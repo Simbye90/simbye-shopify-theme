@@ -2,9 +2,6 @@
 <!-- Enterprise Header 2025 - Simbye eSIM -->
 
 <style>
-/* Import Inter Font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
 /* CSS Custom Properties für Theming */
 :root {
   --header-height: 70px;
@@ -21,7 +18,7 @@
   --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
   --mobile-menu-width: 85%;
   --mobile-menu-bg: #fafafa;
-  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
 /* Dark Mode Variables */
@@ -253,73 +250,39 @@
   transform: rotate(30deg);
 }
 
-/* Mobile Menu Toggle - Modern Dot Grid Design */
+/* Mobile Menu Toggle */
 .mobile-toggle {
   display: none;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  gap: 4px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
   cursor: pointer;
   z-index: 1001;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.2);
-  transition: all var(--transition-base);
 }
 
-.mobile-toggle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
-}
-
-.mobile-toggle:active {
-  transform: scale(0.95);
-}
-
-.mobile-toggle .menu-icon {
-  display: grid;
-  grid-template-columns: repeat(3, 4px);
-  grid-template-rows: repeat(3, 4px);
-  gap: 4px;
-  transition: all var(--transition-base);
-}
-
-.mobile-toggle .menu-icon span {
+.mobile-toggle span {
   display: block;
-  width: 4px;
-  height: 4px;
-  background: white;
-  border-radius: 50%;
+  width: 24px;
+  height: 2px;
+  background: var(--text-color);
+  border-radius: 2px;
   transition: all var(--transition-base);
 }
 
-/* Animated X pattern when active */
-.mobile-toggle.active .menu-icon {
-  transform: rotate(45deg);
+.mobile-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
-.mobile-toggle.active .menu-icon span:nth-child(1),
-.mobile-toggle.active .menu-icon span:nth-child(5),
-.mobile-toggle.active .menu-icon span:nth-child(9) {
-  transform: scale(1.5);
-  background: rgba(255, 255, 255, 1);
-}
-
-.mobile-toggle.active .menu-icon span:nth-child(3),
-.mobile-toggle.active .menu-icon span:nth-child(7) {
-  transform: scale(1.5);
-  background: rgba(255, 255, 255, 1);
-}
-
-.mobile-toggle.active .menu-icon span:nth-child(2),
-.mobile-toggle.active .menu-icon span:nth-child(4),
-.mobile-toggle.active .menu-icon span:nth-child(6),
-.mobile-toggle.active .menu-icon span:nth-child(8) {
-  transform: scale(0);
+.mobile-toggle.active span:nth-child(2) {
   opacity: 0;
+  transform: translateX(-10px);
+}
+
+.mobile-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* Mobile Menu */
@@ -586,17 +549,9 @@
       
       <!-- Mobile Menu Toggle -->
       <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
-        <div class="menu-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
   </div>
@@ -612,17 +567,15 @@
         <div class="mobile-user-info">
           <div class="mobile-user-avatar">
             {% if customer.first_name %}
-              {{ customer.first_name | slice: 0 }}{{ customer.last_name | slice: 0 }}
+              {{ customer.first_name | slice: 0 }}
             {% else %}
-              SU
+              U
             {% endif %}
           </div>
           <div>
             <div class="mobile-user-name">
-              {% if customer.first_name or customer.last_name %}
+              {% if customer.first_name %}
                 {{ customer.first_name }} {{ customer.last_name }}
-              {% elsif customer.name %}
-                {{ customer.name }}
               {% else %}
                 Simbye User
               {% endif %}
@@ -630,18 +583,15 @@
             <div class="mobile-user-email">{{ customer.email }}</div>
           </div>
         </div>
-        <a href="{{ routes.account_url }}" class="auth-btn logged-in" style="width: 100%; justify-content: center;">
+        <a href="{{ routes.account_url }}" class="auth-btn logged-in" style="width: 100%;">
           My Account →
         </a>
       </div>
     {% else %}
       <div class="mobile-menu-header">
-        <div style="text-align: center; margin-bottom: 16px;">
-          <p style="color: var(--text-color); font-size: 14px; opacity: 0.7;">Welcome to Simbye</p>
-        </div>
-        <div class="auth-group" style="width: 100%; height: 44px;">
-          <a href="{{ routes.account_login_url }}" class="auth-btn login" style="flex: 1; height: 100%;">Login</a>
-          <a href="{{ routes.account_register_url }}" class="auth-btn register" style="flex: 1; height: 100%;">Sign Up</a>
+        <div class="auth-group" style="width: 100%;">
+          <a href="{{ routes.account_login_url }}" class="auth-btn login" style="flex: 1;">Login</a>
+          <a href="{{ routes.account_register_url }}" class="auth-btn register" style="flex: 1;">Sign Up</a>
         </div>
       </div>
     {% endif %}
