@@ -34,9 +34,9 @@
   --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Header Container - NOT FIXED ON DESKTOP */
+/* Header Container - FIXED & FULL WIDTH */
 .enterprise-header {
-  position: relative; /* Changed from fixed */
+  position: fixed; /* Back to fixed */
   top: 0;
   left: 0;
   right: 0;
@@ -63,8 +63,8 @@
   grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
+  /* max-width REMOVED for full width */
+  margin: 0;
   padding: 0 40px;
   gap: 48px;
 }
@@ -634,15 +634,17 @@
 }
 
 @media (max-width: 768px) {
-  /* Mobile header is relative, not fixed */
+  /* Mobile header is fixed */
   .enterprise-header {
     height: var(--header-mobile-height);
-    position: relative;
+    position: fixed; /* Fixed on mobile too */
   }
   
   .header-container {
     grid-template-columns: 160px 1fr;
     padding: 0 20px;
+    /* Full width on mobile too */
+    margin: 0;
   }
   
   /* Bigger mobile logo */
@@ -1137,4 +1139,12 @@
 })();
 </script>
 
-<!-- NO SPACER NEEDED since header is not fixed anymore -->
+<!-- Spacer for fixed header -->
+<div style="height: var(--header-height);"></div>
+<style>
+  @media (max-width: 768px) {
+    div[style*="--header-height"] {
+      height: var(--header-mobile-height) !important;
+    }
+  }
+</style>
