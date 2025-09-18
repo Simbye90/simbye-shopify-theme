@@ -13,7 +13,16 @@
       "type": "hello-world",
       "settings": {
         "hero_image": "shopify://shop_images/Design_ohne_Titel-4.png",
-        "cta_link": "shopify://collections/all"
+        "cta_link": "shopify://collections/all",
+        "product_1": "esim-africa",
+        "product_1_gb": "12GB /12€",
+        "product_1_price": "",
+        "product_2": "",
+        "product_2_gb": "",
+        "product_2_price": "",
+        "product_3": "",
+        "product_3_gb": "",
+        "product_3_price": ""
       }
     }
   },
