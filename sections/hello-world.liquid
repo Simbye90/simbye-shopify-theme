@@ -1,144 +1,488 @@
-{% comment %}
-  Welcome to Shopify theme development!
-{% endcomment %}
+<!-- sections/hero-simbye.liquid -->
+<!-- SIMBYE HERO SECTION - ENTERPRISE 2025 -->
 
-<div class="welcome full-width">
-  <div class="welcome-content">
-    <div>
-      <h1>Hello, World!</h1>
-
-      <p class="welcome-description">
-        The Skeleton theme is a minimal, carefully structured Shopify theme designed to help you quickly get started.
-        Designed with modularity, maintainability, and Shopify's best practices in mind.
-      </p>
-
-      <p class="welcome-description">
-        Themes shape the online store experience for merchants and their customers. Build fast, flexible themes at scale
-        using Liquid, Shopify's theme templating language, along with HTML, CSS, JavaScript, and JSON.
-      </p>
-    </div>
-    <div class="icon">
-      <img src="{{ 'shoppy-x-ray.svg' | asset_url }}" width="300" height="300">
-    </div>
-  </div>
-</div>
-
-<div class="highlights">
-  <div class="highlight">
-    <h3>Key Concepts</h3>
-    <p class="highlight-description">
-      Shopify themes are a package of template files, building blocks, and supporting assets. Use these building blocks
-      to create modular, customizable themes.
-    </p>
-    <p>{{ 'Learn more about key concepts' | link_to: 'https://shopify.dev/docs/storefronts/themes/architecture' }}</p>
-  </div>
-
-  <div class="highlight">
-    <h3>Liquid</h3>
-    <p class="highlight-description">
-      The Liquid templating language is the backbone of Shopify themes, and is used to load dynamic content on
-      storefronts. Extend Liquid objects to store and present custom data using metafields.
-    </p>
-    <p>{{ 'View the Liquid reference' | link_to: 'https://shopify.dev/docs/api/liquid' }}</p>
-  </div>
-
-  <div class="highlight">
-    <h3>Best Practices</h3>
-    <p class="highlight-description">
-      To optimize your theme development experience, Shopify has established a set of best practices that you can refer
-      to when developing your theme and setting up your toolchains and processes.
-    </p>
-    <p>{{ 'Follow best practices' | link_to: 'https://shopify.dev/docs/storefronts/themes/best-practices' }}</p>
-  </div>
-</div>
-
-{% stylesheet %}
-  .welcome {
-    display: grid;
-    grid-template-columns: var(--content-grid);
-    background-color: #f6f6f7;
-    padding: 72px 0;
-  }
-
-  .welcome-content {
-    grid-column: 2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-    padding: 0 24px;
-  }
-
-  .welcome-description {
-    max-width: 80ch;
-    line-height: 1.4;
-    margin-top: 1.5rem;
-  }
-
-  .icon {
-    width: 300px;
-  }
-
-  .highlights {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 50px;
-  }
-
-  @media (max-width: 1100px) {
-    .highlights {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .highlight {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    padding: 24px;
-    border-radius: 8px;
-    background-color: #eef3ff;
-    color: rgb(92, 95, 98);
-    line-height: 1.4;
-  }
-
-  .highlight > * + * {
-    margin-top: 1rem;
-  }
-
-  .highlight h3 {
-    font-size: 1rem;
-    color: rgb(32, 34, 35);
-  }
-
-  .highlight-description {
-    flex: 1 1;
-  }
-
-  .highlight a {
-    display: flex;
-    width: fit-content;
-    background-color: rgb(250, 251, 251);
-    box-shadow: rgba(0, 0, 0, 0.2) 0px -3px 0px 0px inset, rgba(255, 255, 255, 0.9) 0px 2px 0px 0px inset;
-    border: 1px solid rgb(140, 145, 150);
-    border-radius: 4px;
-    color: rgb(92, 95, 98);
-    padding: 3px 10px 5px;
-    text-decoration: none;
-  }
-{% endstylesheet %}
-
-{% schema %}
-{
-  "name": "Hello World",
-  "settings": [],
-  "presets": [
-    {
-      "name": "Hello World Template",
-      "category": "Demo"
-    }
-  ]
+<style>
+/* Hero Section - Enterprise Design System */
+.hero-enterprise {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - var(--header-height, 90px));
+  background: linear-gradient(135deg, #f8fffe 0%, #e8f7f3 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 60px 0;
 }
-{% endschema %}
+
+/* Container */
+.hero-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Content Section */
+.hero-content {
+  max-width: 600px;
+}
+
+/* Trust Badge */
+.hero-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 154, 97, 0.08);
+  border: 1px solid rgba(0, 154, 97, 0.2);
+  border-radius: 24px;
+  margin-bottom: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primary-color, #009a61);
+  animation: fadeInUp 0.6s ease;
+}
+
+.trust-pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--primary-color, #009a61);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+/* Main Title */
+.hero-title {
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+  animation: fadeInUp 0.7s ease 0.1s both;
+}
+
+.hero-title-primary {
+  display: block;
+  color: #1a1a1a;
+}
+
+.hero-title-gradient {
+  display: block;
+  background: linear-gradient(135deg, #009a61 0%, #00d97e 50%, #009a61 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease infinite;
+}
+
+/* Subtitle */
+.hero-subtitle {
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 500;
+  color: #6b6b6b;
+  line-height: 1.5;
+  margin-bottom: 32px;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+/* CTA Group */
+.hero-cta-group {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.9s ease 0.3s both;
+}
+
+.btn-hero-primary {
+  padding: 18px 36px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, var(--primary-color, #009a61), #00824f);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-hero-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.btn-hero-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
+}
+
+.btn-hero-primary:hover::before {
+  left: 100%;
+}
+
+.btn-hero-secondary {
+  padding: 18px 32px;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--primary-color, #009a61);
+  background: transparent;
+  border: 2px solid rgba(0, 154, 97, 0.2);
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-hero-secondary:hover {
+  background: rgba(0, 154, 97, 0.05);
+  border-color: var(--primary-color, #009a61);
+  transform: translateY(-2px);
+}
+
+/* Stats Row */
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  animation: fadeInUp 1s ease 0.4s both;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--primary-color, #009a61);
+  letter-spacing: -0.02em;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6b6b6b;
+}
+
+/* Visual Section */
+.hero-visual {
+  position: relative;
+  animation: fadeIn 1s ease 0.5s both;
+}
+
+.hero-phones {
+  width: 100%;
+  height: auto;
+  max-width: 600px;
+  position: relative;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Floating Price Labels */
+.floating-labels {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.price-label {
+  position: absolute;
+  padding: 8px 16px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 14px;
+  animation: floatLabel 4s ease-in-out infinite;
+}
+
+.price-label.turkey {
+  top: 20%;
+  left: -10%;
+}
+
+.price-label.usa {
+  top: 50%;
+  right: -5%;
+}
+
+.price-label.japan {
+  bottom: 30%;
+  left: 5%;
+}
+
+/* Background Decoration */
+.hero-bg-decoration {
+  position: absolute;
+  top: 0;
+  right: -20%;
+  width: 60%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0, 154, 97, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes floatLabel {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.05); }
+}
+
+/* Dark Mode Support */
+[data-theme="dark"] .hero-enterprise {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+}
+
+[data-theme="dark"] .hero-title-primary {
+  color: #f0f0f0;
+}
+
+[data-theme="dark"] .hero-subtitle {
+  color: #a0a0a0;
+}
+
+[data-theme="dark"] .hero-trust-badge {
+  background: rgba(0, 255, 136, 0.1);
+  border-color: rgba(0, 255, 136, 0.2);
+  color: #00ff88;
+}
+
+[data-theme="dark"] .trust-pulse {
+  background: #00ff88;
+}
+
+[data-theme="dark"] .price-label {
+  background: #1a1a1a;
+  color: #f0f0f0;
+}
+
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    text-align: center;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+  }
+  
+  .hero-cta-group {
+    justify-content: center;
+  }
+  
+  .hero-stats {
+    justify-content: center;
+  }
+  
+  .hero-visual {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .floating-labels {
+    display: none; /* Too busy on mobile */
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-enterprise {
+    min-height: calc(100vh - var(--header-mobile-height, 70px));
+    padding: 40px 0;
+  }
+  
+  .hero-container {
+    padding: 0 20px;
+  }
+  
+  .hero-cta-group {
+    flex-direction: column;
+  }
+  
+  .btn-hero-primary,
+  .btn-hero-secondary {
+    width: 100%;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+  
+  .hero-phones {
+    max-width: 100%;
+  }
+}
+
+/* Micro-interactions */
+.hero-trust-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.15);
+}
+
+.stat-item {
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-4px);
+}
+</style>
+
+<section class="hero-enterprise">
+  <!-- Background Decoration -->
+  <div class="hero-bg-decoration"></div>
+  
+  <div class="hero-container">
+    <!-- Left: Content -->
+    <div class="hero-content">
+      <!-- Trust Badge -->
+      <div class="hero-trust-badge">
+        <span class="trust-pulse"></span>
+        <span>{{ 'hero.trust_badge' | t | default: '100.000+ zufriedene Kunden weltweit' }}</span>
+      </div>
+      
+      <!-- Main Title -->
+      <h1 class="hero-title">
+        <span class="hero-title-primary">
+          {{ 'hero.title_line1' | t | default: 'Günstige eSIM' }}
+        </span>
+        <span class="hero-title-gradient">
+          {{ 'hero.title_line2' | t | default: 'Datenpakete für Reisen' }}
+        </span>
+      </h1>
+      
+      <!-- Subtitle -->
+      <p class="hero-subtitle">
+        {{ 'hero.subtitle' | t | default: 'Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert' }}
+      </p>
+      
+      <!-- CTA Buttons -->
+      <div class="hero-cta-group">
+        <button class="btn-hero-primary" onclick="window.location.href='/collections/all'">
+          {{ 'hero.cta_primary' | t | default: 'Kostenlos testen' }}
+        </button>
+        
+        <button class="btn-hero-secondary" onclick="window.location.href='/pages/how-it-works'">
+          {{ 'hero.cta_secondary' | t | default: 'So funktioniert\'s' }}
+        </button>
+      </div>
+      
+      <!-- Stats -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">190+</span>
+          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">2 Min</span>
+          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">4.9★</span>
+          <span class="stat-label">{{ 'hero.stat_rating' | t | default: '2.847 Bewertungen' }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right: Visual -->
+    <div class="hero-visual">
+      <!-- Main Image -->
+      <img 
+        class="hero-phones"
+        src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/3-iphones-min-min.webp?v=1742328516"
+        alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM auf iPhone' }}"
+        width="600"
+        height="500"
+        loading="eager"
+        fetchpriority="high"
+      >
+      
+      <!-- Floating Price Labels (Optional) -->
+      <div class="floating-labels">
+        <div class="price-label turkey">
+          🇹🇷 Türkei • 5GB • 9€
+        </div>
+        <div class="price-label usa">
+          🇺🇸 USA • 10GB • 19€
+        </div>
+        <div class="price-label japan">
+          🇯🇵 Japan • 3GB • 12€
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Locales Structure for de.json -->
+<!--
+{
+  "hero": {
+    "trust_badge": "100.000+ zufriedene Kunden weltweit",
+    "title_line1": "Günstige eSIM",
+    "title_line2": "Datenpakete für Reisen",
+    "subtitle": "Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert",
+    "cta_primary": "Kostenlos testen",
+    "cta_secondary": "So funktioniert's",
+    "stat_countries": "Länder verfügbar",
+    "stat_activation": "Installation",
+    "stat_rating": "2.847 Bewertungen",
+    "image_alt": "Simbye eSIM auf iPhone"
+  }
+}
+-->
