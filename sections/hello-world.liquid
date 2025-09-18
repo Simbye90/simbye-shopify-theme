@@ -1,38 +1,35 @@
 <!-- sections/hero-simbye.liquid -->
-<!-- SIMBYE HERO - OPTIMIZED FOR SEO & MOBILE -->
+<!-- SIMBYE HERO - ENTERPRISE FINAL -->
 
 <style>
-/* Global Reset */
-.hero-section-wrapper {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-/* Hero Section - FULL WIDTH */
+/* FULL WIDTH SECTION */
 .hero-enterprise {
-  width: 100%;
-  padding: 40px 0 60px 0; /* Kein seitliches Padding = Full Width */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0;
   background: linear-gradient(180deg, 
     #ffffff 0%,
     #ffffff 10%,
-    #f9fffd 30%,
-    #e8f7f3 70%,
+    #f9fffd 25%,
+    #e8f7f3 60%,
     #daf2eb 100%
   );
-  position: relative;
+  overflow: hidden;
 }
 
-/* Container für Content - mit Padding */
+/* Container mit Padding */
 .hero-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px; /* Padding nur im Container */
+  padding: 40px 20px 60px 20px;
   width: 100%;
 }
 
-/* MOBILE FIRST */
+/* MOBILE FIRST - SIMPLIFIED */
 .hero-content {
   text-align: center;
   width: 100%;
@@ -40,11 +37,12 @@
 
 /* Title Mobile */
 .hero-title {
-  font-size: 38px;
+  font-size: 32px;
   font-weight: 900;
-  line-height: 1.05;
+  line-height: 1.1;
   margin: 0 0 24px 0;
   letter-spacing: -0.02em;
+  animation: fadeInUp 0.6s ease;
 }
 
 .hero-title-primary {
@@ -63,36 +61,20 @@
 
 /* Subtitle - NUR DESKTOP */
 .hero-subtitle {
-  display: none; /* Mobile: ausgeblendet */
+  display: none;
 }
 
-/* Button Mobile */
+/* Button - NUR DESKTOP */
 .hero-cta {
-  margin-bottom: 36px;
+  display: none;
 }
 
-.btn-hero-main {
-  width: 100%;
-  max-width: 300px;
-  padding: 18px 32px;
-  font-size: 18px;
-  font-weight: 700;
-  color: white;
-  background: var(--primary-color, #009a61);
-  border: none;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-/* Stats Mobile */
+/* Stats Mobile - Direkt nach Title */
 .hero-stats {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
   width: 100%;
 }
 
@@ -104,24 +86,27 @@
 
 .stat-number {
   display: block;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 900;
   color: var(--primary-color, #009a61);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
+  line-height: 1;
 }
 
 .stat-label {
   display: block;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
   color: #6b6b6b;
-  line-height: 1.3;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Image Mobile - FULL WIDTH */
+/* Image Mobile - Full Width */
 .hero-visual {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  width: calc(100% + 40px);
+  margin: 0 -20px;
   position: relative;
 }
 
@@ -131,17 +116,12 @@
   display: block;
 }
 
-/* Product Labels - Hidden Mobile */
-.product-labels {
-  display: none;
-}
-
-/* Mobile Badges */
+/* Mobile Product Badges */
 .mobile-products {
   display: flex;
   gap: 8px;
   justify-content: center;
-  margin-top: -20px;
+  margin-top: -15px;
   margin-bottom: 20px;
   flex-wrap: wrap;
   padding: 0 20px;
@@ -150,10 +130,10 @@
 }
 
 .mobile-product-badge {
-  padding: 10px 14px;
+  padding: 8px 14px;
   background: white;
-  border-radius: 20px;
-  font-size: 13px;
+  border-radius: 18px;
+  font-size: 12px;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
@@ -164,47 +144,69 @@
   font-weight: 800;
 }
 
+/* Product Labels Desktop - Hidden on Mobile */
+.product-labels {
+  display: none;
+}
+
 /* TABLET (768px+) */
 @media (min-width: 768px) {
-  .hero-enterprise {
-    padding: 50px 0 70px 0;
-  }
-  
   .hero-container {
-    padding: 0 30px;
+    padding: 50px 30px 70px 30px;
   }
   
   .hero-title {
-    font-size: 52px;
+    font-size: 42px;
     margin-bottom: 20px;
   }
   
   /* Subtitle zeigen auf Tablet */
   .hero-subtitle {
     display: block;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 500;
     color: #5a5a5a;
     line-height: 1.5;
-    margin: 0 0 36px 0;
+    margin: 0 0 28px 0;
+    padding: 0 10px;
+  }
+  
+  /* Button zeigen auf Tablet */
+  .hero-cta {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 36px;
   }
   
   .btn-hero-main {
-    width: auto;
-    padding: 20px 48px;
-    max-width: none;
+    padding: 18px 44px;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    background: var(--primary-color, #009a61);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-hero-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 154, 97, 0.3);
+    background: #00824f;
   }
   
   .hero-stats {
-    gap: 36px;
+    gap: 35px;
   }
   
   .stat-number {
-    font-size: 32px;
+    font-size: 28px;
   }
   
   .stat-label {
-    font-size: 13px;
+    font-size: 12px;
   }
   
   .hero-visual {
@@ -216,12 +218,8 @@
 
 /* DESKTOP (1024px+) */
 @media (min-width: 1024px) {
-  .hero-enterprise {
-    padding: 60px 0 80px 0; /* Full width background */
-  }
-  
   .hero-container {
-    padding: 0 40px;
+    padding: 60px 40px 80px 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -234,7 +232,7 @@
   }
   
   .hero-title {
-    font-size: 64px;
+    font-size: 56px;
     margin-bottom: 24px;
   }
   
@@ -243,37 +241,41 @@
   }
   
   .hero-subtitle {
-    font-size: 20px;
+    font-size: 19px;
     padding: 0;
     max-width: 480px;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
   }
   
   .hero-cta {
-    margin-bottom: 50px;
+    justify-content: flex-start;
+    margin-bottom: 48px;
   }
   
-  .btn-hero-main:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 28px rgba(0, 154, 97, 0.3);
-    background: #00824f;
+  .btn-hero-main {
+    padding: 20px 52px;
+    font-size: 18px;
   }
   
   .hero-stats {
     justify-content: flex-start;
-    gap: 50px;
+    gap: 48px;
   }
   
   .stat-item {
     text-align: left;
+    max-width: none;
   }
   
   .stat-number {
-    font-size: 38px;
+    font-size: 36px;
+    margin-bottom: 4px;
   }
   
   .stat-label {
-    font-size: 14px;
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
   }
   
   /* Visual Desktop */
@@ -287,10 +289,10 @@
   .hero-phones {
     max-width: 650px;
     width: 100%;
-    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.12));
   }
   
-  /* Product Labels Desktop */
+  /* Product Labels Desktop anzeigen */
   .product-labels {
     display: block;
     position: absolute;
@@ -306,17 +308,13 @@
     padding: 12px 20px;
     background: white;
     border-radius: 26px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     font-weight: 700;
     font-size: 14px;
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: transform 0.3s ease;
-  }
-  
-  .product-label:hover {
-    transform: scale(1.05);
+    animation: floatLabel 8s ease-in-out infinite;
   }
   
   .product-label-1 {
@@ -327,11 +325,13 @@
   .product-label-2 {
     top: 45%;
     right: -8%;
+    animation-delay: 2.5s;
   }
   
   .product-label-3 {
     bottom: 25%;
-    left: 5%;
+    left: 2%;
+    animation-delay: 5s;
   }
   
   .label-price {
@@ -339,20 +339,28 @@
     font-weight: 800;
   }
   
-  /* Hide mobile badges */
+  /* Mobile badges verstecken auf Desktop */
   .mobile-products {
     display: none;
   }
 }
 
-/* XL Desktop */
+/* XL Desktop (1440px+) */
 @media (min-width: 1440px) {
   .hero-title {
-    font-size: 72px;
+    font-size: 68px;
   }
   
   .hero-subtitle {
-    font-size: 22px;
+    font-size: 21px;
+  }
+  
+  .stat-number {
+    font-size: 40px;
+  }
+  
+  .stat-label {
+    font-size: 14px;
   }
 }
 
@@ -361,8 +369,8 @@
   background: linear-gradient(180deg,
     #0a0a0a 0%,
     #0a0a0a 10%,
-    #0f1210 30%,
-    #0a1510 70%,
+    #0f1210 25%,
+    #0a1510 60%,
     #051008 100%
   );
 }
@@ -377,23 +385,11 @@
 
 [data-theme="dark"] .mobile-product-badge,
 [data-theme="dark"] .product-label {
-  background: #1a1a1a;
+  background: rgba(20, 20, 20, 0.95);
   color: #f0f0f0;
 }
 
 /* Animations */
-.hero-content > * {
-  animation: fadeInUp 0.6s ease both;
-}
-
-.hero-content > *:nth-child(2) { animation-delay: 0.1s; }
-.hero-content > *:nth-child(3) { animation-delay: 0.2s; }
-.hero-content > *:nth-child(4) { animation-delay: 0.3s; }
-
-.hero-visual {
-  animation: fadeIn 0.8s ease 0.4s both;
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -405,143 +401,178 @@
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes floatLabel {
+  0%, 100% { 
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+  75% {
+    transform: translateY(5px) rotate(-1deg);
+  }
 }
 </style>
 
-<div class="hero-section-wrapper">
-  <section class="hero-enterprise" role="banner" aria-label="{{ 'hero.section_label' | t | default: 'Hero Section' }}">
-    <div class="hero-container">
-      <!-- Content -->
-      <div class="hero-content">
-        <!-- Title -->
-        <h1 class="hero-title">
-          <span class="hero-title-primary">
-            {{ 'hero.title_line1' | t | default: 'Günstige eSIM' }}
-          </span>
-          <span class="hero-title-gradient">
-            {{ 'hero.title_line2' | t | default: 'Datenpakete für Reisen' }}
-          </span>
-        </h1>
-        
-        <!-- Subtitle - Nur Desktop/Tablet -->
-        <p class="hero-subtitle">
-          {{ 'hero.subtitle' | t | default: 'Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert' }}
-        </p>
-        
-        <!-- CTA Button -->
-        <div class="hero-cta">
-          <button 
-            class="btn-hero-main" 
-            onclick="window.location.href='{{ routes.root_url }}collections/free-esim'"
-            type="button"
-            aria-label="{{ 'hero.cta_aria' | t | default: 'Jetzt kostenlose eSIM holen' }}"
-          >
-            {{ 'hero.cta_text' | t | default: 'Kostenlose eSIM' }}
-          </button>
-        </div>
-        
-        <!-- Stats -->
-        <div class="hero-stats" role="list">
-          <div class="stat-item" role="listitem">
-            <span class="stat-number">190+</span>
-            <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
-          </div>
-          
-          <div class="stat-item" role="listitem">
-            <span class="stat-number">2 Min</span>
-            <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
-          </div>
-          
-          <div class="stat-item" role="listitem">
-            <span class="stat-number">100K+</span>
-            <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
-          </div>
-        </div>
+<section class="hero-enterprise">
+  <div class="hero-container">
+    <!-- Content -->
+    <div class="hero-content">
+      <!-- Title -->
+      <h1 class="hero-title">
+        <span class="hero-title-primary">
+          {{ 'hero.title_line1' | t | default: 'Günstige eSIM' }}
+        </span>
+        <span class="hero-title-gradient">
+          {{ 'hero.title_line2' | t | default: 'Datenpakete für Reisen' }}
+        </span>
+      </h1>
+      
+      <!-- Subtitle - NUR Tablet/Desktop -->
+      <p class="hero-subtitle">
+        {{ 'hero.subtitle' | t | default: 'Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert' }}
+      </p>
+      
+      <!-- CTA Button - NUR Tablet/Desktop -->
+      <div class="hero-cta">
+        <button 
+          class="btn-hero-main" 
+          onclick="window.location.href='{{ section.settings.cta_link | default: collections.all.url }}'"
+          type="button"
+        >
+          {{ 'hero.cta_primary' | t | default: 'Kostenlos testen' }}
+        </button>
       </div>
       
-      <!-- Visual -->
-      <div class="hero-visual">
-        <img 
-          class="hero-phones"
-          src="{{ section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0633/9012/2175/files/3-iphones-min-min.webp?v=1742328516' }}"
-          alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM auf drei Smartphones mit Reisebildern' }}"
-          width="650"
-          height="520"
-          loading="eager"
-          fetchpriority="high"
-        >
-        
-        <!-- Desktop Product Labels -->
-        <div class="product-labels" aria-hidden="true">
-          <div class="product-label product-label-1">
-            <span aria-hidden="true">🇹🇷</span>
-            <span>{{ 'hero.product_turkey' | t | default: 'Türkei • 5GB' }}</span>
-            <span class="label-price">{{ 'hero.price_turkey' | t | default: '9€' }}</span>
-          </div>
-          
-          <div class="product-label product-label-2">
-            <span aria-hidden="true">🇺🇸</span>
-            <span>{{ 'hero.product_usa' | t | default: 'USA • 10GB' }}</span>
-            <span class="label-price">{{ 'hero.price_usa' | t | default: '19€' }}</span>
-          </div>
-          
-          <div class="product-label product-label-3">
-            <span aria-hidden="true">🇯🇵</span>
-            <span>{{ 'hero.product_japan' | t | default: 'Japan • 3GB' }}</span>
-            <span class="label-price">{{ 'hero.price_japan' | t | default: '12€' }}</span>
-          </div>
+      <!-- Stats -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">190+</span>
+          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
         </div>
         
-        <!-- Mobile Product Badges -->
-        <div class="mobile-products" aria-hidden="true">
-          <span class="mobile-product-badge">
-            🇹🇷 {{ 'hero.mobile_turkey' | t | default: 'Türkei ab' }} <span class="price">9€</span>
-          </span>
-          <span class="mobile-product-badge">
-            🇺🇸 {{ 'hero.mobile_usa' | t | default: 'USA ab' }} <span class="price">19€</span>
-          </span>
-          <span class="mobile-product-badge">
-            🇯🇵 {{ 'hero.mobile_japan' | t | default: 'Japan ab' }} <span class="price">12€</span>
-          </span>
+        <div class="stat-item">
+          <span class="stat-number">2 Min</span>
+          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">100K+</span>
+          <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
         </div>
       </div>
     </div>
-  </section>
-</div>
-
-<!-- Schema für SEO -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "{{ 'hero.schema_name' | t | default: 'Simbye eSIM Datenpakete' }}",
-  "description": "{{ 'hero.schema_description' | t | default: 'eSIM Datenpakete für 190+ Länder. Keine Roaming-Gebühren. In 2 Minuten aktiviert.' }}",
-  "brand": {
-    "@type": "Brand",
-    "name": "Simbye"
-  },
-  "offers": {
-    "@type": "AggregateOffer",
-    "priceCurrency": "EUR",
-    "lowPrice": "0",
-    "highPrice": "99"
-  }
-}
-</script>
+    
+    <!-- Visual -->
+    <div class="hero-visual">
+      <img 
+        class="hero-phones"
+        src="{{ section.settings.hero_image | image_url: width: 1300 | default: 'https://cdn.shopify.com/s/files/1/0633/9012/2175/files/3-iphones-min-min.webp?v=1742328516' }}"
+        alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM' }}"
+        width="650"
+        height="520"
+        loading="eager"
+        fetchpriority="high"
+      >
+      
+      <!-- Desktop Product Labels mit echten Shopify Varianten -->
+      <div class="product-labels">
+        {% comment %} Richtige Shopify Varianten Implementation {% endcomment %}
+        {% for collection in collections %}
+          {% if collection.handle == 'turkey' or collection.handle == 'turkei' %}
+            {% assign turkey_product = collection.products.first %}
+          {% elsif collection.handle == 'usa' %}
+            {% assign usa_product = collection.products.first %}
+          {% elsif collection.handle == 'japan' %}
+            {% assign japan_product = collection.products.first %}
+          {% endif %}
+        {% endfor %}
+        
+        <!-- Türkei -->
+        <div class="product-label product-label-1">
+          <span>🇹🇷</span>
+          {% if turkey_product %}
+            <span>{{ turkey_product.title | split: '-' | first | truncate: 15 }}</span>
+            <span class="label-price">
+              {% if turkey_product.price_varies %}
+                ab {{ turkey_product.price_min | money_without_currency }}€
+              {% else %}
+                {{ turkey_product.price | money_without_currency }}€
+              {% endif %}
+            </span>
+          {% else %}
+            <span>Türkei • 5GB</span>
+            <span class="label-price">9€</span>
+          {% endif %}
+        </div>
+        
+        <!-- USA -->
+        <div class="product-label product-label-2">
+          <span>🇺🇸</span>
+          {% if usa_product %}
+            <span>{{ usa_product.title | split: '-' | first | truncate: 15 }}</span>
+            <span class="label-price">
+              {% if usa_product.price_varies %}
+                ab {{ usa_product.price_min | money_without_currency }}€
+              {% else %}
+                {{ usa_product.price | money_without_currency }}€
+              {% endif %}
+            </span>
+          {% else %}
+            <span>USA • 10GB</span>
+            <span class="label-price">19€</span>
+          {% endif %}
+        </div>
+        
+        <!-- Japan -->
+        <div class="product-label product-label-3">
+          <span>🇯🇵</span>
+          {% if japan_product %}
+            <span>{{ japan_product.title | split: '-' | first | truncate: 15 }}</span>
+            <span class="label-price">
+              {% if japan_product.price_varies %}
+                ab {{ japan_product.price_min | money_without_currency }}€
+              {% else %}
+                {{ japan_product.price | money_without_currency }}€
+              {% endif %}
+            </span>
+          {% else %}
+            <span>Japan • 3GB</span>
+            <span class="label-price">12€</span>
+          {% endif %}
+        </div>
+      </div>
+      
+      <!-- Mobile Product Badges -->
+      <div class="mobile-products">
+        <span class="mobile-product-badge">
+          🇹🇷 Türkei ab <span class="price">9€</span>
+        </span>
+        <span class="mobile-product-badge">
+          🇺🇸 USA ab <span class="price">19€</span>
+        </span>
+        <span class="mobile-product-badge">
+          🇯🇵 Japan ab <span class="price">12€</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% schema %}
 {
   "name": "Hero Section",
-  "class": "hero-section",
   "settings": [
     {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero Bild (Optional)",
-      "info": "Standard: 3 iPhones Bild"
+      "label": "Hero Bild"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Button Link",
+      "default": "/collections/all"
     }
   ],
   "presets": [
