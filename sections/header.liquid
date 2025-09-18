@@ -1,37 +1,37 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 v3 - Simbye eSIM - UPDATED -->
+<!-- Enterprise Header 2025 v4 - Simbye eSIM - ENTERPRISE EDITION -->
 
 <style>
 /* CSS Custom Properties */
 :root {
-  --header-height: 80px;
-  --header-mobile-height: 65px;
+  --header-height: 90px;
+  --header-mobile-height: 70px;
   --primary-color: #009a61;
   --primary-hover: #00824f;
   --primary-dark: #007850;
-  --text-color: #2c2c2c;
+  --text-color: #1a1a1a;
   --text-light: #6b6b6b;
   --bg-header: #ffffff;
-  --border-color: rgba(0, 0, 0, 0.08);
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-  --mobile-menu-width: 85%;
-  --mobile-menu-bg: #fafafa;
-  /* Verwende moderne System-Fonts */
-  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  --border-color: rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
+  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  --mobile-menu-width: 90%;
+  --mobile-menu-bg: #ffffff;
+  --font-base: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", Arial, sans-serif;
 }
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  --text-color: #e8e8e8;
+  --text-color: #f0f0f0;
   --text-light: #a0a0a0;
-  --bg-header: #1a1a1a;
-  --border-color: rgba(255, 255, 255, 0.1);
-  --mobile-menu-bg: #242424;
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --bg-header: #0a0a0a;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --mobile-menu-bg: #121212;
+  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
 /* Header Container */
@@ -44,30 +44,32 @@
   background: var(--bg-header);
   border-bottom: 1px solid var(--border-color);
   z-index: 1000;
-  contain: layout style paint;
-  will-change: transform;
-  transform: translateZ(0);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: box-shadow var(--transition-base);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  transition: all var(--transition-base);
 }
 
 .enterprise-header.scrolled {
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+[data-theme="dark"] .enterprise-header.scrolled {
+  background: rgba(10, 10, 10, 0.98);
 }
 
 .header-container {
   display: grid;
-  grid-template-columns: 240px 1fr auto;
+  grid-template-columns: 280px 1fr auto;
   align-items: center;
   height: 100%;
-  max-width: 1400px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 30px;
-  gap: 40px;
+  padding: 0 40px;
+  gap: 48px;
 }
 
-/* Logo - GRÖSSER */
+/* Logo - ENTERPRISE SIZE */
 .header-logo {
   display: flex;
   align-items: center;
@@ -75,16 +77,21 @@
 }
 
 .header-logo img {
-  height: 48px; /* Erhöht von 38px */
+  height: 52px;
   width: auto;
   object-fit: contain;
+  transition: transform var(--transition-base);
 }
 
-/* Desktop Navigation - GRÖSSERE SCHRIFT */
+.header-logo:hover img {
+  transform: scale(1.05);
+}
+
+/* Desktop Navigation - BOLD & LARGE */
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   height: 100%;
 }
 
@@ -98,179 +105,229 @@
 .nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 12px 20px;
+  padding: 14px 24px;
   color: var(--text-color);
-  font-size: 18px; /* Erhöht von 15px */
-  font-weight: 500;
+  font-size: 17px;
+  font-weight: 600;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 12px;
   transition: all var(--transition-fast);
   position: relative;
   font-family: var(--font-base);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .nav-link:hover {
-  background: rgba(0, 154, 97, 0.08);
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.08), rgba(0, 154, 97, 0.12));
   color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .nav-link::after {
   content: '';
   position: absolute;
   bottom: -1px;
-  left: 50%;
-  width: 0;
-  height: 2px;
+  left: 24px;
+  right: 24px;
+  height: 3px;
   background: var(--primary-color);
-  transform: translateX(-50%);
-  transition: width var(--transition-fast);
+  transform: scaleX(0);
+  transition: transform var(--transition-fast);
+  border-radius: 3px;
 }
 
-.nav-link.active::after {
-  width: calc(100% - 40px);
+.nav-link.active::after,
+.nav-link:hover::after {
+  transform: scaleX(1);
 }
 
 /* Actions Section */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 20px;
   height: 100%;
 }
 
-/* Login Button - NUR EINEN BUTTON */
+/* Premium Login Button */
 .auth-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 28px;
-  height: 46px;
-  font-size: 16px; /* Größere Schrift */
-  font-weight: 600;
+  padding: 0 32px;
+  height: 52px;
+  font-size: 17px;
+  font-weight: 700;
   color: white;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   text-decoration: none;
-  border-radius: 23px;
-  transition: all var(--transition-fast);
+  border-radius: 26px;
+  transition: all var(--transition-base);
   white-space: nowrap;
   font-family: var(--font-base);
   letter-spacing: -0.02em;
-  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.15);
-  gap: 8px;
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
 }
 
 .auth-btn:hover {
-  background: var(--primary-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
 }
 
-/* Language & Currency */
+.auth-btn:hover::before {
+  left: 100%;
+}
+
+/* Premium Switcher Buttons */
 .switcher-group {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .switcher {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 10px 16px;
-  border-radius: 10px;
-  background: transparent;
-  border: 1.5px solid var(--border-color);
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--bg-header);
+  border: 2px solid var(--border-color);
   color: var(--text-color);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: var(--font-base);
-}
-
-.switcher:hover {
-  border-color: var(--primary-color);
-  background: rgba(0, 154, 97, 0.05);
-}
-
-.switcher-icon {
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 15px;
-}
-
-/* Dark Mode Toggle */
-.theme-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
-  background: transparent;
-  border: 1.5px solid var(--border-color);
-  cursor: pointer;
-  transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
 }
 
-.theme-toggle:hover {
+.switcher::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, var(--primary-color), transparent);
+  opacity: 0.1;
+  transform: translate(-50%, -50%);
+  transition: all var(--transition-base);
+}
+
+.switcher:hover {
   border-color: var(--primary-color);
-  background: rgba(0, 154, 97, 0.05);
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 154, 97, 0.08));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.15);
+}
+
+.switcher:hover::before {
+  width: 100px;
+  height: 100px;
+  opacity: 0.2;
+}
+
+.switcher-icon {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+/* Premium Dark Mode Toggle */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle:hover {
+  transform: rotate(15deg) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.2);
 }
 
 .theme-toggle svg {
-  width: 22px;
-  height: 22px;
-  transition: all var(--transition-base);
+  width: 26px;
+  height: 26px;
+  transition: all var(--transition-slow);
   position: absolute;
   color: var(--text-color);
 }
 
 .theme-toggle .sun-icon {
   opacity: 0;
-  transform: rotate(-90deg);
+  transform: rotate(-90deg) scale(0.5);
 }
 
 .theme-toggle .moon-icon {
   opacity: 1;
-  transform: rotate(0deg);
+  transform: rotate(0deg) scale(1);
 }
 
 [data-theme="dark"] .theme-toggle .sun-icon {
   opacity: 1;
-  transform: rotate(0deg);
+  transform: rotate(0deg) scale(1);
+  color: #ffd700;
 }
 
 [data-theme="dark"] .theme-toggle .moon-icon {
   opacity: 0;
-  transform: rotate(90deg);
+  transform: rotate(90deg) scale(0.5);
 }
 
-/* Mobile Menu Toggle - OHNE SCHWARZE UMRANDUNG */
+/* Mobile Menu Toggle - PREMIUM DESIGN */
 .mobile-toggle {
   display: none;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   cursor: pointer;
   z-index: 1001;
   position: relative;
   transition: all var(--transition-base);
-  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.2);
-  border: none; /* Keine Border */
-  outline: none; /* Kein Outline */
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.3);
+  border: none;
+  outline: none;
 }
 
 .mobile-toggle:hover {
   transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.4);
 }
 
 .mobile-toggle:active {
@@ -278,8 +335,8 @@
 }
 
 .mobile-toggle .burger {
-  width: 20px;
-  height: 16px;
+  width: 22px;
+  height: 18px;
   position: relative;
 }
 
@@ -287,9 +344,9 @@
   display: block;
   position: absolute;
   width: 100%;
-  height: 2px;
+  height: 3px;
   background: white;
-  border-radius: 2px;
+  border-radius: 3px;
   transition: all var(--transition-base);
   left: 0;
 }
@@ -308,30 +365,32 @@
 }
 
 .mobile-toggle.active .burger span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg) translate(6px, 6px);
 }
 
 .mobile-toggle.active .burger span:nth-child(2) {
   opacity: 0;
+  transform: translateX(20px);
 }
 
 .mobile-toggle.active .burger span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Mobile Menu */
+/* Mobile Menu - PREMIUM SLIDE */
 .mobile-menu {
   position: fixed;
   top: 0;
   right: 0;
   width: var(--mobile-menu-width);
+  max-width: 420px;
   height: 100vh;
   background: var(--mobile-menu-bg);
   transform: translateX(100%);
   transition: transform var(--transition-slow);
   z-index: 999;
   overflow-y: auto;
-  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
 }
 
 .mobile-menu.active {
@@ -344,7 +403,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
   opacity: 0;
   visibility: hidden;
   transition: all var(--transition-base);
@@ -357,46 +417,48 @@
 }
 
 .mobile-menu-content {
-  padding: 80px 24px 24px;
+  padding: 90px 28px 28px;
 }
 
 .mobile-menu-header {
-  padding: 20px;
-  background: var(--bg-header);
-  margin-bottom: 20px;
-  border-radius: 12px;
-  box-shadow: var(--shadow-sm);
+  padding: 24px;
+  background: linear-gradient(135deg, var(--bg-header), rgba(0, 154, 97, 0.02));
+  margin-bottom: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 .mobile-user-info {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
 .mobile-user-avatar {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: 600;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
 
 .mobile-user-name {
-  font-size: 17px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
   color: var(--text-color);
 }
 
 .mobile-user-email {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-light);
+  margin-top: 2px;
 }
 
 .mobile-auth-button {
@@ -404,18 +466,20 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 44px;
-  background: var(--primary-color);
+  height: 52px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   color: white;
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 700;
   text-decoration: none;
-  border-radius: 10px;
+  border-radius: 14px;
   transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.25);
 }
 
 .mobile-auth-button:hover {
-  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.35);
 }
 
 .mobile-menu-nav {
@@ -424,22 +488,38 @@
 
 .mobile-nav-item {
   display: block;
-  padding: 16px 0;
+  padding: 20px 0;
   color: var(--text-color);
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
   transition: all var(--transition-fast);
+  position: relative;
+}
+
+.mobile-nav-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width var(--transition-fast);
 }
 
 .mobile-nav-item:hover {
   color: var(--primary-color);
-  padding-left: 8px;
+  padding-left: 12px;
+}
+
+.mobile-nav-item:hover::before {
+  width: 40px;
 }
 
 .mobile-menu-actions {
-  padding-top: 20px;
+  padding-top: 24px;
   border-top: 1px solid var(--border-color);
 }
 
@@ -447,68 +527,88 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 0;
+  padding: 16px 0;
 }
 
 .mobile-action-row span {
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--text-color);
 }
 
-/* iOS Style Toggle Switch for Dark Mode - OHNE TEXT */
-.dark-mode-row {
+/* Premium Dark Mode Toggle - Mobile */
+.dark-mode-toggle-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  padding: 14px 0;
+  padding: 24px 0;
 }
 
-.dark-mode-icon {
-  font-size: 20px;
-}
-
-.toggle-switch {
-  position: relative;
-  width: 51px;
-  height: 31px;
-  background: #e9e9ea;
-  border-radius: 31px;
-  cursor: pointer;
-  transition: background var(--transition-base);
-}
-
-.toggle-switch.active {
-  background: var(--primary-color);
-}
-
-.toggle-switch-handle {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 27px;
-  height: 27px;
-  background: white;
+.dark-mode-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-  transition: transform var(--transition-base);
+  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+  border: 3px solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
 }
 
-.toggle-switch.active .toggle-switch-handle {
-  transform: translateX(20px);
+[data-theme="dark"] .dark-mode-button {
+  background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode-button:hover {
+  transform: scale(1.1) rotate(15deg);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.2);
+}
+
+.dark-mode-button svg {
+  width: 28px;
+  height: 28px;
+  transition: all var(--transition-slow);
+  position: absolute;
+}
+
+.dark-mode-button .sun-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+  color: #ff9500;
+}
+
+.dark-mode-button .moon-icon {
+  opacity: 0;
+  transform: rotate(-90deg);
+  color: #6b7aff;
+}
+
+[data-theme="dark"] .dark-mode-button .sun-icon {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+[data-theme="dark"] .dark-mode-button .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg);
 }
 
 /* Responsive */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .header-container {
-    grid-template-columns: 200px 1fr auto;
-    gap: 24px;
-    padding: 0 20px;
+    grid-template-columns: 240px 1fr auto;
+    gap: 32px;
+    padding: 0 24px;
   }
   
   .nav-link {
-    padding: 10px 16px;
+    padding: 12px 20px;
     font-size: 16px;
   }
 }
@@ -519,18 +619,19 @@
   }
   
   .header-container {
-    grid-template-columns: 150px 1fr;
-    padding: 0 16px;
+    grid-template-columns: 180px 1fr;
+    padding: 0 20px;
   }
   
   .header-logo img {
-    height: 36px; /* Mobile Logo Größe */
+    height: 40px;
   }
   
   .header-nav,
   .switcher-group,
-  .theme-toggle {
-    display: none;
+  .theme-toggle,
+  .auth-btn {
+    display: none; /* Login nur im Menü auf Mobile */
   }
   
   .mobile-toggle {
@@ -542,11 +643,11 @@
   }
 }
 
-/* Animations */
-@keyframes slideIn {
+/* Premium Animations */
+@keyframes slideInDown {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+    transform: translateY(-20px);
   }
   to {
     opacity: 1;
@@ -554,14 +655,37 @@
   }
 }
 
-.header-loaded .nav-item {
-  animation: slideIn var(--transition-base) ease-out backwards;
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
-.header-loaded .nav-item:nth-child(1) { animation-delay: 50ms; }
-.header-loaded .nav-item:nth-child(2) { animation-delay: 100ms; }
-.header-loaded .nav-item:nth-child(3) { animation-delay: 150ms; }
-.header-loaded .nav-item:nth-child(4) { animation-delay: 200ms; }
+.header-loaded .nav-item {
+  animation: slideInDown var(--transition-base) ease-out backwards;
+}
+
+.header-loaded .nav-item:nth-child(1) { animation-delay: 100ms; }
+.header-loaded .nav-item:nth-child(2) { animation-delay: 150ms; }
+.header-loaded .nav-item:nth-child(3) { animation-delay: 200ms; }
+.header-loaded .nav-item:nth-child(4) { animation-delay: 250ms; }
+
+/* Smooth scrollbar for mobile menu */
+.mobile-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mobile-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mobile-menu::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
 </style>
 
 <header class="enterprise-header" id="enterprise-header">
@@ -572,8 +696,8 @@
         <img 
           src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
           alt="{{ shop.name }}"
-          width="240"
-          height="48"
+          width="280"
+          height="52"
           loading="eager"
           fetchpriority="high"
         >
@@ -606,19 +730,37 @@
     
     <!-- Actions -->
     <div class="header-actions">
-      <!-- Auth Section - NUR EIN BUTTON -->
+      <!-- Language & Currency - DESKTOP ONLY -->
+      <div class="switcher-group">
+        <button class="switcher" id="language-switcher" aria-label="Change language">
+          <span class="switcher-icon">🌐</span>
+          <span>{{ shop.locale | upcase }}</span>
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        
+        <button class="switcher" id="currency-switcher" aria-label="Change currency">
+          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+          <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Premium Login Button - DESKTOP ONLY -->
       {% if customer %}
         <a href="{{ routes.account_url }}" class="auth-btn">
-          <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-            <circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.5"/>
-            <path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
+            <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
           {% if customer.first_name %}
             {{ customer.first_name }}
           {% elsif customer.name %}
             {{ customer.name }}
           {% else %}
-            {{ 'header.my_account' | t | default: 'My Account' }}
+            {{ 'header.my_account' | t | default: 'Account' }}
           {% endif %}
         </a>
       {% else %}
@@ -627,25 +769,7 @@
         </a>
       {% endif %}
       
-      <!-- Language & Currency -->
-      <div class="switcher-group">
-        <button class="switcher" id="language-switcher" aria-label="Change language">
-          <span class="switcher-icon">🌍</span>
-          <span>{{ shop.locale | upcase }}</span>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-        
-        <button class="switcher" id="currency-switcher" aria-label="Change currency">
-          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
-        </button>
-      </div>
-      
-      <!-- Dark Mode Toggle -->
+      <!-- Dark Mode Toggle - DESKTOP -->
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
         <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
@@ -672,7 +796,7 @@
 <div class="mobile-overlay" id="mobile-overlay"></div>
 <nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
   <div class="mobile-menu-content">
-    <!-- User Section -->
+    <!-- User Section / Login -->
     <div class="mobile-menu-header">
       {% if customer %}
         <div class="mobile-user-info">
@@ -726,38 +850,42 @@
     <div class="mobile-menu-actions">
       <div class="mobile-action-row">
         <span>{{ 'header.language' | t | default: 'Language' }}</span>
-        <button class="switcher" style="border: none; padding: 6px 12px;">
-          <span class="switcher-icon">🌍</span>
+        <button class="switcher" style="border: none; padding: 8px 14px;">
+          <span class="switcher-icon">🌐</span>
           <span>{{ shop.locale | upcase }}</span>
         </button>
       </div>
       
       <div class="mobile-action-row">
         <span>{{ 'header.currency' | t | default: 'Currency' }}</span>
-        <button class="switcher" style="border: none; padding: 6px 12px;">
+        <button class="switcher" style="border: none; padding: 8px 14px;">
           <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
         </button>
       </div>
       
-      <!-- Dark Mode Toggle - OHNE TEXT -->
-      <div class="dark-mode-row">
-        <span class="dark-mode-icon">☀️</span>
-        <div class="toggle-switch" id="dark-mode-toggle">
-          <div class="toggle-switch-handle"></div>
-        </div>
-        <span class="dark-mode-icon">🌙</span>
+      <!-- Premium Dark Mode Toggle -->
+      <div class="dark-mode-toggle-wrapper">
+        <button class="dark-mode-button" id="dark-mode-toggle" aria-label="Toggle dark mode">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
       </div>
     </div>
     
     <!-- Footer -->
-    <div style="margin-top: auto; padding: 20px 0; opacity: 0.4; font-size: 12px; text-align: center;">
-      v3.0.0 | © 2025 Simbye
+    <div style="margin-top: auto; padding: 32px 0; opacity: 0.3; font-size: 13px; text-align: center; font-weight: 600;">
+      v4.0.0 Enterprise | © 2025 Simbye
     </div>
   </div>
 </nav>
 
 <script>
-// Enterprise Header JavaScript - Vanilla JS
+// Enterprise Header JavaScript - Premium Edition
 (function() {
   'use strict';
   
@@ -781,9 +909,9 @@
     updateThemeUI();
     
     // Add loaded class for animations
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       header.classList.add('header-loaded');
-    }, 100);
+    });
     
     // Bind events
     bindEvents();
@@ -797,14 +925,16 @@
   
   // Event Bindings
   function bindEvents() {
-    // Scroll event with throttle
-    let scrollTimeout;
+    // Optimized scroll with RAF
+    let ticking = false;
     window.addEventListener('scroll', () => {
-      if (scrollTimeout) return;
-      scrollTimeout = setTimeout(() => {
-        scrollTimeout = null;
-        handleScroll();
-      }, 100);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
     }, { passive: true });
     
     // Mobile menu
@@ -832,16 +962,24 @@
       }
     });
     
-    // Swipe to close
+    // Enhanced swipe to close
     let touchStartX = 0;
+    let touchStartY = 0;
+    
     if (mobileMenu) {
       mobileMenu.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
       }, { passive: true });
       
       mobileMenu.addEventListener('touchend', (e) => {
         const touchEndX = e.changedTouches[0].clientX;
-        if (touchEndX - touchStartX > 100) {
+        const touchEndY = e.changedTouches[0].clientY;
+        const deltaX = touchEndX - touchStartX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        
+        // Only close if horizontal swipe is significant and vertical is minimal
+        if (deltaX > 100 && deltaY < 50) {
           closeMobileMenu();
         }
       }, { passive: true });
@@ -851,10 +989,12 @@
   // Scroll Handler
   function handleScroll() {
     const scrollY = window.scrollY;
-    if (scrollY > 10 && !isScrolled) {
+    const threshold = 20;
+    
+    if (scrollY > threshold && !isScrolled) {
       isScrolled = true;
       header.classList.add('scrolled');
-    } else if (scrollY <= 10 && isScrolled) {
+    } else if (scrollY <= threshold && isScrolled) {
       isScrolled = false;
       header.classList.remove('scrolled');
     }
@@ -871,6 +1011,9 @@
     mobileMenu.classList.add('active');
     mobileOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Trap focus for accessibility
+    trapFocus(mobileMenu);
   }
   
   function closeMobileMenu() {
@@ -879,23 +1022,70 @@
     mobileMenu.classList.remove('active');
     mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
+    
+    // Release focus trap
+    releaseFocus();
   }
   
-  // Theme Toggle
+  // Focus trap for accessibility
+  let focusableElements = [];
+  let firstFocusableElement = null;
+  let lastFocusableElement = null;
+  
+  function trapFocus(element) {
+    focusableElements = element.querySelectorAll(
+      'a[href], button, [tabindex]:not([tabindex="-1"])'
+    );
+    firstFocusableElement = focusableElements[0];
+    lastFocusableElement = focusableElements[focusableElements.length - 1];
+    
+    element.addEventListener('keydown', handleFocusTrap);
+    firstFocusableElement?.focus();
+  }
+  
+  function releaseFocus() {
+    if (mobileMenu) {
+      mobileMenu.removeEventListener('keydown', handleFocusTrap);
+    }
+  }
+  
+  function handleFocusTrap(e) {
+    if (e.key !== 'Tab') return;
+    
+    if (e.shiftKey) {
+      if (document.activeElement === firstFocusableElement) {
+        lastFocusableElement?.focus();
+        e.preventDefault();
+      }
+    } else {
+      if (document.activeElement === lastFocusableElement) {
+        firstFocusableElement?.focus();
+        e.preventDefault();
+      }
+    }
+  }
+  
+  // Theme Toggle with localStorage error handling
   function toggleTheme() {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
+    
+    try {
+      localStorage.setItem('theme', currentTheme);
+    } catch (e) {
+      console.warn('localStorage not available');
+    }
+    
     updateThemeUI();
   }
   
   function updateThemeUI() {
     if (darkModeToggle) {
-      if (currentTheme === 'dark') {
-        darkModeToggle.classList.add('active');
-      } else {
-        darkModeToggle.classList.remove('active');
-      }
+      // Visual feedback for theme change
+      darkModeToggle.style.transform = 'scale(0.8)';
+      setTimeout(() => {
+        darkModeToggle.style.transform = '';
+      }, 200);
     }
     
     // Update aria-pressed for accessibility
@@ -910,18 +1100,24 @@
     document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link => {
       if (link.getAttribute('href') === currentPath) {
         link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
       }
     });
   }
   
-  // Check for reduced motion
+  // Check for reduced motion preference
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.style.setProperty('--transition-fast', '0ms');
     document.documentElement.style.setProperty('--transition-base', '0ms');
     document.documentElement.style.setProperty('--transition-slow', '0ms');
   }
   
-  // Initialize
+  // Check for dark mode preference
+  if (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme')) {
+    currentTheme = 'dark';
+  }
+  
+  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -932,7 +1128,8 @@
   window.EnterpriseHeader = {
     openMobileMenu,
     closeMobileMenu,
-    toggleTheme
+    toggleTheme,
+    getTheme: () => currentTheme
   };
 })();
 </script>
