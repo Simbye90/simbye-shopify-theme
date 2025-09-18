@@ -550,12 +550,54 @@
           {% comment %} PRODUKTE KORREKT LADEN MIT all_products {% endcomment %}
           {% if section.settings.product_1 %}
             {% assign product_1 = all_products[section.settings.product_1] %}
+            {% if section.settings.product_1_variant != blank %}
+              {% assign variant_1 = product_1.variants | where: 'id', section.settings.product_1_variant | first %}
+              {% unless variant_1 %}
+                {% comment %} Fallback: Try to find variant by ID directly {% endcomment %}
+                {% for variant in product_1.variants %}
+                  {% if variant.id == section.settings.product_1_variant %}
+                    {% assign variant_1 = variant %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+              {% endunless %}
+            {% else %}
+              {% assign variant_1 = product_1.selected_or_first_available_variant %}
+            {% endif %}
           {% endif %}
+          
           {% if section.settings.product_2 %}
             {% assign product_2 = all_products[section.settings.product_2] %}
+            {% if section.settings.product_2_variant != blank %}
+              {% assign variant_2 = product_2.variants | where: 'id', section.settings.product_2_variant | first %}
+              {% unless variant_2 %}
+                {% for variant in product_2.variants %}
+                  {% if variant.id == section.settings.product_2_variant %}
+                    {% assign variant_2 = variant %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+              {% endunless %}
+            {% else %}
+              {% assign variant_2 = product_2.selected_or_first_available_variant %}
+            {% endif %}
           {% endif %}
+          
           {% if section.settings.product_3 %}
             {% assign product_3 = all_products[section.settings.product_3] %}
+            {% if section.settings.product_3_variant != blank %}
+              {% assign variant_3 = product_3.variants | where: 'id', section.settings.product_3_variant | first %}
+              {% unless variant_3 %}
+                {% for variant in product_3.variants %}
+                  {% if variant.id == section.settings.product_3_variant %}
+                    {% assign variant_3 = variant %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+              {% endunless %}
+            {% else %}
+              {% assign variant_3 = product_3.selected_or_first_available_variant %}
+            {% endif %}
           {% endif %}
           
           <!-- Produkt 1 (Links) -->
@@ -572,14 +614,18 @@
               {% assign product_name = product_1.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
               <span>{{ product_name | truncate: 20 }}</span>
               
-              {% comment %} Label (z.B. "5GB") {% endcomment %}
-              {% if section.settings.product_1_label != blank %}
+              {% comment %} Label - Zeige Varianten-Titel wenn Variante ausgewählt {% endcomment %}
+              {% if variant_1 and variant_1.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">• {{ variant_1.title }}</span>
+              {% elsif section.settings.product_1_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_1_label }}</span>
               {% endif %}
               
-              {% comment %} Preis {% endcomment %}
+              {% comment %} Preis von spezifischer Variante {% endcomment %}
               <span class="label-price">
-                {% if product_1.price_varies %}
+                {% if variant_1 %}
+                  {{ variant_1.price | money_without_currency }}€
+                {% elsif product_1.price_varies %}
                   ab {{ product_1.price_min | money_without_currency }}€
                 {% else %}
                   {{ product_1.price | money_without_currency }}€
@@ -608,12 +654,16 @@
               {% assign product_name = product_2.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
               <span>{{ product_name | truncate: 20 }}</span>
               
-              {% if section.settings.product_2_label != blank %}
+              {% if variant_2 and variant_2.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">• {{ variant_2.title }}</span>
+              {% elsif section.settings.product_2_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_2_label }}</span>
               {% endif %}
               
               <span class="label-price">
-                {% if product_2.price_varies %}
+                {% if variant_2 %}
+                  {{ variant_2.price | money_without_currency }}€
+                {% elsif product_2.price_varies %}
                   ab {{ product_2.price_min | money_without_currency }}€
                 {% else %}
                   {{ product_2.price | money_without_currency }}€
@@ -642,12 +692,16 @@
               {% assign product_name = product_3.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
               <span>{{ product_name | truncate: 20 }}</span>
               
-              {% if section.settings.product_3_label != blank %}
+              {% if variant_3 and variant_3.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">• {{ variant_3.title }}</span>
+              {% elsif section.settings.product_3_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_3_label }}</span>
               {% endif %}
               
               <span class="label-price">
-                {% if product_3.price_varies %}
+                {% if variant_3 %}
+                  {{ variant_3.price | money_without_currency }}€
+                {% elsif product_3.price_varies %}
                   ab {{ product_3.price_min | money_without_currency }}€
                 {% else %}
                   {{ product_3.price | money_without_currency }}€
@@ -676,10 +730,18 @@
               {% endif %}
               {% assign product_name = product_1.title | split: ' ' | first %}
               <span>{{ product_name | truncate: 12 }}</span>
-              {% if section.settings.product_1_label != blank %}
+              {% if variant_1 and variant_1.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">{{ variant_1.title }}</span>
+              {% elsif section.settings.product_1_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_1_label }}</span>
               {% endif %}
-              <span class="price">{{ product_1.price_min | money_without_currency }}€</span>
+              <span class="price">
+                {% if variant_1 %}
+                  {{ variant_1.price | money_without_currency }}€
+                {% else %}
+                  {{ product_1.price_min | money_without_currency }}€
+                {% endif %}
+              </span>
             </span>
           {% else %}
             <span class="mobile-product-badge">
@@ -696,10 +758,18 @@
               {% endif %}
               {% assign product_name = product_2.title | split: ' ' | first %}
               <span>{{ product_name | truncate: 12 }}</span>
-              {% if section.settings.product_2_label != blank %}
+              {% if variant_2 and variant_2.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">{{ variant_2.title }}</span>
+              {% elsif section.settings.product_2_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_2_label }}</span>
               {% endif %}
-              <span class="price">{{ product_2.price_min | money_without_currency }}€</span>
+              <span class="price">
+                {% if variant_2 %}
+                  {{ variant_2.price | money_without_currency }}€
+                {% else %}
+                  {{ product_2.price_min | money_without_currency }}€
+                {% endif %}
+              </span>
             </span>
           {% else %}
             <span class="mobile-product-badge">
@@ -716,10 +786,18 @@
               {% endif %}
               {% assign product_name = product_3.title | split: ' ' | first %}
               <span>{{ product_name | truncate: 12 }}</span>
-              {% if section.settings.product_3_label != blank %}
+              {% if variant_3 and variant_3.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">{{ variant_3.title }}</span>
+              {% elsif section.settings.product_3_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_3_label }}</span>
               {% endif %}
-              <span class="price">{{ product_3.price_min | money_without_currency }}€</span>
+              <span class="price">
+                {% if variant_3 %}
+                  {{ variant_3.price | money_without_currency }}€
+                {% else %}
+                  {{ product_3.price_min | money_without_currency }}€
+                {% endif %}
+              </span>
             </span>
           {% else %}
             <span class="mobile-product-badge">
@@ -799,12 +877,19 @@
     },
     {
       "type": "header",
-      "content": "Featured Produkte"
+      "content": "Featured Produkte mit Varianten"
     },
     {
       "type": "product",
       "id": "product_1",
       "label": "Produkt 1 (Links oben)"
+    },
+    {
+      "type": "text",
+      "id": "product_1_variant",
+      "label": "Produkt 1 Varianten-ID",
+      "info": "Optional: Specific variant ID (findest du in Shopify Admin)",
+      "placeholder": "z.B. 44567890123456"
     },
     {
       "type": "text",
@@ -820,6 +905,13 @@
     },
     {
       "type": "text",
+      "id": "product_2_variant",
+      "label": "Produkt 2 Varianten-ID",
+      "info": "Optional: Specific variant ID",
+      "placeholder": "z.B. 44567890123457"
+    },
+    {
+      "type": "text",
       "id": "product_2_label",
       "label": "Produkt 2 Zusatz",
       "placeholder": "z.B. 10GB"
@@ -828,6 +920,13 @@
       "type": "product",
       "id": "product_3",
       "label": "Produkt 3 (Links unten)"
+    },
+    {
+      "type": "text",
+      "id": "product_3_variant",
+      "label": "Produkt 3 Varianten-ID",
+      "info": "Optional: Specific variant ID",
+      "placeholder": "z.B. 44567890123458"
     },
     {
       "type": "text",
