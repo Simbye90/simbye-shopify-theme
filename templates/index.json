@@ -11,7 +11,15 @@
   "sections": {
     "main": {
       "type": "hello-world",
-      "settings": {}
+      "settings": {
+        "cta_link": "shopify://collections/all",
+        "product_1": "",
+        "product_1_label": "5GB",
+        "product_2": "esim-turkey",
+        "product_2_label": "10GB",
+        "product_3": "",
+        "product_3_label": "3GB"
+      }
     }
   },
   "order": [
