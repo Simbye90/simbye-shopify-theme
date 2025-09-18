@@ -71,6 +71,18 @@
       "title": "Title",
       "subtitle": "Subtitle",
       "normal": "Normal text"
-    },
+    }
+  },
+  "header": {
+    "how_esim_works": "How eSIM Works",
+    "check_esim": "Check eSIM",
+    "faq": "FAQ",
+    "support": "Support",
+    "login": "Login",
+    "signup": "Sign Up",
+    "my_account": "My Account",
+    "language": "Language",
+    "currency": "Currency",
+    "dark_mode": "Dark Mode"
   }
 }
