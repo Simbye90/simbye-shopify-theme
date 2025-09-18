@@ -1,5 +1,5 @@
 <!-- sections/hero-simbye.liquid -->
-<!-- SIMBYE HERO - ENTERPRISE FINAL FIXED -->
+<!-- SIMBYE HERO - STATS POSITION FIXED -->
 
 <style>
 /* FULL WIDTH SECTION */
@@ -23,7 +23,7 @@
 
 /* Container - GLEICH WIE HEADER */
 .hero-container {
-  max-width: 1600px; /* WICHTIG: Gleich wie Header */
+  max-width: 1600px;
   margin: 0 auto;
   padding: 40px 20px 60px 20px;
   width: 100%;
@@ -69,12 +69,20 @@
   display: none;
 }
 
-/* Stats Mobile - Klein und kompakt */
+/* Visual Mobile mit Stats Container */
+.hero-visual-wrapper {
+  width: 100%;
+  position: relative;
+  margin: 30px 0;
+}
+
+/* Stats Mobile - DIREKT UNTER DER WELTKUGEL */
 .hero-stats {
   display: flex;
   justify-content: center;
   gap: 25px;
-  margin-bottom: 32px;
+  margin-top: 20px;
+  margin-bottom: 0;
   width: 100%;
 }
 
@@ -101,7 +109,7 @@
   line-height: 1.1;
 }
 
-/* Image Mobile - Position relativ für Badge-Positionierung */
+/* Image Mobile */
 .hero-visual {
   width: calc(100% + 40px);
   margin: 0 -20px;
@@ -114,26 +122,26 @@
   display: block;
 }
 
-/* Mobile Product Badges - Standard für größere Mobile */
+/* Mobile Product Badges */
 .mobile-products {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-top: -15px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  padding: 0 20px;
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .mobile-product-badge {
+  position: absolute;
   padding: 6px 10px;
   background: white;
   border-radius: 16px;
   font-size: 11px;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
   white-space: nowrap;
   display: inline-flex;
   align-items: center;
@@ -149,72 +157,20 @@
   font-weight: 800;
 }
 
-/* MOBILE SPECIAL DESIGN */
-@media (max-width: 767px) {
-  .hero-container {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Content oben */
-  .hero-content {
-    order: 1;
-  }
-  
-  /* Visual in der Mitte */
-  .hero-visual {
-    order: 2;
-    position: relative;
-    margin: 30px -20px 40px -20px;
-  }
-  
-  /* Stats GANZ UNTEN */
-  .hero-stats {
-    order: 3;
-    margin-top: 0;
-    margin-bottom: 30px;
-    padding: 20px 0;
-    border-top: 1px solid rgba(0, 154, 97, 0.1);
-  }
-  
-  /* Mobile Products AUF der Weltkugel verteilt */
-  .mobile-products {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .mobile-product-badge {
-    position: absolute;
-    padding: 6px 10px;
-    background: white;
-    border-radius: 16px;
-    font-size: 11px;
-    font-weight: 700;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-    white-space: nowrap;
-  }
-  
-  /* Positionierung wie Desktop Labels */
-  .mobile-product-badge:nth-child(1) {
-    top: 15%;
-    left: 5%;
-  }
-  
-  .mobile-product-badge:nth-child(2) {
-    top: 35%;
-    right: 5%;
-  }
-  
-  .mobile-product-badge:nth-child(3) {
-    bottom: 30%;
-    left: 10%;
-  }
+/* Badge Positionen auf der Weltkugel */
+.mobile-product-badge:nth-child(1) {
+  top: 15%;
+  left: 5%;
+}
+
+.mobile-product-badge:nth-child(2) {
+  top: 35%;
+  right: 5%;
+}
+
+.mobile-product-badge:nth-child(3) {
+  bottom: 30%;
+  left: 10%;
 }
 
 /* Product Labels Desktop - Hidden on Mobile */
@@ -272,8 +228,14 @@
     background: #00824f;
   }
   
+  /* Visual wrapper nicht mehr nötig auf Tablet */
+  .hero-visual-wrapper {
+    margin: 0;
+  }
+  
   .hero-stats {
     gap: 35px;
+    margin-bottom: 32px;
   }
   
   .stat-number {
@@ -290,15 +252,32 @@
     max-width: 600px;
   }
   
-  .hero-image {
-    animation: none;
+  /* Mobile badges normal unter der Weltkugel */
+  .mobile-products {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    z-index: 2;
+  }
+  
+  .mobile-product-badge {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
   }
 }
 
 /* DESKTOP (1024px+) */
 @media (min-width: 1024px) {
   .hero-container {
-    padding: 60px 40px 80px 40px; /* GLEICHE PADDING WIE HEADER! */
+    padding: 60px 40px 80px 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -358,6 +337,11 @@
   }
   
   /* Visual Desktop */
+  .hero-visual-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+  
   .hero-visual {
     width: 100%;
     margin: 0;
@@ -529,224 +513,121 @@
         </button>
       </div>
       
-    </div>
-    
-    <!-- Stats - AUSSERHALB hero-content für Mobile Positionierung -->
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-number">190+</span>
-        <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
-      </div>
-      
-      <div class="stat-item">
-        <span class="stat-number">2 Min</span>
-        <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
-      </div>
-      
-      <div class="stat-item">
-        <span class="stat-number">100K+</span>
-        <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
-      </div>
-    </div>
-  </div>
-    
-    <!-- Visual -->
-    <div class="hero-visual">
-      <img 
-        class="hero-image"
-        src="{{ section.settings.hero_image | image_url: width: 1300 | default: 'https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Design_ohne_Titel-3.png?v=1758222990' }}"
-        alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM Weltkugel' }}"
-        width="650"
-        height="520"
-        loading="eager"
-        fetchpriority="high"
-      >
-      
-      <!-- Desktop Product Labels -->
-      <div class="product-labels">
-        {% comment %} PRODUKTE KORREKT LADEN MIT all_products {% endcomment %}
-        {% if section.settings.product_1 %}
-          {% assign product_1 = all_products[section.settings.product_1] %}
-        {% endif %}
-        {% if section.settings.product_2 %}
-          {% assign product_2 = all_products[section.settings.product_2] %}
-        {% endif %}
-        {% if section.settings.product_3 %}
-          {% assign product_3 = all_products[section.settings.product_3] %}
-        {% endif %}
+      <!-- STATS NUR AUF DESKTOP/TABLET HIER -->
+      <div class="hero-stats" style="display: none;">
+        <div class="stat-item">
+          <span class="stat-number">190+</span>
+          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+        </div>
         
-        <!-- Produkt 1 (Links) -->
-        {% if product_1 != blank %}
-          <div class="product-label product-label-1">
-            {% comment %} Flagge aus Produktbild {% endcomment %}
-            {% if product_1.featured_image %}
-              <img src="{{ product_1.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
-            {% else %}
-              <span>🌍</span>
-            {% endif %}
-            
-            {% comment %} Produktname {% endcomment %}
-            {% assign product_name = product_1.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
-            <span>{{ product_name | truncate: 20 }}</span>
-            
-            {% comment %} Label (z.B. "5GB") {% endcomment %}
-            {% if section.settings.product_1_label != blank %}
-              <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_1_label }}</span>
-            {% endif %}
-            
-            {% comment %} Preis {% endcomment %}
-            <span class="label-price">
-              {% if product_1.price_varies %}
-                ab {{ product_1.price_min | money_without_currency }}€
-              {% else %}
-                {{ product_1.price | money_without_currency }}€
-              {% endif %}
-            </span>
-          </div>
-        {% else %}
-          <!-- Fallback -->
+        <div class="stat-item">
+          <span class="stat-number">2 Min</span>
+          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">100K+</span>
+          <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Visual mit Stats für Mobile -->
+    <div class="hero-visual-wrapper">
+      <div class="hero-visual">
+        <img 
+          class="hero-image"
+          src="{{ section.settings.hero_image | image_url: width: 1300 | default: 'https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Design_ohne_Titel-3.png?v=1758222990' }}"
+          alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM Weltkugel' }}"
+          width="650"
+          height="520"
+          loading="eager"
+          fetchpriority="high"
+        >
+        
+        <!-- Mobile Product Badges - Auf der Weltkugel -->
+        <div class="mobile-products">
+          <span class="mobile-product-badge">
+            🇹🇷 <span>Türkei</span> <span style="color: var(--primary-color, #009a61); font-weight: 800;">5GB</span> <span class="price">9€</span>
+          </span>
+          
+          <span class="mobile-product-badge">
+            🇺🇸 <span>USA</span> <span style="color: var(--primary-color, #009a61); font-weight: 800;">10GB</span> <span class="price">19€</span>
+          </span>
+          
+          <span class="mobile-product-badge">
+            🇯🇵 <span>Japan</span> <span style="color: var(--primary-color, #009a61); font-weight: 800;">3GB</span> <span class="price">12€</span>
+          </span>
+        </div>
+        
+        <!-- Desktop Product Labels -->
+        <div class="product-labels">
           <div class="product-label product-label-1">
             <span>🇹🇷</span>
             <span>Türkei</span>
-            <span style="color: var(--primary-color); font-weight: 800;">• 5GB</span>
+            <span style="color: var(--primary-color, #009a61); font-weight: 800;">• 5GB</span>
             <span class="label-price">9€</span>
           </div>
-        {% endif %}
-        
-        <!-- Produkt 2 (Rechts) -->
-        {% if product_2 != blank %}
-          <div class="product-label product-label-2">
-            {% if product_2.featured_image %}
-              <img src="{{ product_2.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
-            {% else %}
-              <span>🌍</span>
-            {% endif %}
-            
-            {% assign product_name = product_2.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
-            <span>{{ product_name | truncate: 20 }}</span>
-            
-            {% if section.settings.product_2_label != blank %}
-              <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_2_label }}</span>
-            {% endif %}
-            
-            <span class="label-price">
-              {% if product_2.price_varies %}
-                ab {{ product_2.price_min | money_without_currency }}€
-              {% else %}
-                {{ product_2.price | money_without_currency }}€
-              {% endif %}
-            </span>
-          </div>
-        {% else %}
-          <!-- Fallback -->
+          
           <div class="product-label product-label-2">
             <span>🇺🇸</span>
             <span>USA</span>
-            <span style="color: var(--primary-color); font-weight: 800;">• 10GB</span>
+            <span style="color: var(--primary-color, #009a61); font-weight: 800;">• 10GB</span>
             <span class="label-price">19€</span>
           </div>
-        {% endif %}
-        
-        <!-- Produkt 3 (Unten) -->
-        {% if product_3 != blank %}
-          <div class="product-label product-label-3">
-            {% if product_3.featured_image %}
-              <img src="{{ product_3.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
-            {% else %}
-              <span>🌍</span>
-            {% endif %}
-            
-            {% assign product_name = product_3.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
-            <span>{{ product_name | truncate: 20 }}</span>
-            
-            {% if section.settings.product_3_label != blank %}
-              <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_3_label }}</span>
-            {% endif %}
-            
-            <span class="label-price">
-              {% if product_3.price_varies %}
-                ab {{ product_3.price_min | money_without_currency }}€
-              {% else %}
-                {{ product_3.price | money_without_currency }}€
-              {% endif %}
-            </span>
-          </div>
-        {% else %}
-          <!-- Fallback -->
+          
           <div class="product-label product-label-3">
             <span>🇯🇵</span>
             <span>Japan</span>
-            <span style="color: var(--primary-color); font-weight: 800;">• 3GB</span>
+            <span style="color: var(--primary-color, #009a61); font-weight: 800;">• 3GB</span>
             <span class="label-price">12€</span>
           </div>
-        {% endif %}
+        </div>
       </div>
       
-      <!-- Mobile Product Badges - Auf der Weltkugel verteilt -->
-      <div class="mobile-products">
-        {% if product_1 != blank %}
-          <span class="mobile-product-badge">
-            {% if product_1.featured_image %}
-              <img src="{{ product_1.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
-            {% else %}
-              🌍
-            {% endif %}
-            {% assign product_name = product_1.title | split: ' ' | first %}
-            <span>{{ product_name | truncate: 12 }}</span>
-            {% if section.settings.product_1_label != blank %}
-              <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_1_label }}</span>
-            {% endif %}
-            <span class="price">{{ product_1.price_min | money_without_currency }}€</span>
-          </span>
-        {% else %}
-          <span class="mobile-product-badge">
-            🇹🇷 <span>Türkei</span> <span style="color: var(--primary-color); font-weight: 800;">5GB</span> <span class="price">9€</span>
-          </span>
-        {% endif %}
+      <!-- STATS DIREKT UNTER DER WELTKUGEL NUR FÜR MOBILE -->
+      <div class="hero-stats mobile-only-stats">
+        <div class="stat-item">
+          <span class="stat-number">190+</span>
+          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+        </div>
         
-        {% if product_2 != blank %}
-          <span class="mobile-product-badge">
-            {% if product_2.featured_image %}
-              <img src="{{ product_2.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
-            {% else %}
-              🌍
-            {% endif %}
-            {% assign product_name = product_2.title | split: ' ' | first %}
-            <span>{{ product_name | truncate: 12 }}</span>
-            {% if section.settings.product_2_label != blank %}
-              <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_2_label }}</span>
-            {% endif %}
-            <span class="price">{{ product_2.price_min | money_without_currency }}€</span>
-          </span>
-        {% else %}
-          <span class="mobile-product-badge">
-            🇺🇸 <span>USA</span> <span style="color: var(--primary-color); font-weight: 800;">10GB</span> <span class="price">19€</span>
-          </span>
-        {% endif %}
+        <div class="stat-item">
+          <span class="stat-number">2 Min</span>
+          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+        </div>
         
-        {% if product_3 != blank %}
-          <span class="mobile-product-badge">
-            {% if product_3.featured_image %}
-              <img src="{{ product_3.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
-            {% else %}
-              🌍
-            {% endif %}
-            {% assign product_name = product_3.title | split: ' ' | first %}
-            <span>{{ product_name | truncate: 12 }}</span>
-            {% if section.settings.product_3_label != blank %}
-              <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_3_label }}</span>
-            {% endif %}
-            <span class="price">{{ product_3.price_min | money_without_currency }}€</span>
-          </span>
-        {% else %}
-          <span class="mobile-product-badge">
-            🇯🇵 <span>Japan</span> <span style="color: var(--primary-color); font-weight: 800;">3GB</span> <span class="price">12€</span>
-          </span>
-        {% endif %}
+        <div class="stat-item">
+          <span class="stat-number">100K+</span>
+          <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+/* Mobile/Desktop Stats Control */
+@media (max-width: 767px) {
+  .hero-content .hero-stats {
+    display: none !important; /* Stats nicht im content auf Mobile */
+  }
+  
+  .mobile-only-stats {
+    display: flex !important; /* Stats unter der Weltkugel auf Mobile */
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-content .hero-stats {
+    display: flex !important; /* Stats im content auf Tablet/Desktop */
+  }
+  
+  .mobile-only-stats {
+    display: none !important; /* Mobile Stats verstecken */
+  }
+}
+</style>
 
 {% schema %}
 {
@@ -771,54 +652,11 @@
       "id": "cta_link",
       "label": "Button Link",
       "default": "/collections/all"
-    },
-    {
-      "type": "header",
-      "content": "Featured Produkte"
-    },
-    {
-      "type": "product",
-      "id": "product_1",
-      "label": "Produkt 1 (Links oben)"
-    },
-    {
-      "type": "text",
-      "id": "product_1_label",
-      "label": "Produkt 1 Zusatz",
-      "placeholder": "z.B. 5GB",
-      "info": "Optional: GB-Angabe oder Badge"
-    },
-    {
-      "type": "product",
-      "id": "product_2",
-      "label": "Produkt 2 (Rechts)"
-    },
-    {
-      "type": "text",
-      "id": "product_2_label",
-      "label": "Produkt 2 Zusatz",
-      "placeholder": "z.B. 10GB"
-    },
-    {
-      "type": "product",
-      "id": "product_3",
-      "label": "Produkt 3 (Links unten)"
-    },
-    {
-      "type": "text",
-      "id": "product_3_label",
-      "label": "Produkt 3 Zusatz",
-      "placeholder": "z.B. 3GB"
     }
   ],
   "presets": [
     {
-      "name": "Hero Section",
-      "settings": {
-        "product_1_label": "5GB",
-        "product_2_label": "10GB",
-        "product_3_label": "3GB"
-      }
+      "name": "Hero Section"
     }
   ]
 }
