@@ -1,5 +1,5 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 v4 - Simbye eSIM - ENTERPRISE EDITION -->
+<!-- Enterprise Header 2025 v5 - Simbye eSIM - FINAL -->
 
 <style>
 /* CSS Custom Properties */
@@ -60,7 +60,7 @@
 
 .header-container {
   display: grid;
-  grid-template-columns: 280px 1fr auto;
+  grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
   max-width: 1600px;
@@ -69,16 +69,17 @@
   gap: 48px;
 }
 
-/* Logo - ENTERPRISE SIZE */
+/* Logo - 200px WIDTH */
 .header-logo {
   display: flex;
   align-items: center;
   height: 100%;
+  width: 200px;
 }
 
 .header-logo img {
-  height: 52px;
-  width: auto;
+  width: 200px;
+  height: auto;
   object-fit: contain;
   transition: transform var(--transition-base);
 }
@@ -87,7 +88,7 @@
   transform: scale(1.05);
 }
 
-/* Desktop Navigation - BOLD & LARGE */
+/* Desktop Navigation - 18px FONT */
 .header-nav {
   display: flex;
   align-items: center;
@@ -107,7 +108,7 @@
   align-items: center;
   padding: 14px 24px;
   color: var(--text-color);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   text-decoration: none;
   border-radius: 12px;
@@ -136,8 +137,11 @@
   border-radius: 3px;
 }
 
-.nav-link.active::after,
 .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav-link.active::after {
   transform: scaleX(1);
 }
 
@@ -494,7 +498,7 @@
   font-weight: 600;
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
-  transition: all var(--transition-fast);
+  transition: color var(--transition-fast), padding var(--transition-fast);
   position: relative;
 }
 
@@ -536,43 +540,44 @@
   color: var(--text-color);
 }
 
-/* Premium Dark Mode Toggle - Mobile */
+/* Premium Dark Mode Toggle - Mobile IMPROVED */
 .dark-mode-toggle-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px 0;
+  padding: 32px 0 24px 0;
+  margin-top: 20px;
 }
 
 .dark-mode-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
-  border: 3px solid var(--border-color);
+  background: linear-gradient(145deg, #f5f5f5, #e8e8e8);
+  border: none;
   cursor: pointer;
   transition: all var(--transition-base);
   position: relative;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06),
+              0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="dark"] .dark-mode-button {
-  background: linear-gradient(135deg, #3a3a3a, #2a2a2a);
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.05);
+  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.03),
+              0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-.dark-mode-button:hover {
-  transform: scale(1.1) rotate(15deg);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.2);
+.dark-mode-button:active {
+  transform: scale(0.95);
 }
 
 .dark-mode-button svg {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   transition: all var(--transition-slow);
   position: absolute;
 }
@@ -580,13 +585,15 @@
 .dark-mode-button .sun-icon {
   opacity: 1;
   transform: rotate(0deg);
-  color: #ff9500;
+  color: #ffa500;
+  fill: #ffa500;
 }
 
 .dark-mode-button .moon-icon {
   opacity: 0;
   transform: rotate(-90deg);
-  color: #6b7aff;
+  color: #7c7eff;
+  fill: #7c7eff;
 }
 
 [data-theme="dark"] .dark-mode-button .sun-icon {
@@ -602,14 +609,14 @@
 /* Responsive */
 @media (max-width: 1200px) {
   .header-container {
-    grid-template-columns: 240px 1fr auto;
+    grid-template-columns: 200px 1fr auto;
     gap: 32px;
     padding: 0 24px;
   }
   
   .nav-link {
     padding: 12px 20px;
-    font-size: 16px;
+    font-size: 17px;
   }
 }
 
@@ -619,12 +626,18 @@
   }
   
   .header-container {
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 160px 1fr;
     padding: 0 20px;
   }
   
+  /* Bigger mobile logo */
+  .header-logo {
+    width: 160px;
+  }
+  
   .header-logo img {
-    height: 40px;
+    width: 160px;
+    height: auto;
   }
   
   .header-nav,
@@ -642,36 +655,6 @@
     justify-content: flex-end;
   }
 }
-
-/* Premium Animations */
-@keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-.header-loaded .nav-item {
-  animation: slideInDown var(--transition-base) ease-out backwards;
-}
-
-.header-loaded .nav-item:nth-child(1) { animation-delay: 100ms; }
-.header-loaded .nav-item:nth-child(2) { animation-delay: 150ms; }
-.header-loaded .nav-item:nth-child(3) { animation-delay: 200ms; }
-.header-loaded .nav-item:nth-child(4) { animation-delay: 250ms; }
 
 /* Smooth scrollbar for mobile menu */
 .mobile-menu::-webkit-scrollbar {
@@ -696,8 +679,8 @@
         <img 
           src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
           alt="{{ shop.name }}"
-          width="280"
-          height="52"
+          width="200"
+          height="48"
           loading="eager"
           fetchpriority="high"
         >
@@ -863,14 +846,14 @@
         </button>
       </div>
       
-      <!-- Premium Dark Mode Toggle -->
+      <!-- Premium Dark Mode Toggle - Better Positioned -->
       <div class="dark-mode-toggle-wrapper">
         <button class="dark-mode-button" id="dark-mode-toggle" aria-label="Toggle dark mode">
-          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <circle cx="12" cy="12" r="5"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" fill="currentColor"/>
+            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" fill="none"/>
           </svg>
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="currentColor">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
           </svg>
         </button>
@@ -879,13 +862,13 @@
     
     <!-- Footer -->
     <div style="margin-top: auto; padding: 32px 0; opacity: 0.3; font-size: 13px; text-align: center; font-weight: 600;">
-      v4.0.0 Enterprise | © 2025 Simbye
+      v5.0.0 Final | © 2025 Simbye
     </div>
   </div>
 </nav>
 
 <script>
-// Enterprise Header JavaScript - Premium Edition
+// Enterprise Header JavaScript - Final Edition
 (function() {
   'use strict';
   
@@ -907,11 +890,6 @@
     // Set initial theme
     document.documentElement.setAttribute('data-theme', currentTheme);
     updateThemeUI();
-    
-    // Add loaded class for animations
-    requestAnimationFrame(() => {
-      header.classList.add('header-loaded');
-    });
     
     // Bind events
     bindEvents();
@@ -1080,14 +1058,6 @@
   }
   
   function updateThemeUI() {
-    if (darkModeToggle) {
-      // Visual feedback for theme change
-      darkModeToggle.style.transform = 'scale(0.8)';
-      setTimeout(() => {
-        darkModeToggle.style.transform = '';
-      }, 200);
-    }
-    
     // Update aria-pressed for accessibility
     if (themeToggle) {
       themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
