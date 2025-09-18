@@ -34,12 +34,13 @@
   --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
-/* Header Container - FIXED & FULL WIDTH */
+/* Header Container - FULL WIDTH HEADER with CENTERED CONTENT */
 .enterprise-header {
-  position: fixed; /* Back to fixed */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  width: 100%; /* Volle Breite */
   height: var(--header-height);
   background: var(--bg-header);
   /* border-bottom REMOVED */
@@ -63,9 +64,9 @@
   grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
-  /* max-width REMOVED for full width */
-  margin: 0;
-  padding: 0 40px;
+  max-width: 1600px; /* Inhalt bleibt zentriert bei max 1600px */
+  margin: 0 auto; /* Zentrierung des Inhalts */
+  padding: 0 40px; /* Gleiche Padding wie vorher */
   gap: 48px;
 }
 
@@ -643,8 +644,6 @@
   .header-container {
     grid-template-columns: 160px 1fr;
     padding: 0 20px;
-    /* Full width on mobile too */
-    margin: 0;
   }
   
   /* Bigger mobile logo */
