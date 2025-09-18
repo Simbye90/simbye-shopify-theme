@@ -1,5 +1,5 @@
 <!-- sections/hero-simbye.liquid -->
-<!-- SIMBYE HERO - ENTERPRISE FINAL -->
+<!-- SIMBYE HERO - ENTERPRISE FINAL FIXED -->
 
 <style>
 /* FULL WIDTH SECTION */
@@ -21,27 +21,15 @@
   overflow: hidden;
 }
 
-/* Container mit Padding - WICHTIG: Gleiche Werte wie Header! */
+/* Container - GLEICH WIE HEADER */
 .hero-container {
-  max-width: 1400px; /* Gleich wie Header */
+  max-width: 1600px; /* WICHTIG: Gleich wie Header */
   margin: 0 auto;
-  padding: 40px 20px 60px 20px; /* Mobile: 20px, Desktop wird überschrieben */
+  padding: 40px 20px 60px 20px;
   width: 100%;
 }
 
-@media (min-width: 768px) {
-  .hero-container {
-    padding: 50px 30px 70px 30px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .hero-container {
-    padding: 60px 40px 80px 40px; /* Desktop: 40px wie Header */
-  }
-}
-
-/* MOBILE FIRST - SIMPLIFIED */
+/* MOBILE FIRST */
 .hero-content {
   text-align: center;
   width: 100%;
@@ -81,7 +69,7 @@
   display: none;
 }
 
-/* Stats Mobile - Direkt nach Title */
+/* Stats Mobile */
 .hero-stats {
   display: flex;
   justify-content: center;
@@ -115,7 +103,7 @@
   letter-spacing: 0.5px;
 }
 
-/* Image Mobile - Full Width */
+/* Image Mobile */
 .hero-visual {
   width: calc(100% + 40px);
   margin: 0 -20px;
@@ -126,7 +114,6 @@
   width: 100%;
   height: auto;
   display: block;
-  /* Keine Animation auf Mobile für bessere Performance */
 }
 
 /* Mobile Product Badges */
@@ -171,6 +158,10 @@
 
 /* TABLET (768px+) */
 @media (min-width: 768px) {
+  .hero-container {
+    padding: 50px 30px 70px 30px;
+  }
+  
   .hero-title {
     font-size: 42px;
     margin-bottom: 20px;
@@ -185,6 +176,7 @@
     line-height: 1.5;
     margin: 0 0 28px 0;
     padding: 0 10px;
+    animation: fadeInUp 0.7s ease 0.1s both;
   }
   
   /* Button zeigen auf Tablet */
@@ -192,6 +184,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 36px;
+    animation: fadeInUp 0.8s ease 0.2s both;
   }
   
   .btn-hero-main {
@@ -232,32 +225,23 @@
   }
   
   .hero-image {
-    animation: none; /* Keine Animation auf Tablet */
+    animation: none;
   }
 }
 
 /* DESKTOP (1024px+) */
 @media (min-width: 1024px) {
   .hero-container {
-    padding: 60px 40px 80px 40px; /* Gleiche seitliche Padding wie Header */
+    padding: 60px 40px 80px 40px; /* GLEICHE PADDING WIE HEADER! */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
-    /* WICHTIG: Gleiche max-width wie Header für Alignment */
-    max-width: 1600px; /* Exakt wie Header */
   }
   
-  /* Content Links GENAU wie Logo positioniert */
+  /* Content GENAU LINKS WIE LOGO */
   .hero-content {
     text-align: left;
-    padding-left: 0; /* KEIN extra padding - gleich wie Logo */
-  }
-  
-  /* Content Links GENAU wie Logo positioniert */
-  .hero-content {
-    text-align: left;
-    padding-left: 0; /* Kein extra padding, gleich wie Logo */
   }
   
   .hero-title {
@@ -319,7 +303,6 @@
     max-width: 650px;
     width: 100%;
     filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.12));
-    /* Für Weltkugel - sanftes Schweben statt Rotation */
     animation: floatGlobe 8s ease-in-out infinite;
   }
   
@@ -456,28 +439,7 @@
     <div class="hero-content">
       <!-- Title -->
       <h1 class="hero-title">
-        {% comment %} METHODE 3: Über spezifische Collections {% endcomment %}
-        {% unless turkey_product %}
-          {% if collections['turkey'] %}
-            {% assign turkey_product = collections['turkey'].products.first %}
-          {% elsif collections['turkei'] %}
-            {% assign turkey_product = collections['turkei'].products.first %}
-          {% endif %}
-        {% endunless %}
-        
-        {% unless usa_product %}
-          {% if collections['usa'] %}
-            {% assign usa_product = collections['usa'].products.first %}
-          {% elsif collections['united-states'] %}
-            {% assign usa_product = collections['united-states'].products.first %}
-          {% endif %}
-        {% endunless %}
-        
-        {% unless japan_product %}
-          {% if collections['japan'] %}
-            {% assign japan_product = collections['japan'].products.first %}
-          {% endif %}
-        {% endunless %}<span class="hero-title-primary">
+        <span class="hero-title-primary">
           {{ 'hero.title_line1' | t | default: 'Günstige eSIM' }}
         </span>
         <span class="hero-title-gradient">
@@ -532,189 +494,185 @@
         fetchpriority="high"
       >
       
-      <!-- Desktop Product Labels mit echten Shopify Varianten -->
+      <!-- Desktop Product Labels -->
       <div class="product-labels">
-        {% comment %} 
-          RICHTIGE SHOPIFY IMPLEMENTATION
-          
-          DAMIT ES FUNKTIONIERT:
-          1. Produkte müssen existieren mit Handles wie:
-             - "turkey-esim" oder "turkei-esim"
-             - "usa-esim" 
-             - "japan-esim"
-          
-          2. ODER Produkte müssen getaggt sein mit:
-             - Tag: "turkey" für Türkei
-             - Tag: "usa" für USA
-             - Tag: "japan" für Japan
-          
-          3. ODER Produkt-Titel müssen enthalten:
-             - "Türkei" oder "Turkey"
-             - "USA"
-             - "Japan"
-             
-          DEBUG: Um zu sehen welche Produkte gefunden werden,
-          entferne die comment Tags unten:
-        {% endcomment %}
+        {% comment %} PRODUKTE KORREKT LADEN MIT all_products {% endcomment %}
+        {% if section.settings.product_1 %}
+          {% assign product_1 = all_products[section.settings.product_1] %}
+        {% endif %}
+        {% if section.settings.product_2 %}
+          {% assign product_2 = all_products[section.settings.product_2] %}
+        {% endif %}
+        {% if section.settings.product_3 %}
+          {% assign product_3 = all_products[section.settings.product_3] %}
+        {% endif %}
         
-        {% comment %}
-        DEBUG INFO:
-        Turkey Product: {{ turkey_product.title }}
-        USA Product: {{ usa_product.title }}
-        Japan Product: {{ japan_product.title }}
-        {% endcomment %}
-        
-        {% comment %} Versuche Produkte über verschiedene Methoden zu finden {% endcomment %}
-        
-        {% comment %} METHODE 1: Direkte Produkt Handles {% endcomment %}
-        {% assign turkey_product = all_products['turkey-esim'] | default: all_products['turkei-esim'] | default: all_products['turkey'] | default: all_products['turkei'] %}
-        {% assign usa_product = all_products['usa-esim'] | default: all_products['usa'] | default: all_products['united-states'] %}
-        {% assign japan_product = all_products['japan-esim'] | default: all_products['japan'] %}
-        
-        {% comment %} METHODE 2: Falls keine gefunden, suche in allen Produkten {% endcomment %}
-        {% unless turkey_product %}
-          {% for product in collections.all.products limit: 100 %}
-            {% if product.title contains 'Türkei' or product.title contains 'Turkey' or product.title contains 'Turkei' %}
-              {% assign turkey_product = product %}
-              {% break %}
-            {% elsif product.tags contains 'turkey' or product.tags contains 'turkei' or product.tags contains 'türkei' %}
-              {% assign turkey_product = product %}
-              {% break %}
+        <!-- Produkt 1 (Links) -->
+        {% if product_1 != blank %}
+          <div class="product-label product-label-1">
+            {% comment %} Flagge aus Produktbild {% endcomment %}
+            {% if product_1.featured_image %}
+              <img src="{{ product_1.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+            {% else %}
+              <span>🌍</span>
             {% endif %}
-          {% endfor %}
-        {% endunless %}
-        
-        {% unless usa_product %}
-          {% for product in collections.all.products limit: 100 %}
-            {% if product.title contains 'USA' or product.title contains 'United States' or product.title contains 'Amerika' %}
-              {% assign usa_product = product %}
-              {% break %}
-            {% elsif product.tags contains 'usa' or product.tags contains 'united-states' or product.tags contains 'amerika' %}
-              {% assign usa_product = product %}
-              {% break %}
+            
+            {% comment %} Produktname {% endcomment %}
+            {% assign product_name = product_1.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+            <span>{{ product_name | truncate: 20 }}</span>
+            
+            {% comment %} Label (z.B. "5GB") {% endcomment %}
+            {% if section.settings.product_1_label != blank %}
+              <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_1_label }}</span>
             {% endif %}
-          {% endfor %}
-        {% endunless %}
-        
-        {% unless japan_product %}
-          {% for product in collections.all.products limit: 100 %}
-            {% if product.title contains 'Japan' %}
-              {% assign japan_product = product %}
-              {% break %}
-            {% elsif product.tags contains 'japan' %}
-              {% assign japan_product = product %}
-              {% break %}
-            {% endif %}
-          {% endfor %}
-        {% endunless %}
-        
-        <!-- Türkei Label -->
-        <div class="product-label product-label-1">
-          <span>🇹🇷</span>
-          {% if turkey_product %}
-            {% assign product_title = turkey_product.title | split: ' - ' | first | split: ' | ' | first | split: 'eSIM' | first | strip %}
-            <span>{{ product_title | truncate: 20 }}</span>
+            
+            {% comment %} Preis {% endcomment %}
             <span class="label-price">
-              {% if turkey_product.variants.size > 1 %}
-                ab {{ turkey_product.price_min | money_without_currency }}
+              {% if product_1.price_varies %}
+                ab {{ product_1.price_min | money_without_currency }}€
               {% else %}
-                {{ turkey_product.price | money_without_currency }}
+                {{ product_1.price | money_without_currency }}€
               {% endif %}
             </span>
-          {% else %}
-            <span>Türkei • 5GB</span>
+          </div>
+        {% else %}
+          <!-- Fallback -->
+          <div class="product-label product-label-1">
+            <span>🇹🇷</span>
+            <span>Türkei</span>
+            <span style="color: var(--primary-color); font-weight: 800;">• 5GB</span>
             <span class="label-price">9€</span>
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
         
-        <!-- USA Label -->
-        <div class="product-label product-label-2">
-          <span>🇺🇸</span>
-          {% if usa_product %}
-            {% assign product_title = usa_product.title | split: ' - ' | first | split: ' | ' | first | split: 'eSIM' | first | strip %}
-            <span>{{ product_title | truncate: 20 }}</span>
+        <!-- Produkt 2 (Rechts) -->
+        {% if product_2 != blank %}
+          <div class="product-label product-label-2">
+            {% if product_2.featured_image %}
+              <img src="{{ product_2.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+            {% else %}
+              <span>🌍</span>
+            {% endif %}
+            
+            {% assign product_name = product_2.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+            <span>{{ product_name | truncate: 20 }}</span>
+            
+            {% if section.settings.product_2_label != blank %}
+              <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_2_label }}</span>
+            {% endif %}
+            
             <span class="label-price">
-              {% if usa_product.variants.size > 1 %}
-                ab {{ usa_product.price_min | money_without_currency }}
+              {% if product_2.price_varies %}
+                ab {{ product_2.price_min | money_without_currency }}€
               {% else %}
-                {{ usa_product.price | money_without_currency }}
+                {{ product_2.price | money_without_currency }}€
               {% endif %}
             </span>
-          {% else %}
-            <span>USA • 10GB</span>
+          </div>
+        {% else %}
+          <!-- Fallback -->
+          <div class="product-label product-label-2">
+            <span>🇺🇸</span>
+            <span>USA</span>
+            <span style="color: var(--primary-color); font-weight: 800;">• 10GB</span>
             <span class="label-price">19€</span>
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
         
-        <!-- Japan Label -->
-        <div class="product-label product-label-3">
-          <span>🇯🇵</span>
-          {% if japan_product %}
-            {% assign product_title = japan_product.title | split: ' - ' | first | split: ' | ' | first | split: 'eSIM' | first | strip %}
-            <span>{{ product_title | truncate: 20 }}</span>
+        <!-- Produkt 3 (Unten) -->
+        {% if product_3 != blank %}
+          <div class="product-label product-label-3">
+            {% if product_3.featured_image %}
+              <img src="{{ product_3.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+            {% else %}
+              <span>🌍</span>
+            {% endif %}
+            
+            {% assign product_name = product_3.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+            <span>{{ product_name | truncate: 20 }}</span>
+            
+            {% if section.settings.product_3_label != blank %}
+              <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_3_label }}</span>
+            {% endif %}
+            
             <span class="label-price">
-              {% if japan_product.variants.size > 1 %}
-                ab {{ japan_product.price_min | money_without_currency }}
+              {% if product_3.price_varies %}
+                ab {{ product_3.price_min | money_without_currency }}€
               {% else %}
-                {{ japan_product.price | money_without_currency }}
+                {{ product_3.price | money_without_currency }}€
               {% endif %}
             </span>
-          {% else %}
-            <span>Japan • 3GB</span>
+          </div>
+        {% else %}
+          <!-- Fallback -->
+          <div class="product-label product-label-3">
+            <span>🇯🇵</span>
+            <span>Japan</span>
+            <span style="color: var(--primary-color); font-weight: 800;">• 3GB</span>
             <span class="label-price">12€</span>
-          {% endif %}
-        </div>
+          </div>
+        {% endif %}
       </div>
       
       <!-- Mobile Product Badges -->
       <div class="mobile-products">
-        {% comment %} Produkte richtig laden für Mobile {% endcomment %}
-        {% assign product_1 = all_products[section.settings.product_1] %}
-        {% assign product_2 = all_products[section.settings.product_2] %}
-        {% assign product_3 = all_products[section.settings.product_3] %}
-        
-        {% if product_1 %}
+        {% if product_1 != blank %}
           <span class="mobile-product-badge">
             {% if product_1.featured_image %}
-              <img src="{{ product_1.featured_image | image_url: width: 30 }}" alt="{{ product_1.title }}" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+              <img src="{{ product_1.featured_image | image_url: width: 30 }}" alt="" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
             {% else %}
               🌍
             {% endif %}
-            {{ product_1.title | split: ' ' | first | truncate: 15 }} ab <span class="price">{{ product_1.price_min | money_without_currency }}</span>
+            {% assign product_name = product_1.title | split: ' ' | first %}
+            {{ product_name | truncate: 15 }}
+            {% if section.settings.product_1_label != blank %}
+              {{ section.settings.product_1_label }}
+            {% endif %}
+            <span class="price">{{ product_1.price_min | money_without_currency }}€</span>
           </span>
         {% else %}
           <span class="mobile-product-badge">
-            🇹🇷 Türkei ab <span class="price">9€</span>
+            🇹🇷 Türkei 5GB <span class="price">9€</span>
           </span>
         {% endif %}
         
-        {% if product_2 %}
+        {% if product_2 != blank %}
           <span class="mobile-product-badge">
             {% if product_2.featured_image %}
-              <img src="{{ product_2.featured_image | image_url: width: 30 }}" alt="{{ product_2.title }}" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+              <img src="{{ product_2.featured_image | image_url: width: 30 }}" alt="" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
             {% else %}
               🌍
             {% endif %}
-            {{ product_2.title | split: ' ' | first | truncate: 15 }} ab <span class="price">{{ product_2.price_min | money_without_currency }}</span>
+            {% assign product_name = product_2.title | split: ' ' | first %}
+            {{ product_name | truncate: 15 }}
+            {% if section.settings.product_2_label != blank %}
+              {{ section.settings.product_2_label }}
+            {% endif %}
+            <span class="price">{{ product_2.price_min | money_without_currency }}€</span>
           </span>
         {% else %}
           <span class="mobile-product-badge">
-            🇺🇸 USA ab <span class="price">19€</span>
+            🇺🇸 USA 10GB <span class="price">19€</span>
           </span>
         {% endif %}
         
-        {% if product_3 %}
+        {% if product_3 != blank %}
           <span class="mobile-product-badge">
             {% if product_3.featured_image %}
-              <img src="{{ product_3.featured_image | image_url: width: 30 }}" alt="{{ product_3.title }}" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+              <img src="{{ product_3.featured_image | image_url: width: 30 }}" alt="" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
             {% else %}
               🌍
             {% endif %}
-            {{ product_3.title | split: ' ' | first | truncate: 15 }} ab <span class="price">{{ product_3.price_min | money_without_currency }}</span>
+            {% assign product_name = product_3.title | split: ' ' | first %}
+            {{ product_name | truncate: 15 }}
+            {% if section.settings.product_3_label != blank %}
+              {{ section.settings.product_3_label }}
+            {% endif %}
+            <span class="price">{{ product_3.price_min | money_without_currency }}€</span>
           </span>
         {% else %}
           <span class="mobile-product-badge">
-            🇯🇵 Japan ab <span class="price">12€</span>
+            🇯🇵 Japan 3GB <span class="price">12€</span>
           </span>
         {% endif %}
       </div>
@@ -748,19 +706,19 @@
     },
     {
       "type": "header",
-      "content": "Produkt Labels (Desktop)"
+      "content": "Featured Produkte"
     },
     {
       "type": "product",
       "id": "product_1",
-      "label": "Produkt 1 (Links)"
+      "label": "Produkt 1 (Links oben)"
     },
     {
       "type": "text",
       "id": "product_1_label",
-      "label": "Produkt 1 Label",
-      "default": "5GB",
-      "info": "Z.B. '5GB' oder 'Bestseller'"
+      "label": "Produkt 1 Zusatz",
+      "placeholder": "z.B. 5GB",
+      "info": "Optional: GB-Angabe oder Badge"
     },
     {
       "type": "product",
@@ -770,24 +728,29 @@
     {
       "type": "text",
       "id": "product_2_label",
-      "label": "Produkt 2 Label",
-      "default": "10GB"
+      "label": "Produkt 2 Zusatz",
+      "placeholder": "z.B. 10GB"
     },
     {
       "type": "product",
       "id": "product_3",
-      "label": "Produkt 3 (Unten)"
+      "label": "Produkt 3 (Links unten)"
     },
     {
       "type": "text",
       "id": "product_3_label",
-      "label": "Produkt 3 Label",
-      "default": "3GB"
+      "label": "Produkt 3 Zusatz",
+      "placeholder": "z.B. 3GB"
     }
   ],
   "presets": [
     {
-      "name": "Hero Section"
+      "name": "Hero Section",
+      "settings": {
+        "product_1_label": "5GB",
+        "product_2_label": "10GB",
+        "product_3_label": "3GB"
+      }
     }
   ]
 }
