@@ -1,36 +1,42 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 - Simbye eSIM -->
+<!-- Enterprise Header 2025 v3 - Simbye eSIM - FINAL FIXED -->
 
 <style>
-/* CSS Custom Properties für Theming */
+/* Import Inter Font - Best for 2025 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* CSS Custom Properties */
 :root {
-  --header-height: 70px;
+  --header-height: 72px;
   --header-mobile-height: 60px;
   --primary-color: #009a61;
   --primary-hover: #00824f;
+  --primary-dark: #006644;
   --text-color: #2c2c2c;
+  --text-light: #6b6b6b;
   --bg-header: #ffffff;
   --border-color: rgba(0, 0, 0, 0.08);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
   --mobile-menu-width: 85%;
   --mobile-menu-bg: #fafafa;
-  --font-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
   --text-color: #e8e8e8;
+  --text-light: #a0a0a0;
   --bg-header: #1a1a1a;
   --border-color: rgba(255, 255, 255, 0.1);
   --mobile-menu-bg: #242424;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Prevent CLS with fixed heights */
+/* Header Container */
 .enterprise-header {
   position: fixed;
   top: 0;
@@ -57,13 +63,13 @@
   grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
-  max-width: 1440px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 24px;
-  gap: 32px;
+  padding: 0 30px;
+  gap: 40px;
 }
 
-/* Logo Section */
+/* Logo */
 .header-logo {
   display: flex;
   align-items: center;
@@ -71,12 +77,12 @@
 }
 
 .header-logo img {
+  height: 38px;
   width: auto;
-  height: 32px;
   object-fit: contain;
 }
 
-/* Navigation - Desktop */
+/* Desktop Navigation */
 .header-nav {
   display: flex;
   align-items: center;
@@ -94,7 +100,7 @@
 .nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 8px 16px;
+  padding: 10px 18px;
   color: var(--text-color);
   font-size: 15px;
   font-weight: 500;
@@ -103,6 +109,7 @@
   transition: all var(--transition-fast);
   position: relative;
   font-family: var(--font-base);
+  letter-spacing: -0.01em;
 }
 
 .nav-link:hover {
@@ -123,7 +130,7 @@
 }
 
 .nav-link.active::after {
-  width: calc(100% - 32px);
+  width: calc(100% - 36px);
 }
 
 /* Actions Section */
@@ -137,27 +144,27 @@
 /* Auth Buttons */
 .auth-group {
   display: flex;
-  height: 40px;
-  border-radius: 20px;
+  height: 42px;
+  border-radius: 21px;
   overflow: hidden;
-  box-shadow: 0 0 0 1px var(--border-color);
-  background: var(--bg-header);
+  box-shadow: inset 0 0 0 1.5px var(--primary-color);
 }
 
 .auth-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 20px;
+  padding: 0 22px;
   height: 100%;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
   color: white;
   background: var(--primary-color);
   text-decoration: none;
-  transition: background var(--transition-fast);
+  transition: all var(--transition-fast);
   white-space: nowrap;
   font-family: var(--font-base);
+  letter-spacing: -0.02em;
 }
 
 .auth-btn:hover {
@@ -165,39 +172,40 @@
 }
 
 .auth-btn.login {
-  border-radius: 20px 0 0 20px;
+  border-radius: 21px 0 0 21px;
   border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .auth-btn.register {
-  border-radius: 0 20px 20px 0;
-  background: var(--text-color);
+  border-radius: 0 21px 21px 0;
+  background: var(--primary-dark);
 }
 
 .auth-btn.register:hover {
-  background: #4a4a4a;
+  background: #005533;
 }
 
 .auth-btn.logged-in {
-  border-radius: 20px;
+  border-radius: 21px;
   padding: 0 24px;
   gap: 8px;
+  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.15);
 }
 
-/* Language & Currency Switchers */
+/* Language & Currency */
 .switcher-group {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
 .switcher {
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 8px 12px;
-  border-radius: 8px;
+  gap: 6px;
+  padding: 9px 14px;
+  border-radius: 10px;
   background: transparent;
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
   color: var(--text-color);
   font-size: 14px;
   font-weight: 500;
@@ -214,11 +222,10 @@
 .switcher-icon {
   width: 20px;
   height: 20px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 /* Dark Mode Toggle */
@@ -226,62 +233,113 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
   background: transparent;
-  border: 1px solid var(--border-color);
+  border: 1.5px solid var(--border-color);
   cursor: pointer;
   transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
 }
 
 .theme-toggle:hover {
-  background: rgba(0, 154, 97, 0.05);
   border-color: var(--primary-color);
+  background: rgba(0, 154, 97, 0.05);
 }
 
 .theme-toggle svg {
-  width: 20px;
-  height: 20px;
-  transition: transform var(--transition-base);
+  width: 22px;
+  height: 22px;
+  transition: all var(--transition-base);
+  position: absolute;
+  color: var(--text-color);
 }
 
-.theme-toggle:active svg {
-  transform: rotate(30deg);
+.theme-toggle .sun-icon {
+  opacity: 0;
+  transform: rotate(-90deg);
 }
 
-/* Mobile Menu Toggle */
+.theme-toggle .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+/* Mobile Menu Toggle - Modern Design */
 .mobile-toggle {
   display: none;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  gap: 4px;
-  width: 40px;
-  height: 40px;
-  padding: 8px;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   cursor: pointer;
   z-index: 1001;
+  position: relative;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.2);
 }
 
-.mobile-toggle span {
+.mobile-toggle:hover {
+  transform: scale(1.05);
+}
+
+.mobile-toggle:active {
+  transform: scale(0.95);
+}
+
+.mobile-toggle .burger {
+  width: 20px;
+  height: 16px;
+  position: relative;
+}
+
+.mobile-toggle .burger span {
   display: block;
-  width: 24px;
+  position: absolute;
+  width: 100%;
   height: 2px;
-  background: var(--text-color);
+  background: white;
   border-radius: 2px;
   transition: all var(--transition-base);
+  left: 0;
 }
 
-.mobile-toggle.active span:nth-child(1) {
+.mobile-toggle .burger span:nth-child(1) {
+  top: 0;
+}
+
+.mobile-toggle .burger span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mobile-toggle .burger span:nth-child(3) {
+  bottom: 0;
+}
+
+.mobile-toggle.active .burger span:nth-child(1) {
   transform: rotate(45deg) translate(5px, 5px);
 }
 
-.mobile-toggle.active span:nth-child(2) {
+.mobile-toggle.active .burger span:nth-child(2) {
   opacity: 0;
-  transform: translateX(-10px);
 }
 
-.mobile-toggle.active span:nth-child(3) {
+.mobile-toggle.active .burger span:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
@@ -298,7 +356,6 @@
   z-index: 999;
   overflow-y: auto;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
-  will-change: transform;
 }
 
 .mobile-menu.active {
@@ -328,8 +385,7 @@
 }
 
 .mobile-menu-header {
-  padding: 20px 24px;
-  border-bottom: 1px solid var(--border-color);
+  padding: 20px;
   background: var(--bg-header);
   margin-bottom: 20px;
   border-radius: 12px;
@@ -347,24 +403,43 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .mobile-user-name {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   color: var(--text-color);
 }
 
 .mobile-user-email {
-  font-size: 14px;
-  color: rgba(var(--text-color), 0.7);
+  font-size: 13px;
+  color: var(--text-light);
+}
+
+.mobile-auth-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 44px;
+  background: var(--primary-color);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: all var(--transition-fast);
+}
+
+.mobile-auth-button:hover {
+  background: var(--primary-hover);
 }
 
 .mobile-menu-nav {
@@ -396,19 +471,56 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 0;
+  padding: 14px 0;
 }
 
-/* Responsive Design */
+.mobile-action-row span {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+/* iOS Style Toggle Switch for Dark Mode */
+.toggle-switch {
+  position: relative;
+  width: 51px;
+  height: 31px;
+  background: #e9e9ea;
+  border-radius: 31px;
+  cursor: pointer;
+  transition: background var(--transition-base);
+}
+
+.toggle-switch.active {
+  background: var(--primary-color);
+}
+
+.toggle-switch-handle {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 27px;
+  height: 27px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: transform var(--transition-base);
+}
+
+.toggle-switch.active .toggle-switch-handle {
+  transform: translateX(20px);
+}
+
+/* Responsive */
 @media (max-width: 1024px) {
   .header-container {
-    grid-template-columns: 150px 1fr auto;
-    gap: 20px;
+    grid-template-columns: 180px 1fr auto;
+    gap: 24px;
     padding: 0 20px;
   }
   
   .nav-link {
-    padding: 6px 12px;
+    padding: 8px 14px;
     font-size: 14px;
   }
 }
@@ -421,6 +533,10 @@
   .header-container {
     grid-template-columns: 150px 1fr;
     padding: 0 16px;
+  }
+  
+  .header-logo img {
+    height: 32px;
   }
   
   .header-nav,
@@ -468,12 +584,12 @@
   <div class="header-container">
     <!-- Logo -->
     <div class="header-logo">
-      <a href="{{ routes.root_url }}">
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
         <img 
           src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
           alt="{{ shop.name }}"
           width="200"
-          height="32"
+          height="38"
           loading="eager"
           fetchpriority="high"
         >
@@ -483,16 +599,24 @@
     <!-- Desktop Navigation -->
     <nav class="header-nav" role="navigation">
       <div class="nav-item">
-        <a href="/pages/how-it-works" class="nav-link">How eSIM Works</a>
+        <a href="/pages/how-it-works" class="nav-link">
+          {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
+        </a>
       </div>
       <div class="nav-item">
-        <a href="/pages/check-esim" class="nav-link">Check eSIM</a>
+        <a href="/pages/check-esim" class="nav-link">
+          {{ 'header.check_esim' | t | default: 'Check eSIM' }}
+        </a>
       </div>
       <div class="nav-item">
-        <a href="/pages/faq" class="nav-link">FAQ</a>
+        <a href="/pages/faq" class="nav-link">
+          {{ 'header.faq' | t | default: 'FAQ' }}
+        </a>
       </div>
       <div class="nav-item">
-        <a href="/pages/support" class="nav-link">Support</a>
+        <a href="/pages/support" class="nav-link">
+          {{ 'header.support' | t | default: 'Support' }}
+        </a>
       </div>
     </nav>
     
@@ -507,14 +631,20 @@
           </svg>
           {% if customer.first_name %}
             {{ customer.first_name }}
+          {% elsif customer.name %}
+            {{ customer.name }}
           {% else %}
-            My Account
+            {{ 'header.my_account' | t | default: 'My Account' }}
           {% endif %}
         </a>
       {% else %}
         <div class="auth-group">
-          <a href="{{ routes.account_login_url }}" class="auth-btn login">Login</a>
-          <a href="{{ routes.account_register_url }}" class="auth-btn register">Sign Up</a>
+          <a href="{{ routes.account_login_url }}" class="auth-btn login">
+            {{ 'header.login' | t | default: 'Login' }}
+          </a>
+          <a href="{{ routes.account_register_url }}" class="auth-btn register">
+            {{ 'header.signup' | t | default: 'Sign Up' }}
+          </a>
         </div>
       {% endif %}
       
@@ -522,14 +652,14 @@
       <div class="switcher-group">
         <button class="switcher" id="language-switcher" aria-label="Change language">
           <span class="switcher-icon">🌍</span>
-          <span>EN</span>
+          <span>{{ shop.locale | upcase }}</span>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
         
         <button class="switcher" id="currency-switcher" aria-label="Change currency">
-          <span>€ EUR</span>
+          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
             <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
@@ -538,20 +668,22 @@
       
       <!-- Dark Mode Toggle -->
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-        <svg class="sun-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
-          <circle cx="10" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M10 1v2M10 17v2M19 10h-2M3 10H1M16.4 3.6l-1.4 1.4M5 15l-1.4 1.4M16.4 16.4l-1.4-1.4M5 5L3.6 3.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
         </svg>
-        <svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M8 2C8 7.5 12.5 12 18 12c-1 4-5 6-9 6-5 0-9-4-9-9 0-4 2-8 6-9z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
       
       <!-- Mobile Menu Toggle -->
       <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <div class="burger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </button>
     </div>
   </div>
@@ -561,21 +693,23 @@
 <div class="mobile-overlay" id="mobile-overlay"></div>
 <nav class="mobile-menu" id="mobile-menu" role="navigation">
   <div class="mobile-menu-content">
-    <!-- User Info -->
-    {% if customer %}
-      <div class="mobile-menu-header">
+    <!-- User Section -->
+    <div class="mobile-menu-header">
+      {% if customer %}
         <div class="mobile-user-info">
           <div class="mobile-user-avatar">
             {% if customer.first_name %}
-              {{ customer.first_name | slice: 0 }}
+              {{ customer.first_name | slice: 0 }}{{ customer.last_name | slice: 0 }}
             {% else %}
-              U
+              SU
             {% endif %}
           </div>
           <div>
             <div class="mobile-user-name">
-              {% if customer.first_name %}
+              {% if customer.first_name or customer.last_name %}
                 {{ customer.first_name }} {{ customer.last_name }}
+              {% elsif customer.name %}
+                {{ customer.name }}
               {% else %}
                 Simbye User
               {% endif %}
@@ -583,69 +717,74 @@
             <div class="mobile-user-email">{{ customer.email }}</div>
           </div>
         </div>
-        <a href="{{ routes.account_url }}" class="auth-btn logged-in" style="width: 100%;">
-          My Account →
+        <a href="{{ routes.account_url }}" class="mobile-auth-button">
+          {{ 'header.my_account' | t | default: 'My Account' }} →
         </a>
-      </div>
-    {% else %}
-      <div class="mobile-menu-header">
-        <div class="auth-group" style="width: 100%;">
-          <a href="{{ routes.account_login_url }}" class="auth-btn login" style="flex: 1;">Login</a>
-          <a href="{{ routes.account_register_url }}" class="auth-btn register" style="flex: 1;">Sign Up</a>
+      {% else %}
+        <a href="{{ routes.account_login_url }}" class="mobile-auth-button">
+          {{ 'header.login' | t | default: 'Login' }}
+        </a>
+        <div style="text-align: center; margin-top: 12px;">
+          <a href="{{ routes.account_register_url }}" style="color: var(--text-light); font-size: 14px;">
+            {{ 'header.no_account' | t | default: "Don't have an account?" }} 
+            <span style="color: var(--primary-color); font-weight: 600;">
+              {{ 'header.signup' | t | default: 'Sign Up' }}
+            </span>
+          </a>
         </div>
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
     
     <!-- Navigation -->
     <nav class="mobile-menu-nav">
-      <a href="/pages/how-it-works" class="mobile-nav-item">How eSIM Works</a>
-      <a href="/pages/check-esim" class="mobile-nav-item">Check eSIM</a>
-      <a href="/pages/faq" class="mobile-nav-item">FAQ</a>
-      <a href="/pages/support" class="mobile-nav-item">Support</a>
+      <a href="/pages/how-it-works" class="mobile-nav-item">
+        {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
+      </a>
+      <a href="/pages/check-esim" class="mobile-nav-item">
+        {{ 'header.check_esim' | t | default: 'Check eSIM' }}
+      </a>
+      <a href="/pages/faq" class="mobile-nav-item">
+        {{ 'header.faq' | t | default: 'FAQ' }}
+      </a>
+      <a href="/pages/support" class="mobile-nav-item">
+        {{ 'header.support' | t | default: 'Support' }}
+      </a>
     </nav>
     
-    <!-- Actions -->
+    <!-- Settings -->
     <div class="mobile-menu-actions">
       <div class="mobile-action-row">
-        <span>Language</span>
-        <button class="switcher" style="border: none;">
+        <span>{{ 'header.language' | t | default: 'Language' }}</span>
+        <button class="switcher" style="border: none; padding: 6px 12px;">
           <span class="switcher-icon">🌍</span>
-          <span>English</span>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M7.5 4.5L4.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+          <span>{{ shop.locale | upcase }}</span>
         </button>
       </div>
       
       <div class="mobile-action-row">
-        <span>Currency</span>
-        <button class="switcher" style="border: none;">
-          <span>€ EUR</span>
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path d="M7.5 4.5L4.5 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          </svg>
+        <span>{{ 'header.currency' | t | default: 'Currency' }}</span>
+        <button class="switcher" style="border: none; padding: 6px 12px;">
+          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
         </button>
       </div>
       
       <div class="mobile-action-row">
-        <span>Dark Mode</span>
-        <button class="theme-toggle" style="border: none;">
-          <svg class="moon-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M8 2C8 7.5 12.5 12 18 12c-1 4-5 6-9 6-5 0-9-4-9-9 0-4 2-8 6-9z" stroke="currentColor" stroke-width="1.5"/>
-          </svg>
-        </button>
+        <span>{{ 'header.dark_mode' | t | default: 'Dark Mode' }}</span>
+        <div class="toggle-switch" id="dark-mode-toggle">
+          <div class="toggle-switch-handle"></div>
+        </div>
       </div>
     </div>
     
     <!-- Footer -->
-    <div style="margin-top: auto; padding: 20px 0; opacity: 0.5; font-size: 12px;">
+    <div style="margin-top: auto; padding: 20px 0; opacity: 0.4; font-size: 12px; text-align: center;">
       v2.1.0 | © 2025 Simbye
     </div>
   </div>
 </nav>
 
 <script>
-// Enterprise Header JavaScript - Vanilla JS, No jQuery
+// Enterprise Header JavaScript - Vanilla JS
 (function() {
   'use strict';
   
@@ -654,9 +793,8 @@
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileOverlay = document.getElementById('mobile-overlay');
-  const themeToggles = document.querySelectorAll('#theme-toggle, .mobile-menu-actions .theme-toggle');
-  const languageSwitcher = document.getElementById('language-switcher');
-  const currencySwitcher = document.getElementById('currency-switcher');
+  const themeToggle = document.getElementById('theme-toggle');
+  const darkModeToggle = document.getElementById('dark-mode-toggle');
   
   // State
   let isScrolled = false;
@@ -667,7 +805,7 @@
   function init() {
     // Set initial theme
     document.documentElement.setAttribute('data-theme', currentTheme);
-    updateThemeIcons();
+    updateThemeUI();
     
     // Add loaded class for animations
     setTimeout(() => {
@@ -677,8 +815,11 @@
     // Bind events
     bindEvents();
     
-    // Check initial scroll position
+    // Check initial scroll
     handleScroll();
+    
+    // Mark active nav
+    markActiveNavItem();
   }
   
   // Event Bindings
@@ -702,30 +843,36 @@
       mobileOverlay.addEventListener('click', closeMobileMenu);
     }
     
-    // Theme toggle
-    themeToggles.forEach(toggle => {
-      toggle.addEventListener('click', toggleTheme);
-    });
+    // Theme toggles
+    if (themeToggle) {
+      themeToggle.addEventListener('click', toggleTheme);
+    }
     
-    // Escape key to close mobile menu
+    if (darkModeToggle) {
+      darkModeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    // Escape key
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && isMobileMenuOpen) {
         closeMobileMenu();
       }
     });
     
-    // Swipe to close mobile menu
+    // Swipe to close
     let touchStartX = 0;
-    mobileMenu.addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-    
-    mobileMenu.addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      if (touchEndX - touchStartX > 100) {
-        closeMobileMenu();
-      }
-    }, { passive: true });
+    if (mobileMenu) {
+      mobileMenu.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+      
+      mobileMenu.addEventListener('touchend', (e) => {
+        const touchEndX = e.changedTouches[0].clientX;
+        if (touchEndX - touchStartX > 100) {
+          closeMobileMenu();
+        }
+      }, { passive: true });
+    }
   }
   
   // Scroll Handler
@@ -740,7 +887,7 @@
     }
   }
   
-  // Mobile Menu Functions
+  // Mobile Menu
   function toggleMobileMenu() {
     isMobileMenuOpen ? closeMobileMenu() : openMobileMenu();
   }
@@ -751,10 +898,6 @@
     mobileMenu.classList.add('active');
     mobileOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
-    
-    // Trap focus in mobile menu
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    mobileMenu.focus();
   }
   
   function closeMobileMenu() {
@@ -763,8 +906,6 @@
     mobileMenu.classList.remove('active');
     mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
-    
-    mobileMenu.setAttribute('aria-hidden', 'true');
   }
   
   // Theme Toggle
@@ -772,19 +913,20 @@
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
     localStorage.setItem('theme', currentTheme);
-    updateThemeIcons();
+    updateThemeUI();
   }
   
-  function updateThemeIcons() {
-    document.querySelectorAll('.sun-icon').forEach(icon => {
-      icon.style.display = currentTheme === 'dark' ? 'block' : 'none';
-    });
-    document.querySelectorAll('.moon-icon').forEach(icon => {
-      icon.style.display = currentTheme === 'light' ? 'block' : 'none';
-    });
+  function updateThemeUI() {
+    if (darkModeToggle) {
+      if (currentTheme === 'dark') {
+        darkModeToggle.classList.add('active');
+      } else {
+        darkModeToggle.classList.remove('active');
+      }
+    }
   }
   
-  // Mark active navigation item
+  // Mark Active Navigation
   function markActiveNavItem() {
     const currentPath = window.location.pathname;
     document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link => {
@@ -794,26 +936,21 @@
     });
   }
   
-  // Check for reduced motion preference
-  function prefersReducedMotion() {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  }
-  
-  // Disable animations if user prefers reduced motion
-  if (prefersReducedMotion()) {
+  // Check for reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.documentElement.style.setProperty('--transition-fast', '0ms');
     document.documentElement.style.setProperty('--transition-base', '0ms');
     document.documentElement.style.setProperty('--transition-slow', '0ms');
   }
   
-  // Initialize when DOM is ready
+  // Initialize
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
   
-  // Export for use in other scripts if needed
+  // Export for external use
   window.EnterpriseHeader = {
     openMobileMenu,
     closeMobileMenu,
@@ -822,17 +959,12 @@
 })();
 </script>
 
-<!-- Spacer to prevent content from hiding under fixed header -->
-<div style="height: var(--header-height); pointer-events: none;"></div>
-<div style="height: var(--header-mobile-height); pointer-events: none; display: none;"></div>
-
+<!-- Spacer for fixed header -->
+<div style="height: var(--header-height);"></div>
 <style>
-@media (max-width: 768px) {
-  div[style*="--header-height"] {
-    display: none !important;
+  @media (max-width: 768px) {
+    div[style*="--header-height"] {
+      height: var(--header-mobile-height) !important;
+    }
   }
-  div[style*="--header-mobile-height"] {
-    display: block !important;
-  }
-}
 </style>
