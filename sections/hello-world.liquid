@@ -151,13 +151,13 @@
 
 /* MOBILE SPECIAL DESIGN */
 @media (max-width: 767px) {
-  /* Stats UNTER der Weltkugel */
-  .hero-content {
+  .hero-container {
     display: flex;
     flex-direction: column;
   }
   
-  .hero-title {
+  /* Content oben */
+  .hero-content {
     order: 1;
   }
   
@@ -165,14 +165,16 @@
   .hero-visual {
     order: 2;
     position: relative;
-    margin: 30px -20px 20px -20px;
+    margin: 30px -20px 40px -20px;
   }
   
-  /* Stats unten */
+  /* Stats GANZ UNTEN */
   .hero-stats {
     order: 3;
-    margin-top: 20px;
+    margin-top: 0;
     margin-bottom: 30px;
+    padding: 20px 0;
+    border-top: 1px solid rgba(0, 154, 97, 0.1);
   }
   
   /* Mobile Products AUF der Weltkugel verteilt */
@@ -527,24 +529,26 @@
         </button>
       </div>
       
-      <!-- Stats -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">190+</span>
-          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
-        </div>
-        
-        <div class="stat-item">
-          <span class="stat-number">2 Min</span>
-          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
-        </div>
-        
-        <div class="stat-item">
-          <span class="stat-number">100K+</span>
-          <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
-        </div>
+    </div>
+    
+    <!-- Stats - AUSSERHALB hero-content für Mobile Positionierung -->
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">190+</span>
+        <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="stat-number">2 Min</span>
+        <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+      </div>
+      
+      <div class="stat-item">
+        <span class="stat-number">100K+</span>
+        <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
       </div>
     </div>
+  </div>
     
     <!-- Visual -->
     <div class="hero-visual">
