@@ -1,142 +1,128 @@
 <!-- sections/hero-simbye.liquid -->
-<!-- SIMBYE HERO SECTION - FINAL V3 -->
+<!-- SIMBYE HERO SECTION - MOBILE FIRST v4 -->
 
 <style>
-/* Hero Section - Full Width ohne Abstände */
+/* Reset für Section */
+.shopify-section.hero-section {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Verhindert horizontales Scrolling */
+}
+
+/* Hero Section - Fixed Width Issues */
 .hero-enterprise {
   position: relative;
-  width: 100vw;
+  width: 100%; /* NICHT 100vw - das verursacht Scrolling! */
   margin: 0;
   padding: 0;
   min-height: calc(100vh - var(--header-height, 90px));
-  /* GRADIENT: WEISS OBEN → GRÜN UNTEN */
+  /* Gradient Weiß → Grün */
   background: linear-gradient(180deg, 
     #ffffff 0%,
-    #ffffff 20%,
-    rgba(248, 255, 254, 1) 40%,
-    rgba(232, 247, 243, 1) 70%,
-    rgba(219, 242, 235, 1) 100%
+    #ffffff 15%,
+    #fafffe 30%,
+    #f0faf8 50%,
+    #e8f7f3 70%,
+    #dff2eb 100%
   );
   overflow: hidden;
-  display: flex;
-  align-items: center;
 }
 
-/* Container - Full Width mit seitlichem Padding */
+/* Container */
 .hero-container {
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
   padding: 60px 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
+  gap: 60px;
   position: relative;
-  z-index: 2;
 }
 
 /* Content Section */
 .hero-content {
+  flex: 1;
   max-width: 650px;
 }
 
-/* Main Title - Größer und prominenter */
+/* Title */
 .hero-title {
-  font-size: clamp(42px, 6vw, 72px);
+  font-size: 72px;
   font-weight: 900;
-  line-height: 1.05;
-  margin-bottom: 28px;
+  line-height: 1;
+  margin-bottom: 32px;
   letter-spacing: -0.04em;
-  animation: fadeInUp 0.6s ease both;
+  animation: fadeInUp 0.6s ease;
 }
 
 .hero-title-primary {
   display: block;
   color: #0a0a0a;
   margin-bottom: 12px;
+  font-size: 68px;
 }
 
 .hero-title-gradient {
   display: block;
-  background: linear-gradient(135deg, #009a61 0%, #00d97e 50%, #009a61 100%);
-  background-size: 200% auto;
+  font-size: 72px;
+  background: linear-gradient(135deg, #009a61 0%, #00d97e 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 4s ease infinite;
 }
 
 /* Subtitle */
 .hero-subtitle {
-  font-size: clamp(19px, 2.5vw, 24px);
+  font-size: 22px;
   font-weight: 500;
   color: #4a4a4a;
   line-height: 1.6;
   margin-bottom: 40px;
-  animation: fadeInUp 0.7s ease 0.1s both;
   max-width: 500px;
 }
 
-/* Single CTA Button */
+/* CTA Button */
 .hero-cta {
-  animation: fadeInUp 0.8s ease 0.2s both;
   margin-bottom: 48px;
 }
 
 .btn-hero-main {
-  padding: 22px 56px;
+  padding: 22px 60px;
   font-size: 20px;
   font-weight: 700;
   color: white;
-  background: linear-gradient(135deg, var(--primary-color, #009a61), #00824f);
+  background: var(--primary-color, #009a61);
   border: none;
-  border-radius: 40px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s ease;
   box-shadow: 0 8px 28px rgba(0, 154, 97, 0.3);
-  position: relative;
-  overflow: hidden;
   display: inline-block;
 }
 
-.btn-hero-main::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transition: left 0.7s;
-}
-
 .btn-hero-main:hover {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-2px);
+  background: #00824f;
   box-shadow: 0 12px 40px rgba(0, 154, 97, 0.4);
 }
 
-.btn-hero-main:hover::before {
-  left: 100%;
-}
-
-/* Stats Row - 3 Items gleichmäßig */
+/* Stats */
 .hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  animation: fadeInUp 0.9s ease 0.3s both;
-  max-width: 500px;
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .stat-number {
-  font-size: 36px;
+  font-size: 42px;
   font-weight: 900;
   color: var(--primary-color, #009a61);
   letter-spacing: -0.03em;
@@ -144,31 +130,29 @@
 }
 
 .stat-label {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #6b6b6b;
-  line-height: 1.2;
 }
 
-/* Visual Section */
+/* Visual */
 .hero-visual {
+  flex: 1;
   position: relative;
-  animation: fadeIn 1.2s ease 0.4s both;
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 700px;
 }
 
 .hero-phones {
   width: 100%;
   height: auto;
-  max-width: 700px;
-  position: relative;
-  filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.18));
-  animation: floatSmooth 10s ease-in-out infinite;
+  max-width: 650px;
+  filter: drop-shadow(0 40px 80px rgba(0, 0, 0, 0.15));
 }
 
-/* Product Labels - Besser positioniert */
+/* Product Labels Desktop */
 .product-labels {
   position: absolute;
   top: 0;
@@ -180,96 +164,55 @@
 
 .product-label {
   position: absolute;
-  padding: 12px 20px;
+  padding: 14px 24px;
   background: white;
-  border-radius: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 35px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
   font-weight: 700;
-  font-size: 15px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   gap: 10px;
-  animation: floatLabel 6s ease-in-out infinite;
   white-space: nowrap;
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.95);
 }
 
 .product-label-1 {
   top: 10%;
-  left: -15%;
-  animation-delay: 0s;
+  left: -10%;
 }
 
 .product-label-2 {
   top: 40%;
-  right: -10%;
-  animation-delay: 2s;
+  right: -8%;
 }
 
 .product-label-3 {
   bottom: 20%;
-  left: -5%;
-  animation-delay: 4s;
+  left: 0;
 }
 
 .label-flag {
-  font-size: 20px;
+  font-size: 22px;
 }
 
 .label-price {
   color: var(--primary-color, #009a61);
   font-weight: 800;
-  font-size: 16px;
+  font-size: 17px;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
-@keyframes floatSmooth {
-  0%, 100% { transform: translateY(0) scale(1); }
-  25% { transform: translateY(-20px) scale(1.02); }
-  75% { transform: translateY(15px) scale(0.98); }
-}
-
-@keyframes floatLabel {
-  0%, 100% { 
-    transform: translateY(0) scale(1) rotate(0deg);
-    opacity: 0.95;
-  }
-  50% { 
-    transform: translateY(-15px) scale(1.05) rotate(2deg);
-    opacity: 1;
-  }
+/* Mobile Product List - Hidden on Desktop */
+.mobile-products {
+  display: none;
 }
 
 /* Dark Mode */
 [data-theme="dark"] .hero-enterprise {
   background: linear-gradient(180deg,
     #0a0a0a 0%,
-    #0a0a0a 20%,
-    rgba(10, 20, 18, 1) 40%,
-    rgba(10, 30, 25, 1) 70%,
-    rgba(0, 40, 30, 1) 100%
+    #0f0f0f 30%,
+    #0a1512 70%,
+    #051f18 100%
   );
 }
 
@@ -281,85 +224,103 @@
   color: #c0c0c0;
 }
 
+[data-theme="dark"] .btn-hero-main {
+  background: #00ff88;
+  color: #0a0a0a;
+}
+
 [data-theme="dark"] .product-label {
-  background: rgba(20, 20, 20, 0.95);
+  background: #1a1a1a;
   color: #f0f0f0;
   box-shadow: 0 10px 30px rgba(0, 255, 136, 0.1);
 }
 
-/* MOBILE OPTIMIZED */
+/* MOBILE OPTIMIERUNG - KOMPLETT NEU */
 @media (max-width: 768px) {
   .hero-enterprise {
-    min-height: calc(100vh - var(--header-mobile-height, 70px));
+    min-height: auto;
+    padding: 40px 0;
     background: linear-gradient(180deg,
       #ffffff 0%,
-      #ffffff 30%,
-      rgba(232, 247, 243, 1) 100%
+      #fafffe 50%,
+      #e8f7f3 100%
     );
   }
   
   .hero-container {
-    grid-template-columns: 1fr;
-    padding: 40px 20px;
-    gap: 32px;
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 40px;
   }
   
   .hero-content {
     text-align: center;
     max-width: 100%;
+    order: 1;
   }
   
+  /* Mobile Title */
   .hero-title {
-    font-size: clamp(32px, 9vw, 48px);
+    font-size: 36px;
     margin-bottom: 20px;
   }
   
   .hero-title-primary {
+    font-size: 34px;
     margin-bottom: 8px;
   }
   
-  .hero-subtitle {
-    font-size: 17px;
-    margin-bottom: 32px;
-    padding: 0 10px;
-    max-width: 100%;
+  .hero-title-gradient {
+    font-size: 38px;
   }
   
-  /* CTA Mobile */
+  .hero-subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 32px;
+    max-width: 100%;
+    color: #5a5a5a;
+  }
+  
+  /* Mobile CTA */
+  .hero-cta {
+    margin-bottom: 32px;
+  }
+  
   .btn-hero-main {
     width: 100%;
-    max-width: 360px;
-    padding: 20px 40px;
+    max-width: 320px;
+    padding: 18px 40px;
     font-size: 18px;
+    border-radius: 40px;
   }
   
-  .hero-cta {
-    margin-bottom: 36px;
-  }
-  
-  /* Stats Mobile - Horizontal */
+  /* Mobile Stats - Horizontal */
   .hero-stats {
-    display: flex;
-    gap: 24px;
-    justify-content: center;
-    max-width: 100%;
+    gap: 0;
+    justify-content: space-around;
+    width: 100%;
   }
   
   .stat-item {
     text-align: center;
+    flex: 1;
   }
   
   .stat-number {
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .stat-label {
     font-size: 12px;
+    color: #7a7a7a;
   }
   
-  /* Visual Mobile */
+  /* Mobile Visual */
   .hero-visual {
-    width: 100vw;
+    order: 2;
+    width: 100%;
+    max-width: 100%;
     margin: 0 -20px;
     padding: 0;
   }
@@ -367,13 +328,15 @@
   .hero-phones {
     width: 100%;
     max-width: none;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
   }
   
-  /* Mobile Product Badges */
+  /* Hide Desktop Labels */
   .product-labels {
     display: none;
   }
   
+  /* Show Mobile Product List */
   .mobile-products {
     display: flex;
     gap: 10px;
@@ -381,22 +344,33 @@
     margin-top: 24px;
     flex-wrap: wrap;
     padding: 0 20px;
+    order: 3;
   }
   
   .mobile-product-badge {
-    padding: 10px 18px;
+    padding: 10px 16px;
     background: white;
     border-radius: 25px;
     font-size: 14px;
     font-weight: 700;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
     align-items: center;
     gap: 6px;
+    white-space: nowrap;
+  }
+  
+  .badge-flag {
+    font-size: 18px;
+  }
+  
+  .badge-price {
+    color: var(--primary-color, #009a61);
+    font-weight: 800;
   }
 }
 
-/* Tablet */
+/* Tablet Anpassungen */
 @media (min-width: 769px) and (max-width: 1024px) {
   .hero-container {
     padding: 50px 30px;
@@ -406,152 +380,181 @@
     font-size: 56px;
   }
   
-  .hero-phones {
-    max-width: 550px;
+  .hero-title-primary {
+    font-size: 52px;
+  }
+  
+  .hero-title-gradient {
+    font-size: 56px;
+  }
+  
+  .hero-visual {
+    max-width: 500px;
+  }
+  
+  .product-labels {
+    transform: scale(0.85);
   }
 }
 
-/* Desktop only */
-@media (min-width: 769px) {
-  .mobile-products {
-    display: none;
-  }
-}
-
-/* Sehr große Screens */
+/* Große Screens */
 @media (min-width: 1600px) {
   .hero-container {
     max-width: 1600px;
-    padding: 80px 60px;
+    padding: 80px 80px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
 
-<section class="hero-enterprise">
-  <div class="hero-container">
-    <!-- Left: Content -->
-    <div class="hero-content">
-      <!-- Main Title -->
-      <h1 class="hero-title">
-        <span class="hero-title-primary">
-          {{ 'hero.title_line1' | t | default: 'Günstige eSIM' }}
-        </span>
-        <span class="hero-title-gradient">
-          {{ 'hero.title_line2' | t | default: 'Datenpakete für Reisen' }}
-        </span>
-      </h1>
-      
-      <!-- Subtitle -->
-      <p class="hero-subtitle">
-        {{ 'hero.subtitle' | t | default: 'Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert' }}
-      </p>
-      
-      <!-- Single CTA Button -->
-      <div class="hero-cta">
-        <button class="btn-hero-main" onclick="window.location.href='{{ section.settings.cta_link | default: '/collections/all' }}'">
-          {{ 'hero.cta_primary' | t | default: 'Kostenlos testen' }}
-        </button>
-      </div>
-      
-      <!-- Stats Row - 3 gleichmäßige Items -->
-      <div class="hero-stats">
-        <div class="stat-item">
-          <span class="stat-number">190+</span>
-          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+<div class="shopify-section hero-section">
+  <section class="hero-enterprise">
+    <div class="hero-container">
+      <!-- Content -->
+      <div class="hero-content">
+        <!-- Title -->
+        <h1 class="hero-title">
+          <span class="hero-title-primary">
+            {{ 'hero.title_line1' | t | default: 'Günstige eSIM' }}
+          </span>
+          <span class="hero-title-gradient">
+            {{ 'hero.title_line2' | t | default: 'Datenpakete für Reisen' }}
+          </span>
+        </h1>
+        
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+          {{ 'hero.subtitle' | t | default: 'Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert' }}
+        </p>
+        
+        <!-- CTA -->
+        <div class="hero-cta">
+          <button class="btn-hero-main" onclick="window.location.href='{{ section.settings.cta_link | default: '/collections/all' }}'">
+            {{ 'hero.cta_primary' | t | default: 'Kostenlos testen' }}
+          </button>
         </div>
         
-        <div class="stat-item">
-          <span class="stat-number">2 Min</span>
-          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Schnelle Installation' }}</span>
-        </div>
-        
-        <div class="stat-item">
-          <span class="stat-number">100K+</span>
-          <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
+        <!-- Stats -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">190+</span>
+            <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-number">2 Min</span>
+            <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+          </div>
+          
+          <div class="stat-item">
+            <span class="stat-number">100K+</span>
+            <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <!-- Right: Visual -->
-    <div class="hero-visual">
-      <!-- Main Image -->
-      <img 
-        class="hero-phones"
-        src="{{ section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0633/9012/2175/files/3-iphones-min-min.webp?v=1742328516' }}"
-        alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM' }}"
-        width="700"
-        height="560"
-        loading="eager"
-        fetchpriority="high"
-      >
       
-      <!-- Product Labels - Dynamisch oder Fallback -->
-      <div class="product-labels">
-        {% comment %} Versuche Produkte mit bestimmten Tags zu finden {% endcomment %}
-        {% assign turkey_product = collections.all.products | where: 'tags', 'turkey' | first %}
-        {% assign usa_product = collections.all.products | where: 'tags', 'usa' | first %}
-        {% assign japan_product = collections.all.products | where: 'tags', 'japan' | first %}
+      <!-- Visual -->
+      <div class="hero-visual">
+        <img 
+          class="hero-phones"
+          src="{{ section.settings.hero_image | default: 'https://cdn.shopify.com/s/files/1/0633/9012/2175/files/3-iphones-min-min.webp?v=1742328516' }}"
+          alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM' }}"
+          width="650"
+          height="520"
+          loading="eager"
+        >
         
-        {% if turkey_product %}
-          <div class="product-label product-label-1">
-            <span class="label-flag">🇹🇷</span>
-            <span>{{ turkey_product.title | split: ' - ' | first | truncate: 20 }}</span>
-            <span class="label-price">{{ turkey_product.price | money_without_currency }}</span>
-          </div>
-        {% else %}
-          <div class="product-label product-label-1">
-            <span class="label-flag">🇹🇷</span>
-            <span>Türkei • 5GB</span>
-            <span class="label-price">9€</span>
-          </div>
-        {% endif %}
-        
-        {% if usa_product %}
-          <div class="product-label product-label-2">
-            <span class="label-flag">🇺🇸</span>
-            <span>{{ usa_product.title | split: ' - ' | first | truncate: 20 }}</span>
-            <span class="label-price">{{ usa_product.price | money_without_currency }}</span>
-          </div>
-        {% else %}
-          <div class="product-label product-label-2">
-            <span class="label-flag">🇺🇸</span>
-            <span>USA • 10GB</span>
-            <span class="label-price">19€</span>
-          </div>
-        {% endif %}
-        
-        {% if japan_product %}
-          <div class="product-label product-label-3">
-            <span class="label-flag">🇯🇵</span>
-            <span>{{ japan_product.title | split: ' - ' | first | truncate: 20 }}</span>
-            <span class="label-price">{{ japan_product.price | money_without_currency }}</span>
-          </div>
-        {% else %}
-          <div class="product-label product-label-3">
-            <span class="label-flag">🇯🇵</span>
-            <span>Japan • 3GB</span>
-            <span class="label-price">12€</span>
-          </div>
-        {% endif %}
+        <!-- Desktop Product Labels mit Varianten -->
+        <div class="product-labels">
+          {% comment %} Shopify Produkte mit ersten Varianten {% endcomment %}
+          {% for product in collections.all.products limit: 3 %}
+            {% if product.available %}
+              {% assign variant = product.first_available_variant %}
+              <div class="product-label product-label-{{ forloop.index }}">
+                <span class="label-flag">
+                  {% if product.title contains 'Türkei' or product.title contains 'Turkey' %}🇹🇷
+                  {% elsif product.title contains 'USA' or product.title contains 'United States' %}🇺🇸
+                  {% elsif product.title contains 'Japan' %}🇯🇵
+                  {% elsif forloop.index == 1 %}🇹🇷
+                  {% elsif forloop.index == 2 %}🇺🇸
+                  {% else %}🇯🇵
+                  {% endif %}
+                </span>
+                <span>{{ product.title | split: ' - ' | first | truncate: 15 }}</span>
+                <span class="label-price">{{ variant.price | money_without_currency }}€</span>
+              </div>
+            {% endif %}
+          {% else %}
+            <!-- Fallback wenn keine Produkte -->
+            <div class="product-label product-label-1">
+              <span class="label-flag">🇹🇷</span>
+              <span>Türkei • 5GB</span>
+              <span class="label-price">9€</span>
+            </div>
+            <div class="product-label product-label-2">
+              <span class="label-flag">🇺🇸</span>
+              <span>USA • 10GB</span>
+              <span class="label-price">19€</span>
+            </div>
+            <div class="product-label product-label-3">
+              <span class="label-flag">🇯🇵</span>
+              <span>Japan • 3GB</span>
+              <span class="label-price">12€</span>
+            </div>
+          {% endfor %}
+        </div>
       </div>
       
-      <!-- Mobile Product Badges -->
+      <!-- Mobile Products -->
       <div class="mobile-products">
-        <span class="mobile-product-badge">
-          <span>🇹🇷</span> Türkei ab 9€
-        </span>
-        <span class="mobile-product-badge">
-          <span>🇺🇸</span> USA ab 19€
-        </span>
-        <span class="mobile-product-badge">
-          <span>🇯🇵</span> Japan ab 12€
-        </span>
+        {% for product in collections.all.products limit: 3 %}
+          {% if product.available %}
+            {% assign variant = product.first_available_variant %}
+            <div class="mobile-product-badge">
+              <span class="badge-flag">
+                {% if product.title contains 'Türkei' or product.title contains 'Turkey' %}🇹🇷
+                {% elsif product.title contains 'USA' %}🇺🇸
+                {% elsif product.title contains 'Japan' %}🇯🇵
+                {% else %}🌍
+                {% endif %}
+              </span>
+              <span>{{ product.title | split: ' ' | first }} ab</span>
+              <span class="badge-price">{{ variant.price | money_without_currency }}€</span>
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="mobile-product-badge">
+            <span class="badge-flag">🇹🇷</span>
+            <span>Türkei ab</span>
+            <span class="badge-price">9€</span>
+          </div>
+          <div class="mobile-product-badge">
+            <span class="badge-flag">🇺🇸</span>
+            <span>USA ab</span>
+            <span class="badge-price">19€</span>
+          </div>
+          <div class="mobile-product-badge">
+            <span class="badge-flag">🇯🇵</span>
+            <span>Japan ab</span>
+            <span class="badge-price">12€</span>
+          </div>
+        {% endfor %}
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
-<!-- Section Schema -->
 {% schema %}
 {
   "name": "Hero Simbye",
@@ -570,8 +573,7 @@
   ],
   "presets": [
     {
-      "name": "Hero Simbye",
-      "category": "Hero"
+      "name": "Hero Simbye"
     }
   ]
 }
