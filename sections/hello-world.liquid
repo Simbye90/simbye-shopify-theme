@@ -150,6 +150,13 @@
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mobile-product-badge img {
+  flex-shrink: 0;
 }
 
 .mobile-product-badge .price {
@@ -655,15 +662,50 @@
       
       <!-- Mobile Product Badges -->
       <div class="mobile-products">
-        <span class="mobile-product-badge">
-          🇹🇷 Türkei ab <span class="price">9€</span>
-        </span>
-        <span class="mobile-product-badge">
-          🇺🇸 USA ab <span class="price">19€</span>
-        </span>
-        <span class="mobile-product-badge">
-          🇯🇵 Japan ab <span class="price">12€</span>
-        </span>
+        {% if product_1 %}
+          <span class="mobile-product-badge">
+            {% if product_1.featured_image %}
+              <img src="{{ product_1.featured_image | image_url: width: 30 }}" alt="{{ product_1.title }}" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+            {% else %}
+              🌍
+            {% endif %}
+            {{ product_1.title | split: ' ' | first | truncate: 15 }} ab <span class="price">{{ product_1.price_min | money_without_currency }}</span>
+          </span>
+        {% else %}
+          <span class="mobile-product-badge">
+            🇹🇷 Türkei ab <span class="price">9€</span>
+          </span>
+        {% endif %}
+        
+        {% if product_2 %}
+          <span class="mobile-product-badge">
+            {% if product_2.featured_image %}
+              <img src="{{ product_2.featured_image | image_url: width: 30 }}" alt="{{ product_2.title }}" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+            {% else %}
+              🌍
+            {% endif %}
+            {{ product_2.title | split: ' ' | first | truncate: 15 }} ab <span class="price">{{ product_2.price_min | money_without_currency }}</span>
+          </span>
+        {% else %}
+          <span class="mobile-product-badge">
+            🇺🇸 USA ab <span class="price">19€</span>
+          </span>
+        {% endif %}
+        
+        {% if product_3 %}
+          <span class="mobile-product-badge">
+            {% if product_3.featured_image %}
+              <img src="{{ product_3.featured_image | image_url: width: 30 }}" alt="{{ product_3.title }}" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+            {% else %}
+              🌍
+            {% endif %}
+            {{ product_3.title | split: ' ' | first | truncate: 15 }} ab <span class="price">{{ product_3.price_min | money_without_currency }}</span>
+          </span>
+        {% else %}
+          <span class="mobile-product-badge">
+            🇯🇵 Japan ab <span class="price">12€</span>
+          </span>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -674,15 +716,62 @@
   "name": "Hero Section",
   "settings": [
     {
+      "type": "header",
+      "content": "Bild"
+    },
+    {
       "type": "image_picker",
       "id": "hero_image",
-      "label": "Hero Bild"
+      "label": "Hero Bild",
+      "info": "Empfohlen: 1300x1000px"
+    },
+    {
+      "type": "header",
+      "content": "Button"
     },
     {
       "type": "url",
       "id": "cta_link",
       "label": "Button Link",
       "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Produkt Labels (Desktop)"
+    },
+    {
+      "type": "product",
+      "id": "product_1",
+      "label": "Produkt 1 (Links)"
+    },
+    {
+      "type": "text",
+      "id": "product_1_label",
+      "label": "Produkt 1 Label",
+      "default": "5GB",
+      "info": "Z.B. '5GB' oder 'Bestseller'"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Produkt 2 (Rechts)"
+    },
+    {
+      "type": "text",
+      "id": "product_2_label",
+      "label": "Produkt 2 Label",
+      "default": "10GB"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Produkt 3 (Unten)"
+    },
+    {
+      "type": "text",
+      "id": "product_3_label",
+      "label": "Produkt 3 Label",
+      "default": "3GB"
     }
   ],
   "presets": [
