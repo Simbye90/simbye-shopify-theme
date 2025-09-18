@@ -69,11 +69,11 @@
   display: none;
 }
 
-/* Stats Mobile */
+/* Stats Mobile - Klein und kompakt */
 .hero-stats {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 25px;
   margin-bottom: 32px;
   width: 100%;
 }
@@ -81,12 +81,12 @@
 .stat-item {
   text-align: center;
   flex: 1;
-  max-width: 90px;
+  max-width: 100px;
 }
 
 .stat-number {
   display: block;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 900;
   color: var(--primary-color, #009a61);
   margin-bottom: 2px;
@@ -98,12 +98,10 @@
   font-size: 10px;
   font-weight: 600;
   color: #6b6b6b;
-  line-height: 1.2;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  line-height: 1.1;
 }
 
-/* Image Mobile */
+/* Image Mobile - Position relativ für Badge-Positionierung */
 .hero-visual {
   width: calc(100% + 40px);
   margin: 0 -20px;
@@ -116,7 +114,7 @@
   display: block;
 }
 
-/* Mobile Product Badges */
+/* Mobile Product Badges - Standard für größere Mobile */
 .mobile-products {
   display: flex;
   gap: 8px;
@@ -130,16 +128,16 @@
 }
 
 .mobile-product-badge {
-  padding: 8px 14px;
+  padding: 6px 10px;
   background: white;
-  border-radius: 18px;
-  font-size: 12px;
+  border-radius: 16px;
+  font-size: 11px;
   font-weight: 700;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   white-space: nowrap;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .mobile-product-badge img {
@@ -149,6 +147,72 @@
 .mobile-product-badge .price {
   color: var(--primary-color, #009a61);
   font-weight: 800;
+}
+
+/* MOBILE SPECIAL DESIGN */
+@media (max-width: 767px) {
+  /* Stats UNTER der Weltkugel */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .hero-title {
+    order: 1;
+  }
+  
+  /* Visual in der Mitte */
+  .hero-visual {
+    order: 2;
+    position: relative;
+    margin: 30px -20px 20px -20px;
+  }
+  
+  /* Stats unten */
+  .hero-stats {
+    order: 3;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  /* Mobile Products AUF der Weltkugel verteilt */
+  .mobile-products {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: block;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .mobile-product-badge {
+    position: absolute;
+    padding: 6px 10px;
+    background: white;
+    border-radius: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+  }
+  
+  /* Positionierung wie Desktop Labels */
+  .mobile-product-badge:nth-child(1) {
+    top: 15%;
+    left: 5%;
+  }
+  
+  .mobile-product-badge:nth-child(2) {
+    top: 35%;
+    right: 5%;
+  }
+  
+  .mobile-product-badge:nth-child(3) {
+    bottom: 30%;
+    left: 10%;
+  }
 }
 
 /* Product Labels Desktop - Hidden on Mobile */
@@ -338,18 +402,18 @@
   
   .product-label-1 {
     top: 10%;
-    left: -15%;
+    left: -10%;
   }
   
   .product-label-2 {
     top: 40%;
-    right: -12%;
+    right: -8%;
     animation-delay: 2.5s;
   }
   
   .product-label-3 {
     bottom: 20%;
-    left: -8%;
+    left: 0%;
     animation-delay: 5s;
   }
   
@@ -614,65 +678,65 @@
         {% endif %}
       </div>
       
-      <!-- Mobile Product Badges -->
+      <!-- Mobile Product Badges - Auf der Weltkugel verteilt -->
       <div class="mobile-products">
         {% if product_1 != blank %}
           <span class="mobile-product-badge">
             {% if product_1.featured_image %}
-              <img src="{{ product_1.featured_image | image_url: width: 30 }}" alt="" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+              <img src="{{ product_1.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
             {% else %}
               🌍
             {% endif %}
             {% assign product_name = product_1.title | split: ' ' | first %}
-            {{ product_name | truncate: 15 }}
+            <span>{{ product_name | truncate: 12 }}</span>
             {% if section.settings.product_1_label != blank %}
-              {{ section.settings.product_1_label }}
+              <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_1_label }}</span>
             {% endif %}
             <span class="price">{{ product_1.price_min | money_without_currency }}€</span>
           </span>
         {% else %}
           <span class="mobile-product-badge">
-            🇹🇷 Türkei 5GB <span class="price">9€</span>
+            🇹🇷 <span>Türkei</span> <span style="color: var(--primary-color); font-weight: 800;">5GB</span> <span class="price">9€</span>
           </span>
         {% endif %}
         
         {% if product_2 != blank %}
           <span class="mobile-product-badge">
             {% if product_2.featured_image %}
-              <img src="{{ product_2.featured_image | image_url: width: 30 }}" alt="" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+              <img src="{{ product_2.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
             {% else %}
               🌍
             {% endif %}
             {% assign product_name = product_2.title | split: ' ' | first %}
-            {{ product_name | truncate: 15 }}
+            <span>{{ product_name | truncate: 12 }}</span>
             {% if section.settings.product_2_label != blank %}
-              {{ section.settings.product_2_label }}
+              <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_2_label }}</span>
             {% endif %}
             <span class="price">{{ product_2.price_min | money_without_currency }}€</span>
           </span>
         {% else %}
           <span class="mobile-product-badge">
-            🇺🇸 USA 10GB <span class="price">19€</span>
+            🇺🇸 <span>USA</span> <span style="color: var(--primary-color); font-weight: 800;">10GB</span> <span class="price">19€</span>
           </span>
         {% endif %}
         
         {% if product_3 != blank %}
           <span class="mobile-product-badge">
             {% if product_3.featured_image %}
-              <img src="{{ product_3.featured_image | image_url: width: 30 }}" alt="" style="width: 20px; height: 20px; border-radius: 3px; object-fit: cover;">
+              <img src="{{ product_3.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
             {% else %}
               🌍
             {% endif %}
             {% assign product_name = product_3.title | split: ' ' | first %}
-            {{ product_name | truncate: 15 }}
+            <span>{{ product_name | truncate: 12 }}</span>
             {% if section.settings.product_3_label != blank %}
-              {{ section.settings.product_3_label }}
+              <span style="color: var(--primary-color); font-weight: 800;">{{ section.settings.product_3_label }}</span>
             {% endif %}
             <span class="price">{{ product_3.price_min | money_without_currency }}€</span>
           </span>
         {% else %}
           <span class="mobile-product-badge">
-            🇯🇵 Japan 3GB <span class="price">12€</span>
+            🇯🇵 <span>Japan</span> <span style="color: var(--primary-color); font-weight: 800;">3GB</span> <span class="price">12€</span>
           </span>
         {% endif %}
       </div>
