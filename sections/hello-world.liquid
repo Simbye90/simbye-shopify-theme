@@ -23,7 +23,7 @@
 
 /* Container mit Padding - WICHTIG: Gleiche Werte wie Header! */
 .hero-container {
-  max-width: 1600px; /* Gleich wie Header */
+  max-width: 1400px; /* Gleich wie Header */
   margin: 0 auto;
   padding: 40px 20px 60px 20px; /* Mobile: 20px, Desktop wird überschrieben */
   width: 100%;
@@ -245,7 +245,7 @@
     gap: 60px;
     align-items: center;
     /* WICHTIG: Gleiche max-width wie Header für Alignment */
-    max-width: 1600px;
+    max-width: 1400px;
   }
   
   /* Content Links GENAU wie Logo positioniert */
@@ -662,6 +662,11 @@
       
       <!-- Mobile Product Badges -->
       <div class="mobile-products">
+        {% comment %} Produkte richtig laden für Mobile {% endcomment %}
+        {% assign product_1 = all_products[section.settings.product_1] %}
+        {% assign product_2 = all_products[section.settings.product_2] %}
+        {% assign product_3 = all_products[section.settings.product_3] %}
+        
         {% if product_1 %}
           <span class="mobile-product-badge">
             {% if product_1.featured_image %}
