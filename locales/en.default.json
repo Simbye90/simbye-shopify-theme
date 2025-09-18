@@ -69,5 +69,31 @@
     "language": "Language",
     "currency": "Currency",
     "dark_mode": "Dark Mode"
+  },
+  
+
+  "hero": {
+
+    "trust_badge": "100.000+ zufriedene Kunden weltweit",
+
+    "title_line1": "Günstige eSIM",
+
+    "title_line2": "Datenpakete für Reisen",
+
+    "subtitle": "Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert",
+
+    "cta_primary": "Kostenlos testen",
+
+    "cta_secondary": "So funktioniert's",
+
+    "stat_countries": "Länder verfügbar",
+
+    "stat_activation": "Installation",
+
+    "stat_rating": "2.847 Bewertungen",
+
+    "image_alt": "Simbye eSIM auf iPhone"
+
   }
+
 }
