@@ -560,9 +560,22 @@
           
           <!-- Produkt 1 (Links) -->
           {% if product_1 != blank %}
+            {% comment %} Variante laden wenn ID angegeben {% endcomment %}
+            {% assign selected_variant_1 = product_1.variants.first %}
+            {% if section.settings.product_1_variant_id != blank %}
+              {% for variant in product_1.variants %}
+                {% if variant.id == section.settings.product_1_variant_id %}
+                  {% assign selected_variant_1 = variant %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            
             <div class="product-label product-label-1">
               {% comment %} Flagge aus Produktbild {% endcomment %}
-              {% if product_1.featured_image %}
+              {% if selected_variant_1.image %}
+                <img src="{{ selected_variant_1.image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+              {% elsif product_1.featured_image %}
                 <img src="{{ product_1.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
               {% else %}
                 <span>🌍</span>
@@ -572,18 +585,16 @@
               {% assign product_name = product_1.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
               <span>{{ product_name | truncate: 20 }}</span>
               
-              {% comment %} Label (z.B. "5GB") {% endcomment %}
+              {% comment %} Label (z.B. "5GB") - kann aus Variante kommen {% endcomment %}
               {% if section.settings.product_1_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_1_label }}</span>
+              {% elsif selected_variant_1.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">• {{ selected_variant_1.title }}</span>
               {% endif %}
               
-              {% comment %} Preis {% endcomment %}
+              {% comment %} Preis von der spezifischen Variante {% endcomment %}
               <span class="label-price">
-                {% if product_1.price_varies %}
-                  ab {{ product_1.price_min | money_without_currency }}€
-                {% else %}
-                  {{ product_1.price | money_without_currency }}€
-                {% endif %}
+                {{ selected_variant_1.price | money_without_currency }}€
               </span>
             </div>
           {% else %}
@@ -598,8 +609,20 @@
           
           <!-- Produkt 2 (Rechts) -->
           {% if product_2 != blank %}
+            {% assign selected_variant_2 = product_2.variants.first %}
+            {% if section.settings.product_2_variant_id != blank %}
+              {% for variant in product_2.variants %}
+                {% if variant.id == section.settings.product_2_variant_id %}
+                  {% assign selected_variant_2 = variant %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            
             <div class="product-label product-label-2">
-              {% if product_2.featured_image %}
+              {% if selected_variant_2.image %}
+                <img src="{{ selected_variant_2.image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+              {% elsif product_2.featured_image %}
                 <img src="{{ product_2.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
               {% else %}
                 <span>🌍</span>
@@ -610,14 +633,12 @@
               
               {% if section.settings.product_2_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_2_label }}</span>
+              {% elsif selected_variant_2.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">• {{ selected_variant_2.title }}</span>
               {% endif %}
               
               <span class="label-price">
-                {% if product_2.price_varies %}
-                  ab {{ product_2.price_min | money_without_currency }}€
-                {% else %}
-                  {{ product_2.price | money_without_currency }}€
-                {% endif %}
+                {{ selected_variant_2.price | money_without_currency }}€
               </span>
             </div>
           {% else %}
@@ -632,8 +653,20 @@
           
           <!-- Produkt 3 (Unten) -->
           {% if product_3 != blank %}
+            {% assign selected_variant_3 = product_3.variants.first %}
+            {% if section.settings.product_3_variant_id != blank %}
+              {% for variant in product_3.variants %}
+                {% if variant.id == section.settings.product_3_variant_id %}
+                  {% assign selected_variant_3 = variant %}
+                  {% break %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+            
             <div class="product-label product-label-3">
-              {% if product_3.featured_image %}
+              {% if selected_variant_3.image %}
+                <img src="{{ selected_variant_3.image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+              {% elsif product_3.featured_image %}
                 <img src="{{ product_3.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
               {% else %}
                 <span>🌍</span>
@@ -644,14 +677,12 @@
               
               {% if section.settings.product_3_label != blank %}
                 <span style="color: var(--primary-color); font-weight: 800;">• {{ section.settings.product_3_label }}</span>
+              {% elsif selected_variant_3.title != 'Default Title' %}
+                <span style="color: var(--primary-color); font-weight: 800;">• {{ selected_variant_3.title }}</span>
               {% endif %}
               
               <span class="label-price">
-                {% if product_3.price_varies %}
-                  ab {{ product_3.price_min | money_without_currency }}€
-                {% else %}
-                  {{ product_3.price | money_without_currency }}€
-                {% endif %}
+                {{ selected_variant_3.price | money_without_currency }}€
               </span>
             </div>
           {% else %}
@@ -808,6 +839,13 @@
     },
     {
       "type": "text",
+      "id": "product_1_variant_id",
+      "label": "Variante ID für Produkt 1",
+      "placeholder": "z.B. 39897499729985",
+      "info": "Optional: Gehe zu Produkt → Varianten → ID kopieren"
+    },
+    {
+      "type": "text",
       "id": "product_1_label",
       "label": "Produkt 1 Zusatz",
       "placeholder": "z.B. 5GB",
@@ -820,6 +858,12 @@
     },
     {
       "type": "text",
+      "id": "product_2_variant_id",
+      "label": "Variante ID für Produkt 2",
+      "placeholder": "z.B. 39897499762753"
+    },
+    {
+      "type": "text",
       "id": "product_2_label",
       "label": "Produkt 2 Zusatz",
       "placeholder": "z.B. 10GB"
@@ -828,6 +872,12 @@
       "type": "product",
       "id": "product_3",
       "label": "Produkt 3 (Links unten)"
+    },
+    {
+      "type": "text",
+      "id": "product_3_variant_id",
+      "label": "Variante ID für Produkt 3",
+      "placeholder": "z.B. 39897499795521"
     },
     {
       "type": "text",
