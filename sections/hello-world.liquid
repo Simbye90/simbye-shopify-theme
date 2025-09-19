@@ -350,10 +350,14 @@
   }
   
   .hero-image {
-    max-width: 650px;
+    max-width: 850px;
     width: 100%;
-    filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.12));
-    animation: floatGlobe 8s ease-in-out infinite;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
+    /* Animation nur bei Hover für bessere Performance */
+  }
+  
+  .hero-image:hover {
+    animation: floatGlobe 3s ease-in-out;
   }
   
   @keyframes floatGlobe {
@@ -387,19 +391,20 @@
   }
   
   .product-label-1 {
-    top: 10%;
-    left: -10%;
+    top: 25%;
+    left: 48%; /* Afrika - mehr in der Mitte */
+    transform: translateX(-50%);
   }
   
   .product-label-2 {
-    top: 40%;
-    right: -8%;
+    top: 35%;
+    right: 70%; /* USA - weiter links */
     animation-delay: 2.5s;
   }
   
   .product-label-3 {
-    bottom: 20%;
-    left: 0%;
+    bottom: 35%;
+    right: 15%; /* Japan - weiter rechts */
     animation-delay: 5s;
   }
   
