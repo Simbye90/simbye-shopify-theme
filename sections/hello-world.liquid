@@ -25,7 +25,7 @@
 .hero-container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 40px 20px 60px 20px;
+  padding: 40px 20px 0px 20px; /* Bottom padding auf 0 */
   width: 100%;
 }
 
@@ -181,7 +181,7 @@
 /* TABLET (768px+) */
 @media (min-width: 768px) {
   .hero-container {
-    padding: 50px 30px 70px 30px;
+    padding: 50px 30px 30px 30px; /* Bottom padding reduziert */
   }
   
   .hero-title {
@@ -277,7 +277,7 @@
 /* DESKTOP (1024px+) */
 @media (min-width: 1024px) {
   .hero-container {
-    padding: 60px 40px 80px 40px;
+    padding: 60px 40px 40px 40px; /* Bottom padding reduziert */
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
@@ -350,7 +350,7 @@
   }
   
   .hero-image {
-    max-width: 1000px;
+    max-width: 1000px; /* Von 850px auf 1000px erhöht */
     width: 100%;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
     /* Keine Animation mehr */
@@ -466,7 +466,17 @@
   color: #b0b0b0;
 }
 
-[data-theme="dark"] .mobile-product-badge,
+/* Dark Mode - Mobile Badges WEISSER HINTERGRUND */
+[data-theme="dark"] .mobile-product-badge {
+  background: rgba(255, 255, 255, 0.95); /* Weißer Hintergrund */
+  color: #1a1a1a; /* Schwarzer Text */
+}
+
+[data-theme="dark"] .mobile-product-badge .price {
+  color: var(--primary-color, #009a61); /* Preis bleibt grün */
+}
+
+/* Desktop Labels bleiben wie vorher */
 [data-theme="dark"] .product-label {
   background: rgba(20, 20, 20, 0.95);
   color: #f0f0f0;
@@ -761,8 +771,8 @@
   .hero-content .hero-stats {
     display: flex !important; /* Stats im content auf Tablet/Desktop */
   }
- 
-    .mobile-only-stats {
+  
+  .mobile-only-stats {
     display: none !important; /* Mobile Stats verstecken */
   }
 }
