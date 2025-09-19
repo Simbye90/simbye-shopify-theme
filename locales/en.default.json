@@ -68,32 +68,21 @@
     "my_account": "My Account",
     "language": "Language",
     "currency": "Currency",
-    "dark_mode": "Dark Mode"
+    "dark_mode": "Dark Mode",
+    "light": "Light",
+    "dark": "Dark"
   },
-  
-
   "hero": {
-
-    "trust_badge": "100.000+ zufriedene Kunden weltweit",
-
-    "title_line1": "Günstige eSIM",
-
-    "title_line2": "Datenpakete für Reisen",
-
-    "subtitle": "Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert",
-
-    "cta_primary": "Kostenlos testen",
-
-    "cta_secondary": "So funktioniert's",
-
-    "stat_countries": "Länder verfügbar",
-
+    "trust_badge": "100,000+ satisfied customers worldwide",
+    "title_line1": "Affordable eSIM",
+    "title_line2": "Data Packages for Travel",
+    "subtitle": "Internet in 190+ countries • No roaming fees • Activated in 2 minutes",
+    "cta_primary": "Try for Free",
+    "cta_secondary": "How it Works",
+    "stat_countries": "Countries Available",
     "stat_activation": "Installation",
-
-    "stat_rating": "2.847 Bewertungen",
-
-    "image_alt": "Simbye eSIM auf iPhone"
-
+    "stat_customers": "Happy Customers",
+    "stat_rating": "2,847 Reviews",
+    "image_alt": "Simbye eSIM World Map"
   }
-
 }
