@@ -1,99 +1,86 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 v6 - Simbye eSIM - UPDATED -->
+<!-- Enterprise Header 2025 v2 - Simbye eSIM - FIXED VERSION -->
 
 <style>
-/* CSS Custom Properties */
+/* CSS Custom Properties für Theming */
 :root {
-  --header-height: 90px;
-  --header-mobile-height: 70px;
+  --header-height: 80px;
+  --header-mobile-height: 65px;
   --primary-color: #009a61;
   --primary-hover: #00824f;
-  --primary-dark: #007850;
-  --text-color: #1a1a1a;
-  --text-light: #6b6b6b;
+  --text-color: #2c2c2c;
   --bg-header: #ffffff;
-  --border-color: rgba(0, 0, 0, 0.06);
-  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
-  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  --mobile-menu-width: 90%;
-  --mobile-menu-bg: #ffffff;
-  --font-base: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+  --bg-dropdown: #ffffff;
+  --border-color: #e5e5e5;
+  --transition-base: 0.3s ease;
+  --transition-fast: 0.2s ease;
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Dark Mode Variables */
 [data-theme="dark"] {
-  --text-color: #f0f0f0;
-  --text-light: #a0a0a0;
-  --bg-header: #0a0a0a;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --mobile-menu-bg: #121212;
-  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
+  --text-color: #ffffff;
+  --bg-header: #1a1a1a;
+  --bg-dropdown: #2a2a2a;
+  --border-color: #3a3a3a;
 }
 
-/* Header Container - FULL WIDTH HEADER with CENTERED CONTENT */
+/* Header Base */
 .enterprise-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  width: 100%; /* Volle Breite */
   height: var(--header-height);
   background: var(--bg-header);
-  /* border-bottom REMOVED */
+  border-bottom: 1px solid var(--border-color);
   z-index: 1000;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   transition: all var(--transition-base);
+  will-change: transform;
 }
 
 .enterprise-header.scrolled {
-  box-shadow: var(--shadow-md);
-  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
 }
 
-[data-theme="dark"] .enterprise-header.scrolled {
-  background: rgba(10, 10, 10, 0.98);
+.enterprise-header.hidden {
+  transform: translateY(-100%);
 }
 
 .header-container {
   display: grid;
-  grid-template-columns: 200px 1fr auto;
+  grid-template-columns: 240px 1fr auto;
   align-items: center;
   height: 100%;
-  max-width: 1600px; /* Inhalt bleibt zentriert bei max 1600px */
-  margin: 0 auto; /* Zentrierung des Inhalts */
-  padding: 0 40px; /* Gleiche Padding wie vorher */
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
   gap: 48px;
 }
 
-/* Logo - 200px WIDTH */
+/* Logo Section - BIGGER! */
 .header-logo {
   display: flex;
   align-items: center;
   height: 100%;
-  width: 200px;
+}
+
+.header-logo a {
+  display: flex;
+  align-items: center;
 }
 
 .header-logo img {
-  width: 200px;
-  height: auto;
+  width: auto;
+  height: 45px;
+  max-width: 240px;
   object-fit: contain;
-  transition: transform var(--transition-base);
 }
 
-.header-logo:hover img {
-  transform: scale(1.05);
-}
-
-/* Desktop Navigation - 18px FONT */
+/* Navigation - Desktop (NO SUPPORT) */
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   height: 100%;
 }
 
@@ -107,46 +94,40 @@
 .nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 14px 24px;
+  padding: 10px 20px;
   color: var(--text-color);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 8px;
   transition: all var(--transition-fast);
   position: relative;
   font-family: var(--font-base);
-  letter-spacing: -0.02em;
+  white-space: nowrap;
 }
 
 .nav-link:hover {
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.08), rgba(0, 154, 97, 0.12));
+  background: rgba(0, 154, 97, 0.08);
   color: var(--primary-color);
-  transform: translateY(-2px);
 }
 
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: -1px;
-  left: 24px;
-  right: 24px;
-  height: 3px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
   background: var(--primary-color);
-  transform: scaleX(0);
-  transition: transform var(--transition-fast);
-  border-radius: 3px;
-}
-
-.nav-link:hover::after {
-  transform: scaleX(1);
+  transition: width var(--transition-fast);
 }
 
 .nav-link.active::after {
-  transform: scaleX(1);
+  width: calc(100% - 40px);
 }
 
-/* Actions Section - REORDERED */
+/* Actions Section */
 .header-actions {
   display: flex;
   align-items: center;
@@ -154,99 +135,81 @@
   height: 100%;
 }
 
-/* Premium Login Button */
+/* Auth Buttons */
+.auth-group {
+  display: flex;
+  height: 44px;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--border-color);
+  background: var(--bg-header);
+}
+
 .auth-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 32px;
-  height: 52px;
-  font-size: 17px;
-  font-weight: 700;
-  color: white;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-  text-decoration: none;
-  border-radius: 26px;
-  transition: all var(--transition-base);
-  white-space: nowrap;
-  font-family: var(--font-base);
-  letter-spacing: -0.02em;
-  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
-  gap: 10px;
-  position: relative;
-  overflow: hidden;
-  order: 1; /* LOGIN FIRST */
-}
-
-.auth-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
+  padding: 0 24px;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.6s;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  background: var(--primary-color);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  cursor: pointer;
 }
 
 .auth-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
+  background: var(--primary-hover);
 }
 
-.auth-btn:hover::before {
-  left: 100%;
+.auth-btn.login {
+  border-radius: 22px 0 0 22px;
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Premium Switcher Buttons */
+.auth-btn.register {
+  border-radius: 0 22px 22px 0;
+  background: #4a4a4a;
+}
+
+.auth-btn.register:hover {
+  background: #3a3a3a;
+}
+
+.auth-btn.logged-in {
+  border-radius: 22px;
+  padding: 0 28px;
+  gap: 10px;
+}
+
+/* Language & Currency Switchers */
 .switcher-group {
   display: flex;
   gap: 12px;
-  order: 2; /* AFTER LOGIN */
 }
 
 .switcher {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 18px;
-  border-radius: 14px;
-  background: var(--bg-header);
-  border: 2px solid var(--border-color);
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border-color);
   color: var(--text-color);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: all var(--transition-fast);
   font-family: var(--font-base);
-  position: relative;
-  overflow: hidden;
-}
-
-.switcher::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, var(--primary-color), transparent);
-  opacity: 0.1;
-  transform: translate(-50%, -50%);
-  transition: all var(--transition-base);
 }
 
 .switcher:hover {
+  background: rgba(0, 154, 97, 0.05);
   border-color: var(--primary-color);
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 154, 97, 0.08));
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.15);
-}
-
-.switcher:hover::before {
-  width: 100px;
-  height: 100px;
-  opacity: 0.2;
 }
 
 .switcher-icon {
@@ -255,48 +218,42 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
 }
 
-/* Premium Dark Mode Toggle */
+/* Dark Mode Toggle - BETTER ICON */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid var(--border-color);
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  order: 3; /* DARK MODE LAST */
-}
-
-[data-theme="dark"] .theme-toggle {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .theme-toggle:hover {
-  transform: rotate(15deg) scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.2);
+  background: rgba(0, 154, 97, 0.05);
+  border-color: var(--primary-color);
+  transform: scale(1.05);
 }
 
 .theme-toggle svg {
-  width: 26px;
-  height: 26px;
-  transition: all var(--transition-slow);
+  width: 24px;
+  height: 24px;
+  transition: all var(--transition-base);
   position: absolute;
   color: var(--text-color);
 }
 
 .theme-toggle .sun-icon {
   opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
+  transform: rotate(-180deg) scale(0.5);
 }
 
 .theme-toggle .moon-icon {
@@ -307,404 +264,261 @@
 [data-theme="dark"] .theme-toggle .sun-icon {
   opacity: 1;
   transform: rotate(0deg) scale(1);
-  color: #ffd700;
 }
 
 [data-theme="dark"] .theme-toggle .moon-icon {
   opacity: 0;
-  transform: rotate(90deg) scale(0.5);
+  transform: rotate(180deg) scale(0.5);
 }
 
-/* Mobile Menu Toggle - FIXED ON MOBILE */
+/* Mobile Menu Toggle */
 .mobile-toggle {
   display: none;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 10px;
   cursor: pointer;
   z-index: 1001;
-  position: relative;
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.3);
-  border: none;
-  outline: none;
 }
 
-.mobile-toggle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.4);
-}
-
-.mobile-toggle:active {
-  transform: scale(0.95);
-}
-
-.mobile-toggle .burger {
-  width: 22px;
-  height: 18px;
-  position: relative;
-}
-
-.mobile-toggle .burger span {
+.mobile-toggle span {
   display: block;
-  position: absolute;
   width: 100%;
-  height: 3px;
-  background: white;
-  border-radius: 3px;
-  transition: all var(--transition-base);
-  left: 0;
+  height: 2px;
+  background: var(--text-color);
+  transition: all var(--transition-fast);
+  border-radius: 2px;
 }
 
-.mobile-toggle .burger span:nth-child(1) {
-  top: 0;
+.mobile-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
-.mobile-toggle .burger span:nth-child(2) {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.mobile-toggle .burger span:nth-child(3) {
-  bottom: 0;
-}
-
-.mobile-toggle.active .burger span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
-}
-
-.mobile-toggle.active .burger span:nth-child(2) {
+.mobile-toggle.active span:nth-child(2) {
   opacity: 0;
-  transform: translateX(20px);
 }
 
-.mobile-toggle.active .burger span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+.mobile-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
 }
 
-/* Mobile specific fixed toggle */
-@media (max-width: 768px) {
-  .mobile-toggle-fixed-wrapper {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1002;
-  }
-}
-
-/* Mobile Menu - PREMIUM SLIDE */
+/* Mobile Menu */
 .mobile-menu {
   position: fixed;
   top: 0;
-  right: 0;
-  width: var(--mobile-menu-width);
-  max-width: 420px;
+  right: -100%;
+  width: 85%;
+  max-width: 400px;
   height: 100vh;
-  background: var(--mobile-menu-bg);
-  transform: translateX(100%);
-  transition: transform var(--transition-slow);
+  background: var(--bg-header);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+  transition: right var(--transition-base);
   z-index: 999;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu.active {
-  transform: translateX(0);
+  right: 0;
 }
 
-.mobile-overlay {
+.mobile-menu-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
   transition: all var(--transition-base);
   z-index: 998;
 }
 
-.mobile-overlay.active {
+.mobile-menu-overlay.active {
   opacity: 1;
   visibility: visible;
 }
 
-.mobile-menu-content {
-  padding: 90px 28px 28px;
-}
-
+/* Mobile Menu Content */
 .mobile-menu-header {
-  padding: 24px;
-  background: linear-gradient(135deg, var(--bg-header), rgba(0, 154, 97, 0.02));
-  margin-bottom: 24px;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
-}
-
-.mobile-user-info {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.mobile-user-avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 700;
-  font-size: 18px;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
-}
-
-.mobile-user-name {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text-color);
-}
-
-.mobile-user-email {
-  font-size: 14px;
-  color: var(--text-light);
-  margin-top: 2px;
-}
-
-.mobile-auth-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 52px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-  color: white;
-  font-size: 17px;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 14px;
-  transition: all var(--transition-fast);
-  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.25);
-}
-
-.mobile-auth-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.35);
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .mobile-menu-nav {
-  margin-bottom: 32px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .mobile-nav-item {
-  display: block;
-  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
   color: var(--text-color);
-  font-size: 18px;
-  font-weight: 600;
   text-decoration: none;
-  border-bottom: 1px solid var(--border-color);
-  transition: color var(--transition-fast), padding var(--transition-fast);
-  position: relative;
-}
-
-.mobile-nav-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-color);
-  transition: width var(--transition-fast);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
 }
 
 .mobile-nav-item:hover {
+  background: rgba(0, 154, 97, 0.08);
   color: var(--primary-color);
-  padding-left: 12px;
-}
-
-.mobile-nav-item:hover::before {
-  width: 40px;
 }
 
 .mobile-menu-actions {
-  padding-top: 24px;
+  padding: 20px;
   border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .mobile-action-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 14px 0;
 }
 
 .mobile-action-row span {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   color: var(--text-color);
 }
 
-/* Premium Dark Mode Toggle - Mobile IMPROVED */
-.dark-mode-toggle-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 0 24px 0;
-  margin-top: 20px;
-}
-
-.dark-mode-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #f5f5f5, #e8e8e8);
-  border: none;
-  cursor: pointer;
-  transition: all var(--transition-base);
+/* Dark Mode Switch for Mobile */
+.dark-mode-switch {
   position: relative;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06),
-              0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 52px;
+  height: 28px;
+  background: var(--border-color);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background var(--transition-base);
 }
 
-[data-theme="dark"] .dark-mode-button {
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.03),
-              0 4px 12px rgba(0, 0, 0, 0.3);
+.dark-mode-switch.active {
+  background: var(--primary-color);
 }
 
-.dark-mode-button:active {
-  transform: scale(0.95);
-}
-
-.dark-mode-button svg {
-  width: 32px;
-  height: 32px;
-  transition: all var(--transition-slow);
+.dark-mode-switch-handle {
   position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  background: white;
+  border-radius: 50%;
+  transition: transform var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
 }
 
-.dark-mode-button .sun-icon {
-  opacity: 1;
-  transform: rotate(0deg);
-  color: #ffa500;
-  fill: #ffa500;
+.dark-mode-switch.active .dark-mode-switch-handle {
+  transform: translateX(24px);
 }
 
-.dark-mode-button .moon-icon {
-  opacity: 0;
-  transform: rotate(-90deg);
-  color: #7c7eff;
-  fill: #7c7eff;
-}
-
-[data-theme="dark"] .dark-mode-button .sun-icon {
-  opacity: 0;
-  transform: rotate(90deg);
-}
-
-[data-theme="dark"] .dark-mode-button .moon-icon {
-  opacity: 1;
-  transform: rotate(0deg);
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
+/* Responsive Design */
+@media (max-width: 1024px) {
   .header-container {
     grid-template-columns: 200px 1fr auto;
-    gap: 32px;
+    gap: 24px;
     padding: 0 24px;
   }
   
   .nav-link {
-    padding: 12px 20px;
-    font-size: 17px;
+    padding: 8px 16px;
+    font-size: 15px;
+  }
+  
+  .header-logo img {
+    height: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  /* Mobile header is fixed */
   .enterprise-header {
     height: var(--header-mobile-height);
-    position: fixed; /* Fixed on mobile too */
   }
   
   .header-container {
-    grid-template-columns: 160px 1fr;
-    padding: 0 20px;
-  }
-  
-  /* Bigger mobile logo */
-  .header-logo {
-    width: 160px;
+    grid-template-columns: 180px 1fr;
+    padding: 0 16px;
   }
   
   .header-logo img {
-    width: 160px;
-    height: auto;
+    height: 35px;
+    max-width: 180px;
   }
   
   .header-nav,
   .switcher-group,
-  .theme-toggle,
-  .auth-btn {
-    display: none; /* Login nur im Menü auf Mobile */
+  .theme-toggle {
+    display: none;
   }
   
   .mobile-toggle {
     display: flex;
   }
   
-  .header-actions {
-    justify-content: flex-end;
+  .auth-group:not(.mobile-menu-header .auth-group) {
+    display: none;
   }
 }
 
-/* Smooth scrollbar for mobile menu */
-.mobile-menu::-webkit-scrollbar {
-  width: 6px;
+/* Loading Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.mobile-menu::-webkit-scrollbar-track {
-  background: transparent;
+.header-loaded .nav-item,
+.header-loaded .header-actions > * {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
 }
 
-.mobile-menu::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 3px;
-}
+.header-loaded .nav-item:nth-child(1) { animation-delay: 50ms; }
+.header-loaded .nav-item:nth-child(2) { animation-delay: 100ms; }
+.header-loaded .nav-item:nth-child(3) { animation-delay: 150ms; }
 </style>
 
 <header class="enterprise-header" id="enterprise-header">
   <div class="header-container">
-    <!-- Logo -->
+    <!-- Logo - BIGGER -->
     <div class="header-logo">
-      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      <a href="{{ routes.root_url }}">
         <img 
           src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
           alt="{{ shop.name }}"
-          width="200"
-          height="48"
+          width="240"
+          height="45"
           loading="eager"
           fetchpriority="high"
         >
       </a>
     </div>
-    
-    <!-- Desktop Navigation -->
-    <nav class="header-nav" role="navigation" aria-label="Main navigation">
+
+    <!-- Desktop Navigation - NO SUPPORT -->
+    <nav class="header-nav" role="navigation">
       <div class="nav-item">
         <a href="/pages/how-it-works" class="nav-link">
           {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
@@ -720,197 +534,184 @@
           {{ 'header.faq' | t | default: 'FAQ' }}
         </a>
       </div>
-      <div class="nav-item">
-        <a href="/pages/support" class="nav-link">
-          {{ 'header.support' | t | default: 'Support' }}
-        </a>
-      </div>
     </nav>
-    
-    <!-- Actions - REORDERED: Login → Language/Currency → Dark Mode -->
+
+    <!-- Actions -->
     <div class="header-actions">
-      <!-- Premium Login Button - FIRST -->
+      <!-- Auth Buttons -->
       {% if customer %}
-        <a href="{{ routes.account_url }}" class="auth-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
-            <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <a href="{{ routes.account_url }}" class="auth-btn logged-in">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <circle cx="9" cy="5" r="3" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M3 16c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
           {% if customer.first_name %}
             {{ customer.first_name }}
-          {% elsif customer.name %}
-            {{ customer.name }}
           {% else %}
-            {{ 'header.my_account' | t | default: 'Account' }}
+            {{ 'header.my_account' | t | default: 'My Account' }}
           {% endif %}
         </a>
       {% else %}
-        <a href="{{ routes.account_login_url }}" class="auth-btn">
-          {{ 'header.login' | t | default: 'Login' }}
-        </a>
+        <div class="auth-group">
+          <a href="{{ routes.account_login_url }}" class="auth-btn login">
+            {{ 'header.login' | t | default: 'Login' }}
+          </a>
+          <a href="{{ routes.account_register_url }}" class="auth-btn register">
+            {{ 'header.signup' | t | default: 'Sign Up' }}
+          </a>
+        </div>
       {% endif %}
-      
-      <!-- Language & Currency - SECOND -->
+
+      <!-- Language & Currency -->
       <div class="switcher-group">
         <button class="switcher" id="language-switcher" aria-label="Change language">
-          <span class="switcher-icon">🌐</span>
+          <span class="switcher-icon">🌍</span>
           <span>{{ shop.locale | upcase }}</span>
-          <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
-        
+
         <button class="switcher" id="currency-switcher" aria-label="Change currency">
           <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-          <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
       </div>
-      
-      <!-- Dark Mode Toggle - LAST -->
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+
+      <!-- Dark Mode Toggle - BETTER DESIGN -->
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
       </button>
-      
+
       <!-- Mobile Menu Toggle -->
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
-        <div class="burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle mobile menu">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
     </div>
   </div>
 </header>
 
-<!-- Mobile Fixed Menu Button (Optional - for fixed mobile button) -->
-<div class="mobile-toggle-fixed-wrapper" style="display: none;">
-  <button class="mobile-toggle" id="mobile-toggle-fixed" aria-label="Toggle menu">
-    <div class="burger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </button>
-</div>
-
 <!-- Mobile Menu -->
-<div class="mobile-overlay" id="mobile-overlay"></div>
-<nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-  <div class="mobile-menu-content">
-    <!-- User Section / Login -->
+<div class="mobile-menu-overlay" id="mobile-overlay"></div>
+<div class="mobile-menu" id="mobile-menu">
+  <!-- User Section -->
+  {% if customer %}
     <div class="mobile-menu-header">
-      {% if customer %}
-        <div class="mobile-user-info">
-          <div class="mobile-user-avatar">
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 18px;">
+          {{ customer.first_name | slice: 0 | upcase }}{{ customer.last_name | slice: 0 | upcase }}
+        </div>
+        <div>
+          <div style="font-weight: 600; color: var(--text-color);">
             {% if customer.first_name %}
-              {{ customer.first_name | slice: 0 }}{{ customer.last_name | slice: 0 }}
+              {{ customer.first_name }} {{ customer.last_name }}
             {% else %}
-              SU
+              {{ customer.email }}
             {% endif %}
           </div>
-          <div>
-            <div class="mobile-user-name">
-              {% if customer.first_name or customer.last_name %}
-                {{ customer.first_name }} {{ customer.last_name }}
-              {% elsif customer.name %}
-                {{ customer.name }}
-              {% else %}
-                Simbye User
-              {% endif %}
-            </div>
-            <div class="mobile-user-email">{{ customer.email }}</div>
-          </div>
+          <div style="font-size: 12px; opacity: 0.6;">{{ customer.email }}</div>
         </div>
-        <a href="{{ routes.account_url }}" class="mobile-auth-button">
-          {{ 'header.my_account' | t | default: 'My Account' }} →
-        </a>
-      {% else %}
-        <a href="{{ routes.account_login_url }}" class="mobile-auth-button">
+      </div>
+      <a href="{{ routes.account_url }}" class="auth-btn logged-in" style="width: 100%;">
+        {{ 'header.my_account' | t | default: 'My Account' }} →
+      </a>
+    </div>
+  {% else %}
+    <div class="mobile-menu-header">
+      <div class="auth-group" style="width: 100%;">
+        <a href="{{ routes.account_login_url }}" class="auth-btn login" style="flex: 1;">
           {{ 'header.login' | t | default: 'Login' }}
         </a>
-      {% endif %}
-    </div>
-    
-    <!-- Navigation -->
-    <nav class="mobile-menu-nav">
-      <a href="/pages/how-it-works" class="mobile-nav-item">
-        {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
-      </a>
-      <a href="/pages/check-esim" class="mobile-nav-item">
-        {{ 'header.check_esim' | t | default: 'Check eSIM' }}
-      </a>
-      <a href="/pages/faq" class="mobile-nav-item">
-        {{ 'header.faq' | t | default: 'FAQ' }}
-      </a>
-      <a href="/pages/support" class="mobile-nav-item">
-        {{ 'header.support' | t | default: 'Support' }}
-      </a>
-    </nav>
-    
-    <!-- Settings -->
-    <div class="mobile-menu-actions">
-      <div class="mobile-action-row">
-        <span>{{ 'header.language' | t | default: 'Language' }}</span>
-        <button class="switcher" style="border: none; padding: 8px 14px;">
-          <span class="switcher-icon">🌐</span>
-          <span>{{ shop.locale | upcase }}</span>
-        </button>
-      </div>
-      
-      <div class="mobile-action-row">
-        <span>{{ 'header.currency' | t | default: 'Currency' }}</span>
-        <button class="switcher" style="border: none; padding: 8px 14px;">
-          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-        </button>
-      </div>
-      
-      <!-- Premium Dark Mode Toggle -->
-      <div class="dark-mode-toggle-wrapper">
-        <button class="dark-mode-button" id="dark-mode-toggle" aria-label="Toggle dark mode">
-          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5" fill="currentColor"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" fill="none"/>
-          </svg>
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="currentColor">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        </button>
+        <a href="{{ routes.account_register_url }}" class="auth-btn register" style="flex: 1;">
+          {{ 'header.signup' | t | default: 'Sign Up' }}
+        </a>
       </div>
     </div>
-    
-    <!-- Footer -->
-    <div style="margin-top: auto; padding: 32px 0; opacity: 0.3; font-size: 13px; text-align: center; font-weight: 600;">
-      v6.0.0 | © 2025 Simbye
+  {% endif %}
+
+  <!-- Navigation -->
+  <nav class="mobile-menu-nav">
+    <a href="/pages/how-it-works" class="mobile-nav-item">
+      {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
+    </a>
+    <a href="/pages/check-esim" class="mobile-nav-item">
+      {{ 'header.check_esim' | t | default: 'Check eSIM' }}
+    </a>
+    <a href="/pages/faq" class="mobile-nav-item">
+      {{ 'header.faq' | t | default: 'FAQ' }}
+    </a>
+    <a href="/pages/support" class="mobile-nav-item">
+      {{ 'header.support' | t | default: 'Support' }}
+    </a>
+  </nav>
+
+  <!-- Actions -->
+  <div class="mobile-menu-actions">
+    <div class="mobile-action-row">
+      <span>{{ 'header.language' | t | default: 'Language' }}</span>
+      <button class="switcher" style="border: none; padding: 8px 12px;">
+        <span class="switcher-icon">🌍</span>
+        <span>{{ shop.locale | upcase }}</span>
+      </button>
+    </div>
+
+    <div class="mobile-action-row">
+      <span>{{ 'header.currency' | t | default: 'Currency' }}</span>
+      <button class="switcher" style="border: none; padding: 8px 12px;">
+        <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+      </button>
+    </div>
+
+    <div class="mobile-action-row">
+      <span>{{ 'header.dark_mode' | t | default: 'Dark Mode' }}</span>
+      <div class="dark-mode-switch" id="dark-mode-switch">
+        <div class="dark-mode-switch-handle">
+          <span>🌙</span>
+        </div>
+      </div>
     </div>
   </div>
-</nav>
+
+  <!-- Footer -->
+  <div style="margin-top: auto; padding: 20px 0; opacity: 0.5; font-size: 12px; text-align: center;">
+    v2.1.0 | © 2025 Simbye
+  </div>
+</div>
 
 <script>
-// Enterprise Header JavaScript - v6
-(function() {
+document.addEventListener('DOMContentLoaded', function() {
   'use strict';
   
   // Elements
   const header = document.getElementById('enterprise-header');
   const mobileToggle = document.getElementById('mobile-toggle');
-  const mobileToggleFixed = document.getElementById('mobile-toggle-fixed');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileOverlay = document.getElementById('mobile-overlay');
   const themeToggle = document.getElementById('theme-toggle');
-  const darkModeToggle = document.getElementById('dark-mode-toggle');
+  const darkModeSwitch = document.getElementById('dark-mode-switch');
+  const languageSwitcher = document.getElementById('language-switcher');
+  const currencySwitcher = document.getElementById('currency-switcher');
   
   // State
-  let isScrolled = false;
-  let isMobileMenuOpen = false;
+  let lastScroll = 0;
+  let isScrolling = false;
   let currentTheme = localStorage.getItem('theme') || 'light';
   
   // Initialize
@@ -919,77 +720,63 @@
     document.documentElement.setAttribute('data-theme', currentTheme);
     updateThemeUI();
     
-    // Bind events
-    bindEvents();
+    // Add loaded class for animations
+    setTimeout(() => {
+      header.classList.add('header-loaded');
+    }, 100);
     
-    // Check initial scroll
-    handleScroll();
+    // Setup event listeners
+    setupEventListeners();
     
     // Mark active nav
     markActiveNavItem();
   }
   
-  // Event Bindings
-  function bindEvents() {
-    // Optimized scroll with RAF
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+  // Event Listeners
+  function setupEventListeners() {
+    // Scroll events
+    window.addEventListener('scroll', handleScroll);
     
     // Mobile menu
     if (mobileToggle) {
       mobileToggle.addEventListener('click', toggleMobileMenu);
     }
     
-    if (mobileToggleFixed) {
-      mobileToggleFixed.addEventListener('click', toggleMobileMenu);
-    }
-    
     if (mobileOverlay) {
       mobileOverlay.addEventListener('click', closeMobileMenu);
     }
     
-    // Theme toggles
+    // Close mobile menu on link click
+    document.querySelectorAll('.mobile-nav-item').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+    
+    // Theme toggle
     if (themeToggle) {
       themeToggle.addEventListener('click', toggleTheme);
     }
     
-    if (darkModeToggle) {
-      darkModeToggle.addEventListener('click', toggleTheme);
+    if (darkModeSwitch) {
+      darkModeSwitch.addEventListener('click', toggleTheme);
     }
     
-    // Escape key
+    // Escape key to close mobile menu
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
         closeMobileMenu();
       }
     });
     
-    // Enhanced swipe to close
+    // Swipe to close mobile menu
     let touchStartX = 0;
-    let touchStartY = 0;
-    
     if (mobileMenu) {
       mobileMenu.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
       }, { passive: true });
       
       mobileMenu.addEventListener('touchend', (e) => {
         const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-        const deltaX = touchEndX - touchStartX;
-        const deltaY = Math.abs(touchEndY - touchStartY);
-        
-        // Only close if horizontal swipe is significant and vertical is minimal
-        if (deltaX > 100 && deltaY < 50) {
+        if (touchEndX - touchStartX > 100) {
           closeMobileMenu();
         }
       }, { passive: true });
@@ -998,152 +785,90 @@
   
   // Scroll Handler
   function handleScroll() {
-    const scrollY = window.scrollY;
-    const threshold = 20;
-    
-    if (scrollY > threshold && !isScrolled) {
-      isScrolled = true;
-      header.classList.add('scrolled');
-    } else if (scrollY <= threshold && isScrolled) {
-      isScrolled = false;
-      header.classList.remove('scrolled');
+    if (!isScrolling) {
+      window.requestAnimationFrame(() => {
+        const currentScroll = window.pageYOffset;
+        
+        // Add/remove scrolled class
+        if (currentScroll > 10) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        
+        // Hide/show on scroll
+        if (currentScroll > lastScroll && currentScroll > 100) {
+          header.classList.add('hidden');
+        } else {
+          header.classList.remove('hidden');
+        }
+        
+        lastScroll = currentScroll;
+        isScrolling = false;
+      });
+      isScrolling = true;
     }
   }
   
-  // Mobile Menu
+  // Mobile Menu Functions
   function toggleMobileMenu() {
-    isMobileMenuOpen ? closeMobileMenu() : openMobileMenu();
-  }
-  
-  function openMobileMenu() {
-    isMobileMenuOpen = true;
-    if (mobileToggle) mobileToggle.classList.add('active');
-    if (mobileToggleFixed) mobileToggleFixed.classList.add('active');
-    mobileMenu.classList.add('active');
-    mobileOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    
-    // Trap focus for accessibility
-    trapFocus(mobileMenu);
+    mobileToggle.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    mobileOverlay.classList.toggle('active');
+    document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
   }
   
   function closeMobileMenu() {
-    isMobileMenuOpen = false;
-    if (mobileToggle) mobileToggle.classList.remove('active');
-    if (mobileToggleFixed) mobileToggleFixed.classList.remove('active');
+    mobileToggle.classList.remove('active');
     mobileMenu.classList.remove('active');
     mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
-    
-    // Release focus trap
-    releaseFocus();
   }
   
-  // Focus trap for accessibility
-  let focusableElements = [];
-  let firstFocusableElement = null;
-  let lastFocusableElement = null;
-  
-  function trapFocus(element) {
-    focusableElements = element.querySelectorAll(
-      'a[href], button, [tabindex]:not([tabindex="-1"])'
-    );
-    firstFocusableElement = focusableElements[0];
-    lastFocusableElement = focusableElements[focusableElements.length - 1];
-    
-    element.addEventListener('keydown', handleFocusTrap);
-    firstFocusableElement?.focus();
-  }
-  
-  function releaseFocus() {
-    if (mobileMenu) {
-      mobileMenu.removeEventListener('keydown', handleFocusTrap);
-    }
-  }
-  
-  function handleFocusTrap(e) {
-    if (e.key !== 'Tab') return;
-    
-    if (e.shiftKey) {
-      if (document.activeElement === firstFocusableElement) {
-        lastFocusableElement?.focus();
-        e.preventDefault();
-      }
-    } else {
-      if (document.activeElement === lastFocusableElement) {
-        firstFocusableElement?.focus();
-        e.preventDefault();
-      }
-    }
-  }
-  
-  // Theme Toggle with localStorage error handling
+  // Theme Toggle
   function toggleTheme() {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
-    
-    try {
-      localStorage.setItem('theme', currentTheme);
-    } catch (e) {
-      console.warn('localStorage not available');
-    }
-    
+    localStorage.setItem('theme', currentTheme);
     updateThemeUI();
   }
   
   function updateThemeUI() {
-    // Update aria-pressed for accessibility
-    if (themeToggle) {
-      themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
+    // Update dark mode switch
+    if (darkModeSwitch) {
+      if (currentTheme === 'dark') {
+        darkModeSwitch.classList.add('active');
+        darkModeSwitch.querySelector('.dark-mode-switch-handle span').textContent = '☀️';
+      } else {
+        darkModeSwitch.classList.remove('active');
+        darkModeSwitch.querySelector('.dark-mode-switch-handle span').textContent = '🌙';
+      }
     }
   }
   
-  // Mark Active Navigation
+  // Mark active navigation item
   function markActiveNavItem() {
     const currentPath = window.location.pathname;
-    document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link => {
+    document.querySelectorAll('.nav-link').forEach(link => {
       if (link.getAttribute('href') === currentPath) {
         link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
       }
     });
   }
   
-  // Check for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.style.setProperty('--transition-fast', '0ms');
-    document.documentElement.style.setProperty('--transition-base', '0ms');
-    document.documentElement.style.setProperty('--transition-slow', '0ms');
-  }
-  
-  // Check for dark mode preference
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme')) {
-    currentTheme = 'dark';
-  }
-  
   // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-  
-  // Export for external use
-  window.EnterpriseHeader = {
-    openMobileMenu,
-    closeMobileMenu,
-    toggleTheme,
-    getTheme: () => currentTheme
-  };
-})();
-</script>
+  init();
+});
 
-<!-- Spacer for fixed header -->
-<div style="height: var(--header-height);"></div>
-<style>
-  @media (max-width: 768px) {
-    div[style*="--header-height"] {
-      height: var(--header-mobile-height) !important;
-    }
-  }
-</style>
+// Performance optimization
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(() => {
+    // Load non-critical features
+    console.log('Enterprise Header v2.1.0 loaded');
+  });
+} else {
+  setTimeout(() => {
+    console.log('Enterprise Header v2.1.0 loaded');
+  }, 1);
+}
+</script>
