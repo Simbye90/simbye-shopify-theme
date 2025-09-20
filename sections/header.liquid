@@ -33,6 +33,7 @@
   top: 0;
   left: 0;
   right: 0;
+  width: 100vw; /* Full viewport width */
   height: var(--header-height);
   background: var(--bg-header);
   z-index: 1000;
@@ -49,8 +50,7 @@
   grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
-  /* max-width removed - 100% width */
-  margin: 0;
+  width: 100%; /* Full width */
   padding: 0 40px;
   gap: 40px;
 }
@@ -326,10 +326,10 @@
 .mobile-header-login {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   text-decoration: none;
   color: var(--text-color);
-  font-size: 15px;
+  font-size: 14px; /* Kleiner - war 15px */
   font-weight: 500;
   transition: all var(--transition-fast);
 }
@@ -339,8 +339,8 @@
 }
 
 .mobile-header-login svg {
-  width: 20px;
-  height: 20px;
+  width: 18px; /* Kleiner - war 20px */
+  height: 18px;
 }
 
 .mobile-close {
@@ -478,17 +478,19 @@
 @media (max-width: 768px) {
   .enterprise-header {
     height: var(--header-mobile-height);
+    width: 100vw; /* Full width mobile too */
   }
   
   /* WENIGER ABSTAND ZUR SEITE */
   .header-container {
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 160px 1fr; /* Logo max 160px */
     padding: 0 12px;
     gap: 12px;
   }
   
   .header-logo img {
-    width: 140px;
+    width: 160px; /* Max width 160px */
+    max-width: 160px;
   }
   
   .header-nav,
