@@ -1,8 +1,8 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 v7 - Simbye eSIM - PERFECTED -->
+<!-- Enterprise Header 2025 Final - Simbye eSIM -->
 
 <style>
-/* CSS Custom Properties */
+/* CSS Variables */
 :root {
   --header-height: 80px;
   --header-mobile-height: 65px;
@@ -18,7 +18,7 @@
   --transition-base: 250ms ease;
 }
 
-/* Dark Mode Variables */
+/* Dark Mode */
 [data-theme="dark"] {
   --text-color: #f5f5f5;
   --text-secondary: #b0b0b0;
@@ -27,9 +27,9 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Header Base */
+/* Header - STICKY NOT FIXED */
 .enterprise-header {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   right: 0;
@@ -46,7 +46,7 @@
 
 .header-container {
   display: grid;
-  grid-template-columns: 200px 1fr auto;
+  grid-template-columns: 200px 1fr auto; /* Logo 200px wie gewünscht */
   align-items: center;
   height: 100%;
   max-width: 1440px;
@@ -60,31 +60,37 @@
   display: flex;
   align-items: center;
   height: 100%;
+  width: 200px;
 }
 
 .header-logo img {
   width: 180px;
   height: auto;
   object-fit: contain;
+  transition: transform var(--transition-fast);
 }
 
-/* Desktop Navigation */
+.header-logo:hover img {
+  transform: scale(1.02);
+}
+
+/* Desktop Navigation - 18PX WIE GEWÜNSCHT */
 .header-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   height: 100%;
 }
 
 .nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 10px 20px;
+  padding: 12px 24px;
   color: var(--text-color);
-  font-size: 15px;
+  font-size: 18px; /* 18px wie gewünscht */
   font-weight: 500;
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 10px;
   transition: all var(--transition-fast);
   position: relative;
 }
@@ -98,12 +104,13 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 20px;
-  right: 20px;
+  left: 24px;
+  right: 24px;
   height: 2px;
   background: var(--primary-color);
   transform: scaleX(0);
   transition: transform var(--transition-fast);
+  border-radius: 1px;
 }
 
 .nav-link.active::after,
@@ -119,7 +126,7 @@
   height: 100%;
 }
 
-/* Login Button - Desktop */
+/* Login Button */
 .auth-btn {
   display: inline-flex;
   align-items: center;
@@ -142,7 +149,7 @@
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
 }
 
-/* Switcher Group */
+/* Switchers */
 .switcher-group {
   display: flex;
   gap: 8px;
@@ -168,7 +175,7 @@
   background: rgba(0, 154, 97, 0.05);
 }
 
-/* Dark Mode Toggle - Desktop */
+/* Dark Mode Toggle Desktop */
 .theme-toggle {
   display: flex;
   align-items: center;
@@ -187,6 +194,7 @@
 .theme-toggle:hover {
   border-color: var(--primary-color);
   background: rgba(0, 154, 97, 0.05);
+  transform: rotate(10deg);
 }
 
 .theme-toggle svg {
@@ -217,7 +225,7 @@
   transform: rotate(180deg) scale(0);
 }
 
-/* Mobile Toggle Button */
+/* Mobile Toggle */
 .mobile-toggle {
   display: none;
   width: 44px;
@@ -229,6 +237,10 @@
   cursor: pointer;
   border: none;
   position: relative;
+}
+
+.mobile-toggle:active {
+  transform: scale(0.95);
 }
 
 .mobile-toggle .burger {
@@ -263,7 +275,7 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile Menu - ENTERPRISE LEVEL */
+/* Mobile Menu */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -274,7 +286,7 @@
   background: var(--bg-header);
   transform: translateX(100%);
   transition: transform var(--transition-base);
-  z-index: 999;
+  z-index: 1001;
   overflow-y: auto;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
 }
@@ -293,7 +305,7 @@
   opacity: 0;
   visibility: hidden;
   transition: all var(--transition-base);
-  z-index: 998;
+  z-index: 1000;
 }
 
 .mobile-overlay.active {
@@ -301,26 +313,27 @@
   visibility: visible;
 }
 
-/* Mobile Menu Header */
+/* Mobile Menu Header - KEIN LOGO */
 .mobile-menu-header {
-  padding: 20px;
+  padding: 16px 20px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.mobile-logo {
-  width: 140px;
-  height: auto;
+.mobile-menu-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 .mobile-close {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.05);
-  border: none;
+  background: transparent;
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -328,12 +341,9 @@
   transition: all var(--transition-fast);
 }
 
-[data-theme="dark"] .mobile-close {
-  background: rgba(255, 255, 255, 0.05);
-}
-
 .mobile-close:hover {
   background: rgba(0, 154, 97, 0.1);
+  border-color: var(--primary-color);
 }
 
 /* Mobile User Section */
@@ -346,20 +356,20 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .mobile-user-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 22px;
   background: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .mobile-user-details {
@@ -367,7 +377,7 @@
 }
 
 .mobile-user-name {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--text-color);
   line-height: 1.2;
@@ -379,36 +389,37 @@
   margin-top: 2px;
 }
 
-/* Mobile Login Button - COMPACT */
+/* Mobile Login Button - KOMPAKT */
 .mobile-auth-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 44px;
+  height: 42px;
   background: var(--primary-color);
   color: white;
   font-size: 15px;
   font-weight: 600;
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 10px;
   transition: all var(--transition-fast);
 }
 
-.mobile-auth-btn:hover {
+.mobile-auth-btn:active {
   background: var(--primary-hover);
+  transform: scale(0.98);
 }
 
 /* Mobile Navigation */
 .mobile-nav {
-  padding: 16px 20px;
+  padding: 12px 20px;
 }
 
 .mobile-nav-item {
   display: block;
-  padding: 14px 0;
+  padding: 12px 0;
   color: var(--text-color);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
@@ -419,18 +430,18 @@
   border-bottom: none;
 }
 
-.mobile-nav-item:hover {
+.mobile-nav-item:active {
   color: var(--primary-color);
   padding-left: 8px;
 }
 
-/* Mobile Settings - HORIZONTAL LAYOUT */
+/* Mobile Settings */
 .mobile-settings {
-  padding: 20px;
+  padding: 16px 20px;
   border-top: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .settings-row {
@@ -448,9 +459,9 @@
 .settings-value {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border-radius: 8px;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 6px;
   background: rgba(0, 0, 0, 0.03);
   font-size: 14px;
   font-weight: 500;
@@ -461,13 +472,13 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Dark Mode Switch - COMPACT */
+/* Dark Mode Switch */
 .dark-mode-switch {
   position: relative;
-  width: 48px;
-  height: 26px;
+  width: 44px;
+  height: 24px;
   background: #e0e0e0;
-  border-radius: 13px;
+  border-radius: 12px;
   cursor: pointer;
   transition: background var(--transition-fast);
 }
@@ -478,8 +489,8 @@
 
 .dark-mode-switch-handle {
   position: absolute;
-  top: 3px;
-  left: 3px;
+  top: 2px;
+  left: 2px;
   width: 20px;
   height: 20px;
   background: white;
@@ -489,16 +500,16 @@
 }
 
 [data-theme="dark"] .dark-mode-switch-handle {
-  transform: translateX(22px);
+  transform: translateX(20px);
 }
 
 /* Mobile Footer */
 .mobile-footer {
-  padding: 20px;
+  padding: 16px 20px;
   text-align: center;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-secondary);
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 /* Responsive */
@@ -508,8 +519,8 @@
   }
   
   .nav-link {
-    font-size: 14px;
-    padding: 8px 16px;
+    font-size: 16px;
+    padding: 10px 20px;
   }
 }
 
@@ -525,7 +536,7 @@
   }
   
   .header-logo img {
-    width: 150px;
+    width: 140px;
   }
   
   .header-nav,
@@ -544,7 +555,7 @@
   }
 }
 
-/* Scrollbar Styling */
+/* Scrollbar */
 .mobile-menu::-webkit-scrollbar {
   width: 4px;
 }
@@ -556,6 +567,7 @@
 .mobile-menu::-webkit-scrollbar-thumb {
   background: var(--primary-color);
   border-radius: 2px;
+  opacity: 0.5;
 }
 </style>
 
@@ -567,8 +579,6 @@
         <img 
           src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
           alt="{{ shop.name }}"
-          width="180"
-          height="auto"
           loading="eager"
         >
       </a>
@@ -620,7 +630,7 @@
       </div>
       
       <!-- Dark Mode -->
-      <button class="theme-toggle" id="theme-toggle">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -631,7 +641,7 @@
       </button>
       
       <!-- Mobile Toggle -->
-      <button class="mobile-toggle" id="mobile-toggle">
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
         <div class="burger">
           <span></span>
           <span></span>
@@ -645,14 +655,10 @@
 <!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobile-overlay"></div>
 <nav class="mobile-menu" id="mobile-menu">
-  <!-- Header with Logo and Close -->
+  <!-- Header - KEIN LOGO, NUR TITLE UND CLOSE -->
   <div class="mobile-menu-header">
-    <img 
-      src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
-      alt="{{ shop.name }}"
-      class="mobile-logo"
-    >
-    <button class="mobile-close" id="mobile-close">
+    <span class="mobile-menu-title">Menu</span>
+    <button class="mobile-close" id="mobile-close" aria-label="Close menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 6L6 18M6 6l12 12"/>
       </svg>
@@ -726,7 +732,7 @@
   
   <!-- Footer -->
   <div class="mobile-footer">
-    v7.0.0 | © 2025 Simbye
+    © 2025 Simbye eSIM
   </div>
 </nav>
 
@@ -734,6 +740,7 @@
 (function() {
   'use strict';
   
+  // Elements
   const header = document.getElementById('enterprise-header');
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -742,7 +749,9 @@
   const themeToggle = document.getElementById('theme-toggle');
   const darkModeSwitch = document.getElementById('dark-mode-switch');
   
+  // State
   let currentTheme = localStorage.getItem('theme') || 'light';
+  let isMenuOpen = false;
   
   // Initialize
   function init() {
@@ -752,30 +761,50 @@
     markActiveNav();
   }
   
-  // Events
+  // Event Bindings
   function bindEvents() {
+    // Scroll
     window.addEventListener('scroll', handleScroll, { passive: true });
     
-    if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
-    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
-    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
-    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-    if (darkModeSwitch) darkModeSwitch.addEventListener('click', toggleTheme);
+    // Mobile Menu
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', openMobileMenu);
+    }
     
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+    // Close Button - WICHTIG FIX
+    if (mobileClose) {
+      mobileClose.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Overlay
+    if (mobileOverlay) {
+      mobileOverlay.addEventListener('click', closeMobileMenu);
+    }
+    
+    // Theme Toggles
+    if (themeToggle) {
+      themeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    if (darkModeSwitch) {
+      darkModeSwitch.addEventListener('click', toggleTheme);
+    }
+    
+    // Escape Key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && isMenuOpen) {
         closeMobileMenu();
       }
     });
     
-    // Swipe to close
+    // Swipe to Close
     let touchStartX = 0;
     if (mobileMenu) {
-      mobileMenu.addEventListener('touchstart', (e) => {
+      mobileMenu.addEventListener('touchstart', function(e) {
         touchStartX = e.touches[0].clientX;
       }, { passive: true });
       
-      mobileMenu.addEventListener('touchend', (e) => {
+      mobileMenu.addEventListener('touchend', function(e) {
         const touchEndX = e.changedTouches[0].clientX;
         if (touchEndX - touchStartX > 80) {
           closeMobileMenu();
@@ -784,7 +813,7 @@
     }
   }
   
-  // Scroll
+  // Scroll Handler
   function handleScroll() {
     if (window.scrollY > 10) {
       header.classList.add('scrolled');
@@ -793,8 +822,9 @@
     }
   }
   
-  // Mobile Menu
+  // Mobile Menu Functions
   function openMobileMenu() {
+    isMenuOpen = true;
     mobileToggle.classList.add('active');
     mobileMenu.classList.add('active');
     mobileOverlay.classList.add('active');
@@ -802,39 +832,35 @@
   }
   
   function closeMobileMenu() {
+    isMenuOpen = false;
     mobileToggle.classList.remove('active');
     mobileMenu.classList.remove('active');
     mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
   }
   
-  // Theme
+  // Theme Toggle
   function toggleTheme() {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
-    localStorage.setItem('theme', currentTheme);
+    try {
+      localStorage.setItem('theme', currentTheme);
+    } catch(e) {
+      // localStorage not available
+    }
   }
   
-  // Active Nav
+  // Mark Active Navigation
   function markActiveNav() {
     const path = window.location.pathname;
-    document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link => {
+    document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(function(link) {
       if (link.getAttribute('href') === path) {
         link.classList.add('active');
       }
     });
   }
   
+  // Start
   init();
 })();
 </script>
-
-<!-- Spacer -->
-<div style="height: var(--header-height);"></div>
-<style>
-  @media (max-width: 768px) {
-    div[style*="--header-height"] {
-      height: var(--header-mobile-height) !important;
-    }
-  }
-</style>
