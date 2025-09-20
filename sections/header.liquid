@@ -334,13 +334,18 @@
   min-height: 52px;
 }
 
+/* Dark Mode Border anpassen */
+[data-theme="dark"] .mobile-menu-header {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
 .mobile-header-login {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   text-decoration: none;
   color: var(--text-color);
-  font-size: 16px; /* Größer - von 14px auf 16px */
+  font-size: 16px;
   font-weight: 500;
   transition: all var(--transition-fast);
 }
@@ -350,8 +355,8 @@
 }
 
 .mobile-header-login svg {
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
 }
 
 .mobile-close {
@@ -365,6 +370,11 @@
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .mobile-close {
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .mobile-close:hover {
@@ -386,6 +396,11 @@
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
   transition: all var(--transition-fast);
+}
+
+/* Dark Mode Borders */
+[data-theme="dark"] .mobile-nav-item {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 .mobile-nav-item:last-child {
@@ -418,6 +433,11 @@
   color: var(--text-secondary);
 }
 
+/* Dark Mode - Hellere Labels */
+[data-theme="dark"] .settings-label {
+  color: #999999;
+}
+
 .settings-value {
   display: flex;
   align-items: center;
@@ -431,16 +451,16 @@
 }
 
 [data-theme="dark"] .settings-value {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* Dark Mode Switch */
+/* Dark Mode Switch - Kleiner */
 .dark-mode-switch {
   position: relative;
-  width: 44px;
-  height: 24px;
-  background: #e0e0e0;
-  border-radius: 12px;
+  width: 42px;
+  height: 22px;
+  background: #4a4a4a;
+  border-radius: 11px;
   cursor: pointer;
   transition: background var(--transition-fast);
 }
@@ -453,12 +473,12 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   background: white;
   border-radius: 50%;
   transition: transform var(--transition-fast);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] .dark-mode-switch-handle {
