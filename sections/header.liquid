@@ -41,6 +41,15 @@
   /* border-bottom removed */
 }
 
+/* Dark Mode - Header nimmt Hero Verlauf auf */
+[data-theme="dark"] .enterprise-header {
+  background: linear-gradient(180deg, 
+    #0a0a0a 0%, 
+    #0a0a0a 50%, 
+    #0f1210 100%
+  );
+}
+
 .enterprise-header.scrolled {
   box-shadow: var(--shadow-md);
 }
@@ -51,8 +60,15 @@
   align-items: center;
   height: 100%;
   width: 100%; /* Full width */
-  padding: 0 40px;
+  padding: 0 40px; /* Gleich wie Hero Container */
   gap: 40px;
+}
+
+/* Größere Screens */
+@media (min-width: 1440px) {
+  .header-container {
+    padding: 0 60px; /* Mehr Padding auf großen Screens */
+  }
 }
 
 /* Logo - LINKSBÜNDIG WIE H1 */
@@ -275,7 +291,7 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile Menu */
+/* Mobile Menu - Dark Mode angepasst */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -289,6 +305,12 @@
   z-index: 1001;
   overflow-y: auto;
   box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Mobile Menu Background */
+[data-theme="dark"] .mobile-menu {
+  background: #0f0f0f;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
 }
 
 .mobile-menu.active {
@@ -329,7 +351,7 @@
   gap: 6px;
   text-decoration: none;
   color: var(--text-color);
-  font-size: 14px; /* Kleiner - war 15px */
+  font-size: 16px; /* Größer - von 14px auf 16px */
   font-weight: 500;
   transition: all var(--transition-fast);
 }
@@ -339,7 +361,7 @@
 }
 
 .mobile-header-login svg {
-  width: 18px; /* Kleiner - war 20px */
+  width: 18px;
   height: 18px;
 }
 
