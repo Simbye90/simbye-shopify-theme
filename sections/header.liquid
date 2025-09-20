@@ -33,21 +33,16 @@
   top: 0;
   left: 0;
   right: 0;
-  width: 100vw; /* Full viewport width */
+  width: 100vw;
   height: var(--header-height);
   background: var(--bg-header);
   z-index: 1000;
   transition: all var(--transition-base);
-  /* border-bottom removed */
 }
 
-/* Dark Mode - Header nimmt Hero Verlauf auf */
+/* Dark Mode - Gleicher Verlauf wie Hero */
 [data-theme="dark"] .enterprise-header {
-  background: linear-gradient(180deg, 
-    #0a0a0a 0%, 
-    #0a0a0a 50%, 
-    #0f1210 100%
-  );
+  background: #0a0a0a; /* Solid schwarz, kein Verlauf im Header */
 }
 
 .enterprise-header.scrolled {
@@ -59,16 +54,10 @@
   grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
-  width: 100%; /* Full width */
-  padding: 0 40px; /* Gleich wie Hero Container */
+  max-width: 1600px; /* Gleich wie Hero Container */
+  margin: 0 auto; /* Zentriert wie Hero */
+  padding: 0 40px; /* Gleich wie Hero */
   gap: 40px;
-}
-
-/* Größere Screens */
-@media (min-width: 1440px) {
-  .header-container {
-    padding: 0 60px; /* Mehr Padding auf großen Screens */
-  }
 }
 
 /* Logo - LINKSBÜNDIG WIE H1 */
@@ -500,18 +489,18 @@
 @media (max-width: 768px) {
   .enterprise-header {
     height: var(--header-mobile-height);
-    width: 100vw; /* Full width mobile too */
+    width: 100vw;
   }
   
-  /* WENIGER ABSTAND ZUR SEITE */
   .header-container {
-    grid-template-columns: 160px 1fr; /* Logo max 160px */
-    padding: 0 12px;
+    grid-template-columns: 160px 1fr;
+    padding: 0 20px; /* Gleich wie Hero mobile padding */
     gap: 12px;
+    max-width: none; /* Full width on mobile */
   }
   
   .header-logo img {
-    width: 160px; /* Max width 160px */
+    width: 160px;
     max-width: 160px;
   }
   
