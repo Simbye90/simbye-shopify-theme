@@ -64,7 +64,7 @@
 }
 
 .header-logo img {
-  width: 180px;
+  width: 200px;
   height: auto;
   object-fit: contain;
   transition: transform var(--transition-fast);
@@ -313,19 +313,14 @@
   visibility: visible;
 }
 
-/* Mobile Menu Header - KEIN LOGO */
+/* Mobile Menu Header - KEIN TEXT */
 .mobile-menu-header {
   padding: 16px 20px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-}
-
-.mobile-menu-title {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text-color);
+  min-height: 52px;
 }
 
 .mobile-close {
@@ -536,7 +531,7 @@
   }
   
   .header-logo img {
-    width: 140px;
+    width: 150px;
   }
   
   .header-nav,
@@ -655,9 +650,8 @@
 <!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobile-overlay"></div>
 <nav class="mobile-menu" id="mobile-menu">
-  <!-- Header - KEIN LOGO, NUR TITLE UND CLOSE -->
+  <!-- Header - NUR CLOSE BUTTON -->
   <div class="mobile-menu-header">
-    <span class="mobile-menu-title">Menu</span>
     <button class="mobile-close" id="mobile-close" aria-label="Close menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 6L6 18M6 6l12 12"/>
