@@ -46,16 +46,16 @@
 
 .header-container {
   display: grid;
-  grid-template-columns: 200px 1fr auto; /* Logo 200px wie gewünscht */
+  grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 32px;
+  padding: 0 40px;
   gap: 40px;
 }
 
-/* Logo */
+/* Logo - LINKSBÜNDIG WIE H1 */
 .header-logo {
   display: flex;
   align-items: center;
@@ -74,7 +74,7 @@
   transform: scale(1.02);
 }
 
-/* Desktop Navigation - 18PX WIE GEWÜNSCHT */
+/* Desktop Navigation - 18PX */
 .header-nav {
   display: flex;
   align-items: center;
@@ -87,7 +87,7 @@
   align-items: center;
   padding: 12px 24px;
   color: var(--text-color);
-  font-size: 18px; /* 18px wie gewünscht */
+  font-size: 18px;
   font-weight: 500;
   text-decoration: none;
   border-radius: 10px;
@@ -126,7 +126,7 @@
   height: 100%;
 }
 
-/* Login Button */
+/* Login Button Desktop */
 .auth-btn {
   display: inline-flex;
   align-items: center;
@@ -313,7 +313,7 @@
   visibility: visible;
 }
 
-/* Mobile Menu Header - KEIN TEXT */
+/* Mobile Menu Header */
 .mobile-menu-header {
   padding: 16px 20px;
   border-bottom: 1px solid var(--border-color);
@@ -341,80 +341,16 @@
   border-color: var(--primary-color);
 }
 
-/* Mobile User Section */
-.mobile-user-section {
-  padding: 20px;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.mobile-user-info {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.mobile-user-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 22px;
-  background: var(--primary-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.mobile-user-details {
-  flex: 1;
-}
-
-.mobile-user-name {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--text-color);
-  line-height: 1.2;
-}
-
-.mobile-user-email {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 2px;
-}
-
-/* Mobile Login Button - KOMPAKT */
-.mobile-auth-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 42px;
-  background: var(--primary-color);
-  color: white;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 10px;
-  transition: all var(--transition-fast);
-}
-
-.mobile-auth-btn:active {
-  background: var(--primary-hover);
-  transform: scale(0.98);
-}
-
-/* Mobile Navigation */
+/* Mobile Navigation - LOGIN ALS NORMALER LINK */
 .mobile-nav {
   padding: 12px 20px;
 }
 
 .mobile-nav-item {
   display: block;
-  padding: 12px 0;
+  padding: 14px 0;
   color: var(--text-color);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
@@ -428,6 +364,12 @@
 .mobile-nav-item:active {
   color: var(--primary-color);
   padding-left: 8px;
+}
+
+/* Mobile Login - ALS NAVIGATION ITEM */
+.mobile-nav-item.login {
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 /* Mobile Settings */
@@ -524,14 +466,15 @@
     height: var(--header-mobile-height);
   }
   
+  /* WENIGER ABSTAND ZUR SEITE */
   .header-container {
-    grid-template-columns: 150px 1fr;
-    padding: 0 16px;
-    gap: 16px;
+    grid-template-columns: 140px 1fr;
+    padding: 0 12px;
+    gap: 12px;
   }
   
   .header-logo img {
-    width: 150px;
+    width: 140px;
   }
   
   .header-nav,
@@ -659,32 +602,18 @@
     </button>
   </div>
   
-  <!-- User Section -->
-  <div class="mobile-user-section">
+  <!-- Navigation mit Login -->
+  <nav class="mobile-nav">
     {% if customer %}
-      <div class="mobile-user-info">
-        <div class="mobile-user-avatar">
-          {{ customer.first_name | slice: 0 | upcase }}{{ customer.last_name | slice: 0 | upcase }}
-        </div>
-        <div class="mobile-user-details">
-          <div class="mobile-user-name">
-            {{ customer.first_name }} {{ customer.last_name | default: customer.name }}
-          </div>
-          <div class="mobile-user-email">{{ customer.email }}</div>
-        </div>
-      </div>
-      <a href="{{ routes.account_url }}" class="mobile-auth-btn">
+      <a href="{{ routes.account_url }}" class="mobile-nav-item login">
         {{ 'header.my_account' | t | default: 'My Account' }}
       </a>
     {% else %}
-      <a href="{{ routes.account_login_url }}" class="mobile-auth-btn">
+      <a href="{{ routes.account_login_url }}" class="mobile-nav-item login">
         {{ 'header.login' | t | default: 'Login' }}
       </a>
     {% endif %}
-  </div>
-  
-  <!-- Navigation -->
-  <nav class="mobile-nav">
+    
     <a href="/pages/how-it-works" class="mobile-nav-item">
       {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
     </a>
@@ -765,7 +694,7 @@
       mobileToggle.addEventListener('click', openMobileMenu);
     }
     
-    // Close Button - WICHTIG FIX
+    // Close Button
     if (mobileClose) {
       mobileClose.addEventListener('click', closeMobileMenu);
     }
