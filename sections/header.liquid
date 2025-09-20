@@ -37,7 +37,7 @@
   background: var(--bg-header);
   z-index: 1000;
   transition: all var(--transition-base);
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom removed */
 }
 
 .enterprise-header.scrolled {
@@ -49,8 +49,8 @@
   grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
+  /* max-width removed - 100% width */
+  margin: 0;
   padding: 0 40px;
   gap: 40px;
 }
@@ -313,14 +313,34 @@
   visibility: visible;
 }
 
-/* Mobile Menu Header */
+/* Mobile Menu Header - LOGIN + CLOSE */
 .mobile-menu-header {
   padding: 16px 20px;
   border-bottom: 1px solid var(--border-color);
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   min-height: 52px;
+}
+
+.mobile-header-login {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+}
+
+.mobile-header-login:hover {
+  opacity: 0.8;
+}
+
+.mobile-header-login svg {
+  width: 20px;
+  height: 20px;
 }
 
 .mobile-close {
@@ -341,7 +361,7 @@
   border-color: var(--primary-color);
 }
 
-/* Mobile Navigation - LOGIN ALS NORMALER LINK */
+/* Mobile Navigation */
 .mobile-nav {
   padding: 12px 20px;
 }
@@ -364,12 +384,6 @@
 .mobile-nav-item:active {
   color: var(--primary-color);
   padding-left: 8px;
-}
-
-/* Mobile Login - ALS NAVIGATION ITEM */
-.mobile-nav-item.login {
-  color: var(--primary-color);
-  font-weight: 600;
 }
 
 /* Mobile Settings */
@@ -593,8 +607,26 @@
 <!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobile-overlay"></div>
 <nav class="mobile-menu" id="mobile-menu">
-  <!-- Header - NUR CLOSE BUTTON -->
+  <!-- Header - LOGIN + CLOSE BUTTON -->
   <div class="mobile-menu-header">
+    {% if customer %}
+      <a href="{{ routes.account_url }}" class="mobile-header-login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+        </svg>
+        <span>{{ customer.first_name | default: 'Account' }}</span>
+      </a>
+    {% else %}
+      <a href="{{ routes.account_login_url }}" class="mobile-header-login">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+        </svg>
+        <span>Login</span>
+      </a>
+    {% endif %}
+    
     <button class="mobile-close" id="mobile-close" aria-label="Close menu">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 6L6 18M6 6l12 12"/>
@@ -602,18 +634,8 @@
     </button>
   </div>
   
-  <!-- Navigation mit Login -->
+  <!-- Navigation OHNE LOGIN -->
   <nav class="mobile-nav">
-    {% if customer %}
-      <a href="{{ routes.account_url }}" class="mobile-nav-item login">
-        {{ 'header.my_account' | t | default: 'My Account' }}
-      </a>
-    {% else %}
-      <a href="{{ routes.account_login_url }}" class="mobile-nav-item login">
-        {{ 'header.login' | t | default: 'Login' }}
-      </a>
-    {% endif %}
-    
     <a href="/pages/how-it-works" class="mobile-nav-item">
       {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
     </a>
