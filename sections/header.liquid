@@ -1,61 +1,47 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 v6 - Simbye eSIM - UPDATED -->
+<!-- Enterprise Header 2025 v7 - Simbye eSIM - PERFECTED -->
 
 <style>
 /* CSS Custom Properties */
 :root {
-  --header-height: 90px;
-  --header-mobile-height: 70px;
+  --header-height: 80px;
+  --header-mobile-height: 65px;
   --primary-color: #009a61;
   --primary-hover: #00824f;
-  --primary-dark: #007850;
   --text-color: #1a1a1a;
-  --text-light: #6b6b6b;
+  --text-secondary: #666666;
   --bg-header: #ffffff;
-  --border-color: rgba(0, 0, 0, 0.06);
-  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12);
-  --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-base: 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-  --mobile-menu-width: 90%;
-  --mobile-menu-bg: #ffffff;
-
+  --border-color: rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
 }
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  --text-color: #f0f0f0;
-  --text-light: #a0a0a0;
-  --bg-header: #0a0a0a;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --mobile-menu-bg: #121212;
-  --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.5);
+  --text-color: #f5f5f5;
+  --text-secondary: #b0b0b0;
+  --bg-header: #0f0f0f;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Header Container - FIXED & FULL WIDTH */
+/* Header Base */
 .enterprise-header {
-  position: fixed; /* Back to fixed */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: var(--header-height);
   background: var(--bg-header);
-  /* border-bottom REMOVED */
   z-index: 1000;
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
   transition: all var(--transition-base);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .enterprise-header.scrolled {
   box-shadow: var(--shadow-md);
-  background: rgba(255, 255, 255, 0.98);
-}
-
-[data-theme="dark"] .enterprise-header.scrolled {
-  background: rgba(10, 10, 10, 0.98);
 }
 
 .header-container {
@@ -63,287 +49,191 @@
   grid-template-columns: 200px 1fr auto;
   align-items: center;
   height: 100%;
-  /* max-width REMOVED for full width */
-  margin: 0;
-  padding: 0 40px;
-  gap: 48px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+  gap: 40px;
 }
 
-/* Logo - 200px WIDTH */
+/* Logo */
 .header-logo {
   display: flex;
   align-items: center;
   height: 100%;
-  width: 200px;
 }
 
 .header-logo img {
-  width: 200px;
+  width: 180px;
   height: auto;
   object-fit: contain;
-  transition: transform var(--transition-base);
 }
 
-.header-logo:hover img {
-  transform: scale(1.05);
-}
-
-/* Desktop Navigation - 18px FONT */
+/* Desktop Navigation */
 .header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 20px;
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(0, 154, 97, 0.08);
+  color: var(--primary-color);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transition: transform var(--transition-fast);
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* Desktop Actions */
+.header-actions {
   display: flex;
   align-items: center;
   gap: 16px;
   height: 100%;
 }
 
-.nav-item {
-  position: relative;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.nav-link {
-  display: inline-flex;
-  align-items: center;
-  padding: 14px 24px;
-  color: var(--text-color);
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: 12px;
-  transition: all var(--transition-fast);
-  position: relative;
-  font-family: var(--font-base);
-  letter-spacing: -0.02em;
-}
-
-.nav-link:hover {
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.08), rgba(0, 154, 97, 0.12));
-  color: var(--primary-color);
-  transform: translateY(-2px);
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 24px;
-  right: 24px;
-  height: 3px;
-  background: var(--primary-color);
-  transform: scaleX(0);
-  transition: transform var(--transition-fast);
-  border-radius: 3px;
-}
-
-.nav-link:hover::after {
-  transform: scaleX(1);
-}
-
-.nav-link.active::after {
-  transform: scaleX(1);
-}
-
-/* Actions Section - REORDERED */
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  height: 100%;
-}
-
-/* Premium Login Button */
+/* Login Button - Desktop */
 .auth-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 32px;
-  height: 52px;
-  font-size: 17px;
-  font-weight: 700;
+  padding: 0 28px;
+  height: 44px;
+  font-size: 15px;
+  font-weight: 600;
   color: white;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  background: var(--primary-color);
   text-decoration: none;
-  border-radius: 26px;
+  border-radius: 22px;
   transition: all var(--transition-base);
-  white-space: nowrap;
-  font-family: var(--font-base);
-  letter-spacing: -0.02em;
-  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
-  gap: 10px;
-  position: relative;
-  overflow: hidden;
-  order: 1; /* LOGIN FIRST */
-}
-
-.auth-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.6s;
+  gap: 8px;
 }
 
 .auth-btn:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
 }
 
-.auth-btn:hover::before {
-  left: 100%;
-}
-
-/* Premium Switcher Buttons */
+/* Switcher Group */
 .switcher-group {
   display: flex;
-  gap: 12px;
-  order: 2; /* AFTER LOGIN */
+  gap: 8px;
 }
 
 .switcher {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 12px 18px;
-  border-radius: 14px;
-  background: var(--bg-header);
-  border: 2px solid var(--border-color);
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border-color);
   color: var(--text-color);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   transition: all var(--transition-fast);
-  font-family: var(--font-base);
-  position: relative;
-  overflow: hidden;
-}
-
-.switcher::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, var(--primary-color), transparent);
-  opacity: 0.1;
-  transform: translate(-50%, -50%);
-  transition: all var(--transition-base);
 }
 
 .switcher:hover {
   border-color: var(--primary-color);
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 154, 97, 0.08));
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.15);
+  background: rgba(0, 154, 97, 0.05);
 }
 
-.switcher:hover::before {
-  width: 100px;
-  height: 100px;
-  opacity: 0.2;
-}
-
-.switcher-icon {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-
-/* Premium Dark Mode Toggle */
+/* Dark Mode Toggle - Desktop */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
-  border: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid var(--border-color);
   cursor: pointer;
-  transition: all var(--transition-base);
+  transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  order: 3; /* DARK MODE LAST */
-}
-
-[data-theme="dark"] .theme-toggle {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
 }
 
 .theme-toggle:hover {
-  transform: rotate(15deg) scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.2);
+  border-color: var(--primary-color);
+  background: rgba(0, 154, 97, 0.05);
 }
 
 .theme-toggle svg {
-  width: 26px;
-  height: 26px;
-  transition: all var(--transition-slow);
+  width: 22px;
+  height: 22px;
+  transition: all var(--transition-base);
   position: absolute;
   color: var(--text-color);
 }
 
 .theme-toggle .sun-icon {
   opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
+  transform: rotate(-180deg) scale(0);
 }
 
 .theme-toggle .moon-icon {
   opacity: 1;
-  transform: rotate(0deg) scale(1);
+  transform: rotate(0) scale(1);
 }
 
 [data-theme="dark"] .theme-toggle .sun-icon {
   opacity: 1;
-  transform: rotate(0deg) scale(1);
-  color: #ffd700;
+  transform: rotate(0) scale(1);
 }
 
 [data-theme="dark"] .theme-toggle .moon-icon {
   opacity: 0;
-  transform: rotate(90deg) scale(0.5);
+  transform: rotate(180deg) scale(0);
 }
 
-/* Mobile Menu Toggle - FIXED ON MOBILE */
+/* Mobile Toggle Button */
 .mobile-toggle {
   display: none;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
-  border-radius: 14px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  border-radius: 10px;
+  background: var(--primary-color);
   cursor: pointer;
-  z-index: 1001;
-  position: relative;
-  transition: all var(--transition-base);
-  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.3);
   border: none;
-  outline: none;
-}
-
-.mobile-toggle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.4);
-}
-
-.mobile-toggle:active {
-  transform: scale(0.95);
+  position: relative;
 }
 
 .mobile-toggle .burger {
-  width: 22px;
-  height: 18px;
+  width: 20px;
+  height: 16px;
   position: relative;
 }
 
@@ -351,63 +241,42 @@
   display: block;
   position: absolute;
   width: 100%;
-  height: 3px;
+  height: 2px;
   background: white;
-  border-radius: 3px;
+  border-radius: 2px;
   transition: all var(--transition-base);
-  left: 0;
 }
 
-.mobile-toggle .burger span:nth-child(1) {
-  top: 0;
-}
-
-.mobile-toggle .burger span:nth-child(2) {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.mobile-toggle .burger span:nth-child(3) {
-  bottom: 0;
-}
+.mobile-toggle .burger span:nth-child(1) { top: 0; }
+.mobile-toggle .burger span:nth-child(2) { top: 7px; }
+.mobile-toggle .burger span:nth-child(3) { bottom: 0; }
 
 .mobile-toggle.active .burger span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .mobile-toggle.active .burger span:nth-child(2) {
   opacity: 0;
-  transform: translateX(20px);
 }
 
 .mobile-toggle.active .burger span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile specific fixed toggle */
-@media (max-width: 768px) {
-  .mobile-toggle-fixed-wrapper {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1002;
-  }
-}
-
-/* Mobile Menu - PREMIUM SLIDE */
+/* Mobile Menu - ENTERPRISE LEVEL */
 .mobile-menu {
   position: fixed;
   top: 0;
   right: 0;
-  width: var(--mobile-menu-width);
-  max-width: 420px;
+  width: 75%;
+  max-width: 360px;
   height: 100vh;
-  background: var(--mobile-menu-bg);
+  background: var(--bg-header);
   transform: translateX(100%);
-  transition: transform var(--transition-slow);
+  transition: transform var(--transition-base);
   z-index: 999;
   overflow-y: auto;
-  box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
 }
 
 .mobile-menu.active {
@@ -420,8 +289,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
   transition: all var(--transition-base);
@@ -433,235 +301,238 @@
   visibility: visible;
 }
 
-.mobile-menu-content {
-  padding: 90px 28px 28px;
+/* Mobile Menu Header */
+.mobile-menu-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.mobile-menu-header {
-  padding: 24px;
-  background: linear-gradient(135deg, var(--bg-header), rgba(0, 154, 97, 0.02));
-  margin-bottom: 24px;
-  border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+.mobile-logo {
+  width: 140px;
+  height: auto;
+}
+
+.mobile-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+[data-theme="dark"] .mobile-close {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mobile-close:hover {
+  background: rgba(0, 154, 97, 0.1);
+}
+
+/* Mobile User Section */
+.mobile-user-section {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .mobile-user-info {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 12px;
+  margin-bottom: 16px;
 }
 
 .mobile-user-avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: 700;
-  font-size: 18px;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.mobile-user-details {
+  flex: 1;
 }
 
 .mobile-user-name {
-  font-size: 19px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--text-color);
+  line-height: 1.2;
 }
 
 .mobile-user-email {
-  font-size: 14px;
-  color: var(--text-light);
+  font-size: 13px;
+  color: var(--text-secondary);
   margin-top: 2px;
 }
 
-.mobile-auth-button {
+/* Mobile Login Button - COMPACT */
+.mobile-auth-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 52px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  height: 44px;
+  background: var(--primary-color);
   color: white;
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
   text-decoration: none;
-  border-radius: 14px;
+  border-radius: 12px;
   transition: all var(--transition-fast);
-  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.25);
 }
 
-.mobile-auth-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.35);
+.mobile-auth-btn:hover {
+  background: var(--primary-hover);
 }
 
-.mobile-menu-nav {
-  margin-bottom: 32px;
+/* Mobile Navigation */
+.mobile-nav {
+  padding: 16px 20px;
 }
 
 .mobile-nav-item {
   display: block;
-  padding: 20px 0;
+  padding: 14px 0;
   color: var(--text-color);
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
   text-decoration: none;
   border-bottom: 1px solid var(--border-color);
-  transition: color var(--transition-fast), padding var(--transition-fast);
-  position: relative;
+  transition: all var(--transition-fast);
 }
 
-.mobile-nav-item::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: var(--primary-color);
-  transition: width var(--transition-fast);
+.mobile-nav-item:last-child {
+  border-bottom: none;
 }
 
 .mobile-nav-item:hover {
   color: var(--primary-color);
-  padding-left: 12px;
+  padding-left: 8px;
 }
 
-.mobile-nav-item:hover::before {
-  width: 40px;
-}
-
-.mobile-menu-actions {
-  padding-top: 24px;
+/* Mobile Settings - HORIZONTAL LAYOUT */
+.mobile-settings {
+  padding: 20px;
   border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.mobile-action-row {
+.settings-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
 }
 
-.mobile-action-row span {
-  font-size: 16px;
-  font-weight: 600;
+.settings-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.settings-value {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.03);
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-color);
 }
 
-/* Premium Dark Mode Toggle - Mobile IMPROVED */
-.dark-mode-toggle-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 32px 0 24px 0;
-  margin-top: 20px;
+[data-theme="dark"] .settings-value {
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.dark-mode-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: linear-gradient(145deg, #f5f5f5, #e8e8e8);
-  border: none;
-  cursor: pointer;
-  transition: all var(--transition-base);
+/* Dark Mode Switch - COMPACT */
+.dark-mode-switch {
   position: relative;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06),
-              0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 48px;
+  height: 26px;
+  background: #e0e0e0;
+  border-radius: 13px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
 }
 
-[data-theme="dark"] .dark-mode-button {
-  background: linear-gradient(145deg, #2a2a2a, #1a1a1a);
-  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.03),
-              0 4px 12px rgba(0, 0, 0, 0.3);
+[data-theme="dark"] .dark-mode-switch {
+  background: var(--primary-color);
 }
 
-.dark-mode-button:active {
-  transform: scale(0.95);
-}
-
-.dark-mode-button svg {
-  width: 32px;
-  height: 32px;
-  transition: all var(--transition-slow);
+.dark-mode-switch-handle {
   position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform var(--transition-fast);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-.dark-mode-button .sun-icon {
-  opacity: 1;
-  transform: rotate(0deg);
-  color: #ffa500;
-  fill: #ffa500;
+[data-theme="dark"] .dark-mode-switch-handle {
+  transform: translateX(22px);
 }
 
-.dark-mode-button .moon-icon {
-  opacity: 0;
-  transform: rotate(-90deg);
-  color: #7c7eff;
-  fill: #7c7eff;
-}
-
-[data-theme="dark"] .dark-mode-button .sun-icon {
-  opacity: 0;
-  transform: rotate(90deg);
-}
-
-[data-theme="dark"] .dark-mode-button .moon-icon {
-  opacity: 1;
-  transform: rotate(0deg);
+/* Mobile Footer */
+.mobile-footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.6;
 }
 
 /* Responsive */
 @media (max-width: 1200px) {
   .header-container {
-    grid-template-columns: 200px 1fr auto;
-    gap: 32px;
     padding: 0 24px;
   }
   
   .nav-link {
-    padding: 12px 20px;
-    font-size: 17px;
+    font-size: 14px;
+    padding: 8px 16px;
   }
 }
 
 @media (max-width: 768px) {
-  /* Mobile header is fixed */
   .enterprise-header {
     height: var(--header-mobile-height);
-    position: fixed; /* Fixed on mobile too */
   }
   
   .header-container {
-    grid-template-columns: 160px 1fr;
-    padding: 0 20px;
-    /* Full width on mobile too */
-    margin: 0;
-  }
-  
-  /* Bigger mobile logo */
-  .header-logo {
-    width: 160px;
+    grid-template-columns: 150px 1fr;
+    padding: 0 16px;
+    gap: 16px;
   }
   
   .header-logo img {
-    width: 160px;
-    height: auto;
+    width: 150px;
   }
   
   .header-nav,
   .switcher-group,
   .theme-toggle,
   .auth-btn {
-    display: none; /* Login nur im Menü auf Mobile */
+    display: none;
   }
   
   .mobile-toggle {
@@ -673,9 +544,9 @@
   }
 }
 
-/* Smooth scrollbar for mobile menu */
+/* Scrollbar Styling */
 .mobile-menu::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .mobile-menu::-webkit-scrollbar-track {
@@ -684,7 +555,7 @@
 
 .mobile-menu::-webkit-scrollbar-thumb {
   background: var(--primary-color);
-  border-radius: 3px;
+  border-radius: 2px;
 }
 </style>
 
@@ -692,58 +563,43 @@
   <div class="header-container">
     <!-- Logo -->
     <div class="header-logo">
-      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      <a href="{{ routes.root_url }}">
         <img 
           src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
           alt="{{ shop.name }}"
-          width="200"
-          height="48"
+          width="180"
+          height="auto"
           loading="eager"
-          fetchpriority="high"
         >
       </a>
     </div>
     
     <!-- Desktop Navigation -->
-    <nav class="header-nav" role="navigation" aria-label="Main navigation">
-      <div class="nav-item">
-        <a href="/pages/how-it-works" class="nav-link">
-          {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
-        </a>
-      </div>
-      <div class="nav-item">
-        <a href="/pages/check-esim" class="nav-link">
-          {{ 'header.check_esim' | t | default: 'Check eSIM' }}
-        </a>
-      </div>
-      <div class="nav-item">
-        <a href="/pages/faq" class="nav-link">
-          {{ 'header.faq' | t | default: 'FAQ' }}
-        </a>
-      </div>
-      <div class="nav-item">
-        <a href="/pages/support" class="nav-link">
-          {{ 'header.support' | t | default: 'Support' }}
-        </a>
-      </div>
+    <nav class="header-nav">
+      <a href="/pages/how-it-works" class="nav-link">
+        {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
+      </a>
+      <a href="/pages/check-esim" class="nav-link">
+        {{ 'header.check_esim' | t | default: 'Check eSIM' }}
+      </a>
+      <a href="/pages/faq" class="nav-link">
+        {{ 'header.faq' | t | default: 'FAQ' }}
+      </a>
+      <a href="/pages/support" class="nav-link">
+        {{ 'header.support' | t | default: 'Support' }}
+      </a>
     </nav>
     
-    <!-- Actions - REORDERED: Login → Language/Currency → Dark Mode -->
+    <!-- Desktop Actions -->
     <div class="header-actions">
-      <!-- Premium Login Button - FIRST -->
+      <!-- Login -->
       {% if customer %}
         <a href="{{ routes.account_url }}" class="auth-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="2"/>
-            <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2"/>
           </svg>
-          {% if customer.first_name %}
-            {{ customer.first_name }}
-          {% elsif customer.name %}
-            {{ customer.name }}
-          {% else %}
-            {{ 'header.my_account' | t | default: 'Account' }}
-          {% endif %}
+          {{ customer.first_name | default: 'Account' }}
         </a>
       {% else %}
         <a href="{{ routes.account_login_url }}" class="auth-btn">
@@ -751,37 +607,31 @@
         </a>
       {% endif %}
       
-      <!-- Language & Currency - SECOND -->
+      <!-- Switchers -->
       <div class="switcher-group">
-        <button class="switcher" id="language-switcher" aria-label="Change language">
-          <span class="switcher-icon">🌐</span>
+        <button class="switcher" id="language-switcher">
+          <span>🌐</span>
           <span>{{ shop.locale | upcase }}</span>
-          <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
         </button>
         
-        <button class="switcher" id="currency-switcher" aria-label="Change currency">
+        <button class="switcher" id="currency-switcher">
           <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-          <svg width="14" height="14" viewBox="0 0 12 12" fill="none">
-            <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
         </button>
       </div>
       
-      <!-- Dark Mode Toggle - LAST -->
-      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Dark Mode -->
+      <button class="theme-toggle" id="theme-toggle">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
           <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
         </svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
       
-      <!-- Mobile Menu Toggle -->
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+      <!-- Mobile Toggle -->
+      <button class="mobile-toggle" id="mobile-toggle">
         <div class="burger">
           <span></span>
           <span></span>
@@ -792,354 +642,194 @@
   </div>
 </header>
 
-<!-- Mobile Fixed Menu Button (Optional - for fixed mobile button) -->
-<div class="mobile-toggle-fixed-wrapper" style="display: none;">
-  <button class="mobile-toggle" id="mobile-toggle-fixed" aria-label="Toggle menu">
-    <div class="burger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </button>
-</div>
-
 <!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobile-overlay"></div>
-<nav class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
-  <div class="mobile-menu-content">
-    <!-- User Section / Login -->
-    <div class="mobile-menu-header">
-      {% if customer %}
-        <div class="mobile-user-info">
-          <div class="mobile-user-avatar">
-            {% if customer.first_name %}
-              {{ customer.first_name | slice: 0 }}{{ customer.last_name | slice: 0 }}
-            {% else %}
-              SU
-            {% endif %}
-          </div>
-          <div>
-            <div class="mobile-user-name">
-              {% if customer.first_name or customer.last_name %}
-                {{ customer.first_name }} {{ customer.last_name }}
-              {% elsif customer.name %}
-                {{ customer.name }}
-              {% else %}
-                Simbye User
-              {% endif %}
-            </div>
-            <div class="mobile-user-email">{{ customer.email }}</div>
-          </div>
+<nav class="mobile-menu" id="mobile-menu">
+  <!-- Header with Logo and Close -->
+  <div class="mobile-menu-header">
+    <img 
+      src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
+      alt="{{ shop.name }}"
+      class="mobile-logo"
+    >
+    <button class="mobile-close" id="mobile-close">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+  
+  <!-- User Section -->
+  <div class="mobile-user-section">
+    {% if customer %}
+      <div class="mobile-user-info">
+        <div class="mobile-user-avatar">
+          {{ customer.first_name | slice: 0 | upcase }}{{ customer.last_name | slice: 0 | upcase }}
         </div>
-        <a href="{{ routes.account_url }}" class="mobile-auth-button">
-          {{ 'header.my_account' | t | default: 'My Account' }} →
-        </a>
-      {% else %}
-        <a href="{{ routes.account_login_url }}" class="mobile-auth-button">
-          {{ 'header.login' | t | default: 'Login' }}
-        </a>
-      {% endif %}
-    </div>
-    
-    <!-- Navigation -->
-    <nav class="mobile-menu-nav">
-      <a href="/pages/how-it-works" class="mobile-nav-item">
-        {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
-      </a>
-      <a href="/pages/check-esim" class="mobile-nav-item">
-        {{ 'header.check_esim' | t | default: 'Check eSIM' }}
-      </a>
-      <a href="/pages/faq" class="mobile-nav-item">
-        {{ 'header.faq' | t | default: 'FAQ' }}
-      </a>
-      <a href="/pages/support" class="mobile-nav-item">
-        {{ 'header.support' | t | default: 'Support' }}
-      </a>
-    </nav>
-    
-    <!-- Settings -->
-    <div class="mobile-menu-actions">
-      <div class="mobile-action-row">
-        <span>{{ 'header.language' | t | default: 'Language' }}</span>
-        <button class="switcher" style="border: none; padding: 8px 14px;">
-          <span class="switcher-icon">🌐</span>
-          <span>{{ shop.locale | upcase }}</span>
-        </button>
+        <div class="mobile-user-details">
+          <div class="mobile-user-name">
+            {{ customer.first_name }} {{ customer.last_name | default: customer.name }}
+          </div>
+          <div class="mobile-user-email">{{ customer.email }}</div>
+        </div>
       </div>
-      
-      <div class="mobile-action-row">
-        <span>{{ 'header.currency' | t | default: 'Currency' }}</span>
-        <button class="switcher" style="border: none; padding: 8px 14px;">
-          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-        </button>
-      </div>
-      
-      <!-- Premium Dark Mode Toggle -->
-      <div class="dark-mode-toggle-wrapper">
-        <button class="dark-mode-button" id="dark-mode-toggle" aria-label="Toggle dark mode">
-          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5" fill="currentColor"/>
-            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" fill="none"/>
-          </svg>
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" fill="currentColor">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        </button>
+      <a href="{{ routes.account_url }}" class="mobile-auth-btn">
+        {{ 'header.my_account' | t | default: 'My Account' }}
+      </a>
+    {% else %}
+      <a href="{{ routes.account_login_url }}" class="mobile-auth-btn">
+        {{ 'header.login' | t | default: 'Login' }}
+      </a>
+    {% endif %}
+  </div>
+  
+  <!-- Navigation -->
+  <nav class="mobile-nav">
+    <a href="/pages/how-it-works" class="mobile-nav-item">
+      {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
+    </a>
+    <a href="/pages/check-esim" class="mobile-nav-item">
+      {{ 'header.check_esim' | t | default: 'Check eSIM' }}
+    </a>
+    <a href="/pages/faq" class="mobile-nav-item">
+      {{ 'header.faq' | t | default: 'FAQ' }}
+    </a>
+    <a href="/pages/support" class="mobile-nav-item">
+      {{ 'header.support' | t | default: 'Support' }}
+    </a>
+  </nav>
+  
+  <!-- Settings -->
+  <div class="mobile-settings">
+    <div class="settings-row">
+      <span class="settings-label">Language</span>
+      <div class="settings-value">
+        <span>🌐</span>
+        <span>{{ shop.locale | upcase }}</span>
       </div>
     </div>
     
-    <!-- Footer -->
-    <div style="margin-top: auto; padding: 32px 0; opacity: 0.3; font-size: 13px; text-align: center; font-weight: 600;">
-      v6.0.0 | © 2025 Simbye
+    <div class="settings-row">
+      <span class="settings-label">Currency</span>
+      <div class="settings-value">
+        <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+      </div>
     </div>
+    
+    <div class="settings-row">
+      <span class="settings-label">Dark Mode</span>
+      <div class="dark-mode-switch" id="dark-mode-switch">
+        <div class="dark-mode-switch-handle"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <div class="mobile-footer">
+    v7.0.0 | © 2025 Simbye
   </div>
 </nav>
 
 <script>
-// Enterprise Header JavaScript - v6
 (function() {
   'use strict';
   
-  // Elements
   const header = document.getElementById('enterprise-header');
   const mobileToggle = document.getElementById('mobile-toggle');
-  const mobileToggleFixed = document.getElementById('mobile-toggle-fixed');
   const mobileMenu = document.getElementById('mobile-menu');
   const mobileOverlay = document.getElementById('mobile-overlay');
+  const mobileClose = document.getElementById('mobile-close');
   const themeToggle = document.getElementById('theme-toggle');
-  const darkModeToggle = document.getElementById('dark-mode-toggle');
+  const darkModeSwitch = document.getElementById('dark-mode-switch');
   
-  // State
-  let isScrolled = false;
-  let isMobileMenuOpen = false;
   let currentTheme = localStorage.getItem('theme') || 'light';
   
   // Initialize
   function init() {
-    // Set initial theme
     document.documentElement.setAttribute('data-theme', currentTheme);
-    updateThemeUI();
-    
-    // Bind events
     bindEvents();
-    
-    // Check initial scroll
     handleScroll();
-    
-    // Mark active nav
-    markActiveNavItem();
+    markActiveNav();
   }
   
-  // Event Bindings
+  // Events
   function bindEvents() {
-    // Optimized scroll with RAF
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
-    // Mobile menu
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', toggleMobileMenu);
-    }
+    if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (darkModeSwitch) darkModeSwitch.addEventListener('click', toggleTheme);
     
-    if (mobileToggleFixed) {
-      mobileToggleFixed.addEventListener('click', toggleMobileMenu);
-    }
-    
-    if (mobileOverlay) {
-      mobileOverlay.addEventListener('click', closeMobileMenu);
-    }
-    
-    // Theme toggles
-    if (themeToggle) {
-      themeToggle.addEventListener('click', toggleTheme);
-    }
-    
-    if (darkModeToggle) {
-      darkModeToggle.addEventListener('click', toggleTheme);
-    }
-    
-    // Escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isMobileMenuOpen) {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
         closeMobileMenu();
       }
     });
     
-    // Enhanced swipe to close
+    // Swipe to close
     let touchStartX = 0;
-    let touchStartY = 0;
-    
     if (mobileMenu) {
       mobileMenu.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
       }, { passive: true });
       
       mobileMenu.addEventListener('touchend', (e) => {
         const touchEndX = e.changedTouches[0].clientX;
-        const touchEndY = e.changedTouches[0].clientY;
-        const deltaX = touchEndX - touchStartX;
-        const deltaY = Math.abs(touchEndY - touchStartY);
-        
-        // Only close if horizontal swipe is significant and vertical is minimal
-        if (deltaX > 100 && deltaY < 50) {
+        if (touchEndX - touchStartX > 80) {
           closeMobileMenu();
         }
       }, { passive: true });
     }
   }
   
-  // Scroll Handler
+  // Scroll
   function handleScroll() {
-    const scrollY = window.scrollY;
-    const threshold = 20;
-    
-    if (scrollY > threshold && !isScrolled) {
-      isScrolled = true;
+    if (window.scrollY > 10) {
       header.classList.add('scrolled');
-    } else if (scrollY <= threshold && isScrolled) {
-      isScrolled = false;
+    } else {
       header.classList.remove('scrolled');
     }
   }
   
   // Mobile Menu
-  function toggleMobileMenu() {
-    isMobileMenuOpen ? closeMobileMenu() : openMobileMenu();
-  }
-  
   function openMobileMenu() {
-    isMobileMenuOpen = true;
-    if (mobileToggle) mobileToggle.classList.add('active');
-    if (mobileToggleFixed) mobileToggleFixed.classList.add('active');
+    mobileToggle.classList.add('active');
     mobileMenu.classList.add('active');
     mobileOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
-    
-    // Trap focus for accessibility
-    trapFocus(mobileMenu);
   }
   
   function closeMobileMenu() {
-    isMobileMenuOpen = false;
-    if (mobileToggle) mobileToggle.classList.remove('active');
-    if (mobileToggleFixed) mobileToggleFixed.classList.remove('active');
+    mobileToggle.classList.remove('active');
     mobileMenu.classList.remove('active');
     mobileOverlay.classList.remove('active');
     document.body.style.overflow = '';
-    
-    // Release focus trap
-    releaseFocus();
   }
   
-  // Focus trap for accessibility
-  let focusableElements = [];
-  let firstFocusableElement = null;
-  let lastFocusableElement = null;
-  
-  function trapFocus(element) {
-    focusableElements = element.querySelectorAll(
-      'a[href], button, [tabindex]:not([tabindex="-1"])'
-    );
-    firstFocusableElement = focusableElements[0];
-    lastFocusableElement = focusableElements[focusableElements.length - 1];
-    
-    element.addEventListener('keydown', handleFocusTrap);
-    firstFocusableElement?.focus();
-  }
-  
-  function releaseFocus() {
-    if (mobileMenu) {
-      mobileMenu.removeEventListener('keydown', handleFocusTrap);
-    }
-  }
-  
-  function handleFocusTrap(e) {
-    if (e.key !== 'Tab') return;
-    
-    if (e.shiftKey) {
-      if (document.activeElement === firstFocusableElement) {
-        lastFocusableElement?.focus();
-        e.preventDefault();
-      }
-    } else {
-      if (document.activeElement === lastFocusableElement) {
-        firstFocusableElement?.focus();
-        e.preventDefault();
-      }
-    }
-  }
-  
-  // Theme Toggle with localStorage error handling
+  // Theme
   function toggleTheme() {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
-    
-    try {
-      localStorage.setItem('theme', currentTheme);
-    } catch (e) {
-      console.warn('localStorage not available');
-    }
-    
-    updateThemeUI();
+    localStorage.setItem('theme', currentTheme);
   }
   
-  function updateThemeUI() {
-    // Update aria-pressed for accessibility
-    if (themeToggle) {
-      themeToggle.setAttribute('aria-pressed', currentTheme === 'dark');
-    }
-  }
-  
-  // Mark Active Navigation
-  function markActiveNavItem() {
-    const currentPath = window.location.pathname;
+  // Active Nav
+  function markActiveNav() {
+    const path = window.location.pathname;
     document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link => {
-      if (link.getAttribute('href') === currentPath) {
+      if (link.getAttribute('href') === path) {
         link.classList.add('active');
-        link.setAttribute('aria-current', 'page');
       }
     });
   }
   
-  // Check for reduced motion preference
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.style.setProperty('--transition-fast', '0ms');
-    document.documentElement.style.setProperty('--transition-base', '0ms');
-    document.documentElement.style.setProperty('--transition-slow', '0ms');
-  }
-  
-  // Check for dark mode preference
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches && !localStorage.getItem('theme')) {
-    currentTheme = 'dark';
-  }
-  
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-  
-  // Export for external use
-  window.EnterpriseHeader = {
-    openMobileMenu,
-    closeMobileMenu,
-    toggleTheme,
-    getTheme: () => currentTheme
-  };
+  init();
 })();
 </script>
 
-<!-- Spacer for fixed header -->
+<!-- Spacer -->
 <div style="height: var(--header-height);"></div>
 <style>
   @media (max-width: 768px) {
