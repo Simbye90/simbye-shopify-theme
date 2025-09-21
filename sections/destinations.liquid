@@ -31,12 +31,16 @@
   --dest-tab-bg: #1a1a1a;
 }
 
-/* Main Section Container */
+/* Main Section Container - FULL WIDTH */
 .esim-destinations {
-  width: 100%;
-  padding: 80px 20px;
-  background: var(--dest-bg);
+  width: 100vw;
   position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 80px 0;
+  background: var(--dest-bg);
   transition: var(--dest-transition);
 }
 
@@ -44,30 +48,37 @@
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
+  padding: 0 20px;
 }
 
-/* Tab Navigation - EXACT LIKE SCREENSHOT */
+/* Tab Navigation - IMPROVED DESIGN */
 .dest-tabs {
   display: inline-flex;
   background: var(--dest-tab-bg);
   border-radius: 100px;
-  padding: 4px;
+  padding: 6px;
   margin: 0 auto 48px;
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.05);
+  gap: 3px;
 }
 
 [data-theme="dark"] .dest-tabs {
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .dest-tab-btn {
-  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 28px;
   background: transparent;
   color: var(--dest-text);
-  border: none;
+  border: 1px solid transparent;
   border-radius: 100px;
   font-size: 15px;
   font-weight: 600;
@@ -76,23 +87,26 @@
   white-space: nowrap;
   outline: none;
   position: relative;
-  min-width: 110px;
+  min-width: 100px;
   text-align: center;
+  opacity: 0.7;
 }
 
 .dest-tab-btn:hover:not(.active) {
-  color: var(--dest-primary);
+  opacity: 1;
+  background: rgba(0, 154, 97, 0.05);
 }
 
 .dest-tab-btn.active {
-  background: var(--dest-primary);
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.25);
+  background: var(--dest-primary) !important;
+  color: white !important;
+  opacity: 1;
+  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.3);
 }
 
 [data-theme="dark"] .dest-tab-btn.active {
-  background: var(--dest-primary);
-  box-shadow: 0 2px 8px rgba(0, 217, 126, 0.25);
+  background: var(--dest-primary) !important;
+  box-shadow: 0 2px 8px rgba(0, 217, 126, 0.3);
 }
 
 /* Section Heading */
@@ -118,26 +132,6 @@
   max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
-}
-
-@media (max-width: 1400px) {
-  .dest-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 1024px) {
-  .dest-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
-  }
-}
-
-@media (max-width: 640px) {
-  .dest-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
 }
 
 /* Country Card - BETTER LAYOUT */
@@ -693,7 +687,7 @@
               {% comment %} View All Button - Only show if NOT the All tab {% endcomment %}
               {% if block.settings.tab_title != 'All' %}
                 <div class="dest-view-all-wrapper">
-                  <button class="dest-view-all" type="button" onclick="document.querySelector('[data-tab-type=\"all\"]').click()">
+                  <button class="dest-view-all" type="button" id="view-all-btn-{{ block.id }}">
                     {{ 'destinations.view_all_countries' | t | default: 'VIEW ALL COUNTRIES' }}
                   </button>
                 </div>
@@ -720,6 +714,7 @@
   const tabButtons = document.querySelectorAll('.dest-tab-btn');
   const tabContents = document.querySelectorAll('.dest-tab-content');
   const heading = document.getElementById('dest-dynamic-heading');
+  const viewAllButtons = document.querySelectorAll('.dest-view-all');
   
   // State
   let currentTab = null;
@@ -731,6 +726,22 @@
     // Tab click handlers
     tabButtons.forEach(button => {
       button.addEventListener('click', handleTabClick);
+    });
+    
+    // View All buttons handler
+    viewAllButtons.forEach(button => {
+      button.addEventListener('click', function() {
+        // Find and click the "All" tab
+        const allTab = document.querySelector('[data-tab-type="all"]');
+        if (allTab) {
+          allTab.click();
+          // Smooth scroll to top of section
+          const section = document.getElementById('esim-destinations');
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
     });
     
     // Keyboard navigation
@@ -745,7 +756,7 @@
   function handleTabClick(e) {
     const button = e.currentTarget;
     const tabId = button.dataset.tab;
-    const title = button.dataset.title;
+    const tabType = button.dataset.tabType;
     
     // Don't do anything if same tab
     if (currentTab === tabId) return;
@@ -769,13 +780,12 @@
       activeContent.classList.add('active');
     }
     
-    // Update heading based on tab
-    const tabText = button.textContent.trim();
+    // Update heading based on tab type
     if (heading) {
       let newHeading = '';
       
       // Check if it's the "All" tab
-      if (tabText === '{{ 'destinations.tab_all' | t | default: 'All' }}' || tabText === 'All') {
+      if (tabType === 'all') {
         newHeading = '{{ 'destinations.heading_all' | t | default: 'All Countries' }}';
       } else {
         newHeading = '{{ 'destinations.heading_popular' | t | default: 'Popular Destinations' }}';
