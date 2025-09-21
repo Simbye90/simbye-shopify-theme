@@ -638,10 +638,10 @@
     gap: 16px;
     margin-bottom: 48px;
     width: 100%;
-    padding: 0 20px;
+    padding: 0 16px;  /* Weniger Padding für breitere Cards */
     box-sizing: border-box;
     display: grid;
-    place-items: center;
+    place-items: stretch;  /* Stretch statt center für volle Breite */
   }
   
   .dest-heading {
@@ -673,10 +673,10 @@
     max-width: 130px;
   }
 
-  /* ZENTRIERTE CARDS MIT GLEICHEN ABSTÄNDEN */
+  /* BREITERE CARDS - FAST VOLLE BILDSCHIRMBREITE */
   .dest-card {
     width: 100%;
-    max-width: 380px;
+    max-width: none;  /* Keine max-width Begrenzung */
     padding: 20px;
     min-height: 120px;
     border-radius: 20px;
@@ -738,14 +738,14 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 20px;
+    padding: 0 16px;  /* Gleicher Abstand wie Grid */
     width: 100%;
     box-sizing: border-box;
   }
 
   .dest-view-all {
     width: 100%;
-    max-width: 380px;
+    max-width: none;  /* Volle Breite */
     padding: 18px 40px;
     font-size: 15px;
   }
@@ -754,8 +754,8 @@
   #all-countries-section .dest-grid {
     display: grid;
     grid-template-columns: 1fr;
-    place-items: center;
-    padding: 0 20px;
+    place-items: stretch;
+    padding: 0 16px;
   }
 }
 
@@ -763,14 +763,14 @@
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 20px;
+    padding: 0 16px;
   }
 
   .dest-tabs {
     margin-bottom: 40px;
     display: flex;
     justify-content: center;
-    width: calc(100% - 32px);
+    width: calc(100% - 24px);
     padding: 10px;
   }
 
@@ -784,14 +784,14 @@
     white-space: nowrap;
   }
   
-  /* GLEICHE ABSTÄNDE LINKS/RECHTS */
+  /* BREITERE CARDS - NUR KLEINER ABSTAND */
   .dest-grid {
-    padding: 0 16px;
+    padding: 0 12px;  /* Weniger Padding */
   }
 
   .dest-card {
     width: 100%;
-    max-width: 360px;
+    max-width: none;  /* Keine Begrenzung */
     padding: 18px;
     min-height: 115px;
   }
@@ -833,18 +833,18 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 16px;
+    padding: 0 12px;
   }
 
   .dest-view-all {
-    max-width: 360px;
+    max-width: none;  /* Volle Breite */
   }
 }
 
 /* Very Small Screens */
 @media (max-width: 380px) {
   .dest-tabs {
-    width: calc(100% - 24px);
+    width: calc(100% - 20px);  /* Weniger Abstand */
   }
 
   .dest-tab-btn {
@@ -854,13 +854,14 @@
     min-width: 85px;
   }
 
+  /* MAXIMALE BREITE AUF KLEINEN SCREENS */
   .dest-grid {
-    padding: 0 12px;
+    padding: 0 10px;  /* Nur 10px Padding für maximale Breite */
   }
 
   .dest-card {
     width: 100%;
-    max-width: 340px;
+    max-width: none;  /* Volle Breite */
     padding: 16px;
   }
 
@@ -901,11 +902,11 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 12px;
+    padding: 0 10px;  /* Gleicher Abstand wie Grid */
   }
 
   .dest-view-all {
-    max-width: 340px;
+    max-width: none;  /* Volle Breite */
   }
 }
 
