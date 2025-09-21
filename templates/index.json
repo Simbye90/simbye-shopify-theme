@@ -24,24 +24,24 @@
         "product_3_price": ""
       }
     },
-    "destinations_WrrpBN": {
+    "destinations_jRWp7x": {
       "type": "destinations",
       "blocks": {
-        "tab_xVGxri": {
+        "tab_jQGEwq": {
           "type": "tab",
           "settings": {
             "tab_title": "Country",
-            "collection": "popular-travel-destinations"
+            "collection": "beliebtes-land"
           }
         },
-        "tab_BAQYrC": {
+        "tab_V3JzyY": {
           "type": "tab",
           "settings": {
             "tab_title": "Regional",
             "collection": "regional-plans"
           }
         },
-        "tab_W8XpfB": {
+        "tab_7BKfB9": {
           "type": "tab",
           "settings": {
             "tab_title": "Global",
@@ -50,20 +50,20 @@
         }
       },
       "block_order": [
-        "tab_xVGxri",
-        "tab_BAQYrC",
-        "tab_W8XpfB"
+        "tab_jQGEwq",
+        "tab_V3JzyY",
+        "tab_7BKfB9"
       ],
       "name": "eSIM Destinations",
       "settings": {
-        "all_countries_collection": "",
         "show_badges": true,
-        "products_limit": 20
+        "products_limit": 20,
+        "all_countries_collection": "local-esim"
       }
     }
   },
   "order": [
     "main",
-    "destinations_WrrpBN"
+    "destinations_jRWp7x"
   ]
 }
