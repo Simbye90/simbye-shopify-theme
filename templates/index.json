@@ -57,7 +57,7 @@
       "name": "eSIM Destinations",
       "settings": {
         "show_badges": true,
-        "products_limit": 20,
+        "products_limit": 40,
         "all_countries_collection": "local-esim"
       }
     }
