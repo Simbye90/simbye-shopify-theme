@@ -1,0 +1,1002 @@
+<!-- sections/esim-destinations.liquid -->
+<!-- ENTERPRISE ESIM DESTINATIONS WITH DARK MODE -->
+
+{% assign current_language = request.locale.iso_code %}
+
+<style>
+/* CSS Variables for Theme */
+:root {
+  --dest-bg: #ffffff;
+  --dest-card-bg: #ffffff;
+  --dest-text: #1a1a1a;
+  --dest-text-secondary: #666666;
+  --dest-border: #e5e5e5;
+  --dest-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --dest-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --dest-primary: #009a61;
+  --dest-primary-hover: #00824f;
+  --dest-tab-inactive: #f8f8f8;
+  --dest-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --dest-bg: #0f0f0f;
+  --dest-card-bg: #1a1a1a;
+  --dest-text: #f5f5f5;
+  --dest-text-secondary: #999999;
+  --dest-border: #2a2a2a;
+  --dest-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  --dest-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --dest-primary: #00d97e;
+  --dest-primary-hover: #009a61;
+  --dest-tab-inactive: #252525;
+}
+
+/* Main Section Container */
+.esim-destinations {
+  width: 100%;
+  padding: 80px 20px;
+  background: var(--dest-bg);
+  position: relative;
+  transition: var(--dest-transition);
+}
+
+.esim-destinations-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Tab Navigation - Modern Pills */
+.dest-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 48px;
+  position: relative;
+}
+
+.dest-tab-btn {
+  padding: 14px 36px;
+  background: var(--dest-tab-inactive);
+  color: var(--dest-text);
+  border: 2px solid transparent;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--dest-transition);
+  white-space: nowrap;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.dest-tab-btn:hover:not(.active) {
+  background: var(--dest-border);
+  transform: translateY(-1px);
+}
+
+.dest-tab-btn.active {
+  background: var(--dest-primary);
+  color: white;
+  border-color: var(--dest-primary);
+}
+
+.dest-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255,255,255,0.2) 0%, 
+    rgba(255,255,255,0) 100%);
+  pointer-events: none;
+}
+
+/* Section Heading */
+.dest-heading {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 56px 0;
+  color: var(--dest-text);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  transition: var(--dest-transition);
+  animation: fadeInUp 0.8s ease;
+}
+
+/* Countries Grid */
+.dest-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 56px;
+  animation: fadeInUp 0.9s ease 0.1s both;
+}
+
+/* Country Card - Modern Design */
+.dest-card {
+  background: var(--dest-card-bg);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: var(--dest-shadow);
+  transition: var(--dest-transition);
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--dest-border);
+  min-height: 100px;
+}
+
+.dest-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--dest-shadow-hover);
+  border-color: var(--dest-primary);
+}
+
+.dest-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 154, 97, 0.05), 
+    transparent);
+  transition: left 0.6s ease;
+}
+
+.dest-card:hover::before {
+  left: 100%;
+}
+
+/* Country Info Section */
+.dest-card-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Flag Container - Larger and Modern */
+.dest-flag {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  background: white;
+}
+
+[data-theme="dark"] .dest-flag {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dest-flag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Flag Emoji Fallback */
+.dest-flag-emoji {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+}
+
+[data-theme="dark"] .dest-flag-emoji {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+/* Country Name */
+.dest-country {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--dest-text);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+/* Price Section */
+.dest-price-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dest-price-wrapper {
+  text-align: right;
+}
+
+.dest-starting {
+  font-size: 12px;
+  color: var(--dest-text-secondary);
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 500;
+}
+
+.dest-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dest-text);
+  display: block;
+}
+
+/* Arrow Icon - Modern */
+.dest-arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--dest-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--dest-transition);
+  flex-shrink: 0;
+}
+
+.dest-card:hover .dest-arrow {
+  transform: translateX(3px);
+  background: var(--dest-primary-hover);
+}
+
+.dest-arrow svg {
+  width: 18px;
+  height: 18px;
+  color: white;
+  stroke-width: 2.5;
+}
+
+/* View All Button */
+.dest-view-all-wrapper {
+  text-align: center;
+  margin-top: 48px;
+  animation: fadeInUp 1s ease 0.2s both;
+}
+
+.dest-view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 48px;
+  background: var(--dest-primary);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--dest-transition);
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.dest-view-all:hover {
+  background: var(--dest-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
+}
+
+.dest-view-all::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.dest-view-all:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Tab Content */
+.dest-tab-content {
+  display: none;
+  opacity: 0;
+  animation: tabFadeIn 0.5s ease forwards;
+}
+
+.dest-tab-content.active {
+  display: block;
+}
+
+/* All Countries View */
+.dest-all-countries {
+  display: none;
+}
+
+.dest-all-countries.active {
+  display: block;
+  animation: fadeInUp 0.5s ease;
+}
+
+/* Badge for Popular/New */
+.dest-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--dest-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Loading State */
+.dest-loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--dest-text-secondary);
+}
+
+.dest-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--dest-border);
+  border-top-color: var(--dest-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 20px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes tabFadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .dest-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  
+  .dest-heading {
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .esim-destinations {
+    padding: 60px 16px;
+  }
+  
+  .dest-tabs {
+    gap: 6px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+  }
+  
+  .dest-tab-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+    flex: 1;
+    min-width: 100px;
+  }
+  
+  .dest-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .dest-card {
+    padding: 20px;
+  }
+  
+  .dest-flag {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .dest-country {
+    font-size: 18px;
+  }
+  
+  .dest-view-all {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dest-heading {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+  
+  .dest-tab-btn {
+    padding: 10px 20px;
+  }
+  
+  .dest-card {
+    padding: 16px;
+    min-height: 80px;
+  }
+  
+  .dest-flag {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .dest-country {
+    font-size: 16px;
+  }
+  
+  .dest-price {
+    font-size: 16px;
+  }
+  
+  .dest-arrow {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .dest-tabs,
+  .dest-view-all-wrapper {
+    display: none;
+  }
+  
+  .dest-tab-content {
+    display: block !important;
+    opacity: 1 !important;
+  }
+}
+</style>
+
+<!-- Translations -->
+{% capture text_country %}
+  {% case current_language %}
+    {% when 'de' %}Länder
+    {% when 'es' %}Países
+    {% when 'fr' %}Pays
+    {% when 'it' %}Paesi
+    {% when 'tr' %}Ülkeler
+    {% when 'nl' %}Landen
+    {% when 'pl' %}Kraje
+    {% else %}Country
+  {% endcase %}
+{% endcapture %}
+
+{% capture text_regional %}
+  {% case current_language %}
+    {% when 'de' %}Regional
+    {% when 'es' %}Regional
+    {% when 'fr' %}Régional
+    {% when 'it' %}Regionale
+    {% when 'tr' %}Bölgesel
+    {% when 'nl' %}Regionaal
+    {% when 'pl' %}Regionalny
+    {% else %}Regional
+  {% endcase %}
+{% endcapture %}
+
+{% capture text_global %}
+  {% case current_language %}
+    {% when 'de' %}Global
+    {% when 'es' %}Global
+    {% when 'fr' %}Global
+    {% when 'it' %}Globale
+    {% when 'tr' %}Küresel
+    {% when 'nl' %}Wereldwijd
+    {% when 'pl' %}Globalny
+    {% else %}Global
+  {% endcase %}
+{% endcapture %}
+
+{% capture text_popular_destinations %}
+  {% case current_language %}
+    {% when 'de' %}Beliebte Reiseziele
+    {% when 'es' %}Destinos Populares
+    {% when 'fr' %}Destinations Populaires
+    {% when 'it' %}Destinazioni Popolari
+    {% when 'tr' %}Popüler Destinasyonlar
+    {% when 'nl' %}Populaire Bestemmingen
+    {% when 'pl' %}Popularne Destynacje
+    {% else %}Popular Destinations
+  {% endcase %}
+{% endcapture %}
+
+{% capture text_starting_at %}
+  {% case current_language %}
+    {% when 'de' %}Ab
+    {% when 'es' %}Desde
+    {% when 'fr' %}À partir de
+    {% when 'it' %}A partire da
+    {% when 'tr' %}Başlangıç
+    {% when 'nl' %}Vanaf
+    {% when 'pl' %}Od
+    {% else %}Starting at
+  {% endcase %}
+{% endcapture %}
+
+{% capture text_view_all %}
+  {% case current_language %}
+    {% when 'de' %}Alle Länder anzeigen
+    {% when 'es' %}Ver todos los países
+    {% when 'fr' %}Voir tous les pays
+    {% when 'it' %}Vedi tutti i paesi
+    {% when 'tr' %}Tüm Ülkeleri Gör
+    {% when 'nl' %}Alle landen bekijken
+    {% when 'pl' %}Zobacz wszystkie kraje
+    {% else %}View All Countries
+  {% endcase %}
+{% endcapture %}
+
+<!-- Main Section -->
+<section class="esim-destinations" id="esim-destinations">
+  <div class="esim-destinations-container">
+    
+    <!-- Tab Navigation -->
+    <div class="dest-tabs" role="tablist" aria-label="Destination types">
+      {% for block in section.blocks %}
+        {% if block.type == 'tab' %}
+          <button 
+            class="dest-tab-btn {% if forloop.first %}active{% endif %}" 
+            role="tab"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="tab-{{ block.id }}"
+            data-tab="{{ block.id }}"
+            data-title="{{ collections[block.settings.collection].title | default: block.settings.tab_title }}"
+            type="button"
+          >
+            {{ block.settings.tab_title | default: text_country }}
+          </button>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    <!-- Dynamic Heading -->
+    <h2 class="dest-heading" id="dest-dynamic-heading">
+      {% for block in section.blocks %}
+        {% if block.type == 'tab' and forloop.first %}
+          {{ collections[block.settings.collection].title | default: text_popular_destinations }}
+        {% endif %}
+      {% endfor %}
+    </h2>
+    
+    <!-- Tab Contents -->
+    <div class="dest-tabs-content">
+      {% for block in section.blocks %}
+        {% if block.type == 'tab' %}
+          <div 
+            id="tab-{{ block.id }}" 
+            class="dest-tab-content {% if forloop.first %}active{% endif %}"
+            role="tabpanel"
+            aria-labelledby="tab-btn-{{ block.id }}"
+          >
+            {% assign collection = collections[block.settings.collection] %}
+            
+            <div class="dest-grid">
+              {% for product in collection.products limit: 20 %}
+                <a href="{{ product.url }}" class="dest-card">
+                  {% if forloop.index <= 3 %}
+                    <span class="dest-badge">Popular</span>
+                  {% endif %}
+                  
+                  <div class="dest-card-info">
+                    <div class="dest-flag">
+                      {% if product.featured_image %}
+                        <img 
+                          src="{{ product.featured_image | img_url: '112x112', crop: 'center' }}" 
+                          alt="{{ product.title }} flag"
+                          loading="lazy"
+                          width="56"
+                          height="56"
+                        >
+                      {% else %}
+                        <div class="dest-flag-emoji">🌍</div>
+                      {% endif %}
+                    </div>
+                    
+                    <h3 class="dest-country">
+                      {{ product.title | replace: 'eSIM', '' | strip }}
+                    </h3>
+                  </div>
+                  
+                  <div class="dest-price-section">
+                    <div class="dest-price-wrapper">
+                      <span class="dest-starting">{{ text_starting_at }}</span>
+                      <span class="dest-price">{{ product.price | money }}</span>
+                    </div>
+                    
+                    <div class="dest-arrow">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+              {% else %}
+                <!-- Empty state if no products -->
+                {% if forloop.first %}
+                  <div class="dest-loading" style="grid-column: 1/-1;">
+                    <div class="dest-loading-spinner"></div>
+                    <p>Loading destinations...</p>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    
+    <!-- View All Countries Button -->
+    <div class="dest-view-all-wrapper">
+      <button class="dest-view-all" type="button" id="dest-view-all-btn">
+        {{ text_view_all }}
+      </button>
+    </div>
+    
+    <!-- All Countries Section (Hidden by default) -->
+    <div class="dest-all-countries" id="dest-all-countries">
+      <div class="dest-grid">
+        {% if section.settings.all_countries_collection != blank %}
+          {% assign all_countries = collections[section.settings.all_countries_collection].products %}
+          {% for product in all_countries %}
+            <a href="{{ product.url }}" class="dest-card">
+              <div class="dest-card-info">
+                <div class="dest-flag">
+                  {% if product.featured_image %}
+                    <img 
+                      src="{{ product.featured_image | img_url: '112x112', crop: 'center' }}" 
+                      alt="{{ product.title }} flag"
+                      loading="lazy"
+                      width="56"
+                      height="56"
+                    >
+                  {% else %}
+                    <div class="dest-flag-emoji">🌍</div>
+                  {% endif %}
+                </div>
+                
+                <h3 class="dest-country">
+                  {{ product.title | replace: 'eSIM', '' | strip }}
+                </h3>
+              </div>
+              
+              <div class="dest-price-section">
+                <div class="dest-price-wrapper">
+                  <span class="dest-starting">{{ text_starting_at }}</span>
+                  <span class="dest-price">{{ product.price | money }}</span>
+                </div>
+                
+                <div class="dest-arrow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Cache DOM elements
+  const tabButtons = document.querySelectorAll('.dest-tab-btn');
+  const tabContents = document.querySelectorAll('.dest-tab-content');
+  const heading = document.getElementById('dest-dynamic-heading');
+  const viewAllBtn = document.getElementById('dest-view-all-btn');
+  const allCountries = document.getElementById('dest-all-countries');
+  const tabsContent = document.querySelector('.dest-tabs-content');
+  
+  // State
+  let isAllCountriesView = false;
+  let previousHeading = '';
+  
+  // Initialize
+  function init() {
+    if (!tabButtons.length) return;
+    
+    // Tab click handlers
+    tabButtons.forEach(button => {
+      button.addEventListener('click', handleTabClick);
+    });
+    
+    // View all button
+    if (viewAllBtn) {
+      viewAllBtn.addEventListener('click', handleViewAll);
+    }
+    
+    // Keyboard navigation
+    tabButtons.forEach((button, index) => {
+      button.addEventListener('keydown', (e) => {
+        handleKeyboardNav(e, index);
+      });
+    });
+    
+    // Set initial state
+    updateHeading(tabButtons[0].dataset.title);
+  }
+  
+  // Handle tab click
+  function handleTabClick(e) {
+    const button = e.currentTarget;
+    const tabId = button.dataset.tab;
+    const title = button.dataset.title;
+    
+    // Update active states
+    tabButtons.forEach(btn => {
+      btn.classList.remove('active');
+      btn.setAttribute('aria-selected', 'false');
+    });
+    
+    tabContents.forEach(content => {
+      content.classList.remove('active');
+    });
+    
+    // Set new active
+    button.classList.add('active');
+    button.setAttribute('aria-selected', 'true');
+    
+    const activeContent = document.getElementById(`tab-${tabId}`);
+    if (activeContent) {
+      activeContent.classList.add('active');
+    }
+    
+    // Update heading
+    updateHeading(title);
+    
+    // Reset all countries view if active
+    if (isAllCountriesView) {
+      resetAllCountriesView();
+    }
+  }
+  
+  // Handle view all button
+  function handleViewAll() {
+    if (!isAllCountriesView) {
+      // Show all countries
+      previousHeading = heading.textContent;
+      tabsContent.style.display = 'none';
+      allCountries.classList.add('active');
+      
+      updateHeading('{{ "All Countries" | t | default: "All Countries" }}');
+      
+      viewAllBtn.textContent = '{{ "Back to Popular" | t | default: "Back to Popular Destinations" }}';
+      isAllCountriesView = true;
+      
+      // Smooth scroll to section
+      const section = document.getElementById('esim-destinations');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } else {
+      resetAllCountriesView();
+    }
+  }
+  
+  // Reset to tab view
+  function resetAllCountriesView() {
+    tabsContent.style.display = '';
+    allCountries.classList.remove('active');
+    
+    if (previousHeading) {
+      updateHeading(previousHeading);
+    }
+    
+    viewAllBtn.textContent = '{{ text_view_all | strip }}';
+    isAllCountriesView = false;
+  }
+  
+  // Update heading with animation
+  function updateHeading(text) {
+    if (!heading || !text) return;
+    
+    heading.style.opacity = '0';
+    heading.style.transform = 'translateY(-10px)';
+    
+    setTimeout(() => {
+      heading.textContent = text;
+      heading.style.opacity = '1';
+      heading.style.transform = 'translateY(0)';
+    }, 200);
+  }
+  
+  // Keyboard navigation
+  function handleKeyboardNav(e, currentIndex) {
+    let newIndex = currentIndex;
+    
+    switch(e.key) {
+      case 'ArrowLeft':
+        e.preventDefault();
+        newIndex = currentIndex > 0 ? currentIndex - 1 : tabButtons.length - 1;
+        break;
+      case 'ArrowRight':
+        e.preventDefault();
+        newIndex = currentIndex < tabButtons.length - 1 ? currentIndex + 1 : 0;
+        break;
+      case 'Home':
+        e.preventDefault();
+        newIndex = 0;
+        break;
+      case 'End':
+        e.preventDefault();
+        newIndex = tabButtons.length - 1;
+        break;
+      default:
+        return;
+    }
+    
+    tabButtons[newIndex].focus();
+    tabButtons[newIndex].click();
+  }
+  
+  // Performance: Lazy load images on scroll
+  if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            observer.unobserve(img);
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px'
+    });
+    
+    // Observe all flag images
+    document.querySelectorAll('.dest-flag img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+  }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "eSIM Destinations",
+  "class": "esim-destinations-section",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "all_countries_collection",
+      "label": "All Countries Collection",
+      "info": "Collection containing all available countries"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badges",
+      "label": "Show Popular Badges",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Products per tab",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Tab",
+      "type": "tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_title",
+          "label": "Tab Title",
+          "default": "Country"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection",
+          "info": "Products from this collection will be shown"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "eSIM Destinations",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Country"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Regional"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "tab_title": "Global"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
