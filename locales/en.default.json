@@ -89,5 +89,14 @@
     "no_results": "No results found",
     "searching": "Searching...",
     "image_alt": "Simbye eSIM World Map"
+  },
+  "destinations": {
+    "title": "Popular Destinations",
+    "starting_at": "Starting at",
+    "view_all": "View All Countries",
+    "back_to_popular": "Back to Popular",
+    "all_countries": "All Countries",
+    "no_products": "No products found",
+    "tab_navigation": "Destination categories"
   }
 }
