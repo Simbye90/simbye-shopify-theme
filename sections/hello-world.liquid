@@ -1,15 +1,11 @@
 <!-- sections/hero-simbye.liquid -->
-<!-- SIMBYE HERO - ENTERPRISE SEARCH V2 -->
+<!-- SIMBYE HERO - ENTERPRISE SEARCH V2 - FIXED -->
 
 <style>
-/* FULL WIDTH SECTION */
+/* FULL WIDTH SECTION - GEFIXED OHNE OVERFLOW */
 .hero-enterprise {
-  width: 100vw;
+  width: 100%;  /* 100% STATT 100vw - KEIN OVERFLOW! */
   position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
   padding: 0;
   background: linear-gradient(180deg, 
     #ffffff 0%,
@@ -18,7 +14,7 @@
     #e8f7f3 60%,
     #daf2eb 100%
   );
-
+  overflow-x: hidden; /* Sicherheit gegen Overflow */
 }
 
 /* Container - GLEICH WIE HEADER */
@@ -27,6 +23,7 @@
   margin: 0 auto;
   padding: 40px 20px 60px 20px;
   width: 100%;
+  box-sizing: border-box; /* Padding inkludiert */
 }
 
 /* MOBILE FIRST - Padding Anpassung nur für Mobile */
@@ -76,7 +73,7 @@
   margin: 0 0 25px 0;
   position: relative;
   animation: fadeInUp 0.7s ease 0.1s both;
-  z-index: 1000; /* Höher für Dropdown */
+  z-index: 1000;
 }
 
 /* Desktop Search - im Content */
@@ -95,7 +92,7 @@
   position: relative;
   max-width: 100%;
   margin: 0 auto;
-  z-index: 1000; /* Für Dropdown */
+  z-index: 1000;
 }
 
 .hero-search {
@@ -158,7 +155,6 @@
 
 /* Search Button */
 .search-btn {
- 
   height: 100%;
   background: #009a61;
   color: white;
@@ -171,6 +167,7 @@
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
   min-width: 80px;
+  padding: 0 20px;
 }
 
 .search-btn:hover {
@@ -182,7 +179,7 @@
   background: #007745;
 }
 
-/* Dropdown Suggestions - ECHTE PRODUKTSUCHE */
+/* Dropdown Suggestions */
 .search-suggestions {
   position: absolute;
   top: calc(100% + 8px);
@@ -191,7 +188,7 @@
   background: white;
   border-radius: 16px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  z-index: 9999; /* HÖHER für über allem */
+  z-index: 9999;
   overflow: hidden;
   opacity: 0;
   visibility: hidden;
@@ -231,7 +228,7 @@
   text-decoration: none;
   color: #1a1a1a;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  min-height: 48px; /* Touch-friendly */
+  min-height: 48px;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -354,7 +351,8 @@
 .hero-visual-wrapper {
   width: 100%;
   position: relative;
-  margin: 30px 0 0 0; /* Bottom margin removed */
+  margin: 30px 0 0 0;
+  overflow-x: hidden; /* Kein Overflow */
 }
 
 /* Stats - Desktop im Content, Mobile nach Bild */
@@ -362,7 +360,7 @@
   display: none; /* Mobile: versteckt im content */
 }
 
-/* Mobile Only Stats - NACH DEM BILD */
+/* Mobile Only Stats */
 .mobile-only-stats {
   display: flex;
   justify-content: center;
@@ -395,25 +393,28 @@
   line-height: 1.1;
 }
 
-/* Image Mobile */
+/* Image Mobile - GEFIXED OHNE OVERFLOW */
 .hero-visual {
-  width: calc(100% + 40px);
-  margin: 0 -20px;
+  width: 100%;  /* NUR 100%, NICHT calc(100% + 40px) */
+  margin: 0;     /* KEINE negativen margins */
   position: relative;
+  padding: 0 20px; /* Padding statt negative margins */
+  box-sizing: border-box;
 }
 
 .hero-image {
   width: 100%;
   height: auto;
   display: block;
+  max-width: 100%; /* Sicherheit */
 }
 
 /* Mobile Product Badges */
 .mobile-products {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 20px;  /* Angepasst für padding */
+  right: 20px; /* Angepasst für padding */
   bottom: 0;
   display: block;
   margin: 0;
@@ -525,7 +526,7 @@
   
   /* Stats auf Tablet - im Content zeigen */
   .hero-stats {
-    display: flex !important; /* Zeigen */
+    display: flex !important;
     gap: 35px;
     margin: 0 0 36px 0;
     animation: fadeInUp 0.8s ease 0.2s both;
@@ -552,6 +553,7 @@
     width: 100%;
     margin: 0 auto;
     max-width: 600px;
+    padding: 0; /* Kein padding auf größeren Screens */
   }
   
   .mobile-products {
@@ -564,6 +566,8 @@
     flex-wrap: wrap;
     padding: 0 20px;
     z-index: 2;
+    left: 0;
+    right: 0;
   }
   
   .mobile-product-badge {
@@ -708,6 +712,7 @@
     align-items: center;
     gap: 10px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    pointer-events: auto;
   }
   
   .product-label:hover {
@@ -842,6 +847,23 @@
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   display: inline-block;
+}
+
+/* OVERFLOW PREVENTION - Extra Sicherheit */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  
+  .hero-enterprise {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-container {
+    overflow-x: hidden !important;
+    max-width: 100% !important;
+  }
 }
 </style>
 
@@ -1091,7 +1113,7 @@
         </div>
       </div>
       
-      <!-- MOBILE SEARCH - NUR MOBILE SICHTBAR, DIREKT VOR STATS -->
+      <!-- MOBILE SEARCH - NUR MOBILE SICHTBAR -->
       <div class="hero-search-wrapper mobile-only-search">
         <div class="hero-search-container">
           <div class="hero-search">
