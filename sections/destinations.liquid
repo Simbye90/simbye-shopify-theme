@@ -182,6 +182,8 @@
   border: 2px solid var(--dest-border);
   min-height: 120px;
   gap: 16px;
+  /* Allow height to grow with content */
+  height: auto;
 }
 
 [data-theme="dark"] .dest-card {
@@ -268,17 +270,17 @@
   line-height: 1;
 }
 
-/* Country Name - BETTER TRUNCATION */
+/* Country Name - NICHT ABKÜRZEN */
 .dest-country {
   font-size: 24px;
   font-weight: 600;
   color: var(--dest-text);
   margin: 0;
   letter-spacing: -0.01em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 200px; /* Prevent too long names */
+  /* Kein text-overflow mehr - volle Länge anzeigen */
+  white-space: normal;
+  word-wrap: break-word;
+  flex: 1;
 }
 
 /* Price Section - BETTER ALIGNMENT */
@@ -350,11 +352,11 @@
   display: block;
 }
 
-/* Badge for Popular - BETTER POSITION */
+/* Badge for Popular - HÖHER POSITIONIERT */
 .dest-badge {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 10px;  /* Höher positioniert (war 16px) */
+  right: 14px;
   background: var(--dest-primary);
   color: white;
   padding: 6px 14px;
@@ -666,8 +668,8 @@
   }
 
   .dest-badge {
-    top: 12px;
-    right: 12px;
+    top: 8px;  /* Noch höher auf Mobile */
+    right: 10px;
     padding: 4px 10px;
     font-size: 10px;
   }
@@ -921,12 +923,23 @@
     
     <!-- Hidden Section für alle Länder -->
     <div id="all-countries-section" style="display: none;">
+      {% if section.settings.all_countries_collection %}
+        {% assign all_collection_handle = section.settings.all_countries_collection %}
+        {% assign all_countries = collections[all_collection_handle] %}
+        {% if all_countries %}
+          <p style="text-align: center; margin-bottom: 24px; color: var(--dest-text-secondary); font-size: 14px;">
+            {{ 'destinations.showing_countries' | t | default: 'Showing' }} {{ all_countries.products_count }} {{ 'destinations.countries' | t | default: 'countries' }}
+          </p>
+        {% endif %}
+      {% endif %}
       <div class="dest-grid" id="all-countries-grid">
         {% comment %} Server-side rendering if collection is available {% endcomment %}
         {% if section.settings.all_countries_collection %}
-          {% assign all_countries = collections[section.settings.all_countries_collection] %}
+          {% assign all_collection_handle = section.settings.all_countries_collection %}
+          {% assign all_countries = collections[all_collection_handle] %}
           {% if all_countries and all_countries.products.size > 0 %}
-            {% for product in all_countries.products limit: 250 %}
+            {% comment %} KEIN LIMIT - zeige ALLE Produkte {% endcomment %}
+            {% for product in all_countries.products %}
               <a href="{{ product.url }}" class="dest-card">
                 <div class="dest-card-info">
                   <div class="dest-flag">
@@ -1136,6 +1149,7 @@
     const existingCards = allCountriesGrid.querySelectorAll('.dest-card');
     if (existingCards.length > 0) {
       // Products already rendered by Liquid
+      console.log(`Loaded ${existingCards.length} countries from server`);
       allCountriesLoaded = true;
       return;
     }
@@ -1147,15 +1161,27 @@
       // Show loading state
       allCountriesGrid.innerHTML = '<div class="dest-loading"><div class="dest-loading-spinner"></div><p>Loading all countries...</p></div>';
       
-      // Fetch via AJAX as fallback
-      fetch(`/collections/${collectionHandle}/products.json?limit=250`)
+      // Fetch via AJAX as fallback - OHNE LIMIT für alle Produkte
+      fetch(`/collections/${collectionHandle}.json`)
         .then(response => response.json())
         .then(data => {
-          if (data.products && data.products.length > 0) {
-            renderAllCountries(data.products);
+          if (data.collection && data.collection.products && data.collection.products.length > 0) {
+            console.log(`Loading ${data.collection.products.length} countries via AJAX`);
+            renderAllCountries(data.collection.products);
             allCountriesLoaded = true;
           } else {
-            allCountriesGrid.innerHTML = '<div class="dest-empty"><p>No countries found.</p></div>';
+            // Try alternative endpoint with higher limit
+            return fetch(`/collections/${collectionHandle}/products.json?limit=999`);
+          }
+        })
+        .then(response => {
+          if (response) return response.json();
+        })
+        .then(data => {
+          if (data && data.products && data.products.length > 0) {
+            console.log(`Loading ${data.products.length} countries via AJAX (alternative)`);
+            renderAllCountries(data.products);
+            allCountriesLoaded = true;
           }
         })
         .catch(error => {
@@ -1217,7 +1243,7 @@
     });
   }
   
-  // Render all countries in grid
+  // Render all countries in grid (AJAX fallback)
   function renderAllCountries(products) {
     let html = '';
     
@@ -1256,17 +1282,7 @@
     });
     
     allCountriesGrid.innerHTML = html;
-    
-    // Animate cards in
-    const cards = allCountriesGrid.querySelectorAll('.dest-card');
-    cards.forEach((card, index) => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(20px)';
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }, Math.min(index * 20, 1000));
-    });
+    animateCards();
   }
   
   // Update heading with animation
