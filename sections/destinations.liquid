@@ -663,36 +663,36 @@
     max-width: 130px; /* Max Breite für Balance */
   }
 
-  /* WIDER MOBILE CARDS - NEUES LAYOUT */
+  /* WIDER MOBILE CARDS - GRÖSSERE SCHRIFT */
   .dest-card {
     width: 100%;
-    padding: 18px;
-    min-height: 110px;
+    padding: 20px;
+    min-height: 120px;
     border-radius: 20px;
-    gap: 12px;
-  }
-
-  .dest-card-info {
     gap: 14px;
   }
 
+  .dest-card-info {
+    gap: 16px;
+  }
+
   .dest-flag {
-    width: 44px;
-    height: 44px;
+    width: 52px;
+    height: 52px;
   }
 
   .dest-flag-emoji {
-    font-size: 24px;
+    font-size: 30px;
   }
 
   .dest-country {
-    font-size: 18px;
+    font-size: 22px; /* GRÖSSER - wie gewünscht */
     font-weight: 600;
   }
 
   .dest-price-section {
-    margin-top: 16px;
-    padding-top: 12px;
+    margin-top: 18px;
+    padding-top: 14px;
   }
 
   .dest-price-wrapper {
@@ -700,22 +700,22 @@
   }
 
   .dest-starting {
-    font-size: 11px;
-    margin-right: 4px;
+    font-size: 13px;
+    margin-right: 5px;
   }
 
   .dest-price {
-    font-size: 17px;
+    font-size: 20px; /* Auch größer */
   }
 
   .dest-arrow {
-    width: 36px;
-    height: 36px;
+    width: 42px;
+    height: 42px;
   }
 
   .dest-arrow svg {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
 
   .dest-badge {
@@ -735,45 +735,95 @@
 
 @media (max-width: 480px) {
   .dest-heading {
-    font-size: 32px;
-    margin-bottom: 36px;
+    font-size: 36px; /* Auch etwas größer */
+    margin-bottom: 40px;
     padding: 0 16px;
   }
 
   .dest-tabs {
-    margin-bottom: 36px;
+    margin-bottom: 40px;
     display: flex;
     justify-content: center;
     width: calc(100% - 32px);
-    padding: 4px;
+    padding: 5px;
   }
 
   .dest-tab-btn {
-    height: 46px;
-    padding: 0 20px;
-    font-size: 14px;
-    min-width: 0; /* Remove min-width */
-    flex: 1; /* Equal width */
+    height: 48px;
+    padding: 0 22px;
+    font-size: 15px; /* Etwas größer */
+    min-width: 0;
+    flex: 1;
     max-width: 120px;
     white-space: nowrap;
   }
   
   .dest-card {
-    padding: 16px;
-    min-height: 100px;
+    padding: 18px;
+    min-height: 115px;
   }
   
   .dest-flag {
-    width: 40px;
-    height: 40px;
+    width: 48px; /* Größer */
+    height: 48px;
   }
 
   .dest-flag-emoji {
-    font-size: 22px;
+    font-size: 28px;
   }
   
   .dest-country {
-    font-size: 17px;
+    font-size: 20px; /* GRÖSSER wie gewünscht */
+  }
+
+  .dest-price-section {
+    margin-top: 16px;
+    padding-top: 12px;
+  }
+
+  .dest-starting {
+    font-size: 12px; /* Größer */
+  }
+  
+  .dest-price {
+    font-size: 19px; /* Größer */
+  }
+
+  .dest-arrow {
+    width: 38px; /* Größer */
+    height: 38px;
+  }
+
+  .dest-arrow svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 380px) {
+  .dest-tab-btn {
+    height: 46px;
+    padding: 0 18px;
+    font-size: 14px;
+    min-width: 85px;
+  }
+
+  .dest-card {
+    padding: 16px;
+  }
+
+  .dest-flag {
+    width: 44px; /* Größer */
+    height: 44px;
+  }
+
+  .dest-flag-emoji {
+    font-size: 26px;
+  }
+
+  .dest-country {
+    font-size: 19px; /* GRÖSSER */
   }
 
   .dest-price-section {
@@ -782,67 +832,21 @@
   }
 
   .dest-starting {
-    font-size: 10px;
+    font-size: 11px;
   }
-  
+
   .dest-price {
-    font-size: 16px;
+    font-size: 18px; /* Größer */
   }
 
   .dest-arrow {
-    width: 34px;
-    height: 34px;
-  }
-
-  .dest-arrow svg {
-    width: 16px;
-    height: 16px;
-  }
-}
-
-/* Very Small Screens */
-@media (max-width: 380px) {
-  .dest-tab-btn {
-    height: 44px;
-    padding: 0 16px;
-    font-size: 13px;
-    min-width: 90px;
-  }
-
-  .dest-card {
-    padding: 14px;
-  }
-
-  .dest-flag {
     width: 36px;
     height: 36px;
   }
 
-  .dest-flag-emoji {
-    font-size: 20px;
-  }
-
-  .dest-country {
-    font-size: 16px;
-  }
-
-  .dest-price-section {
-    margin-top: 12px;
-    padding-top: 8px;
-  }
-
-  .dest-price {
-    font-size: 15px;
-  }
-
-  .dest-arrow {
-    width: 32px;
-    height: 32px;
-  }
-
   .dest-arrow svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 }
 
