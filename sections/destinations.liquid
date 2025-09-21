@@ -486,6 +486,17 @@
   transform: translateY(0);
 }
 
+/* Mobile specific for all countries */
+@media (max-width: 640px) {
+  #all-countries-section {
+    margin-top: 30px;
+  }
+  
+  #all-countries-section .dest-grid {
+    padding: 0;
+  }
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
@@ -553,12 +564,12 @@
   }
 
   .esim-destinations-container {
-    padding: 0 16px;
+    padding: 0 12px; /* Minimales Padding für maximale Breite */
   }
   
   .dest-tabs {
-    width: calc(100% - 32px);
-    max-width: 400px;
+    width: calc(100% - 24px); /* Fast volle Breite */
+    max-width: none; /* Kein Maximum */
     padding: 6px;
     gap: 4px;
     margin-bottom: 48px;
@@ -571,17 +582,19 @@
     min-width: 120px;
   }
   
+  /* Cards in voller Breite */
+  .dest-grid {
+    gap: 14px;
+  }
+  
   .dest-card {
     padding: 20px;
+    flex-direction: row; /* Horizontal auf Tablets */
   }
   
   .dest-flag {
-    width: 44px;
-    height: 44px;
-  }
-
-  .dest-flag-emoji {
-    font-size: 26px;
+    width: 48px;
+    height: 48px;
   }
   
   .dest-country {
@@ -589,22 +602,14 @@
   }
 
   .dest-price-section {
-    margin-top: 16px;
-    padding-top: 12px;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    margin-left: auto;
   }
   
   .dest-price {
     font-size: 18px;
-  }
-
-  .dest-arrow {
-    width: 38px;
-    height: 38px;
-  }
-
-  .dest-arrow svg {
-    width: 18px;
-    height: 18px;
   }
 }
 
@@ -721,11 +726,12 @@
   .dest-heading {
     font-size: 32px;
     margin-bottom: 36px;
-    padding: 0 16px;
+    padding: 0 12px;
   }
 
   .dest-tabs {
     margin-bottom: 36px;
+    width: calc(100% - 20px); /* Noch breiter */
   }
 
   .dest-tab-btn {
@@ -735,9 +741,11 @@
     min-width: 100px;
   }
   
+  /* HORIZONTAL LAYOUT BLEIBT */
   .dest-card {
-    padding: 16px;
-    min-height: 100px;
+    padding: 16px 14px;
+    min-height: 90px;
+    flex-direction: row; /* Horizontal */
   }
   
   .dest-flag {
@@ -750,20 +758,23 @@
   }
   
   .dest-country {
-    font-size: 17px;
+    font-size: 16px;
   }
 
   .dest-price-section {
-    margin-top: 14px;
-    padding-top: 10px;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
   }
 
   .dest-starting {
     font-size: 10px;
+    display: block;
   }
   
   .dest-price {
     font-size: 16px;
+    display: block;
   }
 
   .dest-arrow {
@@ -779,6 +790,14 @@
 
 /* Very Small Screens */
 @media (max-width: 380px) {
+  .esim-destinations-container {
+    padding: 0 8px; /* Minimales Padding */
+  }
+
+  .dest-tabs {
+    width: calc(100% - 16px); /* Maximale Breite */
+  }
+
   .dest-tab-btn {
     height: 44px;
     padding: 0 16px;
@@ -787,7 +806,8 @@
   }
 
   .dest-card {
-    padding: 14px;
+    padding: 14px 12px;
+    flex-direction: row; /* Horizontal bleibt */
   }
 
   .dest-flag {
@@ -800,12 +820,7 @@
   }
 
   .dest-country {
-    font-size: 16px;
-  }
-
-  .dest-price-section {
-    margin-top: 12px;
-    padding-top: 8px;
+    font-size: 15px;
   }
 
   .dest-price {
@@ -815,11 +830,6 @@
   .dest-arrow {
     width: 32px;
     height: 32px;
-  }
-
-  .dest-arrow svg {
-    width: 16px;
-    height: 16px;
   }
 }
 
