@@ -1,5 +1,5 @@
 <!-- sections/hero-simbye.liquid -->
-<!-- SIMBYE HERO - STATS POSITION FIXED -->
+<!-- SIMBYE HERO - MIT ENTERPRISE SUCHBALKEN -->
 
 <style>
 /* FULL WIDTH SECTION */
@@ -25,14 +25,14 @@
 .hero-container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 40px 20px 60px 20px; /* Standard padding */
+  padding: 40px 20px 60px 20px;
   width: 100%;
 }
 
 /* MOBILE FIRST - Padding Anpassung nur für Mobile */
 @media (max-width: 767px) {
   .hero-container {
-    padding: 40px 20px 0px 20px; /* Bottom padding auf 0 nur mobile */
+    padding: 40px 20px 0px 20px;
   }
 }
 
@@ -71,9 +71,216 @@
   display: none;
 }
 
-/* Button - NUR DESKTOP */
-.hero-cta {
-  display: none;
+/* ====== ENTERPRISE SUCHBALKEN ====== */
+.hero-search-wrapper {
+  margin: 0 0 30px 0;
+  position: relative;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.hero-search-container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.hero-search {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 60px;
+  box-shadow: 0 8px 32px rgba(0, 154, 97, 0.15);
+  overflow: hidden;
+  height: 56px;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.hero-search:focus-within {
+  box-shadow: 0 12px 48px rgba(0, 154, 97, 0.25);
+  border-color: #009a61;
+}
+
+/* Location Icon */
+.search-location-icon {
+  width: 24px;
+  height: 24px;
+  margin: 0 16px;
+  color: #009a61;
+  flex-shrink: 0;
+}
+
+/* Input Field */
+.hero-search input {
+  flex: 1;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  background: transparent;
+  color: #1a1a1a;
+  font-family: inherit;
+}
+
+.hero-search input::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+/* Search Button */
+.search-btn {
+  padding: 0 28px;
+  height: 100%;
+  background: #009a61;
+  color: white;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.search-btn:hover {
+  background: #00824f;
+}
+
+.search-btn:active {
+  transform: scale(0.98);
+}
+
+/* Dropdown Suggestions */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.search-suggestions.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.suggestions-header {
+  padding: 16px 20px 8px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #666;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 14px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: #1a1a1a;
+}
+
+.suggestion-item:hover {
+  background: #f8fffe;
+  padding-left: 24px;
+}
+
+.suggestion-flag {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  border-radius: 4px;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-text {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.suggestion-badge {
+  background: #e8f7f3;
+  color: #009a61;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* DARK MODE - Suchbalken */
+[data-theme="dark"] .hero-search {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .hero-search:focus-within {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #00d97e;
+  box-shadow: 0 12px 48px rgba(0, 217, 126, 0.2);
+}
+
+[data-theme="dark"] .hero-search input {
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .hero-search input::placeholder {
+  color: #888;
+}
+
+[data-theme="dark"] .search-location-icon {
+  color: #00d97e;
+}
+
+[data-theme="dark"] .search-btn {
+  background: #00d97e;
+  color: #0a0a0a;
+}
+
+[data-theme="dark"] .search-btn:hover {
+  background: #009a61;
+  color: white;
+}
+
+[data-theme="dark"] .search-suggestions {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .suggestions-header {
+  color: #999;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .suggestion-item {
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .suggestion-item:hover {
+  background: rgba(0, 217, 126, 0.1);
+}
+
+[data-theme="dark"] .suggestion-badge {
+  background: rgba(0, 217, 126, 0.15);
+  color: #00d97e;
 }
 
 /* Visual Mobile mit Stats Container */
@@ -188,7 +395,7 @@
 /* TABLET (768px+) */
 @media (min-width: 768px) {
   .hero-container {
-    padding: 50px 30px 70px 30px; /* Original padding */
+    padding: 50px 30px 70px 30px;
   }
   
   .hero-title {
@@ -208,34 +415,32 @@
     animation: fadeInUp 0.7s ease 0.1s both;
   }
   
-  /* Button zeigen auf Tablet */
-  .hero-cta {
-    display: flex;
-    justify-content: center;
+  /* Suchbalken auf Tablet */
+  .hero-search-wrapper {
     margin-bottom: 36px;
-    animation: fadeInUp 0.8s ease 0.2s both;
   }
   
-  .btn-hero-main {
-    padding: 18px 44px;
+  .hero-search-container {
+    max-width: 500px;
+  }
+  
+  .hero-search {
+    height: 60px;
+  }
+  
+  .search-location-icon {
+    margin: 0 20px;
+  }
+  
+  .hero-search input {
     font-size: 17px;
-    font-weight: 700;
-    color: white;
-    background: var(--primary-color, #009a61);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 4px 16px rgba(0, 154, 97, 0.2);
-    transition: all 0.3s ease;
   }
   
-  .btn-hero-main:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 154, 97, 0.3);
-    background: #00824f;
+  .search-btn {
+    padding: 0 36px;
+    font-size: 17px;
   }
   
-  /* Visual wrapper nicht mehr nötig auf Tablet */
   .hero-visual-wrapper {
     margin: 0;
   }
@@ -259,7 +464,6 @@
     max-width: 600px;
   }
   
-  /* Mobile badges normal unter der Weltkugel */
   .mobile-products {
     position: relative;
     display: flex;
@@ -284,14 +488,14 @@
 /* DESKTOP (1024px+) */
 @media (min-width: 1024px) {
   .hero-container {
-    padding: 60px 40px 80px 40px; /* Original padding */
+    padding: 60px 40px 80px 40px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 60px;
     align-items: center;
   }
   
-  /* Content GENAU LINKS WIE LOGO */
+  /* Content LINKS */
   .hero-content {
     text-align: left;
   }
@@ -312,13 +516,22 @@
     margin-bottom: 36px;
   }
   
-  .hero-cta {
-    justify-content: flex-start;
+  /* Suchbalken Desktop */
+  .hero-search-wrapper {
     margin-bottom: 48px;
   }
   
-  .btn-hero-main {
-    padding: 20px 52px;
+  .hero-search-container {
+    max-width: 520px;
+    margin: 0;
+  }
+  
+  .hero-search {
+    height: 64px;
+  }
+  
+  .search-btn {
+    padding: 0 40px;
     font-size: 18px;
   }
   
@@ -357,10 +570,9 @@
   }
   
   .hero-image {
-    max-width: 1000px; /* Von 850px auf 1000px erhöht */
+    max-width: 1000px;
     width: 100%;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
-    /* Keine Animation mehr */
   }
   
   .product-labels {
@@ -384,7 +596,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    /* Keine Animation mehr */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
@@ -395,20 +606,18 @@
   
   .product-label-1 {
     top: 25%;
-    left: 48%; /* Afrika - mehr in der Mitte */
+    left: 48%;
     transform: translateX(-50%);
   }
   
   .product-label-2 {
     top: 35%;
-    right: 70%; /* USA - weiter links */
-    /* Keine animation-delay mehr */
+    right: 70%;
   }
   
   .product-label-3 {
     bottom: 35%;
-    right: 15%; /* Japan - weiter rechts */
-    /* Keine animation-delay mehr */
+    right: 15%;
   }
   
   .label-price {
@@ -460,26 +669,23 @@
   color: #b0b0b0;
 }
 
-/* Dark Mode - STATS LABELS WEISS */
 [data-theme="dark"] .stat-label {
-  color: #e0e0e0; /* Hellgrau/Weiß statt grau */
+  color: #e0e0e0;
 }
 
-/* Dark Mode - STATS NUMBERS bleiben grün */
 [data-theme="dark"] .stat-number {
-  color: #00d97e; /* Etwas helleres Grün im Dark Mode */
+  color: #00d97e;
 }
 
-/* Dark Mode - ALLE Badges und Labels mit WEISSEM HINTERGRUND */
 [data-theme="dark"] .mobile-product-badge,
 [data-theme="dark"] .product-label {
-  background: rgba(255, 255, 255, 0.95); /* Weißer Hintergrund */
-  color: #1a1a1a; /* Schwarzer Text */
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
 }
 
 [data-theme="dark"] .mobile-product-badge .price,
 [data-theme="dark"] .product-label .label-price {
-  color: var(--primary-color, #009a61); /* Preis bleibt grün */
+  color: var(--primary-color, #009a61);
 }
 
 /* Animations */
@@ -494,16 +700,40 @@
   }
 }
 
-@keyframes floatLabel {
-  0%, 100% { 
-    transform: translateY(0) rotate(0deg);
+/* Mobile/Desktop Stats Control */
+@media (max-width: 767px) {
+  .hero-content .hero-stats {
+    display: none !important;
   }
-  25% {
-    transform: translateY(-8px) rotate(1deg);
+  
+  .mobile-only-stats {
+    display: flex !important;
   }
-  75% {
-    transform: translateY(5px) rotate(-1deg);
+}
+
+@media (min-width: 768px) {
+  .hero-content .hero-stats {
+    display: flex !important;
   }
+  
+  .mobile-only-stats {
+    display: none !important;
+  }
+}
+
+/* Scrollbar für Dropdown */
+.search-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-suggestions::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.search-suggestions::-webkit-scrollbar-thumb {
+  background: #009a61;
+  border-radius: 3px;
+  opacity: 0.5;
 }
 </style>
 
@@ -526,15 +756,69 @@
         {{ 'hero.subtitle' | t | default: 'Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert' }}
       </p>
       
-      <!-- CTA Button - NUR Tablet/Desktop -->
-      <div class="hero-cta">
-        <button 
-          class="btn-hero-main" 
-          onclick="window.location.href='{{ section.settings.cta_link | default: collections.all.url }}'"
-          type="button"
-        >
-          {{ 'hero.cta_primary' | t | default: 'Kostenlos testen' }}
-        </button>
+      <!-- ENTERPRISE SUCHBALKEN -->
+      <div class="hero-search-wrapper">
+        <div class="hero-search-container">
+          <div class="hero-search">
+            <!-- Location Icon -->
+            <svg class="search-location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="3"/>
+            </svg>
+            
+            <!-- Input Field -->
+            <input 
+              type="text" 
+              id="destination-search"
+              placeholder="{{ 'hero.search_placeholder' | t | default: 'Wohin reist du? Türkei, USA, Japan...' }}"
+              autocomplete="off"
+              aria-label="{{ 'hero.search_aria_label' | t | default: 'Reiseziel suchen' }}"
+            >
+            
+            <!-- Search Button -->
+            <button type="button" class="search-btn" aria-label="{{ 'hero.search_button' | t | default: 'Suchen' }}">
+              {{ 'hero.search_button' | t | default: 'Suchen' }}
+            </button>
+          </div>
+          
+          <!-- Dropdown Suggestions -->
+          <div class="search-suggestions" id="search-suggestions">
+            <div class="suggestions-header">
+              {{ 'hero.popular_destinations' | t | default: 'Beliebte Reiseziele' }}
+            </div>
+            <a href="/products/esim-turkey" class="suggestion-item">
+              <img src="https://flagcdn.com/48x36/tr.png" alt="Türkei" class="suggestion-flag">
+              <span class="suggestion-text">{{ 'countries.turkey' | t | default: 'Türkei' }}</span>
+              <span class="suggestion-badge">{{ 'hero.bestseller' | t | default: 'Bestseller' }}</span>
+            </a>
+            <a href="/products/esim-usa" class="suggestion-item">
+              <img src="https://flagcdn.com/48x36/us.png" alt="USA" class="suggestion-flag">
+              <span class="suggestion-text">{{ 'countries.usa' | t | default: 'USA' }}</span>
+            </a>
+            <a href="/products/esim-japan" class="suggestion-item">
+              <img src="https://flagcdn.com/48x36/jp.png" alt="Japan" class="suggestion-flag">
+              <span class="suggestion-text">{{ 'countries.japan' | t | default: 'Japan' }}</span>
+            </a>
+            <a href="/products/esim-egypt" class="suggestion-item">
+              <img src="https://flagcdn.com/48x36/eg.png" alt="Ägypten" class="suggestion-flag">
+              <span class="suggestion-text">{{ 'countries.egypt' | t | default: 'Ägypten' }}</span>
+            </a>
+            <a href="/products/esim-thailand" class="suggestion-item">
+              <img src="https://flagcdn.com/48x36/th.png" alt="Thailand" class="suggestion-flag">
+              <span class="suggestion-text">{{ 'countries.thailand' | t | default: 'Thailand' }}</span>
+            </a>
+            <a href="/collections/all" class="suggestion-item" style="background: #f8f8f8;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#009a61" stroke-width="2" style="margin-right: 12px;">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M2 12h20"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span class="suggestion-text" style="color: #009a61; font-weight: 600;">
+                {{ 'hero.show_all_countries' | t | default: 'Alle 190+ Länder anzeigen' }}
+              </span>
+            </a>
+          </div>
+        </div>
       </div>
       
       <!-- STATS NUR AUF DESKTOP/TABLET HIER -->
@@ -569,7 +853,7 @@
           fetchpriority="high"
         >
         
-        <!-- Mobile Product Badges - Auf der Weltkugel -->
+        <!-- Mobile Product Badges -->
         <div class="mobile-products">
           {% comment %} Produkte laden {% endcomment %}
           {% if section.settings.product_1 %}
@@ -755,28 +1039,162 @@
   </div>
 </section>
 
-<style>
-/* Mobile/Desktop Stats Control */
-@media (max-width: 767px) {
-  .hero-content .hero-stats {
-    display: none !important; /* Stats nicht im content auf Mobile */
+<script>
+(function() {
+  'use strict';
+  
+  // Elements
+  const searchInput = document.getElementById('destination-search');
+  const searchButton = document.querySelector('.search-btn');
+  const suggestions = document.getElementById('search-suggestions');
+  
+  // Popular countries für Autocomplete
+  const popularCountries = [
+    { name: 'Türkei', code: 'turkey', flag: '🇹🇷', url: '/products/esim-turkey' },
+    { name: 'USA', code: 'usa', flag: '🇺🇸', url: '/products/esim-usa' },
+    { name: 'Japan', code: 'japan', flag: '🇯🇵', url: '/products/esim-japan' },
+    { name: 'Ägypten', code: 'egypt', flag: '🇪🇬', url: '/products/esim-egypt' },
+    { name: 'Thailand', code: 'thailand', flag: '🇹🇭', url: '/products/esim-thailand' },
+    { name: 'Spanien', code: 'spain', flag: '🇪🇸', url: '/products/esim-spain' },
+    { name: 'Italien', code: 'italy', flag: '🇮🇹', url: '/products/esim-italy' },
+    { name: 'Frankreich', code: 'france', flag: '🇫🇷', url: '/products/esim-france' },
+    { name: 'Griechenland', code: 'greece', flag: '🇬🇷', url: '/products/esim-greece' },
+    { name: 'Dubai', code: 'uae', flag: '🇦🇪', url: '/products/esim-uae' }
+  ];
+  
+  let isOpen = false;
+  let selectedIndex = -1;
+  
+  // Show suggestions on focus
+  searchInput.addEventListener('focus', function() {
+    if (!isOpen) {
+      showSuggestions();
+    }
+  });
+  
+  // Filter suggestions on input
+  searchInput.addEventListener('input', function() {
+    const value = this.value.toLowerCase().trim();
+    
+    if (value.length > 0) {
+      // Filter countries based on input
+      const filtered = popularCountries.filter(country => 
+        country.name.toLowerCase().includes(value) ||
+        country.code.includes(value)
+      );
+      
+      if (filtered.length > 0) {
+        showFilteredSuggestions(filtered);
+      }
+    } else {
+      showSuggestions();
+    }
+  });
+  
+  // Handle search button click
+  searchButton.addEventListener('click', function() {
+    const value = searchInput.value.trim();
+    if (value) {
+      // Check if it matches a country
+      const country = popularCountries.find(c => 
+        c.name.toLowerCase() === value.toLowerCase()
+      );
+      
+      if (country) {
+        window.location.href = country.url;
+      } else {
+        // General search
+        window.location.href = `/search?q=${encodeURIComponent(value)}`;
+      }
+    }
+  });
+  
+  // Handle Enter key
+  searchInput.addEventListener('keydown', function(e) {
+    const items = suggestions.querySelectorAll('.suggestion-item');
+    
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (selectedIndex >= 0 && items[selectedIndex]) {
+        items[selectedIndex].click();
+      } else {
+        searchButton.click();
+      }
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+      updateSelection(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex = Math.max(selectedIndex - 1, -1);
+      updateSelection(items);
+    } else if (e.key === 'Escape') {
+      hideSuggestions();
+      searchInput.blur();
+    }
+  });
+  
+  // Close on click outside
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+      hideSuggestions();
+    }
+  });
+  
+  // Functions
+  function showSuggestions() {
+    suggestions.classList.add('active');
+    isOpen = true;
+    selectedIndex = -1;
   }
   
-  .mobile-only-stats {
-    display: flex !important; /* Stats unter der Weltkugel auf Mobile */
-  }
-}
-
-@media (min-width: 768px) {
-  .hero-content .hero-stats {
-    display: flex !important; /* Stats im content auf Tablet/Desktop */
+  function hideSuggestions() {
+    suggestions.classList.remove('active');
+    isOpen = false;
+    selectedIndex = -1;
   }
   
-  .mobile-only-stats {
-    display: none !important; /* Mobile Stats verstecken */
+  function showFilteredSuggestions(filtered) {
+    // Build filtered HTML
+    let html = '<div class="suggestions-header">Suchergebnisse</div>';
+    
+    filtered.forEach(country => {
+      html += `
+        <a href="${country.url}" class="suggestion-item">
+          <span style="font-size: 20px; margin-right: 12px;">${country.flag}</span>
+          <span class="suggestion-text">${country.name}</span>
+        </a>
+      `;
+    });
+    
+    // Add "show all" link
+    html += `
+      <a href="/collections/all" class="suggestion-item" style="background: #f8f8f8;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#009a61" stroke-width="2" style="margin-right: 12px;">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M2 12h20"/>
+        </svg>
+        <span class="suggestion-text" style="color: #009a61; font-weight: 600;">
+          Alle Länder anzeigen
+        </span>
+      </a>
+    `;
+    
+    suggestions.innerHTML = html;
+    showSuggestions();
   }
-}
-</style>
+  
+  function updateSelection(items) {
+    items.forEach((item, index) => {
+      if (index === selectedIndex) {
+        item.style.background = '#f8fffe';
+      } else {
+        item.style.background = '';
+      }
+    });
+  }
+})();
+</script>
 
 {% schema %}
 {
@@ -791,16 +1209,6 @@
       "id": "hero_image",
       "label": "Hero Bild",
       "info": "Empfohlen: 1300x1000px"
-    },
-    {
-      "type": "header",
-      "content": "Button"
-    },
-    {
-      "type": "url",
-      "id": "cta_link",
-      "label": "Button Link",
-      "default": "/collections/all"
     },
     {
       "type": "header",
