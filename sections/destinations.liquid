@@ -1,5 +1,5 @@
 <!-- sections/destinations.liquid -->
-<!-- ENTERPRISE ESIM DESTINATIONS V4 - FULLY OPTIMIZED -->
+<!-- ENTERPRISE ESIM DESTINATIONS V4 - MOBILE CENTERED -->
 
 <style>
 /* CSS Variables for Theme */
@@ -67,7 +67,7 @@
   padding: 0 20px;
 }
 
-/* Tab Navigation - BIGGER TABS WITH 18PX FONT */
+/* Tab Navigation */
 .dest-tabs {
   display: inline-flex;
   background: var(--dest-tab-bg);
@@ -95,7 +95,7 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4), 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* BIGGER TAB BUTTONS WITH 18PX FONT */
+/* Tab Buttons */
 .dest-tab-btn {
   display: flex;
   align-items: center;
@@ -106,7 +106,7 @@
   color: var(--dest-text);
   border: 2px solid transparent;
   border-radius: 100px;
-  font-size: 18px; /* 18px as requested */
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: var(--dest-transition);
@@ -161,7 +161,7 @@
   animation: fadeInUp 0.8s ease;
 }
 
-/* Countries Grid - BIGGER CARDS */
+/* Countries Grid */
 .dest-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -173,7 +173,7 @@
   margin-right: auto;
 }
 
-/* Country Card - NEUES LAYOUT WIE IM SCREENSHOT */
+/* Country Card */
 .dest-card {
   background: var(--dest-card-bg);
   border-radius: 24px;
@@ -183,7 +183,7 @@
   cursor: pointer;
   text-decoration: none;
   display: flex;
-  flex-direction: column; /* Vertikal statt horizontal */
+  flex-direction: column;
   position: relative;
   overflow: hidden;
   border: 2px solid var(--dest-border);
@@ -233,15 +233,15 @@
   left: 100%;
 }
 
-/* Country Info Section - OBEN */
+/* Country Info Section */
 .dest-card-info {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: auto; /* Push price section down */
+  margin-bottom: auto;
 }
 
-/* Flag Container - KLEINER UND LINKS */
+/* Flag Container */
 .dest-flag {
   width: 48px;
   height: 48px;
@@ -274,9 +274,9 @@
   line-height: 1;
 }
 
-/* Country Name - GRÖSSER AUF DESKTOP */
+/* Country Name */
 .dest-country {
-  font-size: 22px; /* Erhöht von 20px */
+  font-size: 22px;
   font-weight: 600;
   color: var(--dest-text);
   margin: 0;
@@ -286,11 +286,11 @@
   flex: 1;
 }
 
-/* Price Section - UNTEN */
+/* Price Section */
 .dest-price-section {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Price left, arrow right */
+  justify-content: space-between;
   margin-top: 20px;
   padding-top: 16px;
   border-top: 1px solid var(--dest-border);
@@ -301,15 +301,15 @@
 }
 
 .dest-price-wrapper {
-  text-align: left; /* Links ausrichten */
+  text-align: left;
 }
 
 .dest-starting {
   font-size: 12px;
   color: var(--dest-text-secondary);
-  display: inline; /* Inline statt inline-block */
+  display: inline;
   margin-right: 4px;
-  font-weight: 400; /* Weniger bold */
+  font-weight: 400;
   opacity: 0.7;
 }
 
@@ -317,12 +317,12 @@
   font-size: 20px;
   font-weight: 700;
   color: var(--dest-text);
-  display: inline; /* Inline statt inline-block */
+  display: inline;
   letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
-/* Arrow Icon - ANGEPASST */
+/* Arrow Icon */
 .dest-arrow {
   width: 40px;
   height: 40px;
@@ -358,10 +358,10 @@
   display: block;
 }
 
-/* Badge for Popular - HÖHER POSITIONIERT */
+/* Badge for Popular */
 .dest-badge {
   position: absolute;
-  top: 10px;  /* Höher positioniert (war 16px) */
+  top: 10px;
   right: 14px;
   background: var(--dest-primary);
   color: white;
@@ -375,7 +375,7 @@
   box-shadow: 0 2px 8px rgba(0, 154, 97, 0.3);
 }
 
-/* View All Button - BIGGER & SHOWS ALL ON SAME PAGE */
+/* View All Button */
 .dest-view-all-wrapper {
   text-align: center;
   margin-top: 60px;
@@ -616,42 +616,52 @@
   }
 }
 
-/* OPTIMIZED MOBILE - WIDER CARDS */
+/* ========================================= */
+/* MOBILE CENTERED VERSION - WICHTIGSTE ÄNDERUNGEN */
+/* ========================================= */
 @media (max-width: 640px) {
   .esim-destinations {
     padding: 60px 0;
   }
 
   .esim-destinations-container {
-    padding: 0 12px;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
+  /* Grid zentriert mit gleichem Abstand links/rechts */
   .dest-grid {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 48px;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
   }
   
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
+    padding: 0 20px;
   }
 
   .dest-tabs {
-    width: calc(100% - 24px);
-    max-width: none;
+    width: calc(100% - 40px);
+    max-width: 400px;
     flex-direction: row;
-    justify-content: center; /* Zentrieren */
+    justify-content: center;
     align-items: center;
     overflow-x: auto;
     padding: 5px;
     gap: 3px;
     border-radius: 60px;
-    /* Remove any extra margins */
     margin-left: auto;
     margin-right: auto;
-    left: auto;
-    transform: none;
   }
 
   .dest-tab-btn {
@@ -659,17 +669,19 @@
     padding: 0 24px;
     font-size: 15px;
     min-width: 110px;
-    flex: 1; /* Gleichmäßige Breite */
-    max-width: 130px; /* Max Breite für Balance */
+    flex: 1;
+    max-width: 130px;
   }
 
-  /* WIDER MOBILE CARDS - GRÖSSERE SCHRIFT */
+  /* ZENTRIERTE CARDS MIT GLEICHEN ABSTÄNDEN */
   .dest-card {
     width: 100%;
+    max-width: 380px;
     padding: 20px;
     min-height: 120px;
     border-radius: 20px;
     gap: 14px;
+    margin: 0;
   }
 
   .dest-card-info {
@@ -686,7 +698,7 @@
   }
 
   .dest-country {
-    font-size: 22px; /* GRÖSSER - wie gewünscht */
+    font-size: 22px;
     font-weight: 600;
   }
 
@@ -705,7 +717,7 @@
   }
 
   .dest-price {
-    font-size: 20px; /* Auch größer */
+    font-size: 20px;
   }
 
   .dest-arrow {
@@ -719,25 +731,39 @@
   }
 
   .dest-badge {
-    top: 8px;  /* Noch höher auf Mobile */
+    top: 8px;
     right: 10px;
     padding: 4px 10px;
     font-size: 10px;
   }
 
+  .dest-view-all-wrapper {
+    padding: 0 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   .dest-view-all {
-    width: calc(100% - 24px);
-    max-width: 400px;
+    width: 100%;
+    max-width: 380px;
     padding: 18px 40px;
     font-size: 15px;
+  }
+
+  /* All Countries Section auch zentriert */
+  #all-countries-section .dest-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    place-items: center;
+    padding: 0 20px;
   }
 }
 
 @media (max-width: 480px) {
   .dest-heading {
-    font-size: 36px; /* Auch etwas größer */
+    font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 16px;
+    padding: 0 20px;
   }
 
   .dest-tabs {
@@ -751,20 +777,27 @@
   .dest-tab-btn {
     height: 48px;
     padding: 0 22px;
-    font-size: 15px; /* Etwas größer */
+    font-size: 15px;
     min-width: 0;
     flex: 1;
     max-width: 120px;
     white-space: nowrap;
   }
   
+  /* GLEICHE ABSTÄNDE LINKS/RECHTS */
+  .dest-grid {
+    padding: 0 16px;
+  }
+
   .dest-card {
+    width: 100%;
+    max-width: 360px;
     padding: 18px;
     min-height: 115px;
   }
   
   .dest-flag {
-    width: 48px; /* Größer */
+    width: 48px;
     height: 48px;
   }
 
@@ -773,7 +806,7 @@
   }
   
   .dest-country {
-    font-size: 20px; /* GRÖSSER wie gewünscht */
+    font-size: 20px;
   }
 
   .dest-price-section {
@@ -782,15 +815,15 @@
   }
 
   .dest-starting {
-    font-size: 12px; /* Größer */
+    font-size: 12px;
   }
   
   .dest-price {
-    font-size: 19px; /* Größer */
+    font-size: 19px;
   }
 
   .dest-arrow {
-    width: 38px; /* Größer */
+    width: 38px;
     height: 38px;
   }
 
@@ -798,10 +831,22 @@
     width: 20px;
     height: 20px;
   }
+
+  .dest-view-all-wrapper {
+    padding: 0 16px;
+  }
+
+  .dest-view-all {
+    max-width: 360px;
+  }
 }
 
 /* Very Small Screens */
 @media (max-width: 380px) {
+  .dest-tabs {
+    width: calc(100% - 24px);
+  }
+
   .dest-tab-btn {
     height: 46px;
     padding: 0 18px;
@@ -809,12 +854,18 @@
     min-width: 85px;
   }
 
+  .dest-grid {
+    padding: 0 12px;
+  }
+
   .dest-card {
+    width: 100%;
+    max-width: 340px;
     padding: 16px;
   }
 
   .dest-flag {
-    width: 44px; /* Größer */
+    width: 44px;
     height: 44px;
   }
 
@@ -823,7 +874,7 @@
   }
 
   .dest-country {
-    font-size: 19px; /* GRÖSSER */
+    font-size: 19px;
   }
 
   .dest-price-section {
@@ -836,7 +887,7 @@
   }
 
   .dest-price {
-    font-size: 18px; /* Größer */
+    font-size: 18px;
   }
 
   .dest-arrow {
@@ -847,6 +898,14 @@
   .dest-arrow svg {
     width: 18px;
     height: 18px;
+  }
+
+  .dest-view-all-wrapper {
+    padding: 0 12px;
+  }
+
+  .dest-view-all {
+    max-width: 340px;
   }
 }
 
@@ -892,7 +951,7 @@
 <section class="esim-destinations" id="esim-destinations">
   <div class="esim-destinations-container">
     
-    <!-- Tab Navigation - NUR 3 TABS -->
+    <!-- Tab Navigation -->
     <div class="dest-tabs" role="tablist" aria-label="{{ 'destinations.tab_label' | t | default: 'Destination types' }}">
       {% for block in section.blocks %}
         {% if block.type == 'tab' %}
@@ -1005,7 +1064,7 @@
       {% endfor %}
     </div>
     
-    <!-- View All Countries Button - ZEIGT ALLE AUF GLEICHER SEITE -->
+    <!-- View All Countries Button -->
     {% if section.blocks.size > 0 %}
       <div class="dest-view-all-wrapper">
         <button 
@@ -1033,12 +1092,10 @@
         {% endif %}
       {% endif %}
       <div class="dest-grid" id="all-countries-grid">
-        {% comment %} Server-side rendering if collection is available {% endcomment %}
         {% if section.settings.all_countries_collection %}
           {% assign all_collection_handle = section.settings.all_countries_collection %}
           {% assign all_countries = collections[all_collection_handle] %}
           {% if all_countries and all_countries.products.size > 0 %}
-            {% comment %} KEIN LIMIT - zeige ALLE Produkte {% endcomment %}
             {% for product in all_countries.products %}
               <a href="{{ product.url }}" class="dest-card">
                 <div class="dest-card-info">
@@ -1129,7 +1186,7 @@
   function handleTabClick(e) {
     const button = e.currentTarget;
     const tabId = button.dataset.tab;
-    const tabType = button.dataset.tabType; // Get tab type from data attribute
+    const tabType = button.dataset.tabType;
     
     // Hide all countries section if visible
     if (allCountriesVisible) {
@@ -1162,7 +1219,6 @@
     if (heading && tabType) {
       let newHeading = '';
       
-      // Change heading based on tab type
       switch(tabType) {
         case 'country':
           newHeading = '{{ 'destinations.heading_country' | t | default: 'Popular Countries' }}';
@@ -1210,7 +1266,6 @@
       setTimeout(() => {
         allCountriesSection.style.opacity = '1';
         allCountriesSection.style.transform = 'translateY(0)';
-        // Animate cards if already loaded
         if (allCountriesLoaded) {
           animateCards();
         }
@@ -1219,11 +1274,11 @@
       // Update heading
       updateHeading('{{ 'destinations.heading_all' | t | default: 'All Countries' }}');
       
-      // Change button text to "Show Less"
+      // Change button text
       showAllBtn.querySelector('span').textContent = '{{ 'destinations.show_less' | t | default: 'SHOW LESS' }}';
       showAllBtn.classList.add('showing-all');
       
-      // Smooth scroll to section
+      // Smooth scroll
       document.getElementById('esim-destinations').scrollIntoView({ 
         behavior: 'smooth', 
         block: 'start' 
@@ -1235,26 +1290,22 @@
     }
   }
   
-  // Hide all countries and show tabs again
+  // Hide all countries
   function hideAllCountries() {
-    // Hide all countries
     allCountriesSection.style.opacity = '0';
     
     setTimeout(() => {
       allCountriesSection.style.display = 'none';
       
-      // Show tabs content again
       tabContents.forEach(content => {
         content.style.display = '';
       });
       
-      // Activate first tab
       if (tabButtons[0]) {
         tabButtons[0].click();
       }
     }, 300);
     
-    // Reset button
     showAllBtn.querySelector('span').textContent = '{{ 'destinations.view_all_countries' | t | default: 'VIEW ALL 150+ COUNTRIES' }}';
     showAllBtn.classList.remove('showing-all');
     
@@ -1263,23 +1314,18 @@
   
   // Load all countries from collection
   function loadAllCountries() {
-    // Check if products are already rendered server-side
     const existingCards = allCountriesGrid.querySelectorAll('.dest-card');
     if (existingCards.length > 0) {
-      // Products already rendered by Liquid
       console.log(`Loaded ${existingCards.length} countries from server`);
       allCountriesLoaded = true;
       return;
     }
     
-    // Get collection from SECTION settings
     {% if section.settings.all_countries_collection %}
       const collectionHandle = '{{ section.settings.all_countries_collection }}';
       
-      // Show loading state
       allCountriesGrid.innerHTML = '<div class="dest-loading"><div class="dest-loading-spinner"></div><p>Loading all countries...</p></div>';
       
-      // Fetch via AJAX as fallback - OHNE LIMIT für alle Produkte
       fetch(`/collections/${collectionHandle}.json`)
         .then(response => response.json())
         .then(data => {
@@ -1288,7 +1334,6 @@
             renderAllCountries(data.collection.products);
             allCountriesLoaded = true;
           } else {
-            // Try alternative endpoint with higher limit
             return fetch(`/collections/${collectionHandle}/products.json?limit=999`);
           }
         })
@@ -1312,43 +1357,7 @@
     {% endif %}
   }
   
-  // Render products from Liquid data
-  function renderAllCountriesFromLiquid(products) {
-    let html = '';
-    
-    products.forEach(product => {
-      const title = product.title.replace('eSIM', '').replace('Esim', '').trim();
-      
-      html += `
-        <a href="${product.url}" class="dest-card">
-          <div class="dest-card-info">
-            <div class="dest-flag">
-              ${product.featured_image 
-                ? `<img src="${product.featured_image}" alt="${product.title} eSIM" loading="lazy" width="72" height="72">` 
-                : '<div class="dest-flag-emoji">🌍</div>'}
-            </div>
-            <h3 class="dest-country">${title}</h3>
-          </div>
-          <div class="dest-price-section">
-            <div class="dest-price-wrapper">
-              <span class="dest-starting">{{ 'destinations.starting_at' | t | default: 'Starting at' }}</span>
-              <span class="dest-price">${product.price}</span>
-            </div>
-            <div class="dest-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
-          </div>
-        </a>
-      `;
-    });
-    
-    allCountriesGrid.innerHTML = html;
-    animateCards();
-  }
-  
-  // Animate cards function
+  // Animate cards
   function animateCards() {
     const cards = allCountriesGrid.querySelectorAll('.dest-card');
     cards.forEach((card, index) => {
@@ -1361,7 +1370,7 @@
     });
   }
   
-  // Render all countries in grid (AJAX fallback)
+  // Render all countries in grid
   function renderAllCountries(products) {
     let html = '';
     
@@ -1563,53 +1572,3 @@
   ]
 }
 {% endschema %}
-
-<!-- LOCALE KEYS NEEDED -->
-{% comment %}
-Add these to your locales/[language].json files:
-
-{
-  "destinations": {
-    "tab_label": "Destination types",
-    "tab_country": "Country",
-    "tab_regional": "Regional",
-    "tab_global": "Global",
-    "heading_popular": "Popular Destinations",
-    "heading_country": "Popular Countries",
-    "heading_regional": "Regional Packages",
-    "heading_global": "Global Plans",
-    "heading_all": "All Countries",
-    "starting_at": "starting at",
-    "badge_popular": "Popular",
-    "flag_alt": "flag",
-    "no_products": "No destinations available in this category.",
-    "view_all_countries": "VIEW ALL 150+ COUNTRIES",
-    "show_less": "SHOW LESS",
-    "showing_countries": "Showing",
-    "countries": "countries"
-  }
-}
-
-For German (de.json):
-{
-  "destinations": {
-    "tab_label": "Reisezieltypen",
-    "tab_country": "Länder",
-    "tab_regional": "Regional",
-    "tab_global": "Global",
-    "heading_popular": "Beliebte Reiseziele",
-    "heading_country": "Beliebte Länder",
-    "heading_regional": "Regionale Pakete",
-    "heading_global": "Globale Tarife",
-    "heading_all": "Alle Länder",
-    "starting_at": "Ab",
-    "badge_popular": "Beliebt",
-    "flag_alt": "Flagge",
-    "no_products": "Keine Ziele in dieser Kategorie verfügbar.",
-    "view_all_countries": "ALLE 150+ LÄNDER ANZEIGEN",
-    "show_less": "WENIGER ANZEIGEN",
-    "showing_countries": "Zeige",
-    "countries": "Länder"
-  }
-}
-{% endcomment %}
