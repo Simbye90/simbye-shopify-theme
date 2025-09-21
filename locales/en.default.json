@@ -83,6 +83,11 @@
     "stat_activation": "Installation",
     "stat_customers": "Happy Customers",
     "stat_rating": "2,847 Reviews",
+    "search_placeholder": "Where are you traveling?",
+    "search_aria_label": "Search destination",
+    "search_button": "Search",
+    "no_results": "No results found",
+    "searching": "Searching...",
     "image_alt": "Simbye eSIM World Map"
   }
 }
