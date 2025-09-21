@@ -19,7 +19,7 @@
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  --dest-bg: #0f0f0f;
+  --dest-bg: transparent; /* Transparent für nahtlosen Übergang */
   --dest-card-bg: #1a1a1a;
   --dest-text: #f5f5f5;
   --dest-text-secondary: #999999;
@@ -28,7 +28,7 @@
   --dest-shadow-hover: 0 6px 20px rgba(0, 0, 0, 0.5);
   --dest-primary: #00d97e;
   --dest-primary-hover: #009a61;
-  --dest-tab-bg: #1a1a1a;
+  --dest-tab-bg: rgba(255, 255, 255, 0.05);
 }
 
 /* Main Section Container - FULL WIDTH */
@@ -42,6 +42,22 @@
   padding: 80px 0;
   background: var(--dest-bg);
   transition: var(--dest-transition);
+}
+
+/* Light Mode - Normal Background */
+[data-theme="light"] .esim-destinations {
+  background: #ffffff;
+}
+
+/* Dark Mode - Gradient wie Hero fortsetzung */
+[data-theme="dark"] .esim-destinations {
+  background: linear-gradient(180deg,
+    #051008 0%,      /* Wo Hero aufhört */
+    #0a1510 20%,     /* Sanfter Übergang */
+    #0f1210 40%,     /* Mitteldunkel */
+    #0a0a0a 70%,     /* Dunkler */
+    #0a0a0a 100%     /* Endfarbe */
+  );
 }
 
 .esim-destinations-container {
@@ -66,8 +82,9 @@
 }
 
 [data-theme="dark"] .dest-tabs {
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .dest-tab-btn {
@@ -92,9 +109,18 @@
   opacity: 0.7;
 }
 
+[data-theme="dark"] .dest-tab-btn {
+  color: #b0b0b0;
+}
+
 .dest-tab-btn:hover:not(.active) {
   opacity: 1;
   background: rgba(0, 154, 97, 0.05);
+}
+
+[data-theme="dark"] .dest-tab-btn:hover:not(.active) {
+  background: rgba(0, 217, 126, 0.08);
+  color: #e0e0e0;
 }
 
 .dest-tab-btn.active {
@@ -105,7 +131,8 @@
 }
 
 [data-theme="dark"] .dest-tab-btn.active {
-  background: var(--dest-primary) !important;
+  background: #00d97e !important;
+  color: #0a0a0a !important;
   box-shadow: 0 2px 8px rgba(0, 217, 126, 0.3);
 }
 
@@ -150,6 +177,23 @@
   border: 1px solid var(--dest-border);
   min-height: 100px;
   gap: 16px;
+}
+
+[data-theme="dark"] .dest-card {
+  background: rgba(26, 26, 26, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.dest-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--dest-shadow-hover);
+  border-color: var(--dest-primary);
+}
+
+[data-theme="dark"] .dest-card:hover {
+  border-color: #00d97e;
+  background: rgba(26, 26, 26, 0.8);
 }
 
 .dest-card:hover {
