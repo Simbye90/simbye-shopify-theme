@@ -91,14 +91,22 @@
     "image_alt": "Simbye eSIM World Map"
   },
   "destinations": {
+    "tab_label": "Destination types",
     "tab_country": "Country",
-    "tab_regional": "Regional", 
+    "tab_regional": "Regional",
     "tab_global": "Global",
-    "tab_all": "All",
     "heading_popular": "Popular Destinations",
+    "heading_country": "Popular Countries",
+    "heading_regional": "Regional Packages",
+    "heading_global": "Global Plans",
     "heading_all": "All Countries",
-    "starting_at": "Starting at",
+    "starting_at": "Ab",
     "badge_popular": "Popular",
-    "no_products": "No destinations available."
+    "flag_alt": "flag",
+    "no_products": "No destinations available in this category.",
+    "view_all_countries": "VIEW ALL 150+ COUNTRIES",
+    "show_less": "SHOW LESS",
+    "showing_countries": "Showing",
+    "countries": "countries"
   }
 }
