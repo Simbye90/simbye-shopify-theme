@@ -81,6 +81,14 @@
   gap: 6px;
 }
 
+@media (max-width: 640px) {
+  .dest-tabs {
+    left: 0;
+    transform: none;
+    display: flex;
+  }
+}
+
 [data-theme="dark"] .dest-tabs {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -266,9 +274,9 @@
   line-height: 1;
 }
 
-/* Country Name - NEBEN FLAGGE */
+/* Country Name - GRÖSSER AUF DESKTOP */
 .dest-country {
-  font-size: 20px;
+  font-size: 22px; /* Erhöht von 20px */
   font-weight: 600;
   color: var(--dest-text);
   margin: 0;
@@ -486,17 +494,6 @@
   transform: translateY(0);
 }
 
-/* Mobile specific for all countries */
-@media (max-width: 640px) {
-  #all-countries-section {
-    margin-top: 30px;
-  }
-  
-  #all-countries-section .dest-grid {
-    padding: 0;
-  }
-}
-
 /* Animations */
 @keyframes fadeInUp {
   from {
@@ -564,12 +561,12 @@
   }
 
   .esim-destinations-container {
-    padding: 0 12px; /* Minimales Padding für maximale Breite */
+    padding: 0 16px;
   }
   
   .dest-tabs {
-    width: calc(100% - 24px); /* Fast volle Breite */
-    max-width: none; /* Kein Maximum */
+    width: calc(100% - 32px);
+    max-width: 400px;
     padding: 6px;
     gap: 4px;
     margin-bottom: 48px;
@@ -582,19 +579,17 @@
     min-width: 120px;
   }
   
-  /* Cards in voller Breite */
-  .dest-grid {
-    gap: 14px;
-  }
-  
   .dest-card {
     padding: 20px;
-    flex-direction: row; /* Horizontal auf Tablets */
   }
   
   .dest-flag {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .dest-flag-emoji {
+    font-size: 26px;
   }
   
   .dest-country {
@@ -602,14 +597,22 @@
   }
 
   .dest-price-section {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
-    margin-left: auto;
+    margin-top: 16px;
+    padding-top: 12px;
   }
   
   .dest-price {
     font-size: 18px;
+  }
+
+  .dest-arrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .dest-arrow svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -638,10 +641,17 @@
     width: calc(100% - 24px);
     max-width: none;
     flex-direction: row;
+    justify-content: center; /* Zentrieren */
+    align-items: center;
     overflow-x: auto;
     padding: 5px;
     gap: 3px;
     border-radius: 60px;
+    /* Remove any extra margins */
+    margin-left: auto;
+    margin-right: auto;
+    left: auto;
+    transform: none;
   }
 
   .dest-tab-btn {
@@ -649,7 +659,8 @@
     padding: 0 24px;
     font-size: 15px;
     min-width: 110px;
-    flex-shrink: 0;
+    flex: 1; /* Gleichmäßige Breite */
+    max-width: 130px; /* Max Breite für Balance */
   }
 
   /* WIDER MOBILE CARDS - NEUES LAYOUT */
@@ -726,26 +737,30 @@
   .dest-heading {
     font-size: 32px;
     margin-bottom: 36px;
-    padding: 0 12px;
+    padding: 0 16px;
   }
 
   .dest-tabs {
     margin-bottom: 36px;
-    width: calc(100% - 20px); /* Noch breiter */
+    display: flex;
+    justify-content: center;
+    width: calc(100% - 32px);
+    padding: 4px;
   }
 
   .dest-tab-btn {
     height: 46px;
     padding: 0 20px;
     font-size: 14px;
-    min-width: 100px;
+    min-width: 0; /* Remove min-width */
+    flex: 1; /* Equal width */
+    max-width: 120px;
+    white-space: nowrap;
   }
   
-  /* HORIZONTAL LAYOUT BLEIBT */
   .dest-card {
-    padding: 16px 14px;
-    min-height: 90px;
-    flex-direction: row; /* Horizontal */
+    padding: 16px;
+    min-height: 100px;
   }
   
   .dest-flag {
@@ -758,23 +773,20 @@
   }
   
   .dest-country {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .dest-price-section {
-    margin-top: 0;
-    padding-top: 0;
-    border-top: none;
+    margin-top: 14px;
+    padding-top: 10px;
   }
 
   .dest-starting {
     font-size: 10px;
-    display: block;
   }
   
   .dest-price {
     font-size: 16px;
-    display: block;
   }
 
   .dest-arrow {
@@ -790,14 +802,6 @@
 
 /* Very Small Screens */
 @media (max-width: 380px) {
-  .esim-destinations-container {
-    padding: 0 8px; /* Minimales Padding */
-  }
-
-  .dest-tabs {
-    width: calc(100% - 16px); /* Maximale Breite */
-  }
-
   .dest-tab-btn {
     height: 44px;
     padding: 0 16px;
@@ -806,8 +810,7 @@
   }
 
   .dest-card {
-    padding: 14px 12px;
-    flex-direction: row; /* Horizontal bleibt */
+    padding: 14px;
   }
 
   .dest-flag {
@@ -820,7 +823,12 @@
   }
 
   .dest-country {
-    font-size: 15px;
+    font-size: 16px;
+  }
+
+  .dest-price-section {
+    margin-top: 12px;
+    padding-top: 8px;
   }
 
   .dest-price {
@@ -830,6 +838,11 @@
   .dest-arrow {
     width: 32px;
     height: 32px;
+  }
+
+  .dest-arrow svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -885,6 +898,7 @@
             aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
             aria-controls="tab-{{ block.id }}"
             data-tab="{{ block.id }}"
+            data-tab-type="{{ block.settings.tab_title | downcase }}"
             type="button"
           >
             {% case block.settings.tab_title %}
@@ -904,7 +918,20 @@
     
     <!-- Dynamic Heading -->
     <h2 class="dest-heading" id="dest-dynamic-heading">
-      {{ 'destinations.heading_popular' | t | default: 'Popular Destinations' }}
+      {% for block in section.blocks %}
+        {% if block.type == 'tab' and forloop.first %}
+          {% case block.settings.tab_title %}
+            {% when 'Country' %}
+              {{ 'destinations.heading_country' | t | default: 'Popular Countries' }}
+            {% when 'Regional' %}
+              {{ 'destinations.heading_regional' | t | default: 'Regional Packages' }}
+            {% when 'Global' %}
+              {{ 'destinations.heading_global' | t | default: 'Global Plans' }}
+            {% else %}
+              {{ 'destinations.heading_popular' | t | default: 'Popular Destinations' }}
+          {% endcase %}
+        {% endif %}
+      {% endfor %}
     </h2>
     
     <!-- Tab Contents -->
@@ -1098,6 +1125,7 @@
   function handleTabClick(e) {
     const button = e.currentTarget;
     const tabId = button.dataset.tab;
+    const tabType = button.dataset.tabType; // Get tab type from data attribute
     
     // Hide all countries section if visible
     if (allCountriesVisible) {
@@ -1126,9 +1154,26 @@
       activeContent.classList.add('active');
     }
     
-    // Update heading
-    if (heading) {
-      updateHeading('{{ 'destinations.heading_popular' | t | default: 'Popular Destinations' }}');
+    // Update heading based on tab type
+    if (heading && tabType) {
+      let newHeading = '';
+      
+      // Change heading based on tab type
+      switch(tabType) {
+        case 'country':
+          newHeading = '{{ 'destinations.heading_country' | t | default: 'Popular Countries' }}';
+          break;
+        case 'regional':
+          newHeading = '{{ 'destinations.heading_regional' | t | default: 'Regional Packages' }}';
+          break;
+        case 'global':
+          newHeading = '{{ 'destinations.heading_global' | t | default: 'Global Plans' }}';
+          break;
+        default:
+          newHeading = '{{ 'destinations.heading_popular' | t | default: 'Popular Destinations' }}';
+      }
+      
+      updateHeading(newHeading);
     }
     
     currentTab = tabId;
@@ -1526,13 +1571,18 @@ Add these to your locales/[language].json files:
     "tab_regional": "Regional",
     "tab_global": "Global",
     "heading_popular": "Popular Destinations",
+    "heading_country": "Popular Countries",
+    "heading_regional": "Regional Packages",
+    "heading_global": "Global Plans",
     "heading_all": "All Countries",
-    "starting_at": "Starting at",
+    "starting_at": "Ab",
     "badge_popular": "Popular",
     "flag_alt": "flag",
     "no_products": "No destinations available in this category.",
     "view_all_countries": "VIEW ALL 150+ COUNTRIES",
-    "show_less": "SHOW LESS"
+    "show_less": "SHOW LESS",
+    "showing_countries": "Showing",
+    "countries": "countries"
   }
 }
 
@@ -1544,13 +1594,18 @@ For German (de.json):
     "tab_regional": "Regional",
     "tab_global": "Global",
     "heading_popular": "Beliebte Reiseziele",
+    "heading_country": "Beliebte Länder",
+    "heading_regional": "Regionale Pakete",
+    "heading_global": "Globale Tarife",
     "heading_all": "Alle Länder",
     "starting_at": "Ab",
     "badge_popular": "Beliebt",
     "flag_alt": "Flagge",
     "no_products": "Keine Ziele in dieser Kategorie verfügbar.",
     "view_all_countries": "ALLE 150+ LÄNDER ANZEIGEN",
-    "show_less": "WENIGER ANZEIGEN"
+    "show_less": "WENIGER ANZEIGEN",
+    "showing_countries": "Zeige",
+    "countries": "Länder"
   }
 }
 {% endcomment %}
