@@ -115,3 +115,40 @@ body {
 .shopify-section > .full-width {
   grid-column: 1 / -1;
 }
+/* EMERGENCY HORIZONTAL SCROLL FIX */
+* {
+  max-width: 100% !important;
+}
+
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.shopify-section {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Specific Fixes */
+.hero-enterprise,
+.enterprise-header {
+  width: 100% !important;
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.dest-tabs {
+  position: static !important;
+  left: auto !important;
+  transform: none !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
