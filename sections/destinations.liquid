@@ -165,22 +165,23 @@
   margin-right: auto;
 }
 
-/* Country Card - BIGGER */
+/* Country Card - BETTER LAYOUT */
 .dest-card {
   background: var(--dest-card-bg);
   border-radius: 24px;
-  padding: 32px;
+  padding: 28px;
   box-shadow: var(--dest-shadow);
   transition: var(--dest-transition);
   cursor: pointer;
   text-decoration: none;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Better spacing */
   position: relative;
   overflow: hidden;
   border: 2px solid var(--dest-border);
   min-height: 120px;
-  gap: 20px;
+  gap: 16px;
 }
 
 [data-theme="dark"] .dest-card {
@@ -225,15 +226,16 @@
   left: 100%;
 }
 
-/* Country Info Section */
+/* Country Info Section - BETTER LAYOUT */
 .dest-card-info {
   display: flex;
   align-items: center;
-  gap: 20px;
-  flex: 1;
+  gap: 18px;
+  flex: 0 1 auto; /* Don't grow too much */
+  min-width: 0; /* Allow text truncation */
 }
 
-/* Flag Container - BIGGER */
+/* Flag Container - CONSISTENT */
 .dest-flag {
   width: 72px;
   height: 72px;
@@ -266,26 +268,31 @@
   line-height: 1;
 }
 
-/* Country Name - BIGGER */
+/* Country Name - BETTER TRUNCATION */
 .dest-country {
   font-size: 24px;
   font-weight: 600;
   color: var(--dest-text);
   margin: 0;
   letter-spacing: -0.01em;
-  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px; /* Prevent too long names */
 }
 
-/* Price Section - BIGGER */
+/* Price Section - BETTER ALIGNMENT */
 .dest-price-section {
   display: flex;
   align-items: center;
-  gap: 20px;
-  margin-left: auto;
+  gap: 16px;
+  flex-shrink: 0; /* Keep size consistent */
+  margin-left: auto; /* Push to right */
 }
 
 .dest-price-wrapper {
   text-align: right;
+  min-width: 80px; /* Consistent width */
 }
 
 .dest-starting {
@@ -304,6 +311,7 @@
   color: var(--dest-text);
   display: block;
   letter-spacing: -0.02em;
+  white-space: nowrap; /* Prevent wrapping */
 }
 
 /* Arrow Icon - BIGGER */
@@ -914,7 +922,48 @@
     <!-- Hidden Section für alle Länder -->
     <div id="all-countries-section" style="display: none;">
       <div class="dest-grid" id="all-countries-grid">
-        <!-- Wird dynamisch gefüllt oder serverseitig gerendert -->
+        {% comment %} Server-side rendering if collection is available {% endcomment %}
+        {% if section.settings.all_countries_collection %}
+          {% assign all_countries = collections[section.settings.all_countries_collection] %}
+          {% if all_countries and all_countries.products.size > 0 %}
+            {% for product in all_countries.products limit: 250 %}
+              <a href="{{ product.url }}" class="dest-card">
+                <div class="dest-card-info">
+                  <div class="dest-flag">
+                    {% if product.featured_image %}
+                      <img 
+                        src="{{ product.featured_image | img_url: '144x144', crop: 'center' }}" 
+                        alt="{{ product.title }} eSIM"
+                        loading="lazy"
+                        width="72"
+                        height="72"
+                      >
+                    {% else %}
+                      <div class="dest-flag-emoji">🌍</div>
+                    {% endif %}
+                  </div>
+                  
+                  <h3 class="dest-country">
+                    {{ product.title | replace: 'eSIM', '' | replace: 'Esim', '' | strip }}
+                  </h3>
+                </div>
+                
+                <div class="dest-price-section">
+                  <div class="dest-price-wrapper">
+                    <span class="dest-starting">{{ 'destinations.starting_at' | t | default: 'Starting at' }}</span>
+                    <span class="dest-price">{{ product.price | money }}</span>
+                  </div>
+                  
+                  <div class="dest-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                      <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
       </div>
     </div>
     
@@ -1030,6 +1079,10 @@
       setTimeout(() => {
         allCountriesSection.style.opacity = '1';
         allCountriesSection.style.transform = 'translateY(0)';
+        // Animate cards if already loaded
+        if (allCountriesLoaded) {
+          animateCards();
+        }
       }, 10);
       
       // Update heading
@@ -1079,19 +1132,22 @@
   
   // Load all countries from collection
   function loadAllCountries() {
-    // Check if we need to load from a collection
-    {% if section.blocks.size > 0 and section.blocks.first.settings.all_countries_collection %}
-      const collectionHandle = '{{ section.blocks.first.settings.all_countries_collection }}';
-      
-      if (!collectionHandle) {
-        console.error('No collection specified for all countries');
-        return;
-      }
+    // Check if products are already rendered server-side
+    const existingCards = allCountriesGrid.querySelectorAll('.dest-card');
+    if (existingCards.length > 0) {
+      // Products already rendered by Liquid
+      allCountriesLoaded = true;
+      return;
+    }
+    
+    // Get collection from SECTION settings
+    {% if section.settings.all_countries_collection %}
+      const collectionHandle = '{{ section.settings.all_countries_collection }}';
       
       // Show loading state
       allCountriesGrid.innerHTML = '<div class="dest-loading"><div class="dest-loading-spinner"></div><p>Loading all countries...</p></div>';
       
-      // Fetch collection products via Shopify AJAX API
+      // Fetch via AJAX as fallback
       fetch(`/collections/${collectionHandle}/products.json?limit=250`)
         .then(response => response.json())
         .then(data => {
@@ -1107,9 +1163,58 @@
           allCountriesGrid.innerHTML = '<div class="dest-empty"><p>Error loading countries. Please try again.</p></div>';
         });
     {% else %}
-      // If no collection specified, show server-side rendered content
+      allCountriesGrid.innerHTML = '<div class="dest-empty"><p>Please select an "All Countries Collection" in the section settings.</p></div>';
       allCountriesLoaded = true;
     {% endif %}
+  }
+  
+  // Render products from Liquid data
+  function renderAllCountriesFromLiquid(products) {
+    let html = '';
+    
+    products.forEach(product => {
+      const title = product.title.replace('eSIM', '').replace('Esim', '').trim();
+      
+      html += `
+        <a href="${product.url}" class="dest-card">
+          <div class="dest-card-info">
+            <div class="dest-flag">
+              ${product.featured_image 
+                ? `<img src="${product.featured_image}" alt="${product.title} eSIM" loading="lazy" width="72" height="72">` 
+                : '<div class="dest-flag-emoji">🌍</div>'}
+            </div>
+            <h3 class="dest-country">${title}</h3>
+          </div>
+          <div class="dest-price-section">
+            <div class="dest-price-wrapper">
+              <span class="dest-starting">{{ 'destinations.starting_at' | t | default: 'Starting at' }}</span>
+              <span class="dest-price">${product.price}</span>
+            </div>
+            <div class="dest-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      `;
+    });
+    
+    allCountriesGrid.innerHTML = html;
+    animateCards();
+  }
+  
+  // Animate cards function
+  function animateCards() {
+    const cards = allCountriesGrid.querySelectorAll('.dest-card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, Math.min(index * 20, 1000));
+    });
   }
   
   // Render all countries in grid
@@ -1263,6 +1368,12 @@
       "max": 48,
       "step": 4,
       "default": 20
+    },
+    {
+      "type": "collection",
+      "id": "all_countries_collection",
+      "label": "All Countries Collection",
+      "info": "Collection for 'View All' button - shows all 150+ countries"
     }
   ],
   "blocks": [
@@ -1287,12 +1398,6 @@
           "id": "collection",
           "label": "Collection",
           "info": "Products from this collection will be shown"
-        },
-        {
-          "type": "text",
-          "id": "all_countries_collection",
-          "label": "All Countries Collection (Optional)",
-          "info": "Collection handle for 'View All' button (e.g. 'all-countries'). Leave empty to use combined products from all tabs."
         }
       ]
     }
@@ -1304,8 +1409,7 @@
         {
           "type": "tab",
           "settings": {
-            "tab_title": "Country",
-            "all_countries_collection": "all-countries"
+            "tab_title": "Country"
           }
         },
         {
