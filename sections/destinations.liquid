@@ -617,51 +617,45 @@
 }
 
 /* ========================================= */
-/* MOBILE CENTERED VERSION - WICHTIGSTE ÄNDERUNGEN */
+/* MOBILE VERSION - MAXIMALE BREITE */
 /* ========================================= */
 @media (max-width: 640px) {
   .esim-destinations {
     padding: 60px 0;
   }
 
+  /* Container OHNE Padding für maximale Breite */
   .esim-destinations-container {
-    padding: 0;
+    padding: 0 !important;  /* Override global padding */
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 100%;  /* Volle Breite */
   }
 
-  /* Grid zentriert mit gleichem Abstand links/rechts */
+  /* Grid mit minimalem Padding */
   .dest-grid {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 48px;
     width: 100%;
-    padding: 0 16px;  /* Weniger Padding für breitere Cards */
+    padding: 0 12px;  /* NUR 12px Abstand vom Rand */
     box-sizing: border-box;
     display: grid;
-    place-items: stretch;  /* Stretch statt center für volle Breite */
   }
   
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 20px;
+    padding: 0 12px;  /* Gleicher Abstand wie Grid */
   }
 
+  /* Tabs zentriert */
   .dest-tabs {
-    width: calc(100% - 40px);
-    max-width: 400px;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    overflow-x: auto;
+    width: calc(100% - 24px);  /* 12px auf jeder Seite */
+    max-width: none;
+    margin: 0 12px 48px 12px;  /* Gleicher Seitenabstand */
     padding: 5px;
     gap: 3px;
     border-radius: 60px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   .dest-tab-btn {
@@ -673,15 +667,15 @@
     max-width: 130px;
   }
 
-  /* BREITERE CARDS - FAST VOLLE BILDSCHIRMBREITE */
+  /* MAXIMALE CARD BREITE */
   .dest-card {
     width: 100%;
-    max-width: none;  /* Keine max-width Begrenzung */
+    max-width: none !important;  /* Keine Begrenzung */
     padding: 20px;
     min-height: 120px;
     border-radius: 20px;
-    gap: 14px;
     margin: 0;
+    box-sizing: border-box;
   }
 
   .dest-card-info {
@@ -738,39 +732,42 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 16px;  /* Gleicher Abstand wie Grid */
+    padding: 0 12px;  /* Gleicher Abstand wie Grid */
     width: 100%;
     box-sizing: border-box;
   }
 
   .dest-view-all {
     width: 100%;
-    max-width: none;  /* Volle Breite */
+    max-width: none !important;  /* Volle Breite */
     padding: 18px 40px;
     font-size: 15px;
+    box-sizing: border-box;
   }
 
-  /* All Countries Section auch zentriert */
+  /* All Countries Section auch maximale Breite */
   #all-countries-section .dest-grid {
     display: grid;
     grid-template-columns: 1fr;
-    place-items: stretch;
-    padding: 0 16px;
+    padding: 0 12px;  /* Gleicher minimaler Abstand */
   }
 }
 
 @media (max-width: 480px) {
+  .esim-destinations-container {
+    padding: 0 !important;  /* Override */
+  }
+
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 16px;
+    padding: 0 10px;  /* Noch weniger Padding */
   }
 
   .dest-tabs {
     margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-    width: calc(100% - 24px);
+    width: calc(100% - 20px);  /* 10px auf jeder Seite */
+    margin: 0 10px 40px 10px;
     padding: 10px;
   }
 
@@ -784,14 +781,14 @@
     white-space: nowrap;
   }
   
-  /* BREITERE CARDS - NUR KLEINER ABSTAND */
+  /* NOCH WENIGER PADDING FÜR MAXIMALE BREITE */
   .dest-grid {
-    padding: 0 12px;  /* Weniger Padding */
+    padding: 0 10px !important;  /* Nur 10px */
   }
 
   .dest-card {
     width: 100%;
-    max-width: none;  /* Keine Begrenzung */
+    max-width: none !important;
     padding: 18px;
     min-height: 115px;
   }
@@ -833,18 +830,23 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 12px;
+    padding: 0 10px;  /* Gleicher Abstand */
   }
 
   .dest-view-all {
-    max-width: none;  /* Volle Breite */
+    max-width: none !important;
   }
 }
 
 /* Very Small Screens */
 @media (max-width: 380px) {
+  .esim-destinations-container {
+    padding: 0 !important;  /* Kein Container Padding */
+  }
+
   .dest-tabs {
-    width: calc(100% - 20px);  /* Weniger Abstand */
+    width: calc(100% - 16px);  /* 8px auf jeder Seite */
+    margin: 0 8px 40px 8px;
   }
 
   .dest-tab-btn {
@@ -854,14 +856,18 @@
     min-width: 85px;
   }
 
-  /* MAXIMALE BREITE AUF KLEINEN SCREENS */
+  /* MINIMALER ABSTAND FÜR MAXIMALE BREITE */
   .dest-grid {
-    padding: 0 10px;  /* Nur 10px Padding für maximale Breite */
+    padding: 0 8px !important;  /* Nur 8px für maximale Breite */
+  }
+
+  .dest-heading {
+    padding: 0 8px;  /* Gleicher Abstand */
   }
 
   .dest-card {
     width: 100%;
-    max-width: none;  /* Volle Breite */
+    max-width: none !important;  /* Volle verfügbare Breite */
     padding: 16px;
   }
 
@@ -902,11 +908,17 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 10px;  /* Gleicher Abstand wie Grid */
+    padding: 0 8px;  /* Minimaler Abstand */
   }
 
   .dest-view-all {
-    max-width: none;  /* Volle Breite */
+    max-width: none !important;
+    width: 100%;
+  }
+  
+  /* All Countries auch minimal */
+  #all-countries-section .dest-grid {
+    padding: 0 8px !important;
   }
 }
 
