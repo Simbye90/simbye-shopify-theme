@@ -31,17 +31,14 @@
   --dest-tab-bg: rgba(255, 255, 255, 0.05);
 }
 
-/* Main Section Container - FULL WIDTH */
+/* Main Section Container - FULL WIDTH OHNE OVERFLOW */
 .esim-destinations {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: 100%;  /* 100% statt 100vw - KEIN OVERFLOW! */
   padding: 100px 0;
   background: var(--dest-bg);
   transition: var(--dest-transition);
+  overflow-x: hidden;  /* Sicherheit gegen Overflow */
+  position: relative;
 }
 
 /* Light Mode - Normal Background */
@@ -67,25 +64,34 @@
   padding: 0 20px;
 }
 
-/* Tab Navigation */
+/* Tab Navigation - OHNE OVERFLOW TRICKS */
 .dest-tabs {
   display: inline-flex;
   background: var(--dest-tab-bg);
   border-radius: 100px;
   padding: 8px;
   margin: 0 auto 60px;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.08);
   gap: 6px;
 }
 
+/* Desktop Zentrierung ohne Overflow */
+@media (min-width: 641px) {
+  .dest-tabs {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 @media (max-width: 640px) {
   .dest-tabs {
-    left: 0;
-    transform: none;
+    position: static !important;  /* Reset position komplett */
+    left: auto !important;
+    transform: none !important;
     display: flex;
+    width: calc(100% - 32px);
+    margin: 0 16px 48px 16px;
   }
 }
 
@@ -617,18 +623,26 @@
 }
 
 /* ========================================= */
-/* MOBILE VERSION - MAXIMALE BREITE */
+/* MOBILE VERSION - MAXIMALE BREITE OHNE OVERFLOW */
 /* ========================================= */
 @media (max-width: 640px) {
+  /* Verhindere horizontales Scrollen */
+  body {
+    overflow-x: hidden !important;
+  }
+
   .esim-destinations {
     padding: 60px 0;
+    overflow-x: hidden !important;  /* Kein horizontales Scrollen */
+    width: 100% !important;  /* Nie breiter als 100% */
   }
 
   /* Container OHNE Padding für maximale Breite */
   .esim-destinations-container {
-    padding: 0 !important;  /* Override global padding */
+    padding: 0 !important;
     width: 100%;
-    max-width: 100%;  /* Volle Breite */
+    max-width: 100%;
+    overflow-x: hidden !important;  /* Extra Sicherheit */
   }
 
   /* Grid mit etwas mehr Padding */
@@ -648,14 +662,18 @@
     padding: 0 16px;  /* Gleicher Abstand wie Grid */
   }
 
-  /* Tabs zentriert */
+  /* Tabs müssen innerhalb bleiben - KEIN OVERFLOW */
   .dest-tabs {
-    width: calc(100% - 32px);  /* 16px auf jeder Seite */
+    width: calc(100% - 32px) !important;  /* Wichtig: calc() nutzen */
     max-width: none;
-    margin: 0 16px 48px 16px;  /* Gleicher Seitenabstand */
+    margin: 0 16px 48px 16px !important;
     padding: 5px;
     gap: 3px;
     border-radius: 60px;
+    position: static !important;  /* Kein position relative */
+    left: auto !important;
+    transform: none !important;
+    box-sizing: border-box;  /* Padding inkludiert */
   }
 
   .dest-tab-btn {
