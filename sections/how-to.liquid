@@ -1,24 +1,28 @@
-<!-- sections/how-to.liquid -->
-<!-- sections/how-to.liquid -->
+<!-- ⬇️ NEUER KORREKTER CODE ⬇️ -->
 <style>
-  /* Break out of container */
+  /* Fix Dark Mode Container Issue - Correct Version */
   #shopify-section-{{ section.id }} {
-    width: 100vw !important;
-    position: relative !important;
-    left: 50% !important;
-    right: 50% !important;
-    margin-left: -50vw !important;
-    margin-right: -50vw !important;
-    grid-column: 1 / -1 !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
   }
   
-  /* Dark Mode specific */
+  /* Ensure full width without breaking layout */
+  .howto-section {
+    width: 100%;
+    margin: 0;
+  }
+  
+  /* Dark Mode - Remove any parent styling */
   [data-theme="dark"] #shopify-section-{{ section.id }} {
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
   }
-</style>
+</style
 
 <style>
 /* CSS Variables - Enterprise Design System */
