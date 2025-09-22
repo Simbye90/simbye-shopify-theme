@@ -50,14 +50,17 @@
   background: #ffffff;
 }
 
-/* Dark Mode - Fortsetzung des Verlaufs von How-To */
+/* Dark Mode - NAHTLOSER VERLAUF von How-To */
 [data-theme="dark"] .why-section {
+  /* Startet wo How-To aufhört und geht sanft weiter */
   background: linear-gradient(180deg,
-    #0a0a0a 0%,
-    #0f1210 20%,
-    #0a1510 50%,
-    #051008 80%,
-    #0a0a0a 100%
+    #0a0a0a 0%,      /* Übernimmt End-Farbe von How-To */
+    #0c0f0d 15%,     /* Ganz sanfter Übergang */
+    #0e1210 30%,     /* Minimal grünlicher */
+    #0a1510 50%,     /* Mitte mit leichtem Grün-Touch */
+    #081008 70%,     /* Zurück zu dunkler */
+    #060806 85%,     /* Fast schwarz */
+    #040404 100%     /* Endet in tiefem Schwarz für nächste Section */
   );
 }
 
@@ -92,8 +95,9 @@
   animation: fadeInUp 0.8s ease;
 }
 
+/* TITLE - EXAKT GLEICH WIE HOW-TO */
 .why-title {
-  font-size: clamp(36px, 5vw, 56px); /* Gleich wie How-To */
+  font-size: clamp(36px, 5vw, 56px); /* Identisch mit How-To */
   font-weight: 700;
   color: var(--why-text);
   margin: 0 0 20px 0;
@@ -112,7 +116,7 @@
 
 [data-theme="dark"] .why-title-highlight {
   background: var(--why-primary);
-  color: #0a0a0a;
+  color: #fff;  /* Geändert zu weiß wie in How-To */
 }
 
 .why-subtitle {
@@ -164,10 +168,6 @@
   border-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
 }
-
-/* Kein Hover-Effekt mehr */
-
-/* Feature Gradient Effect - REMOVED */
 
 /* Icon Container - ENTERPRISE PREMIUM STYLE */
 .why-icon {
@@ -331,7 +331,7 @@
   }
 }
 
-/* Mobile */
+/* Mobile - TITEL GRÖSSE WIE HOW-TO */
 @media (max-width: 768px) {
   .why-section {
     padding: 72px 0;
@@ -345,12 +345,13 @@
     margin-bottom: 48px;
   }
   
+  /* TITEL EXAKT WIE HOW-TO MOBILE */
   .why-title {
-    font-size: 32px; /* Gleich wie How-To Mobile */
+    font-size: 32px; /* Identisch mit How-To Mobile */
   }
   
   .why-subtitle {
-    font-size: 17px;
+    font-size: 17px; /* Auch identisch mit How-To */
     padding: 0 16px;
   }
   
@@ -419,7 +420,7 @@
   }
   
   .why-title {
-    font-size: 28px;
+    font-size: 28px; /* Auch angepasst für sehr kleine Screens */
   }
   
   .why-subtitle {
