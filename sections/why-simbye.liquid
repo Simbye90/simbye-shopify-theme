@@ -148,37 +148,118 @@
 
 /* Feature Gradient Effect - REMOVED */
 
-/* Icon Container */
+/* Icon Container - ENTERPRISE PREMIUM STYLE */
 .why-icon {
-  width: 64px;
-  height: 64px;
-  background: var(--why-gradient);
-  border: 2px solid var(--why-primary);
-  border-radius: 20px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--why-primary), var(--why-accent));
+  border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px;
-  transition: var(--why-transition);
+  margin-bottom: 28px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.25);
+  animation: subtlePulse 4s ease-in-out infinite;
+}
+
+/* Animated Glow Effect */
+.why-icon::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--why-primary), var(--why-accent));
+  border-radius: 24px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(20px);
+  animation: glow 4s ease-in-out infinite;
 }
 
 [data-theme="dark"] .why-icon {
-  background: rgba(0, 217, 126, 0.1);
-  border-color: var(--why-primary);
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
+  box-shadow: 
+    0 10px 30px rgba(0, 217, 126, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
 }
 
-/* Kein Hover-Effekt mehr */
-
 .why-icon svg {
-  width: 32px;
-  height: 32px;
-  color: var(--why-primary);
-  transition: var(--why-transition);
-  stroke-width: 1.5; /* Dünner für Enterprise Look */
+  width: 36px;
+  height: 36px;
+  color: white;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 [data-theme="dark"] .why-icon svg {
   color: var(--why-primary);
+}
+
+/* Feature Number Badge */
+.why-feature-number {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: white;
+  color: var(--why-primary);
+  border: 2px solid var(--why-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .why-feature-number {
+  background: var(--why-primary);
+  color: #0a0a0a;
+  border-color: var(--why-primary);
+}
+
+/* Icon Animations */
+@keyframes subtlePulse {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 0.6;
+  }
+}
+
+/* Individual Icon Animations on Scroll */
+.why-feature.animate .why-icon {
+  animation: iconBounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+}
+
+@keyframes iconBounceIn {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
 }
 
 /* Feature Content */
@@ -263,15 +344,23 @@
   }
   
   .why-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-    margin-bottom: 20px;
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    margin-bottom: 24px;
   }
   
   .why-icon svg {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
+  }
+  
+  .why-feature-number {
+    width: 26px;
+    height: 26px;
+    font-size: 13px;
+    top: -6px;
+    right: -6px;
   }
   
   .why-feature-title {
@@ -363,10 +452,9 @@
       <!-- Feature 1: Aufladbar -->
       <div class="why-feature">
         <div class="why-icon">
-          <!-- Refresh/Reload Icon - Enterprise Style -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21.5 2v6h-6M2.5 22v-6h6"/>
-            <path d="M2.69 7a10 10 0 0 1 15.57-2.38L21.5 8M2.5 16l3.24 3.38A10 10 0 0 0 21.31 17"/>
+          <span class="why-feature-number">1</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3 class="why-feature-title">{{ 'why.feature1_title' | t | default: 'Aufladbar & Flexibel' }}</h3>
@@ -379,10 +467,10 @@
       <!-- Feature 2: Günstigster Anbieter -->
       <div class="why-feature">
         <div class="why-icon">
-          <!-- Trending Down/Savings Icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/>
-            <polyline points="16 17 22 17 22 11"/>
+          <span class="why-feature-number">2</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="16 7 22 7 22 13" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3 class="why-feature-title">{{ 'why.feature2_title' | t | default: 'Der Günstigste Anbieter' }}</h3>
@@ -395,10 +483,9 @@
       <!-- Feature 3: 24/7 Support -->
       <div class="why-feature">
         <div class="why-icon">
-          <!-- Headset/Support Icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
-            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3v5zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3v5z"/>
+          <span class="why-feature-number">3</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3 class="why-feature-title">{{ 'why.feature3_title' | t | default: '24/7 Premium Support' }}</h3>
@@ -411,12 +498,11 @@
       <!-- Feature 4: Gratis Testen -->
       <div class="why-feature">
         <div class="why-icon">
-          <!-- Gift/Free Icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="8" width="18" height="13" rx="2"/>
-            <path d="M12 8v13"/>
-            <path d="M19 12H7.5a2.5 2.5 0 1 1 0-5C11 7 8.5 3 12 3s-1 4 2.5 4a2.5 2.5 0 1 1 0 5z"/>
-            <path d="M3 12h18"/>
+          <span class="why-feature-number">4</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <rect x="3" y="8" width="18" height="13" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 8v13M3 12h18" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3 class="why-feature-title">{{ 'why.feature4_title' | t | default: 'Gratis Testen' }}</h3>
@@ -429,11 +515,11 @@
       <!-- Feature 5: Premium Netze -->
       <div class="why-feature">
         <div class="why-icon">
-          <!-- Globe/Network Icon - Enterprise -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M2 12h20"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          <span class="why-feature-number">5</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 2v20M2 12h20" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3 class="why-feature-title">{{ 'why.feature5_title' | t | default: 'Lokale Premium-Netze' }}</h3>
@@ -446,10 +532,9 @@
       <!-- Feature 6: 100K+ Kunden -->
       <div class="why-feature">
         <div class="why-icon">
-          <!-- Award/Trophy Icon - Enterprise -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="7"/>
-            <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+          <span class="why-feature-number">6</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <h3 class="why-feature-title">{{ 'why.feature6_title' | t | default: 'Vertrauenswürdig' }}</h3>
@@ -476,7 +561,7 @@
   function init() {
     if (!section) return;
     
-    // Animate on scroll
+    // Animate icons on scroll
     animateOnScroll();
   }
   
@@ -484,22 +569,24 @@
   function animateOnScroll() {
     if ('IntersectionObserver' in window) {
       const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            // Add animate class for icon bounce
+            setTimeout(() => {
+              entry.target.classList.add('animate');
+            }, index * 100); // Stagger animation
+            
+            // Remove observer after animation
+            observer.unobserve(entry.target);
           }
         });
       }, {
-        threshold: 0.1,
-        rootMargin: '50px'
+        threshold: 0.3,
+        rootMargin: '0px'
       });
       
       // Observe all features
       features.forEach(feature => {
-        feature.style.opacity = '0';
-        feature.style.transform = 'translateY(30px)';
-        feature.style.transition = 'all 0.6s ease';
         observer.observe(feature);
       });
     }
