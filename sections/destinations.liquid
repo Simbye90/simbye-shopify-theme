@@ -31,14 +31,17 @@
   --dest-tab-bg: rgba(255, 255, 255, 0.05);
 }
 
-/* Main Section Container - FULL WIDTH OHNE OVERFLOW */
+/* Main Section Container - FULL WIDTH */
 .esim-destinations {
-  width: 100%;  /* 100% statt 100vw - KEIN OVERFLOW! */
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   padding: 100px 0;
   background: var(--dest-bg);
   transition: var(--dest-transition);
-  overflow-x: hidden;  /* Sicherheit gegen Overflow */
-  position: relative;
 }
 
 /* Light Mode - Normal Background */
@@ -64,34 +67,25 @@
   padding: 0 20px;
 }
 
-/* Tab Navigation - OHNE OVERFLOW TRICKS */
+/* Tab Navigation */
 .dest-tabs {
   display: inline-flex;
   background: var(--dest-tab-bg);
   border-radius: 100px;
   padding: 8px;
   margin: 0 auto 60px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08), 0 6px 16px rgba(0, 0, 0, 0.08);
   gap: 6px;
 }
 
-/* Desktop Zentrierung ohne Overflow */
-@media (min-width: 641px) {
-  .dest-tabs {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-}
-
 @media (max-width: 640px) {
   .dest-tabs {
-    position: static !important;  /* Reset position komplett */
-    left: auto !important;
-    transform: none !important;
+    left: 0;
+    transform: none;
     display: flex;
-    width: calc(100% - 32px);
-    margin: 0 16px 48px 16px;
   }
 }
 
@@ -623,35 +617,27 @@
 }
 
 /* ========================================= */
-/* MOBILE VERSION - MAXIMALE BREITE OHNE OVERFLOW */
+/* MOBILE VERSION - MAXIMALE BREITE */
 /* ========================================= */
 @media (max-width: 640px) {
-  /* Verhindere horizontales Scrollen */
-  body {
-    overflow-x: hidden !important;
-  }
-
   .esim-destinations {
     padding: 60px 0;
-    overflow-x: hidden !important;  /* Kein horizontales Scrollen */
-    width: 100% !important;  /* Nie breiter als 100% */
   }
 
   /* Container OHNE Padding für maximale Breite */
   .esim-destinations-container {
-    padding: 0 !important;
+    padding: 0 !important;  /* Override global padding */
     width: 100%;
-    max-width: 100%;
-    overflow-x: hidden !important;  /* Extra Sicherheit */
+    max-width: 100%;  /* Volle Breite */
   }
 
-  /* Grid mit etwas mehr Padding */
+  /* Grid mit minimalem Padding */
   .dest-grid {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 48px;
     width: 100%;
-    padding: 0 16px;  /* 16px statt 12px - etwas mehr Luft */
+    padding: 0 12px;  /* NUR 12px Abstand vom Rand */
     box-sizing: border-box;
     display: grid;
   }
@@ -659,21 +645,17 @@
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 16px;  /* Gleicher Abstand wie Grid */
+    padding: 0 12px;  /* Gleicher Abstand wie Grid */
   }
 
-  /* Tabs müssen innerhalb bleiben - KEIN OVERFLOW */
+  /* Tabs zentriert */
   .dest-tabs {
-    width: calc(100% - 32px) !important;  /* Wichtig: calc() nutzen */
+    width: calc(100% - 24px);  /* 12px auf jeder Seite */
     max-width: none;
-    margin: 0 16px 48px 16px !important;
+    margin: 0 12px 48px 12px;  /* Gleicher Seitenabstand */
     padding: 5px;
     gap: 3px;
     border-radius: 60px;
-    position: static !important;  /* Kein position relative */
-    left: auto !important;
-    transform: none !important;
-    box-sizing: border-box;  /* Padding inkludiert */
   }
 
   .dest-tab-btn {
@@ -750,7 +732,7 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 16px;  /* Gleicher Abstand wie Grid */
+    padding: 0 12px;  /* Gleicher Abstand wie Grid */
     width: 100%;
     box-sizing: border-box;
   }
@@ -767,7 +749,7 @@
   #all-countries-section .dest-grid {
     display: grid;
     grid-template-columns: 1fr;
-    padding: 0 16px;  /* Gleicher Abstand */
+    padding: 0 12px;  /* Gleicher minimaler Abstand */
   }
 }
 
@@ -779,13 +761,13 @@
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 14px;  /* 14px statt 10px */
+    padding: 0 10px;  /* Noch weniger Padding */
   }
 
   .dest-tabs {
     margin-bottom: 40px;
-    width: calc(100% - 28px);  /* 14px auf jeder Seite */
-    margin: 0 14px 40px 14px;
+    width: calc(100% - 20px);  /* 10px auf jeder Seite */
+    margin: 0 10px 40px 10px;
     padding: 10px;
   }
 
@@ -799,9 +781,9 @@
     white-space: nowrap;
   }
   
-  /* ETWAS MEHR PADDING FÜR BESSERE OPTIK */
+  /* NOCH WENIGER PADDING FÜR MAXIMALE BREITE */
   .dest-grid {
-    padding: 0 14px !important;  /* 14px statt 10px */
+    padding: 0 10px !important;  /* Nur 10px */
   }
 
   .dest-card {
@@ -848,7 +830,7 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 14px;  /* Gleicher Abstand */
+    padding: 0 10px;  /* Gleicher Abstand */
   }
 
   .dest-view-all {
@@ -863,8 +845,8 @@
   }
 
   .dest-tabs {
-    width: calc(100% - 24px);  /* 12px auf jeder Seite */
-    margin: 0 12px 40px 12px;
+    width: calc(100% - 16px);  /* 8px auf jeder Seite */
+    margin: 0 8px 40px 8px;
   }
 
   .dest-tab-btn {
@@ -874,13 +856,13 @@
     min-width: 85px;
   }
 
-  /* ETWAS MEHR LUFT ALS VORHER */
+  /* MINIMALER ABSTAND FÜR MAXIMALE BREITE */
   .dest-grid {
-    padding: 0 12px !important;  /* 12px statt 8px - immer noch breit aber mit Luft */
+    padding: 0 8px !important;  /* Nur 8px für maximale Breite */
   }
 
   .dest-heading {
-    padding: 0 12px;  /* Gleicher Abstand */
+    padding: 0 8px;  /* Gleicher Abstand */
   }
 
   .dest-card {
@@ -926,7 +908,7 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 12px;  /* Gleicher Abstand */
+    padding: 0 8px;  /* Minimaler Abstand */
   }
 
   .dest-view-all {
@@ -934,9 +916,9 @@
     width: 100%;
   }
   
-  /* All Countries auch mit etwas mehr Luft */
+  /* All Countries auch minimal */
   #all-countries-section .dest-grid {
-    padding: 0 12px !important;
+    padding: 0 8px !important;
   }
 }
 
