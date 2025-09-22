@@ -177,21 +177,32 @@
 /* Image Container */
 .howto-step-image {
   position: relative;
+  background: white;
+  border-radius: 24px;
   overflow: hidden;
-  margin-bottom: 0;
+  margin-bottom: 0; /* Kein Abstand nach unten */
+  box-shadow: var(--howto-shadow-md);
+  transition: var(--howto-transition);
   cursor: default;
   aspect-ratio: 4/5;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Kein Background, Border oder Shadow mehr! */
+  border: 2px solid var(--howto-border);
 }
+
+[data-theme="dark"] .howto-step-image {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Kein Hover-Effekt mehr */
 
 .howto-step-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Kein Padding mehr! */
+  padding: 20px;
 }
 
 /* Success Badge on Step 3 */
