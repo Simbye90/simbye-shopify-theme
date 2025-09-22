@@ -89,12 +89,18 @@
   line-height: 1.1;
 }
 
-.howto-title-gradient {
-  background: linear-gradient(135deg, var(--howto-primary) 0%, var(--howto-accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.howto-title-highlight {
+  background: var(--howto-primary);
+  color: white;
+  padding: 4px 20px;
+  border-radius: 12px;
   display: inline-block;
+  margin: 0 8px;
+}
+
+[data-theme="dark"] .howto-title-highlight {
+  background: var(--howto-primary);
+  color: #0a0a0a;
 }
 
 .howto-subtitle {
@@ -105,32 +111,7 @@
   line-height: 1.5;
 }
 
-/* Timer Badge */
-.howto-timer {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--howto-gradient);
-  border: 2px solid var(--howto-primary);
-  border-radius: 100px;
-  padding: 12px 28px;
-  margin-top: 24px;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--howto-primary);
-  animation: pulse 2s infinite;
-}
-
-[data-theme="dark"] .howto-timer {
-  background: rgba(0, 217, 126, 0.1);
-  border-color: var(--howto-primary);
-}
-
-.howto-timer-icon {
-  width: 24px;
-  height: 24px;
-  animation: rotate 2s linear infinite;
-}
+/* Timer Badge - REMOVED */
 
 /* Steps Container */
 .howto-steps {
@@ -202,8 +183,8 @@
   margin-bottom: 24px;
   box-shadow: var(--howto-shadow-md);
   transition: var(--howto-transition);
-  cursor: pointer;
-  aspect-ratio: 4/3;
+  cursor: default;
+  aspect-ratio: 4/5;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -215,11 +196,7 @@
   border-color: rgba(255, 255, 255, 0.1);
 }
 
-.howto-step:hover .howto-step-image {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: var(--howto-shadow-lg);
-  border-color: var(--howto-primary);
-}
+/* Kein Hover-Effekt mehr */
 
 .howto-step-image img {
   width: 100%;
@@ -285,61 +262,7 @@
   background: rgba(0, 217, 126, 0.15);
 }
 
-/* Trust Section */
-.howto-trust {
-  text-align: center;
-  padding: 60px 40px;
-  background: var(--howto-gradient);
-  border-radius: 32px;
-  border: 2px solid var(--howto-border);
-  margin-top: 80px;
-  animation: fadeInUp 1s ease 0.4s both;
-}
-
-[data-theme="dark"] .howto-trust {
-  background: rgba(255, 255, 255, 0.02);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.howto-trust-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--howto-text);
-  margin: 0 0 24px 0;
-}
-
-.howto-trust-items {
-  display: flex;
-  justify-content: center;
-  gap: 48px;
-  flex-wrap: wrap;
-}
-
-.howto-trust-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 18px;
-  color: var(--howto-text);
-  font-weight: 500;
-}
-
-.howto-trust-icon {
-  width: 32px;
-  height: 32px;
-  background: var(--howto-primary);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-[data-theme="dark"] .howto-trust-icon {
-  background: var(--howto-primary);
-  color: #0a0a0a;
-}
+/* Trust Section - REMOVED */
 
 /* Responsive - Tablet */
 @media (max-width: 1024px) {
@@ -353,10 +276,6 @@
   
   .howto-step-title {
     font-size: 22px;
-  }
-  
-  .howto-trust-items {
-    gap: 32px;
   }
 }
 
@@ -416,41 +335,10 @@
   .howto-step-image {
     margin-top: 24px;
   }
-  
-  .howto-trust {
-    padding: 40px 20px;
-    border-radius: 20px;
-  }
-  
-  .howto-trust-title {
-    font-size: 24px;
-  }
-  
-  .howto-trust-items {
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
-    max-width: 280px;
-    margin: 0 auto;
-  }
-  
-  .howto-trust-item {
-    font-size: 16px;
-  }
 }
 
 /* Very Small Screens */
 @media (max-width: 480px) {
-  .howto-timer {
-    font-size: 16px;
-    padding: 10px 24px;
-  }
-  
-  .howto-timer-icon {
-    width: 20px;
-    height: 20px;
-  }
-  
   .howto-step-title {
     font-size: 20px;
   }
@@ -523,18 +411,11 @@
     <!-- Header -->
     <div class="howto-header">
       <h2 class="howto-title">
-        So einfach war <span class="howto-title-gradient">Internet im Ausland</span> noch nie
+        {{ 'howto.title_part1' | t | default: 'How does' }} <span class="howto-title-highlight">{{ 'howto.title_part2' | t | default: 'Simbye eSIM' }}</span> {{ 'howto.title_part3' | t | default: 'work' }}
       </h2>
       <p class="howto-subtitle">
-        Von der Bestellung bis zur Aktivierung in unter 2 Minuten
+        {{ 'howto.subtitle' | t | default: 'Von der Bestellung bis zur Aktivierung in unter 2 Minuten' }}
       </p>
-      <div class="howto-timer">
-        <svg class="howto-timer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M12 6v6l4 2"/>
-        </svg>
-        <span>⌀ 1:47 Min</span>
-      </div>
     </div>
     
     <!-- Steps -->
@@ -547,21 +428,21 @@
           {% if section.settings.step1_image %}
             <img 
               src="{{ section.settings.step1_image | image_url: width: 600 }}" 
-              alt="Datenpaket auswählen"
+              alt="{{ 'howto.step1_alt' | t | default: 'Datenpaket auswählen' }}"
               loading="lazy"
               width="600"
-              height="450"
+              height="750"
             >
           {% else %}
             <img 
-              src="https://via.placeholder.com/600x450/f0faf7/009a61?text=Schritt+1" 
-              alt="Datenpaket auswählen"
+              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+1" 
+              alt="{{ 'howto.step1_alt' | t | default: 'Datenpaket auswählen' }}"
             >
           {% endif %}
         </div>
-        <h3 class="howto-step-title">{{ section.settings.step1_title | default: 'Datenpaket wählen' }}</h3>
-        <p class="howto-step-desc">{{ section.settings.step1_desc | default: '190+ Länder verfügbar. Sofort per E-Mail erhalten.' }}</p>
-        <span class="howto-step-time">~30 Sekunden</span>
+        <h3 class="howto-step-title">{{ 'howto.step1_title' | t | default: section.settings.step1_title }}</h3>
+        <p class="howto-step-desc">{{ 'howto.step1_desc' | t | default: section.settings.step1_desc }}</p>
+        <span class="howto-step-time">{{ 'howto.step1_time' | t | default: '~30 Sekunden' }}</span>
       </div>
       
       <!-- Step 2: Scannen -->
@@ -571,21 +452,21 @@
           {% if section.settings.step2_image %}
             <img 
               src="{{ section.settings.step2_image | image_url: width: 600 }}" 
-              alt="QR-Code scannen"
+              alt="{{ 'howto.step2_alt' | t | default: 'QR-Code scannen' }}"
               loading="lazy"
               width="600"
-              height="450"
+              height="750"
             >
           {% else %}
             <img 
-              src="https://via.placeholder.com/600x450/f0faf7/009a61?text=Schritt+2" 
-              alt="QR-Code scannen"
+              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+2" 
+              alt="{{ 'howto.step2_alt' | t | default: 'QR-Code scannen' }}"
             >
           {% endif %}
         </div>
-        <h3 class="howto-step-title">{{ section.settings.step2_title | default: 'QR-Code scannen' }}</h3>
-        <p class="howto-step-desc">{{ section.settings.step2_desc | default: 'Mit der Kamera-App scannen. Keine zusätzliche App nötig.' }}</p>
-        <span class="howto-step-time">~45 Sekunden</span>
+        <h3 class="howto-step-title">{{ 'howto.step2_title' | t | default: section.settings.step2_title }}</h3>
+        <p class="howto-step-desc">{{ 'howto.step2_desc' | t | default: section.settings.step2_desc }}</p>
+        <span class="howto-step-time">{{ 'howto.step2_time' | t | default: '~45 Sekunden' }}</span>
       </div>
       
       <!-- Step 3: Online -->
@@ -595,42 +476,23 @@
           {% if section.settings.step3_image %}
             <img 
               src="{{ section.settings.step3_image | image_url: width: 600 }}" 
-              alt="eSIM aktivieren"
+              alt="{{ 'howto.step3_alt' | t | default: 'eSIM aktivieren' }}"
               loading="lazy"
               width="600"
-              height="450"
+              height="750"
             >
           {% else %}
             <img 
-              src="https://via.placeholder.com/600x450/f0faf7/009a61?text=Schritt+3" 
-              alt="eSIM aktivieren"
+              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+3" 
+              alt="{{ 'howto.step3_alt' | t | default: 'eSIM aktivieren' }}"
             >
           {% endif %}
         </div>
-        <h3 class="howto-step-title">{{ section.settings.step3_title | default: 'eSIM aktivieren' }}</h3>
-        <p class="howto-step-desc">{{ section.settings.step3_desc | default: 'Mobile Daten einschalten & lossurfen. Kein Roaming!' }}</p>
-        <span class="howto-step-time">~30 Sekunden</span>
+        <h3 class="howto-step-title">{{ 'howto.step3_title' | t | default: section.settings.step3_title }}</h3>
+        <p class="howto-step-desc">{{ 'howto.step3_desc' | t | default: section.settings.step3_desc }}</p>
+        <span class="howto-step-time">{{ 'howto.step3_time' | t | default: '~30 Sekunden' }}</span>
       </div>
       
-    </div>
-    
-    <!-- Trust Section -->
-    <div class="howto-trust">
-      <h3 class="howto-trust-title">Deine Sicherheit ist uns wichtig</h3>
-      <div class="howto-trust-items">
-        <div class="howto-trust-item">
-          <div class="howto-trust-icon">🛡️</div>
-          <span>100% Geld-zurück-Garantie</span>
-        </div>
-        <div class="howto-trust-item">
-          <div class="howto-trust-icon">💬</div>
-          <span>24/7 WhatsApp Support</span>
-        </div>
-        <div class="howto-trust-item">
-          <div class="howto-trust-icon">⚡</div>
-          <span>Sofort-Aktivierung garantiert</span>
-        </div>
-      </div>
     </div>
     
   </div>
@@ -643,25 +505,13 @@
   // Cache DOM elements
   const section = document.getElementById('howto-section');
   const steps = document.querySelectorAll('.howto-step');
-  const images = document.querySelectorAll('.howto-step-image');
   
   // Initialize
   function init() {
     if (!section) return;
     
-    // Add click handlers for images
-    images.forEach((img, index) => {
-      img.addEventListener('click', () => handleImageClick(index));
-    });
-    
     // Animate on scroll
     animateOnScroll();
-  }
-  
-  // Handle image click (future: open modal/zoom)
-  function handleImageClick(index) {
-    console.log(`Step ${index + 1} clicked`);
-    // Future: Open modal with detailed view
   }
   
   // Animate elements on scroll
@@ -711,7 +561,7 @@
       "type": "image_picker",
       "id": "step1_image",
       "label": "Bild für Schritt 1",
-      "info": "Empfohlen: 600x450px"
+      "info": "Empfohlen: 600x750px (4:5 Ratio)"
     },
     {
       "type": "text",
@@ -733,7 +583,7 @@
       "type": "image_picker",
       "id": "step2_image",
       "label": "Bild für Schritt 2",
-      "info": "Empfohlen: 600x450px"
+      "info": "Empfohlen: 600x750px (4:5 Ratio)"
     },
     {
       "type": "text",
@@ -755,7 +605,7 @@
       "type": "image_picker",
       "id": "step3_image",
       "label": "Bild für Schritt 3",
-      "info": "Empfohlen: 600x450px"
+      "info": "Empfohlen: 600x750px (4:5 Ratio)"
     },
     {
       "type": "text",
