@@ -63,6 +63,16 @@
     radial-gradient(circle at 80% 20%, rgba(0, 154, 97, 0.03) 0%, transparent 50%);
 }
 
+/* Dark Mode - GRADIENT ANPASSEN */
+[data-theme="dark"] .howto-section {
+  background: linear-gradient(180deg,
+    #0a0a0a 0%,      /* Start: Reines Schwarz */
+    #0f1210 25%,     /* Leicht grünlich */
+    #0a1510 50%,     /* Mitte */
+    #081008 75%,     /* Dunkler werden */
+    #051008 100%     /* ⬅️ ENDFARBE - Übergang zu Why-Simbye */
+  );
+}
 /* Container */
 .howto-container {
   max-width: 1440px;
