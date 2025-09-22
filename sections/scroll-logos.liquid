@@ -15,29 +15,39 @@
 
 /* Dark Mode */
 [data-theme="dark"] {
-  --carousel-bg: #0a0a0a;
-  --logo-filter: grayscale(100%) opacity(0.4) brightness(2);
-  --logo-hover-filter: grayscale(0%) opacity(0.8) brightness(1.5);
+  --carousel-bg: transparent; /* Transparent für Gradient */
+  --logo-filter: grayscale(0%) opacity(0.7) brightness(1.8) contrast(1.2);
+  --logo-hover-filter: grayscale(0%) opacity(1) brightness(2) contrast(1.3);
 }
 
 /* Main Section */
 .network-carousel-section {
   width: 100%;
   padding: 80px 0;
-  background: var(--carousel-bg);
+  background: #ffffff; /* Explizit weiß für Light Mode */
   position: relative;
   overflow: hidden;
   transition: background 0.3s ease;
 }
 
-/* Gradient Masks für nahtlosen Fade */
+/* Dark Mode Gradient - NAHTLOSER ÜBERGANG von Why-Simbye */
+[data-theme="dark"] .network-carousel-section {
+  background: linear-gradient(180deg,
+    #040404 0%,      /* Start: Kommt von Why-Simbye */
+    #040404 30%,     /* Bleibt schwarz */
+    #050505 60%,     /* Minimal heller */
+    #040404 100%     /* Ende: Reines Schwarz */
+  );
+}
+
+/* Gradient Masks für nahtlosen Fade - ANGEPASST für Dark Mode */
 .network-carousel-section::before,
 .network-carousel-section::after {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 200px;
+  width: 150px;
   z-index: 2;
   pointer-events: none;
 }
@@ -45,8 +55,8 @@
 .network-carousel-section::before {
   left: 0;
   background: linear-gradient(90deg, 
-    var(--carousel-bg) 0%, 
-    var(--carousel-bg) 20%,
+    #ffffff 0%, 
+    #ffffff 10%,
     transparent 100%);
 }
 
@@ -54,8 +64,23 @@
   right: 0;
   background: linear-gradient(90deg, 
     transparent 0%, 
-    var(--carousel-bg) 80%,
-    var(--carousel-bg) 100%);
+    #ffffff 90%,
+    #ffffff 100%);
+}
+
+/* Dark Mode Gradient Masks */
+[data-theme="dark"] .network-carousel-section::before {
+  background: linear-gradient(90deg, 
+    #040404 0%, 
+    #040404 10%,
+    transparent 100%);
+}
+
+[data-theme="dark"] .network-carousel-section::after {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #040404 90%,
+    #040404 100%);
 }
 
 /* Carousel Container */
@@ -105,10 +130,21 @@
   transform: scale(1);
 }
 
+/* Special filter for Orange/Vodafone logos in dark mode */
+[data-theme="dark"] .logo-item img[alt="Orange"],
+[data-theme="dark"] .logo-item img[alt="Vodafone"] {
+  filter: grayscale(0%) opacity(0.85) brightness(2.2) contrast(1.4) saturate(1.2);
+}
+
 /* Hover Effects */
 .logo-item:hover img {
   filter: var(--logo-hover-filter);
   transform: scale(1.1) translateY(-2px);
+}
+
+[data-theme="dark"] .logo-item:hover img[alt="Orange"],
+[data-theme="dark"] .logo-item:hover img[alt="Vodafone"] {
+  filter: grayscale(0%) opacity(1) brightness(2.5) contrast(1.5) saturate(1.3);
 }
 
 /* Infinite Scroll Animation */
@@ -127,7 +163,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: var(--carousel-bg);
+  background: #ffffff;
   padding: 8px 24px;
   border-radius: 100px;
   font-size: 14px;
@@ -142,8 +178,10 @@
 }
 
 [data-theme="dark"] .carousel-trust-badge {
-  background: #1a1a1a;
+  background: rgba(26, 26, 26, 0.9);
   color: #00d97e;
+  border: 1px solid rgba(0, 217, 126, 0.2);
+  backdrop-filter: blur(10px);
 }
 
 /* Show badge on section hover */
@@ -166,7 +204,19 @@
   
   .network-carousel-section::before,
   .network-carousel-section::after {
-    width: 80px;
+    width: 60px; /* Schmaler auf Mobile */
+  }
+  
+  [data-theme="dark"] .network-carousel-section::before {
+    background: linear-gradient(90deg, 
+      #040404 0%, 
+      transparent 100%);
+  }
+
+  [data-theme="dark"] .network-carousel-section::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      #040404 100%);
   }
   
   .logo-item img {
@@ -195,7 +245,19 @@
   
   .network-carousel-section::before,
   .network-carousel-section::after {
-    width: 60px;
+    width: 40px; /* Noch schmaler */
+  }
+  
+  [data-theme="dark"] .network-carousel-section::before {
+    background: linear-gradient(90deg, 
+      #040404 0%, 
+      transparent 100%);
+  }
+
+  [data-theme="dark"] .network-carousel-section::after {
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      #040404 100%);
   }
   
   .logo-item img {
