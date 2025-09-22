@@ -8,7 +8,7 @@
   --logo-filter: grayscale(100%) opacity(0.6);
   --logo-hover-filter: grayscale(0%) opacity(1);
   --carousel-speed: 40s;
-  --carousel-height: 100px;
+  --carousel-height: 120px; /* Höher für Padding-Ersatz */
   --logo-width: 150px;
   --logo-gap: 60px;
 }
@@ -16,16 +16,25 @@
 /* Dark Mode */
 [data-theme="dark"] {
   --carousel-bg: transparent; /* Transparent für Gradient */
+  /* Option 1: Alle Logos farbig mit Brightness */
   --logo-filter: grayscale(0%) opacity(0.7) brightness(1.8) contrast(1.2);
   --logo-hover-filter: grayscale(0%) opacity(1) brightness(2) contrast(1.3);
+  
+  /* Option 2: Grayscale (auskommentiert) */
+  /* --logo-filter: grayscale(100%) opacity(0.7) brightness(1.5); */
+  /* --logo-hover-filter: grayscale(50%) opacity(1) brightness(1.8); */
 }
 
 /* Main Section */
 .network-carousel-section {
-  width: 100%;
-  padding: 80px 0;
-  background: #ffffff; /* Explizit weiß für Light Mode */
+  width: 100vw; /* VOLLE VIEWPORT BREITE */
   position: relative;
+  left: 50%; /* Positionierung für Full Width */
+  right: 50%;
+  margin-left: -50vw; /* Negative Margin für Full Width */
+  margin-right: -50vw;
+  padding: 0; /* KEIN PADDING */
+  background: #ffffff; /* Explizit weiß für Light Mode */
   overflow: hidden;
   transition: background 0.3s ease;
 }
@@ -40,56 +49,22 @@
   );
 }
 
-/* Gradient Masks für nahtlosen Fade - ANGEPASST für Dark Mode */
+/* Gradient Masks KOMPLETT ENTFERNT für volle Breite */
 .network-carousel-section::before,
 .network-carousel-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 150px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.network-carousel-section::before {
-  left: 0;
-  background: linear-gradient(90deg, 
-    #ffffff 0%, 
-    #ffffff 10%,
-    transparent 100%);
-}
-
-.network-carousel-section::after {
-  right: 0;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    #ffffff 90%,
-    #ffffff 100%);
-}
-
-/* Dark Mode Gradient Masks */
-[data-theme="dark"] .network-carousel-section::before {
-  background: linear-gradient(90deg, 
-    #040404 0%, 
-    #040404 10%,
-    transparent 100%);
-}
-
-[data-theme="dark"] .network-carousel-section::after {
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    #040404 90%,
-    #040404 100%);
+  display: none; /* KEINE FADE MASKS MEHR */
 }
 
 /* Carousel Container */
 .carousel-container {
   position: relative;
-  width: 100%;
+  width: 100vw; /* VOLLE VIEWPORT BREITE */
   height: var(--carousel-height);
-  margin: 0 auto;
+  margin: 0;
+  padding: 0; /* KEIN PADDING */
   overflow: hidden;
+  display: flex;
+  align-items: center; /* Vertikal zentriert */
 }
 
 /* Carousel Track */
@@ -99,6 +74,7 @@
   height: 100%;
   width: fit-content;
   animation: scroll var(--carousel-speed) linear infinite;
+  padding: 0; /* Kein Padding */
 }
 
 /* Pause on Hover (optional) */
@@ -130,9 +106,11 @@
   transform: scale(1);
 }
 
-/* Special filter for Orange/Vodafone logos in dark mode */
+/* Special filter for Orange/Red logos in dark mode */
 [data-theme="dark"] .logo-item img[alt="Orange"],
-[data-theme="dark"] .logo-item img[alt="Vodafone"] {
+[data-theme="dark"] .logo-item img[alt="Vodafone"],
+[data-theme="dark"] .logo-item img[alt="Airtel"],
+[data-theme="dark"] .logo-item img[alt="Verizon"] {
   filter: grayscale(0%) opacity(0.85) brightness(2.2) contrast(1.4) saturate(1.2);
 }
 
@@ -143,7 +121,9 @@
 }
 
 [data-theme="dark"] .logo-item:hover img[alt="Orange"],
-[data-theme="dark"] .logo-item:hover img[alt="Vodafone"] {
+[data-theme="dark"] .logo-item:hover img[alt="Vodafone"],
+[data-theme="dark"] .logo-item:hover img[alt="Airtel"],
+[data-theme="dark"] .logo-item:hover img[alt="Verizon"] {
   filter: grayscale(0%) opacity(1) brightness(2.5) contrast(1.5) saturate(1.3);
 }
 
@@ -193,30 +173,24 @@
 @media (max-width: 768px) {
   :root {
     --carousel-speed: 30s;
-    --carousel-height: 80px;
+    --carousel-height: 100px; /* Angepasste Höhe */
     --logo-width: 120px;
     --logo-gap: 40px;
   }
   
   .network-carousel-section {
-    padding: 60px 0;
+    padding: 0; /* KEIN PADDING */
+    margin: 0;
   }
   
+  .carousel-container {
+    padding: 0; /* KEIN PADDING */
+  }
+  
+  /* Keine Fade Masks mehr nötig */
   .network-carousel-section::before,
   .network-carousel-section::after {
-    width: 60px; /* Schmaler auf Mobile */
-  }
-  
-  [data-theme="dark"] .network-carousel-section::before {
-    background: linear-gradient(90deg, 
-      #040404 0%, 
-      transparent 100%);
-  }
-
-  [data-theme="dark"] .network-carousel-section::after {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      #040404 100%);
+    display: none;
   }
   
   .logo-item img {
@@ -234,30 +208,24 @@
 @media (max-width: 480px) {
   :root {
     --carousel-speed: 25s;
-    --carousel-height: 70px;
+    --carousel-height: 80px; /* Kleinere Höhe */
     --logo-width: 100px;
     --logo-gap: 30px;
   }
   
   .network-carousel-section {
-    padding: 50px 0;
+    padding: 0; /* KEIN PADDING */
+    margin: 0;
   }
   
+  .carousel-container {
+    padding: 0; /* KEIN PADDING */
+  }
+  
+  /* Keine Fade Masks */
   .network-carousel-section::before,
   .network-carousel-section::after {
-    width: 40px; /* Noch schmaler */
-  }
-  
-  [data-theme="dark"] .network-carousel-section::before {
-    background: linear-gradient(90deg, 
-      #040404 0%, 
-      transparent 100%);
-  }
-
-  [data-theme="dark"] .network-carousel-section::after {
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      #040404 100%);
+    display: none;
   }
   
   .logo-item img {
