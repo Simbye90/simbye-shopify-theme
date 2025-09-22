@@ -1,5 +1,24 @@
 <!-- sections/how-to.liquid -->
-<!-- SIMBYE HOW-TO - ENTERPRISE 3-STEP PROCESS -->
+<!-- sections/how-to.liquid -->
+<style>
+  /* Break out of container */
+  #shopify-section-{{ section.id }} {
+    width: 100vw !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
+    grid-column: 1 / -1 !important;
+  }
+  
+  /* Dark Mode specific */
+  [data-theme="dark"] #shopify-section-{{ section.id }} {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+</style>
 
 <style>
 /* CSS Variables - Enterprise Design System */
