@@ -39,6 +39,17 @@
   transition: background 0.3s ease;
 }
 
+/* Mobile Fix - Überschreibt die Desktop Full-Width Methode */
+@media (max-width: 768px) {
+  .network-carousel-section {
+    left: 0; /* Reset Position */
+    right: 0;
+    margin-left: 0; /* Reset Margin */
+    margin-right: 0;
+    width: 100%; /* Normale 100% statt 100vw */
+  }
+}
+
 /* Dark Mode Gradient - NAHTLOSER ÜBERGANG von Why-Simbye */
 [data-theme="dark"] .network-carousel-section {
   background: linear-gradient(180deg,
@@ -65,6 +76,15 @@
   overflow: hidden;
   display: flex;
   align-items: center; /* Vertikal zentriert */
+}
+
+/* Mobile Container Fix */
+@media (max-width: 768px) {
+  .carousel-container {
+    width: 100%; /* Normale Breite auf Mobile */
+    left: 0;
+    position: relative;
+  }
 }
 
 /* Carousel Track */
@@ -236,10 +256,18 @@
   .network-carousel-section {
     padding: 0; /* KEIN PADDING */
     margin: 0;
+    left: 0 !important; /* Force Reset */
+    right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
   }
   
   .carousel-container {
     padding: 0; /* KEIN PADDING */
+    width: 100%; /* Normale 100% statt 100vw */
+    left: 0;
+    right: 0;
   }
   
   /* Keine Fade Masks mehr nötig */
@@ -276,10 +304,16 @@
   .network-carousel-section {
     padding: 0; /* KEIN PADDING */
     margin: 0;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
   }
   
   .carousel-container {
     padding: 0; /* KEIN PADDING */
+    width: 100%;
   }
   
   /* Keine Fade Masks */
