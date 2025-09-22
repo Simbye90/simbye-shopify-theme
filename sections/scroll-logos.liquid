@@ -13,6 +13,30 @@
   --logo-gap: 60px;
 }
 
+/* Global Reset für Shopify Container */
+.shopify-section:has(.network-carousel-section) {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Force Mobile Full Width */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden !important;
+  }
+  
+  .shopify-section {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  .network-carousel-section * {
+    max-width: none !important;
+  }
+}
+
 /* Dark Mode */
 [data-theme="dark"] {
   --carousel-bg: transparent; /* Transparent für Gradient */
@@ -27,23 +51,27 @@
 
 /* Main Section */
 .network-carousel-section {
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
   position: relative;
-  padding: 0;
-  margin: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
   background: #ffffff;
   overflow: hidden;
   transition: background 0.3s ease;
+  box-sizing: border-box;
 }
 
 /* Desktop Full Width */
 @media (min-width: 769px) {
   .network-carousel-section {
-    width: 100vw;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    width: 100vw !important;
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw !important;
+    margin-right: -50vw !important;
   }
 }
 
@@ -66,19 +94,21 @@
 /* Carousel Container */
 .carousel-container {
   position: relative;
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
   height: var(--carousel-height);
-  margin: 0;
-  padding: 0;
+  margin: 0 !important;
+  padding: 0 !important;
   overflow: hidden;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 /* Desktop Container */
 @media (min-width: 769px) {
   .carousel-container {
-    width: 100vw;
+    width: 100vw !important;
   }
 }
 
@@ -90,6 +120,8 @@
   width: fit-content;
   animation: scroll var(--carousel-speed) linear infinite;
   padding: 0; /* Kein Padding */
+  margin: 0; /* Kein Margin */
+  box-sizing: border-box;
 }
 
 /* Pause on Hover (optional) */
@@ -108,6 +140,23 @@
   margin-right: var(--logo-gap);
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+/* Mobile: Flexible Breite */
+@media (max-width: 768px) {
+  .logo-item {
+    width: auto !important; /* Flexible Breite */
+    flex: 0 0 auto;
+    padding: 0 15px !important; /* Padding statt feste Breite */
+    margin-right: 0 !important; /* Kein Margin */
+    height: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-item {
+    padding: 0 10px !important; /* Weniger Padding auf kleinen Screens */
+  }
 }
 
 .logo-item img {
@@ -244,28 +293,42 @@
   :root {
     --carousel-speed: 30s;
     --carousel-height: 100px;
-    --logo-width: 120px;
-    --logo-gap: 40px;
+    --logo-width: auto; /* Flexible Breite */
+    --logo-gap: 0; /* Kein Gap */
+  }
+  
+  /* Force Reset für Shopify */
+  .shopify-section:has(.network-carousel-section) {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
   
   .network-carousel-section {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    left: auto;
-    right: auto;
-    position: relative;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative !important;
   }
   
   .carousel-container {
-    width: 100%;
-    padding: 0;
-    margin: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   
   .carousel-track {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .logo-item {
+    padding: 0 15px !important; /* Weniger Padding */
   }
   
   .logo-item img {
@@ -287,28 +350,41 @@
   :root {
     --carousel-speed: 25s;
     --carousel-height: 80px;
-    --logo-width: 100px;
-    --logo-gap: 30px;
+    --logo-width: auto;
+    --logo-gap: 0;
+  }
+  
+  .shopify-section:has(.network-carousel-section) {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
   }
   
   .network-carousel-section {
-    width: 100%;
-    padding: 0;
-    margin: 0;
-    left: auto;
-    right: auto;
-    position: relative;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    position: relative !important;
   }
   
   .carousel-container {
-    width: 100%;
-    padding: 0;
-    margin: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   
   .carousel-track {
-    margin: 0;
-    padding: 0;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .logo-item {
+    padding: 0 10px !important; /* Noch weniger Padding */
   }
   
   .logo-item img {
@@ -345,8 +421,8 @@
 }
 </style>
 
-<section class="network-carousel-section" id="network-carousel">
-  <div class="carousel-container">
+<section class="network-carousel-section" id="network-carousel" style="width: 100%; margin: 0; padding: 0;">
+  <div class="carousel-container" style="width: 100%; margin: 0; padding: 0;">
     <!-- Optional Trust Badge -->
     <div class="carousel-trust-badge">
       700+ Network Partners Worldwide
