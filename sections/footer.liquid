@@ -1,33 +1,43 @@
 <!-- sections/footer-enterprise.liquid -->
 <footer class="footer-enterprise full-width" id="footer-{{ section.id }}" data-section-id="{{ section.id }}">
-  <!-- Background Gradient -->
-  <div class="footer-bg-gradient"></div>
+  <!-- Background Pattern -->
+  <div class="footer-bg-pattern"></div>
   
-  <!-- Main Footer -->
+  <!-- Main Footer Content -->
   <div class="footer-main">
     <div class="footer-container">
-      <!-- Footer Grid -->
       <div class="footer-grid">
-        <!-- Logo Column -->
-        <div class="footer-column footer-brand">
+        
+        <!-- Brand Column -->
+        <div class="footer-brand">
+          <!-- Logo -->
           <div class="footer-logo">
-            <img src="{{ section.settings.logo | image_url: width: 200 }}" 
-                 alt="{{ shop.name }}"
-                 loading="lazy"
-                 width="200">
+            {% if section.settings.logo %}
+              <img src="{{ section.settings.logo | image_url: width: 200 }}" 
+                   alt="{{ shop.name }}"
+                   width="200"
+                   height="auto"
+                   loading="lazy">
+            {% else %}
+              <h3 class="footer-logo-text">{{ shop.name }}</h3>
+            {% endif %}
           </div>
-          <p class="footer-tagline">{{ section.settings.tagline | default: 'eSIM for 190+ countries. No roaming fees. Instant activation.' }}</p>
           
-          <!-- Social Media -->
+          <!-- Tagline -->
+          <p class="footer-tagline">
+            {{ section.settings.tagline | default: 'eSIM for 190+ countries • No roaming fees • Instant activation' }}
+          </p>
+          
+          <!-- Social Media Links -->
           {% if section.settings.show_social %}
             <div class="footer-social">
               {% for block in section.blocks %}
                 {% if block.type == 'social_link' %}
                   <a href="{{ block.settings.url }}" 
-                     class="social-link" 
+                     class="social-icon"
                      title="{{ block.settings.platform }}"
                      target="_blank"
-                     rel="noopener"
+                     rel="noopener noreferrer"
                      {{ block.shopify_attributes }}>
                     {{ block.settings.icon_svg }}
                   </a>
@@ -37,111 +47,101 @@
           {% endif %}
         </div>
         
-        <!-- Dynamic Menu Columns -->
-        {% for block in section.blocks %}
-          {% if block.type == 'menu_column' %}
-            <div class="footer-column" {{ block.shopify_attributes }}>
-              <h4 class="footer-heading">{{ block.settings.heading }}</h4>
-              <ul class="footer-links">
-                {% if block.settings.menu != blank %}
-                  {% for link in linklists[block.settings.menu].links %}
-                    <li>
-                      <a href="{{ link.url }}" class="footer-link">
-                        {{ link.title }}
-                        {% if link.object.metafields.custom.is_new %}
-                          <span class="link-badge">NEW</span>
-                        {% endif %}
-                      </a>
-                    </li>
-                  {% endfor %}
-                {% endif %}
-                
-                <!-- Custom Links -->
-                {% for i in (1..6) %}
-                  {% capture link_title %}custom_link_{{ i }}_title{% endcapture %}
-                  {% capture link_url %}custom_link_{{ i }}_url{% endcapture %}
-                  {% if block.settings[link_title] != blank %}
-                    <li>
-                      <a href="{{ block.settings[link_url] }}" class="footer-link">
-                        {{ block.settings[link_title] }}
-                      </a>
-                    </li>
+        <!-- Menu Columns (3) -->
+        <div class="footer-menus">
+          {% assign menu_count = 0 %}
+          {% for block in section.blocks %}
+            {% if block.type == 'menu_column' and menu_count < 3 %}
+              <div class="footer-menu-column" {{ block.shopify_attributes }}>
+                <h4 class="footer-menu-title">{{ block.settings.heading }}</h4>
+                <ul class="footer-menu-list">
+                  {% if block.settings.menu != blank %}
+                    {% for link in linklists[block.settings.menu].links %}
+                      <li>
+                        <a href="{{ link.url }}" class="footer-link">
+                          {{ link.title }}
+                          {% if forloop.index <= 2 and block.settings.show_new_badge %}
+                            <span class="link-badge">NEW</span>
+                          {% endif %}
+                        </a>
+                      </li>
+                    {% endfor %}
                   {% endif %}
-                {% endfor %}
-              </ul>
-            </div>
-          {% endif %}
-          
-          <!-- Product Column -->
-          {% if block.type == 'product_column' %}
-            <div class="footer-column footer-products" {{ block.shopify_attributes }}>
-              <h4 class="footer-heading">{{ block.settings.heading | default: 'Popular eSIMs' }}</h4>
-              <div class="footer-product-grid">
-                {% for i in (1..4) %}
-                  {% capture product_id %}product_{{ i }}{% endcapture %}
-                  {% assign product = all_products[block.settings[product_id]] %}
-                  {% if product %}
-                    <a href="{{ product.url }}" class="footer-product">
-                      <span class="product-flag">{{ product.metafields.custom.flag | default: '🌍' }}</span>
-                      <span class="product-name">{{ product.title | truncate: 15 }}</span>
-                      <span class="product-price">{{ product.price | money_without_currency }}</span>
-                    </a>
-                  {% endif %}
-                {% endfor %}
+                </ul>
               </div>
-            </div>
-          {% endif %}
-        {% endfor %}
+              {% assign menu_count = menu_count | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        
+        <!-- Popular Products Column -->
+        <div class="footer-products">
+          <h4 class="footer-menu-title">{{ section.settings.products_title | default: 'Popular eSIMs' }}</h4>
+          <div class="footer-product-list">
+            {% for block in section.blocks %}
+              {% if block.type == 'product_item' %}
+                {% assign product = all_products[block.settings.product] %}
+                {% if product %}
+                  <a href="{{ product.url }}" class="footer-product-item">
+                    <span class="product-flag">{{ product.metafields.custom.flag | default: '🌍' }}</span>
+                    <span class="product-name">{{ product.title | truncate: 20 }}</span>
+                    <span class="product-price">{{ product.price | money_without_currency }}</span>
+                  </a>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        
       </div>
-      
-      <!-- Trust Badges -->
-      {% if section.settings.show_trust_badges %}
-        <div class="footer-trust">
-          <div class="trust-badges">
-            <div class="trust-badge">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    </div>
+  </div>
+  
+  <!-- Trust & Payment Section -->
+  <div class="footer-trust-payment">
+    <div class="footer-container">
+      <div class="trust-payment-grid">
+        
+        <!-- Trust Badges -->
+        {% if section.settings.show_trust %}
+          <div class="footer-trust">
+            <div class="trust-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2"/>
+              </svg>
+              <span>4.9/5 (2847 Reviews)</span>
+            </div>
+            <div class="trust-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2"/>
               </svg>
-              <span>SSL Encrypted</span>
+              <span>SSL Secured</span>
             </div>
-            <div class="trust-badge">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2"/>
-              </svg>
-              <span>4.9/5 Rating</span>
-            </div>
-            <div class="trust-badge">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="2"/>
-              </svg>
-              <span>100% Secure</span>
-            </div>
-            <div class="trust-badge">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <div class="trust-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
                 <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
               <span>24/7 Support</span>
             </div>
           </div>
-        </div>
-      {% endif %}
-      
-      <!-- Payment Methods -->
-      {% if section.settings.show_payment %}
-        <div class="footer-payment">
-          <div class="payment-methods">
-            <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/visa.svg?v=1" alt="Visa" height="32" loading="lazy">
-            <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/mastercard.svg?v=1" alt="Mastercard" height="32" loading="lazy">
-            <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/amex.svg?v=1" alt="Amex" height="32" loading="lazy">
-            <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/apple-pay.svg?v=1" alt="Apple Pay" height="32" loading="lazy">
-            <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/google-pay.svg?v=1" alt="Google Pay" height="32" loading="lazy">
-            <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/paypal.svg?v=1" alt="PayPal" height="32" loading="lazy">
-            <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/klarna.svg?v=1" alt="Klarna" height="32" loading="lazy">
+        {% endif %}
+        
+        <!-- Payment Icons -->
+        {% if section.settings.show_payment and shop.enabled_payment_types != empty %}
+          <div class="footer-payment">
+            <ul class="payment-icons" role="list">
+              {% for type in shop.enabled_payment_types %}
+                <li class="payment-icon-item">
+                  {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+                </li>
+              {% endfor %}
+            </ul>
           </div>
-        </div>
-      {% endif %}
+        {% endif %}
+        
+      </div>
     </div>
   </div>
   
@@ -153,17 +153,12 @@
           <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright_text | default: 'All rights reserved.' }}</p>
         </div>
         <div class="footer-legal">
-          {% for link in linklists[section.settings.legal_menu].links %}
-            <a href="{{ link.url }}" class="legal-link">{{ link.title }}</a>
-          {% endfor %}
-        </div>
-        <div class="footer-localization">
-          <button class="locale-selector">
-            <span>🌐 {{ shop.locale | upcase }}</span>
-          </button>
-          <button class="currency-selector">
-            <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-          </button>
+          {% if section.settings.legal_menu != blank %}
+            {% for link in linklists[section.settings.legal_menu].links %}
+              <a href="{{ link.url }}" class="legal-link">{{ link.title }}</a>
+              {% unless forloop.last %}<span class="legal-separator">•</span>{% endunless %}
+            {% endfor %}
+          {% endif %}
         </div>
       </div>
     </div>
@@ -175,7 +170,6 @@
 .shopify-section:has(.footer-enterprise) {
   padding: 0 !important;
   margin: 0 !important;
-  max-width: 100% !important;
   width: 100% !important;
 }
 
@@ -190,52 +184,44 @@
 
 /* Variables */
 .footer-enterprise {
-  --footer-bg: #fafafa;
+  --footer-bg: #ffffff;
   --footer-text: #1a1a1a;
-  --footer-text-secondary: #666;
+  --footer-text-secondary: #666666;
+  --footer-accent: #009a61;
+  --footer-hover: #00824f;
   --footer-border: rgba(0, 0, 0, 0.08);
-  --footer-primary: #009a61;
-  --footer-primary-hover: #00824f;
-  --footer-accent: #00d97e;
   --footer-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dark Mode */
 [data-theme="dark"] .footer-enterprise {
-  --footer-bg: #0a0a0a;
-  --footer-text: #f5f5f5;
-  --footer-text-secondary: #999;
+  --footer-bg: #040404;
+  --footer-text: #ffffff;
+  --footer-text-secondary: #999999;
+  --footer-accent: #00d97e;
+  --footer-hover: #00c571;
   --footer-border: rgba(255, 255, 255, 0.08);
-  --footer-primary: #00d97e;
-  --footer-primary-hover: #00c571;
 }
 
-/* Main Section */
+/* Base */
 .footer-enterprise {
   position: relative;
   background: var(--footer-bg);
+  color: var(--footer-text);
   overflow: hidden;
 }
 
-/* Background Gradient */
-.footer-bg-gradient {
+/* Background Pattern */
+.footer-bg-pattern {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(0, 154, 97, 0.02) 50%, 
-    rgba(0, 154, 97, 0.04) 100%);
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(0, 154, 97, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(0, 217, 126, 0.03) 0%, transparent 40%);
   pointer-events: none;
-}
-
-[data-theme="dark"] .footer-bg-gradient {
-  background: linear-gradient(180deg, 
-    transparent 0%, 
-    rgba(0, 217, 126, 0.02) 50%, 
-    rgba(0, 217, 126, 0.04) 100%);
 }
 
 /* Container */
@@ -245,31 +231,24 @@
   padding: 0 40px;
 }
 
-/* Footer Grid */
+/* Main Footer */
 .footer-main {
-  position: relative;
-  z-index: 1;
+  padding: 80px 0 60px;
+  border-bottom: 1px solid var(--footer-border);
 }
 
+/* Grid Layout */
 .footer-grid {
-  padding: 100px 0 80px 0;
   display: grid;
-  grid-template-columns: 2fr repeat(auto-fit, minmax(200px, 1fr));
-  gap: 60px;
-}
-
-/* Footer Column */
-.footer-column {
-  min-width: 0;
+  grid-template-columns: 300px 1fr 250px;
+  gap: 80px;
 }
 
 /* Brand Column */
 .footer-brand {
-  grid-column: span 1;
-}
-
-.footer-logo {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .footer-logo img {
@@ -277,21 +256,27 @@
   width: auto;
 }
 
-.footer-tagline {
-  font-size: 15px;
-  color: var(--footer-text-secondary);
-  line-height: 1.6;
-  margin: 0 0 24px;
-  max-width: 280px;
+.footer-logo-text {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--footer-accent);
 }
 
-/* Social Links */
+.footer-tagline {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--footer-text-secondary);
+  margin: 0;
+}
+
+/* Social Icons */
 .footer-social {
   display: flex;
   gap: 12px;
 }
 
-.social-link {
+.social-icon {
   width: 40px;
   height: 40px;
   display: flex;
@@ -303,39 +288,49 @@
   transition: var(--footer-transition);
 }
 
-.social-link:hover {
-  background: var(--footer-primary);
+.social-icon:hover {
+  background: var(--footer-accent);
   color: white;
   transform: translateY(-3px);
 }
 
-.social-link svg {
+.social-icon svg {
   width: 20px;
   height: 20px;
+  stroke-width: 2;
 }
 
-/* Footer Heading */
-.footer-heading {
-  font-size: 18px;
-  font-weight: 700;
+/* Menu Columns */
+.footer-menus {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+}
+
+.footer-menu-column {
+  min-width: 0;
+}
+
+.footer-menu-title {
+  font-size: 16px;
+  font-weight: 600;
   color: var(--footer-text);
-  margin: 0 0 24px;
+  margin: 0 0 20px;
   letter-spacing: -0.01em;
 }
 
-/* Footer Links */
-.footer-links {
+.footer-menu-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.footer-links li {
+.footer-menu-list li {
   margin-bottom: 12px;
 }
 
 .footer-link {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--footer-text-secondary);
   text-decoration: none;
   transition: var(--footer-transition);
@@ -345,51 +340,57 @@
 }
 
 .footer-link:hover {
-  color: var(--footer-primary);
-  transform: translateX(3px);
+  color: var(--footer-accent);
+  transform: translateX(2px);
 }
 
 .link-badge {
   padding: 2px 6px;
   background: var(--footer-accent);
   color: white;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   border-radius: 4px;
+  letter-spacing: 0.5px;
 }
 
-/* Product Grid */
-.footer-product-grid {
-  display: grid;
-  gap: 12px;
+/* Products Column */
+.footer-products {
+  min-width: 0;
 }
 
-.footer-product {
+.footer-product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-product-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px;
-  background: var(--footer-border);
+  gap: 10px;
+  padding: 10px 12px;
+  background: rgba(0, 154, 97, 0.04);
   border-radius: 10px;
   text-decoration: none;
   transition: var(--footer-transition);
 }
 
-[data-theme="dark"] .footer-product {
+[data-theme="dark"] .footer-product-item {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.footer-product:hover {
-  background: var(--footer-primary);
+.footer-product-item:hover {
+  background: var(--footer-accent);
   transform: translateX(3px);
 }
 
-.footer-product:hover * {
+.footer-product-item:hover * {
   color: white !important;
 }
 
 .product-flag {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .product-name {
@@ -401,74 +402,83 @@
 
 .product-price {
   font-size: 13px;
-  color: var(--footer-primary);
+  color: var(--footer-accent);
   font-weight: 700;
 }
 
-/* Trust Badges */
-.footer-trust {
+/* Trust & Payment Section */
+.footer-trust-payment {
   padding: 40px 0;
-  border-top: 1px solid var(--footer-border);
-  border-bottom: 1px solid var(--footer-border);
+  background: rgba(0, 154, 97, 0.02);
 }
 
-.trust-badges {
+[data-theme="dark"] .footer-trust-payment {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.trust-payment-grid {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   gap: 40px;
-  flex-wrap: wrap;
 }
 
-.trust-badge {
+/* Trust Items */
+.footer-trust {
+  display: flex;
+  gap: 30px;
+}
+
+.trust-item {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   color: var(--footer-text-secondary);
-}
-
-.trust-badge svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--footer-primary);
-}
-
-.trust-badge span {
   font-size: 14px;
-  font-weight: 500;
 }
 
-/* Payment Methods */
+.trust-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--footer-accent);
+}
+
+/* Payment Icons */
 .footer-payment {
-  padding: 40px 0;
+  display: flex;
 }
 
-.payment-methods {
+.payment-icons {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.payment-icon-item {
+  display: flex;
+  align-items: center;
+}
+
+.payment-icon {
+  height: 28px;
+  width: auto;
   filter: grayscale(100%) opacity(0.6);
   transition: var(--footer-transition);
 }
 
-.payment-methods:hover {
+.payment-icon:hover {
   filter: grayscale(0%) opacity(1);
-}
-
-.payment-methods img {
-  height: 32px;
-  width: auto;
+  transform: translateY(-2px);
 }
 
 /* Bottom Bar */
 .footer-bottom {
-  background: rgba(0, 0, 0, 0.02);
   padding: 24px 0;
+  background: var(--footer-bg);
   border-top: 1px solid var(--footer-border);
-}
-
-[data-theme="dark"] .footer-bottom {
-  background: rgba(255, 255, 255, 0.02);
 }
 
 .footer-bottom-content {
@@ -479,118 +489,114 @@
 }
 
 .footer-copyright p {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--footer-text-secondary);
   margin: 0;
 }
 
 .footer-legal {
   display: flex;
-  gap: 24px;
+  align-items: center;
+  gap: 8px;
 }
 
 .legal-link {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--footer-text-secondary);
   text-decoration: none;
   transition: var(--footer-transition);
 }
 
 .legal-link:hover {
-  color: var(--footer-primary);
+  color: var(--footer-accent);
 }
 
-.footer-localization {
-  display: flex;
-  gap: 12px;
+.legal-separator {
+  color: var(--footer-border);
+  font-size: 10px;
 }
 
-.locale-selector,
-.currency-selector {
-  padding: 8px 16px;
-  background: transparent;
-  border: 1px solid var(--footer-border);
-  border-radius: 8px;
-  color: var(--footer-text-secondary);
-  font-size: 14px;
-  cursor: pointer;
-  transition: var(--footer-transition);
+/* Mobile Responsive */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+  }
+  
+  .footer-products {
+    display: none;
+  }
+  
+  .footer-menus {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
 }
 
-.locale-selector:hover,
-.currency-selector:hover {
-  border-color: var(--footer-primary);
-  color: var(--footer-primary);
-}
-
-/* Mobile Styles */
 @media (max-width: 768px) {
   .footer-container {
     padding: 0 20px;
   }
   
+  .footer-main {
+    padding: 60px 0 40px;
+  }
+  
   .footer-grid {
     grid-template-columns: 1fr;
-    padding: 60px 0 40px 0;
     gap: 40px;
   }
   
   .footer-brand {
     text-align: center;
-  }
-  
-  .footer-logo {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .footer-tagline {
-    max-width: 100%;
-    text-align: center;
+    align-items: center;
   }
   
   .footer-social {
     justify-content: center;
   }
   
-  .footer-heading {
-    font-size: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .footer-product-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  
-  .trust-badges {
-    gap: 20px;
-  }
-  
-  .trust-badge {
-    flex-direction: column;
+  .footer-menus {
+    grid-template-columns: 1fr;
+    gap: 30px;
     text-align: center;
-    gap: 6px;
   }
   
-  .payment-methods {
+  .footer-products {
+    display: block;
+    text-align: center;
+  }
+  
+  .footer-product-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  
+  .trust-payment-grid {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .footer-trust {
+    flex-direction: column;
+    align-items: center;
     gap: 12px;
   }
   
-  .payment-methods img {
-    height: 24px;
+  .payment-icons {
+    justify-content: center;
+    flex-wrap: wrap;
   }
   
   .footer-bottom-content {
     flex-direction: column;
     text-align: center;
-  }
-  
-  .footer-legal {
     gap: 16px;
   }
   
-  .footer-localization {
-    width: 100%;
+  .footer-legal {
+    flex-wrap: wrap;
     justify-content: center;
   }
 }
@@ -607,10 +613,6 @@
 }
 </style>
 
-<script>
-// Footer functionality can be added here if needed
-</script>
-
 {% schema %}
 {
   "name": "Footer Enterprise",
@@ -618,7 +620,7 @@
   "settings": [
     {
       "type": "header",
-      "content": "Logo & Brand"
+      "content": "Brand Settings"
     },
     {
       "type": "image_picker",
@@ -629,8 +631,14 @@
     {
       "type": "text",
       "id": "tagline",
-      "label": "Tagline",
-      "default": "eSIM for 190+ countries. No roaming fees. Instant activation."
+      "label": "Brand Tagline",
+      "default": "eSIM for 190+ countries • No roaming fees • Instant activation"
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Products Column Title",
+      "default": "Popular eSIMs"
     },
     {
       "type": "header",
@@ -638,15 +646,16 @@
     },
     {
       "type": "checkbox",
-      "id": "show_trust_badges",
+      "id": "show_trust",
       "label": "Show Trust Badges",
       "default": true
     },
     {
       "type": "checkbox",
       "id": "show_payment",
-      "label": "Show Payment Methods",
-      "default": true
+      "label": "Show Payment Icons",
+      "default": true,
+      "info": "Shows all enabled payment methods from your store settings"
     },
     {
       "type": "checkbox",
@@ -667,15 +676,15 @@
     {
       "type": "link_list",
       "id": "legal_menu",
-      "label": "Legal Menu",
-      "info": "Select menu for legal links (Privacy, Terms, etc.)"
+      "label": "Legal Links Menu",
+      "info": "Select menu with Privacy Policy, Terms, etc."
     }
   ],
   "blocks": [
     {
       "type": "menu_column",
       "name": "Menu Column",
-      "limit": 6,
+      "limit": 3,
       "settings": [
         {
           "type": "text",
@@ -687,110 +696,31 @@
           "type": "link_list",
           "id": "menu",
           "label": "Menu",
-          "info": "Select a menu or use custom links below"
+          "info": "Select a menu from Navigation"
         },
         {
-          "type": "header",
-          "content": "Custom Links (Optional)"
-        },
-        {
-          "type": "text",
-          "id": "custom_link_1_title",
-          "label": "Link 1 Title"
-        },
-        {
-          "type": "url",
-          "id": "custom_link_1_url",
-          "label": "Link 1 URL"
-        },
-        {
-          "type": "text",
-          "id": "custom_link_2_title",
-          "label": "Link 2 Title"
-        },
-        {
-          "type": "url",
-          "id": "custom_link_2_url",
-          "label": "Link 2 URL"
-        },
-        {
-          "type": "text",
-          "id": "custom_link_3_title",
-          "label": "Link 3 Title"
-        },
-        {
-          "type": "url",
-          "id": "custom_link_3_url",
-          "label": "Link 3 URL"
-        },
-        {
-          "type": "text",
-          "id": "custom_link_4_title",
-          "label": "Link 4 Title"
-        },
-        {
-          "type": "url",
-          "id": "custom_link_4_url",
-          "label": "Link 4 URL"
-        },
-        {
-          "type": "text",
-          "id": "custom_link_5_title",
-          "label": "Link 5 Title"
-        },
-        {
-          "type": "url",
-          "id": "custom_link_5_url",
-          "label": "Link 5 URL"
-        },
-        {
-          "type": "text",
-          "id": "custom_link_6_title",
-          "label": "Link 6 Title"
-        },
-        {
-          "type": "url",
-          "id": "custom_link_6_url",
-          "label": "Link 6 URL"
+          "type": "checkbox",
+          "id": "show_new_badge",
+          "label": "Show NEW badge on first 2 items",
+          "default": false
         }
       ]
     },
     {
-      "type": "product_column",
-      "name": "Product Column",
-      "limit": 1,
+      "type": "product_item",
+      "name": "Product",
+      "limit": 4,
       "settings": [
         {
-          "type": "text",
-          "id": "heading",
-          "label": "Column Heading",
-          "default": "Popular eSIMs"
-        },
-        {
           "type": "product",
-          "id": "product_1",
-          "label": "Product 1"
-        },
-        {
-          "type": "product",
-          "id": "product_2",
-          "label": "Product 2"
-        },
-        {
-          "type": "product",
-          "id": "product_3",
-          "label": "Product 3"
-        },
-        {
-          "type": "product",
-          "id": "product_4",
-          "label": "Product 4"
+          "id": "product",
+          "label": "Select Product"
         }
       ]
     },
     {
       "type": "social_link",
-      "name": "Social Link",
+      "name": "Social Media",
       "settings": [
         {
           "type": "text",
@@ -801,13 +731,13 @@
         {
           "type": "url",
           "id": "url",
-          "label": "Social URL"
+          "label": "Social Media URL"
         },
         {
           "type": "html",
           "id": "icon_svg",
-          "label": "Icon SVG",
-          "default": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='2' y='2' width='20' height='20' rx='5' ry='5'/><path d='M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z'/><line x1='17.5' y1='6.5' x2='17.51' y2='6.5'/></svg>"
+          "label": "Icon SVG Code",
+          "default": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><rect x='2' y='2' width='20' height='20' rx='5'/><path d='M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z'/><line x1='17.5' y1='6.5' x2='17.51' y2='6.5'/></svg>"
         }
       ]
     }
@@ -820,63 +750,42 @@
           "type": "menu_column",
           "settings": {
             "heading": "Products",
-            "custom_link_1_title": "All Countries",
-            "custom_link_1_url": "/collections/all",
-            "custom_link_2_title": "Europe eSIM",
-            "custom_link_2_url": "/products/europe-esim",
-            "custom_link_3_title": "USA eSIM",
-            "custom_link_3_url": "/products/usa-esim",
-            "custom_link_4_title": "Asia eSIM",
-            "custom_link_4_url": "/products/asia-esim"
+            "show_new_badge": true
           }
         },
         {
           "type": "menu_column",
           "settings": {
             "heading": "Support",
-            "custom_link_1_title": "How it Works",
-            "custom_link_1_url": "/pages/how-it-works",
-            "custom_link_2_title": "Check eSIM",
-            "custom_link_2_url": "/pages/check-esim",
-            "custom_link_3_title": "FAQ",
-            "custom_link_3_url": "/pages/faq",
-            "custom_link_4_title": "Contact",
-            "custom_link_4_url": "/pages/contact"
+            "show_new_badge": false
           }
         },
         {
           "type": "menu_column",
           "settings": {
             "heading": "Company",
-            "custom_link_1_title": "About Us",
-            "custom_link_1_url": "/pages/about",
-            "custom_link_2_title": "Blog",
-            "custom_link_2_url": "/blogs/news",
-            "custom_link_3_title": "Careers",
-            "custom_link_3_url": "/pages/careers",
-            "custom_link_4_title": "Partners",
-            "custom_link_4_url": "/pages/partners"
+            "show_new_badge": false
           }
         },
         {
           "type": "social_link",
           "settings": {
             "platform": "Instagram",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><rect x='2' y='2' width='20' height='20' rx='5' ry='5'/><path d='M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z'/><line x1='17.5' y1='6.5' x2='17.51' y2='6.5'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><rect x='2' y='2' width='20' height='20' rx='5'/><path d='M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z'/><line x1='17.5' y1='6.5' x2='17.51' y2='6.5'/></svg>"
           }
         },
         {
           "type": "social_link",
           "settings": {
             "platform": "Facebook",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'/></svg>"
           }
         },
         {
           "type": "social_link",
           "settings": {
             "platform": "Twitter",
-            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'><path d='M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z'/></svg>"
+            "icon_svg": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><path d='M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z'/></svg>"
           }
         }
       ]
