@@ -76,11 +76,6 @@
         "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
       }
     },
-    "why_simbye_JUnMqH": {
-      "type": "why-simbye",
-      "name": "Why Simbye",
-      "settings": {}
-    },
     "scroll_logos_4fNwDz": {
       "type": "scroll-logos",
       "name": "Network Partners Carousel",
@@ -89,6 +84,11 @@
         "pause_on_hover": true,
         "show_trust_badge": false
       }
+    },
+    "why_simbye_JUnMqH": {
+      "type": "why-simbye",
+      "name": "Why Simbye",
+      "settings": {}
     },
     "kommis_KcNN9x": {
       "type": "kommis",
@@ -101,8 +101,8 @@
   "order": [
     "main",
     "destinations_jRWp7x",
-    "scroll_logos_4fNwDz",
     "how_to_YHUCmd",
+    "scroll_logos_4fNwDz",
     "why_simbye_JUnMqH",
     "kommis_KcNN9x"
   ]
