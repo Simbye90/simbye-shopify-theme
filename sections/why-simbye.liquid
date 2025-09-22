@@ -53,9 +53,10 @@
 /* Dark Mode - NAHTLOSER VERLAUF von How-To */
 [data-theme="dark"] .why-section {
   background: linear-gradient(180deg,
-    #051008 0%,      /* ⬅️ STARTFARBE = Endfarbe von How-To */
-    #0a1510 20%,     /* Sanfter Übergang */
-    #0f1210 40%,     /* Mitte */
+    #0a0a0a 0%,      /* ⬅️ STARTFARBE = #0a0a0a (GLEICH WIE HOW-TO ENDE!) */
+    #0c0f0d 15%,     /* Sehr sanfter Übergang */
+    #0f1210 30%,     /* Leicht grünlich */
+    #0a1510 50%,     /* Mitte */
     #0a0a0a 70%,     /* Zurück zu Schwarz */
     #040404 100%     /* Ende in tiefem Schwarz */
   );
@@ -332,7 +333,13 @@
 @media (max-width: 768px) {
   /* REDUZIERTER PADDING FÜR NAHTLOSEN ÜBERGANG */
   .why-section {
-    padding: 20px 0;  /* ⬅️ NUR 20px PADDING WIE GEWÜNSCHT! */
+    padding: 0 0 20px 0;  /* ⬅️ KEIN PADDING OBEN! */
+  }
+  
+  /* Dark Mode Extra-Anpassung */
+  [data-theme="dark"] .why-section {
+    padding-top: 0 !important;
+    margin-top: -2px !important; /* Mini-Überlappung für perfekten Übergang */
   }
   
   .why-container {
