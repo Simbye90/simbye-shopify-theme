@@ -150,5 +150,24 @@
   "feature6_title": "Trusted Worldwide",
   "feature6_subtitle": "Over 100,000+ happy customers",
   "feature6_text": "100,000+ customers worldwide already trust us. 4.9 star rating. The first choice for business travelers and digital nomads."
-}
+},
+
+  "trust": {
+    "title_part1": "Trusted by",
+    "title_part2": "100,000+ travelers",
+    "title_part3": "worldwide",
+    "verified": "Verified Reviews",
+    "review1": "Super easy activation! Was online in Turkey within 2 minutes. Much cheaper than roaming.",
+    "review2": "Best eSIM provider! Much cheaper than my carrier. Had great speeds in Japan.",
+    "review3": "Perfect for my business trips! Reliable connection in 15+ countries so far.",
+    "review4": "Very easy installation! Excellent and fast customer support.",
+    "review5": "Great service! Worked perfectly in Dubai. Definitely recommend.",
+    "review6": "Saved me hundreds on my Europe trip! Fast 5G speeds everywhere.",
+    "date1": "3 days ago",
+    "date2": "1 week ago",
+    "date3": "2 weeks ago",
+    "date4": "3 weeks ago",
+    "date5": "1 month ago",
+    "date6": "6 weeks ago"
+  }
 }
