@@ -122,7 +122,22 @@
   position: relative;
 }
 
-
+/* Connection Line - Subtiler */
+.howto-steps::before {
+  content: '';
+  position: absolute;
+  top: 24px; /* Bei den Nummern */
+  left: 25%;
+  right: 25%;
+  height: 1px; /* Dünner */
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    var(--howto-primary) 20%,
+    var(--howto-primary) 80%,
+    transparent 100%);
+  z-index: 0;
+  opacity: 0.2; /* Noch subtiler */
+}
 
 /* Step Card */
 .howto-step {
@@ -130,6 +145,7 @@
   z-index: 1;
   animation: fadeInUp 0.9s ease both;
   animation-delay: calc(var(--step-index) * 0.1s);
+  text-align: center; /* ALLES ZENTRIERT */
 }
 
 .howto-step:nth-child(1) { --step-index: 1; }
@@ -148,7 +164,7 @@
   border-radius: 50%;
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 24px;
+  margin: 0 auto 24px auto; /* Zentriert mit auto margins */
   position: relative;
   z-index: 2;
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
@@ -250,6 +266,10 @@
     gap: 32px;
   }
   
+  .howto-step {
+    text-align: center; /* Tablet auch zentriert */
+  }
+  
   .howto-step-title {
     font-size: 22px;
   }
@@ -294,6 +314,7 @@
     padding: 24px;
     box-shadow: none; /* Kein Shadow */
     border: none; /* Kein Border */
+    text-align: left; /* Mobile: Links für bessere Lesbarkeit */
   }
   
   [data-theme="dark"] .howto-step {
@@ -306,6 +327,7 @@
     top: -24px;
     left: 24px;
     z-index: 3;
+    margin: 0; /* Reset margin für Mobile */
   }
   
   .howto-step-image {
