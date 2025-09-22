@@ -38,7 +38,7 @@
 /* Main Section */
 .why-section {
   width: 100%;
-  padding: 50px 0;
+  padding: 100px 0;
   background: var(--why-bg);
   position: relative;
   overflow: hidden;
@@ -88,7 +88,7 @@
 /* Header */
 .why-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 72px;
   animation: fadeInUp 0.8s ease;
 }
 
@@ -330,8 +330,9 @@
 
 /* Mobile - TITEL GRÖSSE WIE HOW-TO */
 @media (max-width: 768px) {
+  /* REDUZIERTER PADDING FÜR NAHTLOSEN ÜBERGANG */
   .why-section {
-    padding: 72px 0;
+    padding: 20px 0;  /* ⬅️ NUR 20px PADDING WIE GEWÜNSCHT! */
   }
   
   .why-container {
@@ -470,7 +471,7 @@
     <!-- Header -->
     <div class="why-header">
       <h2 class="why-title">
-        {{ 'why.title_part1' | t | default: 'Warum' }} <span class="why-title-highlight">{{ 'why.title_part2' | t | default: 'Simbye eSIM' }}</span> {{ 'why.title_part3' | t | default: 'wählen' }}
+        {{ 'why.title_part1' | t | default: 'Why choose' }} <span class="why-title-highlight">{{ 'why.title_part2' | t | default: 'Simbye eSIM' }}</span> {{ 'why.title_part3' | t | default: '' }}
       </h2>
       <p class="why-subtitle">
         {{ 'why.subtitle' | t | default: 'Die smarteste Wahl für mobiles Internet im Ausland - ohne versteckte Kosten' }}
@@ -489,10 +490,10 @@
           </svg>
         </div>
         <div class="why-feature-content">
-          <h3 class="why-feature-title">{{ 'why.feature1_title' | t | default: 'Aufladbar & Flexibel' }}</h3>
-          <p class="why-feature-subtitle">{{ 'why.feature1_subtitle' | t | default: 'Einmal kaufen - immer wieder aufladen' }}</p>
+          <h3 class="why-feature-title">{{ 'why.feature1_title' | t | default: 'Rechargeable & Flexible' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature1_subtitle' | t | default: 'Buy once - top up anytime' }}</p>
           <p class="why-feature-text">
-            {{ 'why.feature1_text' | t | default: 'Keine Vertragsbindung, keine versteckten Kosten, keine Mindestlaufzeit. Laden Sie Ihre eSIM beliebig oft auf. Die flexibelste eSIM-Lösung am Markt.' }}
+            {{ 'why.feature1_text' | t | default: 'No contracts, no hidden fees, no minimum term. Top up your eSIM as often as you want. The most flexible eSIM solution on the market.' }}
           </p>
         </div>
       </div>
@@ -507,10 +508,10 @@
           </svg>
         </div>
         <div class="why-feature-content">
-          <h3 class="why-feature-title">{{ 'why.feature2_title' | t | default: 'Der Günstigste Anbieter' }}</h3>
-          <p class="why-feature-subtitle">{{ 'why.feature2_subtitle' | t | default: 'Günstiger als die Konkurrenz' }}</p>
+          <h3 class="why-feature-title">{{ 'why.feature2_title' | t | default: 'Best Price Guarantee' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature2_subtitle' | t | default: 'Cheaper than competitors' }}</p>
           <p class="why-feature-text">
-            {{ 'why.feature2_text' | t | default: 'Wir sind nicht nur günstig - wir sind DIE günstigsten. Vergleichen Sie uns mit Airalo, Holafly oder Nomad - niemand unterbietet unsere Preise.' }}
+            {{ 'why.feature2_text' | t | default: "We're not just cheap - we're THE cheapest. Compare us with Airalo, Holafly or Nomad - nobody beats our prices." }}
           </p>
         </div>
       </div>
@@ -525,9 +526,9 @@
         </div>
         <div class="why-feature-content">
           <h3 class="why-feature-title">{{ 'why.feature3_title' | t | default: '24/7 Premium Support' }}</h3>
-          <p class="why-feature-subtitle">{{ 'why.feature3_subtitle' | t | default: 'Schnellster Support - unter 60 Sekunden' }}</p>
+          <p class="why-feature-subtitle">{{ 'why.feature3_subtitle' | t | default: 'Fastest support - under 60 seconds' }}</p>
           <p class="why-feature-text">
-            {{ 'why.feature3_text' | t | default: 'Während andere Sie warten lassen, antworten wir in Sekunden. WhatsApp, Telegram, Live-Chat - 15 Support-Mitarbeiter nur für Sie. In 12 Sprachen.' }}
+            {{ 'why.feature3_text' | t | default: 'While others keep you waiting, we respond in seconds. WhatsApp, Telegram, Live Chat - 15 support agents just for you. In 12 languages.' }}
           </p>
         </div>
       </div>
@@ -543,10 +544,10 @@
           </svg>
         </div>
         <div class="why-feature-content">
-          <h3 class="why-feature-title">{{ 'why.feature4_title' | t | default: 'Gratis Testen' }}</h3>
-          <p class="why-feature-subtitle">{{ 'why.feature4_subtitle' | t | default: '100 MB völlig kostenlos' }}</p>
+          <h3 class="why-feature-title">{{ 'why.feature4_title' | t | default: 'Free Trial' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature4_subtitle' | t | default: '100 MB completely free' }}</p>
           <p class="why-feature-text">
-            {{ 'why.feature4_text' | t | default: 'Testen Sie komplett gratis. Keine Kreditkarte, kein Trick. Wir sind so überzeugt von unserer Qualität, dass wir Ihnen 100 MB schenken.' }}
+            {{ 'why.feature4_text' | t | default: "Test completely free. No credit card, no tricks. We're so confident in our quality that we give you 100 MB for free." }}
           </p>
         </div>
       </div>
@@ -562,10 +563,10 @@
           </svg>
         </div>
         <div class="why-feature-content">
-          <h3 class="why-feature-title">{{ 'why.feature5_title' | t | default: 'Lokale Premium-Netze' }}</h3>
-          <p class="why-feature-subtitle">{{ 'why.feature5_subtitle' | t | default: 'Schnellstes 5G - Unlimited verfügbar' }}</p>
+          <h3 class="why-feature-title">{{ 'why.feature5_title' | t | default: 'Local Premium Networks' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature5_subtitle' | t | default: 'Fastest 5G - Unlimited available' }}</p>
           <p class="why-feature-text">
-            {{ 'why.feature5_text' | t | default: 'Echte lokale Geschwindigkeiten bis 1 Gbit/s. Von 500 MB bis echtes Unlimited ohne Fair-Use-Policy. Premium-Roaming-Partner in 190+ Ländern.' }}
+            {{ 'why.feature5_text' | t | default: 'Real local speeds up to 1 Gbit/s. From 500 MB to real unlimited without fair use policy. Premium roaming partners in 190+ countries.' }}
           </p>
         </div>
       </div>
@@ -579,10 +580,10 @@
           </svg>
         </div>
         <div class="why-feature-content">
-          <h3 class="why-feature-title">{{ 'why.feature6_title' | t | default: 'Vertrauenswürdig' }}</h3>
-          <p class="why-feature-subtitle">{{ 'why.feature6_subtitle' | t | default: 'Über 100.000+ zufriedene Kunden' }}</p>
+          <h3 class="why-feature-title">{{ 'why.feature6_title' | t | default: 'Trusted Worldwide' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature6_subtitle' | t | default: 'Over 100,000+ happy customers' }}</p>
           <p class="why-feature-text">
-            {{ 'why.feature6_text' | t | default: '100.000+ Kunden weltweit vertrauen uns bereits. 4.9 Sterne Bewertung. Die erste Wahl für Geschäftsreisende und Digital Nomads.' }}
+            {{ 'why.feature6_text' | t | default: '100,000+ customers worldwide already trust us. 4.9 star rating. The first choice for business travelers and digital nomads.' }}
           </p>
         </div>
       </div>
