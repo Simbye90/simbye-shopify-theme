@@ -1,413 +1,608 @@
-<!-- sections/network-carousel.liquid -->
-<!-- ENTERPRISE NETWORK PARTNERS - INFINITE CAROUSEL -->
+<!-- sections/why-simbye.liquid -->
+<!-- WHY SIMBYE - ENTERPRISE FEATURES SECTION -->
 
 <style>
-/* CSS Variables */
+/* CSS Variables - Enterprise Design System */
 :root {
-  --carousel-bg: #ffffff;
-  --logo-filter: grayscale(100%) opacity(0.6);
-  --logo-hover-filter: grayscale(0%) opacity(1);
-  --carousel-speed: 40s;
-  --carousel-height: 120px; /* Höher für Padding-Ersatz */
-  --logo-width: 150px;
-  --logo-gap: 60px;
+  --why-bg: #ffffff;
+  --why-text: #1a1a1a;
+  --why-text-secondary: #666666;
+  --why-primary: #009a61;
+  --why-primary-hover: #00824f;
+  --why-accent: #00d97e;
+  --why-card-bg: #ffffff;
+  --why-border: rgba(0, 0, 0, 0.08);
+  --why-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --why-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --why-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --why-gradient: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  --why-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode */
+/* Dark Mode Variables */
 [data-theme="dark"] {
-  --carousel-bg: transparent; /* Transparent für Gradient */
-  /* Option 1: Alle Logos farbig mit Brightness */
-  --logo-filter: grayscale(0%) opacity(0.7) brightness(1.8) contrast(1.2);
-  --logo-hover-filter: grayscale(0%) opacity(1) brightness(2) contrast(1.3);
-  
-  /* Option 2: Grayscale (auskommentiert) */
-  /* --logo-filter: grayscale(100%) opacity(0.7) brightness(1.5); */
-  /* --logo-hover-filter: grayscale(50%) opacity(1) brightness(1.8); */
+  --why-bg: transparent; /* Transparent damit Verlauf durchgeht */
+  --why-text: #f5f5f5;
+  --why-text-secondary: #999999;
+  --why-primary: #00d97e;
+  --why-primary-hover: #009a61;
+  --why-accent: #00ff88;
+  --why-card-bg: rgba(26, 26, 26, 0.8);
+  --why-border: rgba(255, 255, 255, 0.08);
+  --why-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --why-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --why-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+  --why-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
 }
 
 /* Main Section */
-.network-carousel-section {
-  width: 100vw; /* VOLLE VIEWPORT BREITE */
+.why-section {
+  width: 100%;
+  padding: 0 0 100px 0;  /* ⬅️ NUR UNTEN PADDING, OBEN 0! */
+  background: var(--why-bg);
   position: relative;
-  left: 50%; /* Positionierung für Full Width */
-  right: 50%;
-  margin-left: -50vw; /* Negative Margin für Full Width */
-  margin-right: -50vw;
-  padding: 0; /* KEIN PADDING */
-  background: #ffffff; /* Explizit weiß für Light Mode */
   overflow: hidden;
-  transition: background 0.3s ease;
+  transition: var(--why-transition);
 }
 
-/* Dark Mode Gradient - NAHTLOSER ÜBERGANG von Why-Simbye */
-[data-theme="dark"] .network-carousel-section {
+/* Light Mode - Normal Background */
+[data-theme="light"] .why-section {
+  background: #ffffff;
+}
+
+/* Dark Mode - GRADIENT FIX: #040404 statt #090a09 am Start! */
+[data-theme="dark"] .why-section {
   background: linear-gradient(180deg,
-    #040404 0%,      /* Start: Kommt von Why-Simbye */
-    #040404 30%,     /* Bleibt schwarz */
-    #050505 60%,     /* Minimal heller */
-    #040404 100%     /* Ende: Reines Schwarz */
+    #040404 0%,      /* ⬅️ GEÄNDERT: Reines Schwarz ohne Grünstich! */
+    #0b0c0b 10%,     /* Minimaler Übergang */
+    #0d100f 25%,     /* Sehr sanft grünlich */
+    #0f1210 40%,     /* Peak Grün */
+    #0d100f 60%,     /* Zurück */
+    #090a09 80%,     /* Fast schwarz */
+    #040404 100%     /* Ende in tiefem Schwarz */
   );
 }
 
-/* Gradient Masks KOMPLETT ENTFERNT für volle Breite */
-.network-carousel-section::before,
-.network-carousel-section::after {
-  display: none; /* KEINE FADE MASKS MEHR */
-}
-
-/* Carousel Container */
-.carousel-container {
-  position: relative;
-  width: 100vw; /* VOLLE VIEWPORT BREITE */
-  height: var(--carousel-height);
-  margin: 0;
-  padding: 0; /* KEIN PADDING */
-  overflow: hidden;
-  display: flex;
-  align-items: center; /* Vertikal zentriert */
-}
-
-/* Carousel Track */
-.carousel-track {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: fit-content;
-  animation: scroll var(--carousel-speed) linear infinite;
-  padding: 0; /* Kein Padding */
-}
-
-/* Pause on Hover (optional) */
-.carousel-container:hover .carousel-track {
-  animation-play-state: paused;
-}
-
-/* Logo Items */
-.logo-item {
-  flex: 0 0 auto;
-  width: var(--logo-width);
-  height: var(--carousel-height);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: var(--logo-gap);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.logo-item img {
-  max-width: 120px;
-  max-height: 60px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: var(--logo-filter);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: scale(1);
-}
-
-/* Text Logos für Orange & Verizon */
-.logo-item.text-logo {
-  position: relative;
-}
-
-.logo-text {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #999; /* Grau wie andere Logos */
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: scale(1);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  opacity: 0.6; /* Gleiche Opacity wie andere Logos */
-}
-
-/* Hover - Logos werden farbig */
-.logo-item.text-logo:hover .logo-text {
-  transform: scale(1.1) translateY(-2px);
-  opacity: 1;
-}
-
-/* Orange - bei Hover */
-.logo-item.text-logo:nth-child(5):hover .logo-text,
-.logo-item.text-logo:nth-child(17):hover .logo-text {
-  color: #ff6900;
-}
-
-/* Verizon - bei Hover */
-.logo-item.text-logo:nth-child(6):hover .logo-text,
-.logo-item.text-logo:nth-child(18):hover .logo-text {
-  color: #ed1c24;
-}
-
-/* Dark Mode Text Logos */
-[data-theme="dark"] .logo-text {
-  color: #ccc;
-  opacity: 0.7;
-}
-
-/* Dark Mode - Orange immer orange */
-[data-theme="dark"] .logo-item.text-logo:nth-child(5) .logo-text,
-[data-theme="dark"] .logo-item.text-logo:nth-child(17) .logo-text {
-  color: #ff8a33;
-  opacity: 0.7;
-}
-
-/* Dark Mode - Verizon immer rot */
-[data-theme="dark"] .logo-item.text-logo:nth-child(6) .logo-text,
-[data-theme="dark"] .logo-item.text-logo:nth-child(18) .logo-text {
-  color: #ff4747;
-  opacity: 0.7;
-}
-
-/* Dark Mode Hover */
-[data-theme="dark"] .logo-item.text-logo:hover .logo-text {
-  opacity: 1;
-}
-
-/* Hover Effects */
-.logo-item:hover img {
-  filter: var(--logo-hover-filter);
-  transform: scale(1.1) translateY(-2px);
-}
-
-/* Special filter for problem logos in dark mode - jetzt ohne Orange/Verizon */
-[data-theme="dark"] .logo-item img[alt="Vodafone"],
-[data-theme="dark"] .logo-item img[alt="Airtel"] {
-  filter: grayscale(0%) opacity(0.85) brightness(2.2) contrast(1.4) saturate(1.2);
-}
-
-[data-theme="dark"] .logo-item:hover img[alt="Vodafone"],
-[data-theme="dark"] .logo-item:hover img[alt="Airtel"] {
-  filter: grayscale(0%) opacity(1) brightness(2.5) contrast(1.5) saturate(1.3);
-}
-
-/* Infinite Scroll Animation */
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-/* Trust Badge (Optional Zusatz) */
-.carousel-trust-badge {
+/* Background Pattern */
+.why-section::before {
+  content: '';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #ffffff;
-  padding: 8px 24px;
-  border-radius: 100px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #009a61;
-  z-index: 3;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 10% 90%, rgba(0, 154, 97, 0.03) 0%, transparent 40%),
+    radial-gradient(circle at 90% 10%, rgba(0, 217, 126, 0.03) 0%, transparent 40%);
   pointer-events: none;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.15);
+  z-index: 0;
 }
 
-[data-theme="dark"] .carousel-trust-badge {
-  background: rgba(26, 26, 26, 0.9);
-  color: #00d97e;
-  border: 1px solid rgba(0, 217, 126, 0.2);
+/* Container */
+.why-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 100px 40px 0 40px;  /* ⬅️ PADDING NACH OBEN VERSCHOBEN! */
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.why-header {
+  text-align: center;
+  margin-bottom: 72px;
+  animation: fadeInUp 0.8s ease;
+}
+
+/* TITLE - EXAKT GLEICH WIE HOW-TO */
+.why-title {
+  font-size: clamp(36px, 5vw, 56px); /* Identisch mit How-To */
+  font-weight: 700;
+  color: var(--why-text);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.why-title-highlight {
+  background: var(--why-primary);
+  color: white;
+  padding: 4px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+[data-theme="dark"] .why-title-highlight {
+  background: var(--why-primary);
+  color: #fff;  /* Geändert zu weiß wie in How-To */
+}
+
+.why-subtitle {
+  font-size: 20px;
+  color: var(--why-text-secondary);
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Features Grid */
+.why-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 60px;
+}
+
+/* Feature Content - Desktop & Tablet */
+.why-feature-content {
+  width: 100%;
+}
+
+/* Feature Card */
+.why-feature {
+  background: var(--why-card-bg);
+  border-radius: 24px;
+  padding: 36px 28px;
+  box-shadow: var(--why-shadow-md);
+  transition: var(--why-transition);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--why-border);
+  animation: fadeInUp 0.9s ease both;
+  animation-delay: calc(var(--feature-index) * 0.1s);
+}
+
+.why-feature:nth-child(1) { --feature-index: 1; }
+.why-feature:nth-child(2) { --feature-index: 2; }
+.why-feature:nth-child(3) { --feature-index: 3; }
+.why-feature:nth-child(4) { --feature-index: 4; }
+.why-feature:nth-child(5) { --feature-index: 5; }
+.why-feature:nth-child(6) { --feature-index: 6; }
+
+[data-theme="dark"] .why-feature {
+  background: var(--why-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
 }
 
-/* Show badge on section hover */
-.network-carousel-section:hover .carousel-trust-badge {
-  opacity: 1;
+/* Icon Container - ENTERPRISE PREMIUM STYLE */
+.why-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--why-primary), var(--why-accent));
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.25);
+  animation: subtlePulse 4s ease-in-out infinite;
 }
 
-/* Mobile Optimizations */
+/* Animated Glow Effect */
+.why-icon::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--why-primary), var(--why-accent));
+  border-radius: 24px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(20px);
+  animation: glow 4s ease-in-out infinite;
+}
+
+[data-theme="dark"] .why-icon {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
+  box-shadow: 
+    0 10px 30px rgba(0, 217, 126, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.why-icon svg {
+  width: 36px;
+  height: 36px;
+  color: white;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+[data-theme="dark"] .why-icon svg {
+  color: var(--why-primary);
+}
+
+/* Feature Number Badge */
+.why-feature-number {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: white;
+  color: var(--why-primary);
+  border: 2px solid var(--why-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .why-feature-number {
+  background: var(--why-primary);
+  color: #0a0a0a;
+  border-color: var(--why-primary);
+}
+
+/* Icon Animations */
+@keyframes subtlePulse {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 0.6;
+  }
+}
+
+/* Individual Icon Animations on Scroll */
+.why-feature.animate .why-icon {
+  animation: iconBounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+}
+
+@keyframes iconBounceIn {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* Feature Content */
+.why-feature-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--why-text);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.why-feature-subtitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--why-primary);
+  margin: 0 0 12px 0;
+}
+
+.why-feature-text {
+  font-size: 15px;
+  color: var(--why-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .why-container {
+    padding: 0 24px;
+  }
+  
+  .why-features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .why-feature {
+    padding: 32px 24px;
+  }
+  
+  .why-feature-title {
+    font-size: 22px;
+  }
+  
+  .why-feature-subtitle {
+    font-size: 16px;
+  }
+}
+
+/* Mobile - TITEL GRÖSSE WIE HOW-TO */
 @media (max-width: 768px) {
-  :root {
-    --carousel-speed: 30s;
-    --carousel-height: 100px; /* Angepasste Höhe */
-    --logo-width: 120px;
-    --logo-gap: 40px;
+  /* REDUZIERTER PADDING FÜR NAHTLOSEN ÜBERGANG */
+  .why-section {
+    padding: 0 0 20px 0;  /* ⬅️ KEIN TOP-PADDING für nahtlosen Übergang! */
   }
   
-  .network-carousel-section {
-    padding: 0; /* KEIN PADDING */
-    margin: 0;
+  /* Container Mobile anpassen */
+  .why-container {
+    padding: 20px 16px 0 16px;  /* Weniger Top-Padding auf Mobile */
   }
   
-  .carousel-container {
-    padding: 0; /* KEIN PADDING */
+  /* Dark Mode ohne Extra-Padding */
+  [data-theme="dark"] .why-section {
+    padding-top: 0 !important;  /* ⬅️ KEIN EXTRA PADDING! */
+    margin-top: 0 !important;
   }
   
-  /* Keine Fade Masks mehr nötig */
-  .network-carousel-section::before,
-  .network-carousel-section::after {
-    display: none;
+  .why-container {
+    padding: 0 16px;
   }
   
-  .logo-item img {
-    max-width: 100px;
-    max-height: 50px;
+  .why-header {
+    margin-bottom: 48px;
   }
   
-  /* Text Logos auf Mobile */
-  .logo-text {
-    font-size: 24px;
+  /* TITEL EXAKT WIE HOW-TO MOBILE */
+  .why-title {
+    font-size: 32px; /* Identisch mit How-To Mobile */
   }
   
-  /* Hide trust badge on mobile */
-  .carousel-trust-badge {
-    display: none;
+  .why-subtitle {
+    font-size: 17px; /* Auch identisch mit How-To */
+    padding: 0 16px;
+  }
+  
+  .why-features {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  /* Mobile: Icon links, Content rechts */
+  .why-feature {
+    padding: 24px 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .why-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    margin-bottom: 0; /* Kein Bottom Margin */
+    flex-shrink: 0; /* Icon bleibt gleich groß */
+    position: relative;
+  }
+  
+  .why-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .why-feature-number {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    top: -5px;
+    right: -5px;
+  }
+  
+  /* Content rechts neben Icon */
+  .why-feature-content {
+    flex: 1;
+    min-width: 0; /* Wichtig für Text-Overflow */
+  }
+  
+  .why-feature-title {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  
+  .why-feature-subtitle {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .why-feature-text {
+    font-size: 13px;
+    line-height: 1.5;
   }
 }
 
 /* Very Small Screens */
 @media (max-width: 480px) {
-  :root {
-    --carousel-speed: 25s;
-    --carousel-height: 80px; /* Kleinere Höhe */
-    --logo-width: 100px;
-    --logo-gap: 30px;
+  .why-container {
+    padding: 0 12px;
   }
   
-  .network-carousel-section {
-    padding: 0; /* KEIN PADDING */
-    margin: 0;
+  .why-title {
+    font-size: 32px; /* Auch angepasst für sehr kleine Screens */
   }
   
-  .carousel-container {
-    padding: 0; /* KEIN PADDING */
+  .why-subtitle {
+    font-size: 16px;
+    padding: 0 8px;
   }
   
-  /* Keine Fade Masks */
-  .network-carousel-section::before,
-  .network-carousel-section::after {
-    display: none;
+  .why-feature {
+    padding: 24px 16px;
   }
   
-  .logo-item img {
-    max-width: 80px;
-    max-height: 40px;
+  .why-feature-title {
+    font-size: 19px;
   }
   
-  /* Text Logos auf sehr kleinen Screens */
-  .logo-text {
-    font-size: 20px;
+  .why-feature-subtitle {
+    font-size: 14px;
+  }
+  
+  .why-feature-text {
+    font-size: 13px;
   }
 }
 
-/* Performance Optimizations */
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  .carousel-track {
-    animation: none;
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-  
-  .logo-item img {
-    filter: var(--logo-hover-filter);
-  }
-}
-
-/* High Performance Mode */
-.carousel-track {
-  will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-}
-
-.logo-item img {
-  will-change: filter, transform;
 }
 </style>
 
-<section class="network-carousel-section" id="network-carousel">
-  <div class="carousel-container">
-    <!-- Optional Trust Badge -->
-    <div class="carousel-trust-badge">
-      700+ Network Partners Worldwide
+<section class="why-section full-width" id="why-section">
+  <div class="why-container">
+    
+    <!-- Header -->
+    <div class="why-header">
+      <h2 class="why-title">
+        {{ 'why.title_part1' | t | default: 'Why choose' }} <span class="why-title-highlight">{{ 'why.title_part2' | t | default: 'Simbye eSIM' }}</span> {{ 'why.title_part3' | t | default: '' }}
+      </h2>
+      <p class="why-subtitle">
+        {{ 'why.subtitle' | t | default: 'Die smarteste Wahl für mobiles Internet im Ausland - ohne versteckte Kosten' }}
+      </p>
     </div>
     
-    <!-- Carousel Track mit duplizierten Logos für nahtlosen Loop -->
-    <div class="carousel-track">
-      <!-- Erste Logo-Gruppe -->
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/vodafone.webp?v=1722286812" alt="Vodafone" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/at.webp?v=1722286812" alt="AT&T" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telefonica.webp?v=1722286812" alt="Telefónica" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/t_mobile.webp?v=1722286812" alt="T-Mobile" loading="lazy">
-      </div>
-      <div class="logo-item text-logo">
-        <span class="logo-text">Orange</span>
-      </div>
-      <div class="logo-item text-logo">
-        <span class="logo-text">Verizon</span>
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tele2.webp?v=1722286812" alt="Tele2" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/turkcel.webp?v=1722286812" alt="Turkcell" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/movistarr.webp?v=1722286812" alt="Movistar" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tim.webp?v=1722286812" alt="TIM" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telcel.webp?v=1722286812" alt="Telcel" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/airtel.webp?v=1722286812" alt="Airtel" loading="lazy">
+    <!-- Features Grid -->
+    <div class="why-features">
+      
+      <!-- Feature 1: Aufladbar -->
+      <div class="why-feature">
+        <div class="why-icon">
+          <span class="why-feature-number">1</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature1_title' | t | default: 'Rechargeable & Flexible' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature1_subtitle' | t | default: 'Buy once - top up anytime' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature1_text' | t | default: 'No contracts, no hidden fees, no minimum term. Top up your eSIM as often as you want. The most flexible eSIM solution on the market.' }}
+          </p>
+        </div>
       </div>
       
-      <!-- DUPLIZIERTE Logo-Gruppe für nahtlosen Loop -->
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/vodafone.webp?v=1722286812" alt="Vodafone" loading="lazy">
+      <!-- Feature 2: Günstigster Anbieter -->
+      <div class="why-feature">
+        <div class="why-icon">
+          <span class="why-feature-number">2</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" stroke-linecap="round" stroke-linejoin="round"/>
+            <polyline points="16 7 22 7 22 13" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature2_title' | t | default: 'Best Price Guarantee' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature2_subtitle' | t | default: 'Cheaper than competitors' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature2_text' | t | default: "We're not just cheap - we're THE cheapest. Compare us with Airalo, Holafly or Nomad - nobody beats our prices." }}
+          </p>
+        </div>
       </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/at.webp?v=1722286812" alt="AT&T" loading="lazy">
+      
+      <!-- Feature 3: 24/7 Support -->
+      <div class="why-feature">
+        <div class="why-icon">
+          <span class="why-feature-number">3</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature3_title' | t | default: '24/7 Premium Support' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature3_subtitle' | t | default: 'Fastest support - under 60 seconds' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature3_text' | t | default: 'While others keep you waiting, we respond in seconds. WhatsApp, Telegram, Live Chat - 15 support agents just for you. In 12 languages.' }}
+          </p>
+        </div>
       </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telefonica.webp?v=1722286812" alt="Telefónica" loading="lazy">
+      
+      <!-- Feature 4: Gratis Testen -->
+      <div class="why-feature">
+        <div class="why-icon">
+          <span class="why-feature-number">4</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <rect x="3" y="8" width="18" height="13" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 8v13M3 12h18" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature4_title' | t | default: 'Free Trial' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature4_subtitle' | t | default: '100 MB completely free' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature4_text' | t | default: "Test completely free. No credit card, no tricks. We're so confident in our quality that we give you 100 MB for free." }}
+          </p>
+        </div>
       </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/t_mobile.webp?v=1722286812" alt="T-Mobile" loading="lazy">
+      
+      <!-- Feature 5: Premium Netze -->
+      <div class="why-feature">
+        <div class="why-icon">
+          <span class="why-feature-number">5</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 2v20M2 12h20" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature5_title' | t | default: 'Local Premium Networks' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature5_subtitle' | t | default: 'Fastest 5G - Unlimited available' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature5_text' | t | default: 'Real local speeds up to 1 Gbit/s. From 500 MB to real unlimited without fair use policy. Premium roaming partners in 190+ countries.' }}
+          </p>
+        </div>
       </div>
-      <div class="logo-item text-logo">
-        <span class="logo-text">Orange</span>
+      
+      <!-- Feature 6: 100K+ Kunden -->
+      <div class="why-feature">
+        <div class="why-icon">
+          <span class="why-feature-number">6</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature6_title' | t | default: 'Trusted Worldwide' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature6_subtitle' | t | default: 'Over 100,000+ happy customers' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature6_text' | t | default: '100,000+ customers worldwide already trust us. 4.9 star rating. The first choice for business travelers and digital nomads.' }}
+          </p>
+        </div>
       </div>
-      <div class="logo-item text-logo">
-        <span class="logo-text">Verizon</span>
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tele2.webp?v=1722286812" alt="Tele2" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/turkcel.webp?v=1722286812" alt="Turkcell" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/movistarr.webp?v=1722286812" alt="Movistar" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tim.webp?v=1722286812" alt="TIM" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telcel.webp?v=1722286812" alt="Telcel" loading="lazy">
-      </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/airtel.webp?v=1722286812" alt="Airtel" loading="lazy">
-      </div>
+      
     </div>
+    
   </div>
 </section>
 
@@ -415,53 +610,46 @@
 (function() {
   'use strict';
   
-  // Optional: Dynamische Speed-Anpassung basierend auf Viewport
-  function adjustCarouselSpeed() {
-    const carousel = document.querySelector('.carousel-track');
-    if (!carousel) return;
-    
-    const viewportWidth = window.innerWidth;
-    let speed = '40s';
-    
-    if (viewportWidth < 768) {
-      speed = '30s';
-    } else if (viewportWidth < 480) {
-      speed = '25s';
-    }
-    
-    carousel.style.animationDuration = speed;
-  }
-  
-  // Optional: Pause on Tab/Window blur für Performance
-  function handleVisibilityChange() {
-    const carousel = document.querySelector('.carousel-track');
-    if (!carousel) return;
-    
-    if (document.hidden) {
-      carousel.style.animationPlayState = 'paused';
-    } else {
-      carousel.style.animationPlayState = 'running';
-    }
-  }
+  // Cache DOM elements
+  const section = document.getElementById('why-section');
+  const features = document.querySelectorAll('.why-feature');
   
   // Initialize
   function init() {
-    adjustCarouselSpeed();
+    if (!section) return;
     
-    // Event Listeners
-    window.addEventListener('resize', adjustCarouselSpeed);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    
-    // Optional: Click handler für Partner-Links
-    document.querySelectorAll('.logo-item').forEach(logo => {
-      logo.addEventListener('click', function() {
-        // Hier könntest du zu Partner-Seiten verlinken
-        console.log('Logo clicked:', this.querySelector('img').alt);
-      });
-    });
+    // Animate icons on scroll
+    animateOnScroll();
   }
   
-  // Start when DOM ready
+  // Animate elements on scroll
+  function animateOnScroll() {
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Add animate class for icon bounce
+            setTimeout(() => {
+              entry.target.classList.add('animate');
+            }, index * 100); // Stagger animation
+            
+            // Remove observer after animation
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+      });
+      
+      // Observe all features
+      features.forEach(feature => {
+        observer.observe(feature);
+      });
+    }
+  }
+  
+  // Initialize on DOM ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -472,36 +660,12 @@
 
 {% schema %}
 {
-  "name": "Network Partners Carousel",
-  "class": "network-carousel",
-  "settings": [
-    {
-      "type": "range",
-      "id": "carousel_speed",
-      "label": "Animation Speed",
-      "min": 20,
-      "max": 60,
-      "step": 5,
-      "default": 40,
-      "unit": "s"
-    },
-    {
-      "type": "checkbox",
-      "id": "pause_on_hover",
-      "label": "Pause on Hover",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "show_trust_badge",
-      "label": "Show Trust Badge",
-      "default": false,
-      "info": "Shows '700+ Network Partners' on hover"
-    }
-  ],
+  "name": "Why Simbye Section",
+  "class": "why-section",
+  "settings": [],
   "presets": [
     {
-      "name": "Network Partners Carousel"
+      "name": "Why Simbye"
     }
   ]
 }
