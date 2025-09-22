@@ -61,15 +61,6 @@
         "all_countries_collection": "local-esim"
       }
     },
-    "scroll_logos_4fNwDz": {
-      "type": "scroll-logos",
-      "name": "Network Partners Carousel",
-      "settings": {
-        "carousel_speed": 40,
-        "pause_on_hover": true,
-        "show_trust_badge": false
-      }
-    },
     "why_simbye_JUnMqH": {
       "type": "why-simbye",
       "name": "Why Simbye",
@@ -90,11 +81,183 @@
         "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
       }
     },
+    "scroll_logos_4fNwDz": {
+      "type": "scroll-logos",
+      "name": "Network Partners Carousel",
+      "settings": {
+        "carousel_speed": 40,
+        "pause_on_hover": true,
+        "show_trust_badge": false
+      }
+    },
     "kommis_KcNN9x": {
       "type": "kommis",
       "name": "Trust & Reviews",
       "settings": {
-        "trust_score": "4.6/5"
+        "trust_score": "4.6/5",
+        "scroll_speed": 30
+      }
+    },
+    "faq_hzk6Lr": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_GpiEcD": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can my phone use eSIM?",
+            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer. Check our compatibility list to confirm your device.</p>",
+            "show_cta": true,
+            "cta_text": "Check Compatibilitys",
+            "cta_link": "/pages/check-esim"
+          }
+        },
+        "faq_item_Xc84eW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kann mein Handy eSIM?",
+            "answer": "<p>Die meisten modernen Smartphones ab 2018 unterstützen eSIM-Technologie. Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer. Du kannst die Kompatibilität deines Geräts auf unserer Website überprüfen.</p>"
+          }
+        },
+        "faq_item_dVVkHb": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can my phone use eSIM?",
+            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_XJPNUW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How fast will I receive my eSIM?",
+            "answer": "<p>Your eSIM QR code is delivered instantly via email after payment confirmation. The entire process from order to activation takes less than 2 minutes. No waiting, no shipping - immediate connectivity!</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_P4z6pt": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I reuse my eSIM or top it up?",
+            "answer": "<p>Yes! Simbye eSIMs are fully rechargeable. You can top up your data anytime through your account dashboard. No need to buy a new eSIM - just add more data when needed. Your eSIM stays active as long as you use it at least once every 180 days.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_7CatEj": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What happens when my data runs out?",
+            "answer": "<p>When your data is depleted, the eSIM simply stops working - no surprise charges or roaming fees! You'll receive notifications at 50%, 80%, and 95% usage. You can top up instantly through our app or website to continue using your eSIM.</p>",
+            "show_cta": true,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_rdtYVd": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Does the eSIM work for WhatsApp calls and video?",
+            "answer": "<p>Absolutely! Our eSIMs provide full internet connectivity, perfect for WhatsApp, FaceTime, Skype, Zoom, and all other VoIP services. You can make calls, send messages, and video chat just like with your regular data connection.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_8rc8p8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can my phone usesdsd eSIM?",
+            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
+            "show_cta": true,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_XTR87W": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can my phone use eSIM?",
+            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_Rwd3m6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can my phone use eSIM?",
+            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_Vbw4b6": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can I use multiple eSIMs at the same time?",
+            "answer": "<p>Yes, most eSIM-compatible phones support multiple eSIM profiles. You can store 5-10 different eSIMs and switch between them as needed. However, typically only one eSIM can be active for data at a time (alongside your physical SIM).</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_7KbyHA": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Can my phone use eSIM?",
+            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_TPE74Y": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is there any speed throttling?",
+            "answer": "<p>No throttling whatsoever! You get full 4G/5G speeds up to 1 Gbit/s depending on local network capabilities. We partner with premium tier-1 carriers to ensure you get the same speeds as local customers. Unlimited plans have no fair use policy.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_mh7WnM": {
+          "type": "faq_item",
+          "settings": {
+            "question": "How can I check my data usage?",
+            "answer": "<p>Track your usage in real-time through: 1) Your phone's settings menu, 2) Our Simbye app with live statistics, 3) Email notifications at usage milestones, or 4) Your account dashboard on our website. You'll always know exactly how much data you have left.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_GpiEcD",
+        "faq_item_Xc84eW",
+        "faq_item_dVVkHb",
+        "faq_item_XJPNUW",
+        "faq_item_P4z6pt",
+        "faq_item_7CatEj",
+        "faq_item_rdtYVd",
+        "faq_item_8rc8p8",
+        "faq_item_XTR87W",
+        "faq_item_Rwd3m6",
+        "faq_item_Vbw4b6",
+        "faq_item_7KbyHA",
+        "faq_item_TPE74Y",
+        "faq_item_mh7WnM"
+      ],
+      "name": "FAQ Premium",
+      "settings": {
+        "subtitle": "Everything you need to know about Simbye eSIM"
       }
     }
   },
@@ -104,6 +267,7 @@
     "why_simbye_JUnMqH",
     "how_to_YHUCmd",
     "scroll_logos_4fNwDz",
-    "kommis_KcNN9x"
+    "kommis_KcNN9x",
+    "faq_hzk6Lr"
   ]
 }
