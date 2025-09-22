@@ -38,7 +38,7 @@
 /* Main Section */
 .why-section {
   width: 100%;
-  padding: 100px 0;
+  padding: 0 0 100px 0;  /* ⬅️ NUR UNTEN PADDING, OBEN 0! */
   background: var(--why-bg);
   position: relative;
   overflow: hidden;
@@ -81,7 +81,7 @@
 .why-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 100px 40px 0 40px;  /* ⬅️ PADDING NACH OBEN VERSCHOBEN! */
   position: relative;
   z-index: 1;
 }
@@ -333,7 +333,12 @@
 @media (max-width: 768px) {
   /* REDUZIERTER PADDING FÜR NAHTLOSEN ÜBERGANG */
   .why-section {
-    padding: 0 0 20px 0;  /* ⬅️ KEIN PADDING OBEN! */
+    padding: 0 0 20px 0;  /* NUR UNTEN PADDING! */
+  }
+  
+  /* Container Mobile anpassen */
+  .why-container {
+    padding: 20px 16px 0 16px;  /* Weniger Top-Padding auf Mobile */
   }
   
   /* Dark Mode Extra-Anpassung */
