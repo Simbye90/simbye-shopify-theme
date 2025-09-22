@@ -27,26 +27,23 @@
 
 /* Main Section */
 .network-carousel-section {
-  width: 100vw; /* VOLLE VIEWPORT BREITE */
+  width: 100%;
   position: relative;
-  left: 50%; /* Positionierung für Full Width */
-  right: 50%;
-  margin-left: -50vw; /* Negative Margin für Full Width */
-  margin-right: -50vw;
-  padding: 0; /* KEIN PADDING */
-  background: #ffffff; /* Explizit weiß für Light Mode */
+  padding: 0;
+  margin: 0;
+  background: #ffffff;
   overflow: hidden;
   transition: background 0.3s ease;
 }
 
-/* Mobile Fix - Überschreibt die Desktop Full-Width Methode */
-@media (max-width: 768px) {
+/* Desktop Full Width */
+@media (min-width: 769px) {
   .network-carousel-section {
-    left: 0; /* Reset Position */
-    right: 0;
-    margin-left: 0; /* Reset Margin */
-    margin-right: 0;
-    width: 100%; /* Normale 100% statt 100vw */
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
   }
 }
 
@@ -69,21 +66,19 @@
 /* Carousel Container */
 .carousel-container {
   position: relative;
-  width: 100vw; /* VOLLE VIEWPORT BREITE */
+  width: 100%;
   height: var(--carousel-height);
   margin: 0;
-  padding: 0; /* KEIN PADDING */
+  padding: 0;
   overflow: hidden;
   display: flex;
-  align-items: center; /* Vertikal zentriert */
+  align-items: center;
 }
 
-/* Mobile Container Fix */
-@media (max-width: 768px) {
+/* Desktop Container */
+@media (min-width: 769px) {
   .carousel-container {
-    width: 100%; /* Normale Breite auf Mobile */
-    left: 0;
-    position: relative;
+    width: 100vw;
   }
 }
 
@@ -248,32 +243,29 @@
 @media (max-width: 768px) {
   :root {
     --carousel-speed: 30s;
-    --carousel-height: 100px; /* Angepasste Höhe */
+    --carousel-height: 100px;
     --logo-width: 120px;
     --logo-gap: 40px;
   }
   
   .network-carousel-section {
-    padding: 0; /* KEIN PADDING */
+    width: 100%;
+    padding: 0;
     margin: 0;
-    left: 0 !important; /* Force Reset */
-    right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    width: 100% !important;
+    left: auto;
+    right: auto;
+    position: relative;
   }
   
   .carousel-container {
-    padding: 0; /* KEIN PADDING */
-    width: 100%; /* Normale 100% statt 100vw */
-    left: 0;
-    right: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
   
-  /* Keine Fade Masks mehr nötig */
-  .network-carousel-section::before,
-  .network-carousel-section::after {
-    display: none;
+  .carousel-track {
+    margin: 0;
+    padding: 0;
   }
   
   .logo-item img {
@@ -281,12 +273,10 @@
     max-height: 50px;
   }
   
-  /* Text Logos auf Mobile */
   .logo-text {
     font-size: 24px;
   }
   
-  /* Hide trust badge on mobile */
   .carousel-trust-badge {
     display: none;
   }
@@ -296,30 +286,29 @@
 @media (max-width: 480px) {
   :root {
     --carousel-speed: 25s;
-    --carousel-height: 80px; /* Kleinere Höhe */
+    --carousel-height: 80px;
     --logo-width: 100px;
     --logo-gap: 30px;
   }
   
   .network-carousel-section {
-    padding: 0; /* KEIN PADDING */
+    width: 100%;
+    padding: 0;
     margin: 0;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    width: 100% !important;
+    left: auto;
+    right: auto;
+    position: relative;
   }
   
   .carousel-container {
-    padding: 0; /* KEIN PADDING */
     width: 100%;
+    padding: 0;
+    margin: 0;
   }
   
-  /* Keine Fade Masks */
-  .network-carousel-section::before,
-  .network-carousel-section::after {
-    display: none;
+  .carousel-track {
+    margin: 0;
+    padding: 0;
   }
   
   .logo-item img {
@@ -327,7 +316,6 @@
     max-height: 40px;
   }
   
-  /* Text Logos auf sehr kleinen Screens */
   .logo-text {
     font-size: 20px;
   }
