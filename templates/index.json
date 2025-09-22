@@ -75,11 +75,17 @@
         "step3_title": "eSIM aktivieren",
         "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
       }
+    },
+    "why_simbye_JUnMqH": {
+      "type": "why-simbye",
+      "name": "Why Simbye",
+      "settings": {}
     }
   },
   "order": [
     "main",
     "destinations_jRWp7x",
-    "how_to_YHUCmd"
+    "how_to_YHUCmd",
+    "why_simbye_JUnMqH"
   ]
 }
