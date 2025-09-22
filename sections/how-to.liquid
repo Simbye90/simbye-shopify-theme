@@ -20,13 +20,7 @@
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  --howto-bg: linear-gradient(180deg, 
-    #0a0a0a 0%,      /* Start: Reines Schwarz von destinations */
-    #0f1210 25%,     /* Leicht grünlich */
-    #0a1510 50%,     /* Mitte */
-    #081008 75%,     /* Dunkler werden */
-    #051008 100%     /* ⬅️ ENDFARBE für Übergang zu Why-Simbye */
-  );
+  --howto-bg: transparent; /* Transparent für nahtlosen Übergang */
   --howto-text: #f5f5f5;
   --howto-text-secondary: #999999;
   --howto-primary: #00d97e;
@@ -47,6 +41,17 @@
   position: relative;
   overflow: hidden;
   transition: var(--howto-transition);
+}
+
+/* Dark Mode - NAHTLOSER GRADIENT-ÜBERGANG */
+[data-theme="dark"] .howto-section {
+  background: linear-gradient(180deg,
+    #0a0a0a 0%,      /* Start: Reines Schwarz (von Destinations) */
+    #0f1210 25%,     /* Leicht grünlich */
+    #0a1510 50%,     /* Mitte */
+    #081008 75%,     /* Dunkler werden */
+    #051008 100%     /* ENDFARBE - Übergang zu Why-Simbye */
+  );
 }
 
 /* Background Pattern */
@@ -132,7 +137,7 @@
   z-index: 1;
   animation: fadeInUp 0.9s ease both;
   animation-delay: calc(var(--step-index) * 0.1s);
-  text-align: center;
+  text-align: center; /* ALLES ZENTRIERT */
 }
 
 .howto-step:nth-child(1) { --step-index: 1; }
@@ -151,7 +156,7 @@
   border-radius: 50%;
   font-size: 24px;
   font-weight: 700;
-  margin: 0 auto 24px auto;
+  margin: 0 auto 24px auto; /* Zentriert mit auto margins */
   position: relative;
   z-index: 2;
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
@@ -163,21 +168,21 @@
   box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
 }
 
-/* Image Container */
+/* Image Container - ENTERPRISE STYLE (No Box) */
 .howto-step-image {
   position: relative;
-  background: transparent;
-  border-radius: 0;
-  overflow: visible;
+  background: transparent; /* Kein Background */
+  border-radius: 0; /* Keine Rundung */
+  overflow: visible; /* iPhone kann rausragen */
   margin-bottom: 0;
-  box-shadow: none;
+  box-shadow: none; /* Kein Shadow */
   transition: var(--howto-transition);
   cursor: default;
   aspect-ratio: 4/5;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
+  border: none; /* Kein Border */
 }
 
 [data-theme="dark"] .howto-step-image {
@@ -185,12 +190,13 @@
   border: none;
 }
 
+/* iPhone bekommt eigenen Shadow */
 .howto-step-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   padding: 5px;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15)); /* iPhone Shadow */
 }
 
 [data-theme="dark"] .howto-step-image img {
@@ -227,7 +233,7 @@
   font-size: 24px;
   font-weight: 700;
   color: var(--howto-text);
-  margin: 16px 0 12px 0;
+  margin: 16px 0 12px 0; /* Weniger Abstand oben */
   letter-spacing: -0.01em;
 }
 
@@ -249,7 +255,7 @@
   }
   
   .howto-step {
-    text-align: center;
+    text-align: center; /* Tablet auch zentriert */
   }
   
   .howto-step-title {
@@ -284,17 +290,20 @@
     gap: 48px;
   }
   
+  /* Remove connection line on mobile */
   .howto-steps::before {
     display: none;
   }
   
+  /* Mobile: Steps als Karten - JETZT ZENTRIERT */
   .howto-step {
-    background: rgba(0, 0, 0, 0.02);
+    background: rgba(0, 0, 0, 0.02); /* Sehr subtle Background */
     border-radius: 24px;
     padding: 24px;
-    box-shadow: none;
-    border: none;
-    text-align: left;
+    box-shadow: none; /* Kein Shadow */
+    border: none; /* Kein Border */
+    text-align: center; /* ⬅️ GEÄNDERT: Mobile auch zentriert! */
+    position: relative;
   }
   
   [data-theme="dark"] .howto-step {
@@ -302,16 +311,28 @@
     border: none;
   }
   
+  /* Step Number für Mobile angepasst */
   .howto-step-number {
-    position: absolute;
-    top: -24px;
-    left: 24px;
+    position: relative; /* ⬅️ GEÄNDERT: Nicht mehr absolute */
+    top: auto;
+    left: auto;
     z-index: 3;
-    margin: 0;
+    margin: 0 auto 24px auto; /* Zentriert mit margin auto */
   }
   
+  /* Image für Mobile */
   .howto-step-image {
-    margin-top: 12px;
+    margin-top: 0; /* Reset */
+    margin-bottom: 16px; /* Etwas Abstand nach unten */
+    max-width: 280px; /* Maximale Breite für Mobile */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Text Content zentriert */
+  .howto-step-title,
+  .howto-step-desc {
+    text-align: center; /* Explizit zentriert */
   }
 }
 
@@ -327,6 +348,11 @@
   
   .howto-step {
     padding: 20px;
+  }
+  
+  /* Noch kleinere Bilder für sehr kleine Screens */
+  .howto-step-image {
+    max-width: 240px;
   }
 }
 
