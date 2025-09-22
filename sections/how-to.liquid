@@ -50,7 +50,7 @@
     #0f1210 25%,     /* Leicht grünlich */
     #0a1510 50%,     /* Mitte */
     #081008 75%,     /* Dunkler werden */
-    #051008 100%     /* ENDFARBE - Übergang zu Why-Simbye */
+    #0a0a0a 100%     /* ENDFARBE - MUSS #0a0a0a SEIN! */
   );
 }
 
@@ -266,7 +266,12 @@
 /* Responsive - Mobile */
 @media (max-width: 768px) {
   .howto-section {
-    padding: 20px 0;
+    padding: 20px 0 0 0; /* ⬅️ KEIN PADDING UNTEN! */
+  }
+  
+  /* Dark Mode spezifisch */
+  [data-theme="dark"] .howto-section {
+    padding-bottom: 0 !important;
   }
   
   .howto-container {
@@ -288,6 +293,7 @@
   .howto-steps {
     grid-template-columns: 1fr;
     gap: 48px;
+    margin-bottom: 20px; /* ⬅️ REDUZIERT VON 60px! */
   }
   
   /* Remove connection line on mobile */
