@@ -1,0 +1,413 @@
+<!-- sections/network-carousel.liquid -->
+<!-- ENTERPRISE NETWORK PARTNERS - INFINITE CAROUSEL -->
+
+<style>
+/* CSS Variables */
+:root {
+  --carousel-bg: #ffffff;
+  --logo-filter: grayscale(100%) opacity(0.6);
+  --logo-hover-filter: grayscale(0%) opacity(1);
+  --carousel-speed: 40s;
+  --carousel-height: 100px;
+  --logo-width: 150px;
+  --logo-gap: 60px;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --carousel-bg: #0a0a0a;
+  --logo-filter: grayscale(100%) opacity(0.4) brightness(2);
+  --logo-hover-filter: grayscale(0%) opacity(0.8) brightness(1.5);
+}
+
+/* Main Section */
+.network-carousel-section {
+  width: 100%;
+  padding: 80px 0;
+  background: var(--carousel-bg);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+/* Gradient Masks für nahtlosen Fade */
+.network-carousel-section::before,
+.network-carousel-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.network-carousel-section::before {
+  left: 0;
+  background: linear-gradient(90deg, 
+    var(--carousel-bg) 0%, 
+    var(--carousel-bg) 20%,
+    transparent 100%);
+}
+
+.network-carousel-section::after {
+  right: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--carousel-bg) 80%,
+    var(--carousel-bg) 100%);
+}
+
+/* Carousel Container */
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: var(--carousel-height);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+/* Carousel Track */
+.carousel-track {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: fit-content;
+  animation: scroll var(--carousel-speed) linear infinite;
+}
+
+/* Pause on Hover (optional) */
+.carousel-container:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+/* Logo Items */
+.logo-item {
+  flex: 0 0 auto;
+  width: var(--logo-width);
+  height: var(--carousel-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--logo-gap);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logo-item img {
+  max-width: 120px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: var(--logo-filter);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+}
+
+/* Hover Effects */
+.logo-item:hover img {
+  filter: var(--logo-hover-filter);
+  transform: scale(1.1) translateY(-2px);
+}
+
+/* Infinite Scroll Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Trust Badge (Optional Zusatz) */
+.carousel-trust-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--carousel-bg);
+  padding: 8px 24px;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #009a61;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.15);
+}
+
+[data-theme="dark"] .carousel-trust-badge {
+  background: #1a1a1a;
+  color: #00d97e;
+}
+
+/* Show badge on section hover */
+.network-carousel-section:hover .carousel-trust-badge {
+  opacity: 1;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  :root {
+    --carousel-speed: 30s;
+    --carousel-height: 80px;
+    --logo-width: 120px;
+    --logo-gap: 40px;
+  }
+  
+  .network-carousel-section {
+    padding: 60px 0;
+  }
+  
+  .network-carousel-section::before,
+  .network-carousel-section::after {
+    width: 80px;
+  }
+  
+  .logo-item img {
+    max-width: 100px;
+    max-height: 50px;
+  }
+  
+  /* Hide trust badge on mobile */
+  .carousel-trust-badge {
+    display: none;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  :root {
+    --carousel-speed: 25s;
+    --carousel-height: 70px;
+    --logo-width: 100px;
+    --logo-gap: 30px;
+  }
+  
+  .network-carousel-section {
+    padding: 50px 0;
+  }
+  
+  .network-carousel-section::before,
+  .network-carousel-section::after {
+    width: 60px;
+  }
+  
+  .logo-item img {
+    max-width: 80px;
+    max-height: 40px;
+  }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    animation: none;
+  }
+  
+  .logo-item img {
+    filter: var(--logo-hover-filter);
+  }
+}
+
+/* High Performance Mode */
+.carousel-track {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.logo-item img {
+  will-change: filter, transform;
+}
+</style>
+
+<section class="network-carousel-section" id="network-carousel">
+  <div class="carousel-container">
+    <!-- Optional Trust Badge -->
+    <div class="carousel-trust-badge">
+      700+ Network Partners Worldwide
+    </div>
+    
+    <!-- Carousel Track mit duplizierten Logos für nahtlosen Loop -->
+    <div class="carousel-track">
+      <!-- Erste Logo-Gruppe -->
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/vodafone.webp?v=1722286812" alt="Vodafone" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/at.webp?v=1722286812" alt="AT&T" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telefonica.webp?v=1722286812" alt="Telefónica" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/t_mobile.webp?v=1722286812" alt="T-Mobile" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/orange.webp?v=1722286812" alt="Orange" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/verizon.webp?v=1722286812" alt="Verizon" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tele2.webp?v=1722286812" alt="Tele2" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/turkcel.webp?v=1722286812" alt="Turkcell" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/movistarr.webp?v=1722286812" alt="Movistar" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tim.webp?v=1722286812" alt="TIM" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telcel.webp?v=1722286812" alt="Telcel" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/airtel.webp?v=1722286812" alt="Airtel" loading="lazy">
+      </div>
+      
+      <!-- DUPLIZIERTE Logo-Gruppe für nahtlosen Loop -->
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/vodafone.webp?v=1722286812" alt="Vodafone" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/at.webp?v=1722286812" alt="AT&T" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telefonica.webp?v=1722286812" alt="Telefónica" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/t_mobile.webp?v=1722286812" alt="T-Mobile" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/orange.webp?v=1722286812" alt="Orange" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/verizon.webp?v=1722286812" alt="Verizon" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tele2.webp?v=1722286812" alt="Tele2" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/turkcel.webp?v=1722286812" alt="Turkcell" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/movistarr.webp?v=1722286812" alt="Movistar" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tim.webp?v=1722286812" alt="TIM" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/telcel.webp?v=1722286812" alt="Telcel" loading="lazy">
+      </div>
+      <div class="logo-item">
+        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/airtel.webp?v=1722286812" alt="Airtel" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Optional: Dynamische Speed-Anpassung basierend auf Viewport
+  function adjustCarouselSpeed() {
+    const carousel = document.querySelector('.carousel-track');
+    if (!carousel) return;
+    
+    const viewportWidth = window.innerWidth;
+    let speed = '40s';
+    
+    if (viewportWidth < 768) {
+      speed = '30s';
+    } else if (viewportWidth < 480) {
+      speed = '25s';
+    }
+    
+    carousel.style.animationDuration = speed;
+  }
+  
+  // Optional: Pause on Tab/Window blur für Performance
+  function handleVisibilityChange() {
+    const carousel = document.querySelector('.carousel-track');
+    if (!carousel) return;
+    
+    if (document.hidden) {
+      carousel.style.animationPlayState = 'paused';
+    } else {
+      carousel.style.animationPlayState = 'running';
+    }
+  }
+  
+  // Initialize
+  function init() {
+    adjustCarouselSpeed();
+    
+    // Event Listeners
+    window.addEventListener('resize', adjustCarouselSpeed);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+    // Optional: Click handler für Partner-Links
+    document.querySelectorAll('.logo-item').forEach(logo => {
+      logo.addEventListener('click', function() {
+        // Hier könntest du zu Partner-Seiten verlinken
+        console.log('Logo clicked:', this.querySelector('img').alt);
+      });
+    });
+  }
+  
+  // Start when DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Network Partners Carousel",
+  "class": "network-carousel",
+  "settings": [
+    {
+      "type": "range",
+      "id": "carousel_speed",
+      "label": "Animation Speed",
+      "min": 20,
+      "max": 60,
+      "step": 5,
+      "default": 40,
+      "unit": "s"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on Hover",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_trust_badge",
+      "label": "Show Trust Badge",
+      "default": false,
+      "info": "Shows '700+ Network Partners' on hover"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Network Partners Carousel"
+    }
+  ]
+}
+{% endschema %}
