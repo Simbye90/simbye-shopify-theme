@@ -169,5 +169,29 @@
     "date4": "3 weeks ago",
     "date5": "1 month ago",
     "date6": "6 weeks ago"
-  }
+  },
+  "faq": {
+  "title_part1": "Your",
+  "title_part2": "Questions",
+  "title_part3": "Answered",
+  "subtitle": "Everything you need to know about Simbye eSIM",
+  "question_1": "Can my phone use eSIM?",
+  "answer_1": "Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer. Check our compatibility list to confirm your device.",
+  "question_2": "How fast will I receive my eSIM?",
+  "answer_2": "Your eSIM QR code is delivered instantly via email after payment confirmation. The entire process from order to activation takes less than 2 minutes. No waiting, no shipping - immediate connectivity!",
+  "question_3": "Can I reuse my eSIM or top it up?",
+  "answer_3": "Yes! Simbye eSIMs are fully rechargeable. You can top up your data anytime through your account dashboard. No need to buy a new eSIM - just add more data when needed. Your eSIM stays active as long as you use it at least once every 180 days.",
+  "question_4": "What happens when my data runs out?",
+  "answer_4": "When your data is depleted, the eSIM simply stops working - no surprise charges or roaming fees! You'll receive notifications at 50%, 80%, and 95% usage. You can top up instantly through our app or website to continue using your eSIM.",
+  "question_5": "Does the eSIM work for WhatsApp calls and video?",
+  "answer_5": "Absolutely! Our eSIMs provide full internet connectivity, perfect for WhatsApp, FaceTime, Skype, Zoom, and all other VoIP services. You can make calls, send messages, and video chat just like with your regular data connection.",
+  "question_6": "Can I use multiple eSIMs at the same time?",
+  "answer_6": "Yes, most eSIM-compatible phones support multiple eSIM profiles. You can store 5-10 different eSIMs and switch between them as needed. However, typically only one eSIM can be active for data at a time (alongside your physical SIM).",
+  "question_7": "Is there any speed throttling?",
+  "answer_7": "No throttling whatsoever! You get full 4G/5G speeds up to 1 Gbit/s depending on local network capabilities. We partner with premium tier-1 carriers to ensure you get the same speeds as local customers. Unlimited plans have no fair use policy.",
+  "question_8": "How can I check my data usage?",
+  "answer_8": "Track your usage in real-time through: 1) Your phone's settings menu, 2) Our Simbye app with live statistics, 3) Email notifications at usage milestones, or 4) Your account dashboard on our website. You'll always know exactly how much data you have left.",
+  "cta_check_compatibility": "Check Compatibility",
+  "cta_learn_more": "Learn More"
+}
 }
