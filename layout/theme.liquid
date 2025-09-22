@@ -1,43 +1,6 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
-    <!-- OVERSCROLL FIX - MUSS ZUERST KOMMEN -->
-    <style>
-      /* SIMBYE GLOBAL OVERSCROLL FIX */
-      html {
-        background: #ffffff;
-        position: relative;
-      }
-      
-      html::before {
-        content: '';
-        position: fixed;
-        top: -200vh;
-        left: 0;
-        right: 0;
-        height: 200vh;
-        background: linear-gradient(180deg, 
-          #ffffff 0%,
-          #f9fffd 50%,
-          #e8f7f3 100%
-        );
-        z-index: -9999;
-      }
-      
-      /* Dark Mode Support */
-      [data-theme="dark"] html {
-        background: #0a0a0a;
-      }
-      
-      [data-theme="dark"] html::before {
-        background: linear-gradient(180deg,
-          #0a0a0a 0%,
-          #0f1210 50%,
-          #051008 100%
-        );
-      }
-    </style>
-    
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
 
