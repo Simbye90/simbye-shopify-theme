@@ -1,6 +1,44 @@
 <!doctype html>
 <html lang="{{ request.locale.iso_code }}">
   <head>
+    <!-- SIMBYE OVERSCROLL BRANDING -->
+    <style>
+      /* Overscroll mit Simbye Farben */
+      html {
+        background: #e8f7f3; /* Simbye Hell-Grün */
+        position: relative;
+      }
+      
+      html::before {
+        content: '';
+        position: fixed;
+        top: -200vh;
+        left: 0;
+        right: 0;
+        height: 200vh;
+        background: linear-gradient(180deg, 
+          #ffffff 0%,      /* Weiß */
+          #f0faf7 35%,     /* Sehr helles Grün */
+          #e8f7f3 70%,     /* Simbye Hell-Grün */
+          #009a61 100%     /* Simbye Grün */
+        );
+        z-index: -9999;
+      }
+      
+      /* Dark Mode mit Simbye Dark */
+      [data-theme="dark"] html {
+        background: #051008; /* Dunkles Grün */
+      }
+      
+      [data-theme="dark"] html::before {
+        background: linear-gradient(180deg,
+          #0a0a0a 0%,
+          #051008 50%,
+          #00d97e33 100%   /* Simbye Grün 20% opacity */
+        );
+      }
+    </style>
+    
     {% # Inlined CSS Variables %}
     {% render 'css-variables' %}
 
