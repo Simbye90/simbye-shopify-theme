@@ -60,10 +60,26 @@
         "products_limit": 40,
         "all_countries_collection": "local-esim"
       }
+    },
+    "how_to_YHUCmd": {
+      "type": "how-to",
+      "name": "How-To Section",
+      "settings": {
+        "step1_image": "shopify://shop_images/Design_ohne_Titel-6.png",
+        "step1_title": "Datenpaket wählen",
+        "step1_desc": "190+ Länder verfügbar. Sofort per E-Mail erhalten.",
+        "step2_image": "shopify://shop_images/Design_ohne_Titel-6.png",
+        "step2_title": "QR-Code scannen",
+        "step2_desc": "Mit der Kamera-App scannen. Keine zusätzliche App nötig.",
+        "step3_image": "shopify://shop_images/Design_ohne_Titel-6.png",
+        "step3_title": "eSIM aktivieren",
+        "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
+      }
     }
   },
   "order": [
     "main",
-    "destinations_jRWp7x"
+    "destinations_jRWp7x",
+    "how_to_YHUCmd"
   ]
 }
