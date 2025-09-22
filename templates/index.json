@@ -80,12 +80,30 @@
       "type": "why-simbye",
       "name": "Why Simbye",
       "settings": {}
+    },
+    "scroll_logos_4fNwDz": {
+      "type": "scroll-logos",
+      "name": "Network Partners Carousel",
+      "settings": {
+        "carousel_speed": 40,
+        "pause_on_hover": true,
+        "show_trust_badge": false
+      }
+    },
+    "kommis_KcNN9x": {
+      "type": "kommis",
+      "name": "Trust & Reviews",
+      "settings": {
+        "trust_score": "4.6/5"
+      }
     }
   },
   "order": [
     "main",
     "destinations_jRWp7x",
+    "scroll_logos_4fNwDz",
     "how_to_YHUCmd",
-    "why_simbye_JUnMqH"
+    "why_simbye_JUnMqH",
+    "kommis_KcNN9x"
   ]
 }
