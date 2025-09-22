@@ -180,7 +180,7 @@
   background: white;
   border-radius: 24px;
   overflow: hidden;
-  margin-bottom: 24px;
+  margin-bottom: 0; /* Kein Abstand nach unten */
   box-shadow: var(--howto-shadow-md);
   transition: var(--howto-transition);
   cursor: default;
@@ -235,7 +235,7 @@
   font-size: 24px;
   font-weight: 700;
   color: var(--howto-text);
-  margin: 0 0 12px 0;
+  margin: 16px 0 12px 0; /* Weniger Abstand oben */
   letter-spacing: -0.01em;
 }
 
@@ -246,21 +246,7 @@
   margin: 0;
 }
 
-/* Step Time */
-.howto-step-time {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 6px 16px;
-  background: rgba(0, 154, 97, 0.1);
-  color: var(--howto-primary);
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-[data-theme="dark"] .howto-step-time {
-  background: rgba(0, 217, 126, 0.15);
-}
+/* Step Time - REMOVED */
 
 /* Trust Section - REMOVED */
 
@@ -333,7 +319,7 @@
   }
   
   .howto-step-image {
-    margin-top: 24px;
+    margin-top: 12px; /* Weniger Abstand oben auf Mobile */
   }
 }
 
@@ -442,7 +428,6 @@
         </div>
         <h3 class="howto-step-title">{{ 'howto.step1_title' | t | default: section.settings.step1_title }}</h3>
         <p class="howto-step-desc">{{ 'howto.step1_desc' | t | default: section.settings.step1_desc }}</p>
-        <span class="howto-step-time">{{ 'howto.step1_time' | t | default: '~30 Sekunden' }}</span>
       </div>
       
       <!-- Step 2: Scannen -->
@@ -466,7 +451,6 @@
         </div>
         <h3 class="howto-step-title">{{ 'howto.step2_title' | t | default: section.settings.step2_title }}</h3>
         <p class="howto-step-desc">{{ 'howto.step2_desc' | t | default: section.settings.step2_desc }}</p>
-        <span class="howto-step-time">{{ 'howto.step2_time' | t | default: '~45 Sekunden' }}</span>
       </div>
       
       <!-- Step 3: Online -->
@@ -490,7 +474,6 @@
         </div>
         <h3 class="howto-step-title">{{ 'howto.step3_title' | t | default: section.settings.step3_title }}</h3>
         <p class="howto-step-desc">{{ 'howto.step3_desc' | t | default: section.settings.step3_desc }}</p>
-        <span class="howto-step-time">{{ 'howto.step3_time' | t | default: '~30 Sekunden' }}</span>
       </div>
       
     </div>
