@@ -1,378 +1,809 @@
-<!-- sections/how-to.liquid -->
-<!-- SIMBYE HOW-TO - ENTERPRISE 3-STEP PROCESS -->
+<!-- sections/hero-simbye.liquid -->
+<!-- SIMBYE HERO - ENTERPRISE SEARCH V2 -->
 
 <style>
-/* CSS Variables - Enterprise Design System */
-:root {
-  --howto-bg: #ffffff;
-  --howto-text: #1a1a1a;
-  --howto-text-secondary: #666666;
-  --howto-primary: #009a61;
-  --howto-primary-hover: #00824f;
-  --howto-accent: #00d97e;
-  --howto-border: rgba(0, 0, 0, 0.08);
-  --howto-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --howto-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --howto-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
-  --howto-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --howto-gradient: linear-gradient(135deg, #f0faf7 0%, #ffffff 100%);
-}
-
-/* Dark Mode Variables */
-[data-theme="dark"] {
-  --howto-bg: transparent; /* Transparent für nahtlosen Übergang */
-  --howto-text: #f5f5f5;
-  --howto-text-secondary: #999999;
-  --howto-primary: #00d97e;
-  --howto-primary-hover: #009a61;
-  --howto-accent: #00ff88;
-  --howto-border: rgba(255, 255, 255, 0.08);
-  --howto-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --howto-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --howto-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.2);
-  --howto-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
-}
-
-/* Main Section */
-.howto-section {
-  width: 100%;
-  padding: 50px 0 0 0;  /* ⬅️ NUR OBEN PADDING, UNTEN 0! */
-  background: var(--howto-bg);
+/* FULL WIDTH SECTION */
+.hero-enterprise {
+  width: 100vw;
   position: relative;
-  overflow: hidden;
-  transition: var(--howto-transition);
-}
-
-/* Dark Mode - NAHTLOSER GRADIENT-ÜBERGANG */
-[data-theme="dark"] .howto-section {
-  background: linear-gradient(180deg,
-    #0a0a0a 0%,      /* Start: Reines Schwarz (von Destinations) */
-    #0d100f 20%,     /* Sehr sanfter Übergang */
-    #0f1210 40%,     /* Leicht grünlich */
-    #0d100f 60%,     /* Zurück */
-    #0b0c0b 80%,     /* Fast schwarz */
-    #090a09 100%     /* ENDFARBE - Fast schwarz mit minimalem Grün */
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding: 0;
+  background: linear-gradient(180deg, 
+    #ffffff 0%,
+    #ffffff 10%,
+    #f9fffd 25%,
+    #e8f7f3 60%,
+    #daf2eb 100%
   );
+
 }
 
-/* Background Pattern */
-.howto-section::before {
-  content: '';
+/* Container - GLEICH WIE HEADER */
+.hero-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px 20px 60px 20px;
+  width: 100%;
+}
+
+/* MOBILE FIRST - Padding Anpassung nur für Mobile */
+@media (max-width: 767px) {
+  .hero-container {
+    padding: 30px 20px 0px 20px;
+  }
+}
+
+/* MOBILE FIRST */
+.hero-content {
+  text-align: center;
+  width: 100%;
+}
+
+/* Title Mobile */
+.hero-title {
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  animation: fadeInUp 0.6s ease;
+}
+
+.hero-title-primary {
+  display: block;
+  color: #0a0a0a;
+  margin-bottom: 6px;
+}
+
+.hero-title-gradient {
+  display: block;
+  background: linear-gradient(135deg, #009a61 0%, #00d97e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtitle - NUR DESKTOP */
+.hero-subtitle {
+  display: none;
+}
+
+/* ====== ENTERPRISE SUCHBALKEN V2 ====== */
+.hero-search-wrapper {
+  margin: 0 0 25px 0;
+  position: relative;
+  animation: fadeInUp 0.7s ease 0.1s both;
+  z-index: 1000; /* Höher für Dropdown */
+}
+
+/* Desktop Search - im Content */
+.hero-content .hero-search-wrapper {
+  display: none; /* Mobile: versteckt */
+}
+
+/* Mobile Search - nach der Weltkugel */
+.mobile-only-search {
+  display: block; /* Mobile: sichtbar */
+  margin: 20px 0 20px 0;
+  animation: fadeInUp 0.85s ease 0.25s both;
+}
+
+.hero-search-container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  z-index: 1000; /* Für Dropdown */
+}
+
+.hero-search {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 6px 24px rgba(0, 154, 97, 0.12);
+  overflow: hidden;
+  height: 52px;
+  position: relative;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.hero-search:focus-within {
+  box-shadow: 0 8px 32px rgba(0, 154, 97, 0.2);
+  border-color: rgba(0, 154, 97, 0.3);
+}
+
+/* Location Icon */
+.search-location-icon {
+  width: 22px;
+  height: 22px;
+  margin: 0 14px 0 16px;
+  color: #009a61;
+  flex-shrink: 0;
+}
+
+/* Input Field - MOBILE OPTIMIERT */
+.hero-search input {
+  flex: 1;
+  border: none;
+  padding: 0 8px 0 0;
+  font-size: 16px; /* WICHTIG: Verhindert Zoom auf iOS */
+  font-weight: 500;
+  outline: none;
+  background: transparent;
+  color: #1a1a1a;
+  font-family: inherit;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+}
+
+.hero-search input::placeholder {
+  color: #999;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+/* Prevent iOS zoom on focus */
+@supports (-webkit-touch-callout: none) {
+  .hero-search input {
+    font-size: 16px !important;
+  }
+}
+
+/* Search Button */
+.search-btn {
+ 
+  height: 100%;
+  background: #009a61;
+  color: white;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  min-width: 80px;
+}
+
+.search-btn:hover {
+  background: #00824f;
+}
+
+.search-btn:active {
+  transform: scale(0.98);
+  background: #007745;
+}
+
+/* Dropdown Suggestions - ECHTE PRODUKTSUCHE */
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  z-index: 9999; /* HÖHER für über allem */
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.25s ease;
+  max-height: 320px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.search-suggestions.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.suggestions-loading {
+  padding: 20px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.suggestions-empty {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-size: 14px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: #1a1a1a;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  min-height: 48px; /* Touch-friendly */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item:active {
+  background: #f0faf7;
+  padding-left: 20px;
+}
+
+.suggestion-item.selected {
+  background: #e8f7f3;
+}
+
+.suggestion-image {
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+}
+
+.suggestion-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.suggestion-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.suggestion-subtitle {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+  display: block;
+}
+
+.suggestion-price {
+  color: #009a61;
+  font-weight: 700;
+  font-size: 14px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* DARK MODE - Suchbalken */
+[data-theme="dark"] .hero-search {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .hero-search:focus-within {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(0, 217, 126, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 217, 126, 0.15);
+}
+
+[data-theme="dark"] .hero-search input {
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .hero-search input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .search-location-icon {
+  color: #00d97e;
+}
+
+[data-theme="dark"] .search-btn {
+  background: #00d97e;
+  color: #0a0a0a;
+}
+
+[data-theme="dark"] .search-btn:hover {
+  background: #009a61;
+  color: white;
+}
+
+[data-theme="dark"] .search-suggestions {
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .suggestion-item {
+  color: #f5f5f5;
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .suggestion-item:hover {
+  background: rgba(0, 217, 126, 0.08);
+}
+
+[data-theme="dark"] .suggestion-title {
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .suggestion-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .suggestion-price {
+  color: #00d97e;
+}
+
+/* Visual Mobile mit Stats Container */
+.hero-visual-wrapper {
+  width: 100%;
+  position: relative;
+  margin: 30px 0 0 0; /* Bottom margin removed */
+}
+
+/* Stats - Desktop im Content, Mobile nach Bild */
+.hero-stats {
+  display: none; /* Mobile: versteckt im content */
+}
+
+/* Mobile Only Stats - NACH DEM BILD */
+.mobile-only-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 15px 0 30px 0;
+  width: 100%;
+  animation: fadeInUp 0.9s ease 0.3s both;
+}
+
+.stat-item {
+  text-align: center;
+  flex: 1;
+  max-width: 100px;
+}
+
+.stat-number {
+  display: block;
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--primary-color, #009a61);
+  margin-bottom: 2px;
+  line-height: 1;
+}
+
+.stat-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #6b6b6b;
+  line-height: 1.1;
+}
+
+/* Image Mobile */
+.hero-visual {
+  width: calc(100% + 40px);
+  margin: 0 -20px;
+  position: relative;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Mobile Product Badges */
+.mobile-products {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(0, 154, 97, 0.05) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 217, 126, 0.05) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-[data-theme="dark"] .howto-section::before {
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(0, 217, 126, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(0, 154, 97, 0.03) 0%, transparent 50%);
-}
-
-/* Container */
-.howto-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 40px 50px 40px;  /* ⬅️ PADDING NACH UNTEN VERSCHOBEN! */
-  position: relative;
-  z-index: 1;
-}
-
-/* Header */
-.howto-header {
-  text-align: center;
-  margin-bottom: 80px;
-  animation: fadeInUp 0.8s ease;
-}
-
-.howto-title {
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700;
-  color: var(--howto-text);
-  margin: 0 0 20px 0;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.howto-title-highlight {
-  background: var(--howto-primary);
-  color: white;
-  padding: 4px 20px;
-  border-radius: 12px;
-  display: inline-block;
-  margin: 0 8px;
-}
-
-[data-theme="dark"] .howto-title-highlight {
-  background: var(--howto-primary);
-  color: #fff;
-}
-
-.howto-subtitle {
-  font-size: 20px;
-  color: var(--howto-text-secondary);
+  display: block;
   margin: 0;
-  font-weight: 400;
-  line-height: 1.5;
+  padding: 0;
 }
 
-/* Steps Container */
-.howto-steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  margin-bottom: 60px;
-  position: relative;
-}
-
-/* Step Card */
-.howto-step {
-  position: relative;
-  z-index: 1;
-  animation: fadeInUp 0.9s ease both;
-  animation-delay: calc(var(--step-index) * 0.1s);
-  text-align: center; /* ALLES ZENTRIERT */
-}
-
-.howto-step:nth-child(1) { --step-index: 1; }
-.howto-step:nth-child(2) { --step-index: 2; }
-.howto-step:nth-child(3) { --step-index: 3; }
-
-/* Step Number */
-.howto-step-number {
+.mobile-product-badge {
+  position: absolute;
+  padding: 6px 10px;
+  background: white;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  background: var(--howto-primary);
-  color: white;
-  border-radius: 50%;
-  font-size: 24px;
-  font-weight: 700;
-  margin: 0 auto 24px auto; /* Zentriert mit auto margins */
-  position: relative;
-  z-index: 2;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+  gap: 4px;
 }
 
-[data-theme="dark"] .howto-step-number {
-  background: var(--howto-primary);
-  color: #0a0a0a;
-  box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
+.mobile-product-badge img {
+  flex-shrink: 0;
 }
 
-/* Image Container - ENTERPRISE STYLE (No Box) */
-.howto-step-image {
-  position: relative;
-  background: transparent; /* Kein Background */
-  border-radius: 0; /* Keine Rundung */
-  overflow: visible; /* iPhone kann rausragen */
-  margin-bottom: 0;
-  box-shadow: none; /* Kein Shadow */
-  transition: var(--howto-transition);
-  cursor: default;
-  aspect-ratio: 4/5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none; /* Kein Border */
+.mobile-product-badge .price {
+  color: var(--primary-color, #009a61);
+  font-weight: 800;
 }
 
-[data-theme="dark"] .howto-step-image {
-  background: transparent;
-  border: none;
+/* Badge Positionen auf der Weltkugel */
+.mobile-product-badge:nth-child(1) {
+  top: 15%;
+  left: 5%;
 }
 
-/* iPhone bekommt eigenen Shadow */
-.howto-step-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 5px;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15)); /* iPhone Shadow */
+.mobile-product-badge:nth-child(2) {
+  top: 35%;
+  right: 5%;
 }
 
-[data-theme="dark"] .howto-step-image img {
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+.mobile-product-badge:nth-child(3) {
+  bottom: 30%;
+  left: 10%;
 }
 
-/* Success Badge on Step 3 */
-.howto-step:last-child .howto-step-image::after {
-  content: '✓';
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 48px;
-  height: 48px;
-  background: var(--howto-accent);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: 700;
-  animation: scaleIn 0.5s ease 0.3s both;
-  box-shadow: 0 4px 12px rgba(0, 217, 126, 0.4);
+/* Product Labels Desktop - Hidden on Mobile */
+.product-labels {
+  display: none;
 }
 
-[data-theme="dark"] .howto-step:last-child .howto-step-image::after {
-  background: var(--howto-primary);
-  color: #0a0a0a;
-}
-
-/* Step Content */
-.howto-step-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--howto-text);
-  margin: 16px 0 12px 0; /* Weniger Abstand oben */
-  letter-spacing: -0.01em;
-}
-
-.howto-step-desc {
-  font-size: 16px;
-  color: var(--howto-text-secondary);
-  line-height: 1.5;
-  margin: 0;
-}
-
-/* Responsive - Tablet */
-@media (max-width: 1024px) {
-  .howto-container {
-    padding: 0 24px;
+/* TABLET (768px+) */
+@media (min-width: 768px) {
+  .hero-container {
+    padding: 50px 30px 70px 30px;
   }
   
-  .howto-steps {
-    gap: 32px;
+  .hero-title {
+    font-size: 42px;
+    margin-bottom: 20px;
   }
   
-  .howto-step {
-    text-align: center; /* Tablet auch zentriert */
-  }
-  
-  .howto-step-title {
-    font-size: 22px;
-  }
-}
-
-/* Responsive - Mobile */
-@media (max-width: 768px) {
-  .howto-section {
-    padding: 20px 0 0 0; /* KEIN PADDING UNTEN! */
-  }
-  
-  /* Container Mobile anpassen */
-  .howto-container {
-    padding: 0 16px 20px 16px; /* Padding unten für Mobile */
-  }
-  
-  /* Dark Mode spezifisch */
-  [data-theme="dark"] .howto-section {
-    padding-bottom: 0 !important;
-  }
-  
-  .howto-container {
-    padding: 0 16px;
-  }
-  
-  .howto-header {
-    margin-bottom: 56px;
-  }
-  
-  .howto-title {
-    font-size: 32px;
-  }
-  
-  .howto-subtitle {
+  /* Subtitle zeigen auf Tablet */
+  .hero-subtitle {
+    display: block;
     font-size: 17px;
+    font-weight: 500;
+    color: #5a5a5a;
+    line-height: 1.5;
+    margin: 0 0 28px 0;
+    padding: 0 10px;
+    animation: fadeInUp 0.7s ease 0.1s both;
   }
   
-  .howto-steps {
-    grid-template-columns: 1fr;
+  /* Desktop Search zeigen, Mobile Search verstecken */
+  .hero-content .hero-search-wrapper {
+    display: block !important;
+    margin-bottom: 36px;
+  }
+  
+  .mobile-only-search {
+    display: none !important;
+  }
+  
+  .hero-search-container {
+    max-width: 500px;
+  }
+  
+  .hero-search {
+    height: 60px;
+    box-shadow: 0 8px 32px rgba(0, 154, 97, 0.15);
+  }
+  
+  .search-location-icon {
+    width: 24px;
+    height: 24px;
+    margin: 0 16px 0 20px;
+  }
+  
+  .hero-search input {
+    font-size: 17px;
+    padding: 0 12px 0 0;
+  }
+  
+  .search-btn {
+    padding: 0 32px;
+    font-size: 17px;
+    min-width: 100px;
+  }
+  
+  /* Stats auf Tablet - im Content zeigen */
+  .hero-stats {
+    display: flex !important; /* Zeigen */
+    gap: 35px;
+    margin: 0 0 36px 0;
+    animation: fadeInUp 0.8s ease 0.2s both;
+  }
+  
+  /* Mobile Stats verstecken */
+  .mobile-only-stats {
+    display: none !important;
+  }
+  
+  .stat-number {
+    font-size: 28px;
+  }
+  
+  .stat-label {
+    font-size: 12px;
+  }
+  
+  .hero-visual-wrapper {
+    margin: 0;
+  }
+  
+  .hero-visual {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 600px;
+  }
+  
+  .mobile-products {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: -15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    z-index: 2;
+  }
+  
+  .mobile-product-badge {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+}
+
+/* DESKTOP (1024px+) */
+@media (min-width: 1024px) {
+  .hero-container {
+    padding: 60px 40px 80px 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  
+  /* Content LINKS */
+  .hero-content {
+    text-align: left;
+  }
+  
+  .hero-title {
+    font-size: 56px;
+    margin-bottom: 24px;
+  }
+  
+  .hero-title-primary {
+    margin-bottom: 10px;
+  }
+  
+  .hero-subtitle {
+    font-size: 19px;
+    padding: 0;
+    max-width: 480px;
+    margin-bottom: 36px;
+  }
+  
+  /* Suchbalken Desktop */
+  .hero-content .hero-search-wrapper {
+    display: block !important;
+    margin-bottom: 48px;
+  }
+  
+  .mobile-only-search {
+    display: none !important;
+  }
+  
+  .hero-search-container {
+    max-width: 520px;
+    margin: 0;
+  }
+  
+  .hero-search {
+    height: 64px;
+  }
+  
+  .search-location-icon {
+    margin: 0 18px 0 24px;
+  }
+  
+  .hero-search input {
+    font-size: 18px;
+  }
+  
+  .search-btn {
+    padding: 0 36px;
+    font-size: 18px;
+  }
+  
+  /* Stats Desktop - im Content */
+  .hero-stats {
+    display: flex !important;
+    justify-content: flex-start;
     gap: 48px;
-    margin-bottom: 20px; /* ⬅️ REDUZIERT VON 60px! */
+    margin-bottom: 0;
   }
   
-  /* Remove connection line on mobile */
-  .howto-steps::before {
-    display: none;
+  /* Mobile Stats verstecken */
+  .mobile-only-stats {
+    display: none !important;
   }
   
-  /* Mobile: Steps als Karten - JETZT ZENTRIERT */
-  .howto-step {
-    background: rgba(0, 0, 0, 0.02); /* Sehr subtle Background */
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: none; /* Kein Shadow */
-    border: none; /* Kein Border */
-    text-align: center; /* ⬅️ GEÄNDERT: Mobile auch zentriert! */
+  .stat-item {
+    text-align: left;
+    max-width: none;
+  }
+  
+  .stat-number {
+    font-size: 36px;
+    margin-bottom: 4px;
+  }
+  
+  .stat-label {
+    font-size: 13px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  
+  /* Visual Desktop */
+  .hero-visual-wrapper {
+    width: 100%;
+    margin: 0;
+  }
+  
+  .hero-visual {
+    width: 100%;
+    margin: 0;
+    max-width: none;
     position: relative;
   }
   
-  [data-theme="dark"] .howto-step {
-    background: rgba(255, 255, 255, 0.02);
-    border: none;
+  .hero-image {
+    max-width: 1000px;
+    width: 100%;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
   }
   
-  /* Step Number für Mobile angepasst */
-  .howto-step-number {
-    position: relative; /* ⬅️ GEÄNDERT: Nicht mehr absolute */
-    top: auto;
-    left: auto;
-    z-index: 3;
-    margin: 0 auto 24px auto; /* Zentriert mit margin auto */
+  .product-labels {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
   }
   
-  /* Image für Mobile */
-  .howto-step-image {
-    margin-top: 0; /* Reset */
-    margin-bottom: 16px; /* Etwas Abstand nach unten */
-    max-width: 280px; /* Maximale Breite für Mobile */
-    margin-left: auto;
-    margin-right: auto;
+  .product-label {
+    position: absolute;
+    padding: 12px 20px;
+    background: white;
+    border-radius: 26px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
-  /* Text Content zentriert */
-  .howto-step-title,
-  .howto-step-desc {
-    text-align: center; /* Explizit zentriert */
+  .product-label:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15);
+  }
+  
+  .product-label-1 {
+    top: 25%;
+    left: 48%;
+    transform: translateX(-50%);
+  }
+  
+  .product-label-2 {
+    top: 35%;
+    right: 70%;
+  }
+  
+  .product-label-3 {
+    bottom: 35%;
+    right: 15%;
+  }
+  
+  .label-price {
+    color: var(--primary-color, #009a61);
+    font-weight: 800;
+  }
+  
+  /* Mobile badges verstecken auf Desktop */
+  .mobile-products {
+    display: none;
   }
 }
 
-/* Very Small Screens */
-@media (max-width: 480px) {
-  .howto-step-title {
-    font-size: 20px;
+/* XL Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .hero-title {
+    font-size: 68px;
   }
   
-  .howto-step-desc {
-    font-size: 15px;
+  .hero-subtitle {
+    font-size: 21px;
   }
   
-  .howto-step {
-    padding: 20px;
+  .stat-number {
+    font-size: 40px;
   }
   
-  /* Noch kleinere Bilder für sehr kleine Screens */
-  .howto-step-image {
-    max-width: 240px;
+  .stat-label {
+    font-size: 14px;
   }
+}
+
+/* Dark Mode */
+[data-theme="dark"] .hero-enterprise {
+  background: linear-gradient(180deg,
+    #0a0a0a 0%,
+    #0a0a0a 10%,
+    #0f1210 25%,
+    #0a1510 60%,
+    #051008 100%
+  );
+}
+
+[data-theme="dark"] .hero-title-primary {
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .hero-subtitle {
+  color: #b0b0b0;
+}
+
+[data-theme="dark"] .stat-label {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .stat-number {
+  color: #00d97e;
+}
+
+[data-theme="dark"] .mobile-product-badge,
+[data-theme="dark"] .product-label {
+  background: rgba(255, 255, 255, 0.95);
+  color: #1a1a1a;
+}
+
+[data-theme="dark"] .mobile-product-badge .price,
+[data-theme="dark"] .product-label .label-price {
+  color: var(--primary-color, #009a61);
 }
 
 /* Animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -380,134 +811,334 @@
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.05);
-    opacity: 0.9;
-  }
+/* Scrollbar für Dropdown */
+.search-suggestions::-webkit-scrollbar {
+  width: 4px;
 }
 
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.search-suggestions::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-@keyframes scaleIn {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.search-suggestions::-webkit-scrollbar-thumb {
+  background: rgba(0, 154, 97, 0.3);
+  border-radius: 2px;
 }
 
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+[data-theme="dark"] .search-suggestions::-webkit-scrollbar-thumb {
+  background: rgba(0, 217, 126, 0.3);
+}
+
+/* Loading Spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f0f0f0;
+  border-top-color: #009a61;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
 }
 </style>
 
-<section class="howto-section full-width" id="howto-section">
-  <div class="howto-container">
-    
-    <!-- Header -->
-    <div class="howto-header">
-      <h2 class="howto-title">
-        {{ 'howto.title_part1' | t | default: 'How does' }} <span class="howto-title-highlight">{{ 'howto.title_part2' | t | default: 'Simbye eSIM' }}</span> {{ 'howto.title_part3' | t | default: 'work' }}
-      </h2>
-      <p class="howto-subtitle">
-        {{ 'howto.subtitle' | t | default: 'Von der Bestellung bis zur Aktivierung in unter 2 Minuten' }}
+<section class="hero-enterprise">
+  <div class="hero-container">
+    <!-- Content -->
+    <div class="hero-content">
+      <!-- Title -->
+      <h1 class="hero-title">
+        <span class="hero-title-primary">
+          {{ 'hero.title_line1' | t | default: 'Günstige eSIM' }}
+        </span>
+        <span class="hero-title-gradient">
+          {{ 'hero.title_line2' | t | default: 'Datenpakete für Reisen' }}
+        </span>
+      </h1>
+      
+      <!-- Subtitle - NUR Tablet/Desktop -->
+      <p class="hero-subtitle">
+        {{ 'hero.subtitle' | t | default: 'Internet in 190+ Ländern • Keine Roaming-Gebühren • In 2 Minuten aktiviert' }}
       </p>
+      
+      <!-- ENTERPRISE SUCHBALKEN -->
+      <div class="hero-search-wrapper">
+        <div class="hero-search-container">
+          <div class="hero-search">
+            <!-- Location Icon -->
+            <svg class="search-location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="3"/>
+            </svg>
+            
+            <!-- Input Field -->
+            <input 
+              type="text" 
+              id="destination-search"
+              placeholder="{{ 'hero.search_placeholder' | t | default: 'Wohin reist du?' }}"
+              autocomplete="off"
+              aria-label="{{ 'hero.search_aria_label' | t | default: 'Reiseziel suchen' }}"
+            >
+            
+            <!-- Search Button -->
+            <button type="button" class="search-btn" id="search-btn" aria-label="{{ 'hero.search_button' | t | default: 'Suchen' }}">
+              {{ 'hero.search_button' | t | default: 'Suchen' }}
+            </button>
+          </div>
+          
+          <!-- Dropdown Suggestions -->
+          <div class="search-suggestions" id="search-suggestions"></div>
+        </div>
+      </div>
+      
+      <!-- STATS HIER FÜR MOBILE (NACH SUCHBALKEN) + DESKTOP -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">190+</span>
+          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">2 Min</span>
+          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">100K+</span>
+          <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
+        </div>
+      </div>
     </div>
     
-    <!-- Steps -->
-    <div class="howto-steps">
-      
-      <!-- Step 1: Wählen -->
-      <div class="howto-step">
-        <div class="howto-step-number">1</div>
-        <div class="howto-step-image">
-          {% if section.settings.step1_image %}
-            <img 
-              src="{{ section.settings.step1_image | image_url: width: 600 }}" 
-              alt="{{ 'howto.step1_alt' | t | default: 'Datenpaket auswählen' }}"
-              loading="lazy"
-              width="600"
-              height="750"
-            >
+    <!-- Visual -->
+    <div class="hero-visual-wrapper">
+      <div class="hero-visual">
+        <img 
+          class="hero-image"
+          src="{{ section.settings.hero_image | image_url: width: 1300 | default: 'https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Design_ohne_Titel-3.png?v=1758222990' }}"
+          alt="{{ 'hero.image_alt' | t | default: 'Simbye eSIM Weltkugel' }}"
+          width="650"
+          height="520"
+          loading="eager"
+          fetchpriority="high"
+        >
+        
+        <!-- Mobile Product Badges -->
+        <div class="mobile-products">
+          {% comment %} Produkte laden {% endcomment %}
+          {% if section.settings.product_1 %}
+            {% assign product_1 = all_products[section.settings.product_1] %}
+          {% endif %}
+          {% if section.settings.product_2 %}
+            {% assign product_2 = all_products[section.settings.product_2] %}
+          {% endif %}
+          {% if section.settings.product_3 %}
+            {% assign product_3 = all_products[section.settings.product_3] %}
+          {% endif %}
+          
+          <!-- Mobile Badge 1 -->
+          {% if product_1 != blank %}
+            <span class="mobile-product-badge">
+              {% if product_1.featured_image %}
+                <img src="{{ product_1.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
+              {% else %}
+                🌍
+              {% endif %}
+              {% assign product_name = product_1.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+              <span>{{ product_name | truncate: 12 }}</span>
+              {% if section.settings.product_1_gb != blank %}
+                <span style="color: var(--primary-color, #009a61); font-weight: 800;">{{ section.settings.product_1_gb }}</span>
+              {% endif %}
+              {% if section.settings.product_1_price != blank %}
+                <span class="price">{{ section.settings.product_1_price }}</span>
+              {% endif %}
+            </span>
           {% else %}
-            <img 
-              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+1" 
-              alt="{{ 'howto.step1_alt' | t | default: 'Datenpaket auswählen' }}"
-            >
+            <span class="mobile-product-badge">
+              🇹🇷 <span>Türkei</span> <span style="color: var(--primary-color, #009a61); font-weight: 800;">5GB</span> <span class="price">9€</span>
+            </span>
+          {% endif %}
+          
+          <!-- Mobile Badge 2 -->
+          {% if product_2 != blank %}
+            <span class="mobile-product-badge">
+              {% if product_2.featured_image %}
+                <img src="{{ product_2.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
+              {% else %}
+                🌍
+              {% endif %}
+              {% assign product_name = product_2.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+              <span>{{ product_name | truncate: 12 }}</span>
+              {% if section.settings.product_2_gb != blank %}
+                <span style="color: var(--primary-color, #009a61); font-weight: 800;">{{ section.settings.product_2_gb }}</span>
+              {% endif %}
+              {% if section.settings.product_2_price != blank %}
+                <span class="price">{{ section.settings.product_2_price }}</span>
+              {% endif %}
+            </span>
+          {% else %}
+            <span class="mobile-product-badge">
+              🇺🇸 <span>USA</span> <span style="color: var(--primary-color, #009a61); font-weight: 800;">10GB</span> <span class="price">19€</span>
+            </span>
+          {% endif %}
+          
+          <!-- Mobile Badge 3 -->
+          {% if product_3 != blank %}
+            <span class="mobile-product-badge">
+              {% if product_3.featured_image %}
+                <img src="{{ product_3.featured_image | image_url: width: 24 }}" alt="" style="width: 16px; height: 16px; border-radius: 2px; object-fit: cover;">
+              {% else %}
+                🌍
+              {% endif %}
+              {% assign product_name = product_3.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+              <span>{{ product_name | truncate: 12 }}</span>
+              {% if section.settings.product_3_gb != blank %}
+                <span style="color: var(--primary-color, #009a61); font-weight: 800;">{{ section.settings.product_3_gb }}</span>
+              {% endif %}
+              {% if section.settings.product_3_price != blank %}
+                <span class="price">{{ section.settings.product_3_price }}</span>
+              {% endif %}
+            </span>
+          {% else %}
+            <span class="mobile-product-badge">
+              🇯🇵 <span>Japan</span> <span style="color: var(--primary-color, #009a61); font-weight: 800;">3GB</span> <span class="price">12€</span>
+            </span>
           {% endif %}
         </div>
-        <h3 class="howto-step-title">{{ 'howto.step1_title' | t | default: section.settings.step1_title }}</h3>
-        <p class="howto-step-desc">{{ 'howto.step1_desc' | t | default: section.settings.step1_desc }}</p>
-      </div>
-      
-      <!-- Step 2: Scannen -->
-      <div class="howto-step">
-        <div class="howto-step-number">2</div>
-        <div class="howto-step-image">
-          {% if section.settings.step2_image %}
-            <img 
-              src="{{ section.settings.step2_image | image_url: width: 600 }}" 
-              alt="{{ 'howto.step2_alt' | t | default: 'QR-Code scannen' }}"
-              loading="lazy"
-              width="600"
-              height="750"
-            >
+        
+        <!-- Desktop Product Labels -->
+        <div class="product-labels">
+          <!-- Desktop Label 1 -->
+          {% if product_1 != blank %}
+            <div class="product-label product-label-1">
+              {% if product_1.featured_image %}
+                <img src="{{ product_1.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+              {% else %}
+                <span>🌍</span>
+              {% endif %}
+              {% assign product_name = product_1.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+              <span>{{ product_name | truncate: 20 }}</span>
+              {% if section.settings.product_1_gb != blank %}
+                <span style="color: var(--primary-color, #009a61); font-weight: 800;">• {{ section.settings.product_1_gb }}</span>
+              {% endif %}
+              {% if section.settings.product_1_price != blank %}
+                <span class="label-price">{{ section.settings.product_1_price }}</span>
+              {% endif %}
+            </div>
           {% else %}
-            <img 
-              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+2" 
-              alt="{{ 'howto.step2_alt' | t | default: 'QR-Code scannen' }}"
-            >
+            <div class="product-label product-label-1">
+              <span>🇹🇷</span>
+              <span>Türkei</span>
+              <span style="color: var(--primary-color, #009a61); font-weight: 800;">• 5GB</span>
+              <span class="label-price">9€</span>
+            </div>
+          {% endif %}
+          
+          <!-- Desktop Label 2 -->
+          {% if product_2 != blank %}
+            <div class="product-label product-label-2">
+              {% if product_2.featured_image %}
+                <img src="{{ product_2.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+              {% else %}
+                <span>🌍</span>
+              {% endif %}
+              {% assign product_name = product_2.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+              <span>{{ product_name | truncate: 20 }}</span>
+              {% if section.settings.product_2_gb != blank %}
+                <span style="color: var(--primary-color, #009a61); font-weight: 800;">• {{ section.settings.product_2_gb }}</span>
+              {% endif %}
+              {% if section.settings.product_2_price != blank %}
+                <span class="label-price">{{ section.settings.product_2_price }}</span>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="product-label product-label-2">
+              <span>🇺🇸</span>
+              <span>USA</span>
+              <span style="color: var(--primary-color, #009a61); font-weight: 800;">• 10GB</span>
+              <span class="label-price">19€</span>
+            </div>
+          {% endif %}
+          
+          <!-- Desktop Label 3 -->
+          {% if product_3 != blank %}
+            <div class="product-label product-label-3">
+              {% if product_3.featured_image %}
+                <img src="{{ product_3.featured_image | image_url: width: 40 }}" alt="" style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+              {% else %}
+                <span>🌍</span>
+              {% endif %}
+              {% assign product_name = product_3.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip %}
+              <span>{{ product_name | truncate: 20 }}</span>
+              {% if section.settings.product_3_gb != blank %}
+                <span style="color: var(--primary-color, #009a61); font-weight: 800;">• {{ section.settings.product_3_gb }}</span>
+              {% endif %}
+              {% if section.settings.product_3_price != blank %}
+                <span class="label-price">{{ section.settings.product_3_price }}</span>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="product-label product-label-3">
+              <span>🇯🇵</span>
+              <span>Japan</span>
+              <span style="color: var(--primary-color, #009a61); font-weight: 800;">• 3GB</span>
+              <span class="label-price">12€</span>
+            </div>
           {% endif %}
         </div>
-        <h3 class="howto-step-title">{{ 'howto.step2_title' | t | default: section.settings.step2_title }}</h3>
-        <p class="howto-step-desc">{{ 'howto.step2_desc' | t | default: section.settings.step2_desc }}</p>
       </div>
       
-      <!-- Step 3: Online -->
-      <div class="howto-step">
-        <div class="howto-step-number">3</div>
-        <div class="howto-step-image">
-          {% if section.settings.step3_image %}
-            <img 
-              src="{{ section.settings.step3_image | image_url: width: 600 }}" 
-              alt="{{ 'howto.step3_alt' | t | default: 'eSIM aktivieren' }}"
-              loading="lazy"
-              width="600"
-              height="750"
+      <!-- MOBILE SEARCH - NUR MOBILE SICHTBAR, DIREKT VOR STATS -->
+      <div class="hero-search-wrapper mobile-only-search">
+        <div class="hero-search-container">
+          <div class="hero-search">
+            <!-- Location Icon -->
+            <svg class="search-location-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+              <circle cx="12" cy="9" r="3"/>
+            </svg>
+            
+            <!-- Input Field -->
+            <input 
+              type="text" 
+              id="destination-search-mobile"
+              placeholder="{{ 'hero.search_placeholder' | t | default: 'Wohin reist du?' }}"
+              autocomplete="off"
+              aria-label="{{ 'hero.search_aria_label' | t | default: 'Reiseziel suchen' }}"
             >
-          {% else %}
-            <img 
-              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+3" 
-              alt="{{ 'howto.step3_alt' | t | default: 'eSIM aktivieren' }}"
-            >
-          {% endif %}
+            
+            <!-- Search Button -->
+            <button type="button" class="search-btn" id="search-btn-mobile" aria-label="{{ 'hero.search_button' | t | default: 'Suchen' }}">
+              {{ 'hero.search_button' | t | default: 'Suchen' }}
+            </button>
+          </div>
+          
+          <!-- Dropdown Suggestions -->
+          <div class="search-suggestions" id="search-suggestions-mobile"></div>
         </div>
-        <h3 class="howto-step-title">{{ 'howto.step3_title' | t | default: section.settings.step3_title }}</h3>
-        <p class="howto-step-desc">{{ 'howto.step3_desc' | t | default: section.settings.step3_desc }}</p>
       </div>
       
+      <!-- STATS GANZ UNTEN NUR FÜR MOBILE -->
+      <div class="hero-stats mobile-only-stats">
+        <div class="stat-item">
+          <span class="stat-number">190+</span>
+          <span class="stat-label">{{ 'hero.stat_countries' | t | default: 'Länder verfügbar' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">2 Min</span>
+          <span class="stat-label">{{ 'hero.stat_activation' | t | default: 'Installation' }}</span>
+        </div>
+        
+        <div class="stat-item">
+          <span class="stat-number">100K+</span>
+          <span class="stat-label">{{ 'hero.stat_customers' | t | default: 'Zufriedene Kunden' }}</span>
+        </div>
+      </div>
     </div>
-    
   </div>
 </section>
 
@@ -515,134 +1146,305 @@
 (function() {
   'use strict';
   
-  // Cache DOM elements
-  const section = document.getElementById('howto-section');
-  const steps = document.querySelectorAll('.howto-step');
-  
-  // Initialize
-  function init() {
-    if (!section) return;
+  // Initialize both desktop and mobile search
+  function initSearch(inputId, buttonId, suggestionsId) {
+    const searchInput = document.getElementById(inputId);
+    const searchButton = document.getElementById(buttonId);
+    const suggestions = document.getElementById(suggestionsId);
     
-    // Animate on scroll
-    animateOnScroll();
-  }
-  
-  // Animate elements on scroll
-  function animateOnScroll() {
-    if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+    if (!searchInput || !searchButton || !suggestions) return;
+    
+    // State
+    let isOpen = false;
+    let selectedIndex = -1;
+    let searchTimeout = null;
+    let currentProducts = [];
+    
+    // Event Listeners
+    searchInput.addEventListener('input', handleInput);
+    searchInput.addEventListener('focus', handleFocus);
+    searchInput.addEventListener('keydown', handleKeyDown);
+    searchButton.addEventListener('click', handleSearch);
+    
+    // Click outside
+    document.addEventListener('click', function(e) {
+      if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
+        hideSuggestions();
+      }
+    });
+    
+    // Prevent zoom on iOS
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      searchInput.addEventListener('touchstart', function() {
+        searchInput.style.fontSize = '16px';
+      });
+    }
+    
+    // Handle input
+    function handleInput() {
+      const value = this.value.trim();
+      
+      // Clear previous timeout
+      if (searchTimeout) clearTimeout(searchTimeout);
+      
+      if (value.length > 0) {
+        // Show loading
+        showLoading();
+        
+        // Debounce search
+        searchTimeout = setTimeout(() => {
+          searchProducts(value);
+        }, 300);
+      } else {
+        hideSuggestions();
+      }
+    }
+    
+    // Handle focus
+    function handleFocus() {
+      const value = this.value.trim();
+      if (value.length > 0) {
+        searchProducts(value);
+      }
+    }
+    
+    // Handle keyboard navigation
+    function handleKeyDown(e) {
+      const items = suggestions.querySelectorAll('.suggestion-item');
+      
+      switch(e.key) {
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0 && items[selectedIndex]) {
+            items[selectedIndex].click();
+          } else if (searchInput.value.trim()) {
+            handleSearch();
           }
+          break;
+          
+        case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
+          updateSelection(items);
+          break;
+          
+        case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex = Math.max(selectedIndex - 1, -1);
+          updateSelection(items);
+          break;
+          
+        case 'Escape':
+          hideSuggestions();
+          searchInput.blur();
+          break;
+      }
+    }
+    
+    // Search products via Shopify Search API
+    function searchProducts(query) {
+      // Shopify Predictive Search API
+      fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=8`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.resources && data.resources.results && data.resources.results.products) {
+            currentProducts = data.resources.results.products;
+            displayProducts(currentProducts);
+          } else {
+            displayEmpty();
+          }
+        })
+        .catch(error => {
+          console.error('Search error:', error);
+          displayEmpty();
         });
-      }, {
-        threshold: 0.1,
-        rootMargin: '50px'
+    }
+    
+    // Display products
+    function displayProducts(products) {
+      if (products.length === 0) {
+        displayEmpty();
+        return;
+      }
+      
+      let html = '';
+      
+      products.forEach(product => {
+        // Extract country from title
+        const title = product.title.replace('eSIM', '').replace('-', '').trim();
+        const price = product.price ? `${product.price}` : '';
+        const imageUrl = product.featured_image?.url || '';
+        
+        html += `
+          <a href="${product.url}" class="suggestion-item">
+            ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="suggestion-image">` : '<span class="suggestion-image">🌍</span>'}
+            <div class="suggestion-content">
+              <span class="suggestion-title">${title}</span>
+              ${product.vendor ? `<span class="suggestion-subtitle">${product.vendor}</span>` : ''}
+            </div>
+            ${price ? `<span class="suggestion-price">${price}</span>` : ''}
+          </a>
+        `;
       });
       
-      // Observe all steps
-      steps.forEach(step => {
-        step.style.opacity = '0';
-        step.style.transform = 'translateY(30px)';
-        step.style.transition = 'all 0.6s ease';
-        observer.observe(step);
+      suggestions.innerHTML = html;
+      showSuggestions();
+      selectedIndex = -1;
+    }
+    
+    // Display empty state
+    function displayEmpty() {
+      suggestions.innerHTML = `
+        <div class="suggestions-empty">
+          {{ 'hero.no_results' | t | default: 'Keine Ergebnisse gefunden' }}
+        </div>
+      `;
+      showSuggestions();
+    }
+    
+    // Show loading
+    function showLoading() {
+      suggestions.innerHTML = `
+        <div class="suggestions-loading">
+          <span class="loading-spinner"></span>
+          {{ 'hero.searching' | t | default: 'Suche läuft...' }}
+        </div>
+      `;
+      showSuggestions();
+    }
+    
+    // Handle search button
+    function handleSearch() {
+      const value = searchInput.value.trim();
+      if (value) {
+        // If we have exact match in current products
+        const exactMatch = currentProducts.find(p => 
+          p.title.toLowerCase().includes(value.toLowerCase())
+        );
+        
+        if (exactMatch) {
+          window.location.href = exactMatch.url;
+        } else {
+          // General search
+          window.location.href = `/search?q=${encodeURIComponent(value)}`;
+        }
+      }
+    }
+    
+    // Update keyboard selection
+    function updateSelection(items) {
+      items.forEach((item, index) => {
+        if (index === selectedIndex) {
+          item.classList.add('selected');
+          // Scroll into view if needed
+          item.scrollIntoView({ block: 'nearest' });
+        } else {
+          item.classList.remove('selected');
+        }
       });
+    }
+    
+    // Show/hide suggestions
+    function showSuggestions() {
+      suggestions.classList.add('active');
+      isOpen = true;
+    }
+    
+    function hideSuggestions() {
+      suggestions.classList.remove('active');
+      isOpen = false;
+      selectedIndex = -1;
     }
   }
   
-  // Initialize on DOM ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  // Initialize both desktop and mobile search
+  initSearch('destination-search', 'search-btn', 'search-suggestions');
+  initSearch('destination-search-mobile', 'search-btn-mobile', 'search-suggestions-mobile');
 })();
 </script>
 
 {% schema %}
 {
-  "name": "How-To Section",
-  "class": "howto-section",
+  "name": "Hero Section",
   "settings": [
     {
       "type": "header",
-      "content": "Step 1 - Wählen"
+      "content": "Bild"
     },
     {
       "type": "image_picker",
-      "id": "step1_image",
-      "label": "Bild für Schritt 1",
-      "info": "Empfohlen: 600x750px (4:5 Ratio)"
-    },
-    {
-      "type": "text",
-      "id": "step1_title",
-      "label": "Titel Schritt 1",
-      "default": "Datenpaket wählen"
-    },
-    {
-      "type": "text",
-      "id": "step1_desc",
-      "label": "Beschreibung Schritt 1",
-      "default": "190+ Länder verfügbar. Sofort per E-Mail erhalten."
+      "id": "hero_image",
+      "label": "Hero Bild",
+      "info": "Empfohlen: 1300x1000px"
     },
     {
       "type": "header",
-      "content": "Step 2 - Scannen"
+      "content": "Featured Produkte"
     },
     {
-      "type": "image_picker",
-      "id": "step2_image",
-      "label": "Bild für Schritt 2",
-      "info": "Empfohlen: 600x750px (4:5 Ratio)"
-    },
-    {
-      "type": "text",
-      "id": "step2_title",
-      "label": "Titel Schritt 2",
-      "default": "QR-Code scannen"
+      "type": "product",
+      "id": "product_1",
+      "label": "Produkt 1 (Links oben)"
     },
     {
       "type": "text",
-      "id": "step2_desc",
-      "label": "Beschreibung Schritt 2",
-      "default": "Mit der Kamera-App scannen. Keine zusätzliche App nötig."
-    },
-    {
-      "type": "header",
-      "content": "Step 3 - Aktivieren"
-    },
-    {
-      "type": "image_picker",
-      "id": "step3_image",
-      "label": "Bild für Schritt 3",
-      "info": "Empfohlen: 600x750px (4:5 Ratio)"
+      "id": "product_1_gb",
+      "label": "Produkt 1 GB Anzeige",
+      "placeholder": "5GB",
+      "info": "z.B. 5GB, 10GB, Unlimited"
     },
     {
       "type": "text",
-      "id": "step3_title",
-      "label": "Titel Schritt 3",
-      "default": "eSIM aktivieren"
+      "id": "product_1_price",
+      "label": "Produkt 1 Preis",
+      "placeholder": "9€",
+      "info": "Preis manuell eingeben"
+    },
+    {
+      "type": "product",
+      "id": "product_2",
+      "label": "Produkt 2 (Rechts)"
     },
     {
       "type": "text",
-      "id": "step3_desc",
-      "label": "Beschreibung Schritt 3",
-      "default": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
+      "id": "product_2_gb",
+      "label": "Produkt 2 GB Anzeige",
+      "placeholder": "10GB"
+    },
+    {
+      "type": "text",
+      "id": "product_2_price",
+      "label": "Produkt 2 Preis",
+      "placeholder": "19€"
+    },
+    {
+      "type": "product",
+      "id": "product_3",
+      "label": "Produkt 3 (Links unten)"
+    },
+    {
+      "type": "text",
+      "id": "product_3_gb",
+      "label": "Produkt 3 GB Anzeige",
+      "placeholder": "3GB"
+    },
+    {
+      "type": "text",
+      "id": "product_3_price",
+      "label": "Produkt 3 Preis",
+      "placeholder": "12€"
     }
   ],
   "presets": [
     {
-      "name": "How-To Section",
+      "name": "Hero Section",
       "settings": {
-        "step1_title": "Datenpaket wählen",
-        "step1_desc": "190+ Länder verfügbar. Sofort per E-Mail erhalten.",
-        "step2_title": "QR-Code scannen", 
-        "step2_desc": "Mit der Kamera-App scannen. Keine zusätzliche App nötig.",
-        "step3_title": "eSIM aktivieren",
-        "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
+        "product_1_gb": "5GB",
+        "product_1_price": "9€",
+        "product_2_gb": "10GB",
+        "product_2_price": "19€",
+        "product_3_gb": "3GB",
+        "product_3_price": "12€"
       }
     }
   ]
