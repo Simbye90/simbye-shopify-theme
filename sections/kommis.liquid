@@ -1146,7 +1146,45 @@
   </div>
 </section>
 
-
+<script>
+(function() {
+  'use strict';
+  
+  // Infinite Carousel ist rein CSS - läuft automatisch!
+  // Pausiert on hover durch CSS :hover rule
+  
+  // Optional: Restart animation wenn Tab wieder aktiv wird
+  document.addEventListener('visibilitychange', function() {
+    const track = document.getElementById('trust-carousel');
+    if (track) {
+      if (document.hidden) {
+        track.style.animationPlayState = 'paused';
+      } else {
+        track.style.animationPlayState = 'running';
+      }
+    }
+  });
+  
+  // Optional: Performance optimization
+  if ('IntersectionObserver' in window) {
+    const track = document.getElementById('trust-carousel');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+        } else {
+          entry.target.style.animationPlayState = 'paused';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    if (track) {
+      observer.observe(track);
+    }
+  }
+})();
 </script>
 
 {% schema %}
