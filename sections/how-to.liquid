@@ -1,0 +1,787 @@
+<!-- sections/how-to.liquid -->
+<!-- SIMBYE HOW-TO - ENTERPRISE 3-STEP PROCESS -->
+
+<style>
+/* CSS Variables - Enterprise Design System */
+:root {
+  --howto-bg: #ffffff;
+  --howto-text: #1a1a1a;
+  --howto-text-secondary: #666666;
+  --howto-primary: #009a61;
+  --howto-primary-hover: #00824f;
+  --howto-accent: #00d97e;
+  --howto-border: rgba(0, 0, 0, 0.08);
+  --howto-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --howto-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --howto-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --howto-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --howto-gradient: linear-gradient(135deg, #f0faf7 0%, #ffffff 100%);
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --howto-bg: linear-gradient(180deg, #0a0a0a 0%, #0f1210 50%, #0a0a0a 100%);
+  --howto-text: #f5f5f5;
+  --howto-text-secondary: #999999;
+  --howto-primary: #00d97e;
+  --howto-primary-hover: #009a61;
+  --howto-accent: #00ff88;
+  --howto-border: rgba(255, 255, 255, 0.08);
+  --howto-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --howto-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --howto-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.2);
+  --howto-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+}
+
+/* Main Section */
+.howto-section {
+  width: 100%;
+  padding: 100px 0;
+  background: var(--howto-bg);
+  position: relative;
+  overflow: hidden;
+  transition: var(--howto-transition);
+}
+
+/* Background Pattern */
+.howto-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(0, 154, 97, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 217, 126, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="dark"] .howto-section::before {
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(0, 217, 126, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 154, 97, 0.03) 0%, transparent 50%);
+}
+
+/* Container */
+.howto-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.howto-header {
+  text-align: center;
+  margin-bottom: 80px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.howto-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--howto-text);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.howto-title-gradient {
+  background: linear-gradient(135deg, var(--howto-primary) 0%, var(--howto-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+.howto-subtitle {
+  font-size: 20px;
+  color: var(--howto-text-secondary);
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Timer Badge */
+.howto-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--howto-gradient);
+  border: 2px solid var(--howto-primary);
+  border-radius: 100px;
+  padding: 12px 28px;
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--howto-primary);
+  animation: pulse 2s infinite;
+}
+
+[data-theme="dark"] .howto-timer {
+  background: rgba(0, 217, 126, 0.1);
+  border-color: var(--howto-primary);
+}
+
+.howto-timer-icon {
+  width: 24px;
+  height: 24px;
+  animation: rotate 2s linear infinite;
+}
+
+/* Steps Container */
+.howto-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-bottom: 60px;
+  position: relative;
+}
+
+/* Connection Line */
+.howto-steps::before {
+  content: '';
+  position: absolute;
+  top: 240px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    var(--howto-primary) 0%, 
+    var(--howto-accent) 50%, 
+    var(--howto-primary) 100%);
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* Step Card */
+.howto-step {
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 0.9s ease both;
+  animation-delay: calc(var(--step-index) * 0.1s);
+}
+
+.howto-step:nth-child(1) { --step-index: 1; }
+.howto-step:nth-child(2) { --step-index: 2; }
+.howto-step:nth-child(3) { --step-index: 3; }
+
+/* Step Number */
+.howto-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: var(--howto-primary);
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+}
+
+[data-theme="dark"] .howto-step-number {
+  background: var(--howto-primary);
+  color: #0a0a0a;
+  box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
+}
+
+/* Image Container */
+.howto-step-image {
+  position: relative;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  box-shadow: var(--howto-shadow-md);
+  transition: var(--howto-transition);
+  cursor: pointer;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--howto-border);
+}
+
+[data-theme="dark"] .howto-step-image {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.howto-step:hover .howto-step-image {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--howto-shadow-lg);
+  border-color: var(--howto-primary);
+}
+
+.howto-step-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 20px;
+}
+
+/* Success Badge on Step 3 */
+.howto-step:last-child .howto-step-image::after {
+  content: '✓';
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  background: var(--howto-accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  animation: scaleIn 0.5s ease 0.3s both;
+  box-shadow: 0 4px 12px rgba(0, 217, 126, 0.4);
+}
+
+[data-theme="dark"] .howto-step:last-child .howto-step-image::after {
+  background: var(--howto-primary);
+  color: #0a0a0a;
+}
+
+/* Step Content */
+.howto-step-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--howto-text);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.01em;
+}
+
+.howto-step-desc {
+  font-size: 16px;
+  color: var(--howto-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Step Time */
+.howto-step-time {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 6px 16px;
+  background: rgba(0, 154, 97, 0.1);
+  color: var(--howto-primary);
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .howto-step-time {
+  background: rgba(0, 217, 126, 0.15);
+}
+
+/* Trust Section */
+.howto-trust {
+  text-align: center;
+  padding: 60px 40px;
+  background: var(--howto-gradient);
+  border-radius: 32px;
+  border: 2px solid var(--howto-border);
+  margin-top: 80px;
+  animation: fadeInUp 1s ease 0.4s both;
+}
+
+[data-theme="dark"] .howto-trust {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.howto-trust-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--howto-text);
+  margin: 0 0 24px 0;
+}
+
+.howto-trust-items {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.howto-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  color: var(--howto-text);
+  font-weight: 500;
+}
+
+.howto-trust-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--howto-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .howto-trust-icon {
+  background: var(--howto-primary);
+  color: #0a0a0a;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .howto-container {
+    padding: 0 24px;
+  }
+  
+  .howto-steps {
+    gap: 32px;
+  }
+  
+  .howto-step-title {
+    font-size: 22px;
+  }
+  
+  .howto-trust-items {
+    gap: 32px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .howto-section {
+    padding: 72px 0;
+  }
+  
+  .howto-container {
+    padding: 0 16px;
+  }
+  
+  .howto-header {
+    margin-bottom: 56px;
+  }
+  
+  .howto-title {
+    font-size: 32px;
+  }
+  
+  .howto-subtitle {
+    font-size: 17px;
+  }
+  
+  .howto-steps {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  /* Remove connection line on mobile */
+  .howto-steps::before {
+    display: none;
+  }
+  
+  /* Mobile: Steps als Karten */
+  .howto-step {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--howto-shadow-sm);
+    border: 2px solid var(--howto-border);
+  }
+  
+  [data-theme="dark"] .howto-step {
+    background: rgba(26, 26, 26, 0.6);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .howto-step-number {
+    position: absolute;
+    top: -24px;
+    left: 24px;
+    z-index: 3;
+  }
+  
+  .howto-step-image {
+    margin-top: 24px;
+  }
+  
+  .howto-trust {
+    padding: 40px 20px;
+    border-radius: 20px;
+  }
+  
+  .howto-trust-title {
+    font-size: 24px;
+  }
+  
+  .howto-trust-items {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  
+  .howto-trust-item {
+    font-size: 16px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .howto-timer {
+    font-size: 16px;
+    padding: 10px 24px;
+  }
+  
+  .howto-timer-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .howto-step-title {
+    font-size: 20px;
+  }
+  
+  .howto-step-desc {
+    font-size: 15px;
+  }
+  
+  .howto-step {
+    padding: 20px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+
+<section class="howto-section" id="howto-section">
+  <div class="howto-container">
+    
+    <!-- Header -->
+    <div class="howto-header">
+      <h2 class="howto-title">
+        So einfach war <span class="howto-title-gradient">Internet im Ausland</span> noch nie
+      </h2>
+      <p class="howto-subtitle">
+        Von der Bestellung bis zur Aktivierung in unter 2 Minuten
+      </p>
+      <div class="howto-timer">
+        <svg class="howto-timer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 6v6l4 2"/>
+        </svg>
+        <span>⌀ 1:47 Min</span>
+      </div>
+    </div>
+    
+    <!-- Steps -->
+    <div class="howto-steps">
+      
+      <!-- Step 1: Wählen -->
+      <div class="howto-step">
+        <div class="howto-step-number">1</div>
+        <div class="howto-step-image">
+          {% if section.settings.step1_image %}
+            <img 
+              src="{{ section.settings.step1_image | image_url: width: 600 }}" 
+              alt="Datenpaket auswählen"
+              loading="lazy"
+              width="600"
+              height="450"
+            >
+          {% else %}
+            <img 
+              src="https://via.placeholder.com/600x450/f0faf7/009a61?text=Schritt+1" 
+              alt="Datenpaket auswählen"
+            >
+          {% endif %}
+        </div>
+        <h3 class="howto-step-title">{{ section.settings.step1_title | default: 'Datenpaket wählen' }}</h3>
+        <p class="howto-step-desc">{{ section.settings.step1_desc | default: '190+ Länder verfügbar. Sofort per E-Mail erhalten.' }}</p>
+        <span class="howto-step-time">~30 Sekunden</span>
+      </div>
+      
+      <!-- Step 2: Scannen -->
+      <div class="howto-step">
+        <div class="howto-step-number">2</div>
+        <div class="howto-step-image">
+          {% if section.settings.step2_image %}
+            <img 
+              src="{{ section.settings.step2_image | image_url: width: 600 }}" 
+              alt="QR-Code scannen"
+              loading="lazy"
+              width="600"
+              height="450"
+            >
+          {% else %}
+            <img 
+              src="https://via.placeholder.com/600x450/f0faf7/009a61?text=Schritt+2" 
+              alt="QR-Code scannen"
+            >
+          {% endif %}
+        </div>
+        <h3 class="howto-step-title">{{ section.settings.step2_title | default: 'QR-Code scannen' }}</h3>
+        <p class="howto-step-desc">{{ section.settings.step2_desc | default: 'Mit der Kamera-App scannen. Keine zusätzliche App nötig.' }}</p>
+        <span class="howto-step-time">~45 Sekunden</span>
+      </div>
+      
+      <!-- Step 3: Online -->
+      <div class="howto-step">
+        <div class="howto-step-number">3</div>
+        <div class="howto-step-image">
+          {% if section.settings.step3_image %}
+            <img 
+              src="{{ section.settings.step3_image | image_url: width: 600 }}" 
+              alt="eSIM aktivieren"
+              loading="lazy"
+              width="600"
+              height="450"
+            >
+          {% else %}
+            <img 
+              src="https://via.placeholder.com/600x450/f0faf7/009a61?text=Schritt+3" 
+              alt="eSIM aktivieren"
+            >
+          {% endif %}
+        </div>
+        <h3 class="howto-step-title">{{ section.settings.step3_title | default: 'eSIM aktivieren' }}</h3>
+        <p class="howto-step-desc">{{ section.settings.step3_desc | default: 'Mobile Daten einschalten & lossurfen. Kein Roaming!' }}</p>
+        <span class="howto-step-time">~30 Sekunden</span>
+      </div>
+      
+    </div>
+    
+    <!-- Trust Section -->
+    <div class="howto-trust">
+      <h3 class="howto-trust-title">Deine Sicherheit ist uns wichtig</h3>
+      <div class="howto-trust-items">
+        <div class="howto-trust-item">
+          <div class="howto-trust-icon">🛡️</div>
+          <span>100% Geld-zurück-Garantie</span>
+        </div>
+        <div class="howto-trust-item">
+          <div class="howto-trust-icon">💬</div>
+          <span>24/7 WhatsApp Support</span>
+        </div>
+        <div class="howto-trust-item">
+          <div class="howto-trust-icon">⚡</div>
+          <span>Sofort-Aktivierung garantiert</span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Cache DOM elements
+  const section = document.getElementById('howto-section');
+  const steps = document.querySelectorAll('.howto-step');
+  const images = document.querySelectorAll('.howto-step-image');
+  
+  // Initialize
+  function init() {
+    if (!section) return;
+    
+    // Add click handlers for images
+    images.forEach((img, index) => {
+      img.addEventListener('click', () => handleImageClick(index));
+    });
+    
+    // Animate on scroll
+    animateOnScroll();
+  }
+  
+  // Handle image click (future: open modal/zoom)
+  function handleImageClick(index) {
+    console.log(`Step ${index + 1} clicked`);
+    // Future: Open modal with detailed view
+  }
+  
+  // Animate elements on scroll
+  function animateOnScroll() {
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+      
+      // Observe all steps
+      steps.forEach(step => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateY(30px)';
+        step.style.transition = 'all 0.6s ease';
+        observer.observe(step);
+      });
+    }
+  }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "How-To Section",
+  "class": "howto-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Step 1 - Wählen"
+    },
+    {
+      "type": "image_picker",
+      "id": "step1_image",
+      "label": "Bild für Schritt 1",
+      "info": "Empfohlen: 600x450px"
+    },
+    {
+      "type": "text",
+      "id": "step1_title",
+      "label": "Titel Schritt 1",
+      "default": "Datenpaket wählen"
+    },
+    {
+      "type": "text",
+      "id": "step1_desc",
+      "label": "Beschreibung Schritt 1",
+      "default": "190+ Länder verfügbar. Sofort per E-Mail erhalten."
+    },
+    {
+      "type": "header",
+      "content": "Step 2 - Scannen"
+    },
+    {
+      "type": "image_picker",
+      "id": "step2_image",
+      "label": "Bild für Schritt 2",
+      "info": "Empfohlen: 600x450px"
+    },
+    {
+      "type": "text",
+      "id": "step2_title",
+      "label": "Titel Schritt 2",
+      "default": "QR-Code scannen"
+    },
+    {
+      "type": "text",
+      "id": "step2_desc",
+      "label": "Beschreibung Schritt 2",
+      "default": "Mit der Kamera-App scannen. Keine zusätzliche App nötig."
+    },
+    {
+      "type": "header",
+      "content": "Step 3 - Aktivieren"
+    },
+    {
+      "type": "image_picker",
+      "id": "step3_image",
+      "label": "Bild für Schritt 3",
+      "info": "Empfohlen: 600x450px"
+    },
+    {
+      "type": "text",
+      "id": "step3_title",
+      "label": "Titel Schritt 3",
+      "default": "eSIM aktivieren"
+    },
+    {
+      "type": "text",
+      "id": "step3_desc",
+      "label": "Beschreibung Schritt 3",
+      "default": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "How-To Section",
+      "settings": {
+        "step1_title": "Datenpaket wählen",
+        "step1_desc": "190+ Länder verfügbar. Sofort per E-Mail erhalten.",
+        "step2_title": "QR-Code scannen", 
+        "step2_desc": "Mit der Kamera-App scannen. Keine zusätzliche App nötig.",
+        "step3_title": "eSIM aktivieren",
+        "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
+      }
+    }
+  ]
+}
+{% endschema %}
