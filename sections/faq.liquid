@@ -1,48 +1,54 @@
 <!-- sections/faq-premium.liquid -->
-<section class="faq-premium" id="faq-{{ section.id }}" data-section-id="{{ section.id }}">
-  <div class="faq-container">
+<section class="faq-section" id="faq-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="faq-wrapper">
     
-    <!-- Header -->
+    <!-- Header mit Badge-Style -->
     <div class="faq-header">
       <h2 class="faq-title">
-        <span class="title-line1">{{ section.settings.title_line1 | default: 'Häufig gestellte' }}</span>
-        <span class="title-line2">{{ section.settings.title_line2 | default: 'Fragen' }}</span>
+        <span class="title-text">{{ section.settings.title_text | default: 'Why choose' }}</span>
+        <span class="title-badge">{{ section.settings.title_badge | default: 'Simbye eSIM' }}</span>
       </h2>
-      <p class="faq-subtitle">{{ section.settings.subtitle | default: 'Alles was du über Simbye eSIM wissen musst' }}</p>
+      {% if section.settings.subtitle %}
+        <p class="faq-subtitle">{{ section.settings.subtitle }}</p>
+      {% endif %}
     </div>
 
-    <!-- FAQ Grid -->
-    <div class="faq-grid">
+    <!-- FAQ Accordion Full Width -->
+    <div class="faq-accordion">
       {% for block in section.blocks %}
         {% if block.type == 'faq_item' %}
-          <div class="faq-card" 
-               data-tilt
-               data-tilt-max="3"
-               data-tilt-speed="400"
-               data-tilt-perspective="1000"
-               {{ block.shopify_attributes }}>
+          <div class="faq-item" {{ block.shopify_attributes }}>
             
-            <button class="faq-trigger" 
+            <button class="faq-button" 
                     aria-expanded="false"
                     aria-controls="answer-{{ block.id }}">
               
-              <!-- Question Header -->
-              <div class="faq-header-content">
-                <span class="faq-index">
-                  {% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}
-                </span>
-                <h3 class="faq-question">{{ block.settings.question }}</h3>
-                <span class="faq-toggle">
-                  <span class="toggle-line horizontal"></span>
-                  <span class="toggle-line vertical"></span>
-                </span>
-              </div>
+              <span class="faq-question">{{ block.settings.question }}</span>
+              
+              <span class="faq-icon">
+                <svg class="icon-plus" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <svg class="icon-minus" width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </span>
             </button>
             
-            <!-- Answer Content -->
-            <div class="faq-content" id="answer-{{ block.id }}" aria-hidden="true">
-              <div class="faq-content-inner">
-                {{ block.settings.answer }}
+            <div class="faq-answer" id="answer-{{ block.id }}" aria-hidden="true">
+              <div class="faq-answer-inner">
+                <div class="answer-text">
+                  {{ block.settings.answer }}
+                </div>
+                
+                {% if block.settings.show_button and block.settings.button_text != blank %}
+                  <a href="{{ block.settings.button_link | default: '#' }}" class="answer-button">
+                    {{ block.settings.button_text }}
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -50,237 +56,330 @@
       {% endfor %}
     </div>
 
+    <!-- Optional Bottom CTA -->
+    {% if section.settings.show_bottom_cta %}
+      <div class="faq-bottom-cta">
+        <h3>{{ section.settings.cta_title | default: 'Noch Fragen?' }}</h3>
+        <p>{{ section.settings.cta_text | default: 'Unser Support-Team antwortet in unter 60 Sekunden' }}</p>
+        <a href="{{ section.settings.cta_link | default: '/pages/support' }}" class="cta-button">
+          {{ section.settings.cta_button_text | default: 'Zum Support' }}
+        </a>
+      </div>
+    {% endif %}
+
   </div>
 </section>
 
 <style>
-/* Variables */
-.faq-premium {
+/* Base Variables */
+.faq-section {
   --primary: #009a61;
   --primary-hover: #00824f;
   --accent: #00d97e;
-  --text-dark: #1a1a1a;
-  --text-light: #666;
-  --bg-white: #ffffff;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-  --shadow-hover: 0 20px 40px rgba(0, 154, 97, 0.12);
-  --radius: 16px;
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --bg-section: #ffffff;
+  --bg-item: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --radius: 12px;
 }
 
 /* Dark Mode */
-[data-theme="dark"] .faq-premium {
-  --text-dark: #ffffff;
-  --text-light: #a0a0a0;
-  --bg-white: rgba(255, 255, 255, 0.03);
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  --shadow-hover: 0 20px 40px rgba(0, 217, 126, 0.15);
+[data-theme="dark"] .faq-section {
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --bg-section: #040404;
+  --bg-item: rgba(255, 255, 255, 0.02);
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --accent: #00d97e;
 }
 
-/* Section */
-.faq-premium {
-  padding: 100px 0;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
+/* Section Container */
+.faq-section {
+  padding: 80px 0;
+  background: var(--bg-section);
+  width: 100%;
   position: relative;
-  overflow: hidden;
 }
 
-[data-theme="dark"] .faq-premium {
+[data-theme="dark"] .faq-section {
   background: linear-gradient(180deg, #040404 0%, #050505 50%, #040404 100%);
 }
 
-/* Container */
-.faq-container {
-  max-width: 1200px;
-  margin: 0 auto;
+/* Wrapper - Full Width */
+.faq-wrapper {
+  width: 100%;
+  max-width: none;
   padding: 0 40px;
 }
 
 /* Header */
 .faq-header {
   text-align: center;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Title mit Badge Style */
 .faq-title {
-  font-size: clamp(42px, 6vw, 72px);
+  font-size: clamp(36px, 5vw, 64px);
   font-weight: 700;
-  line-height: 1.1;
   margin: 0 0 20px;
-  letter-spacing: -1px;
-}
-
-.title-line1 {
-  display: block;
-  color: var(--text-dark);
-}
-
-.title-line2 {
-  display: block;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.faq-subtitle {
-  font-size: 20px;
-  color: var(--text-light);
-  margin: 0;
-  font-weight: 400;
-}
-
-/* Grid */
-.faq-grid {
-  display: grid;
-  gap: 20px;
-  transform-style: preserve-3d;
-}
-
-/* FAQ Card */
-.faq-card {
-  background: var(--bg-white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: var(--transition);
-  transform-style: preserve-3d;
-  will-change: transform;
-  border: 1px solid rgba(0, 154, 97, 0.08);
-}
-
-.faq-card:hover {
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-2px);
-}
-
-.faq-card.active {
-  background: linear-gradient(135deg, 
-    rgba(0, 154, 97, 0.02) 0%, 
-    rgba(0, 217, 126, 0.02) 100%);
-  border-color: var(--primary);
-}
-
-/* Trigger Button */
-.faq-trigger {
-  width: 100%;
-  padding: 32px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  text-align: left;
-  transition: var(--transition);
-}
-
-.faq-header-content {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-/* Index Number */
-.faq-index {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-  color: white;
-  font-size: 18px;
+  flex-wrap: wrap;
+  gap: 20px;
+  line-height: 1.2;
+}
+
+.title-text {
+  color: var(--text-primary);
+}
+
+.title-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: #040404;
+  padding: 12px 32px;
+  border-radius: 100px;
   font-weight: 700;
-  border-radius: 12px;
-  transition: var(--transition);
 }
 
-.faq-card.active .faq-index {
-  transform: scale(1.1);
-  border-radius: 50%;
+[data-theme="dark"] .title-badge {
+  background: var(--accent);
+  color: #040404;
 }
 
-/* Question */
-.faq-question {
-  flex: 1;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text-dark);
+.faq-subtitle {
+  font-size: 18px;
+  color: var(--text-secondary);
   margin: 0;
-  line-height: 1.4;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Toggle Icon */
-.faq-toggle {
+/* Accordion Container - Full Width */
+.faq-accordion {
+  width: 100%;
+  max-width: none;
+}
+
+/* FAQ Items */
+.faq-item {
+  background: var(--bg-item);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item:hover {
+  box-shadow: var(--shadow);
+  transform: translateY(-1px);
+}
+
+.faq-item.active {
+  border-color: var(--primary);
+  background: var(--bg-item);
+}
+
+[data-theme="dark"] .faq-item.active {
+  border-color: var(--accent);
+  background: rgba(0, 217, 126, 0.02);
+}
+
+/* FAQ Button */
+.faq-button {
+  width: 100%;
+  padding: 24px 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  font-family: inherit;
+  text-align: left;
+  transition: padding 0.3s ease;
+}
+
+.faq-button:hover {
+  padding-left: 36px;
+}
+
+/* Question Text */
+.faq-question {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* Icon */
+.faq-icon {
   position: relative;
   width: 24px;
   height: 24px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.toggle-line {
+.faq-icon svg {
   position: absolute;
-  background: var(--primary);
-  border-radius: 2px;
-  transition: var(--transition);
+  color: var(--primary);
+  transition: all 0.3s ease;
 }
 
-.toggle-line.horizontal {
-  width: 24px;
-  height: 2px;
-  top: 11px;
-  left: 0;
+[data-theme="dark"] .faq-icon svg {
+  color: var(--accent);
 }
 
-.toggle-line.vertical {
-  width: 2px;
-  height: 24px;
-  top: 0;
-  left: 11px;
-}
-
-.faq-card.active .toggle-line.vertical {
-  transform: rotate(90deg);
+.icon-minus {
   opacity: 0;
+  transform: rotate(-90deg);
 }
 
-.faq-card.active .toggle-line.horizontal {
-  background: var(--accent);
+.faq-item.active .icon-plus {
+  opacity: 0;
+  transform: rotate(90deg);
 }
 
-/* Content */
-.faq-content {
+.faq-item.active .icon-minus {
+  opacity: 1;
+  transform: rotate(0);
+}
+
+/* Answer */
+.faq-answer {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease-out;
 }
 
-.faq-content-inner {
-  padding: 0 32px 32px 104px;
-  color: var(--text-light);
-  font-size: 16px;
-  line-height: 1.7;
+.faq-answer-inner {
+  padding: 0 32px 24px 32px;
 }
 
-.faq-content-inner p {
+.answer-text {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.answer-text p {
   margin: 0 0 12px;
 }
 
-.faq-content-inner p:last-child {
-  margin: 0;
+.answer-text p:last-of-type {
+  margin-bottom: 16px;
 }
 
-.faq-content-inner strong {
-  color: var(--text-dark);
+.answer-text strong {
+  color: var(--text-primary);
   font-weight: 600;
 }
 
-/* Mobile Styles */
+/* Answer Button */
+.answer-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.answer-button:hover {
+  background: var(--primary-hover);
+  transform: translateX(4px);
+}
+
+[data-theme="dark"] .answer-button {
+  background: var(--accent);
+  color: #040404;
+}
+
+[data-theme="dark"] .answer-button:hover {
+  background: var(--primary);
+  color: white;
+}
+
+/* Bottom CTA */
+.faq-bottom-cta {
+  max-width: 800px;
+  margin: 60px auto 0;
+  padding: 40px;
+  background: linear-gradient(135deg, var(--bg-item) 0%, rgba(0, 154, 97, 0.02) 100%);
+  border: 2px solid var(--primary);
+  border-radius: 20px;
+  text-align: center;
+}
+
+[data-theme="dark"] .faq-bottom-cta {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(0, 217, 126, 0.02) 100%);
+  border-color: var(--accent);
+}
+
+.faq-bottom-cta h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 12px;
+}
+
+.faq-bottom-cta p {
+  font-size: 16px;
+  color: var(--text-secondary);
+  margin: 0 0 24px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 14px 32px;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.2);
+}
+
+[data-theme="dark"] .cta-button {
+  background: var(--accent);
+  color: #040404;
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  .faq-premium {
+  .faq-section {
     padding: 60px 0;
   }
   
-  .faq-container {
+  .faq-wrapper {
     padding: 0 20px;
   }
   
@@ -289,59 +388,67 @@
   }
   
   .faq-title {
-    font-size: 36px;
-    letter-spacing: -0.5px;
+    font-size: 32px;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .title-badge {
+    padding: 10px 24px;
+    font-size: inherit;
   }
   
   .faq-subtitle {
     font-size: 16px;
   }
   
-  .faq-grid {
-    gap: 16px;
-  }
-  
-  .faq-trigger {
+  .faq-button {
     padding: 20px;
   }
   
-  .faq-header-content {
-    gap: 16px;
-  }
-  
-  .faq-index {
-    width: 36px;
-    height: 36px;
-    font-size: 14px;
+  .faq-button:hover {
+    padding-left: 20px;
   }
   
   .faq-question {
     font-size: 16px;
   }
   
-  .faq-content-inner {
-    padding: 0 20px 20px 68px;
+  .faq-answer-inner {
+    padding: 0 20px 20px 20px;
+  }
+  
+  .answer-text {
     font-size: 14px;
+  }
+  
+  .faq-bottom-cta {
+    padding: 32px 24px;
+  }
+  
+  .faq-bottom-cta h3 {
+    font-size: 24px;
   }
 }
 
 /* Animations */
 @media (prefers-reduced-motion: no-preference) {
-  .faq-card {
+  .faq-item {
     opacity: 0;
-    transform: translateY(30px);
-    animation: fadeInUp 0.5s ease-out forwards;
+    transform: translateY(20px);
+    animation: fadeInUp 0.4s ease-out forwards;
   }
   
-  .faq-card:nth-child(1) { animation-delay: 0.1s; }
-  .faq-card:nth-child(2) { animation-delay: 0.15s; }
-  .faq-card:nth-child(3) { animation-delay: 0.2s; }
-  .faq-card:nth-child(4) { animation-delay: 0.25s; }
-  .faq-card:nth-child(5) { animation-delay: 0.3s; }
-  .faq-card:nth-child(6) { animation-delay: 0.35s; }
-  .faq-card:nth-child(7) { animation-delay: 0.4s; }
-  .faq-card:nth-child(8) { animation-delay: 0.45s; }
-  .faq-card:nth-child(n+9) { animation-delay: 0.5s; }
+  .faq-item:nth-child(1) { animation-delay: 0.05s; }
+  .faq-item:nth-child(2) { animation-delay: 0.1s; }
+  .faq-item:nth-child(3) { animation-delay: 0.15s; }
+  .faq-item:nth-child(4) { animation-delay: 0.2s; }
+  .faq-item:nth-child(5) { animation-delay: 0.25s; }
+  .faq-item:nth-child(6) { animation-delay: 0.3s; }
+  .faq-item:nth-child(7) { animation-delay: 0.35s; }
+  .faq-item:nth-child(8) { animation-delay: 0.4s; }
+  .faq-item:nth-child(9) { animation-delay: 0.45s; }
+  .faq-item:nth-child(n+10) { animation-delay: 0.5s; }
 }
 
 @keyframes fadeInUp {
@@ -353,90 +460,68 @@
 </style>
 
 <script>
-// Vanilla Tilt Integration
 (function() {
   'use strict';
-  
-  // Load Vanilla Tilt if not already loaded
-  if (typeof VanillaTilt === 'undefined') {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.0/dist/vanilla-tilt.min.js';
-    script.onload = initFAQ;
-    document.head.appendChild(script);
-  } else {
-    initFAQ();
-  }
   
   function initFAQ() {
     const section = document.querySelector('#faq-{{ section.id }}');
     if (!section) return;
     
-    const cards = section.querySelectorAll('.faq-card');
-    const triggers = section.querySelectorAll('.faq-trigger');
+    const items = section.querySelectorAll('.faq-item');
+    const buttons = section.querySelectorAll('.faq-button');
     
-    // Initialize Vanilla Tilt on desktop
-    if (window.innerWidth > 768 && typeof VanillaTilt !== 'undefined') {
-      VanillaTilt.init(section.querySelectorAll('[data-tilt]'), {
-        max: 3,
-        speed: 400,
-        perspective: 1000,
-        scale: 1.02,
-        glare: false,
-        'max-glare': 0.2,
-        reset: true
-      });
-    }
-    
-    // FAQ Toggle
-    triggers.forEach(trigger => {
-      trigger.addEventListener('click', function() {
-        const card = this.closest('.faq-card');
-        const content = card.querySelector('.faq-content');
-        const contentInner = content.querySelector('.faq-content-inner');
-        const isOpen = card.classList.contains('active');
+    // Toggle FAQ items
+    buttons.forEach(button => {
+      button.addEventListener('click', function() {
+        const item = this.closest('.faq-item');
+        const answer = item.querySelector('.faq-answer');
+        const answerInner = answer.querySelector('.faq-answer-inner');
+        const isOpen = item.classList.contains('active');
         
-        // Close other FAQs
-        cards.forEach(otherCard => {
-          if (otherCard !== card && otherCard.classList.contains('active')) {
-            otherCard.classList.remove('active');
-            otherCard.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
-            otherCard.querySelector('.faq-content').style.maxHeight = '0';
-            otherCard.querySelector('.faq-content').setAttribute('aria-hidden', 'true');
+        // Close all other items
+        items.forEach(otherItem => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+            const otherButton = otherItem.querySelector('.faq-button');
+            const otherAnswer = otherItem.querySelector('.faq-answer');
+            otherButton.setAttribute('aria-expanded', 'false');
+            otherAnswer.style.maxHeight = '0';
+            otherAnswer.setAttribute('aria-hidden', 'true');
           }
         });
         
-        // Toggle current FAQ
+        // Toggle current item
         if (isOpen) {
-          card.classList.remove('active');
+          item.classList.remove('active');
           this.setAttribute('aria-expanded', 'false');
-          content.style.maxHeight = '0';
-          content.setAttribute('aria-hidden', 'true');
+          answer.style.maxHeight = '0';
+          answer.setAttribute('aria-hidden', 'true');
         } else {
-          card.classList.add('active');
+          item.classList.add('active');
           this.setAttribute('aria-expanded', 'true');
-          content.style.maxHeight = contentInner.offsetHeight + 'px';
-          content.setAttribute('aria-hidden', 'false');
+          answer.style.maxHeight = answerInner.offsetHeight + 'px';
+          answer.setAttribute('aria-hidden', 'false');
         }
       });
     });
     
-    // Keyboard Navigation
+    // Keyboard navigation
     section.addEventListener('keydown', function(e) {
-      if (!e.target.classList.contains('faq-trigger')) return;
+      if (!e.target.classList.contains('faq-button')) return;
       
-      const currentCard = e.target.closest('.faq-card');
-      const allCards = Array.from(cards);
-      const currentIndex = allCards.indexOf(currentCard);
+      const currentItem = e.target.closest('.faq-item');
+      const allItems = Array.from(items);
+      const currentIndex = allItems.indexOf(currentItem);
       let targetIndex = currentIndex;
       
       switch(e.key) {
         case 'ArrowDown':
           e.preventDefault();
-          targetIndex = currentIndex < allCards.length - 1 ? currentIndex + 1 : 0;
+          targetIndex = currentIndex < allItems.length - 1 ? currentIndex + 1 : 0;
           break;
         case 'ArrowUp':
           e.preventDefault();
-          targetIndex = currentIndex > 0 ? currentIndex - 1 : allCards.length - 1;
+          targetIndex = currentIndex > 0 ? currentIndex - 1 : allItems.length - 1;
           break;
         case 'Home':
           e.preventDefault();
@@ -444,13 +529,13 @@
           break;
         case 'End':
           e.preventDefault();
-          targetIndex = allCards.length - 1;
+          targetIndex = allItems.length - 1;
           break;
         default:
           return;
       }
       
-      allCards[targetIndex].querySelector('.faq-trigger').focus();
+      allItems[targetIndex].querySelector('.faq-button').focus();
     });
     
     // Recalculate heights on window resize
@@ -458,46 +543,80 @@
     window.addEventListener('resize', function() {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(function() {
-        cards.forEach(card => {
-          if (card.classList.contains('active')) {
-            const content = card.querySelector('.faq-content');
-            const contentInner = content.querySelector('.faq-content-inner');
-            content.style.maxHeight = contentInner.offsetHeight + 'px';
+        items.forEach(item => {
+          if (item.classList.contains('active')) {
+            const answer = item.querySelector('.faq-answer');
+            const answerInner = answer.querySelector('.faq-answer-inner');
+            answer.style.maxHeight = answerInner.offsetHeight + 'px';
           }
         });
-        
-        // Reinit tilt on resize
-        if (window.innerWidth > 768 && typeof VanillaTilt !== 'undefined') {
-          VanillaTilt.init(section.querySelectorAll('[data-tilt]'));
-        }
       }, 250);
     });
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFAQ);
+  } else {
+    initFAQ();
   }
 })();
 </script>
 
 {% schema %}
 {
-  "name": "FAQ Premium",
-  "class": "faq-premium-section",
+  "name": "FAQ Section",
+  "class": "section-faq",
   "settings": [
     {
       "type": "text",
-      "id": "title_line1",
-      "label": "Title Line 1",
-      "default": "Häufig gestellte"
+      "id": "title_text",
+      "label": "Title Text (White)",
+      "default": "Why choose"
     },
     {
       "type": "text",
-      "id": "title_line2",
-      "label": "Title Line 2 (Colored)",
-      "default": "Fragen"
+      "id": "title_badge",
+      "label": "Title Badge (Green)",
+      "default": "Simbye eSIM"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Alles was du über Simbye eSIM wissen musst"
+      "label": "Subtitle (Optional)"
+    },
+    {
+      "type": "header",
+      "content": "Bottom CTA (Optional)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_cta",
+      "label": "Show Bottom CTA",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA Title",
+      "default": "Noch Fragen?"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Unser Support-Team antwortet in unter 60 Sekunden"
+    },
+    {
+      "type": "text",
+      "id": "cta_button_text",
+      "label": "CTA Button Text",
+      "default": "Zum Support"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
     }
   ],
   "blocks": [
@@ -515,83 +634,112 @@
           "type": "richtext",
           "id": "answer",
           "label": "Answer",
-          "default": "<p>Die meisten modernen Smartphones ab 2018 unterstützen eSIM-Technologie. Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer. Du kannst die Kompatibilität deines Geräts auf unserer Website überprüfen.</p>"
+          "default": "<p>Die meisten modernen Smartphones ab 2018 unterstützen eSIM-Technologie. Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer.</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_button",
+          "label": "Show Button",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Mehr erfahren"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "FAQ Premium",
+      "name": "FAQ Section",
       "blocks": [
         {
           "type": "faq_item",
           "settings": {
             "question": "Kann mein Handy eSIM?",
-            "answer": "<p><strong>Die meisten modernen Smartphones ab 2018 unterstützen eSIM.</strong> Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer, sowie viele weitere Modelle. Prüfe die Kompatibilität deines Geräts mit unserem Checker.</p>"
+            "answer": "<p><strong>Die meisten modernen Smartphones ab 2018 unterstützen eSIM.</strong> Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer, sowie viele weitere Modelle.</p>",
+            "show_button": true,
+            "button_text": "Kompatibilität prüfen",
+            "button_link": "/pages/check-esim"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Wie schnell erhalte ich meine eSIM?",
-            "answer": "<p><strong>Sofort nach der Zahlung!</strong> Der QR-Code wird dir innerhalb von 30 Sekunden per E-Mail zugeschickt. Die komplette Installation dauert weniger als 2 Minuten. Kein Versand, keine Wartezeit - direkt loslegen!</p>"
+            "answer": "<p><strong>Sofort nach der Zahlung!</strong> Der QR-Code wird dir innerhalb von 30 Sekunden per E-Mail zugeschickt. Die komplette Installation dauert weniger als 2 Minuten.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Kann ich die eSIM mehrmals verwenden und aufladen?",
-            "answer": "<p><strong>Ja, absolut!</strong> Simbye eSIMs sind vollständig wiederaufladbar. Du kannst jederzeit Daten über dein Dashboard nachkaufen. Keine neue eSIM nötig - einfach aufladen wenn du mehr Daten brauchst. Die eSIM bleibt aktiv solange du sie mindestens alle 180 Tage nutzt.</p>"
+            "answer": "<p><strong>Ja, absolut!</strong> Simbye eSIMs sind vollständig wiederaufladbar. Du kannst jederzeit Daten über dein Dashboard nachkaufen. Die eSIM bleibt aktiv solange du sie mindestens alle 180 Tage nutzt.</p>",
+            "show_button": true,
+            "button_text": "Jetzt aufladen",
+            "button_link": "/account"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Was passiert wenn mein Datenvolumen aufgebraucht ist?",
-            "answer": "<p><strong>Die eSIM stoppt einfach - keine versteckten Kosten!</strong> Du bekommst Benachrichtigungen bei 50%, 80% und 95% Verbrauch. Danach kannst du sofort über unsere App oder Website aufladen und direkt weitersurfen.</p>"
+            "answer": "<p><strong>Die eSIM stoppt einfach - keine versteckten Kosten!</strong> Du bekommst Benachrichtigungen bei 50%, 80% und 95% Verbrauch. Danach kannst du sofort über unsere App oder Website aufladen.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Funktioniert die eSIM auch für WhatsApp Anrufe?",
-            "answer": "<p><strong>Natürlich!</strong> Unsere eSIMs bieten vollwertiges Internet - perfekt für WhatsApp, FaceTime, Skype, Zoom und alle anderen VoIP-Dienste. Du kannst telefonieren, chatten und Videocalls machen wie gewohnt.</p>"
+            "answer": "<p><strong>Natürlich!</strong> Unsere eSIMs bieten vollwertiges Internet - perfekt für WhatsApp, FaceTime, Skype, Zoom und alle anderen VoIP-Dienste.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Kann ich mehrere eSIMs gleichzeitig nutzen?",
-            "answer": "<p><strong>Ja, die meisten eSIM-Handys unterstützen mehrere Profile.</strong> Du kannst 5-10 verschiedene eSIMs speichern und zwischen ihnen wechseln. Allerdings kann meist nur eine eSIM gleichzeitig für Daten aktiv sein (neben deiner physischen SIM).</p>"
+            "answer": "<p><strong>Ja, die meisten eSIM-Handys unterstützen mehrere Profile.</strong> Du kannst 5-10 verschiedene eSIMs speichern und zwischen ihnen wechseln.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Gibt es eine Geschwindigkeitsdrosselung?",
-            "answer": "<p><strong>Keine Drosselung - niemals!</strong> Du bekommst volle 4G/5G Geschwindigkeiten bis zu 1 Gbit/s je nach lokalem Netz. Wir arbeiten mit Premium Tier-1 Carriern zusammen. Unlimited Pläne haben keine Fair-Use-Policy.</p>"
+            "answer": "<p><strong>Keine Drosselung - niemals!</strong> Du bekommst volle 4G/5G Geschwindigkeiten bis zu 1 Gbit/s. Unlimited Pläne haben keine Fair-Use-Policy.</p>"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Wie kann ich meinen Datenverbrauch prüfen?",
-            "answer": "<p><strong>Verfolge deinen Verbrauch in Echtzeit über:</strong> 1) Die Einstellungen deines Handys, 2) Unsere Simbye App mit Live-Statistiken, 3) E-Mail Benachrichtigungen bei Meilensteinen, oder 4) Dein Account Dashboard auf unserer Website.</p>"
+            "answer": "<p><strong>Verfolge deinen Verbrauch in Echtzeit über:</strong> Die Einstellungen deines Handys, unsere Simbye App, E-Mail Benachrichtigungen oder dein Account Dashboard.</p>",
+            "show_button": true,
+            "button_text": "Zum Dashboard",
+            "button_link": "/account"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "In welchen Ländern funktioniert Simbye eSIM?",
-            "answer": "<p><strong>In über 190 Ländern weltweit!</strong> Von Europa über Asien bis Amerika - wir haben dich überall abgedeckt. Egal ob Türkei, USA, Thailand oder Japan. Check unsere komplette Länderliste für alle Details und Preise.</p>"
+            "answer": "<p><strong>In über 190 Ländern weltweit!</strong> Von Europa über Asien bis Amerika - wir haben dich überall abgedeckt. Check unsere komplette Länderliste für alle Details.</p>",
+            "show_button": true,
+            "button_text": "Alle Länder anzeigen",
+            "button_link": "/collections/all"
           }
         },
         {
           "type": "faq_item",
           "settings": {
             "question": "Behalte ich meine normale Nummer?",
-            "answer": "<p><strong>Ja, deine Nummer bleibt aktiv!</strong> Die eSIM läuft parallel zu deiner normalen SIM-Karte. Du kannst weiter Anrufe und SMS auf deiner Nummer empfangen, während du mit der eSIM im Internet surfst. Das Beste aus beiden Welten!</p>"
+            "answer": "<p><strong>Ja, deine Nummer bleibt aktiv!</strong> Die eSIM läuft parallel zu deiner normalen SIM-Karte. Du kannst weiter Anrufe und SMS empfangen während du mit der eSIM surfst.</p>"
           }
         }
       ]
