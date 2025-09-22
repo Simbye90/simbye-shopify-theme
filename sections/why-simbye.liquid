@@ -21,7 +21,7 @@
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  --why-bg: linear-gradient(180deg, #0a0a0a 0%, #0f1210 50%, #0a0a0a 100%);
+  --why-bg: transparent; /* Transparent damit Verlauf durchgeht */
   --why-text: #f5f5f5;
   --why-text-secondary: #999999;
   --why-primary: #00d97e;
@@ -43,6 +43,22 @@
   position: relative;
   overflow: hidden;
   transition: var(--why-transition);
+}
+
+/* Light Mode - Normal Background */
+[data-theme="light"] .why-section {
+  background: #ffffff;
+}
+
+/* Dark Mode - Fortsetzung des Verlaufs von How-To */
+[data-theme="dark"] .why-section {
+  background: linear-gradient(180deg,
+    #0a0a0a 0%,
+    #0f1210 20%,
+    #0a1510 50%,
+    #051008 80%,
+    #0a0a0a 100%
+  );
 }
 
 /* Background Pattern */
@@ -77,7 +93,7 @@
 }
 
 .why-title {
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: clamp(36px, 5vw, 56px); /* Gleich wie How-To */
   font-weight: 700;
   color: var(--why-text);
   margin: 0 0 20px 0;
@@ -115,6 +131,11 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
   margin-bottom: 60px;
+}
+
+/* Feature Content - Desktop & Tablet */
+.why-feature-content {
+  width: 100%;
 }
 
 /* Feature Card */
@@ -325,7 +346,7 @@
   }
   
   .why-title {
-    font-size: 32px;
+    font-size: 32px; /* Gleich wie How-To Mobile */
   }
   
   .why-subtitle {
@@ -338,43 +359,55 @@
     gap: 20px;
   }
   
+  /* Mobile: Icon links, Content rechts */
   .why-feature {
-    padding: 28px 20px;
+    padding: 24px 20px;
     border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
   }
   
   .why-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 20px;
-    margin-bottom: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    margin-bottom: 0; /* Kein Bottom Margin */
+    flex-shrink: 0; /* Icon bleibt gleich groß */
+    position: relative;
   }
   
   .why-icon svg {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
   }
   
   .why-feature-number {
-    width: 26px;
-    height: 26px;
-    font-size: 13px;
-    top: -6px;
-    right: -6px;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    top: -5px;
+    right: -5px;
+  }
+  
+  /* Content rechts neben Icon */
+  .why-feature-content {
+    flex: 1;
+    min-width: 0; /* Wichtig für Text-Overflow */
   }
   
   .why-feature-title {
-    font-size: 20px;
-    margin-bottom: 12px;
-  }
-  
-  .why-feature-subtitle {
-    font-size: 15px;
+    font-size: 19px;
     margin-bottom: 10px;
   }
   
-  .why-feature-text {
+  .why-feature-subtitle {
     font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .why-feature-text {
+    font-size: 13px;
     line-height: 1.5;
   }
 }
@@ -457,11 +490,13 @@
             <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="why-feature-title">{{ 'why.feature1_title' | t | default: 'Aufladbar & Flexibel' }}</h3>
-        <p class="why-feature-subtitle">{{ 'why.feature1_subtitle' | t | default: 'Einmal kaufen - immer wieder aufladen' }}</p>
-        <p class="why-feature-text">
-          {{ 'why.feature1_text' | t | default: 'Keine Vertragsbindung, keine versteckten Kosten, keine Mindestlaufzeit. Laden Sie Ihre eSIM beliebig oft auf. Die flexibelste eSIM-Lösung am Markt.' }}
-        </p>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature1_title' | t | default: 'Aufladbar & Flexibel' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature1_subtitle' | t | default: 'Einmal kaufen - immer wieder aufladen' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature1_text' | t | default: 'Keine Vertragsbindung, keine versteckten Kosten, keine Mindestlaufzeit. Laden Sie Ihre eSIM beliebig oft auf. Die flexibelste eSIM-Lösung am Markt.' }}
+          </p>
+        </div>
       </div>
       
       <!-- Feature 2: Günstigster Anbieter -->
@@ -473,11 +508,13 @@
             <polyline points="16 7 22 7 22 13" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="why-feature-title">{{ 'why.feature2_title' | t | default: 'Der Günstigste Anbieter' }}</h3>
-        <p class="why-feature-subtitle">{{ 'why.feature2_subtitle' | t | default: 'Günstiger als die Konkurrenz' }}</p>
-        <p class="why-feature-text">
-          {{ 'why.feature2_text' | t | default: 'Wir sind nicht nur günstig - wir sind DIE günstigsten. Vergleichen Sie uns mit Airalo, Holafly oder Nomad - niemand unterbietet unsere Preise.' }}
-        </p>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature2_title' | t | default: 'Der Günstigste Anbieter' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature2_subtitle' | t | default: 'Günstiger als die Konkurrenz' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature2_text' | t | default: 'Wir sind nicht nur günstig - wir sind DIE günstigsten. Vergleichen Sie uns mit Airalo, Holafly oder Nomad - niemand unterbietet unsere Preise.' }}
+          </p>
+        </div>
       </div>
       
       <!-- Feature 3: 24/7 Support -->
@@ -488,11 +525,13 @@
             <path d="M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="why-feature-title">{{ 'why.feature3_title' | t | default: '24/7 Premium Support' }}</h3>
-        <p class="why-feature-subtitle">{{ 'why.feature3_subtitle' | t | default: 'Schnellster Support - unter 60 Sekunden' }}</p>
-        <p class="why-feature-text">
-          {{ 'why.feature3_text' | t | default: 'Während andere Sie warten lassen, antworten wir in Sekunden. WhatsApp, Telegram, Live-Chat - 15 Support-Mitarbeiter nur für Sie. In 12 Sprachen.' }}
-        </p>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature3_title' | t | default: '24/7 Premium Support' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature3_subtitle' | t | default: 'Schnellster Support - unter 60 Sekunden' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature3_text' | t | default: 'Während andere Sie warten lassen, antworten wir in Sekunden. WhatsApp, Telegram, Live-Chat - 15 Support-Mitarbeiter nur für Sie. In 12 Sprachen.' }}
+          </p>
+        </div>
       </div>
       
       <!-- Feature 4: Gratis Testen -->
@@ -505,11 +544,13 @@
             <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="why-feature-title">{{ 'why.feature4_title' | t | default: 'Gratis Testen' }}</h3>
-        <p class="why-feature-subtitle">{{ 'why.feature4_subtitle' | t | default: '100 MB völlig kostenlos' }}</p>
-        <p class="why-feature-text">
-          {{ 'why.feature4_text' | t | default: 'Testen Sie komplett gratis. Keine Kreditkarte, kein Trick. Wir sind so überzeugt von unserer Qualität, dass wir Ihnen 100 MB schenken.' }}
-        </p>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature4_title' | t | default: 'Gratis Testen' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature4_subtitle' | t | default: '100 MB völlig kostenlos' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature4_text' | t | default: 'Testen Sie komplett gratis. Keine Kreditkarte, kein Trick. Wir sind so überzeugt von unserer Qualität, dass wir Ihnen 100 MB schenken.' }}
+          </p>
+        </div>
       </div>
       
       <!-- Feature 5: Premium Netze -->
@@ -522,11 +563,13 @@
             <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="why-feature-title">{{ 'why.feature5_title' | t | default: 'Lokale Premium-Netze' }}</h3>
-        <p class="why-feature-subtitle">{{ 'why.feature5_subtitle' | t | default: 'Schnellstes 5G - Unlimited verfügbar' }}</p>
-        <p class="why-feature-text">
-          {{ 'why.feature5_text' | t | default: 'Echte lokale Geschwindigkeiten bis 1 Gbit/s. Von 500 MB bis echtes Unlimited ohne Fair-Use-Policy. Premium-Roaming-Partner in 190+ Ländern.' }}
-        </p>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature5_title' | t | default: 'Lokale Premium-Netze' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature5_subtitle' | t | default: 'Schnellstes 5G - Unlimited verfügbar' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature5_text' | t | default: 'Echte lokale Geschwindigkeiten bis 1 Gbit/s. Von 500 MB bis echtes Unlimited ohne Fair-Use-Policy. Premium-Roaming-Partner in 190+ Ländern.' }}
+          </p>
+        </div>
       </div>
       
       <!-- Feature 6: 100K+ Kunden -->
@@ -537,11 +580,13 @@
             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h3 class="why-feature-title">{{ 'why.feature6_title' | t | default: 'Vertrauenswürdig' }}</h3>
-        <p class="why-feature-subtitle">{{ 'why.feature6_subtitle' | t | default: 'Über 100.000+ zufriedene Kunden' }}</p>
-        <p class="why-feature-text">
-          {{ 'why.feature6_text' | t | default: '100.000+ Kunden weltweit vertrauen uns bereits. 4.9 Sterne Bewertung. Die erste Wahl für Geschäftsreisende und Digital Nomads.' }}
-        </p>
+        <div class="why-feature-content">
+          <h3 class="why-feature-title">{{ 'why.feature6_title' | t | default: 'Vertrauenswürdig' }}</h3>
+          <p class="why-feature-subtitle">{{ 'why.feature6_subtitle' | t | default: 'Über 100.000+ zufriedene Kunden' }}</p>
+          <p class="why-feature-text">
+            {{ 'why.feature6_text' | t | default: '100.000+ Kunden weltweit vertrauen uns bereits. 4.9 Sterne Bewertung. Die erste Wahl für Geschäftsreisende und Digital Nomads.' }}
+          </p>
+        </div>
       </div>
       
     </div>
