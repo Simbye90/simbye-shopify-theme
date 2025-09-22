@@ -61,11 +61,6 @@
         "all_countries_collection": "local-esim"
       }
     },
-    "why_simbye_JUnMqH": {
-      "type": "why-simbye",
-      "name": "Why Simbye",
-      "settings": {}
-    },
     "how_to_YHUCmd": {
       "type": "how-to",
       "name": "How-To Section",
@@ -80,6 +75,11 @@
         "step3_title": "eSIM aktivieren",
         "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
       }
+    },
+    "why_simbye_JUnMqH": {
+      "type": "why-simbye",
+      "name": "Why Simbye",
+      "settings": {}
     },
     "scroll_logos_4fNwDz": {
       "type": "scroll-logos",
@@ -264,8 +264,8 @@
   "order": [
     "main",
     "destinations_jRWp7x",
-    "why_simbye_JUnMqH",
     "how_to_YHUCmd",
+    "why_simbye_JUnMqH",
     "scroll_logos_4fNwDz",
     "kommis_KcNN9x",
     "faq_hzk6Lr"
