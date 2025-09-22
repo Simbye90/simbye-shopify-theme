@@ -1,4 +1,5 @@
-
+<!-- sections/how-to.liquid -->
+<!-- SIMBYE HOW-TO - ENTERPRISE 3-STEP PROCESS -->
 
 <style>
 /* CSS Variables - Enterprise Design System */
@@ -19,7 +20,13 @@
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-  --howto-bg: linear-gradient(180deg, #0a0a0a 0%, #0f1210 50%, #0a0a0a 100%);
+  --howto-bg: linear-gradient(180deg, 
+    #0a0a0a 0%,      /* Start: Reines Schwarz von destinations */
+    #0f1210 25%,     /* Leicht grünlich */
+    #0a1510 50%,     /* Mitte */
+    #081008 75%,     /* Dunkler werden */
+    #051008 100%     /* ⬅️ ENDFARBE für Übergang zu Why-Simbye */
+  );
   --howto-text: #f5f5f5;
   --howto-text-secondary: #999999;
   --howto-primary: #00d97e;
@@ -62,7 +69,6 @@
     radial-gradient(circle at 20% 80%, rgba(0, 217, 126, 0.03) 0%, transparent 50%),
     radial-gradient(circle at 80% 20%, rgba(0, 154, 97, 0.03) 0%, transparent 50%);
 }
-
 
 /* Container */
 .howto-container {
@@ -111,8 +117,6 @@
   line-height: 1.5;
 }
 
-/* Timer Badge - REMOVED */
-
 /* Steps Container */
 .howto-steps {
   display: grid;
@@ -122,16 +126,13 @@
   position: relative;
 }
 
-/* Connection Line - Subtiler */
-
-
 /* Step Card */
 .howto-step {
   position: relative;
   z-index: 1;
   animation: fadeInUp 0.9s ease both;
   animation-delay: calc(var(--step-index) * 0.1s);
-  text-align: center; /* ALLES ZENTRIERT */
+  text-align: center;
 }
 
 .howto-step:nth-child(1) { --step-index: 1; }
@@ -150,7 +151,7 @@
   border-radius: 50%;
   font-size: 24px;
   font-weight: 700;
-  margin: 0 auto 24px auto; /* Zentriert mit auto margins */
+  margin: 0 auto 24px auto;
   position: relative;
   z-index: 2;
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
@@ -162,21 +163,21 @@
   box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
 }
 
-/* Image Container - ENTERPRISE STYLE (No Box) */
+/* Image Container */
 .howto-step-image {
   position: relative;
-  background: transparent; /* Kein Background */
-  border-radius: 0; /* Keine Rundung */
-  overflow: visible; /* iPhone kann rausragen */
+  background: transparent;
+  border-radius: 0;
+  overflow: visible;
   margin-bottom: 0;
-  box-shadow: none; /* Kein Shadow */
+  box-shadow: none;
   transition: var(--howto-transition);
   cursor: default;
   aspect-ratio: 4/5;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none; /* Kein Border */
+  border: none;
 }
 
 [data-theme="dark"] .howto-step-image {
@@ -184,13 +185,12 @@
   border: none;
 }
 
-/* iPhone bekommt eigenen Shadow */
 .howto-step-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
   padding: 5px;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15)); /* iPhone Shadow */
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
 }
 
 [data-theme="dark"] .howto-step-image img {
@@ -227,7 +227,7 @@
   font-size: 24px;
   font-weight: 700;
   color: var(--howto-text);
-  margin: 16px 0 12px 0; /* Weniger Abstand oben */
+  margin: 16px 0 12px 0;
   letter-spacing: -0.01em;
 }
 
@@ -237,10 +237,6 @@
   line-height: 1.5;
   margin: 0;
 }
-
-/* Step Time - REMOVED */
-
-/* Trust Section - REMOVED */
 
 /* Responsive - Tablet */
 @media (max-width: 1024px) {
@@ -253,7 +249,7 @@
   }
   
   .howto-step {
-    text-align: center; /* Tablet auch zentriert */
+    text-align: center;
   }
   
   .howto-step-title {
@@ -288,19 +284,17 @@
     gap: 48px;
   }
   
-  /* Remove connection line on mobile */
   .howto-steps::before {
     display: none;
   }
   
-  /* Mobile: Steps als Karten */
   .howto-step {
-    background: rgba(0, 0, 0, 0.02); /* Sehr subtle Background */
+    background: rgba(0, 0, 0, 0.02);
     border-radius: 24px;
     padding: 24px;
-    box-shadow: none; /* Kein Shadow */
-    border: none; /* Kein Border */
-    text-align: left; /* Mobile: Links für bessere Lesbarkeit */
+    box-shadow: none;
+    border: none;
+    text-align: left;
   }
   
   [data-theme="dark"] .howto-step {
@@ -313,11 +307,11 @@
     top: -24px;
     left: 24px;
     z-index: 3;
-    margin: 0; /* Reset margin für Mobile */
+    margin: 0;
   }
   
   .howto-step-image {
-    margin-top: 12px; /* Weniger Abstand oben auf Mobile */
+    margin-top: 12px;
   }
 }
 
