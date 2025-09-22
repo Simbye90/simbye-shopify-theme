@@ -126,5 +126,29 @@
   "step3_desc": "Enable mobile data & surf. No roaming!",
   "step3_time": "~30 seconds",
   "step3_alt": "Activate eSIM"
+},
+"why": {
+  "title_part1": "Why choose",
+  "title_part2": "Simbye eSIM",
+  "title_part3": "",
+  "subtitle": "The smartest choice for mobile internet abroad - no hidden costs",
+  "feature1_title": "Rechargeable & Flexible",
+  "feature1_subtitle": "Buy once - top up anytime",
+  "feature1_text": "No contracts, no hidden fees, no minimum term. Top up your eSIM as often as you want. The most flexible eSIM solution on the market.",
+  "feature2_title": "Best Price Guarantee",
+  "feature2_subtitle": "Cheaper than competitors",
+  "feature2_text": "We're not just cheap - we're THE cheapest. Compare us with Airalo, Holafly or Nomad - nobody beats our prices.",
+  "feature3_title": "24/7 Premium Support",
+  "feature3_subtitle": "Fastest support - under 60 seconds",
+  "feature3_text": "While others keep you waiting, we respond in seconds. WhatsApp, Telegram, Live Chat - 15 support agents just for you. In 12 languages.",
+  "feature4_title": "Free Trial",
+  "feature4_subtitle": "100 MB completely free",
+  "feature4_text": "Test completely free. No credit card, no tricks. We're so confident in our quality that we give you 100 MB for free.",
+  "feature5_title": "Local Premium Networks",
+  "feature5_subtitle": "Fastest 5G - Unlimited available",
+  "feature5_text": "Real local speeds up to 1 Gbit/s. From 500 MB to real unlimited without fair use policy. Premium roaming partners in 190+ countries.",
+  "feature6_title": "Trusted Worldwide",
+  "feature6_subtitle": "Over 100,000+ happy customers",
+  "feature6_text": "100,000+ customers worldwide already trust us. 4.9 star rating. The first choice for business travelers and digital nomads."
 }
 }
