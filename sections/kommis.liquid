@@ -1,0 +1,1348 @@
+<!-- sections/trust.liquid -->
+<!-- SIMBYE TRUST & REVIEWS - ENTERPRISE EDITION -->
+
+<style>
+/* CSS Variables - Enterprise Trust System */
+:root {
+  --trust-bg: #ffffff;
+  --trust-text: #1a1a1a;
+  --trust-text-secondary: #666666;
+  --trust-primary: #009a61;
+  --trust-primary-hover: #00824f;
+  --trust-accent: #00d97e;
+  --trust-card-bg: #ffffff;
+  --trust-border: rgba(0, 0, 0, 0.06);
+  --trust-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --trust-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.06);
+  --trust-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+  --trust-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --trust-star-color: #FFD700;
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --trust-bg: transparent;
+  --trust-text: #f5f5f5;
+  --trust-text-secondary: #999999;
+  --trust-primary: #00d97e;
+  --trust-primary-hover: #009a61;
+  --trust-accent: #00ff88;
+  --trust-card-bg: rgba(26, 26, 26, 0.6);
+  --trust-border: rgba(255, 255, 255, 0.05);
+  --trust-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+  --trust-shadow-md: 0 6px 20px rgba(0, 0, 0, 0.3);
+  --trust-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.1);
+  --trust-star-color: var(--trust-primary);
+}
+
+/* Main Section */
+.trust-section {
+  width: 100%;
+  padding: 100px 0;
+  background: var(--trust-bg);
+  position: relative;
+  overflow: hidden;
+  transition: var(--trust-transition);
+}
+
+/* Light Mode - Clean White */
+[data-theme="light"] .trust-section {
+  background: #ffffff;
+}
+
+/* Dark Mode - NAHTLOSER VERLAUF von Network Carousel */
+[data-theme="dark"] .trust-section {
+  background: linear-gradient(180deg,
+    #040404 0%,      /* START: Exakt von Network Carousel */
+    #050605 15%,     /* Sehr sanfter Übergang */
+    #060807 30%,     /* Minimal grünlich */
+    #070908 50%,     /* Peak */
+    #060807 70%,     /* Zurück */
+    #050605 85%,     
+    #030303 100%     /* ENDE: Für nächste Section */
+  );
+}
+
+/* Container */
+.trust-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.trust-header {
+  text-align: center;
+  margin-bottom: 72px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.trust-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--trust-text);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.trust-title-highlight {
+  background: var(--trust-primary);
+  color: white;
+  padding: 4px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+[data-theme="dark"] .trust-title-highlight {
+  background: var(--trust-primary);
+  color: #fff;
+}
+
+/* Trust Stats Bar - ENTERPRISE MINIMAL */
+.trust-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05) 0%, rgba(0, 217, 126, 0.03) 100%);
+  border-radius: 100px;
+  margin: 0 auto;
+  animation: fadeInUp 0.85s ease 0.1s both;
+}
+
+[data-theme="dark"] .trust-stats {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.08) 0%, rgba(0, 154, 97, 0.05) 100%);
+}
+
+.trust-rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trust-score {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--trust-text);
+  letter-spacing: -0.02em;
+}
+
+.trust-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.trust-star {
+  width: 24px;
+  height: 24px;
+  color: var(--trust-star-color);
+  fill: var(--trust-star-color);
+}
+
+.trust-star.half {
+  position: relative;
+}
+
+.trust-star.half::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--trust-card-bg);
+  opacity: 0.7;
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: var(--trust-shadow-sm);
+}
+
+[data-theme="dark"] .trust-badge {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.trust-badge-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--trust-primary);
+}
+
+.trust-badge-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--trust-text);
+}
+
+/* Reviews Carousel Container */
+.trust-reviews-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 48px;
+}
+
+.trust-reviews-carousel {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Review Card - ENTERPRISE CLEAN */
+.trust-review {
+  flex: 0 0 calc(33.333% - 16px);
+  background: var(--trust-card-bg);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: var(--trust-shadow-md);
+  transition: var(--trust-transition);
+  cursor: default;
+  animation: fadeInUp 0.9s ease both;
+  animation-delay: calc(var(--review-index) * 0.1s);
+  position: relative;
+  overflow: hidden;
+}
+
+.trust-review:nth-child(1) { --review-index: 1; }
+.trust-review:nth-child(2) { --review-index: 2; }
+.trust-review:nth-child(3) { --review-index: 3; }
+.trust-review:nth-child(4) { --review-index: 4; }
+.trust-review:nth-child(5) { --review-index: 5; }
+.trust-review:nth-child(6) { --review-index: 6; }
+
+[data-theme="dark"] .trust-review {
+  background: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.trust-review:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--trust-shadow-lg);
+}
+
+/* Review Header */
+.trust-review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.trust-review-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.trust-review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--trust-primary), var(--trust-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.2);
+}
+
+[data-theme="dark"] .trust-review-avatar {
+  box-shadow: 0 4px 12px rgba(0, 217, 126, 0.2);
+}
+
+.trust-review-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trust-review-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--trust-text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trust-review-country {
+  font-size: 14px;
+  color: var(--trust-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.trust-review-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Verified Badge */
+.trust-verified {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 154, 97, 0.1);
+  border-radius: 50%;
+  color: var(--trust-primary);
+}
+
+[data-theme="dark"] .trust-verified {
+  background: rgba(0, 217, 126, 0.1);
+  color: var(--trust-primary);
+}
+
+.trust-verified svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Review Stars */
+.trust-review-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.trust-review-star {
+  width: 18px;
+  height: 18px;
+  color: var(--trust-star-color);
+  fill: var(--trust-star-color);
+}
+
+/* Review Text */
+.trust-review-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--trust-text-secondary);
+  margin-bottom: 16px;
+  min-height: 48px;
+}
+
+/* Review Date */
+.trust-review-date {
+  font-size: 12px;
+  color: var(--trust-text-secondary);
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Carousel Controls */
+.trust-controls {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.trust-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--trust-border);
+  border: none;
+  cursor: pointer;
+  transition: var(--trust-transition);
+  padding: 0;
+}
+
+.trust-dot:hover {
+  background: var(--trust-primary);
+  transform: scale(1.2);
+}
+
+.trust-dot.active {
+  background: var(--trust-primary);
+  width: 32px;
+  border-radius: 5px;
+}
+
+[data-theme="dark"] .trust-dot {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .trust-dot.active {
+  background: var(--trust-primary);
+}
+
+/* Arrow Controls - Hidden on Mobile */
+.trust-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--trust-shadow-md);
+  transition: var(--trust-transition);
+  z-index: 10;
+  border: none;
+  color: var(--trust-text);
+}
+
+.trust-arrow:hover {
+  background: var(--trust-primary);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.trust-arrow.prev {
+  left: -24px;
+}
+
+.trust-arrow.next {
+  right: -24px;
+}
+
+[data-theme="dark"] .trust-arrow {
+  background: rgba(26, 26, 26, 0.9);
+  color: var(--trust-text);
+}
+
+[data-theme="dark"] .trust-arrow:hover {
+  background: var(--trust-primary);
+  color: #0a0a0a;
+}
+
+.trust-arrow svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .trust-container {
+    padding: 0 24px;
+  }
+  
+  .trust-review {
+    flex: 0 0 calc(50% - 12px);
+  }
+  
+  .trust-arrow {
+    display: none;
+  }
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+  .trust-section {
+    padding: 72px 0;
+  }
+  
+  .trust-container {
+    padding: 0 16px;
+  }
+  
+  .trust-header {
+    margin-bottom: 48px;
+  }
+  
+  .trust-title {
+    font-size: 32px;
+  }
+  
+  /* Mobile Trust Stats */
+  .trust-stats {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 24px;
+    width: 100%;
+    border-radius: 20px;
+  }
+  
+  .trust-score {
+    font-size: 28px;
+  }
+  
+  .trust-star {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Mobile Carousel - Single Card */
+  .trust-reviews-wrapper {
+    margin: 0 -16px; /* Full width */
+    padding: 0 16px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .trust-reviews-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .trust-reviews-carousel {
+    padding: 4px;
+  }
+  
+  .trust-review {
+    flex: 0 0 calc(100vw - 48px);
+    max-width: 400px;
+  }
+  
+  /* Touch-friendly Review Cards */
+  .trust-review {
+    padding: 24px;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  
+  .trust-review-header {
+    margin-bottom: 16px;
+  }
+  
+  .trust-review-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+  
+  .trust-review-name {
+    font-size: 15px;
+  }
+  
+  .trust-review-text {
+    font-size: 14px;
+    min-height: auto;
+  }
+  
+  /* Mobile Controls */
+  .trust-controls {
+    margin-top: 24px;
+  }
+  
+  .trust-dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .trust-dot.active {
+    width: 24px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .trust-review {
+    flex: 0 0 calc(100vw - 32px);
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .trust-reviews-carousel {
+    transition: none;
+  }
+}
+</style>
+
+<section class="trust-section full-width" id="trust-section">
+  <div class="trust-container">
+    
+    <!-- Header -->
+    <div class="trust-header">
+      <h2 class="trust-title">
+        {{ 'trust.title_part1' | t | default: 'Trusted by travelers' }} <span class="trust-title-highlight">{{ 'trust.title_part2' | t | default: 'worldwide' }}</span>
+      </h2>
+      
+      <!-- Trust Stats - MINIMAL ENTERPRISE -->
+      <div class="trust-stats">
+        <div class="trust-rating">
+          <span class="trust-score">4.6/5</span>
+          <div class="trust-stars">
+            <svg class="trust-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-star half" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+        </div>
+        
+        <div class="trust-badge">
+          <svg class="trust-badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+          </svg>
+          <span class="trust-badge-text">{{ 'trust.verified' | t | default: 'Verified Reviews' }}</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Reviews Carousel -->
+    <div class="trust-reviews-wrapper">
+      <!-- Arrow Controls -->
+      <button class="trust-arrow prev" aria-label="Previous review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      
+      <button class="trust-arrow next" aria-label="Next review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 18l6-6-6-6"/>
+        </svg>
+      </button>
+      
+      <div class="trust-reviews-carousel" id="reviews-carousel">
+        
+        <!-- Review 1 -->
+        <div class="trust-review">
+          <div class="trust-review-header">
+            <div class="trust-review-author">
+              <div class="trust-review-avatar">SM</div>
+              <div class="trust-review-info">
+                <div class="trust-review-name">
+                  Sarah M.
+                </div>
+                <div class="trust-review-country">
+                  <span class="trust-review-flag">🇩🇪</span>
+                  Germany
+                </div>
+              </div>
+            </div>
+            <div class="trust-verified" title="Verified Purchase">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="trust-review-stars">
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+          
+          <p class="trust-review-text">
+            {{ 'trust.review1' | t | default: 'Super easy activation! Was online in Turkey within 2 minutes. Much cheaper than roaming.' }}
+          </p>
+          
+          <div class="trust-review-date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {{ 'trust.date1' | t | default: '3 days ago' }}
+          </div>
+        </div>
+        
+        <!-- Review 2 -->
+        <div class="trust-review">
+          <div class="trust-review-header">
+            <div class="trust-review-author">
+              <div class="trust-review-avatar">JD</div>
+              <div class="trust-review-info">
+                <div class="trust-review-name">
+                  John D.
+                </div>
+                <div class="trust-review-country">
+                  <span class="trust-review-flag">🇺🇸</span>
+                  USA
+                </div>
+              </div>
+            </div>
+            <div class="trust-verified" title="Verified Purchase">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="trust-review-stars">
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+          
+          <p class="trust-review-text">
+            {{ 'trust.review2' | t | default: 'Best eSIM provider! Much cheaper than my carrier. Had great speeds in Japan.' }}
+          </p>
+          
+          <div class="trust-review-date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {{ 'trust.date2' | t | default: '1 week ago' }}
+          </div>
+        </div>
+        
+        <!-- Review 3 -->
+        <div class="trust-review">
+          <div class="trust-review-header">
+            <div class="trust-review-author">
+              <div class="trust-review-avatar">MK</div>
+              <div class="trust-review-info">
+                <div class="trust-review-name">
+                  Maria K.
+                </div>
+                <div class="trust-review-country">
+                  <span class="trust-review-flag">🇪🇸</span>
+                  Spain
+                </div>
+              </div>
+            </div>
+            <div class="trust-verified" title="Verified Purchase">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="trust-review-stars">
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+          
+          <p class="trust-review-text">
+            {{ 'trust.review3' | t | default: 'Perfect for my business trips! Reliable connection in 15+ countries so far.' }}
+          </p>
+          
+          <div class="trust-review-date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {{ 'trust.date3' | t | default: '2 weeks ago' }}
+          </div>
+        </div>
+        
+        <!-- Review 4 -->
+        <div class="trust-review">
+          <div class="trust-review-header">
+            <div class="trust-review-author">
+              <div class="trust-review-avatar">TC</div>
+              <div class="trust-review-info">
+                <div class="trust-review-name">
+                  Thomas C.
+                </div>
+                <div class="trust-review-country">
+                  <span class="trust-review-flag">🇫🇷</span>
+                  France
+                </div>
+              </div>
+            </div>
+            <div class="trust-verified" title="Verified Purchase">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="trust-review-stars">
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+          
+          <p class="trust-review-text">
+            {{ 'trust.review4' | t | default: 'Very easy installation! Excellent and fast customer support.' }}
+          </p>
+          
+          <div class="trust-review-date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {{ 'trust.date4' | t | default: '3 weeks ago' }}
+          </div>
+        </div>
+        
+        <!-- Review 5 -->
+        <div class="trust-review">
+          <div class="trust-review-header">
+            <div class="trust-review-author">
+              <div class="trust-review-avatar">AY</div>
+              <div class="trust-review-info">
+                <div class="trust-review-name">
+                  Ahmet Y.
+                </div>
+                <div class="trust-review-country">
+                  <span class="trust-review-flag">🇹🇷</span>
+                  Turkey
+                </div>
+              </div>
+            </div>
+            <div class="trust-verified" title="Verified Purchase">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="trust-review-stars">
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+          
+          <p class="trust-review-text">
+            {{ 'trust.review5' | t | default: 'Great service! Worked perfectly in Dubai. Definitely recommend.' }}
+          </p>
+          
+          <div class="trust-review-date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {{ 'trust.date5' | t | default: '1 month ago' }}
+          </div>
+        </div>
+        
+        <!-- Review 6 -->
+        <div class="trust-review">
+          <div class="trust-review-header">
+            <div class="trust-review-author">
+              <div class="trust-review-avatar">LW</div>
+              <div class="trust-review-info">
+                <div class="trust-review-name">
+                  Lisa W.
+                </div>
+                <div class="trust-review-country">
+                  <span class="trust-review-flag">🇨🇦</span>
+                  Canada
+                </div>
+              </div>
+            </div>
+            <div class="trust-verified" title="Verified Purchase">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+          </div>
+          
+          <div class="trust-review-stars">
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+            <svg class="trust-review-star" viewBox="0 0 20 20">
+              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/>
+            </svg>
+          </div>
+          
+          <p class="trust-review-text">
+            {{ 'trust.review6' | t | default: 'Saved me hundreds on my Europe trip! Fast 5G speeds everywhere.' }}
+          </p>
+          
+          <div class="trust-review-date">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+            {{ 'trust.date6' | t | default: '6 weeks ago' }}
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Carousel Dots -->
+    <div class="trust-controls" role="tablist">
+      <button class="trust-dot active" role="tab" aria-label="Review page 1" data-slide="0"></button>
+      <button class="trust-dot" role="tab" aria-label="Review page 2" data-slide="1"></button>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Cache DOM elements
+  const section = document.getElementById('trust-section');
+  const carousel = document.getElementById('reviews-carousel');
+  const reviews = document.querySelectorAll('.trust-review');
+  const dots = document.querySelectorAll('.trust-dot');
+  const prevBtn = document.querySelector('.trust-arrow.prev');
+  const nextBtn = document.querySelector('.trust-arrow.next');
+  
+  // State
+  let currentSlide = 0;
+  let reviewsPerSlide = 3;
+  let totalSlides = 2;
+  let autoPlayInterval = null;
+  let touchStartX = 0;
+  let touchEndX = 0;
+  let isDragging = false;
+  
+  // Initialize
+  function init() {
+    if (!section || !carousel) return;
+    
+    // Calculate responsive layout
+    updateLayout();
+    
+    // Bind events
+    bindEvents();
+    
+    // Start autoplay
+    startAutoPlay();
+    
+    // Animate on scroll
+    animateOnScroll();
+  }
+  
+  // Update layout based on viewport
+  function updateLayout() {
+    const width = window.innerWidth;
+    
+    if (width <= 768) {
+      reviewsPerSlide = 1;
+      totalSlides = reviews.length;
+    } else if (width <= 1024) {
+      reviewsPerSlide = 2;
+      totalSlides = Math.ceil(reviews.length / reviewsPerSlide);
+    } else {
+      reviewsPerSlide = 3;
+      totalSlides = Math.ceil(reviews.length / reviewsPerSlide);
+    }
+    
+    // Update dots
+    updateDots();
+    
+    // Reset to first slide
+    goToSlide(0);
+  }
+  
+  // Update dots based on total slides
+  function updateDots() {
+    const controlsContainer = document.querySelector('.trust-controls');
+    if (!controlsContainer) return;
+    
+    // Clear existing dots
+    controlsContainer.innerHTML = '';
+    
+    // Create new dots
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'trust-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', `Review page ${i + 1}`);
+      dot.setAttribute('data-slide', i);
+      controlsContainer.appendChild(dot);
+    }
+  }
+  
+  // Bind events
+  function bindEvents() {
+    // Dots
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('trust-dot')) {
+        const slideIndex = parseInt(e.target.getAttribute('data-slide'));
+        goToSlide(slideIndex);
+        stopAutoPlay(); // Stop when user interacts
+      }
+    });
+    
+    // Arrow buttons
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        previousSlide();
+        stopAutoPlay();
+      });
+    }
+    
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        stopAutoPlay();
+      });
+    }
+    
+    // Touch events for mobile
+    carousel.addEventListener('touchstart', handleTouchStart, { passive: true });
+    carousel.addEventListener('touchmove', handleTouchMove, { passive: true });
+    carousel.addEventListener('touchend', handleTouchEnd);
+    
+    // Mouse drag for desktop
+    carousel.addEventListener('mousedown', handleMouseDown);
+    carousel.addEventListener('mousemove', handleMouseMove);
+    carousel.addEventListener('mouseup', handleMouseUp);
+    carousel.addEventListener('mouseleave', handleMouseUp);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (!carousel.contains(document.activeElement)) return;
+      
+      if (e.key === 'ArrowLeft') {
+        previousSlide();
+        stopAutoPlay();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+        stopAutoPlay();
+      }
+    });
+    
+    // Responsive
+    window.addEventListener('resize', debounce(updateLayout, 250));
+    
+    // Pause on hover
+    carousel.addEventListener('mouseenter', stopAutoPlay);
+    carousel.addEventListener('mouseleave', startAutoPlay);
+  }
+  
+  // Go to specific slide
+  function goToSlide(index) {
+    if (index < 0) index = totalSlides - 1;
+    if (index >= totalSlides) index = 0;
+    
+    currentSlide = index;
+    const offset = -(currentSlide * 100 / totalSlides);
+    
+    carousel.style.transform = `translateX(${offset * reviewsPerSlide}%)`;
+    
+    // Update dots
+    updateActiveDot();
+  }
+  
+  // Next slide
+  function nextSlide() {
+    goToSlide(currentSlide + 1);
+  }
+  
+  // Previous slide
+  function previousSlide() {
+    goToSlide(currentSlide - 1);
+  }
+  
+  // Update active dot
+  function updateActiveDot() {
+    const allDots = document.querySelectorAll('.trust-dot');
+    allDots.forEach((dot, index) => {
+      if (index === currentSlide) {
+        dot.classList.add('active');
+        dot.setAttribute('aria-selected', 'true');
+      } else {
+        dot.classList.remove('active');
+        dot.setAttribute('aria-selected', 'false');
+      }
+    });
+  }
+  
+  // Auto play
+  function startAutoPlay() {
+    if (autoPlayInterval) return;
+    
+    autoPlayInterval = setInterval(() => {
+      nextSlide();
+    }, 5000); // 5 seconds
+  }
+  
+  function stopAutoPlay() {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+  }
+  
+  // Touch handlers
+  function handleTouchStart(e) {
+    touchStartX = e.touches[0].clientX;
+  }
+  
+  function handleTouchMove(e) {
+    touchEndX = e.touches[0].clientX;
+  }
+  
+  function handleTouchEnd() {
+    handleSwipe();
+  }
+  
+  // Mouse drag handlers
+  function handleMouseDown(e) {
+    isDragging = true;
+    touchStartX = e.clientX;
+    carousel.style.cursor = 'grabbing';
+  }
+  
+  function handleMouseMove(e) {
+    if (!isDragging) return;
+    touchEndX = e.clientX;
+  }
+  
+  function handleMouseUp() {
+    if (!isDragging) return;
+    isDragging = false;
+    carousel.style.cursor = 'grab';
+    handleSwipe();
+  }
+  
+  // Handle swipe
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        nextSlide(); // Swipe left
+      } else {
+        previousSlide(); // Swipe right
+      }
+      stopAutoPlay(); // Stop auto-play on interaction
+    }
+    
+    // Reset
+    touchStartX = 0;
+    touchEndX = 0;
+  }
+  
+  // Animate on scroll
+  function animateOnScroll() {
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '50px'
+      });
+      
+      reviews.forEach(review => {
+        review.style.opacity = '0';
+        review.style.transform = 'translateY(30px)';
+        review.style.transition = 'all 0.6s ease';
+        observer.observe(review);
+      });
+    }
+  }
+  
+  // Utility: Debounce
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Trust & Reviews",
+  "class": "trust-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "trust_score",
+      "label": "Trust Score",
+      "default": "4.6/5"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_play",
+      "label": "Auto-play carousel",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "auto_play_speed",
+      "label": "Auto-play speed (seconds)",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Review",
+      "type": "review",
+      "limit": 12,
+      "settings": [
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "John D."
+        },
+        {
+          "type": "text",
+          "id": "author_country",
+          "label": "Country",
+          "default": "USA"
+        },
+        {
+          "type": "text",
+          "id": "country_flag",
+          "label": "Country Flag Emoji",
+          "default": "🇺🇸"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Best eSIM provider! Much cheaper than roaming."
+        },
+        {
+          "type": "text",
+          "id": "review_date",
+          "label": "Date",
+          "default": "1 week ago"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Purchase",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust & Reviews",
+      "blocks": []
+    }
+  ]
+}
+{% endschema %}
