@@ -50,10 +50,10 @@
   background: #ffffff;
 }
 
-/* Dark Mode - NAHTLOSER VERLAUF von How-To */
+/* Dark Mode - GRADIENT FIX: #040404 statt #090a09 am Start! */
 [data-theme="dark"] .why-section {
   background: linear-gradient(180deg,
-    #090a09 0%,      /* STARTFARBE = EXAKT GLEICH WIE HOW-TO ENDE! */
+    #040404 0%,      /* ⬅️ GEÄNDERT: Reines Schwarz ohne Grünstich! */
     #0b0c0b 10%,     /* Minimaler Übergang */
     #0d100f 25%,     /* Sehr sanft grünlich */
     #0f1210 40%,     /* Peak Grün */
@@ -332,10 +332,9 @@
 
 /* Mobile - TITEL GRÖSSE WIE HOW-TO */
 @media (max-width: 768px) {
-    
   /* REDUZIERTER PADDING FÜR NAHTLOSEN ÜBERGANG */
   .why-section {
-    padding: 20px 0 20px 0;  /* ⬅️ 20PX ABSTAND OBEN FÜR MOBILE! */
+    padding: 0 0 20px 0;  /* ⬅️ KEIN TOP-PADDING für nahtlosen Übergang! */
   }
   
   /* Container Mobile anpassen */
@@ -343,10 +342,10 @@
     padding: 20px 16px 0 16px;  /* Weniger Top-Padding auf Mobile */
   }
   
-  /* Dark Mode Extra-Anpassung */
+  /* Dark Mode ohne Extra-Padding */
   [data-theme="dark"] .why-section {
-    padding-top: 20px !important;  /* ⬅️ 20PX AUCH IM DARK MODE! */
-    margin-top: 0 !important; /* Keine Überlappung mehr */
+    padding-top: 0 !important;  /* ⬅️ KEIN EXTRA PADDING! */
+    margin-top: 0 !important;
   }
   
   .why-container {
