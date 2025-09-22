@@ -108,5 +108,23 @@
     "show_less": "SHOW LESS",
     "showing_countries": "Showing",
     "countries": "countries"
-  }
+  },
+  "howto": {
+  "title_part1": "How does",
+  "title_part2": "Simbye eSIM",
+  "title_part3": "work",
+  "subtitle": "From order to activation in under 2 minutes",
+  "step1_title": "Choose data package",
+  "step1_desc": "190+ countries available. Instant email delivery.",
+  "step1_time": "~30 seconds",
+  "step1_alt": "Select data package",
+  "step2_title": "Scan QR code",
+  "step2_desc": "Scan with camera app. No additional app needed.",
+  "step2_time": "~45 seconds",
+  "step2_alt": "Scan QR code",
+  "step3_title": "Activate eSIM",
+  "step3_desc": "Enable mobile data & surf. No roaming!",
+  "step3_time": "~30 seconds",
+  "step3_alt": "Activate eSIM"
+}
 }
