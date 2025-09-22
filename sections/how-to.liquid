@@ -43,7 +43,7 @@
   transition: var(--howto-transition);
 }
 
-/* Dark Mode - NAHTLOSER GRADIENT-ÜBERGANG */
+/* Dark Mode - GRADIENT FIX: #040404 statt #090a09 am Ende! */
 [data-theme="dark"] .howto-section {
   background: linear-gradient(180deg,
     #0a0a0a 0%,      /* Start: Reines Schwarz (von Destinations) */
@@ -51,7 +51,7 @@
     #0f1210 40%,     /* Leicht grünlich */
     #0d100f 60%,     /* Zurück */
     #0b0c0b 80%,     /* Fast schwarz */
-    #090a09 100%     /* ENDFARBE - Fast schwarz mit minimalem Grün */
+    #040404 100%     /* ⬅️ GEÄNDERT: Reines Schwarz ohne Grünstich! */
   );
 }
 
