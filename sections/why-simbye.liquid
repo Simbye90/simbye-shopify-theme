@@ -333,7 +333,7 @@
 @media (max-width: 768px) {
   /* REDUZIERTER PADDING FÜR NAHTLOSEN ÜBERGANG */
   .why-section {
-    padding: 0 0 20px 0;  /* NUR UNTEN PADDING! */
+    padding: 20px 0 20px 0;  /* ⬅️ 20PX ABSTAND OBEN FÜR MOBILE! */
   }
   
   /* Container Mobile anpassen */
@@ -343,8 +343,8 @@
   
   /* Dark Mode Extra-Anpassung */
   [data-theme="dark"] .why-section {
-    padding-top: 0 !important;
-    margin-top: -2px !important; /* Mini-Überlappung für perfekten Übergang */
+    padding-top: 20px !important;  /* ⬅️ 20PX AUCH IM DARK MODE! */
+    margin-top: 0 !important; /* Keine Überlappung mehr */
   }
   
   .why-container {
