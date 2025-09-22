@@ -106,12 +106,63 @@
   transform: scale(1);
 }
 
-/* Special filter for Orange/Red logos in dark mode */
-[data-theme="dark"] .logo-item img[alt="Orange"],
-[data-theme="dark"] .logo-item img[alt="Vodafone"],
-[data-theme="dark"] .logo-item img[alt="Airtel"],
-[data-theme="dark"] .logo-item img[alt="Verizon"] {
-  filter: grayscale(0%) opacity(0.85) brightness(2.2) contrast(1.4) saturate(1.2);
+/* Text Logos für Orange & Verizon */
+.logo-item.text-logo {
+  position: relative;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #999; /* Grau wie andere Logos */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  opacity: 0.6; /* Gleiche Opacity wie andere Logos */
+}
+
+/* Hover - Logos werden farbig */
+.logo-item.text-logo:hover .logo-text {
+  transform: scale(1.1) translateY(-2px);
+  opacity: 1;
+}
+
+/* Orange - bei Hover */
+.logo-item.text-logo:nth-child(5):hover .logo-text,
+.logo-item.text-logo:nth-child(17):hover .logo-text {
+  color: #ff6900;
+}
+
+/* Verizon - bei Hover */
+.logo-item.text-logo:nth-child(6):hover .logo-text,
+.logo-item.text-logo:nth-child(18):hover .logo-text {
+  color: #ed1c24;
+}
+
+/* Dark Mode Text Logos */
+[data-theme="dark"] .logo-text {
+  color: #ccc;
+  opacity: 0.7;
+}
+
+/* Dark Mode - Orange immer orange */
+[data-theme="dark"] .logo-item.text-logo:nth-child(5) .logo-text,
+[data-theme="dark"] .logo-item.text-logo:nth-child(17) .logo-text {
+  color: #ff8a33;
+  opacity: 0.7;
+}
+
+/* Dark Mode - Verizon immer rot */
+[data-theme="dark"] .logo-item.text-logo:nth-child(6) .logo-text,
+[data-theme="dark"] .logo-item.text-logo:nth-child(18) .logo-text {
+  color: #ff4747;
+  opacity: 0.7;
+}
+
+/* Dark Mode Hover */
+[data-theme="dark"] .logo-item.text-logo:hover .logo-text {
+  opacity: 1;
 }
 
 /* Hover Effects */
@@ -120,10 +171,14 @@
   transform: scale(1.1) translateY(-2px);
 }
 
-[data-theme="dark"] .logo-item:hover img[alt="Orange"],
+/* Special filter for problem logos in dark mode - jetzt ohne Orange/Verizon */
+[data-theme="dark"] .logo-item img[alt="Vodafone"],
+[data-theme="dark"] .logo-item img[alt="Airtel"] {
+  filter: grayscale(0%) opacity(0.85) brightness(2.2) contrast(1.4) saturate(1.2);
+}
+
 [data-theme="dark"] .logo-item:hover img[alt="Vodafone"],
-[data-theme="dark"] .logo-item:hover img[alt="Airtel"],
-[data-theme="dark"] .logo-item:hover img[alt="Verizon"] {
+[data-theme="dark"] .logo-item:hover img[alt="Airtel"] {
   filter: grayscale(0%) opacity(1) brightness(2.5) contrast(1.5) saturate(1.3);
 }
 
@@ -198,6 +253,11 @@
     max-height: 50px;
   }
   
+  /* Text Logos auf Mobile */
+  .logo-text {
+    font-size: 24px;
+  }
+  
   /* Hide trust badge on mobile */
   .carousel-trust-badge {
     display: none;
@@ -231,6 +291,11 @@
   .logo-item img {
     max-width: 80px;
     max-height: 40px;
+  }
+  
+  /* Text Logos auf sehr kleinen Screens */
+  .logo-text {
+    font-size: 20px;
   }
 }
 
@@ -280,11 +345,11 @@
       <div class="logo-item">
         <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/t_mobile.webp?v=1722286812" alt="T-Mobile" loading="lazy">
       </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/orange.webp?v=1722286812" alt="Orange" loading="lazy">
+      <div class="logo-item text-logo">
+        <span class="logo-text">Orange</span>
       </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/verizon.webp?v=1722286812" alt="Verizon" loading="lazy">
+      <div class="logo-item text-logo">
+        <span class="logo-text">Verizon</span>
       </div>
       <div class="logo-item">
         <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tele2.webp?v=1722286812" alt="Tele2" loading="lazy">
@@ -318,11 +383,11 @@
       <div class="logo-item">
         <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/t_mobile.webp?v=1722286812" alt="T-Mobile" loading="lazy">
       </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/orange.webp?v=1722286812" alt="Orange" loading="lazy">
+      <div class="logo-item text-logo">
+        <span class="logo-text">Orange</span>
       </div>
-      <div class="logo-item">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/verizon.webp?v=1722286812" alt="Verizon" loading="lazy">
+      <div class="logo-item text-logo">
+        <span class="logo-text">Verizon</span>
       </div>
       <div class="logo-item">
         <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tele2.webp?v=1722286812" alt="Tele2" loading="lazy">
