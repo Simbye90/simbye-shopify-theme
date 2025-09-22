@@ -174,40 +174,4 @@ body {
 }
 
 
-/* ========================================
-   SEAMLESS GRADIENT TRANSITION
-   ======================================== */
 
-/* Create pseudo-element for smooth transition */
-[data-theme="dark"] .howto-section::after {
-  content: '';
-  position: absolute;
-  bottom: -100px;
-  left: 0;
-  right: 0;
-  height: 200px;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    #051008 50%,
-    #051008 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Adjust z-index for content */
-[data-theme="dark"] .howto-container {
-  position: relative;
-  z-index: 2;
-}
-
-/* Smooth blend between sections */
-[data-theme="dark"] #shopify-section-how_to_YHUCmd {
-  margin-bottom: -50px !important;
-}
-
-[data-theme="dark"] #shopify-section-why_simbye_JUnMqH {
-  margin-top: -50px !important;
-  position: relative;
-  z-index: 0;
-}
