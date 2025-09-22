@@ -122,20 +122,21 @@
   position: relative;
 }
 
-/* Connection Line */
+/* Connection Line - Subtiler */
 .howto-steps::before {
   content: '';
   position: absolute;
-  top: 240px;
+  top: 24px; /* Bei den Nummern */
   left: 25%;
   right: 25%;
-  height: 2px;
+  height: 1px; /* Dünner */
   background: linear-gradient(90deg, 
-    var(--howto-primary) 0%, 
-    var(--howto-accent) 50%, 
-    var(--howto-primary) 100%);
+    transparent 0%,
+    var(--howto-primary) 20%,
+    var(--howto-primary) 80%,
+    transparent 100%);
   z-index: 0;
-  opacity: 0.3;
+  opacity: 0.2; /* Noch subtiler */
 }
 
 /* Step Card */
@@ -174,36 +175,39 @@
   box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
 }
 
-/* Image Container */
+/* Image Container - ENTERPRISE STYLE (No Box) */
 .howto-step-image {
   position: relative;
-  background: white;
-  border-radius: 24px;
-  overflow: hidden;
-  margin-bottom: 0; /* Kein Abstand nach unten */
-  box-shadow: var(--howto-shadow-md);
+  background: transparent; /* Kein Background */
+  border-radius: 0; /* Keine Rundung */
+  overflow: visible; /* iPhone kann rausragen */
+  margin-bottom: 0;
+  box-shadow: none; /* Kein Shadow */
   transition: var(--howto-transition);
   cursor: default;
-  aspect-ratio: 3/4; /* Mehr Platz für iPhone-Mockup */
+  aspect-ratio: 4/5;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--howto-border);
+  border: none; /* Kein Border */
 }
 
 [data-theme="dark"] .howto-step-image {
-  background: #1a1a1a;
-  border-color: rgba(255, 255, 255, 0.1);
+  background: transparent;
+  border: none;
 }
 
-/* Kein Hover-Effekt mehr */
-
+/* iPhone bekommt eigenen Shadow */
 .howto-step-image img {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 40px; /* Mehr Abstand zum Rand */
-  transform: scale(0.85); /* iPhone kleiner machen */
+  padding: 20px;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15)); /* iPhone Shadow */
+}
+
+[data-theme="dark"] .howto-step-image img {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
 }
 
 /* Success Badge on Step 3 */
@@ -300,16 +304,16 @@
   
   /* Mobile: Steps als Karten */
   .howto-step {
-    background: white;
+    background: rgba(0, 0, 0, 0.02); /* Sehr subtle Background */
     border-radius: 24px;
     padding: 24px;
-    box-shadow: var(--howto-shadow-sm);
-    border: 2px solid var(--howto-border);
+    box-shadow: none; /* Kein Shadow */
+    border: none; /* Kein Border */
   }
   
   [data-theme="dark"] .howto-step {
-    background: rgba(26, 26, 26, 0.6);
-    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    border: none;
   }
   
   .howto-step-number {
@@ -321,11 +325,6 @@
   
   .howto-step-image {
     margin-top: 12px; /* Weniger Abstand oben auf Mobile */
-  }
-  
-  .howto-step-image img {
-    padding: 30px; /* Auch mobile mehr Padding */
-    transform: scale(0.9); /* Mobile auch etwas kleiner */
   }
 }
 
@@ -423,11 +422,11 @@
               alt="{{ 'howto.step1_alt' | t | default: 'Datenpaket auswählen' }}"
               loading="lazy"
               width="600"
-              height="800"
+              height="750"
             >
           {% else %}
             <img 
-              src="https://via.placeholder.com/600x800/f0faf7/009a61?text=Schritt+1" 
+              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+1" 
               alt="{{ 'howto.step1_alt' | t | default: 'Datenpaket auswählen' }}"
             >
           {% endif %}
@@ -446,11 +445,11 @@
               alt="{{ 'howto.step2_alt' | t | default: 'QR-Code scannen' }}"
               loading="lazy"
               width="600"
-              height="800"
+              height="750"
             >
           {% else %}
             <img 
-              src="https://via.placeholder.com/600x800/f0faf7/009a61?text=Schritt+2" 
+              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+2" 
               alt="{{ 'howto.step2_alt' | t | default: 'QR-Code scannen' }}"
             >
           {% endif %}
@@ -469,11 +468,11 @@
               alt="{{ 'howto.step3_alt' | t | default: 'eSIM aktivieren' }}"
               loading="lazy"
               width="600"
-              height="800"
+              height="750"
             >
           {% else %}
             <img 
-              src="https://via.placeholder.com/600x800/f0faf7/009a61?text=Schritt+3" 
+              src="https://via.placeholder.com/600x750/f0faf7/009a61?text=Schritt+3" 
               alt="{{ 'howto.step3_alt' | t | default: 'eSIM aktivieren' }}"
             >
           {% endif %}
@@ -550,7 +549,7 @@
       "type": "image_picker",
       "id": "step1_image",
       "label": "Bild für Schritt 1",
-      "info": "Empfohlen: 600x800px (3:4 Ratio)"
+      "info": "Empfohlen: 600x750px (4:5 Ratio)"
     },
     {
       "type": "text",
@@ -572,7 +571,7 @@
       "type": "image_picker",
       "id": "step2_image",
       "label": "Bild für Schritt 2",
-      "info": "Empfohlen: 600x800px (3:4 Ratio)"
+      "info": "Empfohlen: 600x750px (4:5 Ratio)"
     },
     {
       "type": "text",
@@ -594,7 +593,7 @@
       "type": "image_picker",
       "id": "step3_image",
       "label": "Bild für Schritt 3",
-      "info": "Empfohlen: 600x800px (3:4 Ratio)"
+      "info": "Empfohlen: 600x750px (4:5 Ratio)"
     },
     {
       "type": "text",
