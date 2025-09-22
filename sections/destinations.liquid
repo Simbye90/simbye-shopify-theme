@@ -631,13 +631,13 @@
     max-width: 100%;  /* Volle Breite */
   }
 
-  /* Grid mit minimalem Padding */
+  /* Grid mit etwas mehr Padding */
   .dest-grid {
     grid-template-columns: 1fr;
     gap: 16px;
     margin-bottom: 48px;
     width: 100%;
-    padding: 0 12px;  /* NUR 12px Abstand vom Rand */
+    padding: 0 16px;  /* 16px statt 12px - etwas mehr Luft */
     box-sizing: border-box;
     display: grid;
   }
@@ -645,14 +645,14 @@
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 12px;  /* Gleicher Abstand wie Grid */
+    padding: 0 16px;  /* Gleicher Abstand wie Grid */
   }
 
   /* Tabs zentriert */
   .dest-tabs {
-    width: calc(100% - 24px);  /* 12px auf jeder Seite */
+    width: calc(100% - 32px);  /* 16px auf jeder Seite */
     max-width: none;
-    margin: 0 12px 48px 12px;  /* Gleicher Seitenabstand */
+    margin: 0 16px 48px 16px;  /* Gleicher Seitenabstand */
     padding: 5px;
     gap: 3px;
     border-radius: 60px;
@@ -732,7 +732,7 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 12px;  /* Gleicher Abstand wie Grid */
+    padding: 0 16px;  /* Gleicher Abstand wie Grid */
     width: 100%;
     box-sizing: border-box;
   }
@@ -749,7 +749,7 @@
   #all-countries-section .dest-grid {
     display: grid;
     grid-template-columns: 1fr;
-    padding: 0 12px;  /* Gleicher minimaler Abstand */
+    padding: 0 16px;  /* Gleicher Abstand */
   }
 }
 
@@ -761,13 +761,13 @@
   .dest-heading {
     font-size: 36px;
     margin-bottom: 40px;
-    padding: 0 10px;  /* Noch weniger Padding */
+    padding: 0 14px;  /* 14px statt 10px */
   }
 
   .dest-tabs {
     margin-bottom: 40px;
-    width: calc(100% - 20px);  /* 10px auf jeder Seite */
-    margin: 0 10px 40px 10px;
+    width: calc(100% - 28px);  /* 14px auf jeder Seite */
+    margin: 0 14px 40px 14px;
     padding: 10px;
   }
 
@@ -781,9 +781,9 @@
     white-space: nowrap;
   }
   
-  /* NOCH WENIGER PADDING FÜR MAXIMALE BREITE */
+  /* ETWAS MEHR PADDING FÜR BESSERE OPTIK */
   .dest-grid {
-    padding: 0 10px !important;  /* Nur 10px */
+    padding: 0 14px !important;  /* 14px statt 10px */
   }
 
   .dest-card {
@@ -830,7 +830,7 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 10px;  /* Gleicher Abstand */
+    padding: 0 14px;  /* Gleicher Abstand */
   }
 
   .dest-view-all {
@@ -845,8 +845,8 @@
   }
 
   .dest-tabs {
-    width: calc(100% - 16px);  /* 8px auf jeder Seite */
-    margin: 0 8px 40px 8px;
+    width: calc(100% - 24px);  /* 12px auf jeder Seite */
+    margin: 0 12px 40px 12px;
   }
 
   .dest-tab-btn {
@@ -856,13 +856,13 @@
     min-width: 85px;
   }
 
-  /* MINIMALER ABSTAND FÜR MAXIMALE BREITE */
+  /* ETWAS MEHR LUFT ALS VORHER */
   .dest-grid {
-    padding: 0 8px !important;  /* Nur 8px für maximale Breite */
+    padding: 0 12px !important;  /* 12px statt 8px - immer noch breit aber mit Luft */
   }
 
   .dest-heading {
-    padding: 0 8px;  /* Gleicher Abstand */
+    padding: 0 12px;  /* Gleicher Abstand */
   }
 
   .dest-card {
@@ -908,7 +908,7 @@
   }
 
   .dest-view-all-wrapper {
-    padding: 0 8px;  /* Minimaler Abstand */
+    padding: 0 12px;  /* Gleicher Abstand */
   }
 
   .dest-view-all {
@@ -916,9 +916,9 @@
     width: 100%;
   }
   
-  /* All Countries auch minimal */
+  /* All Countries auch mit etwas mehr Luft */
   #all-countries-section .dest-grid {
-    padding: 0 8px !important;
+    padding: 0 12px !important;
   }
 }
 
