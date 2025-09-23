@@ -14,8 +14,14 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu": "",
-        "show_payment_icons": true
+        "logo": "shopify://shop_images/SIMBYE_820_x_300_px_512_x_512_px.png",
+        "show_apps": false,
+        "ios_link": "",
+        "android_link": "",
+        "destinations_title": "Popular Destinations",
+        "show_payment": true,
+        "copyright": "All rights reserved.",
+        "legal_menu": "footer-memu"
       }
     }
   },
