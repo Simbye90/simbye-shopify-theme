@@ -1,286 +1,156 @@
 <!-- sections/footer-ultimate.liquid -->
 <footer class="footer-ultimate full-width" id="footer-{{ section.id }}" data-section-id="{{ section.id }}">
   
-  <!-- Newsletter Bar -->
-  {% if section.settings.show_newsletter %}
-    <div class="footer-newsletter-bar">
-      <div class="newsletter-container">
-        <div class="newsletter-content">
-          <div class="newsletter-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="newsletter-text">
-            <h3>{{ section.settings.newsletter_title | default: 'Get 100 MB Free + Exclusive Offers' }}</h3>
-            <p>{{ section.settings.newsletter_subtitle | default: 'Join 50,000+ travelers getting the best eSIM deals' }}</p>
-          </div>
-        </div>
-        <form class="newsletter-form" action="/contact#contact_form" method="post">
-          <input type="hidden" name="form_type" value="customer">
-          <input type="hidden" name="utf8" value="✓">
-          <input type="email" 
-                 name="contact[email]" 
-                 placeholder="{{ section.settings.newsletter_placeholder | default: 'Enter your email' }}"
-                 class="newsletter-input"
-                 required>
-          <button type="submit" class="newsletter-btn">
-            {{ section.settings.newsletter_button | default: 'Get Free Data' }}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14m-7-7l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-        </form>
-      </div>
-    </div>
-  {% endif %}
-  
   <!-- Main Footer -->
   <div class="footer-main">
     <div class="footer-container">
       
-      <!-- Top Section with Logo & App Downloads -->
-      <div class="footer-top">
-        <div class="footer-brand-section">
-          <!-- Logo & Tagline -->
-          <div class="footer-logo-group">
-            {% if section.settings.logo %}
-              <img src="{{ section.settings.logo | image_url: width: 180 }}" 
-                   alt="{{ shop.name }}"
-                   class="footer-logo"
-                   width="180"
-                   loading="lazy">
-            {% else %}
-              <div class="footer-logo-text">{{ shop.name }}</div>
-            {% endif %}
-            <p class="footer-tagline">{{ section.settings.tagline | default: 'eSIM for 190+ countries • Instant activation • No roaming' }}</p>
-          </div>
-          
-          <!-- App Downloads -->
-          {% if section.settings.show_apps %}
-            <div class="footer-apps">
-              <h4 class="apps-title">{{ section.settings.apps_title | default: 'Download our app' }}</h4>
-              <div class="app-buttons">
-                <a href="{{ section.settings.ios_link | default: '#' }}" class="app-btn" target="_blank">
-                  <svg class="app-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-                  </svg>
-                  <div class="app-text">
-                    <span class="app-label">Download on the</span>
-                    <span class="app-store">App Store</span>
-                  </div>
-                </a>
-                <a href="{{ section.settings.android_link | default: '#' }}" class="app-btn" target="_blank">
-                  <svg class="app-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M3 20.5v-17c0-.59.34-1.11.84-1.35L13.69 12l-9.85 9.85c-.5-.25-.84-.76-.84-1.35m13.81-5.38L6.05 21.29 14.54 12l-7.69-7.71 9.96 10.83m4.35-2.83c.35.27.59.74.59 1.21s-.24.94-.59 1.21l-2.32 2.01L14.54 12l4.3-4.3 2.32 2.01z"/>
-                  </svg>
-                  <div class="app-text">
-                    <span class="app-label">Get it on</span>
-                    <span class="app-store">Google Play</span>
-                  </div>
-                </a>
-              </div>
-            </div>
+      <!-- Top Row with Logo and Apps -->
+      <div class="footer-top-row">
+        <!-- Logo -->
+        <div class="footer-logo-section">
+          {% if section.settings.logo %}
+            <img src="{{ section.settings.logo | image_url: width: 140 }}" 
+                 alt="{{ shop.name }}"
+                 class="footer-logo"
+                 width="140"
+                 loading="lazy">
+          {% else %}
+            <div class="footer-logo-text">{{ shop.name }}</div>
           {% endif %}
         </div>
         
-        <!-- Trustpilot Rating -->
-        {% if section.settings.show_trustpilot %}
-          <div class="footer-trustpilot">
-            <h4 class="trust-title">Excellent</h4>
-            <div class="trust-stars">
-              {% for i in (1..5) %}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#00b67a">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                </svg>
-              {% endfor %}
-            </div>
-            <p class="trust-text">Based on <strong>2,847 reviews</strong></p>
-            <img src="https://cdn.trustpilot.net/brand-assets/4.1.0/logo-white.svg" alt="Trustpilot" class="trustpilot-logo" width="100" loading="lazy">
+        <!-- App Downloads -->
+        {% if section.settings.show_apps %}
+          <div class="footer-apps">
+            <a href="{{ section.settings.ios_link | default: '#' }}" class="app-store-btn" target="_blank">
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/app-store-badge.svg?v=1" 
+                   alt="Download on App Store"
+                   width="135"
+                   height="40">
+            </a>
+            <a href="{{ section.settings.android_link | default: '#' }}" class="app-store-btn" target="_blank">
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/google-play-badge.svg?v=1" 
+                   alt="Get it on Google Play"
+                   width="135"
+                   height="40">
+            </a>
           </div>
         {% endif %}
       </div>
       
-      <!-- Middle Section with Menus -->
-      <div class="footer-middle">
-        <!-- 3 Menu Columns -->
-        {% assign menu_count = 0 %}
-        {% for block in section.blocks %}
-          {% if block.type == 'menu' and menu_count < 3 %}
-            <div class="footer-menu" {{ block.shopify_attributes }}>
-              <h3 class="menu-title">{{ block.settings.title }}</h3>
-              <ul class="menu-list">
-                {% if block.settings.menu != blank %}
-                  {% for link in linklists[block.settings.menu].links %}
-                    <li>
-                      <a href="{{ link.url }}" class="menu-link">
-                        {{ link.title }}
-                        {% if forloop.index <= 2 and block.settings.show_new %}
-                          <span class="link-new">NEW</span>
-                        {% endif %}
-                      </a>
-                    </li>
-                  {% endfor %}
-                {% endif %}
-              </ul>
-            </div>
-            {% assign menu_count = menu_count | plus: 1 %}
-          {% endif %}
-        {% endfor %}
-        
+      <!-- Main Content Grid -->
+      <div class="footer-content">
         <!-- Popular Destinations -->
-        <div class="footer-destinations">
-          <h3 class="menu-title">{{ section.settings.destinations_title | default: 'Popular Destinations' }}</h3>
-          <div class="destinations-grid">
+        <div class="footer-column">
+          <h3 class="footer-heading">{{ section.settings.destinations_title | default: 'Beliebte Reiseziele' }}</h3>
+          <ul class="footer-list">
             {% for block in section.blocks %}
               {% if block.type == 'destination' %}
-                <a href="{{ block.settings.url }}" class="destination-link">
-                  <span class="dest-flag">{{ block.settings.flag }}</span>
-                  <span class="dest-name">{{ block.settings.name }}</span>
+                <li>
+                  <a href="{{ block.settings.url }}" class="footer-link">
+                    {{ block.settings.name }}
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+        
+        <!-- Company Menu -->
+        <div class="footer-column">
+          <h3 class="footer-heading">{{ section.settings.company_title | default: 'Simbye' }}</h3>
+          <ul class="footer-list">
+            {% if section.settings.company_menu != blank %}
+              {% for link in linklists[section.settings.company_menu].links %}
+                <li>
+                  <a href="{{ link.url }}" class="footer-link">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+        
+        <!-- eSIM Info Menu -->
+        <div class="footer-column">
+          <h3 class="footer-heading">{{ section.settings.esim_title | default: 'eSIM' }}</h3>
+          <ul class="footer-list">
+            {% if section.settings.esim_menu != blank %}
+              {% for link in linklists[section.settings.esim_menu].links %}
+                <li>
+                  <a href="{{ link.url }}" class="footer-link">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+        
+        <!-- Help Menu -->
+        <div class="footer-column">
+          <h3 class="footer-heading">{{ section.settings.help_title | default: 'Hilfe' }}</h3>
+          <ul class="footer-list">
+            {% if section.settings.help_menu != blank %}
+              {% for link in linklists[section.settings.help_menu].links %}
+                <li>
+                  <a href="{{ link.url }}" class="footer-link">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            {% endif %}
+          </ul>
+        </div>
+        
+        <!-- Social Media -->
+        <div class="footer-column footer-social-column">
+          <h3 class="footer-heading">{{ section.settings.social_title | default: 'Folge uns' }}</h3>
+          <div class="footer-social-links">
+            {% for block in section.blocks %}
+              {% if block.type == 'social' %}
+                <a href="{{ block.settings.url }}" 
+                   class="footer-social-link"
+                   target="_blank"
+                   rel="noopener">
+                  <span class="social-icon">{{ block.settings.icon_svg }}</span>
+                  <span class="social-name">{{ block.settings.platform }}</span>
                 </a>
               {% endif %}
             {% endfor %}
           </div>
         </div>
-        
-        <!-- Support & Contact -->
-        <div class="footer-support">
-          <h3 class="menu-title">{{ section.settings.support_title | default: '24/7 Support' }}</h3>
-          <div class="support-content">
-            <a href="#" class="support-item" onclick="openLiveChat()">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 1.821.487 3.53 1.338 5L2 22l5-1.338A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" stroke="currentColor" stroke-width="2"/>
-                <circle cx="8" cy="12" r="1" fill="currentColor"/>
-                <circle cx="12" cy="12" r="1" fill="currentColor"/>
-                <circle cx="16" cy="12" r="1" fill="currentColor"/>
-              </svg>
-              <div>
-                <strong>Live Chat</strong>
-                <span>Response in 60 seconds</span>
-              </div>
-            </a>
-            <a href="https://wa.me/{{ section.settings.whatsapp }}" class="support-item" target="_blank">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M12 2a10 10 0 00-8.64 14.96L2 22l5.04-1.36A10 10 0 1012 2z" stroke="currentColor" stroke-width="2"/>
-                <path d="M9 10a1 1 0 011-1h1l.5 1.5L10 12l2 2 1.5-1.5L15 13v1a1 1 0 01-1 1 5 5 0 01-5-5z" fill="currentColor"/>
-              </svg>
-              <div>
-                <strong>WhatsApp</strong>
-                <span>+49 123 456789</span>
-              </div>
-            </a>
-            <a href="mailto:{{ section.settings.email }}" class="support-item">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="currentColor" stroke-width="2"/>
-              </svg>
-              <div>
-                <strong>Email</strong>
-                <span>support@simbye.com</span>
-              </div>
-            </a>
-          </div>
-        </div>
       </div>
       
-      <!-- Trust & Payment Section -->
-      <div class="footer-bottom-section">
-        <!-- Trust Badges -->
-        <div class="footer-trust">
-          <div class="trust-badge">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span>SSL Secured</span>
-          </div>
-          <div class="trust-badge">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2"/>
-            </svg>
-            <span>4.9/5 Rating</span>
-          </div>
-          <div class="trust-badge">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
-              <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span>Instant Delivery</span>
-          </div>
-          <div class="trust-badge">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="currentColor" stroke-width="2"/>
-              <path d="M22 4L12 14.01l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span>Money-Back Guarantee</span>
+    </div>
+  </div>
+  
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="footer-container">
+      <div class="footer-bottom-content">
+        <!-- Copyright & Legal -->
+        <div class="footer-legal">
+          <p class="footer-copyright">
+            {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.copyright | default: 'Alle Rechte vorbehalten.' }}
+          </p>
+          <div class="footer-legal-links">
+            {% if section.settings.legal_menu != blank %}
+              {% for link in linklists[section.settings.legal_menu].links %}
+                <a href="{{ link.url }}" class="legal-link">{{ link.title }}</a>
+              {% endfor %}
+            {% endif %}
           </div>
         </div>
         
-        <!-- Payment Icons -->
+        <!-- Payment Methods -->
         {% if section.settings.show_payment and shop.enabled_payment_types != empty %}
           <div class="footer-payment">
-            <span class="payment-label">{{ section.settings.payment_label | default: 'Secure payments:' }}</span>
-            <ul class="payment-icons" role="list">
+            <ul class="payment-methods" role="list">
               {% for type in shop.enabled_payment_types %}
-                <li class="payment-icon">
-                  {{ type | payment_type_svg_tag: class: 'payment-svg' }}
+                <li class="payment-method">
+                  {{ type | payment_type_svg_tag: class: 'payment-icon-colored' }}
                 </li>
               {% endfor %}
             </ul>
           </div>
         {% endif %}
-      </div>
-      
-      <!-- Partner Logos -->
-      {% if section.settings.show_partners %}
-        <div class="footer-partners">
-          <span class="partners-label">{{ section.settings.partners_label | default: 'Our network partners:' }}</span>
-          <div class="partners-logos">
-            {% for block in section.blocks %}
-              {% if block.type == 'partner' %}
-                <img src="{{ block.settings.logo | image_url: width: 80 }}" 
-                     alt="{{ block.settings.name }}"
-                     class="partner-logo"
-                     loading="lazy">
-              {% endif %}
-            {% endfor %}
-          </div>
-        </div>
-      {% endif %}
-      
-    </div>
-  </div>
-  
-  <!-- Legal Bottom Bar -->
-  <div class="footer-legal-bar">
-    <div class="footer-container">
-      <div class="legal-content">
-        <!-- Copyright -->
-        <div class="footer-copyright">
-          <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }} GmbH. {{ section.settings.copyright | default: 'All rights reserved.' }}</p>
-        </div>
-        
-        <!-- Legal Links -->
-        <div class="footer-legal-links">
-          {% if section.settings.legal_menu != blank %}
-            {% for link in linklists[section.settings.legal_menu].links %}
-              <a href="{{ link.url }}" class="legal-link">{{ link.title }}</a>
-            {% endfor %}
-          {% endif %}
-        </div>
-        
-        <!-- Social Media -->
-        <div class="footer-social">
-          {% for block in section.blocks %}
-            {% if block.type == 'social' %}
-              <a href="{{ block.settings.url }}" 
-                 class="social-link"
-                 title="{{ block.settings.platform }}"
-                 target="_blank"
-                 rel="noopener">
-                {{ block.settings.icon_svg }}
-              </a>
-            {% endif %}
-          {% endfor %}
-        </div>
       </div>
     </div>
   </div>
@@ -306,297 +176,98 @@
 /* Variables */
 .footer-ultimate {
   --footer-bg: #ffffff;
-  --footer-text: #1a1a1a;
+  --footer-text: #000000;
   --footer-text-secondary: #666666;
+  --footer-link: #333333;
   --footer-primary: #009a61;
-  --footer-primary-hover: #00824f;
-  --footer-accent: #00d97e;
-  --footer-border: #e5e5e5;
-  --footer-radius: 12px;
-  --footer-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --footer-border: #f0f0f0;
+  --footer-transition: all 0.2s ease;
 }
 
-/* Dark Mode - EXACT wie bei Konkurrenz */
+/* Dark Mode */
 [data-theme="dark"] .footer-ultimate {
-  --footer-bg: #040404;
+  --footer-bg: #0a0a0a;
   --footer-text: #ffffff;
   --footer-text-secondary: #999999;
+  --footer-link: #cccccc;
   --footer-primary: #00d97e;
-  --footer-primary-hover: #00c571;
-  --footer-accent: #00ff88;
-  --footer-border: rgba(255, 255, 255, 0.1);
+  --footer-border: rgba(255, 255, 255, 0.08);
 }
 
 /* Base */
 .footer-ultimate {
   background: var(--footer-bg);
   color: var(--footer-text);
-  font-size: 14px;
-  position: relative;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
 /* Container */
 .footer-container {
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
-}
-
-/* Newsletter Bar */
-.footer-newsletter-bar {
-  background: linear-gradient(135deg, var(--footer-primary) 0%, var(--footer-accent) 100%);
-  padding: 32px 0;
-}
-
-[data-theme="dark"] .footer-newsletter-bar {
-  background: linear-gradient(135deg, #00824f 0%, var(--footer-primary) 100%);
-}
-
-.newsletter-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-}
-
-.newsletter-content {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex: 1;
-}
-
-.newsletter-icon {
-  width: 48px;
-  height: 48px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  flex-shrink: 0;
-}
-
-.newsletter-text h3 {
-  color: white;
-  font-size: 20px;
-  font-weight: 700;
-  margin: 0 0 4px;
-}
-
-.newsletter-text p {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 14px;
-  margin: 0;
-}
-
-.newsletter-form {
-  display: flex;
-  gap: 12px;
-  max-width: 400px;
-}
-
-.newsletter-input {
-  flex: 1;
-  padding: 12px 20px;
-  background: white;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  color: var(--footer-text);
-}
-
-[data-theme="dark"] .newsletter-input {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-}
-
-.newsletter-btn {
-  padding: 12px 24px;
-  background: white;
-  color: var(--footer-primary);
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: var(--footer-transition);
-  white-space: nowrap;
-}
-
-[data-theme="dark"] .newsletter-btn {
-  background: var(--footer-text);
-  color: var(--footer-bg);
-}
-
-.newsletter-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 /* Main Footer */
 .footer-main {
-  padding: 60px 0 40px;
-  background: var(--footer-bg);
+  padding: 60px 0;
   border-bottom: 1px solid var(--footer-border);
 }
 
-/* Top Section */
-.footer-top {
+/* Top Row */
+.footer-top-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 60px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid var(--footer-border);
-}
-
-.footer-brand-section {
-  display: flex;
-  gap: 60px;
 }
 
 .footer-logo {
-  height: 36px;
+  height: 32px;
   width: auto;
 }
 
 .footer-logo-text {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 700;
   color: var(--footer-primary);
+  letter-spacing: -0.02em;
 }
 
-.footer-tagline {
-  font-size: 14px;
-  color: var(--footer-text-secondary);
-  margin: 12px 0 0;
-  max-width: 300px;
-}
-
-/* App Downloads */
+/* App Store Buttons */
 .footer-apps {
-  min-width: 280px;
-}
-
-.apps-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--footer-text);
-  margin: 0 0 16px;
-}
-
-.app-buttons {
   display: flex;
-  gap: 12px;
+  gap: 16px;
 }
 
-.app-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: var(--footer-text);
-  color: var(--footer-bg);
-  border-radius: 8px;
-  text-decoration: none;
+.app-store-btn {
+  display: block;
   transition: var(--footer-transition);
 }
 
-[data-theme="dark"] .app-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--footer-text);
-  border: 1px solid var(--footer-border);
-}
-
-.app-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.app-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.app-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.2;
-}
-
-.app-label {
-  font-size: 10px;
+.app-store-btn:hover {
   opacity: 0.8;
+  transform: translateY(-2px);
 }
 
-.app-store {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-/* Trustpilot */
-.footer-trustpilot {
-  text-align: center;
-  padding: 20px;
-  background: #00b67a;
-  border-radius: var(--footer-radius);
-  color: white;
-}
-
-[data-theme="dark"] .footer-trustpilot {
-  background: rgba(0, 182, 122, 0.1);
-  border: 1px solid rgba(0, 182, 122, 0.2);
-}
-
-.trust-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin: 0 0 8px;
-}
-
-.trust-stars {
-  display: flex;
-  justify-content: center;
-  gap: 4px;
-  margin-bottom: 8px;
-}
-
-.trust-text {
-  font-size: 13px;
-  margin: 0 0 12px;
-}
-
-.trustpilot-logo {
-  height: 20px;
+.app-store-btn img {
+  height: 40px;
   width: auto;
-  opacity: 0.9;
 }
 
-[data-theme="dark"] .trustpilot-logo {
-  filter: invert(1);
-}
-
-/* Middle Section */
-.footer-middle {
+/* Content Grid - Saily Style */
+.footer-content {
   display: grid;
-  grid-template-columns: repeat(3, 1fr) 1.5fr 1.5fr;
+  grid-template-columns: repeat(5, 1fr);
   gap: 40px;
-  margin-bottom: 40px;
 }
 
-/* Menu Columns */
-.footer-menu {
+/* Footer Column */
+.footer-column {
   min-width: 0;
 }
 
-.menu-title {
+.footer-heading {
   font-size: 16px;
   font-weight: 600;
   color: var(--footer-text);
@@ -604,265 +275,86 @@
   letter-spacing: -0.01em;
 }
 
-.menu-list {
+.footer-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.menu-list li {
+.footer-list li {
   margin-bottom: 12px;
 }
 
-.menu-link {
+.footer-link {
   font-size: 14px;
-  color: var(--footer-text-secondary);
+  color: var(--footer-link);
   text-decoration: none;
   transition: var(--footer-transition);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  display: block;
 }
 
-.menu-link:hover {
+.footer-link:hover {
   color: var(--footer-primary);
-  transform: translateX(2px);
 }
 
-.link-new {
-  padding: 2px 6px;
-  background: var(--footer-accent);
-  color: white;
-  font-size: 9px;
-  font-weight: 700;
-  border-radius: 4px;
-  letter-spacing: 0.5px;
-}
-
-/* Destinations Grid */
-.destinations-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.destination-link {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(0, 154, 97, 0.05);
-  border-radius: 8px;
-  text-decoration: none;
-  transition: var(--footer-transition);
-}
-
-[data-theme="dark"] .destination-link {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.destination-link:hover {
-  background: var(--footer-primary);
-  transform: translateX(2px);
-}
-
-.destination-link:hover .dest-name {
-  color: white;
-}
-
-.dest-flag {
-  font-size: 20px;
-}
-
-.dest-name {
-  font-size: 13px;
-  color: var(--footer-text);
-  font-weight: 500;
-}
-
-/* Support Section */
-.support-content {
+/* Social Links Column */
+.footer-social-links {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.support-item {
+.footer-social-link {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px;
-  background: rgba(0, 154, 97, 0.05);
-  border-radius: var(--footer-radius);
-  text-decoration: none;
-  transition: var(--footer-transition);
-}
-
-[data-theme="dark"] .support-item {
-  background: rgba(255, 255, 255, 0.03);
-}
-
-.support-item:hover {
-  background: var(--footer-primary);
-  transform: translateX(2px);
-}
-
-.support-item:hover * {
-  color: white !important;
-}
-
-.support-item svg {
-  width: 24px;
-  height: 24px;
-  stroke: var(--footer-primary);
-  flex-shrink: 0;
-}
-
-.support-item div {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.support-item strong {
   font-size: 14px;
-  color: var(--footer-text);
+  color: var(--footer-link);
+  text-decoration: none;
+  transition: var(--footer-transition);
 }
 
-.support-item span {
-  font-size: 12px;
-  color: var(--footer-text-secondary);
+.footer-social-link:hover {
+  color: var(--footer-primary);
 }
 
-/* Bottom Section */
-.footer-bottom-section {
-  padding-top: 40px;
-  border-top: 1px solid var(--footer-border);
-}
-
-/* Trust Badges */
-.footer-trust {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-
-.trust-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--footer-text-secondary);
-}
-
-.trust-badge svg {
+.social-icon {
   width: 20px;
   height: 20px;
-  stroke: var(--footer-primary);
-  flex-shrink: 0;
-}
-
-.trust-badge span {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-/* Payment Icons */
-.footer-payment {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 30px;
+  flex-shrink: 0;
 }
 
-.payment-label {
-  font-size: 13px;
-  color: var(--footer-text-secondary);
-  font-weight: 500;
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
 }
 
-.payment-icons {
-  display: flex;
-  gap: 12px;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.payment-icon {
-  display: flex;
-  align-items: center;
-}
-
-.payment-svg {
-  height: 28px;
-  width: auto;
-  filter: grayscale(100%) opacity(0.5);
-  transition: var(--footer-transition);
-}
-
-.payment-svg:hover {
-  filter: grayscale(0%) opacity(1);
-  transform: scale(1.1);
-}
-
-/* Partner Logos */
-.footer-partners {
-  text-align: center;
+/* Bottom Bar */
+.footer-bottom {
+  background: var(--footer-bg);
   padding: 30px 0;
 }
 
-.partners-label {
-  display: block;
-  font-size: 13px;
-  color: var(--footer-text-secondary);
-  margin-bottom: 20px;
-  font-weight: 500;
-}
-
-.partners-logos {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.partner-logo {
-  height: 30px;
-  width: auto;
-  filter: grayscale(100%) opacity(0.4);
-  transition: var(--footer-transition);
-}
-
-.partner-logo:hover {
-  filter: grayscale(0%) opacity(1);
-  transform: scale(1.1);
-}
-
-/* Legal Bar */
-.footer-legal-bar {
-  background: rgba(0, 0, 0, 0.02);
-  padding: 20px 0;
-  border-top: 1px solid var(--footer-border);
-}
-
-[data-theme="dark"] .footer-legal-bar {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.legal-content {
+.footer-bottom-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
+  gap: 40px;
 }
 
-.footer-copyright p {
+/* Legal Section */
+.footer-legal {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+}
+
+.footer-copyright {
   font-size: 13px;
   color: var(--footer-text-secondary);
   margin: 0;
@@ -875,145 +367,110 @@
 
 .legal-link {
   font-size: 13px;
-  color: var(--footer-text-secondary);
+  color: var(--footer-link);
   text-decoration: none;
   transition: var(--footer-transition);
+  text-decoration: underline;
 }
 
 .legal-link:hover {
   color: var(--footer-primary);
 }
 
-/* Social Media */
-.footer-social {
-  display: flex;
-  gap: 12px;
-}
-
-.social-link {
-  width: 36px;
-  height: 36px;
+/* Payment Methods - COLORED LIKE SAILY! */
+.footer-payment {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(0, 154, 97, 0.1);
-  border-radius: 50%;
-  color: var(--footer-primary);
+}
+
+.payment-methods {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+}
+
+/* PAYMENT ICONS ALWAYS IN COLOR! */
+.payment-icon-colored {
+  height: 28px;
+  width: auto;
+  opacity: 1;
+  filter: none !important; /* Force color display */
   transition: var(--footer-transition);
 }
 
-[data-theme="dark"] .social-link {
-  background: rgba(255, 255, 255, 0.05);
+.payment-icon-colored:hover {
+  transform: scale(1.1);
 }
 
-.social-link:hover {
-  background: var(--footer-primary);
-  color: white;
-  transform: translateY(-3px);
-}
-
-.social-link svg {
-  width: 18px;
-  height: 18px;
-  stroke-width: 2;
+/* Dark Mode Payment Icons Stay Colored */
+[data-theme="dark"] .payment-icon-colored {
+  filter: brightness(1.1) !important;
 }
 
 /* Mobile Responsive */
+@media (max-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr) 1.5fr;
+    gap: 30px;
+  }
+  
+  .footer-social-column {
+    grid-column: span 1;
+  }
+}
+
 @media (max-width: 768px) {
-  .footer-container,
-  .newsletter-container {
+  .footer-container {
     padding: 0 20px;
   }
   
-  /* Newsletter */
-  .newsletter-container {
-    flex-direction: column;
-    text-align: center;
+  .footer-main {
+    padding: 40px 0;
   }
   
-  .newsletter-content {
+  .footer-top-row {
     flex-direction: column;
-    margin-bottom: 20px;
-  }
-  
-  .newsletter-form {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-  }
-  
-  .newsletter-input,
-  .newsletter-btn {
-    width: 100%;
-  }
-  
-  /* Footer Top */
-  .footer-top {
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .footer-brand-section {
-    flex-direction: column;
+    align-items: flex-start;
     gap: 30px;
-    text-align: center;
+    margin-bottom: 40px;
   }
   
-  .footer-logo-group {
-    text-align: center;
-  }
-  
-  .footer-tagline {
-    max-width: 100%;
-  }
-  
-  .app-buttons {
-    flex-direction: column;
-  }
-  
-  .app-btn {
+  .footer-apps {
     width: 100%;
-    justify-content: center;
   }
   
-  /* Middle Section */
-  .footer-middle {
+  .app-store-btn {
+    flex: 1;
+  }
+  
+  .app-store-btn img {
+    width: 100%;
+    height: auto;
+    max-width: 135px;
+  }
+  
+  .footer-content {
     grid-template-columns: 1fr;
     gap: 30px;
   }
   
-  .destinations-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  /* Bottom */
-  .footer-trust {
+  .footer-bottom-content {
+    flex-direction: column;
     gap: 20px;
   }
   
-  .trust-badge {
+  .footer-legal {
     flex-direction: column;
     text-align: center;
-    gap: 4px;
-  }
-  
-  .footer-payment {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .partners-logos {
-    gap: 20px;
-  }
-  
-  .partner-logo {
-    height: 24px;
-  }
-  
-  /* Legal */
-  .legal-content {
-    flex-direction: column;
-    text-align: center;
+    gap: 16px;
   }
   
   .footer-legal-links {
@@ -1022,7 +479,8 @@
     gap: 16px;
   }
   
-  .footer-social {
+  .payment-methods {
+    flex-wrap: wrap;
     justify-content: center;
   }
 }
@@ -1049,41 +507,7 @@ function openLiveChat() {
   "settings": [
     {
       "type": "header",
-      "content": "Newsletter"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_newsletter",
-      "label": "Show Newsletter",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "newsletter_title",
-      "label": "Newsletter Title",
-      "default": "Get 100 MB Free + Exclusive Offers"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_subtitle",
-      "label": "Newsletter Subtitle",
-      "default": "Join 50,000+ travelers getting the best eSIM deals"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_placeholder",
-      "label": "Placeholder",
-      "default": "Enter your email"
-    },
-    {
-      "type": "text",
-      "id": "newsletter_button",
-      "label": "Button Text",
-      "default": "Get Free Data"
-    },
-    {
-      "type": "header",
-      "content": "Brand"
+      "content": "Logo & Apps"
     },
     {
       "type": "image_picker",
@@ -1091,26 +515,10 @@ function openLiveChat() {
       "label": "Footer Logo"
     },
     {
-      "type": "text",
-      "id": "tagline",
-      "label": "Tagline",
-      "default": "eSIM for 190+ countries • Instant activation • No roaming"
-    },
-    {
-      "type": "header",
-      "content": "App Downloads"
-    },
-    {
       "type": "checkbox",
       "id": "show_apps",
-      "label": "Show App Downloads",
+      "label": "Show App Store Buttons",
       "default": true
-    },
-    {
-      "type": "text",
-      "id": "apps_title",
-      "label": "Apps Title",
-      "default": "Download our app"
     },
     {
       "type": "url",
@@ -1124,49 +532,60 @@ function openLiveChat() {
     },
     {
       "type": "header",
-      "content": "Trustpilot"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_trustpilot",
-      "label": "Show Trustpilot Rating",
-      "default": true
-    },
-    {
-      "type": "header",
-      "content": "Destinations"
+      "content": "Menu Titles"
     },
     {
       "type": "text",
       "id": "destinations_title",
-      "label": "Destinations Title",
-      "default": "Popular Destinations"
+      "label": "Destinations Column Title",
+      "default": "Beliebte Reiseziele"
+    },
+    {
+      "type": "text",
+      "id": "company_title",
+      "label": "Company Column Title",
+      "default": "Simbye"
+    },
+    {
+      "type": "text",
+      "id": "esim_title",
+      "label": "eSIM Column Title",
+      "default": "eSIM"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Help Column Title",
+      "default": "Hilfe"
+    },
+    {
+      "type": "text",
+      "id": "social_title",
+      "label": "Social Column Title",
+      "default": "Folge uns"
     },
     {
       "type": "header",
-      "content": "Support"
+      "content": "Menus"
     },
     {
-      "type": "text",
-      "id": "support_title",
-      "label": "Support Title",
-      "default": "24/7 Support"
+      "type": "link_list",
+      "id": "company_menu",
+      "label": "Company Menu"
     },
     {
-      "type": "text",
-      "id": "whatsapp",
-      "label": "WhatsApp Number",
-      "default": "4912345678"
+      "type": "link_list",
+      "id": "esim_menu",
+      "label": "eSIM Menu"
     },
     {
-      "type": "text",
-      "id": "email",
-      "label": "Support Email",
-      "default": "support@simbye.com"
+      "type": "link_list",
+      "id": "help_menu",
+      "label": "Help Menu"
     },
     {
       "type": "header",
-      "content": "Payment & Trust"
+      "content": "Bottom Bar"
     },
     {
       "type": "checkbox",
@@ -1176,79 +595,27 @@ function openLiveChat() {
     },
     {
       "type": "text",
-      "id": "payment_label",
-      "label": "Payment Label",
-      "default": "Secure payments:"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_partners",
-      "label": "Show Partner Logos",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "partners_label",
-      "label": "Partners Label",
-      "default": "Our network partners:"
-    },
-    {
-      "type": "header",
-      "content": "Legal"
-    },
-    {
-      "type": "text",
       "id": "copyright",
       "label": "Copyright Text",
-      "default": "All rights reserved."
+      "default": "Alle Rechte vorbehalten."
     },
     {
       "type": "link_list",
       "id": "legal_menu",
-      "label": "Legal Menu"
+      "label": "Legal Links Menu"
     }
   ],
   "blocks": [
     {
-      "type": "menu",
-      "name": "Menu Column",
-      "limit": 3,
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Menu Title",
-          "default": "Products"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "Menu"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_new",
-          "label": "Show NEW badge on first 2 items",
-          "default": false
-        }
-      ]
-    },
-    {
       "type": "destination",
       "name": "Destination",
-      "limit": 8,
+      "limit": 10,
       "settings": [
-        {
-          "type": "text",
-          "id": "flag",
-          "label": "Flag Emoji",
-          "default": "🇺🇸"
-        },
         {
           "type": "text",
           "id": "name",
           "label": "Country Name",
-          "default": "USA"
+          "default": "Türkei"
         },
         {
           "type": "url",
@@ -1258,31 +625,15 @@ function openLiveChat() {
       ]
     },
     {
-      "type": "partner",
-      "name": "Partner Logo",
-      "limit": 6,
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "logo",
-          "label": "Partner Logo"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Partner Name"
-        }
-      ]
-    },
-    {
       "type": "social",
       "name": "Social Media",
+      "limit": 6,
       "settings": [
         {
           "type": "text",
           "id": "platform",
-          "label": "Platform",
-          "default": "Instagram"
+          "label": "Platform Name",
+          "default": "Facebook"
         },
         {
           "type": "url",
@@ -1293,7 +644,7 @@ function openLiveChat() {
           "type": "html",
           "id": "icon_svg",
           "label": "Icon SVG",
-          "default": "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor'><rect x='2' y='2' width='20' height='20' rx='5'/><path d='M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z'/><line x1='17.5' y1='6.5' x2='17.51' y2='6.5'/></svg>"
+          "default": "<svg viewBox='0 0 24 24'><path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'/></svg>"
         }
       ]
     }
@@ -1303,30 +654,15 @@ function openLiveChat() {
       "name": "Footer Ultimate",
       "blocks": [
         {
-          "type": "menu",
+          "type": "destination",
           "settings": {
-            "title": "Products",
-            "show_new": true
-          }
-        },
-        {
-          "type": "menu",
-          "settings": {
-            "title": "Support",
-            "show_new": false
-          }
-        },
-        {
-          "type": "menu",
-          "settings": {
-            "title": "Company",
-            "show_new": false
+            "name": "Türkei",
+            "url": "/products/turkey-esim"
           }
         },
         {
           "type": "destination",
           "settings": {
-            "flag": "🇺🇸",
             "name": "USA",
             "url": "/products/usa-esim"
           }
@@ -1334,25 +670,85 @@ function openLiveChat() {
         {
           "type": "destination",
           "settings": {
-            "flag": "🇹🇷",
-            "name": "Turkey",
-            "url": "/products/turkey-esim"
+            "name": "Kanada",
+            "url": "/products/canada-esim"
           }
         },
         {
           "type": "destination",
           "settings": {
-            "flag": "🇪🇺",
-            "name": "Europe",
-            "url": "/products/europe-esim"
+            "name": "Griechenland",
+            "url": "/products/greece-esim"
           }
         },
         {
           "type": "destination",
           "settings": {
-            "flag": "🇯🇵",
-            "name": "Japan",
-            "url": "/products/japan-esim"
+            "name": "Serbien",
+            "url": "/products/serbia-esim"
+          }
+        },
+        {
+          "type": "destination",
+          "settings": {
+            "name": "Spanien",
+            "url": "/products/spain-esim"
+          }
+        },
+        {
+          "type": "destination",
+          "settings": {
+            "name": "Indonesien",
+            "url": "/products/indonesia-esim"
+          }
+        },
+        {
+          "type": "destination",
+          "settings": {
+            "name": "Italien",
+            "url": "/products/italy-esim"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "Facebook",
+            "icon_svg": "<svg viewBox='0 0 24 24'><path d='M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z'/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "Twitter (jetzt X)",
+            "icon_svg": "<svg viewBox='0 0 24 24'><path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z'/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "LinkedIn",
+            "icon_svg": "<svg viewBox='0 0 24 24'><path d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "YouTube",
+            "icon_svg": "<svg viewBox='0 0 24 24'><path d='M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z'/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "Instagram",
+            "icon_svg": "<svg viewBox='0 0 24 24'><rect x='2' y='2' width='20' height='20' rx='5' ry='5' fill='none' stroke='currentColor' stroke-width='2'/><path d='M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z' fill='none' stroke='currentColor' stroke-width='2'/><line x1='17.5' y1='6.5' x2='17.51' y2='6.5' stroke='currentColor' stroke-width='2' stroke-linecap='round'/></svg>"
+          }
+        },
+        {
+          "type": "social",
+          "settings": {
+            "platform": "Reddit",
+            "icon_svg": "<svg viewBox='0 0 24 24'><path d='M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z'/></svg>"
           }
         }
       ]
