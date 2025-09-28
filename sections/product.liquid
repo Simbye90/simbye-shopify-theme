@@ -1,6 +1,6 @@
 <!-- sections/product-enterprise.liquid -->
 <style>
-/* ENTERPRISE PRODUCT PAGE V2 - SIMBYE ESIM */
+/* ENTERPRISE PRODUCT PAGE V3 - SIMBYE ESIM */
 :root {
   --product-primary: #009a61;
   --product-primary-dark: #00824f;
@@ -39,6 +39,11 @@
   position: relative;
   overflow: hidden;
   padding-top: 80px;
+}
+
+/* Dark Mode - Kein extra padding */
+[data-theme="dark"] .product-enterprise {
+  padding-top: 80px; /* Gleich bleiben */
 }
 
 /* Hero Section */
@@ -720,21 +725,154 @@
   transform: scale(0.98);
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
+/* MOBILE - FULL WIDTH OHNE PADDING */
+@media (max-width: 768px) {
+  .product-enterprise {
+    padding-top: 40px;
+  }
+  
+  /* Hero ohne seitliches Padding */
+  .product-hero {
+    padding: 0 0 40px 0; /* KEIN SEITLICHES PADDING */
+  }
+  
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  /* Bild volle Breite */
+  .hero-image-section {
+    order: 1;
+    margin: 0; /* Kein Margin */
+    padding: 0; /* Kein Padding */
+  }
+  
+  .hero-image-wrapper {
+    border-radius: 0; /* KEINE RUNDUNG */
+    width: 100vw; /* VOLLE BREITE */
+    margin: 0;
+    box-shadow: none; /* Kein Shadow auf Mobile */
+  }
+  
+  /* Info Section mit Padding */
+  .hero-info-section {
+    order: 2;
+    padding: 0 20px; /* Padding nur für Text */
+    text-align: center;
+  }
+  
+  .product-title-wrapper {
+    justify-content: center;
+  }
+  
+  .product-title {
+    font-size: 32px;
+  }
+  
+  .price-range {
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px;
+  }
+  
+  .trust-badges {
+    justify-content: center;
+  }
+  
+  /* Product Selection */
+  .product-selection {
+    padding: 0 20px 40px; /* Seitliches Padding für Content */
+  }
+  
+  .selection-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  /* Tabs */
+  .variant-tabs {
+    gap: 2px;
+    padding: 2px;
+    margin-bottom: 24px;
+  }
+  
+  .variant-tab {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  
+  .variant-tab svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* Plan Cards */
+  .plan-card {
+    padding: 20px;
+  }
+  
+  .plan-name {
+    font-size: 18px;
+  }
+  
+  .plan-price {
+    font-size: 24px;
+  }
+  
+  /* Purchase Box */
+  .purchase-box {
+    position: static;
+    padding: 24px 20px;
+    border-radius: 16px;
+    margin: 24px -20px 0; /* Negative margin für full width effect */
+    box-shadow: none;
+    border-left: none;
+    border-right: none;
+    border-radius: 16px 16px 0 0;
+  }
+  
+  /* Features */
+  .features-section {
+    padding: 40px 20px;
+  }
+  
+  .features-title {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .feature-card {
+    padding: 32px 20px;
+  }
+  
+  /* Mobile Sticky anzeigen */
+  .mobile-sticky {
+    display: block;
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
   .hero-container {
     grid-template-columns: 1fr;
     gap: 40px;
   }
   
   .hero-image-section {
-    order: 1;
     max-width: 600px;
     margin: 0 auto;
   }
   
   .hero-info-section {
-    order: 2;
     text-align: center;
   }
   
@@ -758,78 +896,6 @@
   .features-grid {
     grid-template-columns: 1fr;
     gap: 24px;
-  }
-}
-
-@media (max-width: 768px) {
-  .product-enterprise {
-    padding-top: 40px;
-  }
-  
-  .product-hero,
-  .product-selection,
-  .features-section {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  
-  .product-title {
-    font-size: 32px;
-  }
-  
-  .price-range {
-    font-size: 20px;
-    padding: 10px 20px;
-  }
-  
-  .hero-subtitle {
-    font-size: 16px;
-  }
-  
-  .variant-tabs {
-    gap: 2px;
-    padding: 2px;
-  }
-  
-  .variant-tab {
-    padding: 12px 16px;
-    font-size: 15px;
-  }
-  
-  .variant-tab svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .plan-card {
-    padding: 20px;
-  }
-  
-  .plan-name {
-    font-size: 18px;
-  }
-  
-  .plan-price {
-    font-size: 24px;
-  }
-  
-  .purchase-box {
-    padding: 24px 20px;
-    border-radius: 16px 16px 0 0;
-    margin: 0 -20px;
-  }
-  
-  .mobile-sticky {
-    display: block;
-  }
-  
-  .feature-card {
-    padding: 32px 20px;
-  }
-  
-  .features-title {
-    font-size: 28px;
-    margin-bottom: 32px;
   }
 }
 </style>
@@ -927,19 +993,14 @@
   <div class="product-selection">
     <!-- Check for Unlimited variants -->
     {% assign has_unlimited = false %}
-    {% assign normal_variants = "" | split: "," %}
-    {% assign unlimited_variants = "" | split: "," %}
     {% assign has_free = false %}
     
     {% for variant in product.variants %}
       {% if variant.sku contains 'daily' or variant.sku contains 'Daily' %}
         {% assign has_unlimited = true %}
-        {% assign unlimited_variants = unlimited_variants | push: variant %}
-      {% else %}
-        {% assign normal_variants = normal_variants | push: variant %}
-        {% if variant.price == 0 %}
-          {% assign has_free = true %}
-        {% endif %}
+      {% endif %}
+      {% if variant.price == 0 %}
+        {% assign has_free = true %}
       {% endif %}
     {% endfor %}
     
@@ -978,73 +1039,32 @@
       <div class="plans-container">
         <!-- Normal Variants -->
         <div class="variant-group" id="normal-variants" style="display: block;">
-          {% for variant in normal_variants %}
-            {% assign is_free = false %}
-            {% if variant.price == 0 %}
-              {% assign is_free = true %}
-            {% endif %}
-            
-            <div class="plan-card {% if forloop.first %}selected{% endif %}" data-variant-id="{{ variant.id }}" data-is-free="{{ is_free }}">
-              <input type="radio" 
-                     name="variant" 
-                     value="{{ variant.id }}"
-                     data-price="{{ variant.price | money }}"
-                     data-title="{{ variant.title }}"
-                     {% if forloop.first %}checked{% endif %}>
-              
-              <div class="plan-content">
-                <div class="plan-info">
-                  <div class="plan-name">{{ variant.title }}</div>
-                  <div class="plan-validity">
-                    {{ 'product.valid_for' | t }}
-                    {% assign title_parts = variant.title | split: " " %}
-                    {% assign days_index = title_parts.size | minus: 2 %}
-                    {{ title_parts[days_index] }}
-                    {{ 'product.days' | t }}
-                  </div>
-                </div>
-                <div class="plan-price-wrapper">
-                  {% if variant.compare_at_price > variant.price %}
-                    <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
-                  {% endif %}
-                  <span class="plan-price">{{ variant.price | money }}</span>
-                </div>
-              </div>
-              
-              {% if forloop.index == 3 %}
-                <span class="popular-badge">{{ 'product.popular' | t }}</span>
+          {% assign variant_index = 0 %}
+          {% for variant in product.variants %}
+            {% unless variant.sku contains 'daily' or variant.sku contains 'Daily' %}
+              {% assign variant_index = variant_index | plus: 1 %}
+              {% assign is_free = false %}
+              {% if variant.price == 0 %}
+                {% assign is_free = true %}
               {% endif %}
               
-              {% if is_free %}
-                <span class="free-badge" id="free-badge-{{ variant.id }}">{{ 'product.free' | t }}</span>
-                {% unless customer %}
-                  <div class="login-overlay" id="login-overlay-{{ variant.id }}">
-                    <a href="/account/login" class="login-button">{{ 'product.login_for_free' | t }}</a>
-                  </div>
-                {% endunless %}
-              {% endif %}
-            </div>
-          {% endfor %}
-        </div>
-        
-        <!-- Unlimited Variants -->
-        {% if has_unlimited %}
-          <div class="variant-group" id="unlimited-variants" style="display: none;">
-            {% for variant in unlimited_variants %}
-              <div class="plan-card" data-variant-id="{{ variant.id }}">
+              <div class="plan-card {% if variant_index == 1 %}selected{% endif %}" data-variant-id="{{ variant.id }}" data-is-free="{{ is_free }}">
                 <input type="radio" 
                        name="variant" 
                        value="{{ variant.id }}"
                        data-price="{{ variant.price | money }}"
-                       data-title="{{ variant.title }}">
+                       data-title="{{ variant.title }}"
+                       {% if variant_index == 1 %}checked{% endif %}>
                 
                 <div class="plan-content">
                   <div class="plan-info">
-                    <div class="plan-name">{{ 'product.unlimited_plan' | t }}</div>
+                    <div class="plan-name">{{ variant.title }}</div>
                     <div class="plan-validity">
-                      {% assign sku_parts = variant.sku | split: "_" %}
-                      {% assign days = sku_parts.last %}
-                      {{ 'product.gb_per_day_for' | t: days: days }}
+                      {{ 'product.valid_for' | t }}
+                      {% assign title_parts = variant.title | split: " " %}
+                      {% assign days_index = title_parts.size | minus: 2 %}
+                      {{ title_parts[days_index] }}
+                      {{ 'product.days' | t }}
                     </div>
                   </div>
                   <div class="plan-price-wrapper">
@@ -1054,7 +1074,54 @@
                     <span class="plan-price">{{ variant.price | money }}</span>
                   </div>
                 </div>
+                
+                {% if variant_index == 3 %}
+                  <span class="popular-badge">{{ 'product.popular' | t }}</span>
+                {% endif %}
+                
+                {% if is_free %}
+                  <span class="free-badge" id="free-badge-{{ variant.id }}">{{ 'product.free' | t }}</span>
+                  {% unless customer %}
+                    <div class="login-overlay" id="login-overlay-{{ variant.id }}">
+                      <a href="/account/login" class="login-button">{{ 'product.login_for_free' | t }}</a>
+                    </div>
+                  {% endunless %}
+                {% endif %}
               </div>
+            {% endunless %}
+          {% endfor %}
+        </div>
+        
+        <!-- Unlimited Variants -->
+        {% if has_unlimited %}
+          <div class="variant-group" id="unlimited-variants" style="display: none;">
+            {% for variant in product.variants %}
+              {% if variant.sku contains 'daily' or variant.sku contains 'Daily' %}
+                <div class="plan-card" data-variant-id="{{ variant.id }}">
+                  <input type="radio" 
+                         name="variant" 
+                         value="{{ variant.id }}"
+                         data-price="{{ variant.price | money }}"
+                         data-title="{{ variant.title }}">
+                  
+                  <div class="plan-content">
+                    <div class="plan-info">
+                      <div class="plan-name">{{ 'product.unlimited_plan' | t }}</div>
+                      <div class="plan-validity">
+                        {% assign sku_parts = variant.sku | split: "_" %}
+                        {% assign days = sku_parts.last %}
+                        {{ 'product.gb_per_day_for' | t: days: days }}
+                      </div>
+                    </div>
+                    <div class="plan-price-wrapper">
+                      {% if variant.compare_at_price > variant.price %}
+                        <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
+                      {% endif %}
+                      <span class="plan-price">{{ variant.price | money }}</span>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
             {% endfor %}
           </div>
         {% endif %}
@@ -1372,7 +1439,7 @@
     setCookie('return_to_product', currentUrl, 1);
   }
   
-  // Initialize
+  // Initialize - Select first variant
   const firstCard = section.querySelector('.plan-card');
   if (firstCard) {
     selectPlan(firstCard);
