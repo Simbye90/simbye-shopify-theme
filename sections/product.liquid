@@ -1,52 +1,1275 @@
-{% comment %}
-  This section is used in the product template to render product page with
-  media, content, and add-to-cart form.
+<!-- sections/product-enterprise.liquid -->
+<style>
+/* ENTERPRISE PRODUCT PAGE - SIMBYE ESIM */
+:root {
+  --product-primary: #009a61;
+  --product-primary-dark: #00824f;
+  --product-accent: #00d97e;
+  --product-text: #1a1a1a;
+  --product-text-secondary: #666;
+  --product-bg: #ffffff;
+  --product-card-bg: #ffffff;
+  --product-border: rgba(0, 0, 0, 0.06);
+  --product-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --product-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --product-shadow-lg: 0 16px 48px rgba(0, 154, 97, 0.12);
+  --product-radius: 20px;
+  --product-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-  https://shopify.dev/docs/storefronts/themes/architecture/templates/product
-{% endcomment %}
+/* Dark Mode */
+[data-theme="dark"] {
+  --product-text: #ffffff;
+  --product-text-secondary: #a0a0a0;
+  --product-bg: #040404;
+  --product-card-bg: rgba(255, 255, 255, 0.03);
+  --product-border: rgba(255, 255, 255, 0.08);
+  --product-primary: #00d97e;
+  --product-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --product-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --product-shadow-lg: 0 16px 48px rgba(0, 217, 126, 0.15);
+}
 
-<div class="product-images">
-  {% for image in product.images %}
-    {% render 'image', class: 'product-image', image: image %}
-  {% endfor %}
-</div>
+/* PRODUCT WRAPPER */
+.product-enterprise {
+  width: 100%;
+  background: var(--product-bg);
+  position: relative;
+  overflow: hidden;
+}
 
-<div class="product-info">
-  <h1>{{ product.title }}</h1>
-  <p>{{ product.price | money }}</p>
-  <p>{{ product.description }}</p>
-</div>
+/* PRODUCT TITLE - Ganz oben */
+.product-title-section {
+  background: linear-gradient(135deg, var(--product-primary) 0%, var(--product-primary-dark) 100%);
+  padding: 24px 0;
+  text-align: center;
+  position: relative;
+}
 
-<div class="product-form">
-  {% form 'product', product %}
-    {% assign current_variant = product.selected_or_first_available_variant %}
+.product-title-wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
 
-    <select name="id">
-      {% for variant in product.variants %}
-        <option
-          value="{{ variant.id }}"
-          {% if variant == current_variant %}
-            selected="selected"
-          {% endif %}
-        >
-          {{ variant.title }} - {{ variant.price | money }}
-        </option>
-      {% endfor %}
-    </select>
+.product-main-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  color: white;
+  margin: 0;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
 
-    <input type="text" name="quantity" min="1" value="1">
+.title-flag {
+  width: 48px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
-    <input type="submit" value="Add to cart">
-    {{ form | payment_button }}
-  {% endform %}
-</div>
+/* HERO SECTION */
+.product-hero {
+  position: relative;
+  padding: 60px 0;
+  background: linear-gradient(180deg, 
+    rgba(0, 154, 97, 0.03) 0%, 
+    transparent 100%
+  );
+}
+
+[data-theme="dark"] .product-hero {
+  background: linear-gradient(180deg, 
+    rgba(0, 217, 126, 0.05) 0%, 
+    transparent 100%
+  );
+}
+
+.hero-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Hero Left - Info */
+.hero-info {
+  order: 1;
+}
+
+.price-range-wrapper {
+  margin-bottom: 24px;
+}
+
+.price-range-badge {
+  background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
+  color: white;
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-size: 24px;
+  font-weight: 700;
+  display: inline-block;
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+  position: relative;
+}
+
+.price-from {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--product-text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.hero-features {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.hero-feature {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  color: var(--product-text);
+}
+
+.feature-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 154, 97, 0.1);
+  border-radius: 50%;
+  color: var(--product-primary);
+}
+
+/* Hero Right - Image */
+.hero-image-wrapper {
+  order: 2;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--product-shadow-lg);
+  aspect-ratio: 16/10;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* MAIN CONTENT */
+.product-content {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 60px 40px;
+}
+
+/* TAB SYSTEM für Normal/Unlimited */
+.variant-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--product-card-bg);
+  padding: 4px;
+  border-radius: 16px;
+  border: 1px solid var(--product-border);
+  margin-bottom: 40px;
+  box-shadow: var(--product-shadow-sm);
+}
+
+.variant-tab {
+  flex: 1;
+  padding: 16px 32px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--product-text-secondary);
+  cursor: pointer;
+  transition: var(--product-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: inherit;
+}
+
+.variant-tab:hover {
+  background: rgba(0, 154, 97, 0.05);
+}
+
+.variant-tab.active {
+  background: var(--product-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+}
+
+.tab-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Fair Use Notice */
+.fair-use-notice {
+  background: linear-gradient(135deg, 
+    rgba(0, 154, 97, 0.05) 0%, 
+    rgba(0, 217, 126, 0.05) 100%
+  );
+  border: 2px solid var(--product-primary);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin-bottom: 32px;
+  display: none;
+}
+
+.fair-use-notice.active {
+  display: block;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fair-use-title {
+  font-weight: 700;
+  color: var(--product-primary);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+}
+
+.fair-use-text {
+  color: var(--product-text-secondary);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* VARIANT SELECTOR */
+.variant-selector {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+}
+
+.plans-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.plan-option {
+  position: relative;
+}
+
+.plan-radio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.plan-label {
+  display: flex;
+  align-items: center;
+  background: var(--product-card-bg);
+  border: 2px solid var(--product-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  transition: var(--product-transition);
+  position: relative;
+}
+
+.plan-label:hover {
+  border-color: var(--product-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--product-shadow-md);
+}
+
+.plan-radio:checked + .plan-label {
+  border-color: var(--product-primary);
+  background: linear-gradient(135deg, 
+    rgba(0, 154, 97, 0.03) 0%, 
+    rgba(0, 217, 126, 0.03) 100%
+  );
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
+}
+
+.plan-details {
+  flex: 1;
+}
+
+.plan-data {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--product-text);
+  margin-bottom: 4px;
+}
+
+.plan-validity {
+  font-size: 14px;
+  color: var(--product-text-secondary);
+}
+
+.plan-price {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--product-primary);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -8px;
+  right: 20px;
+  background: var(--product-accent);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
+}
+
+/* Purchase Section */
+.purchase-section {
+  background: var(--product-card-bg);
+  border: 1px solid var(--product-border);
+  border-radius: 20px;
+  padding: 32px;
+  position: sticky;
+  top: 100px;
+}
+
+.purchase-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--product-text);
+}
+
+.selected-summary {
+  background: linear-gradient(135deg, 
+    rgba(0, 154, 97, 0.05) 0%, 
+    rgba(0, 217, 126, 0.05) 100%
+  );
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.summary-item:last-child {
+  margin-bottom: 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--product-border);
+  font-weight: 700;
+}
+
+.checkout-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 18px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--product-transition);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.checkout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
+}
+
+.payment-icons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--product-border);
+}
+
+.payment-icon {
+  height: 24px;
+  opacity: 0.7;
+  transition: var(--product-transition);
+}
+
+.payment-icon:hover {
+  opacity: 1;
+}
+
+/* FEATURES SECTION */
+.features-section {
+  margin-top: 80px;
+  padding-top: 60px;
+  border-top: 1px solid var(--product-border);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 32px 24px;
+  background: var(--product-card-bg);
+  border: 1px solid var(--product-border);
+  border-radius: 20px;
+  transition: var(--product-transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--product-shadow-md);
+  border-color: var(--product-primary);
+}
+
+.feature-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: white;
+  font-size: 28px;
+}
+
+.feature-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--product-text);
+}
+
+.feature-description {
+  font-size: 14px;
+  color: var(--product-text-secondary);
+  line-height: 1.5;
+}
+
+/* MOBILE STICKY CART */
+.mobile-sticky-cart {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--product-bg);
+  border-top: 1px solid var(--product-border);
+  padding: 16px;
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-sticky-cart.active {
+  transform: translateY(0);
+}
+
+.sticky-content {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sticky-info {
+  flex: 1;
+}
+
+.sticky-variant {
+  font-size: 14px;
+  color: var(--product-text-secondary);
+  margin-bottom: 4px;
+}
+
+.sticky-price {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--product-primary);
+}
+
+.sticky-checkout-btn {
+  background: var(--product-primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: var(--product-transition);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .hero-info {
+    order: 2;
+    text-align: center;
+  }
+  
+  .hero-image-wrapper {
+    order: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .variant-selector {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .purchase-section {
+    position: static;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-title-section {
+    padding: 16px 0;
+  }
+  
+  .product-main-title {
+    font-size: 28px;
+  }
+  
+  .title-flag {
+    width: 36px;
+    height: 27px;
+  }
+  
+  .product-hero {
+    padding: 40px 0;
+  }
+  
+  .hero-container,
+  .product-content {
+    padding: 0 20px;
+  }
+  
+  .price-range-badge {
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px;
+  }
+  
+  .variant-tabs {
+    margin-bottom: 24px;
+  }
+  
+  .variant-tab {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  
+  .plan-label {
+    padding: 16px;
+  }
+  
+  .plan-data {
+    font-size: 18px;
+  }
+  
+  .plan-price {
+    font-size: 20px;
+  }
+  
+  .purchase-section {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+  
+  .mobile-sticky-cart {
+    display: block;
+  }
+  
+  .checkout-btn {
+    padding: 16px;
+    font-size: 16px;
+  }
+  
+  .features-section {
+    margin-top: 60px;
+    padding-top: 40px;
+  }
+}
+</style>
+
+<section class="product-enterprise" data-section-id="{{ section.id }}">
+  <!-- Product Title - Ganz oben -->
+  <div class="product-title-section">
+    <div class="product-title-wrapper">
+      <h1 class="product-main-title">
+        {% if product.images[0] %}
+          <img src="{{ product.images[0] | img_url: '100x75' }}" alt="{{ product.title }}" class="title-flag" width="48" height="36">
+        {% endif %}
+        <span>eSIM {{ product.title }}</span>
+      </h1>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="product-hero">
+    <div class="hero-container">
+      <!-- Left: Info -->
+      <div class="hero-info">
+        <div class="price-range-wrapper">
+          <div class="price-range-badge">
+            <span class="price-from">
+              {% case shop.locale %}
+                {% when 'de' %}ab{% when 'es' %}desde{% when 'fr' %}à partir de
+                {% when 'tr' %}başlayan{% else %}from
+              {% endcase %}
+            </span>
+            {{ product.variants.first.price | money }} - {{ product.variants.last.price | money }}
+          </div>
+        </div>
+        
+        <p class="hero-subtitle">
+          {% case shop.locale %}
+            {% when 'de' %}
+              Prepaid eSIM Datenpakete für {{ product.title }}. In 60 Sekunden aktiviert, WhatsApp-Nummer behalten, ohne Vertrag.
+            {% when 'es' %}
+              Paquetes de datos eSIM prepago para {{ product.title }}. Activación en 60 segundos, mantén tu WhatsApp, sin contrato.
+            {% when 'fr' %}
+              Forfaits data eSIM prépayés pour {{ product.title }}. Activation en 60 secondes, gardez votre WhatsApp, sans contrat.
+            {% when 'tr' %}
+              {{ product.title }} için ön ödemeli eSIM veri paketleri. 60 saniyede aktivasyon, WhatsApp numaranı koru, sözleşmesiz.
+            {% else %}
+              Prepaid eSIM data plans for {{ product.title }}. Activated in 60 seconds, keep your WhatsApp number, no contract.
+          {% endcase %}
+        </p>
+        
+        <div class="hero-features">
+          <div class="hero-feature">
+            <div class="feature-icon">✓</div>
+            <span>
+              {% case shop.locale %}
+                {% when 'de' %}Sofort per E-Mail
+                {% when 'es' %}Entrega instantánea
+                {% when 'fr' %}Livraison instantanée
+                {% when 'tr' %}Anında teslimat
+                {% else %}Instant delivery
+              {% endcase %}
+            </span>
+          </div>
+          <div class="hero-feature">
+            <div class="feature-icon">✓</div>
+            <span>
+              {% case shop.locale %}
+                {% when 'de' %}Premium 4G/5G Netzwerk
+                {% when 'es' %}Red premium 4G/5G
+                {% when 'fr' %}Réseau premium 4G/5G
+                {% when 'tr' %}Premium 4G/5G ağı
+                {% else %}Premium 4G/5G network
+              {% endcase %}
+            </span>
+          </div>
+          <div class="hero-feature">
+            <div class="feature-icon">✓</div>
+            <span>
+              {% case shop.locale %}
+                {% when 'de' %}24/7 WhatsApp Support
+                {% when 'es' %}Soporte 24/7 WhatsApp
+                {% when 'fr' %}Support 24/7 WhatsApp
+                {% when 'tr' %}7/24 WhatsApp destek
+                {% else %}24/7 WhatsApp support
+              {% endcase %}
+            </span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right: Image -->
+      {% if product.images[1] %}
+        <div class="hero-image-wrapper">
+          <img src="{{ product.images[1] | img_url: '800x500' }}" 
+               alt="{{ product.title }}" 
+               class="hero-image"
+               loading="eager"
+               width="800"
+               height="500">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="product-content">
+    <!-- Check for Unlimited variants -->
+    {% assign has_unlimited = false %}
+    {% assign normal_variants = "" | split: "," %}
+    {% assign unlimited_variants = "" | split: "," %}
+    
+    {% for variant in product.variants %}
+      {% if variant.sku contains 'daily' or variant.sku contains 'Daily' %}
+        {% assign has_unlimited = true %}
+        {% assign unlimited_variants = unlimited_variants | push: variant %}
+      {% else %}
+        {% assign normal_variants = normal_variants | push: variant %}
+      {% endif %}
+    {% endfor %}
+    
+    <!-- Tab System only if unlimited exists -->
+    {% if has_unlimited %}
+      <div class="variant-tabs">
+        <button class="variant-tab active" data-tab="normal">
+          <svg class="tab-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
+          </svg>
+          <span>
+            {% case shop.locale %}
+              {% when 'de' %}Datenpakete
+              {% when 'es' %}Paquetes de datos
+              {% when 'fr' %}Forfaits data
+              {% when 'tr' %}Veri paketleri
+              {% else %}Data Plans
+            {% endcase %}
+          </span>
+        </button>
+        <button class="variant-tab" data-tab="unlimited">
+          <svg class="tab-icon" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 4a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+          </svg>
+          <span>
+            {% case shop.locale %}
+              {% when 'de' %}Unlimited Daily
+              {% when 'es' %}Unlimited Diario
+              {% when 'fr' %}Unlimited Quotidien
+              {% when 'tr' %}Unlimited Günlük
+              {% else %}Unlimited Daily
+            {% endcase %}
+          </span>
+        </button>
+      </div>
+      
+      <!-- Fair Use Notice for Unlimited -->
+      <div class="fair-use-notice" id="fair-use-notice">
+        <div class="fair-use-title">
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+          </svg>
+          <span>Fair Use Policy</span>
+        </div>
+        <p class="fair-use-text">
+          {% case shop.locale %}
+            {% when 'de' %}
+              1GB pro Tag mit Highspeed-Internet. Nach 1GB wird die Geschwindigkeit auf 128kbps reduziert. Das Datenvolumen erneuert sich täglich um Mitternacht (lokale Zeit).
+            {% when 'es' %}
+              1GB diario a alta velocidad. Después de 1GB, la velocidad se reduce a 128kbps. Los datos se renuevan diariamente a medianoche (hora local).
+            {% when 'fr' %}
+              1GB par jour à haute vitesse. Après 1GB, la vitesse est réduite à 128kbps. Les données sont renouvelées quotidiennement à minuit (heure locale).
+            {% when 'tr' %}
+              Günde 1GB yüksek hızlı internet. 1GB sonrası hız 128kbps'ye düşer. Veri her gün gece yarısı (yerel saat) yenilenir.
+            {% else %}
+              1GB daily at high speed. After 1GB, speed is reduced to 128kbps. Data resets daily at midnight (local time).
+          {% endcase %}
+        </p>
+      </div>
+    {% endif %}
+    
+    <!-- Variant Selector -->
+    <div class="variant-selector">
+      <!-- Plans Container -->
+      <div class="plans-container">
+        <!-- Normal Variants -->
+        <div class="variants-group" id="normal-variants" style="display: block;">
+          {% for variant in normal_variants %}
+            <div class="plan-option">
+              <input type="radio" 
+                     id="variant-{{ variant.id }}" 
+                     name="variant" 
+                     value="{{ variant.id }}"
+                     class="plan-radio"
+                     data-price="{{ variant.price | money }}"
+                     data-title="{{ variant.title }}"
+                     {% if forloop.first %}checked{% endif %}>
+              <label for="variant-{{ variant.id }}" class="plan-label">
+                <div class="plan-details">
+                  <div class="plan-data">{{ variant.title }}</div>
+                  <div class="plan-validity">
+                    {% case shop.locale %}
+                      {% when 'de' %}Gültig für
+                      {% when 'es' %}Válido por
+                      {% when 'fr' %}Valable pendant
+                      {% when 'tr' %}Geçerlilik
+                      {% else %}Valid for
+                    {% endcase %}
+                    {% assign title_parts = variant.title | split: " " %}
+                    {% assign days_index = title_parts.size | minus: 2 %}
+                    {{ title_parts[days_index] }}
+                    {% case shop.locale %}
+                      {% when 'de' %}Tage
+                      {% when 'es' %}días
+                      {% when 'fr' %}jours
+                      {% when 'tr' %}gün
+                      {% else %}days
+                    {% endcase %}
+                  </div>
+                </div>
+                <div class="plan-price">{{ variant.price | money }}</div>
+                {% if forloop.index == 3 %}
+                  <span class="popular-badge">
+                    {% case shop.locale %}
+                      {% when 'de' %}Beliebt
+                      {% when 'es' %}Popular
+                      {% when 'fr' %}Populaire
+                      {% when 'tr' %}Popüler
+                      {% else %}Popular
+                    {% endcase %}
+                  </span>
+                {% endif %}
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+        
+        <!-- Unlimited Variants -->
+        {% if has_unlimited %}
+          <div class="variants-group" id="unlimited-variants" style="display: none;">
+            {% for variant in unlimited_variants %}
+              <div class="plan-option">
+                <input type="radio" 
+                       id="variant-{{ variant.id }}" 
+                       name="variant" 
+                       value="{{ variant.id }}"
+                       class="plan-radio"
+                       data-price="{{ variant.price | money }}"
+                       data-title="{{ variant.title }}">
+                <label for="variant-{{ variant.id }}" class="plan-label">
+                  <div class="plan-details">
+                    <div class="plan-data">Unlimited Daily</div>
+                    <div class="plan-validity">
+                      {% case shop.locale %}
+                        {% when 'de' %}1GB/Tag für
+                        {% when 'es' %}1GB/día por
+                        {% when 'fr' %}1GB/jour pendant
+                        {% when 'tr' %}Günlük 1GB,
+                        {% else %}1GB/day for
+                      {% endcase %}
+                      {% assign sku_parts = variant.sku | split: "_" %}
+                      {% assign days = sku_parts.last %}
+                      {{ days }}
+                      {% case shop.locale %}
+                        {% when 'de' %}Tage
+                        {% when 'es' %}días
+                        {% when 'fr' %}jours
+                        {% when 'tr' %}gün
+                        {% else %}days
+                      {% endcase %}
+                    </div>
+                  </div>
+                  <div class="plan-price">{{ variant.price | money }}</div>
+                </label>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Purchase Section -->
+      <div class="purchase-section">
+        <h3 class="purchase-title">
+          {% case shop.locale %}
+            {% when 'de' %}Ihre Auswahl
+            {% when 'es' %}Su selección
+            {% when 'fr' %}Votre sélection
+            {% when 'tr' %}Seçiminiz
+            {% else %}Your Selection
+          {% endcase %}
+        </h3>
+        
+        <div class="selected-summary">
+          <div class="summary-item">
+            <span>{{ product.title }} eSIM</span>
+            <span id="selected-variant">-</span>
+          </div>
+          <div class="summary-item">
+            <span>
+              {% case shop.locale %}
+                {% when 'de' %}Aktivierung
+                {% when 'es' %}Activación
+                {% when 'fr' %}Activation
+                {% when 'tr' %}Aktivasyon
+                {% else %}Activation
+              {% endcase %}
+            </span>
+            <span>
+              {% case shop.locale %}
+                {% when 'de' %}Sofort
+                {% when 'es' %}Inmediata
+                {% when 'fr' %}Immédiate
+                {% when 'tr' %}Anında
+                {% else %}Instant
+              {% endcase %}
+            </span>
+          </div>
+          <div class="summary-item">
+            <span>
+              {% case shop.locale %}
+                {% when 'de' %}Gesamtpreis
+                {% when 'es' %}Precio total
+                {% when 'fr' %}Prix total
+                {% when 'tr' %}Toplam fiyat
+                {% else %}Total Price
+              {% endcase %}
+            </span>
+            <span id="total-price">-</span>
+          </div>
+        </div>
+        
+        <form action="/cart/add" method="post" id="product-form">
+          <input type="hidden" name="id" id="variant-input" value="">
+          <button type="submit" class="checkout-btn">
+            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/>
+              <path d="M16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+            </svg>
+            <span>
+              {% case shop.locale %}
+                {% when 'de' %}Jetzt kaufen
+                {% when 'es' %}Comprar ahora
+                {% when 'fr' %}Acheter maintenant
+                {% when 'tr' %}Şimdi satın al
+                {% else %}Buy Now
+              {% endcase %}
+            </span>
+          </button>
+        </form>
+        
+        <div class="payment-icons">
+          {% assign payment_types = 'visa,master,apple_pay,google_pay,paypal' | split: ',' %}
+          {% for type in payment_types %}
+            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Features Section -->
+    <div class="features-section">
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">📧</div>
+          <h3 class="feature-title">
+            {% case shop.locale %}
+              {% when 'de' %}Sofort-Lieferung
+              {% when 'es' %}Entrega instantánea
+              {% when 'fr' %}Livraison instantanée
+              {% when 'tr' %}Anında teslimat
+              {% else %}Instant Delivery
+            {% endcase %}
+          </h3>
+          <p class="feature-description">
+            {% case shop.locale %}
+              {% when 'de' %}QR-Code in 60 Sekunden per E-Mail. Keine SIM-Karte nötig.
+              {% when 'es' %}Código QR en 60 segundos por correo. Sin tarjeta SIM física.
+              {% when 'fr' %}Code QR en 60 secondes par email. Pas de carte SIM physique.
+              {% when 'tr' %}60 saniyede e-posta ile QR kod. Fiziksel SIM kart gerekmez.
+              {% else %}QR code in 60 seconds via email. No physical SIM needed.
+            {% endcase %}
+          </p>
+        </div>
+        
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">🌐</div>
+          <h3 class="feature-title">
+            {% case shop.locale %}
+              {% when 'de' %}Premium Netzwerk
+              {% when 'es' %}Red premium
+              {% when 'fr' %}Réseau premium
+              {% when 'tr' %}Premium ağ
+              {% else %}Premium Network
+            {% endcase %}
+          </h3>
+          <p class="feature-description">
+            {% case shop.locale %}
+              {% when 'de' %}Schnelles 4G/5G Internet mit den besten lokalen Anbietern.
+              {% when 'es' %}Internet 4G/5G rápido con los mejores proveedores locales.
+              {% when 'fr' %}Internet 4G/5G rapide avec les meilleurs opérateurs locaux.
+              {% when 'tr' %}En iyi yerel sağlayıcılarla hızlı 4G/5G internet.
+              {% else %}Fast 4G/5G internet with the best local providers.
+            {% endcase %}
+          </p>
+        </div>
+        
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">💬</div>
+          <h3 class="feature-title">
+            {% case shop.locale %}
+              {% when 'de' %}24/7 Support
+              {% when 'es' %}Soporte 24/7
+              {% when 'fr' %}Support 24/7
+              {% when 'tr' %}7/24 Destek
+              {% else %}24/7 Support
+            {% endcase %}
+          </h3>
+          <p class="feature-description">
+            {% case shop.locale %}
+              {% when 'de' %}WhatsApp und Live-Chat Support in 12 Sprachen. Antwort in 60 Sekunden.
+              {% when 'es' %}Soporte por WhatsApp y chat en vivo en 12 idiomas. Respuesta en 60 segundos.
+              {% when 'fr' %}Support WhatsApp et chat en direct en 12 langues. Réponse en 60 secondes.
+              {% when 'tr' %}12 dilde WhatsApp ve canlı sohbet desteği. 60 saniyede yanıt.
+              {% else %}WhatsApp and live chat support in 12 languages. Response in 60 seconds.
+            {% endcase %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Mobile Sticky Cart -->
+  <div class="mobile-sticky-cart" id="mobile-sticky-cart">
+    <div class="sticky-content">
+      <div class="sticky-info">
+        <div class="sticky-variant" id="sticky-variant">-</div>
+        <div class="sticky-price" id="sticky-price">-</div>
+      </div>
+      <button class="sticky-checkout-btn" id="sticky-checkout">
+        {% case shop.locale %}
+          {% when 'de' %}Jetzt kaufen
+          {% when 'es' %}Comprar ahora
+          {% when 'fr' %}Acheter maintenant
+          {% when 'tr' %}Şimdi al
+          {% else %}Buy Now
+        {% endcase %}
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Elements
+  const variantTabs = document.querySelectorAll('.variant-tab');
+  const normalVariants = document.getElementById('normal-variants');
+  const unlimitedVariants = document.getElementById('unlimited-variants');
+  const fairUseNotice = document.getElementById('fair-use-notice');
+  const variantRadios = document.querySelectorAll('.plan-radio');
+  const variantInput = document.getElementById('variant-input');
+  const selectedVariantText = document.getElementById('selected-variant');
+  const totalPriceText = document.getElementById('total-price');
+  const productForm = document.getElementById('product-form');
+  
+  // Mobile Sticky
+  const mobileSticky = document.getElementById('mobile-sticky-cart');
+  const stickyVariant = document.getElementById('sticky-variant');
+  const stickyPrice = document.getElementById('sticky-price');
+  const stickyCheckout = document.getElementById('sticky-checkout');
+  
+  // Tab switching (only if tabs exist)
+  if (variantTabs.length > 0) {
+    variantTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        // Remove active from all tabs
+        variantTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Show/hide variant groups
+        const tabType = this.dataset.tab;
+        if (tabType === 'unlimited') {
+          if (normalVariants) normalVariants.style.display = 'none';
+          if (unlimitedVariants) unlimitedVariants.style.display = 'block';
+          if (fairUseNotice) fairUseNotice.classList.add('active');
+          
+          // Select first unlimited variant
+          const firstUnlimited = unlimitedVariants?.querySelector('.plan-radio');
+          if (firstUnlimited) {
+            firstUnlimited.checked = true;
+            updateSelection(firstUnlimited);
+          }
+        } else {
+          if (normalVariants) normalVariants.style.display = 'block';
+          if (unlimitedVariants) unlimitedVariants.style.display = 'none';
+          if (fairUseNotice) fairUseNotice.classList.remove('active');
+          
+          // Select first normal variant
+          const firstNormal = normalVariants?.querySelector('.plan-radio');
+          if (firstNormal) {
+            firstNormal.checked = true;
+            updateSelection(firstNormal);
+          }
+        }
+      });
+    });
+  }
+  
+  // Update selection
+  function updateSelection(radio) {
+    if (!radio) return;
+    
+    const variantId = radio.value;
+    const price = radio.dataset.price;
+    const title = radio.dataset.title;
+    
+    variantInput.value = variantId;
+    selectedVariantText.textContent = title;
+    totalPriceText.textContent = price;
+    
+    // Update sticky cart
+    if (mobileSticky) {
+      stickyVariant.textContent = title;
+      stickyPrice.textContent = price;
+    }
+  }
+  
+  // Variant selection
+  variantRadios.forEach(radio => {
+    radio.addEventListener('change', function() {
+      updateSelection(this);
+    });
+  });
+  
+  // Initialize with first variant
+  const firstChecked = document.querySelector('.plan-radio:checked');
+  if (firstChecked) {
+    updateSelection(firstChecked);
+  }
+  
+  // Direct checkout (bypass cart)
+  productForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    
+    // Clear cart and add product
+    fetch('/cart/clear.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(() => fetch('/cart/add.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        id: formData.get('id'),
+        quantity: 1
+      })
+    }))
+    .then(() => {
+      window.location.href = '/checkout';
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
+  
+  // Mobile sticky cart
+  let scrollThreshold = 300;
+  
+  function handleScroll() {
+    if (!mobileSticky) return;
+    
+    if (window.scrollY > scrollThreshold) {
+      mobileSticky.classList.add('active');
+    } else {
+      mobileSticky.classList.remove('active');
+    }
+  }
+  
+  // Throttle scroll
+  let ticking = false;
+  function requestTick() {
+    if (!ticking) {
+      window.requestAnimationFrame(handleScroll);
+      ticking = true;
+      setTimeout(() => { ticking = false; }, 100);
+    }
+  }
+  
+  window.addEventListener('scroll', requestTick);
+  
+  // Sticky checkout button
+  if (stickyCheckout) {
+    stickyCheckout.addEventListener('click', function() {
+      productForm.dispatchEvent(new Event('submit'));
+    });
+  }
+})();
+</script>
 
 {% schema %}
 {
-  "name": "t:general.product",
-  "settings": [],
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  }
+  "name": "Product Enterprise",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_trust_badges",
+      "label": "Show Trust Badges",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_cart",
+      "label": "Enable Mobile Sticky Cart",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Enterprise"
+    }
+  ]
 }
 {% endschema %}
