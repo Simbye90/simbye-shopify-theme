@@ -4,7 +4,7 @@
 <style>
 /* ============================================
    ENTERPRISE PRODUCT PAGE V11 - SIMBYE ESIM
-   COMPLETE WITH ALL LOGIC & FEATURES
+   COMPLETE WITH ALL FEATURES & FIXES
    ============================================ */
 
 /* KILL SHOPIFY GRID */
@@ -62,11 +62,11 @@
   --product-shadow-lg: 0 16px 48px rgba(0, 217, 126, 0.15);
 }
 
-/* Main Section - MEHR ABSTAND */
+/* Main Section - VIEL MEHR ABSTAND */
 .product-enterprise {
   background: var(--product-bg);
   overflow: hidden;
-  padding-top: 100px; /* VIEL MEHR Abstand zum Header */
+  padding-top: 100px; /* Viel mehr Abstand zum Header */
   min-height: 100vh;
 }
 
@@ -78,7 +78,7 @@
 .product-hero {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 40px 60px;
+  padding: 0 40px 80px;
   width: 100%;
 }
 
@@ -89,7 +89,7 @@
   align-items: center;
 }
 
-/* Hero Image - ZWEITES BILD */
+/* Hero Image */
 .hero-image-section {
   position: relative;
   animation: fadeInLeft 0.8s ease;
@@ -126,7 +126,7 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Title mit Flagge - ERSTES BILD IST FLAGGE */
+/* Title mit Flagge */
 .product-title-wrapper {
   display: flex;
   align-items: center;
@@ -163,7 +163,7 @@
   color: #ffffff;
 }
 
-/* Price Badge - OHNE FROM */
+/* Price Badge */
 .price-range {
   display: inline-flex;
   align-items: baseline;
@@ -239,11 +239,11 @@
 .product-selection {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 40px 60px;
+  padding: 0 40px 80px;
   width: 100%;
 }
 
-/* Tab System - FÜR UNLIMITED! */
+/* Tab System für UNLIMITED */
 .variant-tabs {
   display: flex;
   gap: 4px;
@@ -251,7 +251,7 @@
   padding: 4px;
   border-radius: var(--product-radius-sm);
   border: 1px solid var(--product-border);
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   box-shadow: var(--product-shadow-sm);
 }
 
@@ -297,7 +297,7 @@
   border: 2px solid var(--product-primary);
   border-radius: var(--product-radius-sm);
   padding: 24px;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   display: none;
   animation: slideDown 0.3s ease;
 }
@@ -311,45 +311,24 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.fair-use-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.fair-use-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--product-primary);
-  margin: 0;
-}
-
-.fair-use-text {
-  font-size: 15px;
-  color: var(--product-text-secondary);
-  line-height: 1.6;
-  margin: 0;
-}
-
 /* Selection Grid */
 .selection-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  gap: 40px;
+  gap: 60px;
 }
 
-/* VARIANTEN ABSTÄNDE - MEHR! */
+/* Plans Container - PERFEKTE ABSTÄNDE */
 .plans-container {
   display: flex;
   flex-direction: column;
-  gap: 20px !important; /* MEHR ABSTAND */
+  gap: 20px !important;
 }
 
 .variant-group {
   display: flex;
   flex-direction: column;
-  gap: 20px !important; /* MEHR ABSTAND */
+  gap: 20px !important;
 }
 
 /* Plan Cards */
@@ -418,14 +397,6 @@
   background-clip: text;
 }
 
-.plan-price-old {
-  font-size: 18px;
-  color: var(--product-text-secondary);
-  text-decoration: line-through;
-  display: block;
-  margin-bottom: 4px;
-}
-
 /* FREE Badge */
 .free-badge {
   position: absolute;
@@ -458,44 +429,10 @@
   z-index: 2;
 }
 
-/* Login Overlay - NEU GESTALTET */
-.login-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--product-radius-sm);
-  z-index: 10;
-}
-
-[data-theme="dark"] .login-overlay {
-  background: rgba(0, 0, 0, 0.95);
-}
-
-.login-button {
-  background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
-  color: white;
-  padding: 14px 32px;
-  border-radius: 100px;
-  font-weight: 700;
-  font-size: 16px;
-  text-decoration: none;
-  transition: var(--product-transition);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-}
-
-.login-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
-}
-
 /* Purchase Box */
 .purchase-box {
   position: sticky;
-  top: 100px;
+  top: 120px;
   background: var(--product-card-bg);
   border: 1px solid var(--product-border);
   border-radius: var(--product-radius);
@@ -593,12 +530,180 @@
   transform: scale(1.05);
 }
 
-/* MOBILE STICKY CART */
-.sticky-cart {
-  display: none;
-}
-
-@media screen and (max-width: 768px) {
+/* MOBILE SPECIAL HERO */
+@media (max-width: 768px) {
+  .product-enterprise {
+    padding-top: 20px;
+  }
+  
+  .product-hero {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+  
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 0;
+    position: relative;
+  }
+  
+  /* Mobile Hero mit Overlay Style */
+  .hero-image-section {
+    order: 1;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100vw !important;
+    position: relative;
+  }
+  
+  .hero-image-wrapper {
+    border-radius: 0 !important;
+    border: none !important;
+    width: 100vw !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    aspect-ratio: 16/10;
+    position: relative;
+  }
+  
+  .hero-image-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, 
+      rgba(0,0,0,0) 0%, 
+      rgba(0,0,0,0.3) 50%,
+      rgba(0,0,0,0.6) 100%);
+  }
+  
+  /* Mobile Info Overlay */
+  .hero-info-section {
+    order: 2;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 20px !important;
+    background: linear-gradient(to top, 
+      rgba(0,0,0,0.8) 0%, 
+      rgba(0,0,0,0.4) 70%,
+      transparent 100%);
+    text-align: left;
+    color: white !important;
+  }
+  
+  /* Mobile Title mit kleiner runder Flagge */
+  .product-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .product-flag {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.9);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  .product-title {
+    font-size: 28px;
+    color: white !important;
+  }
+  
+  .country-name {
+    color: #00ff88 !important;
+  }
+  
+  .esim-text {
+    color: white !important;
+  }
+  
+  /* Mobile Features */
+  .price-range {
+    display: none; /* Hide on mobile */
+  }
+  
+  .hero-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.9) !important;
+    margin-bottom: 16px;
+  }
+  
+  .hero-features {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+  
+  .hero-feature {
+    font-size: 12px;
+    color: white !important;
+  }
+  
+  .hero-feature svg {
+    width: 16px;
+    height: 16px;
+    color: #00ff88 !important;
+  }
+  
+  .trust-badges {
+    display: none; /* Hide on mobile */
+  }
+  
+  /* Selection Mobile */
+  .product-selection {
+    padding: 24px 20px 40px !important;
+  }
+  
+  .selection-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .purchase-box {
+    display: none !important;
+  }
+  
+  .variant-tabs {
+    gap: 2px;
+    padding: 2px;
+    margin-bottom: 24px;
+  }
+  
+  .variant-tab {
+    padding: 12px 16px;
+    font-size: 15px;
+  }
+  
+  .plans-container {
+    gap: 16px !important;
+  }
+  
+  .variant-group {
+    gap: 16px !important;
+  }
+  
+  .plan-card {
+    padding: 20px;
+  }
+  
+  .plan-name {
+    font-size: 18px;
+  }
+  
+  .plan-price {
+    font-size: 26px;
+  }
+  
+  /* STICKY MOBILE CART */
   .sticky-cart {
     display: block;
     position: fixed;
@@ -676,220 +781,9 @@
   .sticky-cart-button:active {
     transform: scale(0.98);
   }
-  
-  .halo-sticky-toolbar-mobile {
-    display: none;
-  }
 }
 
-/* MOBILE OPTIMIZATIONS - SPEZIELLES HERO DESIGN! */
-@media (max-width: 768px) {
-  .shopify-section:has(.product-enterprise) {
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-  
-  .product-enterprise {
-    padding-top: 60px;
-  }
-  
-  .product-hero {
-    padding: 0 !important;
-    max-width: 100% !important;
-  }
-  
-  .hero-container {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  
-  /* Hero Image mit Overlay für Title */
-  .hero-image-section {
-    order: 1;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100vw !important;
-    position: relative;
-  }
-  
-  .hero-image-wrapper {
-    border-radius: 0 !important;
-    border: none !important;
-    width: 100vw !important;
-    margin: 0 !important;
-    box-shadow: none !important;
-    aspect-ratio: 4/3;
-    position: relative;
-  }
-  
-  /* MOBILE TITLE OVERLAY */
-  .mobile-hero-overlay {
-    display: block !important;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 16px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-  }
-  
-  [data-theme="dark"] .mobile-hero-overlay {
-    background: rgba(26, 26, 26, 0.95);
-  }
-  
-  .mobile-title-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .mobile-flag-circle {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    flex-shrink: 0;
-  }
-  
-  .mobile-flag-circle img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .mobile-title-text {
-    flex: 1;
-  }
-  
-  .mobile-product-title {
-    font-size: 24px;
-    font-weight: 800;
-    margin: 0;
-    line-height: 1.1;
-  }
-  
-  .mobile-country-name {
-    color: var(--product-primary);
-  }
-  
-  .mobile-esim-text {
-    color: var(--product-text);
-  }
-  
-  .mobile-price-badge {
-    font-size: 16px;
-    color: var(--product-primary);
-    font-weight: 700;
-    margin-top: 4px;
-  }
-  
-  /* Desktop Title verstecken auf Mobile */
-  .product-title-wrapper {
-    display: none !important;
-  }
-  
-  /* Hero Info Mobile */
-  .hero-info-section {
-    order: 2;
-    padding: 24px 20px 32px !important;
-    text-align: left;
-  }
-  
-  /* Price Range Mobile */
-  .price-range {
-    display: none; /* Schon im Overlay */
-  }
-  
-  .hero-subtitle {
-    font-size: 16px;
-    margin-bottom: 24px;
-  }
-  
-  .hero-features {
-    gap: 12px;
-  }
-  
-  .hero-feature {
-    font-size: 14px;
-  }
-  
-  .trust-badges {
-    justify-content: flex-start;
-    gap: 12px;
-  }
-  
-  .trust-badge {
-    padding: 8px 12px;
-    font-size: 12px;
-  }
-  
-  /* Selection Mobile */
-  .product-selection {
-    padding: 0 20px 40px !important;
-  }
-  
-  .selection-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  
-  .purchase-box {
-    display: none !important;
-  }
-  
-  /* Tabs Mobile */
-  .variant-tabs {
-    gap: 2px;
-    padding: 2px;
-    margin-bottom: 24px;
-  }
-  
-  .variant-tab {
-    padding: 12px 16px;
-    font-size: 15px;
-  }
-  
-  .tab-icon {
-    width: 18px;
-    height: 18px;
-  }
-  
-  /* Varianten Mobile */
-  .plans-container {
-    gap: 16px !important;
-  }
-  
-  .variant-group {
-    gap: 16px !important;
-  }
-  
-  .plan-card {
-    padding: 20px;
-  }
-  
-  .plan-name {
-    font-size: 18px;
-  }
-  
-  .plan-price {
-    font-size: 26px;
-  }
-}
-
-/* Desktop: Mobile Overlay verstecken */
-@media (min-width: 769px) {
-  .mobile-hero-overlay {
-    display: none !important;
-  }
-}
-
-/* Dark Mode Specific */
+/* Dark Mode */
 [data-theme="dark"] .plan-card {
   background: rgba(26, 26, 26, 0.6);
   border-color: rgba(255, 255, 255, 0.08);
@@ -909,7 +803,7 @@
   <div class="product-hero">
     <div class="hero-container">
       
-      <!-- Hero Image - ZWEITES BILD -->
+      <!-- Hero Image -->
       <div class="hero-image-section">
         <div class="hero-image-wrapper">
           {% if product.images[1] %}
@@ -925,38 +819,12 @@
                fetchpriority: 'high',
                alt: product.title }}
           {% endif %}
-          
-          <!-- MOBILE HERO OVERLAY - NUR FÜR MOBILE! -->
-          <div class="mobile-hero-overlay">
-            <div class="mobile-title-row">
-              <div class="mobile-flag-circle">
-                {% if product.featured_image %}
-                  {{ product.featured_image | image_url: width: 100 | image_tag: 
-                     alt: product.title }}
-                {% else %}
-                  {% assign country_code = product.handle | split: '-' | first %}
-                  <img src="https://flagcdn.com/w80/{{ country_code }}.png" 
-                       alt="{{ product.title }} flag">
-                {% endif %}
-              </div>
-              <div class="mobile-title-text">
-                <h1 class="mobile-product-title">
-                  {% assign title_parts = product.title | split: ' ' %}
-                  <span class="mobile-country-name">{{ title_parts[0] }}</span>
-                  <span class="mobile-esim-text">eSIM</span>
-                </h1>
-                <div class="mobile-price-badge">
-                  {{ product.price_min | money }} - {{ product.price_max | money }}
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
       
       <!-- Hero Info -->
       <div class="hero-info-section">
-        <!-- Title mit Flagge - DESKTOP ONLY -->
+        <!-- Title mit Flagge -->
         <div class="product-title-wrapper">
           {% if product.featured_image %}
             {{ product.featured_image | image_url: width: 80 | image_tag: 
@@ -977,7 +845,7 @@
           </h1>
         </div>
         
-        <!-- Price Range - DESKTOP ONLY -->
+        <!-- Price Range -->
         <div class="price-range">
           <span>{{ product.price_min | money }} - {{ product.price_max | money }}</span>
         </div>
@@ -987,7 +855,7 @@
           {{ 'product.hero_subtitle' | t: country: product.title | default: 'Prepaid eSIM data plans. Activated in 60 seconds, keep your WhatsApp number, no contract.' }}
         </p>
         
-        <!-- Features List -->
+        <!-- Features -->
         <div class="hero-features">
           <div class="hero-feature">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -1033,18 +901,14 @@
     
     <!-- Check for unlimited variants -->
     {% assign has_unlimited = false %}
-    {% assign has_free = false %}
-    
     {% for variant in product.variants %}
-      {% if variant.sku contains 'daily' or variant.sku contains 'Daily' or variant.sku contains 'unlimited' %}
+      {% if variant.title contains 'Daily' or variant.title contains 'Unlimited' or variant.title contains 'daily' %}
         {% assign has_unlimited = true %}
-      {% endif %}
-      {% if variant.price == 0 or variant.title contains '100MB' %}
-        {% assign has_free = true %}
+        {% break %}
       {% endif %}
     {% endfor %}
     
-    <!-- Tab System - NUR WENN UNLIMITED EXISTIERT! -->
+    <!-- Tab System NUR wenn Unlimited existiert -->
     {% if has_unlimited %}
       <div class="variant-tabs">
         <button class="variant-tab active" data-tab="normal">
@@ -1083,7 +947,7 @@
         <div class="variant-group" id="normal-variants" style="display: block;">
           {% assign variant_index = 0 %}
           {% for variant in product.variants %}
-            {% unless variant.sku contains 'daily' or variant.sku contains 'Daily' or variant.sku contains 'unlimited' %}
+            {% unless variant.title contains 'Daily' or variant.title contains 'Unlimited' or variant.title contains 'daily' %}
               {% assign variant_index = variant_index | plus: 1 %}
               {% assign is_free = false %}
               {% if variant.price == 0 or variant.title contains '100MB' %}
@@ -1096,7 +960,7 @@
                 
                 <!-- FREE Badge -->
                 {% if is_free %}
-                  <span class="free-badge">100MB FREE</span>
+                  <span class="free-badge">FREE</span>
                 {% endif %}
                 
                 <!-- Popular Badge -->
@@ -1116,7 +980,7 @@
                   <div class="plan-info">
                     <div class="plan-name">
                       {% if is_free %}
-                        100MB Test eSIM
+                        100MB Free eSIM
                       {% else %}
                         {{ variant.title }}
                       {% endif %}
@@ -1147,10 +1011,12 @@
                   </div>
                 </div>
                 
+                <!-- Login Button für FREE -->
                 {% if is_free %}
                   {% unless customer %}
-                    <div class="login-overlay">
-                      <a href="/account/login?return_url={{ request.path }}" class="login-button">
+                    <div style="margin-top: 20px; text-align: center;">
+                      <a href="/account/login?return_url={{ request.path }}" 
+                         style="display: inline-block; background: linear-gradient(135deg, #009a61, #00d97e); color: white; padding: 12px 32px; border-radius: 100px; font-weight: 700; text-decoration: none;">
                         {{ 'product.login_for_free' | t | default: 'Login for FREE eSIM' }}
                       </a>
                     </div>
@@ -1165,7 +1031,7 @@
         {% if has_unlimited %}
           <div class="variant-group" id="unlimited-variants" style="display: none;">
             {% for variant in product.variants %}
-              {% if variant.sku contains 'daily' or variant.sku contains 'Daily' or variant.sku contains 'unlimited' %}
+              {% if variant.title contains 'Daily' or variant.title contains 'Unlimited' or variant.title contains 'daily' %}
                 <div class="plan-card" data-variant-id="{{ variant.id }}">
                   <input type="radio" 
                          name="variant" 
@@ -1206,7 +1072,7 @@
           </div>
           <div class="summary-row">
             <span class="summary-label">{{ 'product.network' | t | default: 'Network' }}</span>
-            <span class="summary-value">{{ product.metafields.custom.plantyp | default: 'Avea, Turkcell' }}</span>
+            <span class="summary-value">{{ product.metafields.custom.plantyp | default: 'Premium Network' }}</span>
           </div>
           <div class="summary-row">
             <span class="summary-label">{{ 'product.activation' | t | default: 'Activation' }}</span>
@@ -1281,7 +1147,7 @@
   let currentVariant = null;
   let isCustomerLoggedIn = {{ customer.id | default: 'null' }} !== null;
   
-  // Variant Tab Switching - VOLLSTÄNDIGE LOGIC!
+  // Variant Tab Switching
   if (variantTabs.length > 0) {
     variantTabs.forEach(tab => {
       tab.addEventListener('click', function() {
@@ -1300,7 +1166,7 @@
           if (fairUseNotice) fairUseNotice.classList.remove('active');
         }
         
-        // Select first non-free variant in active group
+        // Select first non-free variant
         const activeGroup = tabType === 'unlimited' ? unlimitedGroup : normalGroup;
         const firstCard = activeGroup?.querySelector('.plan-card:not([data-is-free="true"])');
         if (firstCard) {
@@ -1341,12 +1207,10 @@
     }
   }
   
-  // Add click listeners to plan cards
+  // Add click listeners
   planCards.forEach(card => {
     card.addEventListener('click', function(e) {
-      if (e.target.closest('a')) {
-        return;
-      }
+      if (e.target.closest('a')) return;
       selectPlan(this);
     });
   });
@@ -1360,7 +1224,7 @@
     }
   });
   
-  // Mobile Sticky Cart on Scroll
+  // Mobile Sticky Cart
   let ticking = false;
   window.addEventListener('scroll', function() {
     if (!ticking && window.innerWidth <= 768) {
@@ -1378,14 +1242,14 @@
     }
   });
   
-  // Sticky button click
+  // Sticky button
   if (stickyButton) {
     stickyButton.addEventListener('click', function() {
       productForm.dispatchEvent(new Event('submit'));
     });
   }
   
-  // Initialize - Select first non-free variant
+  // Initialize
   const firstCard = section.querySelector('.plan-card:not([data-is-free="true"])');
   if (firstCard) {
     selectPlan(firstCard);
