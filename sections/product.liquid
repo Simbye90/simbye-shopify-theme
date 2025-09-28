@@ -1,6 +1,6 @@
 <!-- sections/product-enterprise.liquid -->
 <style>
-/* ENTERPRISE PRODUCT PAGE - SIMBYE ESIM */
+/* ENTERPRISE PRODUCT PAGE V2 - SIMBYE ESIM */
 :root {
   --product-primary: #009a61;
   --product-primary-dark: #00824f;
@@ -13,7 +13,8 @@
   --product-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
   --product-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
   --product-shadow-lg: 0 16px 48px rgba(0, 154, 97, 0.12);
-  --product-radius: 20px;
+  --product-radius: 24px;
+  --product-radius-sm: 16px;
   --product-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -25,118 +26,151 @@
   --product-card-bg: rgba(255, 255, 255, 0.03);
   --product-border: rgba(255, 255, 255, 0.08);
   --product-primary: #00d97e;
+  --product-primary-dark: #00c571;
   --product-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
   --product-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
   --product-shadow-lg: 0 16px 48px rgba(0, 217, 126, 0.15);
 }
 
-/* PRODUCT WRAPPER */
+/* Section Base */
 .product-enterprise {
   width: 100%;
   background: var(--product-bg);
   position: relative;
   overflow: hidden;
+  padding-top: 80px;
 }
 
-/* PRODUCT TITLE - Ganz oben */
-.product-title-section {
-  background: linear-gradient(135deg, var(--product-primary) 0%, var(--product-primary-dark) 100%);
-  padding: 24px 0;
-  text-align: center;
-  position: relative;
-}
-
-.product-title-wrapper {
+/* Hero Section */
+.product-hero {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px;
-}
-
-.product-main-title {
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 800;
-  color: white;
-  margin: 0;
-  letter-spacing: -0.02em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-}
-
-.title-flag {
-  width: 48px;
-  height: 36px;
-  border-radius: 8px;
-  object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* HERO SECTION */
-.product-hero {
-  position: relative;
-  padding: 60px 0;
-  background: linear-gradient(180deg, 
-    rgba(0, 154, 97, 0.03) 0%, 
-    transparent 100%
-  );
-}
-
-[data-theme="dark"] .product-hero {
-  background: linear-gradient(180deg, 
-    rgba(0, 217, 126, 0.05) 0%, 
-    transparent 100%
-  );
+  padding: 0 40px 80px;
 }
 
 .hero-container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 40px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.2fr 1fr;
   gap: 60px;
   align-items: center;
 }
 
-/* Hero Left - Info */
-.hero-info {
+/* Hero Image (LEFT) */
+.hero-image-section {
   order: 1;
+  position: relative;
+  animation: fadeInLeft 0.8s ease;
 }
 
-.price-range-wrapper {
-  margin-bottom: 24px;
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-.price-range-badge {
+.hero-image-wrapper {
+  position: relative;
+  border-radius: var(--product-radius);
+  overflow: hidden;
+  box-shadow: var(--product-shadow-lg);
+  aspect-ratio: 16/10;
+  background: var(--product-card-bg);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: var(--product-primary);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Hero Info (RIGHT) */
+.hero-info-section {
+  order: 2;
+  animation: fadeInRight 0.8s ease 0.1s both;
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.product-title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.product-flag {
+  width: 56px;
+  height: 42px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-title {
+  font-size: clamp(36px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--product-text);
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.country-badge {
+  background: var(--product-primary);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-left: 12px;
+}
+
+.price-range {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
   background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
   color: white;
   padding: 12px 24px;
   border-radius: 100px;
   font-size: 24px;
   font-weight: 700;
-  display: inline-block;
+  margin-bottom: 24px;
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  position: relative;
 }
 
 .price-from {
   font-size: 14px;
   opacity: 0.9;
-  font-weight: 400;
 }
 
 .hero-subtitle {
-  font-size: 20px;
+  font-size: 18px;
   color: var(--product-text-secondary);
-  margin-bottom: 32px;
   line-height: 1.6;
+  margin-bottom: 32px;
 }
 
 .hero-features {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 32px;
 }
 
 .hero-feature {
@@ -147,47 +181,53 @@
   color: var(--product-text);
 }
 
-.feature-icon {
+.hero-feature svg {
   width: 24px;
   height: 24px;
+  color: var(--product-primary);
+  flex-shrink: 0;
+}
+
+/* Trust Badges */
+.trust-badges {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.trust-badge {
   display: flex;
   align-items: center;
-  justify-content: center;
-  background: rgba(0, 154, 97, 0.1);
-  border-radius: 50%;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--product-card-bg);
+  border: 1px solid var(--product-border);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--product-text);
+}
+
+.trust-badge svg {
+  width: 20px;
+  height: 20px;
   color: var(--product-primary);
 }
 
-/* Hero Right - Image */
-.hero-image-wrapper {
-  order: 2;
-  position: relative;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: var(--product-shadow-lg);
-  aspect-ratio: 16/10;
-}
-
-.hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* MAIN CONTENT */
-.product-content {
+/* Product Selection Section */
+.product-selection {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 60px 40px;
+  padding: 0 40px 80px;
 }
 
-/* TAB SYSTEM für Normal/Unlimited */
+/* Tab System for Variants */
 .variant-tabs {
   display: flex;
   gap: 4px;
   background: var(--product-card-bg);
   padding: 4px;
-  border-radius: 16px;
+  border-radius: var(--product-radius-sm);
   border: 1px solid var(--product-border);
   margin-bottom: 40px;
   box-shadow: var(--product-shadow-sm);
@@ -213,6 +253,7 @@
 
 .variant-tab:hover {
   background: rgba(0, 154, 97, 0.05);
+  color: var(--product-text);
 }
 
 .variant-tab.active {
@@ -221,7 +262,7 @@
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
 
-.tab-icon {
+.variant-tab svg {
   width: 20px;
   height: 20px;
 }
@@ -230,18 +271,17 @@
 .fair-use-notice {
   background: linear-gradient(135deg, 
     rgba(0, 154, 97, 0.05) 0%, 
-    rgba(0, 217, 126, 0.05) 100%
-  );
+    rgba(0, 217, 126, 0.05) 100%);
   border: 2px solid var(--product-primary);
-  border-radius: 16px;
-  padding: 20px 24px;
+  border-radius: var(--product-radius-sm);
+  padding: 24px;
   margin-bottom: 32px;
   display: none;
+  animation: slideDown 0.3s ease;
 }
 
 .fair-use-notice.active {
   display: block;
-  animation: slideDown 0.3s ease;
 }
 
 @keyframes slideDown {
@@ -249,77 +289,89 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-.fair-use-title {
-  font-weight: 700;
-  color: var(--product-primary);
-  margin-bottom: 8px;
+.fair-use-header {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.fair-use-title {
   font-size: 18px;
+  font-weight: 700;
+  color: var(--product-primary);
+  margin: 0;
 }
 
 .fair-use-text {
-  color: var(--product-text-secondary);
   font-size: 15px;
-  line-height: 1.5;
+  color: var(--product-text-secondary);
+  line-height: 1.6;
+  margin: 0;
 }
 
-/* VARIANT SELECTOR */
-.variant-selector {
+/* Selection Grid */
+.selection-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 40px;
 }
 
+/* Plans Container */
 .plans-container {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.plan-option {
-  position: relative;
-}
-
-.plan-radio {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.plan-label {
+.variant-group {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Plan Card */
+.plan-card {
+  position: relative;
   background: var(--product-card-bg);
   border: 2px solid var(--product-border);
-  border-radius: 16px;
-  padding: 20px 24px;
+  border-radius: var(--product-radius-sm);
+  padding: 24px;
   cursor: pointer;
   transition: var(--product-transition);
-  position: relative;
 }
 
-.plan-label:hover {
+.plan-card:hover {
   border-color: var(--product-primary);
   transform: translateY(-2px);
   box-shadow: var(--product-shadow-md);
 }
 
-.plan-radio:checked + .plan-label {
+.plan-card.selected {
   border-color: var(--product-primary);
   background: linear-gradient(135deg, 
     rgba(0, 154, 97, 0.03) 0%, 
-    rgba(0, 217, 126, 0.03) 100%
-  );
+    rgba(0, 217, 126, 0.03) 100%);
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
 }
 
-.plan-details {
+.plan-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.plan-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plan-info {
   flex: 1;
 }
 
-.plan-data {
+.plan-name {
   font-size: 20px;
   font-weight: 700;
   color: var(--product-text);
@@ -331,68 +383,151 @@
   color: var(--product-text-secondary);
 }
 
+.plan-price-wrapper {
+  text-align: right;
+}
+
 .plan-price {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--product-primary);
 }
 
+.plan-price-old {
+  font-size: 18px;
+  color: var(--product-text-secondary);
+  text-decoration: line-through;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* Popular Badge */
 .popular-badge {
   position: absolute;
-  top: -8px;
+  top: -10px;
   right: 20px;
-  background: var(--product-accent);
+  background: linear-gradient(135deg, #ff7e50, #ff9a76);
   color: white;
   padding: 4px 12px;
   border-radius: 100px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(255, 126, 80, 0.3);
+}
+
+/* Free Badge */
+.free-badge {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  background: var(--product-accent);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 14px;
   box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
 }
 
-/* Purchase Section */
-.purchase-section {
-  background: var(--product-card-bg);
-  border: 1px solid var(--product-border);
-  border-radius: 20px;
-  padding: 32px;
+/* Login Overlay */
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--product-radius-sm);
+  z-index: 10;
+}
+
+[data-theme="dark"] .login-overlay {
+  background: rgba(0, 0, 0, 0.95);
+}
+
+.login-button {
+  background: var(--product-primary);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  transition: var(--product-transition);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+}
+
+.login-button:hover {
+  background: var(--product-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
+}
+
+/* Purchase Box */
+.purchase-box {
   position: sticky;
   top: 100px;
+  background: var(--product-card-bg);
+  border: 1px solid var(--product-border);
+  border-radius: var(--product-radius);
+  padding: 32px;
+  box-shadow: var(--product-shadow-md);
 }
 
 .purchase-title {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: 24px;
   color: var(--product-text);
+  margin-bottom: 24px;
 }
 
-.selected-summary {
+.summary-box {
   background: linear-gradient(135deg, 
     rgba(0, 154, 97, 0.05) 0%, 
-    rgba(0, 217, 126, 0.05) 100%
-  );
+    rgba(0, 217, 126, 0.05) 100%);
   border-radius: 12px;
-  padding: 16px;
+  padding: 20px;
   margin-bottom: 24px;
 }
 
-.summary-item {
+.summary-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  padding: 8px 0;
 }
 
-.summary-item:last-child {
-  margin-bottom: 0;
-  padding-top: 8px;
-  border-top: 1px solid var(--product-border);
+.summary-row:not(:last-child) {
+  border-bottom: 1px solid var(--product-border);
+}
+
+.summary-label {
+  font-size: 14px;
+  color: var(--product-text-secondary);
+}
+
+.summary-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--product-text);
+}
+
+.summary-row:last-child .summary-label,
+.summary-row:last-child .summary-value {
+  font-size: 18px;
   font-weight: 700;
+  color: var(--product-primary);
 }
 
-.checkout-btn {
+/* Checkout Button */
+.checkout-form {
+  margin-bottom: 20px;
+}
+
+.checkout-button {
   width: 100%;
   background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
   color: white;
@@ -410,51 +545,81 @@
   gap: 12px;
 }
 
-.checkout-btn:hover {
+.checkout-button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
 }
 
-.payment-icons {
+.checkout-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkout-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Payment Methods */
+.payment-methods {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 20px;
   padding-top: 20px;
   border-top: 1px solid var(--product-border);
 }
 
-.payment-icon {
+.payment-method {
   height: 24px;
   opacity: 0.7;
   transition: var(--product-transition);
 }
 
-.payment-icon:hover {
+.payment-method:hover {
   opacity: 1;
+  transform: scale(1.05);
 }
 
-/* FEATURES SECTION */
+/* Features Section */
 .features-section {
-  margin-top: 80px;
-  padding-top: 60px;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 80px 40px;
   border-top: 1px solid var(--product-border);
+}
+
+.features-title {
+  font-size: clamp(32px, 4vw, 40px);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 48px;
+  color: var(--product-text);
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 32px;
-  margin-top: 40px;
 }
 
 .feature-card {
   text-align: center;
-  padding: 32px 24px;
+  padding: 40px 24px;
   background: var(--product-card-bg);
   border: 1px solid var(--product-border);
-  border-radius: 20px;
+  border-radius: var(--product-radius);
   transition: var(--product-transition);
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: calc(var(--index) * 0.1s);
+}
+
+.feature-card:nth-child(1) { --index: 0; }
+.feature-card:nth-child(2) { --index: 1; }
+.feature-card:nth-child(3) { --index: 2; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .feature-card:hover {
@@ -463,34 +628,38 @@
   border-color: var(--product-primary);
 }
 
-.feature-icon-wrapper {
-  width: 64px;
-  height: 64px;
+.feature-icon {
+  width: 72px;
+  height: 72px;
   background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 24px;
   color: white;
-  font-size: 28px;
 }
 
-.feature-title {
-  font-size: 20px;
+.feature-icon svg {
+  width: 36px;
+  height: 36px;
+}
+
+.feature-name {
+  font-size: 22px;
   font-weight: 700;
   margin-bottom: 12px;
   color: var(--product-text);
 }
 
-.feature-description {
-  font-size: 14px;
+.feature-desc {
+  font-size: 15px;
   color: var(--product-text-secondary);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/* MOBILE STICKY CART */
-.mobile-sticky-cart {
+/* Mobile Sticky Cart */
+.mobile-sticky {
   display: none;
   position: fixed;
   bottom: 0;
@@ -503,13 +672,14 @@
   transform: translateY(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
 }
 
-.mobile-sticky-cart.active {
+.mobile-sticky.active {
   transform: translateY(0);
 }
 
-.sticky-content {
+.sticky-container {
   max-width: 500px;
   margin: 0 auto;
   display: flex;
@@ -521,7 +691,7 @@
   flex: 1;
 }
 
-.sticky-variant {
+.sticky-title {
   font-size: 14px;
   color: var(--product-text-secondary);
   margin-bottom: 4px;
@@ -533,7 +703,7 @@
   color: var(--product-primary);
 }
 
-.sticky-checkout-btn {
+.sticky-button {
   background: var(--product-primary);
   color: white;
   border: none;
@@ -543,32 +713,45 @@
   font-weight: 700;
   white-space: nowrap;
   transition: var(--product-transition);
+  cursor: pointer;
 }
 
-/* RESPONSIVE */
+.sticky-button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive */
 @media (max-width: 1024px) {
   .hero-container {
     grid-template-columns: 1fr;
     gap: 40px;
   }
   
-  .hero-info {
-    order: 2;
-    text-align: center;
-  }
-  
-  .hero-image-wrapper {
+  .hero-image-section {
     order: 1;
     max-width: 600px;
     margin: 0 auto;
   }
   
-  .variant-selector {
+  .hero-info-section {
+    order: 2;
+    text-align: center;
+  }
+  
+  .product-title-wrapper {
+    justify-content: center;
+  }
+  
+  .trust-badges {
+    justify-content: center;
+  }
+  
+  .selection-grid {
     grid-template-columns: 1fr;
     gap: 32px;
   }
   
-  .purchase-section {
+  .purchase-box {
     position: static;
   }
   
@@ -579,29 +762,22 @@
 }
 
 @media (max-width: 768px) {
-  .product-title-section {
-    padding: 16px 0;
+  .product-enterprise {
+    padding-top: 40px;
   }
   
-  .product-main-title {
-    font-size: 28px;
+  .product-hero,
+  .product-selection,
+  .features-section {
+    padding-left: 20px;
+    padding-right: 20px;
   }
   
-  .title-flag {
-    width: 36px;
-    height: 27px;
+  .product-title {
+    font-size: 32px;
   }
   
-  .product-hero {
-    padding: 40px 0;
-  }
-  
-  .hero-container,
-  .product-content {
-    padding: 0 20px;
-  }
-  
-  .price-range-badge {
+  .price-range {
     font-size: 20px;
     padding: 10px 20px;
   }
@@ -611,152 +787,149 @@
   }
   
   .variant-tabs {
-    margin-bottom: 24px;
+    gap: 2px;
+    padding: 2px;
   }
   
   .variant-tab {
-    padding: 12px 20px;
-    font-size: 16px;
+    padding: 12px 16px;
+    font-size: 15px;
   }
   
-  .plan-label {
-    padding: 16px;
+  .variant-tab svg {
+    width: 18px;
+    height: 18px;
   }
   
-  .plan-data {
+  .plan-card {
+    padding: 20px;
+  }
+  
+  .plan-name {
     font-size: 18px;
   }
   
   .plan-price {
-    font-size: 20px;
+    font-size: 24px;
   }
   
-  .purchase-section {
+  .purchase-box {
     padding: 24px 20px;
-    border-radius: 16px;
+    border-radius: 16px 16px 0 0;
+    margin: 0 -20px;
   }
   
-  .mobile-sticky-cart {
+  .mobile-sticky {
     display: block;
   }
   
-  .checkout-btn {
-    padding: 16px;
-    font-size: 16px;
+  .feature-card {
+    padding: 32px 20px;
   }
   
-  .features-section {
-    margin-top: 60px;
-    padding-top: 40px;
+  .features-title {
+    font-size: 28px;
+    margin-bottom: 32px;
   }
 }
 </style>
 
 <section class="product-enterprise" data-section-id="{{ section.id }}">
-  <!-- Product Title - Ganz oben -->
-  <div class="product-title-section">
-    <div class="product-title-wrapper">
-      <h1 class="product-main-title">
-        {% if product.images[0] %}
-          <img src="{{ product.images[0] | img_url: '100x75' }}" alt="{{ product.title }}" class="title-flag" width="48" height="36">
-        {% endif %}
-        <span>eSIM {{ product.title }}</span>
-      </h1>
-    </div>
-  </div>
-
   <!-- Hero Section -->
   <div class="product-hero">
     <div class="hero-container">
-      <!-- Left: Info -->
-      <div class="hero-info">
-        <div class="price-range-wrapper">
-          <div class="price-range-badge">
-            <span class="price-from">
-              {% case shop.locale %}
-                {% when 'de' %}ab{% when 'es' %}desde{% when 'fr' %}à partir de
-                {% when 'tr' %}başlayan{% else %}from
-              {% endcase %}
-            </span>
-            {{ product.variants.first.price | money }} - {{ product.variants.last.price | money }}
-          </div>
+      <!-- Image Section (LEFT) -->
+      <div class="hero-image-section">
+        <div class="hero-image-wrapper">
+          {% if product.images[1] %}
+            <img src="{{ product.images[1] | img_url: '800x500' }}" 
+                 alt="{{ product.title }}" 
+                 class="hero-image"
+                 loading="eager"
+                 width="800"
+                 height="500">
+          {% else %}
+            <img src="{{ product.featured_image | img_url: '800x500' }}" 
+                 alt="{{ product.title }}" 
+                 class="hero-image"
+                 loading="eager"
+                 width="800"
+                 height="500">
+          {% endif %}
+          <span class="hero-badge">{{ product.metafields.custom.badge | default: 'Premium eSIM' }}</span>
+        </div>
+      </div>
+      
+      <!-- Info Section (RIGHT) -->
+      <div class="hero-info-section">
+        <div class="product-title-wrapper">
+          {% if product.images[0] %}
+            <img src="{{ product.images[0] | img_url: '112x84' }}" 
+                 alt="{{ product.title }}" 
+                 class="product-flag"
+                 width="56"
+                 height="42">
+          {% endif %}
+          <h1 class="product-title">
+            eSIM <span class="country-badge">{{ product.title }}</span>
+          </h1>
+        </div>
+        
+        <div class="price-range">
+          <span class="price-from">{{ 'product.price_from' | t }}</span>
+          <span>{{ product.price_min | money }} - {{ product.price_max | money }}</span>
         </div>
         
         <p class="hero-subtitle">
-          {% case shop.locale %}
-            {% when 'de' %}
-              Prepaid eSIM Datenpakete für {{ product.title }}. In 60 Sekunden aktiviert, WhatsApp-Nummer behalten, ohne Vertrag.
-            {% when 'es' %}
-              Paquetes de datos eSIM prepago para {{ product.title }}. Activación en 60 segundos, mantén tu WhatsApp, sin contrato.
-            {% when 'fr' %}
-              Forfaits data eSIM prépayés pour {{ product.title }}. Activation en 60 secondes, gardez votre WhatsApp, sans contrat.
-            {% when 'tr' %}
-              {{ product.title }} için ön ödemeli eSIM veri paketleri. 60 saniyede aktivasyon, WhatsApp numaranı koru, sözleşmesiz.
-            {% else %}
-              Prepaid eSIM data plans for {{ product.title }}. Activated in 60 seconds, keep your WhatsApp number, no contract.
-          {% endcase %}
+          {{ 'product.hero_subtitle' | t: country: product.title }}
         </p>
         
         <div class="hero-features">
           <div class="hero-feature">
-            <div class="feature-icon">✓</div>
-            <span>
-              {% case shop.locale %}
-                {% when 'de' %}Sofort per E-Mail
-                {% when 'es' %}Entrega instantánea
-                {% when 'fr' %}Livraison instantanée
-                {% when 'tr' %}Anında teslimat
-                {% else %}Instant delivery
-              {% endcase %}
-            </span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>{{ 'product.instant_delivery' | t }}</span>
           </div>
           <div class="hero-feature">
-            <div class="feature-icon">✓</div>
-            <span>
-              {% case shop.locale %}
-                {% when 'de' %}Premium 4G/5G Netzwerk
-                {% when 'es' %}Red premium 4G/5G
-                {% when 'fr' %}Réseau premium 4G/5G
-                {% when 'tr' %}Premium 4G/5G ağı
-                {% else %}Premium 4G/5G network
-              {% endcase %}
-            </span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0"/>
+            </svg>
+            <span>{{ 'product.premium_network' | t }}</span>
           </div>
           <div class="hero-feature">
-            <div class="feature-icon">✓</div>
-            <span>
-              {% case shop.locale %}
-                {% when 'de' %}24/7 WhatsApp Support
-                {% when 'es' %}Soporte 24/7 WhatsApp
-                {% when 'fr' %}Support 24/7 WhatsApp
-                {% when 'tr' %}7/24 WhatsApp destek
-                {% else %}24/7 WhatsApp support
-              {% endcase %}
-            </span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+            <span>{{ 'product.whatsapp_support' | t }}</span>
+          </div>
+        </div>
+        
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>{{ 'product.money_back' | t }}</span>
+          </div>
+          <div class="trust-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            <span>{{ 'product.secure_payment' | t }}</span>
           </div>
         </div>
       </div>
-      
-      <!-- Right: Image -->
-      {% if product.images[1] %}
-        <div class="hero-image-wrapper">
-          <img src="{{ product.images[1] | img_url: '800x500' }}" 
-               alt="{{ product.title }}" 
-               class="hero-image"
-               loading="eager"
-               width="800"
-               height="500">
-        </div>
-      {% endif %}
     </div>
   </div>
-
-  <!-- Main Content -->
-  <div class="product-content">
+  
+  <!-- Product Selection -->
+  <div class="product-selection">
     <!-- Check for Unlimited variants -->
     {% assign has_unlimited = false %}
     {% assign normal_variants = "" | split: "," %}
     {% assign unlimited_variants = "" | split: "," %}
+    {% assign has_free = false %}
     
     {% for variant in product.variants %}
       {% if variant.sku contains 'daily' or variant.sku contains 'Daily' %}
@@ -764,6 +937,9 @@
         {% assign unlimited_variants = unlimited_variants | push: variant %}
       {% else %}
         {% assign normal_variants = normal_variants | push: variant %}
+        {% if variant.price == 0 %}
+          {% assign has_free = true %}
+        {% endif %}
       {% endif %}
     {% endfor %}
     
@@ -771,329 +947,207 @@
     {% if has_unlimited %}
       <div class="variant-tabs">
         <button class="variant-tab active" data-tab="normal">
-          <svg class="tab-icon" fill="currentColor" viewBox="0 0 20 20">
+          <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"/>
           </svg>
-          <span>
-            {% case shop.locale %}
-              {% when 'de' %}Datenpakete
-              {% when 'es' %}Paquetes de datos
-              {% when 'fr' %}Forfaits data
-              {% when 'tr' %}Veri paketleri
-              {% else %}Data Plans
-            {% endcase %}
-          </span>
+          <span>{{ 'product.data_plans' | t }}</span>
         </button>
         <button class="variant-tab" data-tab="unlimited">
-          <svg class="tab-icon" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 4a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"/>
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5a1 1 0 10-2 0v5.586l-2.707 2.707a1 1 0 001.414 1.414l3-3A1 1 0 0013 13V7z"/>
           </svg>
-          <span>
-            {% case shop.locale %}
-              {% when 'de' %}Unlimited Daily
-              {% when 'es' %}Unlimited Diario
-              {% when 'fr' %}Unlimited Quotidien
-              {% when 'tr' %}Unlimited Günlük
-              {% else %}Unlimited Daily
-            {% endcase %}
-          </span>
+          <span>{{ 'product.unlimited_daily' | t }}</span>
         </button>
       </div>
       
-      <!-- Fair Use Notice for Unlimited -->
+      <!-- Fair Use Notice -->
       <div class="fair-use-notice" id="fair-use-notice">
-        <div class="fair-use-title">
-          <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"/>
+        <div class="fair-use-header">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
           </svg>
-          <span>Fair Use Policy</span>
+          <h3 class="fair-use-title">{{ 'product.fair_use_title' | t }}</h3>
         </div>
-        <p class="fair-use-text">
-          {% case shop.locale %}
-            {% when 'de' %}
-              1GB pro Tag mit Highspeed-Internet. Nach 1GB wird die Geschwindigkeit auf 128kbps reduziert. Das Datenvolumen erneuert sich täglich um Mitternacht (lokale Zeit).
-            {% when 'es' %}
-              1GB diario a alta velocidad. Después de 1GB, la velocidad se reduce a 128kbps. Los datos se renuevan diariamente a medianoche (hora local).
-            {% when 'fr' %}
-              1GB par jour à haute vitesse. Après 1GB, la vitesse est réduite à 128kbps. Les données sont renouvelées quotidiennement à minuit (heure locale).
-            {% when 'tr' %}
-              Günde 1GB yüksek hızlı internet. 1GB sonrası hız 128kbps'ye düşer. Veri her gün gece yarısı (yerel saat) yenilenir.
-            {% else %}
-              1GB daily at high speed. After 1GB, speed is reduced to 128kbps. Data resets daily at midnight (local time).
-          {% endcase %}
-        </p>
+        <p class="fair-use-text">{{ 'product.fair_use_text' | t }}</p>
       </div>
     {% endif %}
     
-    <!-- Variant Selector -->
-    <div class="variant-selector">
+    <!-- Selection Grid -->
+    <div class="selection-grid">
       <!-- Plans Container -->
       <div class="plans-container">
         <!-- Normal Variants -->
-        <div class="variants-group" id="normal-variants" style="display: block;">
+        <div class="variant-group" id="normal-variants" style="display: block;">
           {% for variant in normal_variants %}
-            <div class="plan-option">
+            {% assign is_free = false %}
+            {% if variant.price == 0 %}
+              {% assign is_free = true %}
+            {% endif %}
+            
+            <div class="plan-card {% if forloop.first %}selected{% endif %}" data-variant-id="{{ variant.id }}" data-is-free="{{ is_free }}">
               <input type="radio" 
-                     id="variant-{{ variant.id }}" 
                      name="variant" 
                      value="{{ variant.id }}"
-                     class="plan-radio"
                      data-price="{{ variant.price | money }}"
                      data-title="{{ variant.title }}"
                      {% if forloop.first %}checked{% endif %}>
-              <label for="variant-{{ variant.id }}" class="plan-label">
-                <div class="plan-details">
-                  <div class="plan-data">{{ variant.title }}</div>
+              
+              <div class="plan-content">
+                <div class="plan-info">
+                  <div class="plan-name">{{ variant.title }}</div>
                   <div class="plan-validity">
-                    {% case shop.locale %}
-                      {% when 'de' %}Gültig für
-                      {% when 'es' %}Válido por
-                      {% when 'fr' %}Valable pendant
-                      {% when 'tr' %}Geçerlilik
-                      {% else %}Valid for
-                    {% endcase %}
+                    {{ 'product.valid_for' | t }}
                     {% assign title_parts = variant.title | split: " " %}
                     {% assign days_index = title_parts.size | minus: 2 %}
                     {{ title_parts[days_index] }}
-                    {% case shop.locale %}
-                      {% when 'de' %}Tage
-                      {% when 'es' %}días
-                      {% when 'fr' %}jours
-                      {% when 'tr' %}gün
-                      {% else %}days
-                    {% endcase %}
+                    {{ 'product.days' | t }}
                   </div>
                 </div>
-                <div class="plan-price">{{ variant.price | money }}</div>
-                {% if forloop.index == 3 %}
-                  <span class="popular-badge">
-                    {% case shop.locale %}
-                      {% when 'de' %}Beliebt
-                      {% when 'es' %}Popular
-                      {% when 'fr' %}Populaire
-                      {% when 'tr' %}Popüler
-                      {% else %}Popular
-                    {% endcase %}
-                  </span>
-                {% endif %}
-              </label>
+                <div class="plan-price-wrapper">
+                  {% if variant.compare_at_price > variant.price %}
+                    <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="plan-price">{{ variant.price | money }}</span>
+                </div>
+              </div>
+              
+              {% if forloop.index == 3 %}
+                <span class="popular-badge">{{ 'product.popular' | t }}</span>
+              {% endif %}
+              
+              {% if is_free %}
+                <span class="free-badge" id="free-badge-{{ variant.id }}">{{ 'product.free' | t }}</span>
+                {% unless customer %}
+                  <div class="login-overlay" id="login-overlay-{{ variant.id }}">
+                    <a href="/account/login" class="login-button">{{ 'product.login_for_free' | t }}</a>
+                  </div>
+                {% endunless %}
+              {% endif %}
             </div>
           {% endfor %}
         </div>
         
         <!-- Unlimited Variants -->
         {% if has_unlimited %}
-          <div class="variants-group" id="unlimited-variants" style="display: none;">
+          <div class="variant-group" id="unlimited-variants" style="display: none;">
             {% for variant in unlimited_variants %}
-              <div class="plan-option">
+              <div class="plan-card" data-variant-id="{{ variant.id }}">
                 <input type="radio" 
-                       id="variant-{{ variant.id }}" 
                        name="variant" 
                        value="{{ variant.id }}"
-                       class="plan-radio"
                        data-price="{{ variant.price | money }}"
                        data-title="{{ variant.title }}">
-                <label for="variant-{{ variant.id }}" class="plan-label">
-                  <div class="plan-details">
-                    <div class="plan-data">Unlimited Daily</div>
+                
+                <div class="plan-content">
+                  <div class="plan-info">
+                    <div class="plan-name">{{ 'product.unlimited_plan' | t }}</div>
                     <div class="plan-validity">
-                      {% case shop.locale %}
-                        {% when 'de' %}1GB/Tag für
-                        {% when 'es' %}1GB/día por
-                        {% when 'fr' %}1GB/jour pendant
-                        {% when 'tr' %}Günlük 1GB,
-                        {% else %}1GB/day for
-                      {% endcase %}
                       {% assign sku_parts = variant.sku | split: "_" %}
                       {% assign days = sku_parts.last %}
-                      {{ days }}
-                      {% case shop.locale %}
-                        {% when 'de' %}Tage
-                        {% when 'es' %}días
-                        {% when 'fr' %}jours
-                        {% when 'tr' %}gün
-                        {% else %}days
-                      {% endcase %}
+                      {{ 'product.gb_per_day_for' | t: days: days }}
                     </div>
                   </div>
-                  <div class="plan-price">{{ variant.price | money }}</div>
-                </label>
+                  <div class="plan-price-wrapper">
+                    {% if variant.compare_at_price > variant.price %}
+                      <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
+                    {% endif %}
+                    <span class="plan-price">{{ variant.price | money }}</span>
+                  </div>
+                </div>
               </div>
             {% endfor %}
           </div>
         {% endif %}
       </div>
       
-      <!-- Purchase Section -->
-      <div class="purchase-section">
-        <h3 class="purchase-title">
-          {% case shop.locale %}
-            {% when 'de' %}Ihre Auswahl
-            {% when 'es' %}Su selección
-            {% when 'fr' %}Votre sélection
-            {% when 'tr' %}Seçiminiz
-            {% else %}Your Selection
-          {% endcase %}
-        </h3>
+      <!-- Purchase Box -->
+      <div class="purchase-box">
+        <h3 class="purchase-title">{{ 'product.your_selection' | t }}</h3>
         
-        <div class="selected-summary">
-          <div class="summary-item">
-            <span>{{ product.title }} eSIM</span>
-            <span id="selected-variant">-</span>
+        <div class="summary-box">
+          <div class="summary-row">
+            <span class="summary-label">{{ product.title }} eSIM</span>
+            <span class="summary-value" id="selected-variant">-</span>
           </div>
-          <div class="summary-item">
-            <span>
-              {% case shop.locale %}
-                {% when 'de' %}Aktivierung
-                {% when 'es' %}Activación
-                {% when 'fr' %}Activation
-                {% when 'tr' %}Aktivasyon
-                {% else %}Activation
-              {% endcase %}
-            </span>
-            <span>
-              {% case shop.locale %}
-                {% when 'de' %}Sofort
-                {% when 'es' %}Inmediata
-                {% when 'fr' %}Immédiate
-                {% when 'tr' %}Anında
-                {% else %}Instant
-              {% endcase %}
-            </span>
+          <div class="summary-row">
+            <span class="summary-label">{{ 'product.network' | t }}</span>
+            <span class="summary-value">{{ product.metafields.custom.plantyp | default: '4G/5G' }}</span>
           </div>
-          <div class="summary-item">
-            <span>
-              {% case shop.locale %}
-                {% when 'de' %}Gesamtpreis
-                {% when 'es' %}Precio total
-                {% when 'fr' %}Prix total
-                {% when 'tr' %}Toplam fiyat
-                {% else %}Total Price
-              {% endcase %}
-            </span>
-            <span id="total-price">-</span>
+          <div class="summary-row">
+            <span class="summary-label">{{ 'product.activation' | t }}</span>
+            <span class="summary-value">{{ 'product.instant' | t }}</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-label">{{ 'product.total' | t }}</span>
+            <span class="summary-value" id="total-price">-</span>
           </div>
         </div>
         
-        <form action="/cart/add" method="post" id="product-form">
+        <form action="/cart/add" method="post" class="checkout-form" id="product-form">
           <input type="hidden" name="id" id="variant-input" value="">
-          <button type="submit" class="checkout-btn">
-            <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3z"/>
-              <path d="M16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
+          <button type="submit" class="checkout-button">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17M17 13v8m0-8L17 21m0 0a2 2 0 11-4 0 2 2 0 014 0zm-10 0a2 2 0 11-4 0 2 2 0 014 0z"/>
             </svg>
-            <span>
-              {% case shop.locale %}
-                {% when 'de' %}Jetzt kaufen
-                {% when 'es' %}Comprar ahora
-                {% when 'fr' %}Acheter maintenant
-                {% when 'tr' %}Şimdi satın al
-                {% else %}Buy Now
-              {% endcase %}
-            </span>
+            <span>{{ 'product.buy_now' | t }}</span>
           </button>
         </form>
         
-        <div class="payment-icons">
+        <div class="payment-methods">
           {% assign payment_types = 'visa,master,apple_pay,google_pay,paypal' | split: ',' %}
           {% for type in payment_types %}
-            {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+            {{ type | payment_type_svg_tag: class: 'payment-method' }}
           {% endfor %}
-        </div>
-      </div>
-    </div>
-    
-    <!-- Features Section -->
-    <div class="features-section">
-      <div class="features-grid">
-        <!-- Feature 1 -->
-        <div class="feature-card">
-          <div class="feature-icon-wrapper">📧</div>
-          <h3 class="feature-title">
-            {% case shop.locale %}
-              {% when 'de' %}Sofort-Lieferung
-              {% when 'es' %}Entrega instantánea
-              {% when 'fr' %}Livraison instantanée
-              {% when 'tr' %}Anında teslimat
-              {% else %}Instant Delivery
-            {% endcase %}
-          </h3>
-          <p class="feature-description">
-            {% case shop.locale %}
-              {% when 'de' %}QR-Code in 60 Sekunden per E-Mail. Keine SIM-Karte nötig.
-              {% when 'es' %}Código QR en 60 segundos por correo. Sin tarjeta SIM física.
-              {% when 'fr' %}Code QR en 60 secondes par email. Pas de carte SIM physique.
-              {% when 'tr' %}60 saniyede e-posta ile QR kod. Fiziksel SIM kart gerekmez.
-              {% else %}QR code in 60 seconds via email. No physical SIM needed.
-            {% endcase %}
-          </p>
-        </div>
-        
-        <!-- Feature 2 -->
-        <div class="feature-card">
-          <div class="feature-icon-wrapper">🌐</div>
-          <h3 class="feature-title">
-            {% case shop.locale %}
-              {% when 'de' %}Premium Netzwerk
-              {% when 'es' %}Red premium
-              {% when 'fr' %}Réseau premium
-              {% when 'tr' %}Premium ağ
-              {% else %}Premium Network
-            {% endcase %}
-          </h3>
-          <p class="feature-description">
-            {% case shop.locale %}
-              {% when 'de' %}Schnelles 4G/5G Internet mit den besten lokalen Anbietern.
-              {% when 'es' %}Internet 4G/5G rápido con los mejores proveedores locales.
-              {% when 'fr' %}Internet 4G/5G rapide avec les meilleurs opérateurs locaux.
-              {% when 'tr' %}En iyi yerel sağlayıcılarla hızlı 4G/5G internet.
-              {% else %}Fast 4G/5G internet with the best local providers.
-            {% endcase %}
-          </p>
-        </div>
-        
-        <!-- Feature 3 -->
-        <div class="feature-card">
-          <div class="feature-icon-wrapper">💬</div>
-          <h3 class="feature-title">
-            {% case shop.locale %}
-              {% when 'de' %}24/7 Support
-              {% when 'es' %}Soporte 24/7
-              {% when 'fr' %}Support 24/7
-              {% when 'tr' %}7/24 Destek
-              {% else %}24/7 Support
-            {% endcase %}
-          </h3>
-          <p class="feature-description">
-            {% case shop.locale %}
-              {% when 'de' %}WhatsApp und Live-Chat Support in 12 Sprachen. Antwort in 60 Sekunden.
-              {% when 'es' %}Soporte por WhatsApp y chat en vivo en 12 idiomas. Respuesta en 60 segundos.
-              {% when 'fr' %}Support WhatsApp et chat en direct en 12 langues. Réponse en 60 secondes.
-              {% when 'tr' %}12 dilde WhatsApp ve canlı sohbet desteği. 60 saniyede yanıt.
-              {% else %}WhatsApp and live chat support in 12 languages. Response in 60 seconds.
-            {% endcase %}
-          </p>
         </div>
       </div>
     </div>
   </div>
   
+  <!-- Features Section -->
+  <div class="features-section">
+    <h2 class="features-title">{{ 'product.why_choose' | t: product: product.title }}</h2>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        <h3 class="feature-name">{{ 'product.feature_instant_title' | t }}</h3>
+        <p class="feature-desc">{{ 'product.feature_instant_desc' | t }}</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="feature-name">{{ 'product.feature_network_title' | t }}</h3>
+        <p class="feature-desc">{{ 'product.feature_network_desc' | t }}</p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+        </div>
+        <h3 class="feature-name">{{ 'product.feature_support_title' | t }}</h3>
+        <p class="feature-desc">{{ 'product.feature_support_desc' | t }}</p>
+      </div>
+    </div>
+  </div>
+  
   <!-- Mobile Sticky Cart -->
-  <div class="mobile-sticky-cart" id="mobile-sticky-cart">
-    <div class="sticky-content">
+  <div class="mobile-sticky" id="mobile-sticky">
+    <div class="sticky-container">
       <div class="sticky-info">
-        <div class="sticky-variant" id="sticky-variant">-</div>
+        <div class="sticky-title" id="sticky-title">-</div>
         <div class="sticky-price" id="sticky-price">-</div>
       </div>
-      <button class="sticky-checkout-btn" id="sticky-checkout">
-        {% case shop.locale %}
-          {% when 'de' %}Jetzt kaufen
-          {% when 'es' %}Comprar ahora
-          {% when 'fr' %}Acheter maintenant
-          {% when 'tr' %}Şimdi al
-          {% else %}Buy Now
-        {% endcase %}
-      </button>
+      <button class="sticky-button" id="sticky-button">{{ 'product.buy_now' | t }}</button>
     </div>
   </div>
 </section>
@@ -1103,96 +1157,131 @@
   'use strict';
   
   // Elements
-  const variantTabs = document.querySelectorAll('.variant-tab');
-  const normalVariants = document.getElementById('normal-variants');
-  const unlimitedVariants = document.getElementById('unlimited-variants');
-  const fairUseNotice = document.getElementById('fair-use-notice');
-  const variantRadios = document.querySelectorAll('.plan-radio');
-  const variantInput = document.getElementById('variant-input');
-  const selectedVariantText = document.getElementById('selected-variant');
-  const totalPriceText = document.getElementById('total-price');
-  const productForm = document.getElementById('product-form');
+  const section = document.querySelector('.product-enterprise');
+  const variantTabs = section.querySelectorAll('.variant-tab');
+  const normalGroup = section.querySelector('#normal-variants');
+  const unlimitedGroup = section.querySelector('#unlimited-variants');
+  const fairUseNotice = section.querySelector('#fair-use-notice');
+  const planCards = section.querySelectorAll('.plan-card');
+  const variantInput = section.querySelector('#variant-input');
+  const selectedVariantText = section.querySelector('#selected-variant');
+  const totalPriceText = section.querySelector('#total-price');
+  const productForm = section.querySelector('#product-form');
+  const checkoutButton = section.querySelector('.checkout-button');
   
   // Mobile Sticky
-  const mobileSticky = document.getElementById('mobile-sticky-cart');
-  const stickyVariant = document.getElementById('sticky-variant');
-  const stickyPrice = document.getElementById('sticky-price');
-  const stickyCheckout = document.getElementById('sticky-checkout');
+  const mobileSticky = section.querySelector('#mobile-sticky');
+  const stickyTitle = section.querySelector('#sticky-title');
+  const stickyPrice = section.querySelector('#sticky-price');
+  const stickyButton = section.querySelector('#sticky-button');
   
-  // Tab switching (only if tabs exist)
+  // State
+  let currentVariant = null;
+  let isCustomerLoggedIn = {{ customer.id | default: 'null' }} !== null;
+  let hasPurchasedFreeVariant = false;
+  
+  // Check if customer has purchased free variant
+  if (isCustomerLoggedIn) {
+    const purchasedFree = getCookie('purchased_free_esim');
+    if (purchasedFree === 'true') {
+      hasPurchasedFreeVariant = true;
+    }
+  }
+  
+  // Tab Switching
   if (variantTabs.length > 0) {
     variantTabs.forEach(tab => {
       tab.addEventListener('click', function() {
-        // Remove active from all tabs
         variantTabs.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
         
-        // Show/hide variant groups
         const tabType = this.dataset.tab;
+        
         if (tabType === 'unlimited') {
-          if (normalVariants) normalVariants.style.display = 'none';
-          if (unlimitedVariants) unlimitedVariants.style.display = 'block';
+          if (normalGroup) normalGroup.style.display = 'none';
+          if (unlimitedGroup) unlimitedGroup.style.display = 'block';
           if (fairUseNotice) fairUseNotice.classList.add('active');
-          
-          // Select first unlimited variant
-          const firstUnlimited = unlimitedVariants?.querySelector('.plan-radio');
-          if (firstUnlimited) {
-            firstUnlimited.checked = true;
-            updateSelection(firstUnlimited);
-          }
         } else {
-          if (normalVariants) normalVariants.style.display = 'block';
-          if (unlimitedVariants) unlimitedVariants.style.display = 'none';
+          if (normalGroup) normalGroup.style.display = 'block';
+          if (unlimitedGroup) unlimitedGroup.style.display = 'none';
           if (fairUseNotice) fairUseNotice.classList.remove('active');
-          
-          // Select first normal variant
-          const firstNormal = normalVariants?.querySelector('.plan-radio');
-          if (firstNormal) {
-            firstNormal.checked = true;
-            updateSelection(firstNormal);
-          }
+        }
+        
+        // Select first variant in active tab
+        const activeGroup = tabType === 'unlimited' ? unlimitedGroup : normalGroup;
+        const firstCard = activeGroup?.querySelector('.plan-card');
+        if (firstCard) {
+          selectPlan(firstCard);
         }
       });
     });
   }
   
-  // Update selection
-  function updateSelection(radio) {
-    if (!radio) return;
+  // Plan Selection
+  function selectPlan(card) {
+    // Remove selected from all
+    planCards.forEach(c => c.classList.remove('selected'));
     
-    const variantId = radio.value;
-    const price = radio.dataset.price;
-    const title = radio.dataset.title;
+    // Add selected to clicked
+    card.classList.add('selected');
     
-    variantInput.value = variantId;
-    selectedVariantText.textContent = title;
-    totalPriceText.textContent = price;
-    
-    // Update sticky cart
-    if (mobileSticky) {
-      stickyVariant.textContent = title;
-      stickyPrice.textContent = price;
+    // Get radio input
+    const radio = card.querySelector('input[type="radio"]');
+    if (radio) {
+      radio.checked = true;
+      currentVariant = {
+        id: radio.value,
+        price: radio.dataset.price,
+        title: radio.dataset.title
+      };
+      
+      // Update UI
+      variantInput.value = currentVariant.id;
+      selectedVariantText.textContent = currentVariant.title;
+      totalPriceText.textContent = currentVariant.price;
+      
+      // Update sticky
+      if (mobileSticky) {
+        stickyTitle.textContent = currentVariant.title;
+        stickyPrice.textContent = currentVariant.price;
+      }
     }
   }
   
-  // Variant selection
-  variantRadios.forEach(radio => {
-    radio.addEventListener('change', function() {
-      updateSelection(this);
+  // Add click listeners to plan cards
+  planCards.forEach(card => {
+    card.addEventListener('click', function(e) {
+      // Check if it's a free variant and user not logged in
+      const isFree = this.dataset.isFree === 'true';
+      
+      if (isFree && !isCustomerLoggedIn) {
+        e.preventDefault();
+        saveReturnUrl();
+        window.location.href = '/account/login';
+        return;
+      }
+      
+      if (isFree && hasPurchasedFreeVariant) {
+        e.preventDefault();
+        alert('{{ "product.already_purchased_free" | t }}');
+        return;
+      }
+      
+      selectPlan(this);
     });
   });
   
-  // Initialize with first variant
-  const firstChecked = document.querySelector('.plan-radio:checked');
-  if (firstChecked) {
-    updateSelection(firstChecked);
-  }
-  
-  // Direct checkout (bypass cart)
+  // Direct Checkout
   productForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const formData = new FormData(this);
+    if (!currentVariant) {
+      alert('{{ "product.select_variant" | t }}');
+      return;
+    }
+    
+    // Disable button
+    checkoutButton.disabled = true;
     
     // Clear cart and add product
     fetch('/cart/clear.js', {
@@ -1203,48 +1292,90 @@
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        id: formData.get('id'),
+        id: currentVariant.id,
         quantity: 1
       })
     }))
     .then(() => {
+      // Set cookie if free variant
+      const selectedCard = section.querySelector('.plan-card.selected');
+      if (selectedCard?.dataset.isFree === 'true') {
+        setCookie('purchased_free_esim', 'true', 365);
+      }
+      
       window.location.href = '/checkout';
     })
     .catch(error => {
       console.error('Error:', error);
+      checkoutButton.disabled = false;
     });
   });
   
-  // Mobile sticky cart
-  let scrollThreshold = 300;
+  // Mobile Sticky Cart
+  let scrollThreshold = 500;
   
   function handleScroll() {
     if (!mobileSticky) return;
     
-    if (window.scrollY > scrollThreshold) {
+    const scrolled = window.scrollY > scrollThreshold;
+    const nearBottom = (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100);
+    
+    if (scrolled && !nearBottom) {
       mobileSticky.classList.add('active');
     } else {
       mobileSticky.classList.remove('active');
     }
   }
   
-  // Throttle scroll
+  // Throttled scroll
   let ticking = false;
-  function requestTick() {
+  window.addEventListener('scroll', function() {
     if (!ticking) {
-      window.requestAnimationFrame(handleScroll);
+      window.requestAnimationFrame(function() {
+        handleScroll();
+        ticking = false;
+      });
       ticking = true;
-      setTimeout(() => { ticking = false; }, 100);
     }
-  }
+  });
   
-  window.addEventListener('scroll', requestTick);
-  
-  // Sticky checkout button
-  if (stickyCheckout) {
-    stickyCheckout.addEventListener('click', function() {
+  // Sticky button click
+  if (stickyButton) {
+    stickyButton.addEventListener('click', function() {
       productForm.dispatchEvent(new Event('submit'));
     });
+  }
+  
+  // Helper Functions
+  function setCookie(name, value, days) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/';
+  }
+  
+  function getCookie(name) {
+    const nameEQ = name + '=';
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      let c = cookies[i].trim();
+      if (c.indexOf(nameEQ) === 0) {
+        return c.substring(nameEQ.length);
+      }
+    }
+    return null;
+  }
+  
+  function saveReturnUrl() {
+    const currentUrl = window.location.pathname + window.location.search;
+    localStorage.setItem('return_to_product', currentUrl);
+    sessionStorage.setItem('return_to_product', currentUrl);
+    setCookie('return_to_product', currentUrl, 1);
+  }
+  
+  // Initialize
+  const firstCard = section.querySelector('.plan-card');
+  if (firstCard) {
+    selectPlan(firstCard);
   }
 })();
 </script>
@@ -1255,13 +1386,13 @@
   "settings": [
     {
       "type": "checkbox",
-      "id": "show_trust_badges",
-      "label": "Show Trust Badges",
+      "id": "show_features",
+      "label": "Show Features Section",
       "default": true
     },
     {
       "type": "checkbox",
-      "id": "enable_sticky_cart",
+      "id": "enable_sticky_mobile",
       "label": "Enable Mobile Sticky Cart",
       "default": true
     }
