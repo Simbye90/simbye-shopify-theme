@@ -67,7 +67,7 @@
 .product-enterprise {
   background: var(--product-bg);
   overflow: hidden;
-  padding-top: 40px;
+  padding-top: 80px; /* Mehr Abstand zum Header */
   min-height: 100vh;
 }
 
@@ -346,17 +346,17 @@
   gap: 40px;
 }
 
-/* Plans Container - WITH PROPER GAPS */
+/* Plans Container - MORE GAP */
 .plans-container {
   display: flex;
   flex-direction: column;
-  gap: 16px !important;
+  gap: 20px !important; /* Mehr Abstand */
 }
 
 .variant-group {
   display: flex;
   flex-direction: column;
-  gap: 16px !important;
+  gap: 20px !important; /* Mehr Abstand */
 }
 
 /* Plan Cards */
@@ -446,39 +446,62 @@
   margin-bottom: 4px;
 }
 
-/* FREE Badge - NO SYMBOLS! SVG ONLY */
+/* FREE Badge - PROMINENT DESIGN */
 .free-badge {
   position: absolute;
-  top: -12px;
+  top: -14px;
   left: 20px;
-  background: linear-gradient(135deg, var(--product-accent), #00ff88);
+  background: linear-gradient(135deg, #00ff88, var(--product-accent));
   color: #0a0a0a;
-  padding: 8px 20px;
+  padding: 10px 24px;
   border-radius: 100px;
-  font-weight: 800;
-  font-size: 14px;
-  box-shadow: 0 6px 20px rgba(0, 217, 126, 0.4);
-  animation: freePulse 1.5s infinite;
+  font-weight: 900;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 24px rgba(0, 217, 126, 0.5);
+  animation: freePulse 2s infinite;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   z-index: 2;
 }
 
 @keyframes freePulse {
   0%, 100% { 
     transform: scale(1);
-    box-shadow: 0 6px 20px rgba(0, 217, 126, 0.4);
+    box-shadow: 0 8px 24px rgba(0, 217, 126, 0.5);
   }
   50% { 
-    transform: scale(1.08);
-    box-shadow: 0 8px 28px rgba(0, 217, 126, 0.6);
+    transform: scale(1.1);
+    box-shadow: 0 12px 32px rgba(0, 217, 126, 0.7);
   }
 }
 
 .gift-icon {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+}
+
+/* FREE Card Special Styling */
+.plan-card[data-is-free="true"] {
+  background: linear-gradient(135deg, 
+    rgba(0, 217, 126, 0.05) 0%, 
+    rgba(0, 255, 136, 0.05) 100%);
+  border: 2px solid var(--product-accent);
+}
+
+.plan-card[data-is-free="true"] .plan-name {
+  color: var(--product-primary);
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.plan-card[data-is-free="true"] .plan-price {
+  color: var(--product-accent);
+  font-size: 36px;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 /* Popular Badge */
@@ -617,12 +640,13 @@
   box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
 }
 
-/* Payment Methods */
+/* Payment Methods - MORE SPACING */
 .payment-methods {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  padding-top: 20px;
+  gap: 12px;
+  padding-top: 24px; /* Mehr Abstand */
+  margin-top: 20px;
   border-top: 1px solid var(--product-border);
 }
 
@@ -1054,40 +1078,7 @@
           </h1>
         </div>
         
-        <!-- Price Range -->
-        <div class="price-range">
-          <span class="price-from">{{ 'product.price_from' | t | default: 'from' }}</span>
-          <span>{{ product.price_min | money }} - {{ product.price_max | money }}</span>
-        </div>
-        
-        <!-- Subtitle -->
-        <p class="hero-subtitle">
-          {{ 'product.hero_subtitle' | t: country: product.title | default: 'Prepaid eSIM data plans. Activated in 60 seconds, keep your WhatsApp number, no contract.' }}
-        </p>
-        
-        <!-- Features List -->
-        <div class="hero-features">
-          <div class="hero-feature">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <span>{{ 'product.instant_delivery' | t | default: 'Instant delivery' }}</span>
-          </div>
-          <div class="hero-feature">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-            </svg>
-            <span>{{ 'product.premium_network' | t | default: 'Premium 4G/5G network' }}</span>
-          </div>
-          <div class="hero-feature">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-            </svg>
-            <span>{{ 'product.whatsapp_support' | t | default: '24/7 WhatsApp support' }}</span>
-          </div>
-        </div>
-        
-        <!-- Trust Badges -->
+        <!-- Trust Badges Only - NO PRICE RANGE! -->
         <div class="trust-badges">
           <div class="trust-badge">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -1100,6 +1091,12 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
             </svg>
             <span>{{ 'product.secure_payment' | t | default: 'Secure payment' }}</span>
+          </div>
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+            </svg>
+            <span>{{ 'product.instant_activation' | t | default: 'Instant activation' }}</span>
           </div>
         </div>
       </div>
@@ -1199,14 +1196,14 @@
                   <div class="plan-info">
                     <div class="plan-name">
                       {% if is_free %}
-                        100MB Test eSIM
+                        100MB FREE eSIM
                       {% else %}
                         {{ variant.title }}
                       {% endif %}
                     </div>
                     <div class="plan-validity">
                       {% if is_free %}
-                        {{ 'product.valid_for' | t | default: 'Valid for' }} 7 {{ 'product.days' | t | default: 'days' }}
+                        {{ 'product.test_esim' | t | default: 'Test our service - No credit card' }}
                       {% else %}
                         {{ 'product.valid_for' | t | default: 'Valid for' }}
                         {% assign title_parts = variant.title | split: " " %}
@@ -1234,7 +1231,10 @@
                   {% unless customer %}
                     <div class="login-overlay">
                       <a href="/account/login?return_url={{ request.path }}" class="login-button">
-                        {{ 'product.login_for_free' | t | default: 'Login for FREE eSIM' }}
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="20" height="20">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                        </svg>
+                        Login for FREE eSIM
                       </a>
                     </div>
                   {% endunless %}
