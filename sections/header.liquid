@@ -36,9 +36,9 @@
   --primary-accent: #00ff88;
 }
 
-/* Header - ENHANCED STYLING */
+/* Header - FIXED POSITION STATT STICKY */
 .enterprise-header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -48,6 +48,17 @@
   z-index: 1000;
   transition: all var(--transition-base);
   border-bottom: 1px solid transparent;
+}
+
+/* Body Padding für Fixed Header */
+body {
+  padding-top: var(--header-height);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: var(--header-mobile-height);
+  }
 }
 
 .enterprise-header.scrolled {
@@ -377,7 +388,7 @@
   visibility: visible;
 }
 
-/* Mobile Menu Header - VERBESSERT */
+/* Mobile Menu Header - GRÖSSERE SCHRIFT */
 .mobile-menu-header {
   padding: 24px 20px;
   border-bottom: 2px solid var(--border-color);
@@ -398,7 +409,7 @@
   gap: 10px;
   text-decoration: none;
   color: var(--text-color);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   transition: all var(--transition-fast);
   padding: 10px 20px;
@@ -450,16 +461,16 @@
   color: #ff3b30;
 }
 
-/* Mobile Navigation - VERBESSERT MIT GRÖSSERER SCHRIFT */
+/* Mobile Navigation - GRÖSSERE SCHRIFT */
 .mobile-nav {
   padding: 24px 20px;
 }
 
 .mobile-nav-item {
   display: block;
-  padding: 18px 24px;
+  padding: 20px 24px;
   color: var(--text-color);
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 600;
   text-decoration: none;
   border-radius: var(--border-radius-sm);
@@ -482,7 +493,7 @@
   color: var(--primary-color);
 }
 
-/* Mobile Settings - ENHANCED */
+/* Mobile Settings - GRÖSSERE SCHRIFT */
 .mobile-settings {
   padding: 20px;
   border-top: 2px solid var(--border-color);
@@ -511,7 +522,7 @@
 }
 
 .settings-label {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--text-secondary);
 }
@@ -523,7 +534,7 @@
   padding: 8px 14px;
   border-radius: 12px;
   background: white;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
   color: var(--text-color);
   box-shadow: var(--shadow-sm);
