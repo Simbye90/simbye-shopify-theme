@@ -107,7 +107,7 @@
   align-items: center;
   padding: 12px 24px;
   color: var(--text-color);
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 500;
   text-decoration: none;
   border-radius: var(--border-radius-sm);
@@ -163,7 +163,7 @@
   height: 100%;
 }
 
-/* Login Button Desktop - ENHANCED WITH ANIMATION */
+/* Login Button Desktop - OHNE ANIMATION */
 .auth-btn {
   display: inline-flex;
   align-items: center;
@@ -179,28 +179,12 @@
   transition: all var(--transition-base);
   gap: 8px;
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  animation: subtlePulse 4s ease-in-out infinite;
   position: relative;
   overflow: hidden;
 }
 
-.auth-btn::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-accent));
-  border-radius: 100px;
-  opacity: 0;
-  z-index: -1;
-  filter: blur(20px);
-  animation: glow 4s ease-in-out infinite;
-}
-
 .auth-btn:hover {
-  transform: translateY(-2px) scale(1.02);
+  transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
 
@@ -298,7 +282,7 @@
   transform: rotate(180deg) scale(0);
 }
 
-/* Mobile Toggle - ENHANCED */
+/* Mobile Toggle - OHNE ANIMATION UND SHADOW */
 .mobile-toggle {
   display: none;
   width: 48px;
@@ -310,8 +294,6 @@
   cursor: pointer;
   border: none;
   position: relative;
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.3);
-  animation: subtlePulse 4s ease-in-out infinite;
 }
 
 .mobile-toggle:active {
@@ -395,20 +377,19 @@
   visibility: visible;
 }
 
-/* Mobile Menu Header - ENHANCED */
+/* Mobile Menu Header - VERBESSERT */
 .mobile-menu-header {
-  padding: 20px;
+  padding: 24px 20px;
   border-bottom: 2px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 65px;
-  background: var(--header-gradient);
+  min-height: 80px;
+  background: transparent;
 }
 
 [data-theme="dark"] .mobile-menu-header {
   border-bottom-color: rgba(255, 255, 255, 0.08);
-  background: rgba(0, 217, 126, 0.02);
 }
 
 .mobile-header-login {
@@ -417,19 +398,18 @@
   gap: 10px;
   text-decoration: none;
   color: var(--text-color);
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 600;
   transition: all var(--transition-fast);
-  padding: 8px 16px;
-  border-radius: var(--border-radius-sm);
+  padding: 10px 20px;
+  border-radius: 100px;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-accent));
   color: white;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
 }
 
 .mobile-header-login:hover {
   transform: translateX(2px);
-  box-shadow: 0 6px 16px rgba(0, 154, 97, 0.3);
+  opacity: 0.9;
 }
 
 .mobile-header-login svg {
@@ -470,32 +450,33 @@
   color: #ff3b30;
 }
 
-/* Mobile Navigation - ENHANCED */
+/* Mobile Navigation - VERBESSERT MIT GRÖSSERER SCHRIFT */
 .mobile-nav {
-  padding: 16px;
+  padding: 24px 20px;
 }
 
 .mobile-nav-item {
   display: block;
-  padding: 16px 20px;
+  padding: 18px 24px;
   color: var(--text-color);
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   text-decoration: none;
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   background: var(--header-gradient);
-  border: 2px solid transparent;
+  border: 2px solid var(--border-color);
 }
 
 [data-theme="dark"] .mobile-nav-item {
-  background: rgba(26, 26, 26, 0.4);
+  background: rgba(26, 26, 26, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .mobile-nav-item:hover,
 .mobile-nav-item:active {
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.08), rgba(0, 217, 126, 0.08));
+  background: rgba(0, 154, 97, 0.1);
   border-color: var(--primary-color);
   transform: translateX(4px);
   color: var(--primary-color);
@@ -597,23 +578,10 @@
   border-top: 1px solid var(--border-color);
 }
 
-/* Animations */
-@keyframes subtlePulse {
-  0%, 100% { 
-    transform: translateY(0) scale(1);
-  }
-  50% { 
-    transform: translateY(-2px) scale(1.02);
-  }
-}
-
-@keyframes glow {
-  0%, 100% { 
-    opacity: 0;
-  }
-  50% { 
-    opacity: 0.6;
-  }
+/* Animations - NUR NOCH DIESE BEIDEN */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Responsive */
@@ -623,7 +591,7 @@
   }
   
   .nav-link {
-    font-size: 16px;
+    font-size: 20px;
     padding: 10px 20px;
   }
 }
