@@ -36,9 +36,9 @@
   --primary-accent: #00ff88;
 }
 
-/* Header - FIXED POSITION STATT STICKY */
+/* Header - NORMAL AUF DESKTOP, FIXED AUF MOBILE */
 .enterprise-header {
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -50,12 +50,17 @@
   border-bottom: 1px solid transparent;
 }
 
-/* Body Padding für Fixed Header */
+/* Body Padding entfernt für Desktop */
 body {
-  padding-top: var(--header-height);
+  padding-top: 0;
 }
 
+/* NUR MOBILE FIXED */
 @media (max-width: 768px) {
+  .enterprise-header {
+    position: fixed;
+  }
+  
   body {
     padding-top: var(--header-mobile-height);
   }
