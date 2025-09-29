@@ -181,6 +181,14 @@
 
 /* KEINE HOVER EFFEKTE für Cards! */
 
+/* Feature Cards mit Icons neben Titel */
+.feature-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
 .feature-icon {
   width: 48px;
   height: 48px;
@@ -189,7 +197,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 @media (min-width: 768px) {
@@ -197,7 +205,6 @@
     width: 56px;
     height: 56px;
     border-radius: 16px;
-    margin-bottom: 20px;
   }
 }
 
@@ -625,20 +632,19 @@
   }
 }
 
-/* Device Tabs - MOBILE OPTIMIERT */
+/* Device Tabs - MOBILE NEBENEINANDER */
 .device-tabs {
   background: #1a1a1a;
   border-radius: 100px;
   padding: 4px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Auch auf Mobile nebeneinander! */
   gap: 4px;
   margin: 24px;
 }
 
 @media (min-width: 768px) {
   .device-tabs {
-    flex-direction: row;
     margin: 32px;
   }
 }
@@ -812,33 +818,39 @@
     <div class="info-tab-content active" id="features-content">
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-            </svg>
+          <div class="feature-title-row">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              </svg>
+            </div>
+            <h3 class="feature-title">{{ 'product.feature_instant_title' | t | default: 'Instant Delivery' }}</h3>
           </div>
-          <h3 class="feature-title">{{ 'product.feature_instant_title' | t | default: 'Instant Delivery' }}</h3>
           <p class="feature-description">{{ 'product.feature_instant_desc' | t | default: 'QR code in 60 seconds via email. No physical SIM needed.' }}</p>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79" />
-            </svg>
+          <div class="feature-title-row">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+            </div>
+            <h3 class="feature-title">{{ 'product.feature_recharge_title' | t | default: 'Rechargeable eSIM' }}</h3>
           </div>
-          <h3 class="feature-title">{{ 'product.feature_network_title' | t | default: 'Premium Network' }}</h3>
-          <p class="feature-description">{{ 'product.feature_network_desc' | t | default: 'Fast 4G/5G internet with the best local providers.' }}</p>
+          <p class="feature-description">{{ 'product.feature_recharge_desc' | t | default: 'Top up your eSIM anytime from your account. No need to buy a new eSIM when data runs out.' }}</p>
         </div>
         
         <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-            </svg>
+          <div class="feature-title-row">
+            <div class="feature-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              </svg>
+            </div>
+            <h3 class="feature-title">{{ 'product.feature_support_title' | t | default: '24/7 WhatsApp Support' }}</h3>
           </div>
-          <h3 class="feature-title">{{ 'product.feature_support_title' | t | default: '24/7 Support' }}</h3>
-          <p class="feature-description">{{ 'product.feature_support_desc' | t | default: 'WhatsApp and live chat support in 12 languages.' }}</p>
+          <p class="feature-description">{{ 'product.feature_support_desc' | t | default: 'Get instant help via WhatsApp or live chat. Support available in 12 languages around the clock.' }}</p>
         </div>
       </div>
       
@@ -874,39 +886,64 @@
       </div>
     </div>
     
-    <!-- Technical Specs Tab -->
+    <!-- Technical Specs Tab - MIT KORREKTEN METAFIELDS -->
     <div class="info-tab-content" id="specs-content">
       <div class="specs-grid">
+        <!-- Network -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_network' | t | default: 'Network' }}</div>
           <div class="spec-value">{{ product.metafields.custom.plantyp | default: '4G/5G Premium' }}</div>
         </div>
         
+        <!-- Speed -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_speed' | t | default: 'Speed' }}</div>
           <div class="spec-value">4G/5G</div>
         </div>
         
+        <!-- Coverage -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_coverage' | t | default: 'Coverage' }}</div>
           <div class="spec-value">{{ product.metafields.custom.aktivierungspolitik | default: '98% Country Coverage' }}</div>
         </div>
         
+        <!-- Data Plans -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_plans' | t | default: 'Data Plans' }}</div>
           <div class="spec-value">
-            {% assign data_sizes = "" %}
+            {% assign datalist = "" %}
             {% for variant in product.variants %}
-              {% unless variant.title contains '100MB' %}
-                {% assign size = variant.title | split: ' ' | first %}
-                {% if data_sizes == "" %}
-                  {% assign data_sizes = size %}
+              {% assign data_value = variant.metafields.custom.data_ | replace: " ", "" %}
+              {% unless data_value == "100MB" or data_value == blank or data_value == nil %}
+                {% if datalist == "" %}
+                  {% assign datalist = data_value %}
                 {% else %}
-                  {% assign data_sizes = data_sizes | append: ", " | append: size %}
+                  {% unless datalist contains data_value %}
+                    {% assign datalist = datalist | append: ", " | append: data_value %}
+                  {% endunless %}
                 {% endif %}
               {% endunless %}
             {% endfor %}
-            {{ data_sizes }}
+            
+            {% if datalist == "" %}
+              {% comment %} Fallback wenn keine Metafields vorhanden {% endcomment %}
+              {% for variant in product.variants %}
+                {% unless variant.title contains '100MB' %}
+                  {% assign size = variant.title | split: ' ' | first %}
+                  {% if datalist == "" %}
+                    {% assign datalist = size %}
+                  {% else %}
+                    {% unless datalist contains size %}
+                      {% assign datalist = datalist | append: ", " | append: size %}
+                    {% endunless %}
+                  {% endif %}
+                {% endunless %}
+              {% endfor %}
+            {% endif %}
+            
+            {{ datalist }}
+            
+            {% comment %} Check für Unlimited {% endcomment %}
             {% for variant in product.variants %}
               {% if variant.sku contains 'unlimited' or variant.sku contains 'daily' or variant.sku contains 'Daily' %}
                 , Unlimited
@@ -916,51 +953,64 @@
           </div>
         </div>
         
+        <!-- Validity after Activation -->
         <div class="spec-item">
-          <div class="spec-label">{{ 'product.spec_validity' | t | default: 'Validity' }}</div>
+          <div class="spec-label">{{ 'product.spec_validity' | t | default: 'Validity after Activation' }}</div>
           <div class="spec-value">
-            {% assign first_variant = product.variants | first %}
-            {% assign last_variant = product.variants | last %}
-            {% assign first_days = first_variant.title | split: ' ' | reverse | second %}
-            {% assign last_days = last_variant.title | split: ' ' | reverse | second %}
-            {% if first_days == last_days %}
-              {{ first_days }} {{ 'product.days' | t | default: 'Days' }}
-            {% else %}
+            {% assign first_title_parts = product.variants.first.title | split: " " %}
+            {% assign last_title_parts = product.variants.last.title | split: " " %}
+            
+            {% assign first_index = first_title_parts.size | minus: 2 %}
+            {% assign last_index = last_title_parts.size | minus: 2 %}
+            
+            {% assign first_days = first_title_parts[first_index] %}
+            {% assign last_days = last_title_parts[last_index] %}
+            
+            {% if product.variants.size > 1 and first_days != last_days %}
               {{ first_days }}-{{ last_days }} {{ 'product.days' | t | default: 'Days' }}
+            {% else %}
+              {{ first_days }} {{ 'product.days' | t | default: 'Days' }}
             {% endif %}
           </div>
         </div>
         
+        <!-- Hotspot -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_hotspot' | t | default: 'Hotspot' }}</div>
           <div class="spec-value yes">{{ 'product.yes' | t | default: 'Yes' }}</div>
         </div>
         
+        <!-- Voice Calls -->
         <div class="spec-item">
-          <div class="spec-label">{{ 'product.spec_voice' | t | default: 'Voice Calls' }}</div>
-          <div class="spec-value no">{{ 'product.spec_voice_apps' | t | default: 'Voice apps only' }}</div>
+          <div class="spec-label">{{ 'product.spec_voice' | t | default: 'Voice Call' }}</div>
+          <div class="spec-value no">✗ {{ 'product.spec_voice_apps' | t | default: 'Voice apps only' }}</div>
         </div>
         
+        <!-- Plan Type -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_plantype' | t | default: 'Plan Type' }}</div>
           <div class="spec-value">Prepaid eSIM</div>
         </div>
         
+        <!-- eKYC -->
         <div class="spec-item">
-          <div class="spec-label">{{ 'product.spec_ekyc' | t | default: 'eKYC' }}</div>
-          <div class="spec-value no">{{ 'product.no' | t | default: 'No' }}</div>
+          <div class="spec-label">{{ 'product.spec_ekyc' | t | default: 'eKYC (Identity Verification)' }}</div>
+          <div class="spec-value no">✗ {{ 'product.no' | t | default: 'No' }}</div>
         </div>
         
+        <!-- Delivery -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_delivery' | t | default: 'Delivery' }}</div>
-          <div class="spec-value">{{ 'product.instant' | t | default: 'Instant' }}</div>
+          <div class="spec-value">{{ 'product.instant' | t | default: 'Immediately after purchase' }}</div>
         </div>
         
+        <!-- Phone Number -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_phone' | t | default: 'Phone Number' }}</div>
-          <div class="spec-value no">{{ 'product.no' | t | default: 'No' }}</div>
+          <div class="spec-value no">✗ {{ 'product.no' | t | default: 'No' }}</div>
         </div>
         
+        <!-- eSIM Validity -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_esim_validity' | t | default: 'eSIM Validity' }}</div>
           <div class="spec-value">180 {{ 'product.days' | t | default: 'Days' }}</div>
@@ -1008,7 +1058,7 @@
         {% for device in android_devices %}
           <div class="device-item">
             <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
+              <path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/>
             </svg>
             <span>{{ device }}</span>
           </div>

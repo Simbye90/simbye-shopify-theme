@@ -15,9 +15,15 @@
         "show_compare_price": true,
         "price_increase_percent": 50
       }
+    },
+    "product_info_tabs_jTcRT8": {
+      "type": "product-info-tabs",
+      "name": "Product Info Tabs",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "product_info_tabs_jTcRT8"
   ]
 }
