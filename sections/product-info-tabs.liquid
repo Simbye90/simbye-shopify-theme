@@ -84,47 +84,6 @@
   z-index: 1;
 }
 
-/* Header - NEU mit Why Styling */
-.tabs-header {
-  text-align: center;
-  margin-bottom: 72px;
-  animation: fadeInUp 0.8s ease;
-}
-
-/* TITLE - EXAKT WIE WHY SECTION */
-.tabs-title {
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700;
-  color: var(--tabs-text);
-  margin: 0 0 20px 0;
-  letter-spacing: -0.02em;
-  line-height: 1.1;
-}
-
-.tabs-title-highlight {
-  background: var(--tabs-primary);
-  color: white;
-  padding: 4px 20px;
-  border-radius: 12px;
-  display: inline-block;
-  margin: 0 8px;
-}
-
-[data-theme="dark"] .tabs-title-highlight {
-  background: var(--tabs-primary);
-  color: #fff;
-}
-
-.tabs-subtitle {
-  font-size: 20px;
-  color: var(--tabs-text-secondary);
-  margin: 0;
-  font-weight: 400;
-  line-height: 1.5;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
 /* Tab Navigation - Mit Why Styling */
 .info-tab-nav {
   display: flex;
@@ -790,19 +749,6 @@
     margin-top: 0 !important;
   }
   
-  .tabs-header {
-    margin-bottom: 48px;
-  }
-  
-  .tabs-title {
-    font-size: 32px;
-  }
-  
-  .tabs-subtitle {
-    font-size: 17px;
-    padding: 0 16px;
-  }
-  
   .info-tab-nav {
     gap: 8px;
     margin-bottom: 32px;
@@ -932,15 +878,6 @@
     padding: 20px 12px 0 12px;
   }
   
-  .tabs-title {
-    font-size: 28px;
-  }
-  
-  .tabs-subtitle {
-    font-size: 16px;
-    padding: 0 8px;
-  }
-  
   .feature-card {
     padding: 20px 16px;
   }
@@ -959,16 +896,6 @@
 <!-- HTML Structure -->
 <section class="product-info-tabs-section">
   <div class="info-tabs-container">
-    
-    <!-- Header mit Why Section Styling -->
-    <div class="tabs-header">
-      <h2 class="tabs-title">
-        {{ 'product.info_title_part1' | t | default: 'Product' }} <span class="tabs-title-highlight">{{ 'product.info_title_part2' | t | default: 'Information' }}</span> {{ 'product.info_title_part3' | t | default: '& Details' }}
-      </h2>
-      <p class="tabs-subtitle">
-        {{ 'product.info_subtitle' | t | default: 'Everything you need to know about your eSIM' }}
-      </p>
-    </div>
     
     <!-- Tab Navigation -->
     <div class="info-tab-nav">
