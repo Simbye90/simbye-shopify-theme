@@ -229,43 +229,18 @@
   "already_purchased_free": "You have already purchased this free eSIM",
   "select_variant": "Please select a variant",
   
-  // NEU - FEHLENDE KEYS:
-  "description": "Description",
-  "technical_details": "Technical Details",
-  
-  // Features für Description Tab
-  "feature_lowdata_title": "Low Data Volume?",
-  "feature_lowdata_desc": "Top up your eSIM from anywhere in seconds. No need to buy a new eSIM.",
-  "feature_nosim_title": "No SIM Card Needed",
-  "feature_nosim_desc": "Works on all eSIM compatible devices. Install directly via QR code.",
-  "feature_network_coverage": "Connected with our premium network partner for 98% coverage across %{country}",
-  
-
-  "spec_network": "Network",
-  "spec_speed": "Speed",
-  "spec_coverage": "Coverage",
-  "spec_plans": "Data Plans",
-  "spec_validity": "Validity",
-  "spec_hotspot": "Hotspot",
-  "spec_voice": "Voice Calls",
-  "spec_voice_apps": "Voice apps only",
-  "spec_plantype": "Plan Type",
-  "spec_ekyc": "eKYC",
-  "spec_delivery": "Delivery",
-  "spec_phone": "Phone Number",
-  "spec_esim_validity": "eSIM Validity",
-   "tab_features": "Features",
+"tab_features": "Features",
     "tab_description": "Description",
     "tab_technical": "Technical Specs",
-    
-    "feature_instant_title": "Instant Delivery",
-    "feature_instant_desc": "QR code in 60 seconds via email. No physical SIM needed.",
     
     "feature_recharge_title": "Rechargeable eSIM",
     "feature_recharge_desc": "Top up your eSIM anytime from your account. No need to buy a new eSIM when data runs out.",
     
-    "feature_support_title": "24/7 WhatsApp Support",
-    "feature_support_desc": "Get instant help via WhatsApp or live chat. Support available in 12 languages around the clock.",
+    "feature_money_back_title": "Money-Back Guarantee",
+    "feature_money_back_desc": "30-day money-back guarantee. Not satisfied? Get a full refund, no questions asked.",
+    
+    "feature_no_contract_title": "No Contract Required",
+    "feature_no_contract_desc": "Prepaid eSIM with no commitments. Cancel anytime, no hidden fees or long-term contracts.",
     
     "compatibility_title": "Check Device Compatibility",
     "compatibility_subtitle": "Make sure your device supports eSIM before purchasing",
