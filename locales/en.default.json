@@ -229,25 +229,29 @@
   "already_purchased_free": "You have already purchased this free eSIM",
   "select_variant": "Please select a variant",
   
-    "info_title_part1": "Product",
-    "info_title_part2": "Information",
-    "info_title_part3": "& Details",
-    "info_subtitle": "Everything you need to know about your eSIM",
-    
-    "tab_features": "Features",
+  // NEU - FEHLENDE KEYS:
+  "description": "Description",
+  "technical_details": "Technical Details",
+  
+  // Features für Description Tab
+  "feature_lowdata_title": "Low Data Volume?",
+  "feature_lowdata_desc": "Top up your eSIM from anywhere in seconds. No need to buy a new eSIM.",
+  "feature_nosim_title": "No SIM Card Needed",
+  "feature_nosim_desc": "Works on all eSIM compatible devices. Install directly via QR code.",
+  "feature_network_coverage": "Connected with our premium network partner for 98% coverage across %{country}",
+  
+
+ "tab_features": "Features",
     "tab_description": "Description",
     "tab_technical": "Technical Specs",
     
     "feature_recharge_title": "Rechargeable eSIM",
-    "feature_recharge_subtitle": "Top up anytime",
     "feature_recharge_desc": "Top up your eSIM anytime from your account. No need to buy a new eSIM when data runs out.",
     
     "feature_money_back_title": "Money-Back Guarantee",
-    "feature_money_back_subtitle": "30-day guarantee",
     "feature_money_back_desc": "30-day money-back guarantee. Not satisfied? Get a full refund, no questions asked.",
     
     "feature_no_contract_title": "No Contract Required",
-    "feature_no_contract_subtitle": "Prepaid & flexible",
     "feature_no_contract_desc": "Prepaid eSIM with no commitments. Cancel anytime, no hidden fees or long-term contracts.",
     
     "compatibility_title": "Check Device Compatibility",
@@ -256,7 +260,7 @@
     "compatibility_modal_title": "Check eSIM Compatibility",
     "compatibility_note": "If your device model is NOT in the list, it was not built to support eSIM.",
     
-    "why_choose": "Why choose our eSIM?",
+    "why_choose": "Why choose {{product}} eSIM?",
     
     "spec_network": "Network",
     "spec_speed": "Speed",
@@ -272,9 +276,9 @@
     "spec_phone": "Phone Number",
     "spec_esim_validity": "eSIM Validity",
     
-    "days": "Days",
     "yes": "Yes",
     "no": "No",
+    "days": "Days",
     "instant": "Immediately after purchase"
 }
 }
