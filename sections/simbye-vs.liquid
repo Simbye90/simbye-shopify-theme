@@ -1,5 +1,5 @@
 <!-- sections/comparison-table.liquid -->
-<!-- SIMBYE COMPARISON TABLE SECTION - ENTERPRISE LEVEL -->
+<!-- SIMBYE COMPARISON TABLE SECTION - OPTIMIZED VERSION -->
 
 <style>
 /* CSS Variables - Identisch mit Why Section */
@@ -91,7 +91,7 @@
 
 /* Title - EXAKT WIE WHY SECTION */
 .comparison-title {
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: clamp(32px, 5vw, 56px);
   font-weight: 700;
   color: var(--compare-text);
   margin: 0 0 20px 0;
@@ -265,6 +265,7 @@
 .comparison-table tbody tr:nth-child(6) { animation-delay: 0.55s; }
 .comparison-table tbody tr:nth-child(7) { animation-delay: 0.6s; }
 .comparison-table tbody tr:nth-child(8) { animation-delay: 0.65s; }
+.comparison-table tbody tr:nth-child(9) { animation-delay: 0.7s; }
 
 .comparison-table tbody tr:hover {
   background: var(--compare-gradient);
@@ -418,78 +419,6 @@
   font-weight: 600;
 }
 
-/* CTA Section */
-.comparison-cta {
-  text-align: center;
-  margin-top: 48px;
-  padding: 48px;
-  background: var(--compare-gradient);
-  border-radius: 24px;
-  border: 2px solid var(--compare-border);
-  animation: fadeInUp 0.9s ease 0.8s both;
-}
-
-[data-theme="dark"] .comparison-cta {
-  background: var(--compare-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.cta-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--compare-text);
-  margin-bottom: 16px;
-}
-
-.cta-subtitle {
-  font-size: 18px;
-  color: var(--compare-text-secondary);
-  margin-bottom: 32px;
-}
-
-.cta-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 18px 36px;
-  background: linear-gradient(135deg, var(--compare-primary), var(--compare-accent));
-  color: white;
-  border: none;
-  border-radius: 100px;
-  font-size: 16px;
-  font-weight: 700;
-  text-decoration: none;
-  cursor: pointer;
-  transition: var(--compare-transition);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  animation: subtlePulse 4s ease-in-out infinite;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--compare-shadow-lg);
-}
-
-.cta-button-secondary {
-  background: transparent;
-  color: var(--compare-primary);
-  border: 2px solid var(--compare-primary);
-  animation: none;
-}
-
-.cta-button-secondary:hover {
-  background: var(--compare-primary);
-  color: white;
-}
-
 /* Mobile Styles */
 @media (max-width: 1024px) {
   .comparison-container {
@@ -499,6 +428,7 @@
   .comparison-table th,
   .comparison-table td {
     padding: 20px 16px;
+    font-size: 14px;
   }
   
   .option-name {
@@ -506,7 +436,7 @@
   }
 }
 
-/* Mobile Table */
+/* Mobile Table - OPTIMIZED */
 @media (max-width: 768px) {
   .comparison-section {
     padding: 0 0 20px 0;
@@ -522,15 +452,15 @@
   }
   
   .comparison-header {
-    margin-bottom: 48px;
+    margin-bottom: 32px;
   }
   
   .comparison-title {
-    font-size: 32px;
+    font-size: 28px;
   }
   
   .comparison-subtitle {
-    font-size: 17px;
+    font-size: 16px;
     padding: 0 16px;
   }
   
@@ -551,69 +481,61 @@
   
   /* Scrollable Table */
   .comparison-table {
-    min-width: 600px;
+    min-width: 500px;
   }
   
   .comparison-table th,
   .comparison-table td {
-    padding: 16px 12px;
+    padding: 12px 8px;
+    font-size: 13px;
   }
   
   .comparison-table th:first-child,
   .comparison-table td:first-child {
     position: sticky;
     left: 0;
-    z-index: 1;
+    z-index: 2;
     background: var(--compare-card-bg);
     box-shadow: 2px 0 4px rgba(0,0,0,0.1);
-  }
-  
-  .comparison-table th.featured-column {
-    position: sticky;
-    left: 140px;
-    z-index: 1;
-  }
-  
-  .comparison-table td.featured-column {
-    position: sticky;
-    left: 140px;
-    z-index: 1;
+    min-width: 120px;
   }
   
   .option-name {
-    font-size: 16px;
+    font-size: 14px;
+  }
+  
+  .option-type {
+    font-size: 10px;
   }
   
   .price-value {
-    font-size: 20px;
+    font-size: 18px;
   }
   
   .recommended-badge {
+    font-size: 9px;
+    padding: 2px 8px;
+  }
+  
+  .value-check,
+  .value-cross,
+  .value-partial {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .value-check svg,
+  .value-cross svg,
+  .value-partial svg {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .save-badge {
     font-size: 10px;
-    padding: 3px 10px;
-  }
-  
-  /* CTA Mobile */
-  .comparison-cta {
-    padding: 32px 20px;
-    border-radius: 20px;
-  }
-  
-  .cta-title {
-    font-size: 24px;
-  }
-  
-  .cta-subtitle {
-    font-size: 16px;
-  }
-  
-  .cta-buttons {
-    flex-direction: column;
-  }
-  
-  .cta-button {
-    width: 100%;
-    padding: 16px 32px;
+    padding: 3px 8px;
+    top: -6px;
+    right: -6px;
   }
 }
 
@@ -668,9 +590,8 @@
     <!-- Header -->
     <div class="comparison-header">
       <h2 class="comparison-title">
-        {{ 'comparison.title_part1' | t | default: 'eSIM vs' }} 
-        <span class="comparison-title-highlight">{{ 'comparison.title_part2' | t | default: 'Traditional Options' }}</span> 
-        {{ 'comparison.title_part3' | t | default: 'Comparison' }}
+        {{ product.title }} {{ 'comparison.title_part1' | t | default: 'eSIM vs' }} 
+        <span class="comparison-title-highlight">{{ 'comparison.title_part2' | t | default: 'Roaming vs Local SIM' }}</span>
       </h2>
       <p class="comparison-subtitle">
         {{ 'comparison.subtitle' | t | default: 'Compare international mobile data solutions and save up to 85% on roaming charges' }}
@@ -699,16 +620,16 @@
       </div>
     </div>
     
-    <!-- Comparison Table -->
+    <!-- Comparison Table - 4 COLUMNS -->
     <div class="comparison-table-wrapper">
       <table class="comparison-table">
         <thead>
           <tr>
             <th>{{ 'comparison.features' | t | default: 'Compare Features' }}</th>
             <th class="featured-column">
-              <span class="recommended-badge">{{ 'comparison.recommended' | t | default: 'RECOMMENDED' }}</span>
-              <span class="option-name">{{ 'comparison.simbye_esim' | t | default: 'Simbye eSIM' }}</span>
-              <span class="option-type">{{ 'comparison.prepaid' | t | default: 'Prepaid Data' }}</span>
+              <span class="recommended-badge">{{ 'comparison.recommended' | t | default: 'BEST CHOICE' }}</span>
+              <span class="option-name">{{ product.title }} {{ 'comparison.simbye_esim' | t | default: 'eSIM' }}</span>
+              <span class="option-type">{{ 'comparison.digital' | t | default: 'Digital • Instant' }}</span>
             </th>
             <th>
               <span class="option-name">{{ 'comparison.roaming' | t | default: 'International Roaming' }}</span>
@@ -718,10 +639,6 @@
               <span class="option-name">{{ 'comparison.local_sim' | t | default: 'Local SIM Card' }}</span>
               <span class="option-type">{{ 'comparison.physical' | t | default: 'Physical Card' }}</span>
             </th>
-            <th>
-              <span class="option-name">{{ 'comparison.wifi_device' | t | default: 'Pocket WiFi' }}</span>
-              <span class="option-type">{{ 'comparison.rental' | t | default: 'Rental Device' }}</span>
-            </th>
           </tr>
         </thead>
         <tbody>
@@ -729,17 +646,21 @@
           <tr>
             <td>
               <div class="feature-label">
-                <span>{{ 'comparison.price_gb' | t | default: 'Average Cost per GB' }}</span>
-                <div class="feature-info">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-                  </svg>
-                </div>
+                <span>{{ 'comparison.price_gb' | t | default: 'Cost per GB' }}</span>
               </div>
             </td>
             <td class="featured-column">
               <span class="price-value best-price">
-                €{{ product.metafields.custom.price_per_gb | default: '4.99' }}
+                {% comment %} Calculate price per GB from last variant {% endcomment %}
+                {% assign last_variant = product.variants.last %}
+                {% assign gb_text = last_variant.title | split: ' ' | first %}
+                {% assign gb_amount = gb_text | remove: 'GB' | times: 1.0 %}
+                {% if gb_amount == 0 %}
+                  {% assign gb_amount = 10 %}
+                {% endif %}
+                {% assign price_cents = last_variant.price %}
+                {% assign price_per_gb = price_cents | divided_by: 100.0 | divided_by: gb_amount %}
+                €{{ price_per_gb | round: 2 }}
                 <span class="save-badge">{{ 'comparison.save' | t | default: 'SAVE 85%' }}</span>
               </span>
               <span class="price-unit">{{ 'comparison.per_gb' | t | default: '/GB' }}</span>
@@ -752,30 +673,23 @@
               <span class="price-value">€15-30</span>
               <span class="price-unit">{{ 'comparison.per_gb' | t | default: '/GB' }}</span>
             </td>
-            <td>
-              <span class="price-value">€8-15</span>
-              <span class="price-unit">{{ 'comparison.per_day' | t | default: '/Day' }}</span>
-            </td>
           </tr>
           
           <!-- Activation Time -->
           <tr>
             <td>
               <div class="feature-label">
-                <span>{{ 'comparison.activation' | t | default: 'Setup & Activation Time' }}</span>
+                <span>{{ 'comparison.activation' | t | default: 'Setup Time' }}</span>
               </div>
             </td>
             <td class="featured-column">
               <span class="text-value highlight">{{ 'comparison.instant_60s' | t | default: '< 60 seconds' }}</span>
             </td>
             <td>
-              <span class="text-value">{{ 'comparison.instant' | t | default: 'Instant' }}</span>
+              <span class="text-value">{{ 'comparison.instant' | t | default: 'Automatic' }}</span>
             </td>
             <td>
               <span class="text-value">{{ 'comparison.30_60_min' | t | default: '30-60 min' }}</span>
-            </td>
-            <td>
-              <span class="text-value">{{ 'comparison.pickup' | t | default: 'Airport pickup' }}</span>
             </td>
           </tr>
           
@@ -783,7 +697,7 @@
           <tr>
             <td>
               <div class="feature-label">
-                <span>{{ 'comparison.keep_number' | t | default: 'Keep WhatsApp Number' }}</span>
+                <span>{{ 'comparison.keep_number' | t | default: 'Keep WhatsApp' }}</span>
               </div>
             </td>
             <td class="featured-column">
@@ -804,13 +718,6 @@
               <span class="value-cross">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </span>
-            </td>
-            <td>
-              <span class="value-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </span>
             </td>
@@ -832,9 +739,6 @@
             <td>
               <span class="text-value">{{ 'comparison.5g_4g' | t | default: '5G/4G LTE' }}</span>
             </td>
-            <td>
-              <span class="text-value">{{ 'comparison.4g_3g' | t | default: '4G/3G' }}</span>
-            </td>
           </tr>
           
           <!-- Hidden Fees -->
@@ -853,16 +757,13 @@
             <td>
               <span class="text-value">{{ 'comparison.sometimes' | t | default: 'Sometimes' }}</span>
             </td>
-            <td>
-              <span class="text-value">{{ 'comparison.deposit' | t | default: 'Deposit required' }}</span>
-            </td>
           </tr>
           
           <!-- Multiple Countries -->
           <tr>
             <td>
               <div class="feature-label">
-                <span>{{ 'comparison.countries' | t | default: 'Multi-Country Support' }}</span>
+                <span>{{ 'comparison.countries' | t | default: 'Countries' }}</span>
               </div>
             </td>
             <td class="featured-column">
@@ -872,10 +773,7 @@
               <span class="text-value">{{ 'comparison.varies' | t | default: 'Varies' }}</span>
             </td>
             <td>
-              <span class="text-value">{{ 'comparison.single' | t | default: 'Single country' }}</span>
-            </td>
-            <td>
-              <span class="text-value">{{ 'comparison.limited' | t | default: 'Limited' }}</span>
+              <span class="text-value">{{ 'comparison.single' | t | default: '1 Country' }}</span>
             </td>
           </tr>
           
@@ -883,7 +781,7 @@
           <tr>
             <td>
               <div class="feature-label">
-                <span>{{ 'comparison.rechargeable' | t | default: 'Rechargeable/Top-up' }}</span>
+                <span>{{ 'comparison.rechargeable' | t | default: 'Rechargeable' }}</span>
               </div>
             </td>
             <td class="featured-column">
@@ -907,10 +805,33 @@
                 </svg>
               </span>
             </td>
+          </tr>
+          
+          <!-- No Contract -->
+          <tr>
+            <td>
+              <div class="feature-label">
+                <span>{{ 'comparison.no_contract' | t | default: 'No Contract' }}</span>
+              </div>
+            </td>
+            <td class="featured-column">
+              <span class="value-check">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+              </span>
+            </td>
             <td>
               <span class="value-cross">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </span>
+            </td>
+            <td>
+              <span class="value-check">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </span>
             </td>
@@ -920,7 +841,7 @@
           <tr>
             <td>
               <div class="feature-label">
-                <span>{{ 'comparison.support' | t | default: '24/7 Customer Support' }}</span>
+                <span>{{ 'comparison.support' | t | default: '24/7 Support' }}</span>
               </div>
             </td>
             <td class="featured-column">
@@ -944,36 +865,9 @@
                 </svg>
               </span>
             </td>
-            <td>
-              <span class="value-partial">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                </svg>
-              </span>
-            </td>
           </tr>
         </tbody>
       </table>
-    </div>
-    
-    <!-- CTA Section -->
-    <div class="comparison-cta">
-      <h3 class="cta-title">{{ 'comparison.cta_title' | t | default: 'Ready to save on international data?' }}</h3>
-      <p class="cta-subtitle">{{ 'comparison.cta_subtitle' | t | default: 'Join 100,000+ travelers using Simbye eSIM worldwide' }}</p>
-      <div class="cta-buttons">
-        <a href="/products/{{ product.handle }}" class="cta-button">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-          </svg>
-          <span>{{ 'comparison.get_esim' | t | default: 'Get Your eSIM Now' }}</span>
-        </a>
-        <a href="/pages/esim-compatible-devices" class="cta-button cta-button-secondary">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-          </svg>
-          <span>{{ 'comparison.check_device' | t | default: 'Check Device Compatibility' }}</span>
-        </a>
-      </div>
     </div>
     
   </div>
