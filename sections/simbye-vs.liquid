@@ -436,19 +436,19 @@
   }
 }
 
-/* Mobile Table - HOLAFLY STYLE */
+/* Mobile Table - OPTIMIZED wie Holafly */
 @media (max-width: 768px) {
   .comparison-section {
-    padding: 0 0 40px 0;
-    background: #f8f9fa;
-  }
-  
-  [data-theme="dark"] .comparison-section {
-    background: #0a0a0a;
+    padding: 0 0 20px 0;
   }
   
   .comparison-container {
     padding: 20px 0 0 0;
+  }
+  
+  [data-theme="dark"] .comparison-section {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
   }
   
   .comparison-header {
@@ -457,259 +457,258 @@
   }
   
   .comparison-title {
-    font-size: 26px;
-    margin-bottom: 12px;
+    font-size: 28px;
+    word-wrap: break-word;
   }
   
   .comparison-subtitle {
-    font-size: 15px;
+    font-size: 16px;
   }
   
   .trust-indicators {
-    display: none; /* Hide on mobile */
+    gap: 16px;
   }
   
-  /* Hide Desktop Table */
+  .trust-indicator {
+    font-size: 12px;
+  }
+  
+  /* Mobile Table Wrapper */
   .comparison-table-wrapper {
+    border-radius: 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 16px;
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  
+  [data-theme="dark"] .comparison-table-wrapper {
+    background: rgba(26, 26, 26, 0.8);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  /* Table */
+  .comparison-table {
+    width: auto;
+    min-width: 100%;
+  }
+  
+  .comparison-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: #ffffff;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  [data-theme="dark"] .comparison-table thead {
+    background: #1a1a1a;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+  
+  .comparison-table th {
+    padding: 16px 12px;
+    font-size: 14px;
+    min-width: 90px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  [data-theme="dark"] .comparison-table th {
+    color: #f5f5f5;
+  }
+  
+  .comparison-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    background: #ffffff;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.05);
+    min-width: 150px;
+    padding-left: 16px;
+    font-size: 13px;
+    word-break: break-word;
+    white-space: normal;
+  }
+  
+  [data-theme="dark"] .comparison-table th:first-child {
+    background: #1a1a1a;
+  }
+  
+  .comparison-table th.featured-column {
+    min-width: 110px;
+    background: linear-gradient(135deg, #009a61, #00d97e);
+  }
+  
+  /* Table Body Rows - Zebra Striping für bessere Lesbarkeit */
+  .comparison-table tbody tr:nth-child(odd) {
+    background: rgba(0, 0, 0, 0.02);
+  }
+  
+  [data-theme="dark"] .comparison-table tbody tr:nth-child(odd) {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  .comparison-table td {
+    padding: 18px 12px;
+    font-size: 14px;
+    min-width: 90px;
+    vertical-align: middle;
+    color: #333;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  [data-theme="dark"] .comparison-table td {
+    color: #f5f5f5;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  
+  .comparison-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: #ffffff;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.05);
+    min-width: 150px;
+    padding-left: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    word-break: break-word;
+    white-space: normal;
+  }
+  
+  [data-theme="dark"] .comparison-table td:first-child {
+    background: #1a1a1a;
+  }
+  
+  /* Zebra stripe fix for sticky column */
+  .comparison-table tbody tr:nth-child(odd) td:first-child {
+    background: #f8f9fa;
+  }
+  
+  [data-theme="dark"] .comparison-table tbody tr:nth-child(odd) td:first-child {
+    background: rgba(26, 26, 26, 0.95);
+  }
+  
+  /* Featured Column */
+  .comparison-table td.featured-column {
+    background: rgba(0, 154, 97, 0.08);
+    font-weight: 600;
+  }
+  
+  [data-theme="dark"] .comparison-table td.featured-column {
+    background: rgba(0, 217, 126, 0.08);
+  }
+  
+  /* Feature Labels mit Icons */
+  .feature-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    word-break: break-word;
+  }
+  
+  .feature-icon-mobile {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--compare-primary);
+    flex-shrink: 0;
+  }
+  
+  .feature-icon-mobile svg {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .feature-info {
     display: none;
   }
   
-  /* Mobile Comparison List */
-  .mobile-comparison {
-    display: block;
-    width: 100%;
-  }
-  
-  /* Mobile Header with Options */
-  .mobile-comparison-header {
-    background: white;
-    border-radius: 20px 20px 0 0;
-    padding: 20px;
-    margin: 0 16px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
-  
-  [data-theme="dark"] .mobile-comparison-header {
-    background: rgba(26, 26, 26, 0.95);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
-  
-  .mobile-option-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    text-align: center;
-  }
-  
-  .mobile-option {
-    padding: 12px 8px;
-    border-radius: 12px;
-    background: #f8f9fa;
-    position: relative;
-  }
-  
-  [data-theme="dark"] .mobile-option {
-    background: rgba(255, 255, 255, 0.05);
-  }
-  
-  .mobile-option.featured {
-    background: linear-gradient(135deg, var(--compare-primary), var(--compare-accent));
-    color: white;
-  }
-  
-  .mobile-option-name {
-    font-size: 14px;
+  /* Compact Option Names */
+  .option-name {
+    font-size: 15px;
     font-weight: 700;
     margin-bottom: 2px;
+    word-break: break-word;
   }
   
-  .mobile-option-type {
+  .option-type {
     font-size: 10px;
     opacity: 0.7;
   }
   
-  .mobile-recommended {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #ff7e50, #ff9a76);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 100px;
-    font-size: 9px;
+  /* Prices */
+  .price-value {
+    font-size: 18px;
     font-weight: 700;
-    white-space: nowrap;
   }
   
-  /* Feature Rows - OUTSIDE WHITE BOX */
-  .mobile-features {
-    margin-top: 0;
+  .price-unit {
+    font-size: 12px;
+    opacity: 0.7;
   }
   
-  .mobile-feature-row {
-    background: transparent;
-    padding: 16px;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+  /* Badges */
+  .recommended-badge {
+    font-size: 9px;
+    padding: 2px 8px;
+    top: -10px;
   }
   
-  [data-theme="dark"] .mobile-feature-row {
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+  .save-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    top: -6px;
+    right: -6px;
   }
   
-  /* Feature Header */
-  .mobile-feature-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  
-  .mobile-feature-icon {
-    width: 36px;
-    height: 36px;
-    background: white;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-  
-  [data-theme="dark"] .mobile-feature-icon {
-    background: rgba(26, 26, 26, 0.8);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
-  
-  .mobile-feature-icon svg {
-    width: 20px;
-    height: 20px;
-    color: var(--compare-primary);
-  }
-  
-  .mobile-feature-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--compare-text);
-  }
-  
-  /* Feature Values Grid */
-  .mobile-feature-values {
-    background: white;
-    border-radius: 12px;
-    padding: 12px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  
-  [data-theme="dark"] .mobile-feature-values {
-    background: rgba(26, 26, 26, 0.6);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
-  
-  .mobile-value {
-    text-align: center;
-    padding: 8px 4px;
-  }
-  
-  .mobile-value.featured {
-    background: linear-gradient(135deg, 
-      rgba(0, 154, 97, 0.08) 0%, 
-      rgba(0, 217, 126, 0.08) 100%);
-    border-radius: 8px;
-    position: relative;
-  }
-  
-  /* Check/Cross Icons */
-  .mobile-check,
-  .mobile-cross,
-  .mobile-partial {
+  /* Values - Größere Touch-Targets */
+  .value-check,
+  .value-cross,
+  .value-partial {
     width: 28px;
     height: 28px;
-    margin: 0 auto 4px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   
-  .mobile-check {
-    background: linear-gradient(135deg, var(--compare-success), var(--compare-accent));
-  }
-  
-  .mobile-cross {
-    background: rgba(255, 71, 87, 0.15);
-  }
-  
-  .mobile-partial {
-    background: rgba(255, 193, 7, 0.15);
-  }
-  
-  .mobile-check svg {
+  .value-check svg,
+  .value-cross svg,
+  .value-partial svg {
     width: 16px;
     height: 16px;
-    color: white;
-    stroke-width: 3;
   }
   
-  .mobile-cross svg {
-    width: 16px;
-    height: 16px;
-    color: var(--compare-danger);
+  .text-value {
+    font-size: 13px;
+    word-break: break-word;
   }
   
-  .mobile-partial svg {
-    width: 16px;
-    height: 16px;
-    color: var(--compare-warning);
-  }
-  
-  /* Text Values */
-  .mobile-value-text {
-    font-size: 12px;
-    color: var(--compare-text-secondary);
-    line-height: 1.3;
-  }
-  
-  .mobile-value.featured .mobile-value-text {
-    color: var(--compare-primary);
+  .text-value.highlight {
     font-weight: 600;
   }
   
-  /* Price Values */
-  .mobile-price {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--compare-text);
-  }
-  
-  .mobile-value.featured .mobile-price {
-    color: var(--compare-primary);
-  }
-  
-  .mobile-price-unit {
-    font-size: 11px;
-    color: var(--compare-text-secondary);
-    display: block;
-  }
-  
-  /* Save Badge Mobile */
-  .mobile-save-badge {
+  /* Scroll Indicator */
+  .comparison-table-wrapper::after {
+    content: '→';
     position: absolute;
-    top: -6px;
-    right: -4px;
-    background: linear-gradient(135deg, var(--compare-success), #00ff88);
-    color: #0a0a0a;
-    padding: 2px 6px;
-    border-radius: 100px;
-    font-size: 9px;
-    font-weight: 700;
-    white-space: nowrap;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: var(--compare-primary);
+    opacity: 0.5;
+    pointer-events: none;
+    animation: scrollHint 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollHint {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(-50%) translateX(5px); }
   }
 }
 
@@ -794,7 +793,7 @@
       </div>
     </div>
     
-    <!-- Comparison Table - 4 COLUMNS DESKTOP -->
+    <!-- Comparison Table - 4 COLUMNS -->
     <div class="comparison-table-wrapper">
       <table class="comparison-table">
         <thead>
@@ -1049,318 +1048,6 @@
       </table>
     </div>
     
-    <!-- MOBILE COMPARISON - HOLAFLY STYLE -->
-    <div class="mobile-comparison" style="display: none;">
-      
-      <!-- Mobile Header with Options -->
-      <div class="mobile-comparison-header">
-        <div class="mobile-option-row">
-          <div class="mobile-option featured">
-            <span class="mobile-recommended">BEST</span>
-            <div class="mobile-option-name">{{ product.title }} eSIM</div>
-            <div class="mobile-option-type">Digital • Instant</div>
-          </div>
-          <div class="mobile-option">
-            <div class="mobile-option-name">Roaming</div>
-            <div class="mobile-option-type">Carrier</div>
-          </div>
-          <div class="mobile-option">
-            <div class="mobile-option-name">Local SIM</div>
-            <div class="mobile-option-type">Physical</div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Mobile Feature Rows -->
-      <div class="mobile-features">
-        
-        <!-- Price per GB -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.price_gb' | t | default: 'Cost per GB' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <span class="mobile-save-badge">-85%</span>
-              <div class="mobile-price">
-                {% assign last_variant = product.variants.last %}
-                {% assign gb_text = last_variant.title | split: ' ' | first %}
-                {% assign gb_amount = gb_text | remove: 'GB' | times: 1.0 %}
-                {% if gb_amount == 0 %}
-                  {% assign gb_amount = 10 %}
-                {% endif %}
-                {% assign price_cents = last_variant.price %}
-                {% assign price_per_gb = price_cents | divided_by: 100.0 | divided_by: gb_amount %}
-                €{{ price_per_gb | round: 2 }}
-              </div>
-              <span class="mobile-price-unit">/GB</span>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-price">€50+</div>
-              <span class="mobile-price-unit">/GB</span>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-price">€15-30</div>
-              <span class="mobile-price-unit">/GB</span>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Setup Time -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.activation' | t | default: 'Setup Time' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-value-text">< 60 sec</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-value-text">Automatic</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-value-text">30-60 min</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Keep WhatsApp -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.keep_number' | t | default: 'Keep WhatsApp' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-cross">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Network Speed -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79M12 12h.008v.007H12V12z" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.network_speed' | t | default: 'Network Speed' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-value-text">5G/4G</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-value-text">Limited</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-value-text">5G/4G</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Hidden Fees -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.hidden_fees' | t | default: 'Hidden Fees' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-              <div class="mobile-value-text">None</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-cross">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-              <div class="mobile-value-text">Many</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-partial">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                </svg>
-              </div>
-              <div class="mobile-value-text">Some</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Countries -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.countries' | t | default: 'Countries' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-value-text">190+</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-value-text">Varies</div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-value-text">1 Only</div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Rechargeable -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.rechargeable' | t | default: 'Rechargeable' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-cross">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-partial">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- No Contract -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.no_contract' | t | default: 'No Contract' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-cross">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- 24/7 Support -->
-        <div class="mobile-feature-row">
-          <div class="mobile-feature-header">
-            <div class="mobile-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
-              </svg>
-            </div>
-            <div class="mobile-feature-name">{{ 'comparison.support' | t | default: '24/7 Support' }}</div>
-          </div>
-          <div class="mobile-feature-values">
-            <div class="mobile-value featured">
-              <div class="mobile-check">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-partial">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                </svg>
-              </div>
-            </div>
-            <div class="mobile-value">
-              <div class="mobile-cross">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-    
   </div>
 </section>
 
@@ -1372,30 +1059,13 @@
   const section = document.querySelector('.comparison-section');
   const tableRows = document.querySelectorAll('.comparison-table tbody tr');
   const valueChecks = document.querySelectorAll('.value-check');
-  const desktopTable = document.querySelector('.comparison-table-wrapper');
-  const mobileComparison = document.querySelector('.mobile-comparison');
   
   // Initialize
   function init() {
     if (!section) return;
     
-    // Handle responsive display
-    handleResponsive();
-    window.addEventListener('resize', handleResponsive);
-    
     // Animate on scroll
     animateOnScroll();
-  }
-  
-  // Handle responsive display
-  function handleResponsive() {
-    if (window.innerWidth <= 768) {
-      if (desktopTable) desktopTable.style.display = 'none';
-      if (mobileComparison) mobileComparison.style.display = 'block';
-    } else {
-      if (desktopTable) desktopTable.style.display = 'block';
-      if (mobileComparison) mobileComparison.style.display = 'none';
-    }
   }
   
   // Animate elements on scroll
