@@ -436,14 +436,14 @@
   }
 }
 
-/* Mobile Table - OPTIMIZED */
+/* Mobile Table - OPTIMIZED wie Holafly */
 @media (max-width: 768px) {
   .comparison-section {
     padding: 0 0 20px 0;
   }
   
   .comparison-container {
-    padding: 20px 16px 0 16px;
+    padding: 20px 0 0 0; /* Kein seitlicher Padding */
   }
   
   [data-theme="dark"] .comparison-section {
@@ -453,6 +453,7 @@
   
   .comparison-header {
     margin-bottom: 32px;
+    padding: 0 16px;
   }
   
   .comparison-title {
@@ -461,7 +462,6 @@
   
   .comparison-subtitle {
     font-size: 16px;
-    padding: 0 16px;
   }
   
   .trust-indicators {
@@ -472,70 +472,169 @@
     font-size: 12px;
   }
   
-  /* Mobile Table Wrapper */
+  /* Mobile Table Wrapper - Full Width */
   .comparison-table-wrapper {
     border-radius: 20px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    margin: 0 16px;
+    background: var(--compare-card-bg);
   }
   
-  /* Scrollable Table */
+  /* Table ohne min-width für natürliches Scrolling */
   .comparison-table {
-    min-width: 500px;
+    width: auto;
+    min-width: 100%;
   }
   
-  .comparison-table th,
-  .comparison-table td {
-    padding: 12px 8px;
+  .comparison-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: var(--compare-card-bg);
+  }
+  
+  .comparison-table th {
+    padding: 16px 12px;
+    font-size: 14px;
+    min-width: 100px;
+    white-space: nowrap;
+  }
+  
+  .comparison-table th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    background: var(--compare-card-bg);
+    box-shadow: 2px 0 4px rgba(0,0,0,0.05);
+    min-width: 140px;
+    padding-left: 16px;
     font-size: 13px;
   }
   
-  .comparison-table th:first-child,
+  .comparison-table th.featured-column {
+    min-width: 120px;
+  }
+  
+  .comparison-table td {
+    padding: 20px 12px;
+    font-size: 14px;
+    min-width: 100px;
+  }
+  
   .comparison-table td:first-child {
     position: sticky;
     left: 0;
     z-index: 2;
     background: var(--compare-card-bg);
-    box-shadow: 2px 0 4px rgba(0,0,0,0.1);
-    min-width: 120px;
+    box-shadow: 2px 0 4px rgba(0,0,0,0.05);
+    min-width: 140px;
+    padding-left: 16px;
+    font-size: 13px;
   }
   
+  [data-theme="dark"] .comparison-table td:first-child,
+  [data-theme="dark"] .comparison-table th:first-child {
+    background: rgba(26, 26, 26, 0.95);
+  }
+  
+  /* Feature Labels mit Icons */
+  .feature-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .feature-icon-mobile {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--compare-primary);
+    flex-shrink: 0;
+  }
+  
+  .feature-icon-mobile svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .feature-info {
+    display: none; /* Hide info icon on mobile */
+  }
+  
+  /* Compact Option Names */
   .option-name {
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 2px;
   }
   
   .option-type {
     font-size: 10px;
+    opacity: 0.7;
   }
   
+  /* Prices */
   .price-value {
     font-size: 18px;
   }
   
+  .price-unit {
+    font-size: 12px;
+  }
+  
+  /* Badges */
   .recommended-badge {
     font-size: 9px;
     padding: 2px 8px;
+    top: -10px;
   }
   
+  .save-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    top: -6px;
+    right: -6px;
+  }
+  
+  /* Values - Größere Touch-Targets */
   .value-check,
   .value-cross,
   .value-partial {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
   }
   
   .value-check svg,
   .value-cross svg,
   .value-partial svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
   
-  .save-badge {
-    font-size: 10px;
-    padding: 3px 8px;
-    top: -6px;
-    right: -6px;
+  .text-value {
+    font-size: 13px;
+  }
+  
+  /* Scroll Indicator */
+  .comparison-table-wrapper::after {
+    content: '→';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: var(--compare-primary);
+    opacity: 0.5;
+    pointer-events: none;
+    animation: scrollHint 2s ease-in-out infinite;
+  }
+  
+  @keyframes scrollHint {
+    0%, 100% { transform: translateY(-50%) translateX(0); }
+    50% { transform: translateY(-50%) translateX(5px); }
   }
 }
 
@@ -646,6 +745,11 @@
           <tr>
             <td>
               <div class="feature-label">
+                <div class="feature-icon-mobile">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
                 <span>{{ 'comparison.price_gb' | t | default: 'Cost per GB' }}</span>
               </div>
             </td>
