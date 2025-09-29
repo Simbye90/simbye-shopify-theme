@@ -253,6 +253,45 @@
   "spec_ekyc": "eKYC",
   "spec_delivery": "Delivery",
   "spec_phone": "Phone Number",
-  "spec_esim_validity": "eSIM Validity"
+  "spec_esim_validity": "eSIM Validity",
+   "tab_features": "Features",
+    "tab_description": "Description",
+    "tab_technical": "Technical Specs",
+    
+    "feature_instant_title": "Instant Delivery",
+    "feature_instant_desc": "QR code in 60 seconds via email. No physical SIM needed.",
+    
+    "feature_recharge_title": "Rechargeable eSIM",
+    "feature_recharge_desc": "Top up your eSIM anytime from your account. No need to buy a new eSIM when data runs out.",
+    
+    "feature_support_title": "24/7 WhatsApp Support",
+    "feature_support_desc": "Get instant help via WhatsApp or live chat. Support available in 12 languages around the clock.",
+    
+    "compatibility_title": "Check Device Compatibility",
+    "compatibility_subtitle": "Make sure your device supports eSIM before purchasing",
+    "check_compatibility": "Check Compatibility",
+    "compatibility_modal_title": "Check eSIM Compatibility",
+    "compatibility_note": "If your device model is NOT in the list, it was not built to support eSIM.",
+    
+    "why_choose": "Why choose {{product}} eSIM?",
+    
+    "spec_network": "Network",
+    "spec_speed": "Speed",
+    "spec_coverage": "Coverage",
+    "spec_plans": "Data Plans",
+    "spec_validity": "Validity after Activation",
+    "spec_hotspot": "Hotspot",
+    "spec_voice": "Voice Call",
+    "spec_voice_apps": "Voice apps only",
+    "spec_plantype": "Plan Type",
+    "spec_ekyc": "eKYC (Identity Verification)",
+    "spec_delivery": "Delivery",
+    "spec_phone": "Phone Number",
+    "spec_esim_validity": "eSIM Validity",
+    
+    "yes": "Yes",
+    "no": "No",
+    "days": "Days",
+    "instant": "Immediately after purchase"
 }
 }
