@@ -1,176 +1,735 @@
-/** Critical CSS for the theme. This file is included on every page. */
+<!-- sections/mobile-apps.liquid -->
+<!-- MOBILE INTERNET FOR APPS - ENTERPRISE STYLE -->
 
-/* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
-* {
-  box-sizing: border-box;
-  margin: 0;
+<style>
+/* ============================================
+   MOBILE APPS SECTION - WHY SECTION STYLING
+   ============================================ */
+
+/* CSS Variables - Identisch mit Why Section */
+:root {
+  --apps-bg: #ffffff;
+  --apps-text: #1a1a1a;
+  --apps-text-secondary: #666666;
+  --apps-primary: #009a61;
+  --apps-primary-hover: #00824f;
+  --apps-accent: #00d97e;
+  --apps-card-bg: #ffffff;
+  --apps-border: rgba(0, 0, 0, 0.08);
+  --apps-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --apps-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --apps-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --apps-gradient: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  --apps-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  min-height: 100svh;
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --apps-bg: transparent;
+  --apps-text: #f5f5f5;
+  --apps-text-secondary: #999999;
+  --apps-primary: #00d97e;
+  --apps-primary-hover: #009a61;
+  --apps-accent: #00ff88;
+  --apps-card-bg: rgba(26, 26, 26, 0.8);
+  --apps-border: rgba(255, 255, 255, 0.08);
+  --apps-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --apps-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --apps-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+  --apps-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
 }
 
-html:has(dialog[scroll-lock][open], details[scroll-lock][open]) {
+/* Main Section - FULL WIDTH FIX */
+.apps-section {
+  width: 100vw !important;
+  margin-left: calc(-1 * var(--page-margin, 0px)) !important;
+  margin-right: calc(-1 * var(--page-margin, 0px)) !important;
+  padding: 0 !important;
+  background: var(--apps-bg);
+  position: relative;
   overflow: hidden;
+  transition: var(--apps-transition);
 }
 
-img,
-picture,
-video,
-canvas,
-svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
+/* Kill Shopify Grid für diese Section */
+.shopify-section:has(.apps-section) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
-input,
-textarea,
-select {
-  font: inherit;
-  border-radius: var(--style-border-radius-inputs);
+.shopify-section:has(.apps-section) > * {
+  grid-column: unset !important;
+  margin: 0 !important;
 }
 
-select {
-  background-color: var(--color-background);
-  color: currentcolor;
+/* Light Mode */
+[data-theme="light"] .apps-section {
+  background: #ffffff;
 }
 
-dialog {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+/* Dark Mode */
+[data-theme="dark"] .apps-section {
+  background: #0a0a0a;
 }
 
-p {
-  text-wrap: pretty;
-}
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  overflow-wrap: break-word;
-}
-
-p:empty {
-  display: none;
+/* Background Pattern */
+.apps-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
 }
 
-:is(p, h1, h2, h3, h4, h5, h6):first-child,
-:empty:first-child + :where(p, h1, h2, h3, h4, h5, h6) {
-  margin-block-start: 0;
-}
-
-:is(p, h1, h2, h3, h4, h5, h6):last-child,
-:where(p, h1, h2, h3, h4, h5, h6) + :has(+ :empty:last-child) {
-  margin-block-end: 0;
-}
-
-/** Theme styles below */
-body {
-  font-family: var(--font-primary--family);
-  background-color: var(--color-background);
-  color: var(--color-foreground);
-}
-
-/** Section layout utilities */
-
-/**
- * Setup a grid that enables both full-width and constrained layouts
- * depending on the class of the child elements.
- *
- * By default, a minimum content margin is set on the left and right
- * sides of the section and the content is centered in the viewport to
- * not exceed the maximum page width.
- *
- * When a child element is given the `full-width` class, it will span
- * the entire viewport.
- */
-.shopify-section {
-  --content-width: min(
-    calc(var(--page-width) - var(--page-margin) * 2),
-    calc(100% - var(--page-margin) * 2)
-  );
-  --content-margin: minmax(var(--page-margin), 1fr);
-  --content-grid: var(--content-margin) var(--content-width) var(--content-margin);
-
-  /* This is required to make <img> elements work as background images */
-  position: relative;
-  grid-template-columns: var(--content-grid);
-  display: grid;
-  width: 100%;
-}
-
-/* Child elements, by default, are constrained to the central column of the grid. */
-.shopify-section > * {
-  grid-column: 2;
-}
-
-/* Child elements that use the full-width utility class span the entire viewport. */
-.shopify-section > .full-width {
-  grid-column: 1 / -1;
-}
-/* ========================================
-   EDGE-TO-EDGE SECTIONS OHNE SCROLL
-   ======================================== */
-
-/* Reset für Shopify */
-html {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  width: 100%;
-}
-
-/* Alle Shopify Sections randlos */
-.shopify-section {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  overflow: hidden; /* Verhindert Overflow */
-}
-
-/* Standard Container Pattern */
-.section-container {
-  max-width: var(--max-width, 1600px);
+/* Container - GLEICHE BREITE WIE ANDERE SECTIONS */
+.apps-container {
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 var(--page-padding, 20px);
+  padding: 100px 40px 0 40px;
+  position: relative;
+  z-index: 1;
 }
 
-/* Responsive Padding */
-@media (min-width: 768px) {
-  .section-container {
-    --page-padding: 40px;
-  }
+/* Header */
+.apps-header {
+  text-align: center;
+  margin-bottom: 72px;
+  animation: fadeInUp 0.8s ease;
 }
 
-@media (min-width: 1440px) {
-  .section-container {
-    --page-padding: 60px;
-  }
+/* Title - EXAKT WIE WHY SECTION */
+.apps-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--apps-text);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-/* Helper Classes */
-.full-width {
-  width: 100%;
+.apps-title-highlight {
+  background: var(--apps-primary);
+  color: white;
+  padding: 4px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+[data-theme="dark"] .apps-title-highlight {
+  background: var(--apps-primary);
+  color: #fff;
+}
+
+.apps-subtitle {
+  font-size: 20px;
+  color: var(--apps-text-secondary);
   margin: 0;
-  padding: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.no-overflow {
-  overflow: hidden !important;
+.apps-subtitle .apps-esim {
+  font-weight: 600;
+  color: var(--apps-primary);
 }
 
+/* Apps Grid */
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 60px;
+}
 
+/* App Card - WIE WHY FEATURE CARDS */
+.app-card {
+  background: var(--apps-card-bg);
+  border-radius: 24px;
+  padding: 36px 28px;
+  box-shadow: var(--apps-shadow-md);
+  transition: var(--apps-transition);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--apps-border);
+  animation: fadeInUp 0.9s ease both;
+  animation-delay: calc(var(--card-index) * 0.1s);
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.app-card:nth-child(1) { --card-index: 1; }
+.app-card:nth-child(2) { --card-index: 2; }
+.app-card:nth-child(3) { --card-index: 3; }
+.app-card:nth-child(4) { --card-index: 4; }
+.app-card:nth-child(5) { --card-index: 5; }
+.app-card:nth-child(6) { --card-index: 6; }
+
+[data-theme="dark"] .app-card {
+  background: var(--apps-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.app-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--apps-shadow-lg);
+  border-color: var(--apps-primary);
+}
+
+/* Icon Container - ENTERPRISE PREMIUM STYLE */
+.app-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--apps-primary), var(--apps-accent));
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.25);
+  animation: subtlePulse 4s ease-in-out infinite;
+  flex-shrink: 0;
+  padding: 16px;
+}
+
+/* Animated Glow Effect */
+.app-icon::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 24px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(20px);
+  animation: glow 4s ease-in-out infinite;
+}
+
+[data-theme="dark"] .app-icon {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
+  box-shadow: 
+    0 10px 30px rgba(0, 217, 126, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.app-icon img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+/* Dark Mode - Icons weiß färben */
+[data-theme="dark"] .app-icon img {
+  filter: brightness(0) invert(1);
+}
+
+/* App Content */
+.app-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--apps-text);
+  margin: 0 0 8px 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.app-description {
+  font-size: 15px;
+  color: var(--apps-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* More Text */
+.apps-more {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--apps-primary);
+  margin-top: 40px;
+  animation: fadeInUp 0.9s ease 0.7s both;
+}
+
+/* Individual Icon Animations on Scroll */
+.app-card.animate .app-icon {
+  animation: iconBounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 0.6;
+  }
+}
+
+@keyframes iconBounceIn {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .apps-container {
+    padding: 80px 24px 0 24px;
+  }
+  
+  .apps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .apps-section {
+    padding: 0 0 20px 0;
+  }
+  
+  .apps-container {
+    padding: 20px 16px 0 16px;
+  }
+  
+  [data-theme="dark"] .apps-section {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  .apps-header {
+    margin-bottom: 48px;
+  }
+  
+  .apps-title {
+    font-size: 32px;
+  }
+  
+  .apps-subtitle {
+    font-size: 17px;
+    padding: 0 16px;
+  }
+  
+  .apps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  /* Mobile: Kompaktere Cards */
+  .app-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  
+  .app-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    margin: 0 auto;
+    padding: 12px;
+  }
+  
+  .app-icon img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .app-content {
+    text-align: center;
+  }
+  
+  .app-name {
+    font-size: 19px;
+    margin-bottom: 6px;
+  }
+  
+  .app-description {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  .apps-more {
+    font-size: 17px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .apps-container {
+    padding: 20px 12px 0 12px;
+  }
+  
+  .apps-title {
+    font-size: 28px;
+  }
+  
+  .apps-subtitle {
+    font-size: 16px;
+    padding: 0 8px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+
+<!-- HTML Structure - FIXED FOR FULL WIDTH -->
+<section class="apps-section full-width">
+  <div class="apps-container">
+    
+    <!-- Header -->
+    <div class="apps-header">
+      <h2 class="apps-title">
+        {{ 'apps.title_part1' | t | default: 'Mobile Internet for' }} 
+        <span class="apps-title-highlight">{{ 'apps.title_part2' | t | default: 'Apps' }}</span>
+      </h2>
+      <p class="apps-subtitle">
+        {{ 'apps.subtitle' | t | replace: '[esim]', '<span class="apps-esim">Simbye eSIM</span>' | default: 'Use the <span class="apps-esim">Simbye eSIM</span> to enjoy WhatsApp, Messenger, Instagram, as well as music, movies, and games on the go. Stay connected with friends and family worldwide via fast 4G and 5G networks.' }}
+      </p>
+    </div>
+    
+    <!-- Apps Grid -->
+    <div class="apps-grid">
+      
+      <!-- WhatsApp -->
+      <div class="app-card">
+        <div class="app-icon">
+          <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Whatsapp.svg?v=1741316813" alt="WhatsApp" loading="lazy">
+        </div>
+        <div class="app-content">
+          <h3 class="app-name">WhatsApp</h3>
+          <p class="app-description">{{ 'apps.whatsapp_desc' | t | default: 'Messages and video calls' }}</p>
+        </div>
+      </div>
+      
+      <!-- Instagram -->
+      <div class="app-card">
+        <div class="app-icon">
+          <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Instagram.svg?v=1741316813" alt="Instagram" loading="lazy">
+        </div>
+        <div class="app-content">
+          <h3 class="app-name">Instagram</h3>
+          <p class="app-description">{{ 'apps.instagram_desc' | t | default: 'Photos, stories, and reels' }}</p>
+        </div>
+      </div>
+      
+      <!-- Spotify -->
+      <div class="app-card">
+        <div class="app-icon">
+          <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/spotify.svg?v=1741316813" alt="Spotify" loading="lazy">
+        </div>
+        <div class="app-content">
+          <h3 class="app-name">Spotify</h3>
+          <p class="app-description">{{ 'apps.spotify_desc' | t | default: 'Music and podcasts' }}</p>
+        </div>
+      </div>
+      
+      <!-- TikTok -->
+      <div class="app-card">
+        <div class="app-icon">
+          <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/tiktok.svg?v=1741316813" alt="TikTok" loading="lazy">
+        </div>
+        <div class="app-content">
+          <h3 class="app-name">TikTok</h3>
+          <p class="app-description">{{ 'apps.tiktok_desc' | t | default: 'Short videos and trends' }}</p>
+        </div>
+      </div>
+      
+      <!-- Google Maps -->
+      <div class="app-card">
+        <div class="app-icon">
+          <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/icons8-google-maps.svg?v=1741317145" alt="Google Maps" loading="lazy">
+        </div>
+        <div class="app-content">
+          <h3 class="app-name">Google Maps</h3>
+          <p class="app-description">{{ 'apps.maps_desc' | t | default: 'Navigation and places' }}</p>
+        </div>
+      </div>
+      
+      <!-- Uber -->
+      <div class="app-card">
+        <div class="app-icon">
+          <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/UBER.svg?v=1741316813" alt="Uber" loading="lazy">
+        </div>
+        <div class="app-content">
+          <h3 class="app-name">Uber</h3>
+          <p class="app-description">{{ 'apps.uber_desc' | t | default: 'Rides and deliveries' }}</p>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- More Text -->
+    <div class="apps-more">
+      {{ 'apps.more' | t | default: '...and many more' }}
+    </div>
+    
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Cache DOM elements
+  const section = document.querySelector('.apps-section');
+  const cards = document.querySelectorAll('.app-card');
+  
+  // Initialize
+  function init() {
+    if (!section) return;
+    
+    // Animate on scroll
+    animateOnScroll();
+  }
+  
+  // Animate elements on scroll
+  function animateOnScroll() {
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Add animate class for icon bounce
+            setTimeout(() => {
+              entry.target.classList.add('animate');
+            }, index * 100);
+            
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+      });
+      
+      // Observe all cards
+      cards.forEach(card => {
+        observer.observe(card);
+      });
+    }
+  }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+<!-- 
+JSON TRANSLATIONS TO ADD TO YOUR LOCALE FILES:
+
+en.json:
+{
+  "apps": {
+    "title_part1": "Mobile Internet for",
+    "title_part2": "Apps",
+    "subtitle": "Use the [esim] to enjoy WhatsApp, Messenger, Instagram, as well as music, movies, and games on the go. Stay connected with friends and family worldwide via fast 4G and 5G networks.",
+    "whatsapp_desc": "Messages and video calls",
+    "instagram_desc": "Photos, stories, and reels",
+    "spotify_desc": "Music and podcasts",
+    "tiktok_desc": "Short videos and trends",
+    "maps_desc": "Navigation and places",
+    "uber_desc": "Rides and deliveries",
+    "more": "...and many more"
+  }
+}
+
+de.json:
+{
+  "apps": {
+    "title_part1": "Mobiles Internet für",
+    "title_part2": "Apps",
+    "subtitle": "Nutze die [esim], um unterwegs WhatsApp, Messenger, Instagram sowie Musik, Filme und Spiele zu genießen. Bleibe weltweit über schnelle 4G- und 5G-Netze jederzeit online und mit Freunden und Familie verbunden.",
+    "whatsapp_desc": "Nachrichten und Video-Calls",
+    "instagram_desc": "Fotos, Stories und Reels",
+    "spotify_desc": "Musik und Podcasts",
+    "tiktok_desc": "Kurzvideos und Trends",
+    "maps_desc": "Navigation und Orte",
+    "uber_desc": "Fahrten und Lieferungen",
+    "more": "...und viele mehr"
+  }
+}
+
+es.json:
+{
+  "apps": {
+    "title_part1": "Internet móvil para",
+    "title_part2": "apps",
+    "subtitle": "Utiliza la [esim] para disfrutar de WhatsApp, Messenger, Instagram, así como de música, películas y juegos mientras te desplazas. Mantente conectado en todo el mundo a través de redes 4G y 5G rápidas y en contacto con amigos y familia.",
+    "whatsapp_desc": "Mensajes y videollamadas",
+    "instagram_desc": "Fotos, historias y reels",
+    "spotify_desc": "Música y podcasts",
+    "tiktok_desc": "Videos cortos y tendencias",
+    "maps_desc": "Navegación y lugares",
+    "uber_desc": "Viajes y entregas",
+    "more": "...y muchos más"
+  }
+}
+
+it.json:
+{
+  "apps": {
+    "title_part1": "Internet mobile per",
+    "title_part2": "app",
+    "subtitle": "Usa la [esim] per goderti WhatsApp, Messenger, Instagram, oltre a musica, film e giochi in movimento. Rimani connesso in tutto il mondo tramite reti 4G e 5G veloci e tieni i contatti con amici e familiari.",
+    "whatsapp_desc": "Messaggi e videochiamate",
+    "instagram_desc": "Foto, storie e reel",
+    "spotify_desc": "Musica e podcast",
+    "tiktok_desc": "Video brevi e tendenze",
+    "maps_desc": "Navigazione e luoghi",
+    "uber_desc": "Viaggi e consegne",
+    "more": "...e molti altri"
+  }
+}
+
+fr.json:
+{
+  "apps": {
+    "title_part1": "Internet mobile pour",
+    "title_part2": "apps",
+    "subtitle": "Utilise la [esim] pour profiter de WhatsApp, Messenger, Instagram ainsi que de la musique, des films et des jeux en déplacement. Reste connecté partout dans le monde grâce aux réseaux 4G et 5G rapides, et garde le contact avec tes amis et ta famille.",
+    "whatsapp_desc": "Messages et appels vidéo",
+    "instagram_desc": "Photos, stories et reels",
+    "spotify_desc": "Musique et podcasts",
+    "tiktok_desc": "Vidéos courtes et tendances",
+    "maps_desc": "Navigation et lieux",
+    "uber_desc": "Trajets et livraisons",
+    "more": "...et bien d'autres"
+  }
+}
+
+nl.json:
+{
+  "apps": {
+    "title_part1": "Mobiel internet voor",
+    "title_part2": "apps",
+    "subtitle": "Gebruik de [esim] om onderweg WhatsApp, Messenger, Instagram en ook muziek, films en games te genieten. Blijf wereldwijd online via snelle 4G- en 5G-netwerken en houd contact met vrienden en familie.",
+    "whatsapp_desc": "Berichten en video-oproepen",
+    "instagram_desc": "Foto's, verhalen en reels",
+    "spotify_desc": "Muziek en podcasts",
+    "tiktok_desc": "Korte video's en trends",
+    "maps_desc": "Navigatie en locaties",
+    "uber_desc": "Ritten en bezorgingen",
+    "more": "...en nog veel meer"
+  }
+}
+
+pl.json:
+{
+  "apps": {
+    "title_part1": "Internet mobilny dla",
+    "title_part2": "aplikacji",
+    "subtitle": "Korzystaj z [esim], aby cieszyć się WhatsApp, Messenger, Instagram oraz muzyką, filmami i grami w podróży. Pozostań online na całym świecie dzięki szybkim sieciom 4G i 5G i bądź zawsze w kontakcie z przyjaciółmi i rodziną.",
+    "whatsapp_desc": "Wiadomości i wideorozmowy",
+    "instagram_desc": "Zdjęcia, relacje i rolki",
+    "spotify_desc": "Muzyka i podcasty",
+    "tiktok_desc": "Krótkie filmy i trendy",
+    "maps_desc": "Nawigacja i miejsca",
+    "uber_desc": "Przejazdy i dostawy",
+    "more": "...i wiele więcej"
+  }
+}
+
+ar.json:
+{
+  "apps": {
+    "title_part1": "إنترنت متنقل لـ",
+    "title_part2": "تطبيقات",
+    "subtitle": "استخدم [esim] للاستمتاع بـ WhatsApp وMessenger وInstagram بالإضافة إلى الموسيقى والأفلام والألعاب أثناء التنقل. ابقَ متصلاً بالإنترنت في جميع أنحاء العالم عبر شبكات 4G و5G السريعة وابقَ على اتصال مع الأصدقاء والعائلة.",
+    "whatsapp_desc": "الرسائل والمكالمات الفيديوية",
+    "instagram_desc": "الصور والقصص والريلز",
+    "spotify_desc": "الموسيقى والبودكاست",
+    "tiktok_desc": "مقاطع الفيديو القصيرة والاتجاهات",
+    "maps_desc": "التنقل والأماكن",
+    "uber_desc": "المواصلات والتوصيل",
+    "more": "...والمزيد"
+  }
+}
+
+tr.json:
+{
+  "apps": {
+    "title_part1": "Uygulamalar için",
+    "title_part2": "Mobil İnternet",
+    "subtitle": "Seyahat halindeyken WhatsApp, Messenger, Instagram ile müzik, film ve oyunların keyfini çıkarmak için [esim]'i kullan. Hızlı 4G ve 5G ağları sayesinde dünya çapında her zaman çevrimiçi kal ve arkadaşlarınla ailenle bağlantıda ol.",
+    "whatsapp_desc": "Mesajlar ve video aramalar",
+    "instagram_desc": "Fotoğraflar, hikayeler ve reels",
+    "spotify_desc": "Müzik ve podcastler",
+    "tiktok_desc": "Kısa videolar ve trendler",
+    "maps_desc": "Gezinme ve konumlar",
+    "uber_desc": "Seyahatler ve teslimatlar",
+    "more": "...ve daha fazlası"
+  }
+}
+-->
+
+{% schema %}
+{
+  "name": "Mobile Apps",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Mobile Apps"
+    }
+  ]
+}
+{% endschema %}
