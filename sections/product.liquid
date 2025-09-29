@@ -497,41 +497,6 @@
   pointer-events: none;
 }
 
-/* CHECKMARK für Selected Cards */
-.plan-card.selected::after {
-  content: '✓';
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
-  animation: checkmarkPop 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  z-index: 3;
-}
-
-@keyframes checkmarkPop {
-  0% {
-    transform: scale(0) rotate(-180deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2) rotate(10deg);
-  }
-  100% {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-  }
-}
-
 .plan-content {
   display: flex;
   justify-content: space-between;
