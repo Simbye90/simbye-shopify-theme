@@ -71,9 +71,9 @@
   z-index: 0;
 }
 
-/* Container */
+/* Container - GLEICHE BREITE WIE ANDERE SECTIONS */
 .apps-container {
-  max-width: 1440px;
+  max-width: 1600px;
   margin: 0 auto;
   padding: 100px 40px 0 40px;
   position: relative;
@@ -212,11 +212,11 @@
   width: 48px;
   height: 48px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
+/* Dark Mode - Icons weiß färben */
 [data-theme="dark"] .app-icon img {
-  filter: none;
+  filter: brightness(0) invert(1);
 }
 
 /* App Content */
@@ -557,7 +557,153 @@
 })();
 </script>
 
+<!-- 
+JSON TRANSLATIONS TO ADD TO YOUR LOCALE FILES:
 
+en.json:
+{
+  "apps": {
+    "title_part1": "Mobile Internet for",
+    "title_part2": "Apps",
+    "subtitle": "Use the [esim] to enjoy WhatsApp, Messenger, Instagram, as well as music, movies, and games on the go. Stay connected with friends and family worldwide via fast 4G and 5G networks.",
+    "whatsapp_desc": "Messages and video calls",
+    "instagram_desc": "Photos, stories, and reels",
+    "spotify_desc": "Music and podcasts",
+    "tiktok_desc": "Short videos and trends",
+    "maps_desc": "Navigation and places",
+    "uber_desc": "Rides and deliveries",
+    "more": "...and many more"
+  }
+}
+
+de.json:
+{
+  "apps": {
+    "title_part1": "Mobiles Internet für",
+    "title_part2": "Apps",
+    "subtitle": "Nutze die [esim], um unterwegs WhatsApp, Messenger, Instagram sowie Musik, Filme und Spiele zu genießen. Bleibe weltweit über schnelle 4G- und 5G-Netze jederzeit online und mit Freunden und Familie verbunden.",
+    "whatsapp_desc": "Nachrichten und Video-Calls",
+    "instagram_desc": "Fotos, Stories und Reels",
+    "spotify_desc": "Musik und Podcasts",
+    "tiktok_desc": "Kurzvideos und Trends",
+    "maps_desc": "Navigation und Orte",
+    "uber_desc": "Fahrten und Lieferungen",
+    "more": "...und viele mehr"
+  }
+}
+
+es.json:
+{
+  "apps": {
+    "title_part1": "Internet móvil para",
+    "title_part2": "apps",
+    "subtitle": "Utiliza la [esim] para disfrutar de WhatsApp, Messenger, Instagram, así como de música, películas y juegos mientras te desplazas. Mantente conectado en todo el mundo a través de redes 4G y 5G rápidas y en contacto con amigos y familia.",
+    "whatsapp_desc": "Mensajes y videollamadas",
+    "instagram_desc": "Fotos, historias y reels",
+    "spotify_desc": "Música y podcasts",
+    "tiktok_desc": "Videos cortos y tendencias",
+    "maps_desc": "Navegación y lugares",
+    "uber_desc": "Viajes y entregas",
+    "more": "...y muchos más"
+  }
+}
+
+it.json:
+{
+  "apps": {
+    "title_part1": "Internet mobile per",
+    "title_part2": "app",
+    "subtitle": "Usa la [esim] per goderti WhatsApp, Messenger, Instagram, oltre a musica, film e giochi in movimento. Rimani connesso in tutto il mondo tramite reti 4G e 5G veloci e tieni i contatti con amici e familiari.",
+    "whatsapp_desc": "Messaggi e videochiamate",
+    "instagram_desc": "Foto, storie e reel",
+    "spotify_desc": "Musica e podcast",
+    "tiktok_desc": "Video brevi e tendenze",
+    "maps_desc": "Navigazione e luoghi",
+    "uber_desc": "Viaggi e consegne",
+    "more": "...e molti altri"
+  }
+}
+
+fr.json:
+{
+  "apps": {
+    "title_part1": "Internet mobile pour",
+    "title_part2": "apps",
+    "subtitle": "Utilise la [esim] pour profiter de WhatsApp, Messenger, Instagram ainsi que de la musique, des films et des jeux en déplacement. Reste connecté partout dans le monde grâce aux réseaux 4G et 5G rapides, et garde le contact avec tes amis et ta famille.",
+    "whatsapp_desc": "Messages et appels vidéo",
+    "instagram_desc": "Photos, stories et reels",
+    "spotify_desc": "Musique et podcasts",
+    "tiktok_desc": "Vidéos courtes et tendances",
+    "maps_desc": "Navigation et lieux",
+    "uber_desc": "Trajets et livraisons",
+    "more": "...et bien d'autres"
+  }
+}
+
+nl.json:
+{
+  "apps": {
+    "title_part1": "Mobiel internet voor",
+    "title_part2": "apps",
+    "subtitle": "Gebruik de [esim] om onderweg WhatsApp, Messenger, Instagram en ook muziek, films en games te genieten. Blijf wereldwijd online via snelle 4G- en 5G-netwerken en houd contact met vrienden en familie.",
+    "whatsapp_desc": "Berichten en video-oproepen",
+    "instagram_desc": "Foto's, verhalen en reels",
+    "spotify_desc": "Muziek en podcasts",
+    "tiktok_desc": "Korte video's en trends",
+    "maps_desc": "Navigatie en locaties",
+    "uber_desc": "Ritten en bezorgingen",
+    "more": "...en nog veel meer"
+  }
+}
+
+pl.json:
+{
+  "apps": {
+    "title_part1": "Internet mobilny dla",
+    "title_part2": "aplikacji",
+    "subtitle": "Korzystaj z [esim], aby cieszyć się WhatsApp, Messenger, Instagram oraz muzyką, filmami i grami w podróży. Pozostań online na całym świecie dzięki szybkim sieciom 4G i 5G i bądź zawsze w kontakcie z przyjaciółmi i rodziną.",
+    "whatsapp_desc": "Wiadomości i wideorozmowy",
+    "instagram_desc": "Zdjęcia, relacje i rolki",
+    "spotify_desc": "Muzyka i podcasty",
+    "tiktok_desc": "Krótkie filmy i trendy",
+    "maps_desc": "Nawigacja i miejsca",
+    "uber_desc": "Przejazdy i dostawy",
+    "more": "...i wiele więcej"
+  }
+}
+
+ar.json:
+{
+  "apps": {
+    "title_part1": "إنترنت متنقل لـ",
+    "title_part2": "تطبيقات",
+    "subtitle": "استخدم [esim] للاستمتاع بـ WhatsApp وMessenger وInstagram بالإضافة إلى الموسيقى والأفلام والألعاب أثناء التنقل. ابقَ متصلاً بالإنترنت في جميع أنحاء العالم عبر شبكات 4G و5G السريعة وابقَ على اتصال مع الأصدقاء والعائلة.",
+    "whatsapp_desc": "الرسائل والمكالمات الفيديوية",
+    "instagram_desc": "الصور والقصص والريلز",
+    "spotify_desc": "الموسيقى والبودكاست",
+    "tiktok_desc": "مقاطع الفيديو القصيرة والاتجاهات",
+    "maps_desc": "التنقل والأماكن",
+    "uber_desc": "المواصلات والتوصيل",
+    "more": "...والمزيد"
+  }
+}
+
+tr.json:
+{
+  "apps": {
+    "title_part1": "Uygulamalar için",
+    "title_part2": "Mobil İnternet",
+    "subtitle": "Seyahat halindeyken WhatsApp, Messenger, Instagram ile müzik, film ve oyunların keyfini çıkarmak için [esim]'i kullan. Hızlı 4G ve 5G ağları sayesinde dünya çapında her zaman çevrimiçi kal ve arkadaşlarınla ailenle bağlantıda ol.",
+    "whatsapp_desc": "Mesajlar ve video aramalar",
+    "instagram_desc": "Fotoğraflar, hikayeler ve reels",
+    "spotify_desc": "Müzik ve podcastler",
+    "tiktok_desc": "Kısa videolar ve trendler",
+    "maps_desc": "Gezinme ve konumlar",
+    "uber_desc": "Seyahatler ve teslimatlar",
+    "more": "...ve daha fazlası"
+  }
+}
+-->
 
 {% schema %}
 {
