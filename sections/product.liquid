@@ -423,21 +423,20 @@
   z-index: 2;
 }
 
-/* FREE Login Button */
+/* FREE Login Button - In Price Position */
 .free-login-button {
-  display: block;
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px 32px;
+  display: inline-block;
+  padding: 12px 24px;
   background: linear-gradient(135deg, #009a61, #00d97e);
   color: white;
   border: none;
   border-radius: 100px;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   text-align: center;
   text-decoration: none;
   transition: var(--product-transition);
+  white-space: nowrap;
 }
 
 .free-login-button:hover {
@@ -632,7 +631,7 @@
     box-shadow: none !important;
   }
   
-  /* Gradient für bessere Lesbarkeit */
+  /* Gradient für bessere Lesbarkeit - MEHR TRANSPARENZ */
   .hero-image-wrapper::after {
     content: '';
     position: absolute;
@@ -641,9 +640,9 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(to bottom, 
-      rgba(255, 255, 255, 0.75) 0%,
-      rgba(255, 255, 255, 0.88) 50%,
-      rgba(255, 255, 255, 0.96) 100%);
+      rgba(255, 255, 255, 0.5) 0%,   /* Transparenter! */
+      rgba(255, 255, 255, 0.75) 50%,  /* Transparenter! */
+      rgba(255, 255, 255, 0.92) 100%); /* Transparenter! */
     z-index: 1;
   }
   
@@ -985,9 +984,10 @@
           <span>{{ 'product.data_plans' | t | default: 'Data Plans' }}</span>
         </button>
         <button class="variant-tab" data-tab="unlimited">
-          <!-- Besseres Unlimited Icon -->
-          <svg class="tab-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 010-5.303m5.304 0a3.75 3.75 0 010 5.303m-7.425 2.122a6.75 6.75 0 010-9.546m9.546 0a6.75 6.75 0 010 9.546M5.106 18.894c-3.808-3.808-3.808-9.98 0-13.789m13.788 0c3.808 3.808 3.808 9.981 0 13.79" />
+          <!-- Infinity Symbol für Unlimited -->
+          <svg class="tab-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9.5 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zM14.5 12c0-1.657 1.343-3 3-3s3 1.343 3 3-1.343 3-3 3-3-1.343-3-3z"/>
+            <path d="M9.5 12h5"/>
           </svg>
           <span>{{ 'product.unlimited_daily' | t | default: 'Unlimited Daily' }}</span>
         </button>
@@ -1078,7 +1078,11 @@
                     {% endif %}
                     
                     {% if is_free %}
-                      <!-- Kein Preis anzeigen, nur Login Button -->
+                      <!-- Login Button direkt als Preis -->
+                      <a href="/account/login?return_url={{ request.path }}" 
+                         class="free-login-button">
+                        {{ 'product.login_for_free' | t | default: 'Login for FREE' }}
+                      </a>
                     {% else %}
                       <span class="plan-price">
                         {{ variant.price | money }}
@@ -1086,20 +1090,6 @@
                     {% endif %}
                   </div>
                 </div>
-                
-                <!-- FREE Login Button -->
-                {% if is_free %}
-                  {% unless customer %}
-                    <a href="/account/login?return_url={{ request.path }}" 
-                       class="free-login-button">
-                      {{ 'product.login_for_free' | t | default: 'Login for FREE eSIM' }}
-                    </a>
-                  {% else %}
-                    <button type="button" class="free-login-button" onclick="selectPlan(this.closest('.plan-card'))">
-                      {{ 'product.select_free' | t | default: 'Select FREE eSIM' }}
-                    </button>
-                  {% endunless %}
-                {% endif %}
               </div>
             {% endunless %}
           {% endfor %}
@@ -1320,7 +1310,7 @@
     if (!ticking && window.innerWidth <= 768) {
       window.requestAnimationFrame(function() {
         const selectionTop = section.querySelector('.product-selection')?.offsetTop || 0;
-        const scrolled = window.scrollY > selectionTop + 100;
+        const scrolled = window.scrollY > selectionTop - 200; // Früher sichtbar!
         
         if (stickyCart) {
           stickyCart.classList.toggle('active', scrolled);
