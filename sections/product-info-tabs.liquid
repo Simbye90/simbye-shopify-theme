@@ -48,8 +48,8 @@
 /* Tab Navigation */
 .info-tab-nav {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex-direction: row; /* Auch auf Mobile nebeneinander! */
+  gap: 4px;
   background: rgba(0, 154, 97, 0.05);
   padding: 4px;
   border-radius: 16px;
@@ -59,8 +59,6 @@
 
 @media (min-width: 768px) {
   .info-tab-nav {
-    flex-direction: row;
-    gap: 4px;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -70,11 +68,11 @@
 
 .info-tab-button {
   flex: 1;
-  padding: 16px 24px;
+  padding: 14px 16px;
   background: transparent;
   border: none;
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   color: #666;
   cursor: pointer;
@@ -82,7 +80,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
 }
@@ -91,6 +89,30 @@
   .info-tab-button {
     padding: 18px 32px;
     font-size: 18px;
+    gap: 12px;
+  }
+}
+
+/* Mobile: Nur Icons zeigen, Text verstecken für Platz */
+@media (max-width: 480px) {
+  .info-tab-button span {
+    display: none;
+  }
+  
+  .info-tab-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .info-tab-button {
+    padding: 16px;
+  }
+}
+
+/* Tablet und größer: Text und Icon */
+@media (min-width: 481px) {
+  .info-tab-button span {
+    display: inline;
   }
 }
 
