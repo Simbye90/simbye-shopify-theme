@@ -127,12 +127,21 @@
         "title_part3": "Answered",
         "subtitle": "Everything you need to know about Simbye eSIM"
       }
+    },
+    "simbye_vs_A7x9RL": {
+      "type": "simbye-vs",
+      "name": "Comparison Table",
+      "settings": {
+        "show_trust_indicators": true,
+        "save_percentage": "85%"
+      }
     }
   },
   "order": [
     "main",
     "product_info_tabs_jTcRT8",
     "mobile_apps_qb8J9x",
+    "simbye_vs_A7x9RL",
     "faq_rdt6jk"
   ]
 }
