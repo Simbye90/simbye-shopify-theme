@@ -436,7 +436,7 @@
   }
 }
 
-/* Mobile Table - OPTIMIZED wie Holafly */
+/* Mobile Table - KOMPLETT NEU wie Holafly */
 @media (max-width: 768px) {
   .comparison-section {
     padding: 0 0 20px 0;
@@ -459,10 +459,13 @@
   .comparison-title {
     font-size: 28px;
     word-wrap: break-word;
+    word-break: break-word;
   }
   
   .comparison-subtitle {
     font-size: 16px;
+    word-wrap: break-word;
+    word-break: break-word;
   }
   
   .trust-indicators {
@@ -473,11 +476,10 @@
     font-size: 12px;
   }
   
-  /* Mobile Table Wrapper */
+  /* Mobile Table Wrapper - KEIN SCROLL! */
   .comparison-table-wrapper {
     border-radius: 20px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow: visible; /* KEIN SCROLL */
     margin: 0 16px;
     background: #f8f9fa;
     border: 1px solid #e9ecef;
@@ -489,16 +491,13 @@
     border-color: rgba(255, 255, 255, 0.08);
   }
   
-  /* Table */
+  /* Table - VOLLE BREITE, KEIN SCROLL */
   .comparison-table {
-    width: auto;
-    min-width: 100%;
+    width: 100%;
+    table-layout: fixed; /* WICHTIG für gleichmäßige Spalten */
   }
   
   .comparison-table thead {
-    position: sticky;
-    top: 0;
-    z-index: 3;
     background: #ffffff;
     border-bottom: 1px solid #e9ecef;
   }
@@ -509,41 +508,63 @@
   }
   
   .comparison-table th {
-    padding: 16px 12px;
-    font-size: 14px;
-    min-width: 90px;
-    white-space: nowrap;
+    padding: 12px 8px;
+    font-size: 13px;
     font-weight: 600;
     color: #333;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    vertical-align: middle;
   }
   
   [data-theme="dark"] .comparison-table th {
     color: #f5f5f5;
   }
   
-  .comparison-table th:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 4;
-    background: #ffffff;
-    box-shadow: 2px 0 4px rgba(0,0,0,0.05);
-    min-width: 150px;
-    padding-left: 16px;
-    font-size: 13px;
-    word-break: break-word;
-    white-space: normal;
+  /* Spaltenbreiten für Mobile */
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    width: 40%; /* Erste Spalte breiter */
+    padding-left: 12px;
   }
   
-  [data-theme="dark"] .comparison-table th:first-child {
-    background: #1a1a1a;
+  .comparison-table th:not(:first-child),
+  .comparison-table td:not(:first-child) {
+    width: 20%; /* Andere Spalten gleichmäßig */
+    text-align: center;
   }
   
+  /* KEIN Featured Background für Simbye Spalte! */
   .comparison-table th.featured-column {
-    min-width: 110px;
-    background: linear-gradient(135deg, #009a61, #00d97e);
+    background: #ffffff; /* Normal weiß */
+    color: #333;
+    position: relative;
   }
   
-  /* Table Body Rows - Zebra Striping für bessere Lesbarkeit */
+  [data-theme="dark"] .comparison-table th.featured-column {
+    background: #1a1a1a;
+    color: #f5f5f5;
+  }
+  
+  /* Recommended Badge bleibt */
+  .recommended-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    top: -10px;
+    background: linear-gradient(135deg, #ff7e50, #ff9a76);
+  }
+  
+  /* Table Body */
+  .comparison-table tbody tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  
+  [data-theme="dark"] .comparison-table tbody tr {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+  
+  /* Zebra Striping */
   .comparison-table tbody tr:nth-child(odd) {
     background: rgba(0, 0, 0, 0.02);
   }
@@ -553,67 +574,43 @@
   }
   
   .comparison-table td {
-    padding: 18px 12px;
-    font-size: 14px;
-    min-width: 90px;
+    padding: 14px 8px;
+    font-size: 13px;
     vertical-align: middle;
     color: #333;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  }
-  
-  [data-theme="dark"] .comparison-table td {
-    color: #f5f5f5;
-    border-bottom-color: rgba(255, 255, 255, 0.06);
-  }
-  
-  .comparison-table td:first-child {
-    position: sticky;
-    left: 0;
-    z-index: 2;
-    background: #ffffff;
-    box-shadow: 2px 0 4px rgba(0,0,0,0.05);
-    min-width: 150px;
-    padding-left: 16px;
-    font-size: 13px;
-    font-weight: 500;
+    word-wrap: break-word;
     word-break: break-word;
     white-space: normal;
   }
   
-  [data-theme="dark"] .comparison-table td:first-child {
-    background: #1a1a1a;
+  [data-theme="dark"] .comparison-table td {
+    color: #f5f5f5;
   }
   
-  /* Zebra stripe fix for sticky column */
-  .comparison-table tbody tr:nth-child(odd) td:first-child {
-    background: #f8f9fa;
-  }
-  
-  [data-theme="dark"] .comparison-table tbody tr:nth-child(odd) td:first-child {
-    background: rgba(26, 26, 26, 0.95);
-  }
-  
-  /* Featured Column */
+  /* KEIN Featured Background für TD */
   .comparison-table td.featured-column {
-    background: rgba(0, 154, 97, 0.08);
+    background: transparent;
     font-weight: 600;
   }
   
-  [data-theme="dark"] .comparison-table td.featured-column {
-    background: rgba(0, 217, 126, 0.08);
-  }
-  
-  /* Feature Labels mit Icons */
+  /* Feature Labels */
   .feature-label {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    word-wrap: break-word;
     word-break: break-word;
   }
   
+  .feature-label span {
+    word-wrap: break-word;
+    word-break: break-word;
+    line-height: 1.3;
+  }
+  
   .feature-icon-mobile {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -622,58 +619,60 @@
   }
   
   .feature-icon-mobile svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
   
   .feature-info {
     display: none;
   }
   
-  /* Compact Option Names */
+  /* Option Names - WORD BREAK! */
   .option-name {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     margin-bottom: 2px;
+    word-wrap: break-word;
     word-break: break-word;
+    white-space: normal;
+    line-height: 1.2;
   }
   
   .option-type {
     font-size: 10px;
     opacity: 0.7;
+    word-wrap: break-word;
+    word-break: break-word;
   }
   
   /* Prices */
   .price-value {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
+    word-wrap: break-word;
+    word-break: break-word;
   }
   
   .price-unit {
-    font-size: 12px;
+    font-size: 11px;
     opacity: 0.7;
+    display: block;
   }
   
-  /* Badges */
-  .recommended-badge {
-    font-size: 9px;
-    padding: 2px 8px;
-    top: -10px;
-  }
-  
+  /* Save Badge kleiner */
   .save-badge {
-    font-size: 9px;
-    padding: 2px 6px;
+    font-size: 8px;
+    padding: 2px 4px;
     top: -6px;
-    right: -6px;
+    right: -4px;
   }
   
-  /* Values - Größere Touch-Targets */
+  /* Values kompakter */
   .value-check,
   .value-cross,
   .value-partial {
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
   }
   
   .value-check svg,
@@ -684,31 +683,21 @@
   }
   
   .text-value {
-    font-size: 13px;
+    font-size: 12px;
+    word-wrap: break-word;
     word-break: break-word;
+    white-space: normal;
+    line-height: 1.3;
   }
   
   .text-value.highlight {
     font-weight: 600;
-  }
-  
-  /* Scroll Indicator */
-  .comparison-table-wrapper::after {
-    content: '→';
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
     color: var(--compare-primary);
-    opacity: 0.5;
-    pointer-events: none;
-    animation: scrollHint 2s ease-in-out infinite;
   }
   
-  @keyframes scrollHint {
-    0%, 100% { transform: translateY(-50%) translateX(0); }
-    50% { transform: translateY(-50%) translateX(5px); }
+  /* Kein Scroll Indicator mehr nötig */
+  .comparison-table-wrapper::after {
+    display: none;
   }
 }
 
