@@ -240,28 +240,24 @@
   "feature_nosim_desc": "Works on all eSIM compatible devices. Install directly via QR code.",
   "feature_network_coverage": "Connected with our premium network partner for 98% coverage across %{country}",
   
-
- "tab_features": "Features",
+"tab_features": "Features",
     "tab_description": "Description",
     "tab_technical": "Technical Specs",
-    
     "feature_recharge_title": "Rechargeable eSIM",
+    "feature_recharge_subtitle": "Top up anytime",
     "feature_recharge_desc": "Top up your eSIM anytime from your account. No need to buy a new eSIM when data runs out.",
-    
     "feature_money_back_title": "Money-Back Guarantee",
+    "feature_money_back_subtitle": "30-day guarantee",
     "feature_money_back_desc": "30-day money-back guarantee. Not satisfied? Get a full refund, no questions asked.",
-    
     "feature_no_contract_title": "No Contract Required",
+    "feature_no_contract_subtitle": "Prepaid & flexible",
     "feature_no_contract_desc": "Prepaid eSIM with no commitments. Cancel anytime, no hidden fees or long-term contracts.",
-    
     "compatibility_title": "Check Device Compatibility",
     "compatibility_subtitle": "Make sure your device supports eSIM before purchasing",
     "check_compatibility": "Check Compatibility",
     "compatibility_modal_title": "Check eSIM Compatibility",
     "compatibility_note": "If your device model is NOT in the list, it was not built to support eSIM.",
-    
-    "why_choose": "Why choose {{product}} eSIM?",
-    
+    "why_choose": "Why choose our eSIM?",
     "spec_network": "Network",
     "spec_speed": "Speed",
     "spec_coverage": "Coverage",
@@ -275,10 +271,21 @@
     "spec_delivery": "Delivery",
     "spec_phone": "Phone Number",
     "spec_esim_validity": "eSIM Validity",
-    
     "yes": "Yes",
     "no": "No",
     "days": "Days",
     "instant": "Immediately after purchase"
-}
+  },
+  "apps": {
+    "title_part1": "Mobile Internet for",
+    "title_part2": "Apps",
+    "subtitle": "Use the [esim] to enjoy WhatsApp, Messenger, Instagram, as well as music, movies, and games on the go. Stay connected with friends and family worldwide via fast 4G and 5G networks.",
+    "whatsapp_desc": "Messages and video calls",
+    "instagram_desc": "Photos, stories, and reels",
+    "spotify_desc": "Music and podcasts",
+    "tiktok_desc": "Short videos and trends",
+    "maps_desc": "Navigation and places",
+    "uber_desc": "Rides and deliveries",
+    "more": "...and many more"
+  }
 }
