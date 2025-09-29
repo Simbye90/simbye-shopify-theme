@@ -1,10 +1,10 @@
 <!-- sections/product.liquid -->
-<!-- SIMBYE ENTERPRISE PRODUCT PAGE V12.0 WITH ALL FIXES -->
+<!-- SIMBYE ENTERPRISE PRODUCT PAGE V13.0 FINAL -->
 
 <style>
 /* ============================================
-   ENTERPRISE PRODUCT PAGE V12 - SIMBYE ESIM
-   ALL FIXES + PERCENTAGE PRICING
+   ENTERPRISE PRODUCT PAGE V13 - SIMBYE ESIM
+   ALL FIXES + TRUST BADGES + BETTER MOBILE
    ============================================ */
 
 /* KILL SHOPIFY GRID - ENHANCED */
@@ -19,7 +19,7 @@
 
 .shopify-section:has(.product-enterprise) > * {
   grid-column: unset !important;
-  margin: 0 !important; /* Kill margin from critical.css */
+  margin: 0 !important;
 }
 
 .product-enterprise {
@@ -63,11 +63,11 @@
   --product-shadow-lg: 0 16px 48px rgba(0, 217, 126, 0.15);
 }
 
-/* Main Section - FORCE HEADER SPACING */
+/* Main Section - MINIMAL HEADER SPACING */
 .product-enterprise {
   background: var(--product-bg);
   overflow: hidden;
-  padding-top: 120px !important; /* Mehr Abstand, mit !important gegen critical.css */
+  padding-top: 20px !important; /* NUR 20px zum Header */
   min-height: 100vh;
 }
 
@@ -127,7 +127,7 @@
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Title mit Flagge - ERSTES BILD IST FLAGGE */
+/* Title mit Flagge */
 .product-title-wrapper {
   display: flex;
   align-items: center;
@@ -177,6 +177,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-bottom: 32px; /* Space for trust badges */
 }
 
 .hero-feature {
@@ -194,6 +195,30 @@
   flex-shrink: 0;
 }
 
+/* Trust Badges - DESKTOP ONLY */
+.trust-badges {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--product-border);
+}
+
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--product-text-secondary);
+}
+
+.trust-badge svg {
+  width: 20px;
+  height: 20px;
+  color: var(--product-primary);
+  flex-shrink: 0;
+}
+
 /* Selection Section */
 .product-selection {
   max-width: 1600px;
@@ -202,7 +227,7 @@
   width: 100%;
 }
 
-/* Tab System - NUR BEI UNLIMITED */
+/* Tab System */
 .variant-tabs {
   display: flex;
   gap: 4px;
@@ -298,7 +323,7 @@
   gap: 40px;
 }
 
-/* Plans Container - FIX WITH MARGINS INSTEAD OF GAP */
+/* Plans Container */
 .plans-container {
   display: flex;
   flex-direction: column;
@@ -309,7 +334,7 @@
   flex-direction: column;
 }
 
-/* Plan Cards - USING MARGINS INSTEAD OF GAP */
+/* Plan Cards - WITH MARGINS */
 .plan-card {
   position: relative;
   background: var(--product-card-bg);
@@ -319,7 +344,7 @@
   cursor: pointer;
   transition: var(--product-transition);
   overflow: visible;
-  margin-bottom: 24px !important; /* EXPLICIT MARGIN statt gap */
+  margin-bottom: 24px !important;
 }
 
 .plan-card:last-child {
@@ -334,11 +359,18 @@
 
 .plan-card.selected {
   border-color: var(--product-primary);
-  border-width: 3px; /* Dickere Border für selected */
+  border-width: 3px;
   background: linear-gradient(135deg, 
     rgba(0, 154, 97, 0.03) 0%, 
     rgba(0, 217, 126, 0.03) 100%);
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
+}
+
+/* Free Card Special Style */
+.plan-card[data-is-free="true"] {
+  background: linear-gradient(135deg, 
+    rgba(0, 217, 126, 0.05) 0%, 
+    rgba(0, 255, 136, 0.05) 100%);
 }
 
 .plan-content {
@@ -367,7 +399,6 @@
   text-align: right;
 }
 
-/* Durchgestrichener Preis */
 .plan-price-old {
   display: block;
   font-size: 16px;
@@ -389,6 +420,25 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Free Login Button IN Card */
+.free-login-button {
+  display: block;
+  background: linear-gradient(135deg, #009a61, #00d97e);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 100px;
+  font-weight: 700;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 20px;
+  transition: var(--product-transition);
+}
+
+.free-login-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
 }
 
 /* FREE Badge */
@@ -426,7 +476,7 @@
 /* Purchase Box */
 .purchase-box {
   position: sticky;
-  top: 120px;
+  top: 100px;
   background: var(--product-card-bg);
   border: 1px solid var(--product-border);
   border-radius: var(--product-radius);
@@ -524,30 +574,14 @@
   transform: scale(1.05);
 }
 
-/* MOBILE STICKY CART */
-.sticky-cart {
-  display: none;
-}
-
 /* MOBILE STYLES */
 @media screen and (max-width: 768px) {
-  /* Header Abstand Mobile - Mit Background-Blur */
+  /* NO HEADER SPACING ON MOBILE */
   .product-enterprise {
-    padding-top: 70px !important; /* Header height + spacing */
+    padding-top: 0 !important;
   }
   
-  /* Mobile Header Blur wenn Hero Background sichtbar */
-  .enterprise-header {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(255, 255, 255, 0.92) !important;
-  }
-  
-  [data-theme="dark"] .enterprise-header {
-    background: rgba(10, 10, 10, 0.92) !important;
-  }
-  
-  /* Hero Mobile - SPECIAL STYLE MIT BACKGROUND */
+  /* Hero Mobile - FULL BACKGROUND */
   .product-hero {
     padding: 0 !important;
     max-width: 100% !important;
@@ -559,9 +593,10 @@
     grid-template-columns: 1fr;
     gap: 0;
     position: relative;
+    min-height: 400px;
   }
   
-  /* Hero Image als Background - DURCHSICHTIG */
+  /* Hero Image als Background */
   .hero-image-section {
     position: absolute;
     top: 0;
@@ -582,7 +617,7 @@
     box-shadow: none !important;
   }
   
-  /* Gradient für bessere Lesbarkeit */
+  /* Better Gradient Overlay for Readability */
   .hero-image-wrapper::after {
     content: '';
     position: absolute;
@@ -590,32 +625,37 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, 
-      rgba(255, 255, 255, 0.75) 0%,
-      rgba(255, 255, 255, 0.88) 50%,
-      rgba(255, 255, 255, 0.96) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.7) 20%,
+      rgba(255, 255, 255, 0.85) 50%,
+      rgba(255, 255, 255, 0.95) 100%
+    );
     z-index: 1;
   }
   
   [data-theme="dark"] .hero-image-wrapper::after {
-    background: linear-gradient(to bottom, 
-      rgba(10, 10, 10, 0.75) 0%,
-      rgba(10, 10, 10, 0.88) 50%,
-      rgba(10, 10, 10, 0.96) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(10, 10, 10, 0.4) 0%,
+      rgba(10, 10, 10, 0.7) 20%,
+      rgba(10, 10, 10, 0.85) 50%,
+      rgba(10, 10, 10, 0.95) 100%
+    );
   }
   
   .hero-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 1;
   }
   
-  /* Hero Info über dem Bild - EXTRA PADDING TOP */
+  /* Hero Info über dem Bild */
   .hero-info-section {
     position: relative;
     z-index: 2;
-    padding: 40px 20px 40px !important; /* Mehr padding-top */
+    padding: 60px 20px 40px !important; /* Smooth transition from header */
     text-align: left;
   }
   
@@ -623,7 +663,7 @@
   .product-title-wrapper {
     justify-content: flex-start;
     margin-bottom: 20px;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
   }
   
@@ -641,8 +681,8 @@
   }
   
   .product-title {
-    font-size: 28px;
-    line-height: 1.2;
+    font-size: 32px;
+    line-height: 1.1;
   }
   
   .hero-subtitle {
@@ -662,6 +702,11 @@
   .hero-feature svg {
     width: 20px;
     height: 20px;
+  }
+  
+  /* Trust Badges - HIDE ON MOBILE */
+  .trust-badges {
+    display: none !important;
   }
   
   /* Selection Mobile */
@@ -693,7 +738,7 @@
     height: 18px;
   }
   
-  /* Varianten Mobile - Margins statt gap */
+  /* Varianten Mobile */
   .plan-card {
     margin-bottom: 16px !important;
     padding: 20px;
@@ -747,33 +792,12 @@
     padding: 5px 0;
   }
   
-  .sticky-cart-menu {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .sticky-cart-menu a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    cursor: pointer;
-    color: #000;
-  }
-  
-  [data-theme="dark"] .sticky-cart-menu a {
-    color: #fff;
-  }
-  
   .sticky-cart-title {
     font-size: 16px;
     font-weight: bold;
     color: var(--product-text);
   }
   
-  /* Dark Mode - Title weiß! */
   [data-theme="dark"] .sticky-cart-title {
     color: #ffffff !important;
   }
@@ -785,12 +809,10 @@
     width: 100%;
     background: #009a61;
     border-radius: 30px;
-    text-decoration: none;
     padding: 17px 24px;
     color: #fff;
     font-weight: bold;
     font-size: 16px;
-    gap: 10px;
     margin-top: 10px;
     border: none;
     cursor: pointer;
@@ -798,10 +820,6 @@
   
   .sticky-cart-button:active {
     transform: scale(0.98);
-  }
-  
-  .halo-sticky-toolbar-mobile {
-    display: none;
   }
 }
 
@@ -825,7 +843,7 @@
   <div class="product-hero">
     <div class="hero-container">
       
-      <!-- Hero Image - ZWEITES BILD ALS BACKGROUND (Mobile) -->
+      <!-- Hero Image -->
       <div class="hero-image-section">
         <div class="hero-image-wrapper">
           {% if product.images[1] %}
@@ -846,7 +864,7 @@
       
       <!-- Hero Info -->
       <div class="hero-info-section">
-        <!-- Title mit Flagge - ERSTES BILD IST FLAGGE -->
+        <!-- Title mit Flagge -->
         <div class="product-title-wrapper">
           {% if product.featured_image %}
             {{ product.featured_image | image_url: width: 80 | image_tag: 
@@ -893,6 +911,22 @@
             <span>{{ 'product.whatsapp_support' | t | default: '24/7 WhatsApp support' }}</span>
           </div>
         </div>
+        
+        <!-- Trust Badges - DESKTOP ONLY -->
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+            <span>{{ 'product.secure_payment' | t | default: 'Secure payment' }}</span>
+          </div>
+          <div class="trust-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{{ 'product.money_back' | t | default: 'Money-back guarantee' }}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -900,7 +934,7 @@
   <!-- Product Selection -->
   <div class="product-selection">
     
-    <!-- Check for unlimited variants WITH SKU -->
+    <!-- Check for unlimited variants -->
     {% assign has_unlimited = false %}
     {% for variant in product.variants %}
       {% if variant.sku contains 'daily' or variant.sku contains 'Daily' or variant.sku contains 'unlimited' %}
@@ -908,7 +942,7 @@
       {% endif %}
     {% endfor %}
     
-    <!-- Tab System - NUR wenn Unlimited existiert -->
+    <!-- Tab System -->
     {% if has_unlimited %}
       <div class="variant-tabs">
         <button class="variant-tab active" data-tab="normal">
@@ -918,8 +952,10 @@
           <span>{{ 'product.data_plans' | t | default: 'Data Plans' }}</span>
         </button>
         <button class="variant-tab" data-tab="unlimited">
+          <!-- Better Unlimited Icon -->
           <svg class="tab-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 7c-2.5 0-4 1.5-4 3s1.5 3 4 3c2.5 0 6-5 9-5 2.5 0 4 1.5 4 3s-1.5 3-4 3c-3 0-6.5-5-9-5z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
           </svg>
           <span>{{ 'product.unlimited_daily' | t | default: 'Unlimited Daily' }}</span>
         </button>
@@ -942,24 +978,6 @@
       
       <!-- Plans Container -->
       <div class="plans-container">
-        
-        <!-- SETTINGS FOR PRICING -->
-        {% comment %}
-        ==========================================
-        PRICING SETTINGS - ÄNDERN SIE DIESE WERTE
-        ==========================================
-        Option 1: show_compare_price = true + price_increase_percent = 20
-                  (zeigt 20% höheren alten Preis)
-        
-        Option 2: show_compare_price = false 
-                  (zeigt keinen durchgestrichenen Preis)
-        
-        Option 3: Shopify compare_at_price verwenden
-                  (variant.compare_at_price direkt in Shopify setzen)
-        {% endcomment %}
-        
-        {% assign show_compare_price = true %}
-        {% assign price_increase_percent = 20 %}
         
         <!-- Normal Variants -->
         <div class="variant-group" id="normal-variants" style="display: block;">
@@ -1016,19 +1034,9 @@
                     </div>
                   </div>
                   <div class="plan-price-wrapper">
-                    <!-- Compare at Price Logic -->
-                    {% if show_compare_price and is_free == false %}
-                      {% if variant.compare_at_price and variant.compare_at_price > variant.price %}
-                        <!-- Use Shopify's compare_at_price if set -->
-                        <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
-                      {% elsif price_increase_percent > 0 %}
-                        <!-- Calculate price based on percentage -->
-                        {% assign multiplier = price_increase_percent | plus: 100 | times: 1.0 | divided_by: 100 %}
-                        {% assign old_price = variant.price | times: multiplier %}
-                        <span class="plan-price-old">{{ old_price | money }}</span>
-                      {% endif %}
+                    {% if variant.compare_at_price and variant.compare_at_price > variant.price and is_free == false %}
+                      <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
                     {% endif %}
-                    
                     <span class="plan-price {% if is_free %}free{% endif %}">
                       {% if is_free %}
                         FREE
@@ -1039,15 +1047,13 @@
                   </div>
                 </div>
                 
-                <!-- Login Button für FREE -->
+                <!-- Login Button für FREE IN CARD -->
                 {% if is_free %}
                   {% unless customer %}
-                    <div style="margin-top: 20px; text-align: center;">
-                      <a href="/account/login?return_url={{ request.path }}" 
-                         style="display: inline-block; background: linear-gradient(135deg, #009a61, #00d97e); color: white; padding: 12px 32px; border-radius: 100px; font-weight: 700; text-decoration: none;">
-                        {{ 'product.login_for_free' | t | default: 'Login for FREE eSIM' }}
-                      </a>
-                    </div>
+                    <a href="/account/login?return_url={{ request.path }}" 
+                       class="free-login-button">
+                      {{ 'product.login_for_free' | t | default: 'Login for FREE eSIM' }}
+                    </a>
                   {% endunless %}
                 {% endif %}
               </div>
@@ -1076,15 +1082,8 @@
                       </div>
                     </div>
                     <div class="plan-price-wrapper">
-                      <!-- Compare at Price for Unlimited -->
-                      {% if show_compare_price %}
-                        {% if variant.compare_at_price and variant.compare_at_price > variant.price %}
-                          <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
-                        {% elsif price_increase_percent > 0 %}
-                          {% assign multiplier = price_increase_percent | plus: 100 | times: 1.0 | divided_by: 100 %}
-                          {% assign old_price = variant.price | times: multiplier %}
-                          <span class="plan-price-old">{{ old_price | money }}</span>
-                        {% endif %}
+                      {% if variant.compare_at_price and variant.compare_at_price > variant.price %}
+                        <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
                       {% endif %}
                       <span class="plan-price">{{ variant.price | money }}</span>
                     </div>
@@ -1143,13 +1142,6 @@
   <div class="sticky-cart" id="sticky-cart">
     <div class="sticky-cart-header">
       <div class="sticky-cart-title" id="sticky-title">-</div>
-      <div class="sticky-cart-menu">
-        <a href="#product-selection">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-        </a>
-      </div>
     </div>
     <button class="sticky-cart-button" id="sticky-button">
       {{ 'product.buy_now' | t | default: 'Buy Now' }}
@@ -1293,3 +1285,58 @@
   }
 })();
 </script>
+
+{% schema %}
+{
+  "name": "Product Page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Price Display Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_compare_price",
+      "label": "Show crossed out prices",
+      "default": false,
+      "info": "Enable to show compare-at prices"
+    },
+    {
+      "type": "range",
+      "id": "price_increase_percent",
+      "label": "Price increase percentage",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "default": 20,
+      "info": "Shows old price as X% higher than current price"
+    },
+    {
+      "type": "select",
+      "id": "price_display_mode",
+      "label": "Price display mode",
+      "options": [
+        {
+          "value": "shopify",
+          "label": "Use Shopify compare-at price"
+        },
+        {
+          "value": "percentage",
+          "label": "Use percentage calculation"
+        },
+        {
+          "value": "none",
+          "label": "Don't show old prices"
+        }
+      ],
+      "default": "none"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Page"
+    }
+  ]
+}
+{% endschema %}
