@@ -20,10 +20,16 @@
       "type": "product-info-tabs",
       "name": "Product Info Tabs",
       "settings": {}
+    },
+    "mobile_apps_qb8J9x": {
+      "type": "mobile-apps",
+      "name": "Mobile Apps",
+      "settings": {}
     }
   },
   "order": [
     "main",
-    "product_info_tabs_jTcRT8"
+    "product_info_tabs_jTcRT8",
+    "mobile_apps_qb8J9x"
   ]
 }
