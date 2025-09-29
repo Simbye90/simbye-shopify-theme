@@ -229,7 +229,19 @@
   "already_purchased_free": "You have already purchased this free eSIM",
   "select_variant": "Please select a variant",
   
-"tab_features": "Features",
+  // NEU - FEHLENDE KEYS:
+  "description": "Description",
+  "technical_details": "Technical Details",
+  
+  // Features für Description Tab
+  "feature_lowdata_title": "Low Data Volume?",
+  "feature_lowdata_desc": "Top up your eSIM from anywhere in seconds. No need to buy a new eSIM.",
+  "feature_nosim_title": "No SIM Card Needed",
+  "feature_nosim_desc": "Works on all eSIM compatible devices. Install directly via QR code.",
+  "feature_network_coverage": "Connected with our premium network partner for 98% coverage across %{country}",
+  
+
+ "tab_features": "Features",
     "tab_description": "Description",
     "tab_technical": "Technical Specs",
     
