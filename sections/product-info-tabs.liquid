@@ -1,13 +1,41 @@
 <!-- sections/product-info-tabs.liquid -->
-<!-- SIMBYE PRODUCT INFO TABS ENTERPRISE V2.0 -->
+<!-- SIMBYE PRODUCT INFO TABS - WHY SECTION STYLING -->
 
 <style>
-/* ============================================
-   PRODUCT INFO TABS - ENTERPRISE LEVEL V2
-   MOBILE FIRST + KEINE HOVER EFFEKTE
-   ============================================ */
+/* CSS Variables - Identisch mit Why Section */
+:root {
+  --tabs-bg: #ffffff;
+  --tabs-text: #1a1a1a;
+  --tabs-text-secondary: #666666;
+  --tabs-primary: #009a61;
+  --tabs-primary-hover: #00824f;
+  --tabs-accent: #00d97e;
+  --tabs-card-bg: #ffffff;
+  --tabs-border: rgba(0, 0, 0, 0.08);
+  --tabs-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --tabs-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --tabs-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --tabs-gradient: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  --tabs-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-/* Kill Shopify Grid für diese Section */
+/* Dark Mode Variables - Identisch mit Why Section */
+[data-theme="dark"] {
+  --tabs-bg: transparent;
+  --tabs-text: #f5f5f5;
+  --tabs-text-secondary: #999999;
+  --tabs-primary: #00d97e;
+  --tabs-primary-hover: #009a61;
+  --tabs-accent: #00ff88;
+  --tabs-card-bg: rgba(26, 26, 26, 0.8);
+  --tabs-border: rgba(255, 255, 255, 0.08);
+  --tabs-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --tabs-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --tabs-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+  --tabs-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+}
+
+/* Kill Shopify Grid */
 .shopify-section:has(.product-info-tabs-section) {
   display: block !important;
   padding: 0 !important;
@@ -15,133 +43,170 @@
   grid-template-columns: unset !important;
 }
 
-/* Section Base - FLEXIBLE HEIGHT */
+/* Main Section - Identischer Background wie Why Section */
 .product-info-tabs-section {
   width: 100%;
-  background: #ffffff;
-  padding: 40px 0;
+  padding: 0 0 20px 0;
+  background: var(--tabs-bg);
   position: relative;
-  overflow: visible; /* Kein overflow hidden! */
+  overflow: hidden;
+  transition: var(--tabs-transition);
 }
 
+/* Light Mode Background */
+[data-theme="light"] .product-info-tabs-section {
+  background: #ffffff;
+}
+
+/* Dark Mode - EXAKT GLEICHER GRADIENT WIE WHY SECTION */
 [data-theme="dark"] .product-info-tabs-section {
-  background: #0a0a0a;
+  background: linear-gradient(180deg,
+    #040404 0%,      /* Reines Schwarz ohne Grünstich */
+    #0b0c0b 10%,     
+    #0d100f 25%,     
+    #0f1210 40%,     /* Peak Grün */
+    #0d100f 60%,     
+    #090a09 80%,     
+    #040404 100%     
+  );
 }
 
-/* Container - Responsive */
+/* Background Pattern */
+.product-info-tabs-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Container - Identisch mit Why */
 .info-tabs-container {
-  max-width: 1600px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 100px 40px 0 40px;
+  position: relative;
+  z-index: 1;
 }
 
-@media (min-width: 768px) {
-  .product-info-tabs-section {
-    padding: 80px 0;
-  }
-  
-  .info-tabs-container {
-    padding: 0 40px;
-  }
+/* Header - NEU mit Why Styling */
+.tabs-header {
+  text-align: center;
+  margin-bottom: 72px;
+  animation: fadeInUp 0.8s ease;
 }
 
-/* Tab Navigation */
+/* TITLE - EXAKT WIE WHY SECTION */
+.tabs-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--tabs-text);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.tabs-title-highlight {
+  background: var(--tabs-primary);
+  color: white;
+  padding: 4px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+[data-theme="dark"] .tabs-title-highlight {
+  background: var(--tabs-primary);
+  color: #fff;
+}
+
+.tabs-subtitle {
+  font-size: 20px;
+  color: var(--tabs-text-secondary);
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Tab Navigation - Mit Why Styling */
 .info-tab-nav {
   display: flex;
-  flex-direction: row; /* Auch auf Mobile nebeneinander! */
-  gap: 4px;
-  background: rgba(0, 154, 97, 0.05);
-  padding: 4px;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 154, 97, 0.1);
-  margin-bottom: 32px;
-}
-
-@media (min-width: 768px) {
-  .info-tab-nav {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 48px;
-  }
+  flex-direction: row;
+  gap: 16px;
+  max-width: 800px;
+  margin: 0 auto 48px auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
 }
 
 .info-tab-button {
   flex: 1;
-  padding: 14px 16px;
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  font-size: 14px;
+  padding: 20px 24px;
+  background: var(--tabs-card-bg);
+  border: 2px solid var(--tabs-border);
+  border-radius: 24px;
+  font-size: 18px;
   font-weight: 600;
-  color: #666;
+  color: var(--tabs-text-secondary);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--tabs-transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   font-family: inherit;
   -webkit-tap-highlight-color: transparent;
+  box-shadow: var(--tabs-shadow-md);
+  animation: fadeInUp 0.9s ease both;
+  position: relative;
+  overflow: hidden;
 }
 
-@media (min-width: 768px) {
-  .info-tab-button {
-    padding: 18px 32px;
-    font-size: 18px;
-    gap: 12px;
-  }
-}
-
-/* Mobile: Nur Icons zeigen, Text verstecken für Platz */
-@media (max-width: 480px) {
-  .info-tab-button span {
-    display: none;
-  }
-  
-  .info-tab-icon {
-    width: 24px;
-    height: 24px;
-  }
-  
-  .info-tab-button {
-    padding: 16px;
-  }
-}
-
-/* Tablet und größer: Text und Icon */
-@media (min-width: 481px) {
-  .info-tab-button span {
-    display: inline;
-  }
-}
+.info-tab-button:nth-child(1) { animation-delay: 0.1s; }
+.info-tab-button:nth-child(2) { animation-delay: 0.2s; }
+.info-tab-button:nth-child(3) { animation-delay: 0.3s; }
 
 [data-theme="dark"] .info-tab-button {
-  color: #a0a0a0;
+  background: var(--tabs-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
-/* Kein Hover auf Mobile, nur active state */
-@media (hover: hover) {
-  .info-tab-button:hover {
-    background: rgba(0, 154, 97, 0.08);
-    color: #1a1a1a;
-  }
-  
-  [data-theme="dark"] .info-tab-button:hover {
-    color: #ffffff;
-  }
-}
-
+/* Tab Button Active State - Mit Glow Effect */
 .info-tab-button.active {
-  background: #009a61;
+  background: linear-gradient(135deg, var(--tabs-primary), var(--tabs-accent));
   color: white;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+  box-shadow: var(--tabs-shadow-lg);
+  border-color: transparent;
 }
 
+.info-tab-button.active::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 24px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(20px);
+  animation: glow 4s ease-in-out infinite;
+}
+
+/* Icon Styling wie Why Section */
 .info-tab-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 /* Tab Content */
@@ -154,203 +219,205 @@
   display: block;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Features Tab - NUR 3 CARDS */
+/* Features Grid - Mit Why Card Styling */
 .features-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  margin-bottom: 32px;
-}
-
-@media (min-width: 768px) {
-  .features-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin-bottom: 48px;
-  }
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 60px;
 }
 
 .feature-card {
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  padding: 24px;
-  transition: none; /* Keine Transition! */
-  cursor: default; /* Kein Pointer! */
+  background: var(--tabs-card-bg);
+  border-radius: 24px;
+  padding: 36px 28px;
+  box-shadow: var(--tabs-shadow-md);
+  transition: var(--tabs-transition);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--tabs-border);
+  animation: fadeInUp 0.9s ease both;
+  cursor: default;
 }
 
-@media (min-width: 768px) {
-  .feature-card {
-    padding: 32px;
-  }
-}
+.feature-card:nth-child(1) { animation-delay: 0.1s; }
+.feature-card:nth-child(2) { animation-delay: 0.2s; }
+.feature-card:nth-child(3) { animation-delay: 0.3s; }
 
 [data-theme="dark"] .feature-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--tabs-card-bg);
   border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
-/* KEINE HOVER EFFEKTE für Cards! */
-
-/* Feature Cards mit Icons neben Titel */
-.feature-title-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
+/* Feature Icon - EXAKT WIE WHY SECTION */
 .feature-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, #009a61, #00d97e);
-  border-radius: 12px;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--tabs-primary), var(--tabs-accent));
+  border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  margin-bottom: 28px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.25);
+  animation: subtlePulse 4s ease-in-out infinite;
 }
 
-@media (min-width: 768px) {
-  .feature-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 16px;
-  }
+/* Feature Number Badge */
+.feature-number {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: white;
+  color: var(--tabs-primary);
+  border: 2px solid var(--tabs-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] .feature-number {
+  background: var(--tabs-primary);
+  color: #0a0a0a;
+  border-color: var(--tabs-primary);
+}
+
+/* Glow Effect für Icons */
+.feature-icon::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 24px;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(20px);
+  animation: glow 4s ease-in-out infinite;
+}
+
+[data-theme="dark"] .feature-icon {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
+  box-shadow: 
+    0 10px 30px rgba(0, 217, 126, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
 }
 
 .feature-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   color: white;
+  stroke-width: 1.8;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
-@media (min-width: 768px) {
-  .feature-icon svg {
-    width: 28px;
-    height: 28px;
-  }
+[data-theme="dark"] .feature-icon svg {
+  color: var(--tabs-primary);
 }
 
+/* Feature Title - Why Section Styling */
 .feature-title {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 12px;
+  color: var(--tabs-text);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.01em;
   line-height: 1.2;
 }
 
-@media (min-width: 768px) {
-  .feature-title {
-    font-size: 20px;
-  }
+/* Feature Subtitle */
+.feature-subtitle {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--tabs-primary);
+  margin: 0 0 12px 0;
 }
 
-[data-theme="dark"] .feature-title {
-  color: #ffffff;
-}
-
+/* Feature Description */
 .feature-description {
   font-size: 15px;
-  color: #666;
+  color: var(--tabs-text-secondary);
   line-height: 1.6;
+  margin: 0;
 }
 
-@media (min-width: 768px) {
-  .feature-description {
-    font-size: 16px;
-  }
-}
-
-[data-theme="dark"] .feature-description {
-  color: #a0a0a0;
-}
-
-/* Compatibility Button Section */
+/* Compatibility Section - Mit Why Styling */
 .compatibility-section {
   text-align: center;
-  padding: 32px 24px;
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05) 0%, rgba(0, 217, 126, 0.05) 100%);
-  border-radius: 20px;
-  border: 2px dashed #009a61;
+  padding: 48px;
+  background: var(--tabs-card-bg);
+  border-radius: 24px;
+  border: 2px solid var(--tabs-border);
+  box-shadow: var(--tabs-shadow-md);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.9s ease both;
+  animation-delay: 0.4s;
 }
 
-@media (min-width: 768px) {
-  .compatibility-section {
-    padding: 48px;
-    border-radius: 24px;
-  }
+[data-theme="dark"] .compatibility-section {
+  background: var(--tabs-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+/* Gradient Background für Compatibility Section */
+.compatibility-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05) 0%, rgba(0, 217, 126, 0.05) 100%);
+  pointer-events: none;
 }
 
 .compatibility-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  color: #1a1a1a;
-  margin-bottom: 12px;
+  color: var(--tabs-text);
+  margin-bottom: 16px;
   line-height: 1.2;
-}
-
-@media (min-width: 768px) {
-  .compatibility-title {
-    font-size: 28px;
-    margin-bottom: 16px;
-  }
-}
-
-[data-theme="dark"] .compatibility-title {
-  color: #ffffff;
+  position: relative;
 }
 
 .compatibility-subtitle {
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 24px;
+  font-size: 18px;
+  color: var(--tabs-text-secondary);
+  margin-bottom: 32px;
   line-height: 1.5;
+  position: relative;
 }
 
-@media (min-width: 768px) {
-  .compatibility-subtitle {
-    font-size: 18px;
-    margin-bottom: 32px;
-  }
-}
-
-[data-theme="dark"] .compatibility-subtitle {
-  color: #a0a0a0;
-}
-
+/* Check Compatibility Button - Premium Style */
 .check-compatibility-btn {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 32px;
-  background: linear-gradient(135deg, #009a61, #00d97e);
+  padding: 20px 48px;
+  background: linear-gradient(135deg, var(--tabs-primary), var(--tabs-accent));
   color: white;
   border: none;
   border-radius: 100px;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: var(--tabs-transition);
   -webkit-tap-highlight-color: transparent;
-}
-
-@media (min-width: 768px) {
-  .check-compatibility-btn {
-    padding: 20px 48px;
-    font-size: 18px;
-  }
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.3);
+  animation: subtlePulse 4s ease-in-out infinite;
 }
 
 .check-compatibility-btn:active {
@@ -359,162 +426,112 @@
 
 @media (hover: hover) {
   .check-compatibility-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
+    transform: translateY(-3px);
+    box-shadow: var(--tabs-shadow-lg);
   }
 }
 
-/* Description Tab - ECHTE PRODUKTBESCHREIBUNG */
+/* Description Content - Mit Why Card Styling */
 .description-content {
   max-width: 800px;
   margin: 0 auto;
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 32px 24px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-}
-
-@media (min-width: 768px) {
-  .description-content {
-    border-radius: 24px;
-    padding: 48px;
-  }
+  background: var(--tabs-card-bg);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: var(--tabs-shadow-md);
+  border: 2px solid var(--tabs-border);
+  animation: fadeInUp 0.9s ease both;
 }
 
 [data-theme="dark"] .description-content {
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: var(--tabs-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 .description-content h3 {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
-  color: #009a61;
-  margin-bottom: 20px;
+  color: var(--tabs-primary);
+  margin-bottom: 24px;
   line-height: 1.2;
 }
 
-@media (min-width: 768px) {
-  .description-content h3 {
-    font-size: 24px;
-    margin-bottom: 24px;
-  }
-}
-
 .description-text {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.8;
-  color: #666;
+  color: var(--tabs-text-secondary);
   margin-bottom: 20px;
   white-space: pre-line;
 }
 
-@media (min-width: 768px) {
-  .description-text {
-    font-size: 16px;
-  }
-}
-
-[data-theme="dark"] .description-text {
-  color: #a0a0a0;
-}
-
-/* Technical Specs Tab */
+/* Technical Specs Grid - Mit Why Card Styling */
 .specs-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0;
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-}
-
-@media (min-width: 768px) {
-  .specs-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    border-radius: 24px;
-    padding: 48px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .specs-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-[data-theme="dark"] .specs-grid {
-  background: rgba(255, 255, 255, 0.03);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
 }
 
 .spec-item {
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--tabs-card-bg);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--tabs-shadow-md);
+  border: 2px solid var(--tabs-border);
+  animation: fadeInUp 0.9s ease both;
+  position: relative;
+  overflow: hidden;
 }
 
-@media (min-width: 768px) {
-  .spec-item {
-    padding: 20px 0;
-  }
-}
+/* Animation Delays für Specs */
+.spec-item:nth-child(1) { animation-delay: 0.1s; }
+.spec-item:nth-child(2) { animation-delay: 0.15s; }
+.spec-item:nth-child(3) { animation-delay: 0.2s; }
+.spec-item:nth-child(4) { animation-delay: 0.25s; }
+.spec-item:nth-child(5) { animation-delay: 0.3s; }
+.spec-item:nth-child(6) { animation-delay: 0.35s; }
+.spec-item:nth-child(7) { animation-delay: 0.4s; }
+.spec-item:nth-child(8) { animation-delay: 0.45s; }
+.spec-item:nth-child(9) { animation-delay: 0.5s; }
+.spec-item:nth-child(10) { animation-delay: 0.55s; }
+.spec-item:nth-child(11) { animation-delay: 0.6s; }
+.spec-item:nth-child(12) { animation-delay: 0.65s; }
 
 [data-theme="dark"] .spec-item {
+  background: var(--tabs-card-bg);
   border-color: rgba(255, 255, 255, 0.08);
-}
-
-.spec-item:last-child {
-  border-bottom: none;
+  backdrop-filter: blur(10px);
 }
 
 .spec-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-  color: #666;
+  color: var(--tabs-primary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 6px;
-}
-
-@media (min-width: 768px) {
-  .spec-label {
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-}
-
-[data-theme="dark"] .spec-label {
-  color: #a0a0a0;
+  margin-bottom: 8px;
 }
 
 .spec-value {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--tabs-text);
   line-height: 1.3;
 }
 
-@media (min-width: 768px) {
-  .spec-value {
-    font-size: 18px;
-  }
-}
-
-[data-theme="dark"] .spec-value {
-  color: #ffffff;
-}
-
 .spec-value.yes {
-  color: #009a61;
+  color: var(--tabs-primary);
 }
 
 .spec-value.no {
   color: #ff4757;
 }
 
-/* Compatibility Modal - MOBILE OPTIMIERT */
+/* Compatibility Modal - Premium Styling */
 .compatibility-modal {
   display: none;
   position: fixed;
@@ -522,38 +539,37 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.8);
   z-index: 10000;
   padding: 20px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  backdrop-filter: blur(10px);
 }
 
 .compatibility-modal.active {
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: fadeIn 0.3s ease;
 }
 
 .modal-content {
-  background: #ffffff;
-  border-radius: 20px;
+  background: var(--tabs-card-bg);
+  border-radius: 24px;
   width: 100%;
   max-width: 900px;
   max-height: 90vh;
   overflow: hidden;
   position: relative;
   animation: slideUp 0.3s ease;
-}
-
-@media (min-width: 768px) {
-  .modal-content {
-    border-radius: 24px;
-  }
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--tabs-border);
 }
 
 [data-theme="dark"] .modal-content {
   background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.08);
 }
 
 @keyframes slideUp {
@@ -567,68 +583,42 @@
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .modal-header {
-  padding: 24px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 32px;
+  border-bottom: 1px solid var(--tabs-border);
   position: relative;
-}
-
-@media (min-width: 768px) {
-  .modal-header {
-    padding: 32px;
-  }
-}
-
-[data-theme="dark"] .modal-header {
-  border-color: rgba(255, 255, 255, 0.08);
+  background: var(--tabs-gradient);
 }
 
 .modal-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: var(--tabs-text);
   margin: 0;
   padding-right: 48px;
   line-height: 1.2;
 }
 
-@media (min-width: 768px) {
-  .modal-title {
-    font-size: 28px;
-  }
-}
-
-[data-theme="dark"] .modal-title {
-  color: #ffffff;
-}
-
 .modal-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
+  top: 24px;
+  right: 24px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.05);
+  background: linear-gradient(135deg, var(--tabs-primary), var(--tabs-accent));
   border: none;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-@media (min-width: 768px) {
-  .modal-close {
-    top: 24px;
-    right: 24px;
-    width: 48px;
-    height: 48px;
-  }
-}
-
-[data-theme="dark"] .modal-close {
-  background: rgba(255, 255, 255, 0.05);
+  transition: var(--tabs-transition);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
 
 .modal-close:active {
@@ -637,59 +627,40 @@
 
 @media (hover: hover) {
   .modal-close:hover {
-    background: rgba(0, 0, 0, 0.1);
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 8px 20px rgba(0, 154, 97, 0.4);
   }
 }
 
 .modal-close svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
+  color: white;
 }
 
-@media (min-width: 768px) {
-  .modal-close svg {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* Device Tabs - MOBILE NEBENEINANDER */
+/* Device Tabs - Premium Style */
 .device-tabs {
-  background: #1a1a1a;
+  background: var(--tabs-gradient);
   border-radius: 100px;
   padding: 4px;
   display: flex;
-  flex-direction: row; /* Auch auf Mobile nebeneinander! */
   gap: 4px;
-  margin: 24px;
-}
-
-@media (min-width: 768px) {
-  .device-tabs {
-    margin: 32px;
-  }
+  margin: 32px;
+  border: 2px solid var(--tabs-border);
 }
 
 .device-tab {
   flex: 1;
-  padding: 14px 24px;
+  padding: 16px 32px;
   background: transparent;
   border: none;
   border-radius: 100px;
-  color: #999;
-  font-size: 16px;
+  color: var(--tabs-text-secondary);
+  font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: var(--tabs-transition);
   white-space: nowrap;
-}
-
-@media (min-width: 768px) {
-  .device-tab {
-    padding: 16px 32px;
-    font-size: 18px;
-  }
 }
 
 .device-tab:active {
@@ -698,46 +669,28 @@
 
 @media (hover: hover) {
   .device-tab:hover {
-    color: #ffffff;
+    color: var(--tabs-text);
   }
 }
 
 .device-tab.active {
-  background: #00ff88;
-  color: #000000;
+  background: linear-gradient(135deg, var(--tabs-primary), var(--tabs-accent));
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
 
 /* Device List */
 .device-content {
-  padding: 24px;
+  padding: 32px;
   max-height: 350px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
 
-@media (min-width: 768px) {
-  .device-content {
-    padding: 32px;
-  }
-}
-
 .device-list {
   display: none;
-  grid-template-columns: 1fr;
-  gap: 12px;
-}
-
-@media (min-width: 768px) {
-  .device-list {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .device-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
 }
 
 .device-list.active {
@@ -748,67 +701,314 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 14px;
-  background: rgba(0, 0, 0, 0.03);
+  padding: 16px;
+  background: var(--tabs-gradient);
   border-radius: 12px;
-  font-size: 15px;
-  color: #1a1a1a;
+  font-size: 16px;
+  color: var(--tabs-text);
+  border: 1px solid var(--tabs-border);
+  transition: var(--tabs-transition);
 }
 
-@media (min-width: 768px) {
-  .device-item {
-    padding: 16px;
-    font-size: 16px;
+@media (hover: hover) {
+  .device-item:hover {
+    transform: translateX(4px);
+    border-color: var(--tabs-primary);
   }
-}
-
-[data-theme="dark"] .device-item {
-  background: rgba(255, 255, 255, 0.03);
-  color: #ffffff;
 }
 
 .device-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   flex-shrink: 0;
   opacity: 0.7;
-}
-
-@media (min-width: 768px) {
-  .device-icon {
-    width: 24px;
-    height: 24px;
-  }
+  color: var(--tabs-primary);
 }
 
 .compatibility-note {
-  padding: 16px;
-  margin: 24px;
-  background: rgba(255, 193, 7, 0.1);
-  border: 1px solid rgba(255, 193, 7, 0.3);
+  padding: 20px;
+  margin: 32px;
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+  border: 2px solid rgba(255, 193, 7, 0.3);
   border-radius: 12px;
   color: #856404;
   text-align: center;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
-}
-
-@media (min-width: 768px) {
-  .compatibility-note {
-    padding: 20px;
-    margin: 32px;
-    font-size: 14px;
-  }
+  font-weight: 600;
 }
 
 [data-theme="dark"] .compatibility-note {
   color: #ffc107;
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.1));
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  50% { 
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+@keyframes glow {
+  0%, 100% { 
+    opacity: 0;
+  }
+  50% { 
+    opacity: 0.6;
+  }
+}
+
+@keyframes iconBounceIn {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .info-tabs-container {
+    padding: 80px 24px 0 24px;
+  }
+  
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .device-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .product-info-tabs-section {
+    padding: 0 0 20px 0;
+  }
+  
+  .info-tabs-container {
+    padding: 20px 16px 0 16px;
+  }
+  
+  [data-theme="dark"] .product-info-tabs-section {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  .tabs-header {
+    margin-bottom: 48px;
+  }
+  
+  .tabs-title {
+    font-size: 32px;
+  }
+  
+  .tabs-subtitle {
+    font-size: 17px;
+    padding: 0 16px;
+  }
+  
+  .info-tab-nav {
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  
+  .info-tab-button {
+    padding: 16px;
+    border-radius: 20px;
+  }
+  
+  /* Mobile: Nur Icons bei Tabs */
+  @media (max-width: 480px) {
+    .info-tab-button span {
+      display: none;
+    }
+    
+    .info-tab-icon {
+      width: 28px;
+      height: 28px;
+    }
+  }
+  
+  /* Features Mobile Layout */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .feature-card {
+    padding: 24px 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  
+  .feature-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .feature-number {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    top: -5px;
+    right: -5px;
+  }
+  
+  .feature-content {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .feature-title {
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  
+  .feature-subtitle {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  
+  .feature-description {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  /* Specs Mobile */
+  .specs-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .spec-item {
+    padding: 20px;
+  }
+  
+  /* Compatibility Section Mobile */
+  .compatibility-section {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  
+  .compatibility-title {
+    font-size: 24px;
+  }
+  
+  .compatibility-subtitle {
+    font-size: 16px;
+  }
+  
+  .check-compatibility-btn {
+    padding: 16px 32px;
+    font-size: 16px;
+  }
+  
+  /* Description Mobile */
+  .description-content {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  
+  /* Modal Mobile */
+  .device-tabs {
+    margin: 24px;
+  }
+  
+  .device-tab {
+    padding: 14px 24px;
+    font-size: 16px;
+  }
+  
+  .device-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .device-content {
+    padding: 24px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .info-tabs-container {
+    padding: 20px 12px 0 12px;
+  }
+  
+  .tabs-title {
+    font-size: 28px;
+  }
+  
+  .tabs-subtitle {
+    font-size: 16px;
+    padding: 0 8px;
+  }
+  
+  .feature-card {
+    padding: 20px 16px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 </style>
 
 <!-- HTML Structure -->
 <section class="product-info-tabs-section">
   <div class="info-tabs-container">
+    
+    <!-- Header mit Why Section Styling -->
+    <div class="tabs-header">
+      <h2 class="tabs-title">
+        {{ 'product.info_title_part1' | t | default: 'Product' }} <span class="tabs-title-highlight">{{ 'product.info_title_part2' | t | default: 'Information' }}</span> {{ 'product.info_title_part3' | t | default: '& Details' }}
+      </h2>
+      <p class="tabs-subtitle">
+        {{ 'product.info_subtitle' | t | default: 'Everything you need to know about your eSIM' }}
+      </p>
+    </div>
     
     <!-- Tab Navigation -->
     <div class="info-tab-nav">
@@ -836,43 +1036,49 @@
     
     <!-- Tab Content -->
     
-    <!-- Features Tab - NUR 3 CARDS -->
+    <!-- Features Tab -->
     <div class="info-tab-content active" id="features-content">
       <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-title-row">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-              </svg>
-            </div>
+          <span class="feature-number">1</span>
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+          </div>
+          <div class="feature-content">
             <h3 class="feature-title">{{ 'product.feature_recharge_title' | t | default: 'Rechargeable eSIM' }}</h3>
+            <p class="feature-subtitle">{{ 'product.feature_recharge_subtitle' | t | default: 'Top up anytime' }}</p>
+            <p class="feature-description">{{ 'product.feature_recharge_desc' | t | default: 'Top up your eSIM anytime from your account. No need to buy a new eSIM when data runs out.' }}</p>
           </div>
-          <p class="feature-description">{{ 'product.feature_recharge_desc' | t | default: 'Top up your eSIM anytime from your account. No need to buy a new eSIM when data runs out.' }}</p>
         </div>
         
         <div class="feature-card">
-          <div class="feature-title-row">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-              </svg>
-            </div>
+          <span class="feature-number">2</span>
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <div class="feature-content">
             <h3 class="feature-title">{{ 'product.feature_money_back_title' | t | default: 'Money-Back Guarantee' }}</h3>
+            <p class="feature-subtitle">{{ 'product.feature_money_back_subtitle' | t | default: '30-day guarantee' }}</p>
+            <p class="feature-description">{{ 'product.feature_money_back_desc' | t | default: '30-day money-back guarantee. Not satisfied? Get a full refund, no questions asked.' }}</p>
           </div>
-          <p class="feature-description">{{ 'product.feature_money_back_desc' | t | default: '30-day money-back guarantee. Not satisfied? Get a full refund, no questions asked.' }}</p>
         </div>
         
         <div class="feature-card">
-          <div class="feature-title-row">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-              </svg>
-            </div>
-            <h3 class="feature-title">{{ 'product.feature_no_contract_title' | t | default: 'No Contract Required' }}</h3>
+          <span class="feature-number">3</span>
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
           </div>
-          <p class="feature-description">{{ 'product.feature_no_contract_desc' | t | default: 'Prepaid eSIM with no commitments. Cancel anytime, no hidden fees or long-term contracts.' }}</p>
+          <div class="feature-content">
+            <h3 class="feature-title">{{ 'product.feature_no_contract_title' | t | default: 'No Contract Required' }}</h3>
+            <p class="feature-subtitle">{{ 'product.feature_no_contract_subtitle' | t | default: 'Prepaid & flexible' }}</p>
+            <p class="feature-description">{{ 'product.feature_no_contract_desc' | t | default: 'Prepaid eSIM with no commitments. Cancel anytime, no hidden fees or long-term contracts.' }}</p>
+          </div>
         </div>
       </div>
       
@@ -889,17 +1095,15 @@
       </div>
     </div>
     
-    <!-- Description Tab - ECHTE PRODUKTBESCHREIBUNG -->
+    <!-- Description Tab -->
     <div class="info-tab-content" id="description-content">
       <div class="description-content">
         <h3>{{ 'product.why_choose' | t: product: product.title | default: 'Why choose our eSIM?' }}</h3>
         
-        <!-- Vollständige Produktbeschreibung -->
         <div class="description-text">
           {{ product.description | strip_html }}
         </div>
         
-        <!-- Zusätzliche Metafield Beschreibung falls vorhanden -->
         {% if product.metafields.custom.description %}
           <div class="description-text">
             {{ product.metafields.custom.description }}
@@ -908,28 +1112,24 @@
       </div>
     </div>
     
-    <!-- Technical Specs Tab - MIT KORREKTEN METAFIELDS -->
+    <!-- Technical Specs Tab -->
     <div class="info-tab-content" id="specs-content">
       <div class="specs-grid">
-        <!-- Network -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_network' | t | default: 'Network' }}</div>
           <div class="spec-value">{{ product.metafields.custom.plantyp | default: '4G/5G Premium' }}</div>
         </div>
         
-        <!-- Speed -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_speed' | t | default: 'Speed' }}</div>
           <div class="spec-value">4G/5G</div>
         </div>
         
-        <!-- Coverage -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_coverage' | t | default: 'Coverage' }}</div>
           <div class="spec-value">{{ product.metafields.custom.aktivierungspolitik | default: '98% Country Coverage' }}</div>
         </div>
         
-        <!-- Data Plans -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_plans' | t | default: 'Data Plans' }}</div>
           <div class="spec-value">
@@ -948,7 +1148,6 @@
             {% endfor %}
             
             {% if datalist == "" %}
-              {% comment %} Fallback wenn keine Metafields vorhanden {% endcomment %}
               {% for variant in product.variants %}
                 {% unless variant.title contains '100MB' %}
                   {% assign size = variant.title | split: ' ' | first %}
@@ -965,7 +1164,6 @@
             
             {{ datalist }}
             
-            {% comment %} Check für Unlimited {% endcomment %}
             {% for variant in product.variants %}
               {% if variant.sku contains 'unlimited' or variant.sku contains 'daily' or variant.sku contains 'Daily' %}
                 , Unlimited
@@ -975,7 +1173,6 @@
           </div>
         </div>
         
-        <!-- Validity after Activation -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_validity' | t | default: 'Validity after Activation' }}</div>
           <div class="spec-value">
@@ -996,43 +1193,36 @@
           </div>
         </div>
         
-        <!-- Hotspot -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_hotspot' | t | default: 'Hotspot' }}</div>
           <div class="spec-value yes">{{ 'product.yes' | t | default: 'Yes' }}</div>
         </div>
         
-        <!-- Voice Calls -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_voice' | t | default: 'Voice Call' }}</div>
           <div class="spec-value no">✗ {{ 'product.spec_voice_apps' | t | default: 'Voice apps only' }}</div>
         </div>
         
-        <!-- Plan Type -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_plantype' | t | default: 'Plan Type' }}</div>
           <div class="spec-value">Prepaid eSIM</div>
         </div>
         
-        <!-- eKYC -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_ekyc' | t | default: 'eKYC (Identity Verification)' }}</div>
           <div class="spec-value no">✗ {{ 'product.no' | t | default: 'No' }}</div>
         </div>
         
-        <!-- Delivery -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_delivery' | t | default: 'Delivery' }}</div>
           <div class="spec-value">{{ 'product.instant' | t | default: 'Immediately after purchase' }}</div>
         </div>
         
-        <!-- Phone Number -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_phone' | t | default: 'Phone Number' }}</div>
           <div class="spec-value no">✗ {{ 'product.no' | t | default: 'No' }}</div>
         </div>
         
-        <!-- eSIM Validity -->
         <div class="spec-item">
           <div class="spec-label">{{ 'product.spec_esim_validity' | t | default: 'eSIM Validity' }}</div>
           <div class="spec-value">180 {{ 'product.days' | t | default: 'Days' }}</div>
@@ -1095,26 +1285,85 @@
 </div>
 
 <script>
-// Tab Switching
-document.querySelectorAll('.info-tab-button').forEach(button => {
-  button.addEventListener('click', function() {
-    const targetTab = this.dataset.tab;
+(function() {
+  'use strict';
+  
+  // Cache DOM elements
+  const section = document.querySelector('.product-info-tabs-section');
+  const features = document.querySelectorAll('.feature-card');
+  const specs = document.querySelectorAll('.spec-item');
+  
+  // Initialize
+  function init() {
+    if (!section) return;
     
-    // Update buttons
-    document.querySelectorAll('.info-tab-button').forEach(btn => {
-      btn.classList.remove('active');
-    });
-    this.classList.add('active');
+    // Setup tab switching
+    setupTabs();
     
-    // Update content
-    document.querySelectorAll('.info-tab-content').forEach(content => {
-      content.classList.remove('active');
+    // Animate on scroll
+    animateOnScroll();
+  }
+  
+  // Tab Switching
+  function setupTabs() {
+    document.querySelectorAll('.info-tab-button').forEach(button => {
+      button.addEventListener('click', function() {
+        const targetTab = this.dataset.tab;
+        
+        // Update buttons
+        document.querySelectorAll('.info-tab-button').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        // Update content
+        document.querySelectorAll('.info-tab-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(targetTab + '-content').classList.add('active');
+      });
     });
-    document.getElementById(targetTab + '-content').classList.add('active');
-  });
-});
+  }
+  
+  // Animate elements on scroll
+  function animateOnScroll() {
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Add animate class for icon bounce
+            setTimeout(() => {
+              entry.target.classList.add('animate');
+            }, index * 100);
+            
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.3,
+        rootMargin: '0px'
+      });
+      
+      // Observe features and specs
+      features.forEach(feature => {
+        observer.observe(feature);
+      });
+      
+      specs.forEach(spec => {
+        observer.observe(spec);
+      });
+    }
+  }
+  
+  // Initialize on DOM ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
 
-// Compatibility Modal
+// Compatibility Modal Functions
 function openCompatibilityModal() {
   document.getElementById('compatibility-modal').classList.add('active');
   document.body.style.overflow = 'hidden';
