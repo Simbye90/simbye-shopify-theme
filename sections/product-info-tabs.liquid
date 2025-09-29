@@ -1,58 +1,80 @@
 <!-- sections/product-info-tabs.liquid -->
-<!-- SIMBYE PRODUCT INFO TABS WITH COMPATIBILITY CHECKER -->
+<!-- SIMBYE PRODUCT INFO TABS ENTERPRISE V2.0 -->
 
 <style>
 /* ============================================
-   PRODUCT INFO TABS SECTION - ENTERPRISE LEVEL
+   PRODUCT INFO TABS - ENTERPRISE LEVEL V2
+   MOBILE FIRST + KEINE HOVER EFFEKTE
    ============================================ */
 
-/* Section Base */
+/* Kill Shopify Grid für diese Section */
+.shopify-section:has(.product-info-tabs-section) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* Section Base - FLEXIBLE HEIGHT */
 .product-info-tabs-section {
   width: 100%;
-  background: var(--info-bg, #ffffff);
-  padding: 80px 0;
+  background: #ffffff;
+  padding: 40px 0;
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Kein overflow hidden! */
 }
 
 [data-theme="dark"] .product-info-tabs-section {
-  --info-bg: #0a0a0a;
-  --info-card-bg: rgba(255, 255, 255, 0.03);
-  --info-border: rgba(255, 255, 255, 0.08);
-  --info-text: #ffffff;
-  --info-text-secondary: #a0a0a0;
-  --info-primary: #00d97e;
-  --info-primary-dark: #00c571;
+  background: #0a0a0a;
 }
 
-/* Container */
+/* Container - Responsive */
 .info-tabs-container {
   max-width: 1600px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .product-info-tabs-section {
+    padding: 80px 0;
+  }
+  
+  .info-tabs-container {
+    padding: 0 40px;
+  }
 }
 
 /* Tab Navigation */
 .info-tab-nav {
   display: flex;
-  gap: 4px;
+  flex-direction: column;
+  gap: 8px;
   background: rgba(0, 154, 97, 0.05);
   padding: 4px;
   border-radius: 16px;
   border: 1px solid rgba(0, 154, 97, 0.1);
-  margin-bottom: 48px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .info-tab-nav {
+    flex-direction: row;
+    gap: 4px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 48px;
+  }
 }
 
 .info-tab-button {
   flex: 1;
-  padding: 18px 32px;
+  padding: 16px 24px;
   background: transparent;
   border: none;
   border-radius: 12px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #666;
   cursor: pointer;
@@ -62,19 +84,30 @@
   justify-content: center;
   gap: 12px;
   font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 768px) {
+  .info-tab-button {
+    padding: 18px 32px;
+    font-size: 18px;
+  }
 }
 
 [data-theme="dark"] .info-tab-button {
   color: #a0a0a0;
 }
 
-.info-tab-button:hover {
-  background: rgba(0, 154, 97, 0.08);
-  color: #1a1a1a;
-}
-
-[data-theme="dark"] .info-tab-button:hover {
-  color: #ffffff;
+/* Kein Hover auf Mobile, nur active state */
+@media (hover: hover) {
+  .info-tab-button:hover {
+    background: rgba(0, 154, 97, 0.08);
+    color: #1a1a1a;
+  }
+  
+  [data-theme="dark"] .info-tab-button:hover {
+    color: #ffffff;
+  }
 }
 
 .info-tab-button.active {
@@ -86,6 +119,7 @@
 .info-tab-icon {
   width: 20px;
   height: 20px;
+  flex-shrink: 0;
 }
 
 /* Tab Content */
@@ -109,20 +143,35 @@
   }
 }
 
-/* Features Tab */
+/* Features Tab - NUR 3 CARDS */
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 32px;
-  margin-bottom: 48px;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-bottom: 48px;
+  }
 }
 
 .feature-card {
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 16px;
-  padding: 32px;
-  transition: all 0.3s ease;
+  padding: 24px;
+  transition: none; /* Keine Transition! */
+  cursor: default; /* Kein Pointer! */
+}
+
+@media (min-width: 768px) {
+  .feature-card {
+    padding: 32px;
+  }
 }
 
 [data-theme="dark"] .feature-card {
@@ -130,34 +179,53 @@
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-.feature-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.1);
-  border-color: #009a61;
-}
+/* KEINE HOVER EFFEKTE für Cards! */
 
 .feature-icon {
-  width: 56px;
-  height: 56px;
+  width: 48px;
+  height: 48px;
   background: linear-gradient(135deg, #009a61, #00d97e);
-  border-radius: 16px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .feature-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+  }
 }
 
 .feature-icon svg {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   color: white;
 }
 
+@media (min-width: 768px) {
+  .feature-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+}
+
 .feature-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #1a1a1a;
   margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .feature-title {
+    font-size: 20px;
+  }
 }
 
 [data-theme="dark"] .feature-title {
@@ -165,29 +233,50 @@
 }
 
 .feature-description {
-  font-size: 16px;
+  font-size: 15px;
   color: #666;
   line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+  .feature-description {
+    font-size: 16px;
+  }
 }
 
 [data-theme="dark"] .feature-description {
   color: #a0a0a0;
 }
 
-/* Compatibility Button */
+/* Compatibility Button Section */
 .compatibility-section {
   text-align: center;
-  padding: 48px;
+  padding: 32px 24px;
   background: linear-gradient(135deg, rgba(0, 154, 97, 0.05) 0%, rgba(0, 217, 126, 0.05) 100%);
-  border-radius: 24px;
+  border-radius: 20px;
   border: 2px dashed #009a61;
 }
 
+@media (min-width: 768px) {
+  .compatibility-section {
+    padding: 48px;
+    border-radius: 24px;
+  }
+}
+
 .compatibility-title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #1a1a1a;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .compatibility-title {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
 }
 
 [data-theme="dark"] .compatibility-title {
@@ -195,9 +284,17 @@
 }
 
 .compatibility-subtitle {
-  font-size: 18px;
+  font-size: 16px;
   color: #666;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .compatibility-subtitle {
+    font-size: 18px;
+    margin-bottom: 32px;
+  }
 }
 
 [data-theme="dark"] .compatibility-subtitle {
@@ -208,30 +305,51 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 20px 48px;
+  padding: 16px 32px;
   background: linear-gradient(135deg, #009a61, #00d97e);
   color: white;
   border: none;
   border-radius: 100px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.check-compatibility-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
+@media (min-width: 768px) {
+  .check-compatibility-btn {
+    padding: 20px 48px;
+    font-size: 18px;
+  }
 }
 
-/* Description Tab */
+.check-compatibility-btn:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) {
+  .check-compatibility-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
+  }
+}
+
+/* Description Tab - ECHTE PRODUKTBESCHREIBUNG */
 .description-content {
   max-width: 800px;
   margin: 0 auto;
   background: #ffffff;
-  border-radius: 24px;
-  padding: 48px;
+  border-radius: 20px;
+  padding: 32px 24px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 768px) {
+  .description-content {
+    border-radius: 24px;
+    padding: 48px;
+  }
 }
 
 [data-theme="dark"] .description-content {
@@ -240,59 +358,62 @@
 }
 
 .description-content h3 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
   color: #009a61;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+  line-height: 1.2;
 }
 
-.description-content p {
-  font-size: 16px;
+@media (min-width: 768px) {
+  .description-content h3 {
+    font-size: 24px;
+    margin-bottom: 24px;
+  }
+}
+
+.description-text {
+  font-size: 15px;
   line-height: 1.8;
   color: #666;
   margin-bottom: 20px;
+  white-space: pre-line;
 }
 
-[data-theme="dark"] .description-content p {
+@media (min-width: 768px) {
+  .description-text {
+    font-size: 16px;
+  }
+}
+
+[data-theme="dark"] .description-text {
   color: #a0a0a0;
-}
-
-.description-list {
-  list-style: none;
-  padding: 0;
-  margin: 32px 0;
-}
-
-.description-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 16px;
-  font-size: 16px;
-  color: #666;
-}
-
-[data-theme="dark"] .description-list li {
-  color: #a0a0a0;
-}
-
-.description-list svg {
-  width: 20px;
-  height: 20px;
-  color: #009a61;
-  flex-shrink: 0;
-  margin-top: 2px;
 }
 
 /* Technical Specs Tab */
 .specs-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 0;
   background: #ffffff;
-  border-radius: 24px;
-  padding: 48px;
+  border-radius: 20px;
+  padding: 24px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 768px) {
+  .specs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    border-radius: 24px;
+    padding: 48px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .specs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 [data-theme="dark"] .specs-grid {
@@ -301,21 +422,38 @@
 }
 
 .spec-item {
-  padding: 20px 0;
+  padding: 16px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 768px) {
+  .spec-item {
+    padding: 20px 0;
+  }
 }
 
 [data-theme="dark"] .spec-item {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
+.spec-item:last-child {
+  border-bottom: none;
+}
+
 .spec-label {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   color: #666;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+  .spec-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
 }
 
 [data-theme="dark"] .spec-label {
@@ -323,9 +461,16 @@
 }
 
 .spec-value {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
+  line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+  .spec-value {
+    font-size: 18px;
+  }
 }
 
 [data-theme="dark"] .spec-value {
@@ -340,7 +485,7 @@
   color: #ff4757;
 }
 
-/* Compatibility Modal */
+/* Compatibility Modal - MOBILE OPTIMIERT */
 .compatibility-modal {
   display: none;
   position: fixed;
@@ -352,7 +497,7 @@
   z-index: 10000;
   padding: 20px;
   overflow-y: auto;
-  animation: fadeIn 0.3s ease;
+  -webkit-overflow-scrolling: touch;
 }
 
 .compatibility-modal.active {
@@ -361,20 +506,21 @@
   justify-content: center;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 .modal-content {
   background: #ffffff;
-  border-radius: 24px;
+  border-radius: 20px;
   width: 100%;
   max-width: 900px;
   max-height: 90vh;
   overflow: hidden;
   position: relative;
   animation: slideUp 0.3s ease;
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    border-radius: 24px;
+  }
 }
 
 [data-theme="dark"] .modal-content {
@@ -393,9 +539,15 @@
 }
 
 .modal-header {
-  padding: 32px;
+  padding: 24px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   position: relative;
+}
+
+@media (min-width: 768px) {
+  .modal-header {
+    padding: 32px;
+  }
 }
 
 [data-theme="dark"] .modal-header {
@@ -403,10 +555,18 @@
 }
 
 .modal-title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 700;
   color: #1a1a1a;
   margin: 0;
+  padding-right: 48px;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .modal-title {
+    font-size: 28px;
+  }
 }
 
 [data-theme="dark"] .modal-title {
@@ -415,10 +575,10 @@
 
 .modal-close {
   position: absolute;
-  top: 24px;
-  right: 24px;
-  width: 48px;
-  height: 48px;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.05);
   border: none;
@@ -429,45 +589,89 @@
   transition: all 0.3s ease;
 }
 
+@media (min-width: 768px) {
+  .modal-close {
+    top: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
 [data-theme="dark"] .modal-close {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.modal-close:hover {
-  background: rgba(0, 0, 0, 0.1);
-  transform: rotate(90deg);
+.modal-close:active {
+  transform: scale(0.9);
+}
+
+@media (hover: hover) {
+  .modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+  }
 }
 
 .modal-close svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
-/* Device Tabs */
+@media (min-width: 768px) {
+  .modal-close svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Device Tabs - MOBILE OPTIMIERT */
 .device-tabs {
   background: #1a1a1a;
   border-radius: 100px;
   padding: 4px;
   display: flex;
+  flex-direction: column;
   gap: 4px;
-  margin: 32px;
+  margin: 24px;
+}
+
+@media (min-width: 768px) {
+  .device-tabs {
+    flex-direction: row;
+    margin: 32px;
+  }
 }
 
 .device-tab {
   flex: 1;
-  padding: 16px 32px;
+  padding: 14px 24px;
   background: transparent;
   border: none;
   border-radius: 100px;
   color: #999;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
-.device-tab:hover {
-  color: #ffffff;
+@media (min-width: 768px) {
+  .device-tab {
+    padding: 16px 32px;
+    font-size: 18px;
+  }
+}
+
+.device-tab:active {
+  transform: scale(0.98);
+}
+
+@media (hover: hover) {
+  .device-tab:hover {
+    color: #ffffff;
+  }
 }
 
 .device-tab.active {
@@ -477,15 +681,35 @@
 
 /* Device List */
 .device-content {
-  padding: 32px;
+  padding: 24px;
   max-height: 400px;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .device-content {
+    padding: 32px;
+  }
 }
 
 .device-list {
   display: none;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  .device-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .device-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .device-list.active {
@@ -496,11 +720,18 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 16px;
+  padding: 14px;
   background: rgba(0, 0, 0, 0.03);
   border-radius: 12px;
-  font-size: 16px;
+  font-size: 15px;
   color: #1a1a1a;
+}
+
+@media (min-width: 768px) {
+  .device-item {
+    padding: 16px;
+    font-size: 16px;
+  }
 }
 
 [data-theme="dark"] .device-item {
@@ -509,110 +740,41 @@
 }
 
 .device-icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
   opacity: 0.7;
 }
 
+@media (min-width: 768px) {
+  .device-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 .compatibility-note {
-  padding: 20px;
-  margin: 32px;
+  padding: 16px;
+  margin: 24px;
   background: rgba(255, 193, 7, 0.1);
   border: 1px solid rgba(255, 193, 7, 0.3);
   border-radius: 12px;
   color: #856404;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .compatibility-note {
+    padding: 20px;
+    margin: 32px;
+    font-size: 14px;
+  }
 }
 
 [data-theme="dark"] .compatibility-note {
   color: #ffc107;
-}
-
-/* Mobile Styles */
-@media screen and (max-width: 768px) {
-  .product-info-tabs-section {
-    padding: 60px 0;
-  }
-  
-  .info-tabs-container {
-    padding: 0 20px;
-  }
-  
-  .info-tab-nav {
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .info-tab-button {
-    padding: 16px 24px;
-    font-size: 16px;
-  }
-  
-  .features-grid {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  
-  .feature-card {
-    padding: 24px;
-  }
-  
-  .compatibility-section {
-    padding: 32px 20px;
-  }
-  
-  .compatibility-title {
-    font-size: 24px;
-  }
-  
-  .compatibility-subtitle {
-    font-size: 16px;
-  }
-  
-  .check-compatibility-btn {
-    padding: 16px 32px;
-    font-size: 16px;
-  }
-  
-  .description-content {
-    padding: 32px 24px;
-  }
-  
-  .specs-grid {
-    padding: 32px 24px;
-    grid-template-columns: 1fr;
-  }
-  
-  .modal-content {
-    margin: 20px;
-  }
-  
-  .modal-header {
-    padding: 24px;
-  }
-  
-  .modal-title {
-    font-size: 24px;
-  }
-  
-  .device-tabs {
-    margin: 24px;
-    flex-direction: column;
-  }
-  
-  .device-tab {
-    padding: 14px 24px;
-    font-size: 16px;
-  }
-  
-  .device-content {
-    padding: 24px;
-  }
-  
-  .device-list {
-    grid-template-columns: 1fr;
-  }
 }
 </style>
 
@@ -646,7 +808,7 @@
     
     <!-- Tab Content -->
     
-    <!-- Features Tab -->
+    <!-- Features Tab - NUR 3 CARDS -->
     <div class="info-tab-content active" id="features-content">
       <div class="features-grid">
         <div class="feature-card">
@@ -678,36 +840,6 @@
           <h3 class="feature-title">{{ 'product.feature_support_title' | t | default: '24/7 Support' }}</h3>
           <p class="feature-description">{{ 'product.feature_support_desc' | t | default: 'WhatsApp and live chat support in 12 languages.' }}</p>
         </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
-            </svg>
-          </div>
-          <h3 class="feature-title">{{ 'product.feature_lowdata_title' | t | default: 'Low Data Volume?' }}</h3>
-          <p class="feature-description">{{ 'product.feature_lowdata_desc' | t | default: 'Top up your eSIM from anywhere in seconds. No need to buy a new eSIM.' }}</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-            </svg>
-          </div>
-          <h3 class="feature-title">{{ 'product.feature_nosim_title' | t | default: 'No SIM Card Needed' }}</h3>
-          <p class="feature-description">{{ 'product.feature_nosim_desc' | t | default: 'Works on all eSIM compatible devices. Install directly via QR code.' }}</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-            </svg>
-          </div>
-          <h3 class="feature-title">{{ 'product.feature_network_coverage' | t: country: product.title | default: 'Reliable Network' }}</h3>
-          <p class="feature-description">{{ 'product.feature_network_coverage' | t: country: product.title | default: 'Connected with our premium network partner for 98% coverage' }}</p>
-        </div>
       </div>
       
       <!-- Check Compatibility Section -->
@@ -723,40 +855,22 @@
       </div>
     </div>
     
-    <!-- Description Tab -->
+    <!-- Description Tab - ECHTE PRODUKTBESCHREIBUNG -->
     <div class="info-tab-content" id="description-content">
       <div class="description-content">
         <h3>{{ 'product.why_choose' | t: product: product.title | default: 'Why choose our eSIM?' }}</h3>
-        <p>{{ product.description | strip_html | truncatewords: 50 }}</p>
         
-        <ul class="description-list">
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-            <span>{{ 'product.desc_instant' | t | default: 'Instant activation - no waiting time' }}</span>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-            <span>{{ 'product.desc_coverage' | t | default: 'Best network coverage in the country' }}</span>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-            <span>{{ 'product.desc_support' | t | default: '24/7 customer support via WhatsApp' }}</span>
-          </li>
-          <li>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-            </svg>
-            <span>{{ 'product.desc_refund' | t | default: 'Money-back guarantee if not satisfied' }}</span>
-          </li>
-        </ul>
+        <!-- Vollständige Produktbeschreibung -->
+        <div class="description-text">
+          {{ product.description | strip_html }}
+        </div>
         
-        <p>{{ 'product.desc_note' | t | default: 'Our eSIM works with all unlocked devices that support eSIM technology. Once purchased, you will receive a QR code via email that you can scan to activate your data plan instantly.' }}</p>
+        <!-- Zusätzliche Metafield Beschreibung falls vorhanden -->
+        {% if product.metafields.custom.description %}
+          <div class="description-text">
+            {{ product.metafields.custom.description }}
+          </div>
+        {% endif %}
       </div>
     </div>
     
@@ -794,7 +908,7 @@
             {% endfor %}
             {{ data_sizes }}
             {% for variant in product.variants %}
-              {% if variant.sku contains 'unlimited' or variant.sku contains 'daily' %}
+              {% if variant.sku contains 'unlimited' or variant.sku contains 'daily' or variant.sku contains 'Daily' %}
                 , Unlimited
                 {% break %}
               {% endif %}
@@ -809,7 +923,11 @@
             {% assign last_variant = product.variants | last %}
             {% assign first_days = first_variant.title | split: ' ' | reverse | second %}
             {% assign last_days = last_variant.title | split: ' ' | reverse | second %}
-            {{ first_days }}-{{ last_days }} {{ 'product.days' | t | default: 'Days' }}
+            {% if first_days == last_days %}
+              {{ first_days }} {{ 'product.days' | t | default: 'Days' }}
+            {% else %}
+              {{ first_days }}-{{ last_days }} {{ 'product.days' | t | default: 'Days' }}
+            {% endif %}
           </div>
         </div>
         
@@ -868,146 +986,33 @@
     <div class="device-tabs">
       <button class="device-tab active" data-device="ios">Apple iOS</button>
       <button class="device-tab" data-device="android">Android</button>
-      <button class="device-tab" data-device="laptops">Laptops</button>
     </div>
     
     <div class="device-content">
       <!-- iOS Devices -->
       <div class="device-list active" id="ios-devices">
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 11 Pro</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 11 Pro Max</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 12 Mini</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 12 Pro</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 13</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 13 Mini</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 14</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 14 Plus</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 14 Pro Max</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 15</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 15 Pro</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
-          </svg>
-          <span>Apple iPhone 15 Pro Max</span>
-        </div>
+        {% assign ios_devices = "iPhone 16 Pro Max,iPhone 16 Pro,iPhone 16 Plus,iPhone 16,iPhone 15 Pro Max,iPhone 15 Pro,iPhone 15 Plus,iPhone 15,iPhone 14 Pro Max,iPhone 14 Pro,iPhone 14 Plus,iPhone 14,iPhone 13 Pro Max,iPhone 13 Pro,iPhone 13 Mini,iPhone 13,iPhone 12 Pro Max,iPhone 12 Pro,iPhone 12 Mini,iPhone 12,iPhone 11 Pro Max,iPhone 11 Pro,iPhone 11,iPhone SE (2022),iPhone SE (2020),iPhone XR,iPhone XS Max,iPhone XS,iPad Pro 12.9 (3rd gen+),iPad Pro 11 (all),iPad Air (3rd gen+),iPad Mini (5th gen+)" | split: ',' %}
+        {% for device in ios_devices %}
+          <div class="device-item">
+            <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.53 4.09l-.05-.01zM12 7.25c-.16-2.5 1.92-4.55 4.34-4.75.29 2.72-2.49 4.98-4.34 4.75z"/>
+            </svg>
+            <span>{{ device }}</span>
+          </div>
+        {% endfor %}
       </div>
       
       <!-- Android Devices -->
       <div class="device-list" id="android-devices">
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
-          </svg>
-          <span>Samsung Galaxy S20+</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
-          </svg>
-          <span>Samsung Galaxy S21</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
-          </svg>
-          <span>Google Pixel 5</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
-          </svg>
-          <span>Google Pixel 6</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
-          </svg>
-          <span>Huawei P40 Pro</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
-          </svg>
-          <span>OnePlus 8</span>
-        </div>
-      </div>
-      
-      <!-- Laptop Devices -->
-      <div class="device-list" id="laptop-devices">
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-          </svg>
-          <span>Windows 10 (version 1709+)</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-          </svg>
-          <span>Windows 11</span>
-        </div>
-        <div class="device-item">
-          <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25m18 0V12a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 12V5.25" />
-          </svg>
-          <span>Surface Pro X</span>
-        </div>
+        {% assign android_devices = "Samsung Galaxy S24 Ultra,Samsung Galaxy S24+,Samsung Galaxy S24,Samsung Galaxy S23 Ultra,Samsung Galaxy S23+,Samsung Galaxy S23,Samsung Galaxy S22 Ultra,Samsung Galaxy S22+,Samsung Galaxy S22,Samsung Galaxy S21 Ultra,Samsung Galaxy S21+,Samsung Galaxy S21,Samsung Galaxy S20 Ultra,Samsung Galaxy S20+,Samsung Galaxy S20,Samsung Galaxy Z Fold 5,Samsung Galaxy Z Fold 4,Samsung Galaxy Z Fold 3,Samsung Galaxy Z Flip 5,Samsung Galaxy Z Flip 4,Samsung Galaxy Z Flip 3,Samsung Galaxy Note 20 Ultra,Samsung Galaxy Note 20,Samsung Galaxy A54,Samsung Galaxy A34,Google Pixel 8 Pro,Google Pixel 8,Google Pixel 7a,Google Pixel 7 Pro,Google Pixel 7,Google Pixel 6a,Google Pixel 6 Pro,Google Pixel 6,Google Pixel 5,Google Pixel 4a,Google Pixel 4 XL,Google Pixel 4,Google Pixel 3a XL,Google Pixel 3a,Google Pixel 3 XL,Google Pixel 3,OnePlus 12,OnePlus 11,OnePlus 10 Pro,OnePlus 10T,OnePlus 9 Pro,OnePlus 9,OnePlus 8T,OnePlus 8 Pro,OnePlus 8,Xiaomi 14 Pro,Xiaomi 14,Xiaomi 13 Pro,Xiaomi 13,Xiaomi 12 Pro,Xiaomi 12,OPPO Find X5 Pro,OPPO Find X5,OPPO Find X3 Pro,OPPO Reno 10 Pro,OPPO Reno 9 Pro,Honor Magic 5 Pro,Honor 90,Honor 70,Motorola Edge 40 Pro,Motorola Edge 30 Pro,Motorola Razr 40 Ultra,Motorola Razr 40,Sony Xperia 1 V,Sony Xperia 1 IV,Sony Xperia 5 V,Sony Xperia 10 V,Huawei P50 Pro,Huawei P40 Pro+,Huawei P40 Pro,Huawei P40,Huawei Mate 40 Pro" | split: ',' %}
+        {% for device in android_devices %}
+          <div class="device-item">
+            <svg class="device-icon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.523 15.34s-.393-2.123-.5-2.68c-.366-.01-1.036-.01-1.363-.01-.527.8-.786 1.92-1.884 1.92a1.873 1.873 0 01-1.873-1.87c0-1.04.84-1.89 1.873-1.89.163 0 .323.02.474.06C14.45 9.56 14.21 8.5 13 8.5c-1.654 0-2.561 1.482-3.036 2.21-.867-.105-1.627.42-2.234.42C5.344 11.13 3 13.473 3 15.86c0 2.386 2.344 4.73 4.73 4.73 2.387 0 3.725-2.315 4.73-4.73.27-.65.44-1.31.5-1.97.324 0 .61-.05.865-.14l.09.09c.17.17.42.18.6.01.17-.16.18-.42.01-.59l-.09-.09zm-7.02 2.5c-1.08 0-1.95-.87-1.95-1.95 0-1.08.87-1.95 1.95-1.95s1.95.87 1.95 1.95c0 1.08-.87 1.95-1.95 1.95z"/>
+            </svg>
+            <span>{{ device }}</span>
+          </div>
+        {% endfor %}
       </div>
     </div>
     
@@ -1070,6 +1075,13 @@ document.querySelectorAll('.device-tab').forEach(tab => {
 // Close on backdrop click
 document.getElementById('compatibility-modal').addEventListener('click', function(e) {
   if (e.target === this) {
+    closeCompatibilityModal();
+  }
+});
+
+// Escape key close
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
     closeCompatibilityModal();
   }
 });
