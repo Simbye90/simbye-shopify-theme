@@ -174,30 +174,11 @@
   position: relative;
 }
 
-/* Winner Badge */
-.vs-winner-badge {
-  position: absolute;
-  top: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--vs-primary);
-  color: white;
-  padding: 6px 16px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
-  white-space: nowrap; /* Verhindert Umbruch */
-  z-index: 10; /* Über allem */
-}
-
 .vs-provider-name {
   font-size: 20px;
   font-weight: 700;
   color: var(--vs-text);
-  margin-top: 28px;
+  margin-top: 12px;
   margin-bottom: 8px;
   line-height: 1.2;
 }
@@ -409,20 +390,12 @@
   
   .vs-table {
     border-radius: 20px;
-    overflow: hidden; /* Standard overflow */
-  }
-  
-  /* Table Wrapper für Badge */
-  .vs-table-wrapper {
-    overflow: visible; /* Badge nicht abschneiden */
   }
   
   /* KOMPAKTE HEADER */
   .vs-header-cell {
     padding: 16px 8px;
     font-size: 12px;
-    position: relative;
-    overflow: visible; /* Badge nicht abschneiden */
   }
   
   .vs-header-cell:first-child {
@@ -430,21 +403,9 @@
     padding-left: 12px;
   }
   
-  /* Winner Badge Mobile - NICHT ABGESCHNITTEN */
-  .vs-winner-badge {
-    font-size: 9px;
-    padding: 3px 8px;
-    top: 2px; /* Weniger oben */
-    position: relative; /* Relative statt absolute */
-    display: inline-block;
-    margin-bottom: 4px;
-    left: auto;
-    transform: none;
-  }
-  
   .vs-provider-name {
     font-size: 13px;
-    margin-top: 16px;
+    margin-top: 8px;
   }
   
   .vs-provider-type {
@@ -565,12 +526,10 @@
             <!-- Empty for features -->
           </div>
           <div class="vs-header-cell is-simbye">
-            <span class="vs-winner-badge">{{ 'comparison.recommended' | t | default: 'RECOMMENDED' }}</span>
             <div class="vs-provider-name">{{ 'comparison.simbye_esim' | t | default: 'Simbye eSIM' }}</div>
             <div class="vs-provider-type">{{ 'comparison.prepaid' | t | default: 'Prepaid Data' }}</div>
-            <div class="vs-provider-price">
-              <span style="font-size: 14px; font-weight: 400;">{{ 'product.price_from' | t | default: 'from' }}</span>
-              <span id="simbye-price">{% comment %} Dynamisch gefüllt {% endcomment %}</span>
+            <div class="vs-provider-price" id="simbye-price">
+              {% comment %} Dynamisch gefüllt {% endcomment %}
             </div>
           </div>
           <div class="vs-header-cell">
@@ -585,7 +544,7 @@
           </div>
         </div>
         
-        <!-- Starting Price Row -->
+        <!-- Price per GB Row -->
         <div class="vs-table-row">
           <div class="vs-table-cell">
             <div class="vs-feature-wrapper">
@@ -594,7 +553,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div class="vs-feature-name">{{ 'comparison.starting_price' | t | default: 'Starting Price' }}</div>
+              <div class="vs-feature-name">{{ 'comparison.price_gb' | t | default: 'Average Cost per GB' }}</div>
             </div>
           </div>
           <div class="vs-table-cell is-simbye">
@@ -604,9 +563,8 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <div class="vs-value-text">
-                <span style="font-size: 11px;">{{ 'product.price_from' | t | default: 'from' }}</span>
-                <span id="simbye-starting-price">{% comment %} Dynamisch gefüllt {% endcomment %}</span>
+              <div class="vs-value-text" id="simbye-price-display">
+                {% comment %} Dynamisch gefüllt {% endcomment %}
               </div>
               <div class="vs-value-subtext">{{ 'comparison.save' | t | default: 'SAVE 85%' }}</div>
             </div>
@@ -618,7 +576,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </div>
-              <div class="vs-value-text">€50-200</div>
+              <div class="vs-value-text">€10-50{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
             </div>
           </div>
           <div class="vs-table-cell">
@@ -628,7 +586,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
-              <div class="vs-value-text">€15-30</div>
+              <div class="vs-value-text">€5-15{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
               <div class="vs-value-subtext">{{ 'comparison.varies' | t | default: 'Varies' }}</div>
             </div>
           </div>
@@ -864,20 +822,21 @@
 (function() {
   'use strict';
   
-  // Dynamische Preisberechnung - VEREINFACHT
+  // Dynamische Preisberechnung - SIMPLIFIED
   function updateSimbyePrice() {
     {% if section.settings.reference_product %}
       {% assign ref_product = all_products[section.settings.reference_product] %}
       
       {% if ref_product and ref_product.variants.size > 0 %}
-        // Erste nicht-FREE Variante finden
-        {% assign selected_variant = nil %}
-        {% for variant in ref_product.variants %}
-          {% unless variant.price == 0 %}
-            {% assign selected_variant = variant %}
-            {% break %}
-          {% endunless %}
-        {% endfor %}
+        // Erste Variante nehmen
+        {% assign first_variant = ref_product.variants.first %}
+        
+        // Wenn erste Variante price = 0, dann zweite nehmen
+        {% if first_variant.price == 0 and ref_product.variants.size > 1 %}
+          {% assign selected_variant = ref_product.variants[1] %}
+        {% else %}
+          {% assign selected_variant = first_variant %}
+        {% endif %}
         
         {% if selected_variant %}
           // Preis in Header setzen
@@ -886,31 +845,25 @@
             priceElement.textContent = '{{ selected_variant.price | money }}';
           }
           
-          // Preis in Table setzen (Starting Price)
-          const startingPriceElement = document.getElementById('simbye-starting-price');
-          if (startingPriceElement) {
-            startingPriceElement.textContent = '{{ selected_variant.price | money }}';
+          // Gleicher Preis in der Tabelle
+          const priceDisplayElement = document.getElementById('simbye-price-display');
+          if (priceDisplayElement) {
+            priceDisplayElement.textContent = '{{ selected_variant.price | money }}';
           }
-        {% else %}
-          // Fallback wenn alle Varianten 0 sind
-          setFallbackPrice();
         {% endif %}
       {% else %}
-        // Fallback wenn kein Produkt gefunden
-        setFallbackPrice();
+        // Fallback Preise
+        document.getElementById('simbye-price').textContent = '€4.99';
+        document.getElementById('simbye-price-display').textContent = '€4.99';
       {% endif %}
     {% else %}
       // Standard Preise wenn kein Produkt gewählt
-      setFallbackPrice();
+      const priceElement = document.getElementById('simbye-price');
+      const priceDisplayElement = document.getElementById('simbye-price-display');
+      
+      if (priceElement) priceElement.textContent = '€4.99';
+      if (priceDisplayElement) priceDisplayElement.textContent = '€4.99';
     {% endif %}
-  }
-  
-  function setFallbackPrice() {
-    const priceElement = document.getElementById('simbye-price');
-    const startingPriceElement = document.getElementById('simbye-starting-price');
-    
-    if (priceElement) priceElement.textContent = '€4.99';
-    if (startingPriceElement) startingPriceElement.textContent = '€4.99';
   }
   
   // Initialize
