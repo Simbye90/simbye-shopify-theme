@@ -8,849 +8,352 @@
   <!-- jQuery LADEN - WICHTIG! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
+<!-- templates/page.test-api.liquid -->
+<!-- API DATA TESTER - NUR ZUM CHECKEN WAS WIR BEKOMMEN -->
 
 <style>
-/* SIMBYE DESIGN SYSTEM - WIE PRODUCT PAGE */
-.check-esim-section {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  padding: 60px 0;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fffe 50%, #f0faf7 100%);
-  min-height: calc(100vh - 90px);
-}
-
-[data-theme="dark"] .check-esim-section {
-  background: linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 50%, #0a0a0a 100%);
-}
-
-.check-container {
+.api-test {
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: monospace;
 }
 
-/* Search Card - WIE PRODUCT CARDS */
-.search-card {
-  background: white;
-  border-radius: 24px;
-  padding: 48px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  max-width: 600px;
-  margin: 0 auto 40px;
-  border: 2px solid rgba(0, 0, 0, 0.05);
-  animation: fadeInUp 0.8s ease;
-}
-
-[data-theme="dark"] .search-card {
-  background: rgba(26, 26, 26, 0.8);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-}
-
-.search-title {
-  font-size: 32px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, #009a61, #00d97e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-align: center;
-}
-
-.search-subtitle {
-  text-align: center;
-  color: #666;
-  margin-bottom: 32px;
-  font-size: 16px;
-}
-
-/* Search Form - WIE HERO SEARCH */
-.search-form {
+.test-input {
   display: flex;
-  background: #f8f8f8;
-  border-radius: 100px;
-  padding: 6px;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .search-form {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.search-form:focus-within {
-  border-color: #009a61;
-  box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
-}
-
-.search-input {
-  flex: 1;
-  padding: 18px 24px;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 16px;
-  color: #1a1a1a;
-}
-
-[data-theme="dark"] .search-input {
-  color: white;
-}
-
-.search-button {
-  padding: 16px 40px;
-  background: linear-gradient(135deg, #009a61, #00d97e);
-  color: white;
-  border: none;
-  border-radius: 100px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.search-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-}
-
-.search-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Loading State */
-.loading-wrapper {
-  display: none;
-  text-align: center;
-  padding: 40px;
-}
-
-.loading-wrapper.active {
-  display: block;
-}
-
-.loading-spinner {
-  width: 48px;
-  height: 48px;
-  border: 3px solid rgba(0, 154, 97, 0.1);
-  border-top-color: #009a61;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin: 0 auto 20px;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Main Content Card */
-.esim-card {
-  display: none;
-  background: white;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.15);
-  max-width: 900px;
-  margin: 0 auto;
-  animation: fadeInUp 0.8s ease;
-}
-
-.esim-card.active {
-  display: block;
-}
-
-[data-theme="dark"] .esim-card {
-  background: rgba(26, 26, 26, 0.8);
-  backdrop-filter: blur(10px);
-}
-
-/* Header - WIE PRODUCT HERO */
-.esim-header {
-  background: linear-gradient(135deg, #009a61, #00d97e);
-  padding: 40px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.esim-header::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  animation: subtlePulse 4s ease-in-out infinite;
-}
-
-.esim-title {
-  font-size: 36px;
-  font-weight: 800;
-  color: white;
-  margin-bottom: 8px;
-  position: relative;
-}
-
-.esim-subtitle {
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 16px;
-  position: relative;
-}
-
-/* QR Code Section */
-.qr-section {
-  padding: 48px;
-  background: linear-gradient(to bottom, #ffffff, #f8fffe);
-  text-align: center;
-  position: relative;
-}
-
-[data-theme="dark"] .qr-section {
-  background: transparent;
-}
-
-.qr-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.qr-code {
-  width: 220px;
-  height: 220px;
-  border: 3px solid #e5e5e5;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  background: white;
-}
-
-.qr-hide-btn {
-  position: absolute;
-  bottom: -15px;
-  right: -15px;
-  width: 40px;
-  height: 40px;
-  background: #009a61;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
-  transition: all 0.3s ease;
-}
-
-.qr-hide-btn:hover {
-  transform: scale(1.1);
-}
-
-/* Usage Progress - WIE PRODUCT SELECTION */
-.usage-section {
-  padding: 48px;
-  background: white;
-}
-
-[data-theme="dark"] .usage-section {
-  background: transparent;
-}
-
-.usage-title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 32px;
-  text-align: center;
-  color: #1a1a1a;
-}
-
-[data-theme="dark"] .usage-title {
-  color: white;
-}
-
-.progress-container {
-  background: #e5e7eb;
-  border-radius: 16px;
-  height: 40px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  position: relative;
-}
-
-[data-theme="dark"] .progress-container {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #009a61, #00d97e);
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 16px;
-  position: relative;
-}
-
-.progress-text {
-  color: white;
-  font-weight: 700;
-  font-size: 16px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.usage-stats {
-  display: flex;
-  justify-content: space-between;
-  font-size: 16px;
-  color: #666;
-}
-
-[data-theme="dark"] .usage-stats {
-  color: #999;
-}
-
-.usage-stats strong {
-  color: #009a61;
-  font-weight: 700;
-}
-
-/* Details Grid - WIE PRODUCT INFO TABS */
-.details-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  padding: 48px;
-  background: #f8fffe;
-}
-
-[data-theme="dark"] .details-grid {
-  background: transparent;
-}
-
-.detail-card {
-  background: white;
-  padding: 28px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  border: 2px solid rgba(0, 154, 97, 0.1);
-  transition: all 0.3s ease;
-}
-
-[data-theme="dark"] .detail-card {
-  background: rgba(26, 26, 26, 0.6);
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.detail-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
-}
-
-.detail-icon {
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, #009a61, #00d97e);
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 16px;
-  font-size: 28px;
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.25);
-}
-
-.detail-label {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-[data-theme="dark"] .detail-label {
-  color: #999;
-}
-
-.detail-value {
-  font-size: 20px;
-  font-weight: 700;
-  color: #1a1a1a;
-}
-
-[data-theme="dark"] .detail-value {
-  color: white;
-}
-
-/* Top Up Button - WIE PRODUCT CTA */
-.topup-wrapper {
-  padding: 32px 48px 48px;
-  text-align: center;
-}
-
-.topup-button {
-  padding: 20px 60px;
-  background: linear-gradient(135deg, #009a61, #00d97e);
-  color: white;
-  border: none;
-  border-radius: 100px;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  animation: subtlePulse 4s ease-in-out infinite;
-}
-
-.topup-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
-}
-
-/* Error & Success Messages */
-.message {
-  padding: 16px 20px;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f5f5f5;
   border-radius: 12px;
-  margin-top: 20px;
+}
+
+.test-input input {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #009a61;
+  border-radius: 8px;
+}
+
+.test-input button {
+  padding: 12px 30px;
+  background: #009a61;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.data-display {
+  background: #1a1a1a;
+  color: #00ff00;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  min-height: 400px;
+  white-space: pre-wrap;
   font-size: 14px;
-  display: none;
+  line-height: 1.6;
 }
 
-.message.show {
-  display: block;
-  animation: fadeInUp 0.3s ease;
+.status {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
 }
 
-.message.error {
-  background: #fee;
-  color: #dc2626;
-  border: 1px solid #fca5a5;
+.status.loading { background: #fff3cd; color: #856404; }
+.status.success { background: #d4edda; color: #155724; }
+.status.error { background: #f8d7da; color: #721c24; }
+
+.important-data {
+  background: #2a2a2a;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 12px;
+  border: 2px solid #009a61;
 }
 
-.message.success {
-  background: #f0fdf4;
-  color: #16a34a;
-  border: 1px solid #86efac;
+.data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.data-item {
+  background: #333;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #009a61;
 }
 
-@keyframes subtlePulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+.data-label {
+  color: #999;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .check-container {
-    padding: 0 20px;
-  }
-  
-  .search-card {
-    padding: 32px 24px;
-    border-radius: 20px;
-  }
-  
-  .search-title {
-    font-size: 28px;
-  }
-  
-  .search-form {
-    flex-direction: column;
-    padding: 8px;
-    border-radius: 20px;
-  }
-  
-  .search-button {
-    width: 100%;
-    margin-top: 8px;
-  }
-  
-  .esim-header {
-    padding: 32px 24px;
-  }
-  
-  .esim-title {
-    font-size: 28px;
-  }
-  
-  .details-grid {
-    grid-template-columns: 1fr;
-    padding: 32px 24px;
-  }
+.data-value {
+  color: #00ff00;
+  font-size: 16px;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.test-orders {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+.test-orders h3 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.test-btn {
+  margin: 5px;
+  padding: 8px 15px;
+  background: #009a61;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.test-btn:hover {
+  background: #00824f;
 }
 </style>
 
-<div class="check-esim-section">
-  <div class="check-container">
+<div class="api-test">
+  <h1 style="text-align: center; color: #009a61;">🔬 eSIM API DATA TESTER</h1>
+  
+  <div class="test-input">
+    <input 
+      type="text" 
+      id="testOrder" 
+      placeholder="Enter Order Number (e.g. 121233)"
+      value=""
+    >
+    <button onclick="testAPI()">TEST API</button>
+    <button onclick="clearData()">CLEAR</button>
+  </div>
+  
+  <div class="test-orders">
+    <h3>Quick Test Numbers:</h3>
+    <button class="test-btn" onclick="testWithNumber('121233')">121233</button>
+    <button class="test-btn" onclick="testWithNumber('1212')">1212 (ohne 33)</button>
+    <button class="test-btn" onclick="testWithNumber('B24022308586593')">B24022308586593</button>
+    <button class="test-btn" onclick="testWithNumber('24022308264990')">24022308264990</button>
+  </div>
+  
+  <div id="status" class="status" style="display:none;"></div>
+  
+  <div class="important-data" style="display:none;" id="importantData">
+    <h2 style="color: #00ff00; margin-bottom: 20px;">📊 WICHTIGE DATEN FÜR CHECK ESIM PAGE:</h2>
+    <div class="data-grid" id="dataGrid"></div>
+  </div>
+  
+  <div class="data-display" id="output">
+    Ready to test API...
     
-    <!-- Search Card -->
-    <div class="search-card">
-      <h1 class="search-title">Check Your eSIM</h1>
-      <p class="search-subtitle">Enter your order number to view eSIM status and top up</p>
-      
-      <div class="search-form">
-        <input 
-          type="text" 
-          id="orderNumber" 
-          class="search-input"
-          placeholder="Enter order number (e.g. 121233)"
-        >
-        <button id="searchBtn" class="search-button">Search</button>
-      </div>
-      
-      <div id="errorMsg" class="message error"></div>
-      <div id="successMsg" class="message success"></div>
-    </div>
+    Endpoints to test:
+    1. /info/{orderNumber} - Main eSIM Data
+    2. /plans?esimTranNo={}&packageCode={}&currency={} - Top Up Plans
+    3. /info/{orderNumber}/{email} - With Email Verification
     
-    <!-- Loading State -->
-    <div id="loading" class="loading-wrapper">
-      <div class="loading-spinner"></div>
-      <p style="color: #666;">Loading your eSIM data...</p>
-    </div>
-    
-    <!-- Main eSIM Card -->
-    <div id="esimCard" class="esim-card">
-      <!-- Header -->
-      <div class="esim-header">
-        <h2 class="esim-title" id="packageName">Loading...</h2>
-        <p class="esim-subtitle" id="packageCode">eSIM Information</p>
-      </div>
-      
-      <!-- QR Code -->
-      <div class="qr-section">
-        <div class="qr-wrapper">
-          <img id="qrCode" class="qr-code" src="" alt="QR Code">
-          <div class="qr-hide-btn" id="hideQR" title="Hide QR Code">
-            👁️
-          </div>
-        </div>
-        <p style="margin-top: 20px; color: #666; font-size: 14px;">
-          Scan to install your eSIM
-        </p>
-      </div>
-      
-      <!-- Usage Progress -->
-      <div class="usage-section">
-        <h3 class="usage-title">Data Usage</h3>
-        <div class="progress-container">
-          <div id="progressBar" class="progress-bar" style="width: 0%">
-            <span class="progress-text">0%</span>
-          </div>
-        </div>
-        <div class="usage-stats">
-          <span>Used: <strong id="dataUsed">0 GB</strong></span>
-          <span>Total: <strong id="totalData">0 GB</strong></span>
-          <span>Remaining: <strong id="dataLeft">0 GB</strong></span>
-        </div>
-      </div>
-      
-      <!-- Details Grid -->
-      <div class="details-grid">
-        <div class="detail-card">
-          <div class="detail-icon">🔑</div>
-          <div class="detail-label">ICCID</div>
-          <div class="detail-value" id="iccid">-</div>
-        </div>
-        <div class="detail-card">
-          <div class="detail-icon">📅</div>
-          <div class="detail-label">Activated</div>
-          <div class="detail-value" id="activationDate">-</div>
-        </div>
-        <div class="detail-card">
-          <div class="detail-icon">⏰</div>
-          <div class="detail-label">Expires</div>
-          <div class="detail-value" id="expiryDate">-</div>
-        </div>
-        <div class="detail-card">
-          <div class="detail-icon">📍</div>
-          <div class="detail-label">Region</div>
-          <div class="detail-value" id="region">-</div>
-        </div>
-      </div>
-      
-      <!-- Top Up Button -->
-      <div class="topup-wrapper">
-        <button id="topupBtn" class="topup-button">Top Up Now</button>
-      </div>
-    </div>
-    
+    Click a test number or enter your own order number.
   </div>
 </div>
 
-<!-- Hidden Data Storage -->
-<div style="display:none;">
-  <span id="esimTranNo"></span>
-  <span id="pkgCode"></span>
-</div>
-
 <script>
-// Check jQuery
+// jQuery Check
 if (typeof jQuery === 'undefined') {
-  console.error('❌ jQuery not loaded! Loading now...');
-  var script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
-  document.head.appendChild(script);
-  script.onload = function() {
-    initCheckEsim();
-  };
-} else {
-  console.log('✅ jQuery ' + jQuery.fn.jquery + ' already loaded');
-  jQuery(document).ready(function() {
-    initCheckEsim();
+  document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"><\/script>');
+}
+
+function testWithNumber(num) {
+  document.getElementById('testOrder').value = num;
+  testAPI();
+}
+
+function clearData() {
+  document.getElementById('output').textContent = 'Cleared. Ready for new test...';
+  document.getElementById('status').style.display = 'none';
+  document.getElementById('importantData').style.display = 'none';
+}
+
+function testAPI() {
+  const orderNumber = document.getElementById('testOrder').value.trim();
+  
+  if (!orderNumber) {
+    alert('Please enter an order number');
+    return;
+  }
+  
+  const output = document.getElementById('output');
+  const status = document.getElementById('status');
+  const importantData = document.getElementById('importantData');
+  const dataGrid = document.getElementById('dataGrid');
+  
+  // Show loading
+  status.className = 'status loading';
+  status.textContent = 'Loading... Testing order: ' + orderNumber;
+  status.style.display = 'block';
+  importantData.style.display = 'none';
+  
+  output.textContent = '🔄 Calling API...\n\n';
+  output.textContent += 'URL: https://simbye.com/apps/topup/info/' + orderNumber + '\n';
+  output.textContent += 'Time: ' + new Date().toISOString() + '\n';
+  output.textContent += '----------------------------------------\n\n';
+  
+  // API Call
+  jQuery.ajax({
+    url: 'https://simbye.com/apps/topup/info/' + orderNumber,
+    method: 'GET',
+    headers: {
+      'ngrok-skip-browser-warning': 'skip',
+      'Accept': 'application/json'
+    },
+    dataType: 'json',
+    timeout: 15000,
+    success: function(response) {
+      console.log('API Response:', response);
+      
+      status.className = 'status success';
+      status.textContent = '✅ SUCCESS - Data received!';
+      
+      // Show raw JSON
+      output.textContent = '✅ RAW API RESPONSE:\n\n';
+      output.textContent += JSON.stringify(response, null, 2);
+      
+      // Extract important data
+      if (response && response.data && response.data.obj && response.data.obj.esimList) {
+        const esim = response.data.obj.esimList[0];
+        if (esim) {
+          importantData.style.display = 'block';
+          
+          // Parse important fields
+          const pkg = esim.packageList && esim.packageList[0] || {};
+          
+          const importantFields = {
+            'eSIM Status': esim.esimStatus || 'N/A',
+            'eSIM TranNo': esim.esimTranNo || 'N/A',
+            'ICCID': esim.iccid || 'N/A',
+            'IMSI': esim.imsi || 'N/A',
+            'Order No': esim.orderNo || 'N/A',
+            'QR Code URL': esim.qrCodeUrl ? '✅ Available' : '❌ Missing',
+            'Activation Time': esim.activateTime || 'Not Activated',
+            'Expired Time': esim.expiredTime || 'N/A',
+            'Total Volume (Bytes)': esim.totalVolume || 0,
+            'Total Volume (GB)': ((esim.totalVolume || 0) / 1073741824).toFixed(2) + ' GB',
+            'Order Usage (Bytes)': esim.orderUsage || 0,
+            'Order Usage (GB)': ((esim.orderUsage || 0) / 1073741824).toFixed(2) + ' GB',
+            'Data Left (GB)': (((esim.totalVolume || 0) - (esim.orderUsage || 0)) / 1073741824).toFixed(2) + ' GB',
+            'Usage Percentage': esim.totalVolume ? Math.round((esim.orderUsage / esim.totalVolume) * 100) + '%' : '0%',
+            'Package Name': pkg.packageName || 'N/A',
+            'Package Code': pkg.packageCode || 'N/A',
+            'Duration': pkg.duration ? pkg.duration + ' Days' : 'N/A',
+            'Location Code': pkg.locationCode || 'N/A',
+            'Active Type': esim.activeType || 'N/A',
+            'Data Type': esim.dataType || 'N/A',
+            'SMDP Status': esim.smdpStatus || 'N/A'
+          };
+          
+          // Check if eSIM is rechargeable
+          const isExpired = new Date(esim.expiredTime) < new Date();
+          const isUnlimited = pkg.packageName && pkg.packageName.toLowerCase().includes('unlimited');
+          const isRechargeable = !isExpired && !isUnlimited;
+          
+          // Add status info
+          importantFields['Is Expired'] = isExpired ? '❌ YES - NOT RECHARGEABLE' : '✅ NO - Still Active';
+          importantFields['Is Unlimited'] = isUnlimited ? '⚠️ YES - NOT RECHARGEABLE' : '✅ NO - Can Top Up';
+          importantFields['Rechargeable'] = isRechargeable ? '✅ YES' : '❌ NO';
+          
+          // Display in grid
+          dataGrid.innerHTML = '';
+          for (const [label, value] of Object.entries(importantFields)) {
+            const item = document.createElement('div');
+            item.className = 'data-item';
+            item.innerHTML = `
+              <div class="data-label">${label}</div>
+              <div class="data-value">${value}</div>
+            `;
+            dataGrid.appendChild(item);
+          }
+          
+          // Test Top-Up Plans API if rechargeable
+          if (isRechargeable && esim.esimTranNo && pkg.packageCode) {
+            output.textContent += '\n\n----------------------------------------\n';
+            output.textContent += '🔄 TESTING TOP-UP PLANS API...\n\n';
+            
+            const currency = window.Shopify?.currency?.active || 'USD';
+            const topupUrl = `https://simbye.com/apps/topup/plans?esimTranNo=${esim.esimTranNo}&packageCode=${pkg.packageCode}&currency=${currency}`;
+            
+            output.textContent += 'URL: ' + topupUrl + '\n\n';
+            
+            jQuery.ajax({
+              url: topupUrl,
+              method: 'GET',
+              headers: {
+                'ngrok-skip-browser-warning': 'skip'
+              },
+              timeout: 10000,
+              success: function(plansResponse) {
+                output.textContent += '✅ TOP-UP PLANS RESPONSE:\n\n';
+                output.textContent += JSON.stringify(plansResponse, null, 2);
+              },
+              error: function(xhr, status, error) {
+                output.textContent += '❌ TOP-UP PLANS ERROR:\n';
+                output.textContent += 'Status: ' + status + '\n';
+                output.textContent += 'Error: ' + error + '\n';
+              }
+            });
+          }
+        }
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error('API Error:', xhr, status, error);
+      
+      status.className = 'status error';
+      status.textContent = '❌ ERROR: ' + error;
+      
+      output.textContent = '❌ API ERROR:\n\n';
+      output.textContent += 'Status: ' + status + '\n';
+      output.textContent += 'Error: ' + error + '\n';
+      output.textContent += 'Response Status: ' + xhr.status + '\n\n';
+      
+      if (xhr.responseText) {
+        output.textContent += 'Response:\n' + xhr.responseText;
+      }
+      
+      if (xhr.status === 0) {
+        output.textContent += '\n\n⚠️ CORS ERROR oder Network Problem!\n';
+        output.textContent += 'Mögliche Lösungen:\n';
+        output.textContent += '1. Shopify App Proxy verwenden\n';
+        output.textContent += '2. Backend Proxy Server\n';
+        output.textContent += '3. API CORS Headers anpassen\n';
+      }
+    }
   });
 }
 
-function initCheckEsim() {
-  console.log('🚀 Initializing Check eSIM Page');
-  
-  const $ = jQuery;
-  
-  // Elements
-  const $orderInput = $('#orderNumber');
-  const $searchBtn = $('#searchBtn');
-  const $errorMsg = $('#errorMsg');
-  const $successMsg = $('#successMsg');
-  const $loading = $('#loading');
-  const $esimCard = $('#esimCard');
-  
-  // Check URL parameters
+// Auto-test on load if order_number in URL
+window.onload = function() {
   const urlParams = new URLSearchParams(window.location.search);
   const orderFromUrl = urlParams.get('order_number');
-  
   if (orderFromUrl) {
-    console.log('📝 Found order in URL:', orderFromUrl);
-    $orderInput.val(orderFromUrl);
-    // Auto-search after 500ms
-    setTimeout(searchOrder, 500);
+    document.getElementById('testOrder').value = orderFromUrl;
+    setTimeout(testAPI, 500);
   }
-  
-  // Search button click
-  $searchBtn.on('click', searchOrder);
-  
-  // Enter key in input
-  $orderInput.on('keypress', function(e) {
-    if (e.which === 13) searchOrder();
-  });
-  
-  // Main search function
-  function searchOrder() {
-    const orderNumber = $orderInput.val().trim();
-    
-    if (!orderNumber) {
-      showError('Please enter an order number');
-      return;
-    }
-    
-    console.log('🔍 Searching for order:', orderNumber);
-    
-    // Clear messages
-    $errorMsg.removeClass('show');
-    $successMsg.removeClass('show');
-    $esimCard.removeClass('active');
-    
-    // Show loading
-    $loading.addClass('active');
-    $searchBtn.prop('disabled', true);
-    
-    // API Call
-    const apiUrl = 'https://simbye.com/apps/topup/info/' + orderNumber;
-    
-    $.ajax({
-      url: apiUrl,
-      method: 'GET',
-      headers: {
-        'ngrok-skip-browser-warning': 'skip',
-        'Accept': 'application/json'
-      },
-      dataType: 'json',
-      timeout: 10000,
-      success: function(response) {
-        console.log('✅ API Response:', response);
-        
-        if (response && response.data && response.data.obj && response.data.obj.esimList) {
-          const esimList = response.data.obj.esimList;
-          if (esimList && esimList.length > 0) {
-            displayEsimData(esimList[0]);
-            showSuccess('eSIM found successfully!');
-          } else {
-            showError('No eSIM found for this order number');
-          }
-        } else {
-          showError('Invalid response format');
-        }
-      },
-      error: function(xhr, status, error) {
-        console.error('❌ API Error:', {
-          status: status,
-          error: error,
-          response: xhr.responseText
-        });
-        
-        if (status === 'timeout') {
-          showError('Request timed out. Please try again.');
-        } else if (xhr.status === 0) {
-          showError('Network error. Please check your connection.');
-        } else if (xhr.status === 404) {
-          showError('Order not found. Please check the order number.');
-        } else {
-          showError('Failed to load eSIM data. Error: ' + error);
-        }
-      },
-      complete: function() {
-        $loading.removeClass('active');
-        $searchBtn.prop('disabled', false);
-      }
-    });
-  }
-  
-  // Display eSIM data
-  function displayEsimData(esim) {
-    console.log('📊 Displaying eSIM:', esim);
-    
-    const pkg = esim.packageList && esim.packageList[0] || {};
-    
-    // Store data for top-up
-    $('#esimTranNo').text(esim.esimTranNo || '');
-    $('#pkgCode').text(pkg.packageCode || '');
-    
-    // Package info
-    $('#packageName').text(pkg.packageName || 'eSIM Package');
-    $('#packageCode').text('Code: ' + (pkg.packageCode || 'N/A'));
-    
-    // QR Code
-    if (esim.qrCodeUrl) {
-      $('#qrCode').attr('src', esim.qrCodeUrl);
-    }
-    
-    // ICCID
-    $('#iccid').text(formatIccid(esim.iccid) || '-');
-    
-    // Dates
-    if (esim.activateTime) {
-      $('#activationDate').text(formatDate(esim.activateTime));
-    } else {
-      $('#activationDate').text('Not activated');
-    }
-    
-    if (esim.expiredTime) {
-      $('#expiryDate').text(formatDate(esim.expiredTime));
-    }
-    
-    // Region
-    $('#region').text(pkg.locationCode || '-');
-    
-    // Data usage calculation
-    const totalBytes = esim.totalVolume || 0;
-    const usedBytes = esim.orderUsage || 0;
-    const totalGB = bytesToGB(totalBytes);
-    const usedGB = bytesToGB(usedBytes);
-    const leftGB = totalGB - usedGB;
-    const percentage = totalGB > 0 ? (usedGB / totalGB * 100) : 0;
-    
-    $('#totalData').text(formatDataSize(totalGB));
-    $('#dataUsed').text(formatDataSize(usedGB));
-    $('#dataLeft').text(formatDataSize(leftGB));
-    
-    // Progress bar
-    $('#progressBar').css('width', percentage + '%');
-    $('#progressBar .progress-text').text(Math.round(percentage) + '%');
-    
-    // Show card
-    $esimCard.addClass('active');
-  }
-  
-  // Format functions
-  function formatIccid(iccid) {
-    if (!iccid) return null;
-    // Format: 8943 1081 7000 1086 375
-    return iccid.replace(/(.{4})/g, '$1 ').trim();
-  }
-  
-  function formatDate(dateString) {
-    if (!dateString) return '-';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
-  }
-  
-  function bytesToGB(bytes) {
-    return bytes / (1024 * 1024 * 1024);
-  }
-  
-  function formatDataSize(gb) {
-    if (gb < 0) return '0 GB';
-    if (gb < 1) {
-      return Math.round(gb * 1024) + ' MB';
-    }
-    return gb.toFixed(2) + ' GB';
-  }
-  
-  // Messages
-  function showError(message) {
-    $errorMsg.text(message).addClass('show');
-    setTimeout(() => $errorMsg.removeClass('show'), 5000);
-  }
-  
-  function showSuccess(message) {
-    $successMsg.text(message).addClass('show');
-    setTimeout(() => $successMsg.removeClass('show'), 3000);
-  }
-  
-  // Hide QR Code button
-  $('#hideQR').on('click', function() {
-    alert('Email verification required to show QR code');
-    // Implement email verification modal here
-  });
-  
-  // Top up button
-  $('#topupBtn').on('click', function() {
-    const esimTranNo = $('#esimTranNo').text();
-    const pkgCode = $('#pkgCode').text();
-    
-    if (!esimTranNo || !pkgCode) {
-      showError('Missing data for top-up');
-      return;
-    }
-    
-    console.log('🛒 Starting top-up:', {
-      esimTranNo: esimTranNo,
-      packageCode: pkgCode
-    });
-    
-    // Load top-up plans
-    loadTopUpPlans(esimTranNo, pkgCode);
-  });
-  
-  // Load top-up plans
-  function loadTopUpPlans(esimTranNo, packageCode) {
-    const currency = window.Shopify?.currency?.active || 'USD';
-    const apiUrl = 'https://simbye.com/apps/topup/plans?esimTranNo=' + esimTranNo + 
-                   '&packageCode=' + packageCode + 
-                   '&currency=' + currency;
-    
-    console.log('📦 Loading top-up plans:', apiUrl);
-    
-    // Here you would implement the modal with top-up options
-    alert('Top-up API: ' + apiUrl);
-  }
-}
+};
 </script>
