@@ -203,14 +203,6 @@
   transition: var(--vs-transition);
 }
 
-.vs-table-row:hover .vs-table-cell {
-  background: rgba(0, 154, 97, 0.02);
-}
-
-[data-theme="dark"] .vs-table-row:hover .vs-table-cell {
-  background: rgba(0, 217, 126, 0.02);
-}
-
 .vs-table-cell {
   display: table-cell;
   padding: 32px 24px;
@@ -529,18 +521,24 @@
             <div class="vs-provider-name">{{ 'comparison.simbye_esim' | t | default: 'Simbye eSIM' }}</div>
             <div class="vs-provider-type">{{ 'comparison.prepaid' | t | default: 'Prepaid Data' }}</div>
             <div class="vs-provider-price">
-              {% if section.settings.reference_product %}
-                {% assign product = all_products[section.settings.reference_product] %}
-                {% if product and product.variants.size > 0 %}
-                  {% if product.variants.first.price == 0 and product.variants.size > 1 %}
-                    {{ 'comparison.from' | t | default: 'From' }} {{ product.variants[1].price | money }}
-                  {% else %}
-                    {{ 'comparison.from' | t | default: 'From' }} {{ product.variants.first.price | money }}
-                  {% endif %}
+              {% comment %} Automatisch Product Page Produkt oder Setting {% endcomment %}
+              {% if product %}
+                {% comment %} Auf Product Page - nutze aktuelles Produkt {% endcomment %}
+                {% if product.variants.first.price == 0 and product.variants.size > 1 %}
+                  {{ 'comparison.from' | t | default: 'From' }} {{ product.variants[1].price | money }}
                 {% else %}
-                  {{ 'comparison.from' | t | default: 'From' }} €4.99
+                  {{ 'comparison.from' | t | default: 'From' }} {{ product.variants.first.price | money }}
+                {% endif %}
+              {% elsif section.settings.reference_product %}
+                {% comment %} Andere Seite - nutze Setting wenn vorhanden {% endcomment %}
+                {% assign ref_product = section.settings.reference_product %}
+                {% if ref_product.variants.first.price == 0 and ref_product.variants.size > 1 %}
+                  {{ 'comparison.from' | t | default: 'From' }} {{ ref_product.variants[1].price | money }}
+                {% else %}
+                  {{ 'comparison.from' | t | default: 'From' }} {{ ref_product.variants.first.price | money }}
                 {% endif %}
               {% else %}
+                {% comment %} Fallback Preis {% endcomment %}
                 {{ 'comparison.from' | t | default: 'From' }} €4.99
               {% endif %}
             </div>
@@ -577,16 +575,19 @@
                 </svg>
               </div>
               <div class="vs-value-text">
-                {% if section.settings.reference_product %}
-                  {% assign product = all_products[section.settings.reference_product] %}
-                  {% if product and product.variants.size > 0 %}
-                    {% if product.variants.first.price == 0 and product.variants.size > 1 %}
-                      {{ 'comparison.from' | t | default: 'From' }} {{ product.variants[1].price | money }}
-                    {% else %}
-                      {{ 'comparison.from' | t | default: 'From' }} {{ product.variants.first.price | money }}
-                    {% endif %}
+                {% comment %} Gleiche Logik wie oben {% endcomment %}
+                {% if product %}
+                  {% if product.variants.first.price == 0 and product.variants.size > 1 %}
+                    {{ 'comparison.from' | t | default: 'From' }} {{ product.variants[1].price | money }}
                   {% else %}
-                    {{ 'comparison.from' | t | default: 'From' }} €4.99
+                    {{ 'comparison.from' | t | default: 'From' }} {{ product.variants.first.price | money }}
+                  {% endif %}
+                {% elsif section.settings.reference_product %}
+                  {% assign ref_product = section.settings.reference_product %}
+                  {% if ref_product.variants.first.price == 0 and ref_product.variants.size > 1 %}
+                    {{ 'comparison.from' | t | default: 'From' }} {{ ref_product.variants[1].price | money }}
+                  {% else %}
+                    {{ 'comparison.from' | t | default: 'From' }} {{ ref_product.variants.first.price | money }}
                   {% endif %}
                 {% else %}
                   {{ 'comparison.from' | t | default: 'From' }} €4.99
