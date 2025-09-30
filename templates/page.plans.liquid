@@ -1,20 +1,1319 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
-{
-  "sections": {
-    "main": {
-      "type": "page",
-      "settings": {}
+
+<style>
+ 
+  body {
+    background-color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    color: #334155;
+   
+  }
+  
+  #MainContent {
+    position: static;
+  
+  }
+  
+  .coontainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .search-wrapper {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  }
+  
+  .search-wrapper label {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #000;
+  }
+  
+  .search-input-group {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  }
+  
+  .search-input-group input {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1.6rem;
+  border: 2px solid #e2e8f0;
+  border-right: none;
+  border-radius: 12px 0 0 12px;
+  outline: none;
+  text-align: left; /* Eingabetext links */
+  }
+  
+  /* Placeholder links ausrichten */
+  .search-input-group input::placeholder {
+    text-align: left !important; /* Erzwingt die linke Ausrichtung */
+    padding-left: 0px !important; /* Entfernt Abstand */
+    direction: ltr !important; /* Sichert linke Schreibrichtung */
+  }
+  
+  
+  
+    
+  .search-input-group button {
+      padding: 1rem 2rem;
+      font-size: 1.6rem;
+      border: none;
+      background: #009a61;
+      color: #fff;
+      border-radius: 0 12px 12px 0;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
     }
-  },
-  "order": [
-    "main"
-  ]
+  
+  /* Main Box Modernization */
+  .main-box {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    display: none;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .top-section {
+    background: linear-gradient(135deg, #009a61 0%, #00b877 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .top-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+  }
+  
+  .top-section h1 {
+    font-size: 2.8rem;
+    margin: 0;
+    color: white;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+  
+  .top-section p {
+    font-size: 1.6rem;
+    margin: 1rem 0 0;
+    opacity: 0.9;
+  }
+  
+  .qr-section {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: linear-gradient(to bottom, #ffffff, #f8fafc);
+  }
+  
+  .qr-section img {
+    width: 160px;
+    height: 160px;
+    border: 3px solid #e5e5e5;
+    border-radius: 16px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    
+      margin: 0 auto;
+  }
+    
+  
+  .qr-section img:hover {
+    transform: scale(1.05);
+  }
+  
+  .usage-section {
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  
+  .usage-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+  }
+  
+  .progress-container {
+    background-color: #e2e8f0;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 24px;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #009a61, #00d084);
+    transition: width 0.4s ease;
+    position: relative;
+  }
+  
+  .progress-info {
+    font-size: 1.7rem;
+    margin-top: 1rem;
+    color: #334155;
+  }
+  
+  .percentage-text {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-weight: 600;
+    font-size: 1.4rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+  }
+  
+  .details-section {
+    border-top: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+    padding: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+  
+  .detail-card {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2rem;
+  box-shadow: 0 0 1px rgba(24, 94, 224, 0.15), 0 6px 12px rgba(24, 94, 224, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  
+  
+  .detail-icon {
+    font-size: 2.8rem;
+    color: #009a61;
+    margin-bottom: 1.2rem;
+  }
+  
+  .detail-title {
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #1e293b;
+  }
+  
+  .detail-value {
+    font-size: 1.5rem;
+    color: #64748b;
+  }
+  
+  /* Top-Up Bereich */
+  .topup-container {
+    text-align: center;
+    padding: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .topup-btn {
+    display: inline-block;
+    padding: 1.2rem 3.5rem;
+    background: linear-gradient(135deg, #00c781 0%, #00a368 100%);
+    color: white;
+    font-size: 1.6rem;
+    font-weight: 600;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+  }
+  
+  .topup-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(0,199,129,0.25);
+  }
+  
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  
+    justify-content: center;
+    align-items: center;
+    animation: modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes modalFadeIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .modal.show {
+    display: flex;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 24px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .modal-header .modal-title {
+    color: #1a1a1a;
+    font-size: 2rem;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 3rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    color: #1a1a1a;
+    padding: 0.5rem;
+    border-radius: 12px;
+  }
+  
+  .modal-close:hover {
+    opacity: 1;
+    background-color: rgba(0,0,0,0.05);
+  }
+  
+  .modal-body {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1rem 0;
+  }
+  
+  .topup-option {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2rem;
+      box-shadow: 0 0 1px rgba(24, 94, 224, 0.15), 0 6px 12px rgba(24, 94, 224, 0.15);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #f0f0f0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .topup-option:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0,199,129,0.12);
+    border-color: #00c781;
+  }
+  
+  .topup-option h3 {
+    font-size: 2rem;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: -0.5px;
+  }
+  
+  .topup-option .price {
+    font-size: 2.4rem;
+    color: #00c781;
+    font-weight: 700;
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 0.25rem;
+  }
+  
+  .topup-option button {
+    background: linear-gradient(135deg, #00c781 0%, #00a368 100%);
+    color: white;
+    padding: 1.2rem 2rem;
+    border-radius: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 2rem;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .topup-option button:hover {
+    background: linear-gradient(135deg, #00d991 0%, #00b478 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,199,129,0.25);
+  }
+  .hide-icon {
+    position: absolute;
+    top: 325px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+  }
+.popup {
+  z-index: 999999;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 30px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  text-align: center;
+  min-width: 350px;
+  max-width: 90%;
 }
+
+.popup input {
+  padding: 1.2rem;
+  font-size: 1.6rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  width: 100%;
+  margin: 15px 0;
+}
+
+.popup button {
+  padding: 1.4rem 4rem;
+  background: linear-gradient(135deg, #00c781 0%, #00a368 100%);
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  backdrop-filter: blur(5px);
+  margin-top: 10px;
+}
+
+.popup button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 199, 129, 0.3);
+}
+
+.popup-content {
+  margin: 15px 0;
+  line-height: 1.6;
+}
+
+
+  
+    @media (max-width: 768px) {
+  
+        .topup-option h3 {
+      font-size: 2rem;
+    }
+    
+    .topup-option .price {
+      font-size: 2rem;
+    }
+    
+    .topup-option button {
+      font-size: 2rem;
+      
+  .coontainer {
+    padding-left: 15px;
+    padding-right: 15px
+    }
+      .main-box {
+  
+  border-radius: 0px;
+  
+    }
+  
+        .modal-content {
+      margin: 1rem;
+      padding: 1.5rem;
+    }
+  </style>
+
+  
+  <!-- Suchbereich -->
+  <div class="coontainer">
+  <div class="search-wrapper">
+    <label for="mobilenumber"> {% case shop.locale %}
+      {% when 'de' %}
+        Bestellnummer eingeben:
+      {% when 'es' %}
+        Introducir el número de pedido:
+      {% when 'it' %}
+        Inserisci il numero d'ordine:
+      {% when 'fr' %}
+        Saisir le numéro de commande :
+  {% when 'nl' %}
+    Voer bestelnummer in:
+  
+  {% when 'pl' %}
+    Wprowadź numer zamówienia:
+  
+      {% when 'ar' %}
+        أدخل رقم الطلب:
+      {% when 'tr' %}
+        Sipariş numarasını girin:
+      {% else %}
+        Enter your Order Number:
+    {% endcase %}</label>
+    <div class="search-input-group">
+   <input 
+  type="text" 
+  id="mobilenumber" 
+  placeholder="{% case shop.locale %}
+    {% when 'de' %} z.B. 123456
+    {% when 'es' %} p.ej. 123456
+    {% when 'it' %} es. 123456
+    {% when 'fr' %} ex. 123456
+  {% when 'nl' %}
+    bv. 123456
+  
+  {% when 'pl' %}
+    np. 123456
+  
+    {% when 'ar' %} مثل 123456
+    {% when 'tr' %} örn. 123456
+    {% else %} e.g. 123456
+  {% endcase %}">
+  
+      <button id="search-button"> {% case shop.locale %}
+        {% when 'de' %}
+          Suchen
+        {% when 'es' %}
+          Buscar
+        {% when 'it' %}
+          Cerca
+        {% when 'fr' %}
+          Rechercher
+   {% when 'nl' %}
+    Zoeken
+  
+  {% when 'pl' %}
+    Szukać
+  
+        {% when 'ar' %}
+          بحث
+        {% when 'tr' %}
+          Ara
+        {% else %}
+          Search
+      {% endcase %}</button>
+    </div>
+  </div>
+  </div>
+  
+  
+  <!-- Hauptbox für eSIM-Info (zunächst ausgeblendet) -->
+  <div class="main-box api_rspns">
+    <!-- Kopfbereich -->
+    <div class="top-section">
+      <h1 class="pkg_name">
+        <span id="pkgname">Mein eSIM</span>
+      </h1>
+    </div>
+    <!-- QR-Bereich -->
+    <div class="qr-section">
+      <img id="qrcode" src="https://cdn.shopify.com/s/files/1/0633/9012/2175/t/45/assets/qrcode.png?v=1743606985" alt="QR Code">
+      <div class="hide-icon" id="showPopup">👁️</div>
+    </div>
+    <!-- Popup Form -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+      <h3>Verify Email</h3>
+      <input type="email" id="emailInput" placeholder="Enter your email">
+      <button onclick="verifyEmail()">Verify</button>
+      <button onclick="closePopup()">Close</button>
+    </div>
+    <!-- Nutzungsbereich -->
+    <div class="usage-section">
+  <h2>
+    {% case shop.locale %}
+      {% when 'de' %}Datenverbrauch
+      {% when 'es' %}Uso de datos
+      {% when 'it' %}Utilizzo dati
+      {% when 'fr' %}Consommation de données
+      {% when 'nl' %}Verbruik
+      {% when 'pl' %}Zużycie
+      {% when 'ar' %}استهلاك البيانات
+      {% when 'tr' %}Veri kullanımı
+      {% else %}Data usage
+    {% endcase %}
+  </h2>
+  
+      <div class="progress-container">
+        <div class="progress-bar" id="usagepercentage" style="width:0%;">0%</div>
+      </div>
+      <p class="progress-info">
+       <span>
+  {% case shop.locale %}
+    {% when 'de' %}
+      Verbraucht: <span id="datausage">0GB</span> | Verfügbar: <span id="dataleft">0GB</span>
+    {% when 'es' %}
+      Usado: <span id="datausage">0GB</span> | Restante: <span id="dataleft">0GB</span>
+    {% when 'it' %}
+      Utilizzato: <span id="datausage">0GB</span> | Rimasto: <span id="dataleft">0GB</span>
+    {% when 'fr' %}
+      Utilisé : <span id="datausage">0GB</span> | Restant : <span id="dataleft">0GB</span>
+  {% when 'nl' %}
+    Gebruikt: <span id="datausage">0GB</span> | Over: <span id="dataleft">0GB</span>
+  
+  {% when 'pl' %}
+    Użyte: <span id="datausage">0GB</span> | Pozostało: <span id="dataleft">0GB</span>
+  
+    {% when 'ar' %}
+      المُستخدم: <span id="datausage">0GB</span> | المُتبقي: <span id="dataleft">0GB</span>
+    {% when 'tr' %}
+      Kullanılan: <span id="datausage">0GB</span> | Kalan: <span id="dataleft">0GB</span>
+    {% else %}
+      Used: <span id="datausage">0GB</span> | Dataleft: <span id="dataleft">0GB</span>
+  {% endcase %}
+  </span>
+  
+      </p>
+    </div>
+    <div class="topup-container">
+      <a class="topup-btn" id="topup-button">  {% case shop.locale %}
+      {% when 'de' %}Aufladen
+      {% when 'es' %}Recargar
+      {% when 'it' %}Ricaricare
+      {% when 'tr' %}Yükleme
+      {% when 'fr' %}Recharger
+  {% when 'nl' %}
+    Opladen
+  
+  {% when 'pl' %}
+    Doładowanie
+  
+      {% when 'ar' %}إعادة الشحن
+      {% else %}Top up
+    {% endcase %}</a>
+    </div>
+    <div class="details-section">
+      <div class="detail-card">
+        <div class="detail-icon">🔑</div>
+        <div class="detail-title">ICCID</div>
+        <div class="detail-value" id="iccid">–</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon">📅</div>
+        <div class="detail-title">   {% case shop.locale %}
+      {% when 'de' %}
+        Aktivierungsdatum
+      {% when 'es' %}
+        Fecha de activación
+      {% when 'it' %}
+        Data di attivazione
+      {% when 'fr' %}
+        Date d'activation
+  {% when 'nl' %}
+    Activatiedatum
+  
+  {% when 'pl' %}
+    Data aktywacji
+  
+      {% when 'ar' %}
+        تاريخ التفعيل
+      {% when 'tr' %}
+        Aktivasyon Tarihi
+      {% else %}
+        Activation Date
+    {% endcase %}</div>
+        <div class="detail-value" id="activateTime">–</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon">📊</div>
+        <div class="detail-title">  {% case shop.locale %}
+      {% when 'de' %}
+        Gesamtdaten
+      {% when 'es' %}
+        Datos totales
+      {% when 'it' %}
+        Dati totali
+      {% when 'fr' %}
+        Données totales
+  {% when 'nl' %}
+    Totale gegevens
+  
+  {% when 'pl' %}
+    Całkowita ilość danych
+  
+      {% when 'ar' %}
+        إجمالي البيانات
+      {% when 'tr' %}
+        Toplam Veri
+      {% else %}
+        Total Data
+    {% endcase %}</div>
+        <div class="detail-value" id="totalvolume">–</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-icon">⏳</div>
+        <div class="detail-title">{% case shop.locale %}
+      {% when 'de' %}
+        Verbleibende Zeit
+      {% when 'es' %}
+        Tiempo restante
+      {% when 'it' %}
+        Tempo rimanente
+      {% when 'fr' %}
+        Temps restant
+  {% when 'nl' %}
+    Overgebleven tijd
+  
+  {% when 'pl' %}
+    Pozostały czas
+  
+      {% when 'ar' %}
+        الوقت المتبقي
+      {% when 'tr' %}
+        Kalan Süre
+      {% else %}
+        Time Left
+    {% endcase %}</div>
+        <div class="detail-value" id="timeleft">–</div>
+      </div>
+    </div>
+    <!-- Versteckte Felder für Top-Up Daten -->
+    <p style="display:none;">
+      <strong>Package Code:</strong> <span id="pkgcode">ABC123</span>
+    </p>
+    <p style="display:none;">
+      <strong>TranNo:</strong> <span id="esimTranNo">XYZ789</span>
+    </p>
+  </div>
+  
+  <!-- Modal für Top-Up Auswahl -->
+  <div class="modal" id="topUpModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{% case shop.locale %}
+  {% when 'de' %}
+    eSIM Aufladepakete
+  {% when 'es' %}
+    Paquetes de recarga eSIM
+  {% when 'it' %}
+    Pacchetti di ricarica eSIM
+  {% when 'fr' %}
+    Forfaits de recharge eSIM
+  {% when 'nl' %}
+    eSIM-oplaadpakketten
+  
+  {% when 'pl' %}
+    Pakiety doładowania eSIM
+  
+  {% when 'ar' %}
+    حزم تعبئة eSIM
+  {% when 'tr' %}
+    eSIM Yenileme Paketleri
+  {% else %}
+    eSIM Top Up Packages
+  {% endcase %}</h5>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div class="modal-body" id="plansContainer">
+        <div class="topup-option">
+          <h3>Option 1: 10GB für 10 Tage</h3>
+          <p class="price">10 USD</p>
+          <button class="buy-topup" data-variant-id="variant1" data-package-code="PKG1">Kaufen</button>
+        </div>
+        <div class="topup-option">
+          <h3>Option 2: 20GB für 20 Tage</h3>
+          <p class="price">20 USD</p>
+          <button class="buy-topup" data-variant-id="variant2" data-package-code="PKG2">Kaufen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+  jQuery(function($) {
+    // Häufig verwendete Selektoren
+    var $mobilenumber    = $("#mobilenumber"),
+        $searchButton    = $("#search-button"),
+        $timeleft        = $("#timeleft"),
+        $qrcode          = $("#qrcode"),
+        $iccid           = $("#iccid"),
+        $pkgname         = $("#pkgname"),
+        $pkgcode         = $("#pkgcode"),
+        $esimTranNo      = $("#esimTranNo"),
+        $activateTime    = $("#activateTime"),
+        $totalvolume     = $("#totalvolume"),
+        $datausage       = $("#datausage"),
+        $dataleft        = $("#dataleft"),
+        $usagepercentage = $("#usagepercentage"),
+        $apiRspns        = $(".api_rspns"),
+        $searchWrapper   = $(".search-wrapper"),
+        $spinnerOverlay  = $("#spinner-overlay"),
+        $plansContainer  = $("#plansContainer"),
+        $topUpModal      = $("#topUpModal"),
+        $topupButton     = $("#topup-button"),
+        $modalClose      = $("#modal-close");
+  
+    // Hilfsfunktionen zum Formatieren
+    var formatDataMB = function(mb) {
+          return mb < 1024 
+            ? Math.round(mb) + ' MB' 
+            : (mb / 1024).toFixed(2) + ' GB';
+        },
+        formatDateString = function(dateString) {
+          if (!dateString) return '';
+          if (dateString.length === 10) dateString += 'T00:00:00';
+          return new Date(dateString).toLocaleDateString('de-DE', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+          });
+        };
+  
+    /* --- Lockout-Mechanismus (max. 3 Versuche) --- */
+    let maxAttempts = 3;
+    let lockoutTime = 60 * 60 * 1000; // 1 Stunde
+  
+    function getFailedAttempts() {
+      return parseInt(localStorage.getItem("failedAttempts")) || 0;
+    }
+    function setFailedAttempts(attempts) {
+      localStorage.setItem("failedAttempts", attempts);
+    }
+    function getLockoutEndTime() {
+      return parseInt(localStorage.getItem("lockoutEndTime")) || 0;
+    }
+    function setLockoutEndTime(time) {
+      localStorage.setItem("lockoutEndTime", time);
+    }
+  
+    // Verschiedene Übersetzungen für Fehlermeldungen (Beispiel)
+    function getLocaleMessage(key) {
+      let locale = Shopify.locale;
+      let translations = {
+        "tooManyAttempts": {
+          "de": "Zu viele falsche Eingaben! Warte 1 Stunde.",
+          "es": "Demasiados intentos fallidos. Espera 1 hora.",
+          "it": "Troppi tentativi falliti. Attendi 1 ora.",
+          "fr": "Trop de tentatives échouées. Attendez 1 heure.",
+          "pt-PT": "Muitas tentativas falhadas. Aguarde 1 hora.",
+          "ar": "محاولات كثيرة خاطئة! انتظر 1 ساعة.",
+          "tr": "Çok fazla yanlış giriş yaptın! 1 saat bekleyin.",
+          "default": "Too many failed attempts! Wait 1 hour."
+        },
+        "wrongAttempt": {
+          "de": "Falsche Bestellnummer! Versuch {attempts} von {max}.",
+          "es": "Número de pedido incorrecto! Intento {attempts} de {max}.",
+          "it": "Numero d'ordine errato! Tentativo {attempts} di {max}.",
+          "fr": "Numéro de commande incorrect! Essai {attempts} de {max}.",
+          "pt-PT": "Número de pedido incorreto! Tentativa {attempts} de {max}.",
+          "ar": "رقم الطلب غير صحيح! محاولة {attempts} من {max}.",
+          "tr": "Sipariş numarası yanlış! {max} den {attempts}.",
+          "default": "Wrong order number! Attempt {attempts} of {max}."
+        }
+      };
+  
+      return (translations[key][locale] || translations[key]["default"])
+             .replace("{attempts}", getFailedAttempts())
+             .replace("{max}", maxAttempts);
+    }
+  
+    // Prüfen, ob die Eingabe aktuell gesperrt ist
+    function checkLockout() {
+      let now = new Date().getTime();
+      let lockoutEndTime = getLockoutEndTime();
+  
+      if (lockoutEndTime > now) {
+        $mobilenumber.prop("disabled", true);
+        $searchButton.prop("disabled", true);
+        alert(getLocaleMessage("tooManyAttempts"));
+        return true; // gesperrt
+      } else {
+        $mobilenumber.prop("disabled", false);
+        $searchButton.prop("disabled", false);
+        return false; // nicht gesperrt
+      }
+    }
+  
+    // Sperre aktivieren (Lockout für 1 Stunde)
+    function lockInput() {
+      let lockoutEndTime = new Date().getTime() + lockoutTime;
+      setLockoutEndTime(lockoutEndTime);
+      checkLockout(); // Felder sofort sperren
+    }
+  
+    // --------------------------------------
+    // A: DOM fertig -> URL-Parameter auslesen
+    // --------------------------------------
+    $(document).ready(function () {
+      // Sperre prüfen
+      checkLockout();
+  
+      // order_number aus der URL holen, z.B. ?order_number=121233
+      var urlParams = new URLSearchParams(window.location.search);
+      var orderNumberParam = urlParams.get('order_number');
+  
+      if (orderNumberParam) {
+        // Im Suchfeld anzeigen, z.B. 121233
+        $mobilenumber.val(orderNumberParam);
+  
+        // OPTIONAL: Wenn du willst, dass sofort (ohne Klick) gesucht wird:
+        $searchButton.click();
+      }
+    });
+  
+    // --------------------------------------
+    // B: Klick auf "Suchen"
+    // --------------------------------------
+    $searchButton.on('click', function () {
+      // Prüfen, ob gesperrt
+      if (checkLockout()) return;
+  
+      // Nutzer-Eingabe ermitteln (z.B. 121233)
+      var number = $mobilenumber.val().trim();
+  
+      // Hier KEINE Entfernung von "33", du schickst 121233 direkt zur API
+      $.ajax({
+        url: "https://simbye.com/apps/topup/info/" + number,
+        method: "GET",
+        headers: { "ngrok-skip-browser-warning": "skip" },
+        timeout: 0
+      })
+      .done(function (response) {
+        // Prüfen, ob eSIM-Daten vorhanden
+        if (response.data && response.data.obj && response.data.obj.esimList && response.data.obj.esimList[0]) {
+          // Reset Lockout-Zähler, falls erfolgreich
+          setFailedAttempts(0);
+        } else {
+          // Ungültige Antwort, Lockout-Zähler erhöhen
+          let attempts = getFailedAttempts() + 1;
+          setFailedAttempts(attempts);
+  
+          if (attempts >= maxAttempts) {
+            lockInput();
+          } else {
+            alert(getLocaleMessage("wrongAttempt"));
+          }
+          return; // Abbruch
+        }
+  
+        // ====================================
+        // eSIM-Daten verarbeiten (falls ok)
+        // ====================================
+        var esim = response.data.obj.esimList[0],
+            pkg  = (esim.packageList && esim.packageList[0]) || {},
+            expiredTime = esim.expiredTime,
+            expiredDate = new Date(expiredTime),
+            currentDate = new Date(),
+            timeDiff    = expiredDate - currentDate,
+            daysLeft    = Math.floor(timeDiff / (1000 * 60 * 60 * 24)),
+            hoursLeft   = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+            minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+  
+        // Restzeit-Ausgabe
+        if (daysLeft > 0) {
+          $timeleft.text(daysLeft + " day(s) left");
+        } else if (hoursLeft > 0) {
+          $timeleft.text(hoursLeft + " hour(s) left");
+        } else if (minutesLeft > 0) {
+          $timeleft.text(minutesLeft + " minute(s) left");
+        } else {
+          $timeleft.text("Expired");
+        }
+  
+        // QR-Code, ICCID etc. ins DOM schreiben
+        // $qrcode.attr('src', esim.qrCodeUrl || '');
+        $iccid.text(esim.iccid || '');
+        $pkgname.text(pkg.packageName || 'Kein Paket');
+        $pkgcode.text(pkg.packageCode || '');
+        $esimTranNo.text(esim.esimTranNo || '');
+        $activateTime.text(formatDateString(esim.activateTime) || '-');
+  
+        var totalMB = (esim.totalVolume || 0) / (1024 * 1024);
+        $totalvolume.text(formatDataMB(totalMB));
+  
+        var usedMB = (esim.orderUsage || 0) / (1024 * 1024);
+        $datausage.text(formatDataMB(usedMB));
+  
+        var diffMB = totalMB - usedMB;
+        var locale = Shopify.locale;
+  
+        // Falls Datenverbrauch über Limit
+        var overLimitMessage = function(diffMB) {
+          switch (locale) {
+            case 'de':    return 'Zero (' + Math.abs(Math.round(diffMB)) + ' MB über dem Limit)';
+            case 'es':    return 'Cero (' + Math.abs(Math.round(diffMB)) + ' MB por encima del límite)';
+            case 'it':    return 'Zero (' + Math.abs(Math.round(diffMB)) + ' MB oltre il limite)';
+            case 'fr':    return 'Zéro (' + Math.abs(Math.round(diffMB)) + ' MB au-delà de la limite)';
+            case 'pt-PT': return 'Zero (' + Math.abs(Math.round(diffMB)) + ' MB acima do limite)';
+            case 'ar':    return 'صفر (' + Math.abs(Math.round(diffMB)) + ' ميغابايت فوق الحد)';
+            case 'tr':    return 'Sıfır (' + Math.abs(Math.round(diffMB)) + ' MB limitin üzerinde)';
+            default:      return 'Zero (' + Math.abs(Math.round(diffMB)) + ' MB over the limit)';
+          }
+        };
+  
+        $dataleft.text(diffMB < 0 
+          ? overLimitMessage(diffMB)
+          : formatDataMB(diffMB));
+  
+        var usagePercentage = 0;
+        if (esim.totalVolume > 0) {
+          usagePercentage = ((esim.totalVolume - esim.orderUsage) / esim.totalVolume) * 100;
+          usagePercentage = usagePercentage > 100 ? 100 : usagePercentage;
+        }
+        $usagepercentage
+          .css('width', usagePercentage + '%')
+          .html('<span class="percentage-text">' + Math.round(usagePercentage) + '%</span>');
+  
+        // eSIM-Hauptcontainer einblenden, Suche verstecken
+        $apiRspns.fadeIn();
+        $searchWrapper.slideUp();
+      })
+      .fail(function () {
+        let attempts = getFailedAttempts() + 1;
+        setFailedAttempts(attempts);
+  
+        if (attempts >= maxAttempts) {
+          lockInput();
+        } else {
+          alert(getLocaleMessage("wrongAttempt"));
+        }
+      });
+    });
+  
+    // --------------------------------------
+    // C: Top-Up-Funktionalität
+    // --------------------------------------
+    $topupButton.on('click', function () {
+      $spinnerOverlay.show();
+  
+      var esimTranNoVal    = $esimTranNo.text(),
+          pkgcodeVal       = $pkgcode.text(),
+          selectedCurrency = Shopify.currency.active;
+  
+      $.ajax({
+        url: "https://simbye.com/apps/topup/plans?esimTranNo=" + esimTranNoVal + 
+             "&packageCode=" + pkgcodeVal + 
+             "&currency=" + selectedCurrency,
+        method: "GET",
+        timeout: 0,
+        headers: { "ngrok-skip-browser-warning": "skip" }
+      })
+      .done(function (response) {
+        var plans = response.data;
+        $plansContainer.empty();
+  
+        if (!plans || plans.length === 0) {
+          $plansContainer.append('<p>Keine verfügbaren Top-Up-Optionen.</p>');
+        } else {
+          $.each(plans, function(_, plan) {
+            var btnText = (function() {
+              switch(Shopify.locale) {
+                case 'de':    return 'Kaufen';
+                case 'es':    return 'Comprar';
+                case 'it':    return 'Acquistare';
+                case 'fr':    return 'Acheter';
+    case 'nl': return 'Koop nu';
+  case 'pl': return 'Kup teraz';
+  
+                case 'ar':    return 'شراء';
+                case 'tr':    return 'Satın al';
+                default:      return 'Buy';
+              }
+            })();
+  
+            var planHTML = 
+              '<div class="topup-option">' +
+                '<h3>' + plan.name + '</h3>' +
+                '<p class="price">' + plan.price + ' ' + selectedCurrency + '</p>' +
+                '<button class="buy-topup" data-variant-id="' + plan.variant_id + 
+                '" data-package-code="' + plan.packageCode + '">' + btnText + '</button>' +
+              '</div>';
+  
+            $plansContainer.append(planHTML);
+          });
+        }
+  
+        $topUpModal.addClass('show');
+      })
+      .fail(function () {
+        alert("Fehler beim Laden der Top-Up-Pläne.");
+      })
+      .always(function () {
+        $spinnerOverlay.hide();
+      });
+    });
+  
+    // Modal schließen
+    $modalClose.on('click', function() {
+      $topUpModal.removeClass('show');
+    });
+    $(window).on('click', function(e) {
+      if ($(e.target).is($topUpModal)) {
+        $topUpModal.removeClass('show');
+      }
+    });
+    $(document).on('keydown', function(e) {
+      if (e.key === "Escape") {
+        $topUpModal.removeClass('show');
+      }
+    });
+  
+    // Kauf eines Top-Ups
+    $(document).on('click', '.buy-topup', function() {
+      var variantId     = $(this).data('variant-id'),
+          esimTranNoVal = $esimTranNo.text(),
+          packageCode   = $(this).data('package-code');
+          
+      $.post("/cart/add.js", {
+        items: [{
+          quantity: 1,
+          id: variantId,
+          properties: {
+            'packageCode': packageCode,
+            'esimTranNo': esimTranNoVal,
+            "type": 'TOPUP'
+          }
+        }]
+      })
+      .done(function() {
+        window.location.href = '/checkout';
+      })
+      .fail(function() {
+        alert('Fehler beim Hinzufügen des Top-Ups zum Warenkorb.');
+      });
+    });
+  });
+  </script>
+
+  {% comment %} Verify Email POP UP {% endcomment %}
+  <script>
+    document.getElementById('showPopup').addEventListener('click', function() {
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('popupOverlay').style.display = 'block';
+    });
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('popupOverlay').style.display = 'none';
+    }
+
+    async function verifyEmail() {
+      let email = document.getElementById('emailInput').value;
+      let number = $("#mobilenumber").val().trim();
+      if (!email) {
+        alert("Please enter an email.");
+        return;
+      }
+      $.ajax({
+        url: "https://simbye.com/apps/topup/info/" + number + "/" + email,
+        method: "GET",
+        headers: { "ngrok-skip-browser-warning": "skip" },
+        timeout: 0
+      })
+      .done(function (response) {
+        if (response.data && response.data.obj && response.data.obj.esimList && response.data.obj.esimList[0]) {
+        
+      
+          var esim = response.data.obj.esimList[0];
+          $("#qrcode").attr('src', esim.qrCodeUrl || '');
+          $(".hide-icon").hide();
+          closePopup();
+        }
+      })
+      .fail(function () {
+          alert("Email verification failed.");
+      });
+    }
+  </script>
+   
+  
+  <div class="esim-welcome-section">
+  <h2 class="esim-welcome-title">
+  <span class="title-highlight">
+    {% case shop.locale %}
+      {% when 'de' %}Viel Spaß
+      {% when 'es' %}¡Disfruta
+      {% when 'it' %}Divertiti
+      {% when 'tr' %}Keyifli kullanımlar
+      {% when 'fr' %}Profitez
+  {% when 'nl' %}
+    Geniet
+  
+  {% when 'pl' %}
+    Ciesz się
+  
+      {% when 'ar' %}استمتع
+      {% else %}Enjoy
+    {% endcase %}
+  </span>
+  {% case shop.locale %}
+    {% when 'de' %}mit Ihrer eSIM!
+    {% when 'es' %}con tu eSIM!
+    {% when 'it' %}con la tua eSIM!
+    {% when 'tr' %}eSIM'inizle!
+    {% when 'fr' %}de votre eSIM !{
+  {% when 'nl' %}
+    met je eSIM!
+  
+  {% when 'pl' %}
+    z twoją eSIM!
+  
+    {% when 'ar' %}بـشريحة eSIM الخاصة بك!
+    {% else %}your eSIM!
+  {% endcase %}
+  </h2>
+  
+  <div class="esim-welcome-image">
+    <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Your_Order_Nr.-2-2.webp?v=1738569587" 
+         alt="{% case shop.locale %}
+           {% when 'de' %}eSIM-Bestellnummer auf dem iPhone angezeigt
+           {% when 'es' %}Número de pedido eSIM en el iPhone
+           {% when 'it' %}Numero d'ordine eSIM visualizzato su iPhone
+           {% when 'tr' %}iPhone'da gösterilen eSIM sipariş numarası
+           {% when 'fr' %}Numéro de commande eSIM affiché sur l'iPhone
+           {% when 'pt-PT' %}Número do pedido eSIM exibido no iPhone
+           {% when 'ar' %}رقم طلب eSIM معروض على الآيفون
+           {% else %}eSIM order number displayed on the iPhone
+         {% endcase %}" />
+  </div>
+  </div>
+  
+  
+  
+  <style>
+  /* Container */
+  .esim-welcome-section {
+    text-align: center;
+    padding: 4rem 1rem;
+    font-family: 'Poppins', sans-serif; /* Moderne Schriftart */
+    color: #333;
+  }
+  
+  /* Überschrift */
+  .esim-welcome-title {
+    font-size: 2.8rem; /* Große Schriftgröße */
+    font-weight: 800; /* Kräftige Schrift */
+    margin-bottom: 2rem;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+  }
+  
+  .title-highlight {
+    display: inline-block;
+    background: #009a61; /* Grüner Hintergrund passend zur CI */
+    color: #fafafa; /* Textfarbe auf hellem Hintergrund */
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .bold-highlight {
+    font-weight: 900; /* Extra dicke Schrift */
+    font-size: 2.5rem;
+    color: #009a61; /* Grüner Akzent */
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+  
+  /* Bildcontainer */
+  .esim-welcome-image {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  
+  .esim-welcome-image img {
+  max-width: 1200px;
+    height: auto;
+    border-radius: 20px; /* Runde Ecken */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* Tiefer Schatten */
+    transition: transform 0.4s ease, box-shadow 0.4s ease; /* Weicher Hover-Effekt */
+  }
+  
+  
+  
+  /* Mobile Ansicht */
+  @media (max-width: 768px) {
+    .esim-welcome-title {
+      font-size: 2.2rem; /* Kleinere Schriftgröße für mobile Geräte */
+    }
+  
+    .bold-highlight {
+      font-size: 2rem;
+    }
+  
+    .esim-welcome-image img {
+      max-width: 100%; /* Bild füllt die volle Breite */
+    }
+  }
+  </style>
