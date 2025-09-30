@@ -8,420 +8,626 @@
   <!-- jQuery LADEN - WICHTIG! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
-  <style>
-    /* SIMBYE STYLE SYSTEM */
-    :root {
-      --primary: #009a61;
-      --primary-hover: #00824f;
-      --accent: #00d97e;
-      --text: #1a1a1a;
-      --text-secondary: #666666;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --border: rgba(0, 0, 0, 0.08);
-      --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-      --shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
-      --radius: 24px;
-      --radius-sm: 16px;
-    }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+/* SIMBYE DESIGN SYSTEM - WIE PRODUCT PAGE */
+.check-esim-section {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  padding: 60px 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fffe 50%, #f0faf7 100%);
+  min-height: calc(100vh - 90px);
+}
 
-    body {
-      background: var(--bg);
-      font-family: system-ui, -apple-system, sans-serif;
-      color: var(--text);
-      line-height: 1.6;
-    }
+[data-theme="dark"] .check-esim-section {
+  background: linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 50%, #0a0a0a 100%);
+}
 
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
+.check-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
 
-    /* Search Section */
-    .search-section {
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      padding: 40px;
-      box-shadow: var(--shadow-md);
-      max-width: 600px;
-      margin: 0 auto 40px;
-    }
+/* Search Card - WIE PRODUCT CARDS */
+.search-card {
+  background: white;
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  border: 2px solid rgba(0, 0, 0, 0.05);
+  animation: fadeInUp 0.8s ease;
+}
 
-    .search-title {
-      font-size: 28px;
-      font-weight: 700;
-      margin-bottom: 24px;
-      color: var(--text);
-    }
+[data-theme="dark"] .search-card {
+  background: rgba(26, 26, 26, 0.8);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
 
-    .search-form {
-      display: flex;
-      gap: 12px;
-    }
+.search-title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, #009a61, #00d97e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
 
-    .search-input {
-      flex: 1;
-      padding: 16px 20px;
-      font-size: 16px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-sm);
-      outline: none;
-      transition: all 0.3s ease;
-    }
+.search-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 32px;
+  font-size: 16px;
+}
 
-    .search-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
-    }
+/* Search Form - WIE HERO SEARCH */
+.search-form {
+  display: flex;
+  background: #f8f8f8;
+  border-radius: 100px;
+  padding: 6px;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
 
-    .search-button {
-      padding: 16px 32px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      white-space: nowrap;
-    }
+[data-theme="dark"] .search-form {
+  background: rgba(255, 255, 255, 0.05);
+}
 
-    .search-button:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
+.search-form:focus-within {
+  border-color: #009a61;
+  box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
+}
 
-    .search-button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+.search-input {
+  flex: 1;
+  padding: 18px 24px;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #1a1a1a;
+}
 
-    /* Error Message */
-    .error-message {
-      display: none;
-      background: #fee;
-      color: #c00;
-      padding: 12px 16px;
-      border-radius: 12px;
-      margin-top: 16px;
-      font-size: 14px;
-    }
+[data-theme="dark"] .search-input {
+  color: white;
+}
 
-    .error-message.show {
-      display: block;
-    }
+.search-button {
+  padding: 16px 40px;
+  background: linear-gradient(135deg, #009a61, #00d97e);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
-    /* Loading Spinner */
-    .loading {
-      display: none;
-      text-align: center;
-      padding: 20px;
-    }
+.search-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+}
 
-    .loading.show {
-      display: block;
-    }
+.search-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid var(--border);
-      border-top-color: var(--primary);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-      margin: 0 auto;
-    }
+/* Loading State */
+.loading-wrapper {
+  display: none;
+  text-align: center;
+  padding: 40px;
+}
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
+.loading-wrapper.active {
+  display: block;
+}
 
-    /* Main Content */
-    .main-content {
-      display: none;
-      background: var(--card-bg);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
-      max-width: 800px;
-      margin: 0 auto;
-    }
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(0, 154, 97, 0.1);
+  border-top-color: #009a61;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 20px;
+}
 
-    .main-content.show {
-      display: block;
-      animation: fadeIn 0.5s ease;
-    }
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+/* Main Content Card */
+.esim-card {
+  display: none;
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.15);
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease;
+}
 
-    /* Header */
-    .esim-header {
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      padding: 32px;
-      text-align: center;
-    }
+.esim-card.active {
+  display: block;
+}
 
-    .esim-title {
-      font-size: 32px;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
+[data-theme="dark"] .esim-card {
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(10px);
+}
 
-    .esim-subtitle {
-      opacity: 0.9;
-      font-size: 16px;
-    }
+/* Header - WIE PRODUCT HERO */
+.esim-header {
+  background: linear-gradient(135deg, #009a61, #00d97e);
+  padding: 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 
-    /* QR Section */
-    .qr-section {
-      padding: 40px;
-      text-align: center;
-      background: linear-gradient(to bottom, #fff, #f8fafc);
-    }
+.esim-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: subtlePulse 4s ease-in-out infinite;
+}
 
-    .qr-code {
-      width: 200px;
-      height: 200px;
-      border: 3px solid var(--border);
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-md);
-      margin: 0 auto;
-    }
+.esim-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 8px;
+  position: relative;
+}
 
-    /* Usage Section */
-    .usage-section {
-      padding: 40px;
-    }
+.esim-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  position: relative;
+}
 
-    .usage-title {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 24px;
-      text-align: center;
-    }
+/* QR Code Section */
+.qr-section {
+  padding: 48px;
+  background: linear-gradient(to bottom, #ffffff, #f8fffe);
+  text-align: center;
+  position: relative;
+}
 
-    .progress-bar {
-      background: #e5e7eb;
-      border-radius: 12px;
-      height: 32px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
+[data-theme="dark"] .qr-section {
+  background: transparent;
+}
 
-    .progress-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--primary), var(--accent));
-      border-radius: 12px;
-      transition: width 0.5s ease;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      padding: 0 12px;
-    }
+.qr-wrapper {
+  position: relative;
+  display: inline-block;
+}
 
-    .progress-text {
-      color: white;
-      font-weight: 600;
-      font-size: 14px;
-    }
+.qr-code {
+  width: 220px;
+  height: 220px;
+  border: 3px solid #e5e5e5;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  background: white;
+}
 
-    .usage-info {
-      display: flex;
-      justify-content: space-between;
-      color: var(--text-secondary);
-    }
+.qr-hide-btn {
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  width: 40px;
+  height: 40px;
+  background: #009a61;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+  transition: all 0.3s ease;
+}
 
-    /* Details Grid */
-    .details-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      padding: 40px;
-      background: #f8fafc;
-    }
+.qr-hide-btn:hover {
+  transform: scale(1.1);
+}
 
-    .detail-card {
-      background: white;
-      padding: 24px;
-      border-radius: var(--radius-sm);
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-    }
+/* Usage Progress - WIE PRODUCT SELECTION */
+.usage-section {
+  padding: 48px;
+  background: white;
+}
 
-    .detail-icon {
-      font-size: 32px;
-      margin-bottom: 12px;
-    }
+[data-theme="dark"] .usage-section {
+  background: transparent;
+}
 
-    .detail-label {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-    }
+.usage-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: center;
+  color: #1a1a1a;
+}
 
-    .detail-value {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-    }
+[data-theme="dark"] .usage-title {
+  color: white;
+}
 
-    /* Top Up Button */
-    .topup-section {
-      padding: 20px 40px 40px;
-      text-align: center;
-    }
+.progress-container {
+  background: #e5e7eb;
+  border-radius: 16px;
+  height: 40px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  position: relative;
+}
 
-    .topup-button {
-      padding: 18px 48px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      color: white;
-      border: none;
-      border-radius: 100px;
-      font-size: 18px;
-      font-weight: 700;
-      cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      transition: all 0.3s ease;
-    }
+[data-theme="dark"] .progress-container {
+  background: rgba(255, 255, 255, 0.1);
+}
 
-    .topup-button:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #009a61, #00d97e);
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 16px;
+  position: relative;
+}
 
-    /* Debug Info */
-    .debug-info {
-      background: #f0f0f0;
-      padding: 20px;
-      margin-top: 20px;
-      border-radius: 12px;
-      font-family: monospace;
-      font-size: 12px;
-      display: none;
-    }
+.progress-text {
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
 
-    .debug-info.show {
-      display: block;
-    }
-  </style>
-</head>
-<body>
+.usage-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #666;
+}
 
-<div class="container">
-  <!-- Search Section -->
-  <div class="search-section">
-    <h1 class="search-title">Check Your eSIM Status</h1>
+[data-theme="dark"] .usage-stats {
+  color: #999;
+}
+
+.usage-stats strong {
+  color: #009a61;
+  font-weight: 700;
+}
+
+/* Details Grid - WIE PRODUCT INFO TABS */
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  padding: 48px;
+  background: #f8fffe;
+}
+
+[data-theme="dark"] .details-grid {
+  background: transparent;
+}
+
+.detail-card {
+  background: white;
+  padding: 28px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 2px solid rgba(0, 154, 97, 0.1);
+  transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .detail-card {
+  background: rgba(26, 26, 26, 0.6);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.detail-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
+}
+
+.detail-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, #009a61, #00d97e);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  font-size: 28px;
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.25);
+}
+
+.detail-label {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+[data-theme="dark"] .detail-label {
+  color: #999;
+}
+
+.detail-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+[data-theme="dark"] .detail-value {
+  color: white;
+}
+
+/* Top Up Button - WIE PRODUCT CTA */
+.topup-wrapper {
+  padding: 32px 48px 48px;
+  text-align: center;
+}
+
+.topup-button {
+  padding: 20px 60px;
+  background: linear-gradient(135deg, #009a61, #00d97e);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+  animation: subtlePulse 4s ease-in-out infinite;
+}
+
+.topup-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
+}
+
+/* Error & Success Messages */
+.message {
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  font-size: 14px;
+  display: none;
+}
+
+.message.show {
+  display: block;
+  animation: fadeInUp 0.3s ease;
+}
+
+.message.error {
+  background: #fee;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
+}
+
+.message.success {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #86efac;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .check-container {
+    padding: 0 20px;
+  }
+  
+  .search-card {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  
+  .search-title {
+    font-size: 28px;
+  }
+  
+  .search-form {
+    flex-direction: column;
+    padding: 8px;
+    border-radius: 20px;
+  }
+  
+  .search-button {
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  .esim-header {
+    padding: 32px 24px;
+  }
+  
+  .esim-title {
+    font-size: 28px;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+  }
+}
+</style>
+
+<div class="check-esim-section">
+  <div class="check-container">
     
-    <div class="search-form">
-      <input 
-        type="text" 
-        id="orderNumber" 
-        class="search-input"
-        placeholder="Enter order number (e.g. 121233)"
-      >
-      <button id="searchBtn" class="search-button">Search</button>
+    <!-- Search Card -->
+    <div class="search-card">
+      <h1 class="search-title">Check Your eSIM</h1>
+      <p class="search-subtitle">Enter your order number to view eSIM status and top up</p>
+      
+      <div class="search-form">
+        <input 
+          type="text" 
+          id="orderNumber" 
+          class="search-input"
+          placeholder="Enter order number (e.g. 121233)"
+        >
+        <button id="searchBtn" class="search-button">Search</button>
+      </div>
+      
+      <div id="errorMsg" class="message error"></div>
+      <div id="successMsg" class="message success"></div>
     </div>
     
-    <div id="errorMsg" class="error-message"></div>
+    <!-- Loading State -->
+    <div id="loading" class="loading-wrapper">
+      <div class="loading-spinner"></div>
+      <p style="color: #666;">Loading your eSIM data...</p>
+    </div>
     
-    <div id="loading" class="loading">
-      <div class="spinner"></div>
-      <p style="margin-top: 16px; color: var(--text-secondary);">Loading...</p>
-    </div>
-  </div>
-
-  <!-- Main Content (Hidden initially) -->
-  <div id="mainContent" class="main-content">
-    <!-- Header -->
-    <div class="esim-header">
-      <h2 class="esim-title" id="packageName">Loading...</h2>
-      <p class="esim-subtitle">eSIM Information</p>
-    </div>
-
-    <!-- QR Code -->
-    <div class="qr-section">
-      <img id="qrCode" class="qr-code" src="" alt="QR Code">
-    </div>
-
-    <!-- Usage -->
-    <div class="usage-section">
-      <h3 class="usage-title">Data Usage</h3>
-      <div class="progress-bar">
-        <div id="progressBar" class="progress-fill" style="width: 0%">
-          <span class="progress-text">0%</span>
+    <!-- Main eSIM Card -->
+    <div id="esimCard" class="esim-card">
+      <!-- Header -->
+      <div class="esim-header">
+        <h2 class="esim-title" id="packageName">Loading...</h2>
+        <p class="esim-subtitle" id="packageCode">eSIM Information</p>
+      </div>
+      
+      <!-- QR Code -->
+      <div class="qr-section">
+        <div class="qr-wrapper">
+          <img id="qrCode" class="qr-code" src="" alt="QR Code">
+          <div class="qr-hide-btn" id="hideQR" title="Hide QR Code">
+            👁️
+          </div>
+        </div>
+        <p style="margin-top: 20px; color: #666; font-size: 14px;">
+          Scan to install your eSIM
+        </p>
+      </div>
+      
+      <!-- Usage Progress -->
+      <div class="usage-section">
+        <h3 class="usage-title">Data Usage</h3>
+        <div class="progress-container">
+          <div id="progressBar" class="progress-bar" style="width: 0%">
+            <span class="progress-text">0%</span>
+          </div>
+        </div>
+        <div class="usage-stats">
+          <span>Used: <strong id="dataUsed">0 GB</strong></span>
+          <span>Total: <strong id="totalData">0 GB</strong></span>
+          <span>Remaining: <strong id="dataLeft">0 GB</strong></span>
         </div>
       </div>
-      <div class="usage-info">
-        <span>Used: <strong id="dataUsed">0 GB</strong></span>
-        <span>Remaining: <strong id="dataLeft">0 GB</strong></span>
+      
+      <!-- Details Grid -->
+      <div class="details-grid">
+        <div class="detail-card">
+          <div class="detail-icon">🔑</div>
+          <div class="detail-label">ICCID</div>
+          <div class="detail-value" id="iccid">-</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">📅</div>
+          <div class="detail-label">Activated</div>
+          <div class="detail-value" id="activationDate">-</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">⏰</div>
+          <div class="detail-label">Expires</div>
+          <div class="detail-value" id="expiryDate">-</div>
+        </div>
+        <div class="detail-card">
+          <div class="detail-icon">📍</div>
+          <div class="detail-label">Region</div>
+          <div class="detail-value" id="region">-</div>
+        </div>
+      </div>
+      
+      <!-- Top Up Button -->
+      <div class="topup-wrapper">
+        <button id="topupBtn" class="topup-button">Top Up Now</button>
       </div>
     </div>
-
-    <!-- Details -->
-    <div class="details-grid">
-      <div class="detail-card">
-        <div class="detail-icon">🔑</div>
-        <div class="detail-label">ICCID</div>
-        <div class="detail-value" id="iccid">-</div>
-      </div>
-      <div class="detail-card">
-        <div class="detail-icon">📅</div>
-        <div class="detail-label">Activation Date</div>
-        <div class="detail-value" id="activationDate">-</div>
-      </div>
-      <div class="detail-card">
-        <div class="detail-icon">📊</div>
-        <div class="detail-label">Total Data</div>
-        <div class="detail-value" id="totalData">-</div>
-      </div>
-      <div class="detail-card">
-        <div class="detail-icon">⏳</div>
-        <div class="detail-label">Time Left</div>
-        <div class="detail-value" id="timeLeft">-</div>
-      </div>
-    </div>
-
-    <!-- Top Up -->
-    <div class="topup-section">
-      <button id="topupBtn" class="topup-button">Top Up Now</button>
-    </div>
-  </div>
-
-  <!-- Debug Info -->
-  <div id="debugInfo" class="debug-info">
-    <strong>Debug Information:</strong>
-    <div id="debugContent"></div>
+    
   </div>
 </div>
 
+<!-- Hidden Data Storage -->
+<div style="display:none;">
+  <span id="esimTranNo"></span>
+  <span id="pkgCode"></span>
+</div>
+
 <script>
-// FIXED VERSION MIT FEHLERBEHANDLUNG
-$(document).ready(function() {
-  console.log('✅ Page loaded, jQuery version:', $.fn.jquery);
+// Check jQuery
+if (typeof jQuery === 'undefined') {
+  console.error('❌ jQuery not loaded! Loading now...');
+  var script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
+  document.head.appendChild(script);
+  script.onload = function() {
+    initCheckEsim();
+  };
+} else {
+  console.log('✅ jQuery ' + jQuery.fn.jquery + ' already loaded');
+  jQuery(document).ready(function() {
+    initCheckEsim();
+  });
+}
+
+function initCheckEsim() {
+  console.log('🚀 Initializing Check eSIM Page');
+  
+  const $ = jQuery;
   
   // Elements
   const $orderInput = $('#orderNumber');
   const $searchBtn = $('#searchBtn');
   const $errorMsg = $('#errorMsg');
+  const $successMsg = $('#successMsg');
   const $loading = $('#loading');
-  const $mainContent = $('#mainContent');
-  const $debugInfo = $('#debugInfo');
-  const $debugContent = $('#debugContent');
+  const $esimCard = $('#esimCard');
   
   // Check URL parameters
   const urlParams = new URLSearchParams(window.location.search);
@@ -430,8 +636,8 @@ $(document).ready(function() {
   if (orderFromUrl) {
     console.log('📝 Found order in URL:', orderFromUrl);
     $orderInput.val(orderFromUrl);
-    // Auto-search
-    setTimeout(() => searchOrder(), 500);
+    // Auto-search after 500ms
+    setTimeout(searchOrder, 500);
   }
   
   // Search button click
@@ -446,7 +652,6 @@ $(document).ready(function() {
   function searchOrder() {
     const orderNumber = $orderInput.val().trim();
     
-    // Validation
     if (!orderNumber) {
       showError('Please enter an order number');
       return;
@@ -454,68 +659,61 @@ $(document).ready(function() {
     
     console.log('🔍 Searching for order:', orderNumber);
     
-    // Clear previous errors
-    hideError();
+    // Clear messages
+    $errorMsg.removeClass('show');
+    $successMsg.removeClass('show');
+    $esimCard.removeClass('active');
     
     // Show loading
-    $loading.addClass('show');
+    $loading.addClass('active');
     $searchBtn.prop('disabled', true);
-    $mainContent.removeClass('show');
     
     // API Call
-    const apiUrl = `https://simbye.com/apps/topup/info/${orderNumber}`;
-    
-    // Debug info
-    $debugInfo.addClass('show');
-    $debugContent.html(`
-      <p><strong>API URL:</strong> ${apiUrl}</p>
-      <p><strong>Order Number:</strong> ${orderNumber}</p>
-      <p><strong>Timestamp:</strong> ${new Date().toISOString()}</p>
-    `);
+    const apiUrl = 'https://simbye.com/apps/topup/info/' + orderNumber;
     
     $.ajax({
       url: apiUrl,
       method: 'GET',
       headers: {
-        'ngrok-skip-browser-warning': 'skip'
+        'ngrok-skip-browser-warning': 'skip',
+        'Accept': 'application/json'
       },
-      timeout: 10000, // 10 second timeout
+      dataType: 'json',
+      timeout: 10000,
       success: function(response) {
         console.log('✅ API Response:', response);
-        $debugContent.append(`<p><strong>Response:</strong> ${JSON.stringify(response, null, 2)}</p>`);
         
-        // Process response
         if (response && response.data && response.data.obj && response.data.obj.esimList) {
-          const esim = response.data.obj.esimList[0];
-          if (esim) {
-            displayEsimData(esim);
+          const esimList = response.data.obj.esimList;
+          if (esimList && esimList.length > 0) {
+            displayEsimData(esimList[0]);
+            showSuccess('eSIM found successfully!');
           } else {
             showError('No eSIM found for this order number');
           }
         } else {
-          showError('Invalid response from server');
+          showError('Invalid response format');
         }
       },
       error: function(xhr, status, error) {
-        console.error('❌ API Error:', status, error);
-        $debugContent.append(`
-          <p style="color: red;"><strong>Error:</strong> ${status}</p>
-          <p style="color: red;"><strong>Details:</strong> ${error}</p>
-          <p style="color: red;"><strong>Response:</strong> ${xhr.responseText || 'No response'}</p>
-        `);
+        console.error('❌ API Error:', {
+          status: status,
+          error: error,
+          response: xhr.responseText
+        });
         
-        let errorMessage = 'Failed to load eSIM data. ';
         if (status === 'timeout') {
-          errorMessage += 'Request timed out.';
-        } else if (status === 'error') {
-          errorMessage += 'Network error or API unavailable.';
+          showError('Request timed out. Please try again.');
+        } else if (xhr.status === 0) {
+          showError('Network error. Please check your connection.');
+        } else if (xhr.status === 404) {
+          showError('Order not found. Please check the order number.');
         } else {
-          errorMessage += status;
+          showError('Failed to load eSIM data. Error: ' + error);
         }
-        showError(errorMessage);
       },
       complete: function() {
-        $loading.removeClass('show');
+        $loading.removeClass('active');
         $searchBtn.prop('disabled', false);
       }
     });
@@ -523,12 +721,17 @@ $(document).ready(function() {
   
   // Display eSIM data
   function displayEsimData(esim) {
-    console.log('📊 Displaying eSIM data:', esim);
+    console.log('📊 Displaying eSIM:', esim);
     
     const pkg = esim.packageList && esim.packageList[0] || {};
     
-    // Package name
+    // Store data for top-up
+    $('#esimTranNo').text(esim.esimTranNo || '');
+    $('#pkgCode').text(pkg.packageCode || '');
+    
+    // Package info
     $('#packageName').text(pkg.packageName || 'eSIM Package');
+    $('#packageCode').text('Code: ' + (pkg.packageCode || 'N/A'));
     
     // QR Code
     if (esim.qrCodeUrl) {
@@ -536,75 +739,118 @@ $(document).ready(function() {
     }
     
     // ICCID
-    $('#iccid').text(esim.iccid || '-');
+    $('#iccid').text(formatIccid(esim.iccid) || '-');
     
-    // Activation date
+    // Dates
     if (esim.activateTime) {
-      const date = new Date(esim.activateTime);
-      $('#activationDate').text(date.toLocaleDateString());
+      $('#activationDate').text(formatDate(esim.activateTime));
+    } else {
+      $('#activationDate').text('Not activated');
     }
     
-    // Data usage
-    const totalMB = (esim.totalVolume || 0) / (1024 * 1024);
-    const usedMB = (esim.orderUsage || 0) / (1024 * 1024);
-    const leftMB = totalMB - usedMB;
-    const percentage = totalMB > 0 ? (usedMB / totalMB * 100) : 0;
+    if (esim.expiredTime) {
+      $('#expiryDate').text(formatDate(esim.expiredTime));
+    }
     
-    $('#totalData').text(formatData(totalMB));
-    $('#dataUsed').text(formatData(usedMB));
-    $('#dataLeft').text(formatData(leftMB));
+    // Region
+    $('#region').text(pkg.locationCode || '-');
+    
+    // Data usage calculation
+    const totalBytes = esim.totalVolume || 0;
+    const usedBytes = esim.orderUsage || 0;
+    const totalGB = bytesToGB(totalBytes);
+    const usedGB = bytesToGB(usedBytes);
+    const leftGB = totalGB - usedGB;
+    const percentage = totalGB > 0 ? (usedGB / totalGB * 100) : 0;
+    
+    $('#totalData').text(formatDataSize(totalGB));
+    $('#dataUsed').text(formatDataSize(usedGB));
+    $('#dataLeft').text(formatDataSize(leftGB));
     
     // Progress bar
     $('#progressBar').css('width', percentage + '%');
     $('#progressBar .progress-text').text(Math.round(percentage) + '%');
     
-    // Time left
-    if (esim.expiredTime) {
-      const expired = new Date(esim.expiredTime);
-      const now = new Date();
-      const diff = expired - now;
-      
-      if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        
-        let timeText = '';
-        if (days > 0) timeText += days + ' days ';
-        if (hours > 0) timeText += hours + ' hours';
-        $('#timeLeft').text(timeText || 'Active');
-      } else {
-        $('#timeLeft').text('Expired');
-      }
-    }
-    
-    // Show content
-    $mainContent.addClass('show');
+    // Show card
+    $esimCard.addClass('active');
   }
   
-  // Format data (MB to GB)
-  function formatData(mb) {
-    if (mb < 1024) {
-      return Math.round(mb) + ' MB';
-    }
-    return (mb / 1024).toFixed(2) + ' GB';
+  // Format functions
+  function formatIccid(iccid) {
+    if (!iccid) return null;
+    // Format: 8943 1081 7000 1086 375
+    return iccid.replace(/(.{4})/g, '$1 ').trim();
   }
   
-  // Error handling
+  function formatDate(dateString) {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+  
+  function bytesToGB(bytes) {
+    return bytes / (1024 * 1024 * 1024);
+  }
+  
+  function formatDataSize(gb) {
+    if (gb < 0) return '0 GB';
+    if (gb < 1) {
+      return Math.round(gb * 1024) + ' MB';
+    }
+    return gb.toFixed(2) + ' GB';
+  }
+  
+  // Messages
   function showError(message) {
     $errorMsg.text(message).addClass('show');
+    setTimeout(() => $errorMsg.removeClass('show'), 5000);
   }
   
-  function hideError() {
-    $errorMsg.removeClass('show');
+  function showSuccess(message) {
+    $successMsg.text(message).addClass('show');
+    setTimeout(() => $successMsg.removeClass('show'), 3000);
   }
+  
+  // Hide QR Code button
+  $('#hideQR').on('click', function() {
+    alert('Email verification required to show QR code');
+    // Implement email verification modal here
+  });
   
   // Top up button
   $('#topupBtn').on('click', function() {
-    alert('Top-up functionality will be implemented here');
-    // Implement top-up modal here
+    const esimTranNo = $('#esimTranNo').text();
+    const pkgCode = $('#pkgCode').text();
+    
+    if (!esimTranNo || !pkgCode) {
+      showError('Missing data for top-up');
+      return;
+    }
+    
+    console.log('🛒 Starting top-up:', {
+      esimTranNo: esimTranNo,
+      packageCode: pkgCode
+    });
+    
+    // Load top-up plans
+    loadTopUpPlans(esimTranNo, pkgCode);
   });
-});
+  
+  // Load top-up plans
+  function loadTopUpPlans(esimTranNo, packageCode) {
+    const currency = window.Shopify?.currency?.active || 'USD';
+    const apiUrl = 'https://simbye.com/apps/topup/plans?esimTranNo=' + esimTranNo + 
+                   '&packageCode=' + packageCode + 
+                   '&currency=' + currency;
+    
+    console.log('📦 Loading top-up plans:', apiUrl);
+    
+    // Here you would implement the modal with top-up options
+    alert('Top-up API: ' + apiUrl);
+  }
+}
 </script>
-
-</body>
-</html>
