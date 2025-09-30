@@ -535,12 +535,12 @@
           <div class="vs-header-cell">
             <div class="vs-provider-name">{{ 'comparison.roaming' | t | default: 'International Roaming' }}</div>
             <div class="vs-provider-type">{{ 'comparison.carrier' | t | default: 'Home Carrier' }}</div>
-            <div class="vs-provider-price">€50-200</div>
+            <div class="vs-provider-price">€10+/day</div>
           </div>
           <div class="vs-header-cell">
             <div class="vs-provider-name">{{ 'comparison.local_sim' | t | default: 'Local SIM Card' }}</div>
             <div class="vs-provider-type">{{ 'comparison.physical' | t | default: 'Physical Card' }}</div>
-            <div class="vs-provider-price">€15-30</div>
+            <div class="vs-provider-price">€10-30</div>
           </div>
         </div>
         
@@ -553,7 +553,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div class="vs-feature-name">{{ 'comparison.price_gb' | t | default: 'Average Cost per GB' }}</div>
+              <div class="vs-feature-name">{{ 'comparison.starting_from' | t | default: 'Starting from' }}</div>
             </div>
           </div>
           <div class="vs-table-cell is-simbye">
@@ -576,7 +576,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </div>
-              <div class="vs-value-text">€10-50{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
+              <div class="vs-value-text">€10-50/day</div>
             </div>
           </div>
           <div class="vs-table-cell">
@@ -586,7 +586,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
-              <div class="vs-value-text">€5-15{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
+              <div class="vs-value-text">€5-15</div>
               <div class="vs-value-subtext">{{ 'comparison.varies' | t | default: 'Varies' }}</div>
             </div>
           </div>
@@ -822,37 +822,27 @@
 (function() {
   'use strict';
   
-  // Dynamische Preisberechnung - SIMPLIFIED
+  // Dynamische Preisberechnung - SIMPLIFIED WITH PRICE_MIN
   function updateSimbyePrice() {
     {% if section.settings.reference_product %}
       {% assign ref_product = all_products[section.settings.reference_product] %}
       
-      {% if ref_product and ref_product.variants.size > 0 %}
-        // Erste Variante nehmen
-        {% assign first_variant = ref_product.variants.first %}
+      {% if ref_product %}
+        // Shopify's price_min nimmt automatisch den niedrigsten Preis (ignoriert 0)
+        const priceElement = document.getElementById('simbye-price');
+        const priceDisplayElement = document.getElementById('simbye-price-display');
         
-        // Wenn erste Variante price = 0, dann zweite nehmen
-        {% if first_variant.price == 0 and ref_product.variants.size > 1 %}
-          {% assign selected_variant = ref_product.variants[1] %}
+        {% if ref_product.price_min > 0 %}
+          const price = '{{ ref_product.price_min | money }}';
+          if (priceElement) priceElement.textContent = price;
+          if (priceDisplayElement) priceDisplayElement.textContent = price;
         {% else %}
-          {% assign selected_variant = first_variant %}
-        {% endif %}
-        
-        {% if selected_variant %}
-          // Preis in Header setzen
-          const priceElement = document.getElementById('simbye-price');
-          if (priceElement) {
-            priceElement.textContent = '{{ selected_variant.price | money }}';
-          }
-          
-          // Gleicher Preis in der Tabelle
-          const priceDisplayElement = document.getElementById('simbye-price-display');
-          if (priceDisplayElement) {
-            priceDisplayElement.textContent = '{{ selected_variant.price | money }}';
-          }
+          // Fallback wenn alle Preise 0 sind
+          if (priceElement) priceElement.textContent = 'FREE';
+          if (priceDisplayElement) priceDisplayElement.textContent = 'FREE';
         {% endif %}
       {% else %}
-        // Fallback Preise
+        // Fallback wenn kein Produkt gefunden
         document.getElementById('simbye-price').textContent = '€4.99';
         document.getElementById('simbye-price-display').textContent = '€4.99';
       {% endif %}
