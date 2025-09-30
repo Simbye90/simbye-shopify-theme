@@ -288,7 +288,7 @@
     "uber_desc": "Rides and deliveries",
     "more": "...and many more"
   },
-"comparison": {
+  "comparison": {
     "title_part1": "eSIM vs",
     "title_part2": "Traditional Options",
     "subtitle": "Compare international mobile data solutions and save up to 85% on roaming charges",
@@ -300,7 +300,6 @@
     "local_sim": "Local SIM Card",
     "physical": "Physical Card",
     
-    "recommended": "RECOMMENDED",
     "save": "SAVE 85%",
     "varies": "Varies",
     "limited": "Limited",
@@ -317,12 +316,9 @@
     "30_60_min": "30-60 min",
     
     "keep_number": "Keep WhatsApp Number",
-    
     "hidden_fees": "Hidden Fees",
-    
     "network_speed": "Network Speed",
     "5g_4g": "5G/4G LTE",
-    
     "support": "24/7 Customer Support"
   }
 }
