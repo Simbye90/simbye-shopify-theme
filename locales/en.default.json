@@ -288,42 +288,42 @@
     "uber_desc": "Rides and deliveries",
     "more": "...and many more"
   },
-  "comparison": {
+"comparison": {
     "title_part1": "eSIM vs",
-    "title_part2": "Traditionelle Optionen",
-    "subtitle": "Vergleiche internationale Datenlösungen und spare bis zu 85% bei Roaming-Gebühren",
+    "title_part2": "Traditional Options",
+    "subtitle": "Compare international mobile data solutions and save up to 85% on roaming charges",
     
     "simbye_esim": "Simbye eSIM",
-    "prepaid": "Prepaid Daten",
-    "roaming": "Internationales Roaming",
-    "carrier": "Heimanbieter",
-    "local_sim": "Lokale SIM-Karte",
-    "physical": "Physische Karte",
+    "prepaid": "Prepaid Data",
+    "roaming": "International Roaming",
+    "carrier": "Home Carrier",
+    "local_sim": "Local SIM Card",
+    "physical": "Physical Card",
     
-    "recommended": "EMPFOHLEN",
-    "save": "SPARE 85%",
-    "varies": "Variiert",
-    "limited": "Begrenzt",
-    "sometimes": "Manchmal",
-    "none": "Keine",
-    "many": "Viele",
+    "recommended": "RECOMMENDED",
+    "save": "SAVE 85%",
+    "varies": "Varies",
+    "limited": "Limited",
+    "sometimes": "Sometimes",
+    "none": "None",
+    "many": "Many",
     
-    "price_gb": "Durchschnittspreis pro GB",
-    "per_gb": "/GB",
+    "price_from": "Price starting from",
+    "from": "From",
     
-    "activation": "Setup & Aktivierungszeit",
-    "instant_60s": "< 60 Sekunden",
-    "instant": "Sofort",
-    "30_60_min": "30-60 Min",
+    "activation": "Setup & Activation Time",
+    "instant_60s": "< 60 seconds",
+    "instant": "Instant",
+    "30_60_min": "30-60 min",
     
-    "keep_number": "WhatsApp-Nummer behalten",
+    "keep_number": "Keep WhatsApp Number",
     
-    "hidden_fees": "Versteckte Gebühren",
+    "hidden_fees": "Hidden Fees",
     
-    "network_speed": "Netzwerkgeschwindigkeit",
+    "network_speed": "Network Speed",
     "5g_4g": "5G/4G LTE",
     
-    "support": "24/7 Kundensupport"
+    "support": "24/7 Customer Support"
   }
 }
 
