@@ -290,62 +290,42 @@
   },
   "comparison": {
     "title_part1": "eSIM vs",
-    "title_part2": "Traditional Options",
-    "title_part3": "Comparison",
-    "subtitle": "Compare international mobile data solutions and save up to 85% on roaming charges",
-    
-    "updated": "Updated January 2025",
-    "based_on": "Based on 10,000+ reviews",
-    "verified": "Verified data",
-    
-    "features": "Compare Features",
-    "recommended": "RECOMMENDED",
+    "title_part2": "Traditionelle Optionen",
+    "subtitle": "Vergleiche internationale Datenlösungen und spare bis zu 85% bei Roaming-Gebühren",
     
     "simbye_esim": "Simbye eSIM",
-    "prepaid": "Prepaid Data",
-    "roaming": "International Roaming",
-    "carrier": "Home Carrier",
-    "local_sim": "Local SIM Card",
-    "physical": "Physical Card",
-    "wifi_device": "Pocket WiFi",
-    "rental": "Rental Device",
+    "prepaid": "Prepaid Daten",
+    "roaming": "Internationales Roaming",
+    "carrier": "Heimanbieter",
+    "local_sim": "Lokale SIM-Karte",
+    "physical": "Physische Karte",
     
-    "price_gb": "Average Cost per GB",
+    "recommended": "EMPFOHLEN",
+    "save": "SPARE 85%",
+    "varies": "Variiert",
+    "limited": "Begrenzt",
+    "sometimes": "Manchmal",
+    "none": "Keine",
+    "many": "Viele",
+    
+    "price_gb": "Durchschnittspreis pro GB",
     "per_gb": "/GB",
-    "per_day": "/Day",
-    "save": "SAVE 85%",
     
-    "activation": "Setup & Activation Time",
-    "instant_60s": "< 60 seconds",
-    "instant": "Instant",
-    "30_60_min": "30-60 min",
-    "pickup": "Airport pickup",
+    "activation": "Setup & Aktivierungszeit",
+    "instant_60s": "< 60 Sekunden",
+    "instant": "Sofort",
+    "30_60_min": "30-60 Min",
     
-    "keep_number": "Keep WhatsApp Number",
+    "keep_number": "WhatsApp-Nummer behalten",
     
-    "network_speed": "Network Speed",
+    "hidden_fees": "Versteckte Gebühren",
+    
+    "network_speed": "Netzwerkgeschwindigkeit",
     "5g_4g": "5G/4G LTE",
-    "4g_3g": "4G/3G",
-    "limited": "Limited",
     
-    "hidden_fees": "Hidden Fees",
-    "none": "None",
-    "many": "Many",
-    "sometimes": "Sometimes",
-    "deposit": "Deposit required",
-    
-    "countries": "Multi-Country Support",
-    "190_countries": "190+ Countries",
-    "varies": "Varies",
-    "single": "Single country",
-    
-    "rechargeable": "Rechargeable/Top-up",
-    
-    "support": "24/7 Customer Support",
-    
-    "cta_title": "Ready to save on international data?",
-    "cta_subtitle": "Join 100,000+ travelers using Simbye eSIM worldwide",
-    "get_esim": "Get Your eSIM Now",
-    "check_device": "Check Device Compatibility"
+    "support": "24/7 Kundensupport"
   }
 }
+
+
+
