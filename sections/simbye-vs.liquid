@@ -189,6 +189,8 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+  white-space: nowrap; /* Verhindert Umbruch */
+  z-index: 10; /* Über allem */
 }
 
 .vs-provider-name {
@@ -407,12 +409,20 @@
   
   .vs-table {
     border-radius: 20px;
+    overflow: hidden; /* Standard overflow */
+  }
+  
+  /* Table Wrapper für Badge */
+  .vs-table-wrapper {
+    overflow: visible; /* Badge nicht abschneiden */
   }
   
   /* KOMPAKTE HEADER */
   .vs-header-cell {
     padding: 16px 8px;
     font-size: 12px;
+    position: relative;
+    overflow: visible; /* Badge nicht abschneiden */
   }
   
   .vs-header-cell:first-child {
@@ -420,10 +430,16 @@
     padding-left: 12px;
   }
   
+  /* Winner Badge Mobile - NICHT ABGESCHNITTEN */
   .vs-winner-badge {
     font-size: 9px;
     padding: 3px 8px;
-    top: 4px;
+    top: 2px; /* Weniger oben */
+    position: relative; /* Relative statt absolute */
+    display: inline-block;
+    margin-bottom: 4px;
+    left: auto;
+    transform: none;
   }
   
   .vs-provider-name {
@@ -552,8 +568,9 @@
             <span class="vs-winner-badge">{{ 'comparison.recommended' | t | default: 'RECOMMENDED' }}</span>
             <div class="vs-provider-name">{{ 'comparison.simbye_esim' | t | default: 'Simbye eSIM' }}</div>
             <div class="vs-provider-type">{{ 'comparison.prepaid' | t | default: 'Prepaid Data' }}</div>
-            <div class="vs-provider-price" id="simbye-price">
-              {% comment %} Dynamisch gefüllt {% endcomment %}
+            <div class="vs-provider-price">
+              <span style="font-size: 14px; font-weight: 400;">{{ 'product.price_from' | t | default: 'from' }}</span>
+              <span id="simbye-price">{% comment %} Dynamisch gefüllt {% endcomment %}</span>
             </div>
           </div>
           <div class="vs-header-cell">
@@ -568,7 +585,7 @@
           </div>
         </div>
         
-        <!-- Price per GB Row -->
+        <!-- Starting Price Row -->
         <div class="vs-table-row">
           <div class="vs-table-cell">
             <div class="vs-feature-wrapper">
@@ -577,7 +594,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div class="vs-feature-name">{{ 'comparison.price_gb' | t | default: 'Average Cost per GB' }}</div>
+              <div class="vs-feature-name">{{ 'comparison.starting_price' | t | default: 'Starting Price' }}</div>
             </div>
           </div>
           <div class="vs-table-cell is-simbye">
@@ -587,8 +604,9 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <div class="vs-value-text" id="simbye-price-per-gb">
-                {% comment %} Dynamisch gefüllt {% endcomment %}
+              <div class="vs-value-text">
+                <span style="font-size: 11px;">{{ 'product.price_from' | t | default: 'from' }}</span>
+                <span id="simbye-starting-price">{% comment %} Dynamisch gefüllt {% endcomment %}</span>
               </div>
               <div class="vs-value-subtext">{{ 'comparison.save' | t | default: 'SAVE 85%' }}</div>
             </div>
@@ -600,7 +618,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </div>
-              <div class="vs-value-text">€10-50{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
+              <div class="vs-value-text">€50-200</div>
             </div>
           </div>
           <div class="vs-table-cell">
@@ -610,7 +628,7 @@
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                 </svg>
               </div>
-              <div class="vs-value-text">€5-15{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
+              <div class="vs-value-text">€15-30</div>
               <div class="vs-value-subtext">{{ 'comparison.varies' | t | default: 'Varies' }}</div>
             </div>
           </div>
@@ -846,7 +864,7 @@
 (function() {
   'use strict';
   
-  // Dynamische Preisberechnung
+  // Dynamische Preisberechnung - VEREINFACHT
   function updateSimbyePrice() {
     {% if section.settings.reference_product %}
       {% assign ref_product = all_products[section.settings.reference_product] %}
@@ -862,45 +880,37 @@
         {% endfor %}
         
         {% if selected_variant %}
-          // Preis setzen
+          // Preis in Header setzen
           const priceElement = document.getElementById('simbye-price');
           if (priceElement) {
             priceElement.textContent = '{{ selected_variant.price | money }}';
           }
           
-          // Price per GB berechnen
-          const pricePerGbElement = document.getElementById('simbye-price-per-gb');
-          if (pricePerGbElement) {
-            {% assign variant_title = selected_variant.title %}
-            {% assign gb_string = variant_title | split: ' ' | first %}
-            {% assign gb_value = gb_string | replace: 'GB', '' | plus: 0 %}
-            
-            {% if gb_value > 0 %}
-              {% assign price_cents = selected_variant.price %}
-              {% assign price_per_gb_cents = price_cents | divided_by: gb_value %}
-              pricePerGbElement.textContent = '{{ price_per_gb_cents | money }}{{ 'comparison.per_gb' | t | default: '/GB' }}';
-            {% else %}
-              // Fallback wenn keine GB gefunden
-              pricePerGbElement.textContent = '{{ selected_variant.price | money }}';
-            {% endif %}
+          // Preis in Table setzen (Starting Price)
+          const startingPriceElement = document.getElementById('simbye-starting-price');
+          if (startingPriceElement) {
+            startingPriceElement.textContent = '{{ selected_variant.price | money }}';
           }
+        {% else %}
+          // Fallback wenn alle Varianten 0 sind
+          setFallbackPrice();
         {% endif %}
       {% else %}
-        // Fallback Preise
-        const priceElement = document.getElementById('simbye-price');
-        const pricePerGbElement = document.getElementById('simbye-price-per-gb');
-        
-        if (priceElement) priceElement.textContent = '€4.99';
-        if (pricePerGbElement) pricePerGbElement.textContent = '€4.99/GB';
+        // Fallback wenn kein Produkt gefunden
+        setFallbackPrice();
       {% endif %}
     {% else %}
       // Standard Preise wenn kein Produkt gewählt
-      const priceElement = document.getElementById('simbye-price');
-      const pricePerGbElement = document.getElementById('simbye-price-per-gb');
-      
-      if (priceElement) priceElement.textContent = '€4.99';
-      if (pricePerGbElement) pricePerGbElement.textContent = '€4.99/GB';
+      setFallbackPrice();
     {% endif %}
+  }
+  
+  function setFallbackPrice() {
+    const priceElement = document.getElementById('simbye-price');
+    const startingPriceElement = document.getElementById('simbye-starting-price');
+    
+    if (priceElement) priceElement.textContent = '€4.99';
+    if (startingPriceElement) startingPriceElement.textContent = '€4.99';
   }
   
   // Initialize
