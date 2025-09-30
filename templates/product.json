@@ -26,6 +26,13 @@
       "name": "Mobile Apps",
       "settings": {}
     },
+    "simbye_vs_A7x9RL": {
+      "type": "simbye-vs",
+      "name": "Comparison Table",
+      "settings": {
+        "reference_product": "esim-africa"
+      }
+    },
     "faq_rdt6jk": {
       "type": "faq",
       "blocks": {
@@ -128,12 +135,11 @@
         "subtitle": "Everything you need to know about Simbye eSIM"
       }
     },
-    "simbye_vs_A7x9RL": {
-      "type": "simbye-vs",
-      "name": "Comparison Table",
+    "custom_liquid_c9b8a3": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
       "settings": {
-        "show_trust_indicators": true,
-        "save_percentage": "85%"
+        "custom_liquid": "<!-- DEBUG: Was ist reference_product? -->\n<div style=\"background: red; color: white; padding: 10px;\">\n  Setting Type: {{ section.settings.reference_product | json }}<br>\n  Has Variants: {{ section.settings.reference_product.variants }}<br>\n  Title Direct: {{ section.settings.reference_product.title }}<br>\n  Via all_products: {{ all_products[section.settings.reference_product].title }}<br>\n</div>"
       }
     }
   },
@@ -142,6 +148,7 @@
     "product_info_tabs_jTcRT8",
     "mobile_apps_qb8J9x",
     "simbye_vs_A7x9RL",
-    "faq_rdt6jk"
+    "faq_rdt6jk",
+    "custom_liquid_c9b8a3"
   ]
 }
