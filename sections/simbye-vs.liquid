@@ -2,6 +2,30 @@
 <!-- SIMBYE COMPARISON TABLE - ENTERPRISE LEVEL FIXED -->
 
 <style>
+/* KILL SHOPIFY GRID - WIE ANDERE SECTIONS */
+.shopify-section:has(.comparison-section) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.shopify-section:has(.comparison-section) > * {
+  grid-column: unset !important;
+  margin: 0 !important;
+}
+
+.comparison-section {
+  width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+}
+
 /* CSS Variables - Enterprise Clean */
 :root {
   --compare-bg: #ffffff;
@@ -242,6 +266,105 @@
   overflow-wrap: break-word;
   hyphens: auto;
   text-align: left;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .comparison-section {
+    padding: 100px 0;
+  }
+  
+  .comparison-container {
+    padding: 0 40px;
+  }
+  
+  .comparison-header {
+    margin-bottom: 72px;
+  }
+  
+  .comparison-title {
+    margin-bottom: 20px;
+  }
+  
+  .comparison-subtitle {
+    font-size: 20px;
+  }
+  
+  .comparison-table {
+    border-radius: 24px;
+  }
+  
+  .table-header-cell {
+    padding: 24px 16px;
+  }
+  
+  .table-header-cell:first-child {
+    width: 35%;
+    padding-left: 24px;
+  }
+  
+  .best-choice-badge {
+    font-size: 11px;
+    padding: 4px 12px;
+    top: 8px;
+  }
+  
+  .provider-name {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .provider-type {
+    font-size: 13px;
+  }
+  
+  .table-cell {
+    padding: 20px 16px;
+  }
+  
+  .table-cell:first-child {
+    padding-left: 24px;
+    padding-right: 16px;
+  }
+  
+  .feature-icon-circle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .feature-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* FEATURE NAME GRÖSSER AUF DESKTOP */
+  .feature-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+  .check-circle,
+  .x-circle,
+  .warning-circle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .check-icon,
+  .x-icon,
+  .warning-icon {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .value-text {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+  
+  .value-subtext {
+    font-size: 11px;
+  }
 }
 
 /* Values - CLEAN ICONS */
