@@ -1,56 +1,45 @@
 <!-- sections/comparison-table.liquid -->
-<!-- SIMBYE COMPARISON TABLE - MOBILE FIRST -->
+<!-- SIMBYE COMPARISON TABLE - ENTERPRISE LEVEL FIXED -->
 
 <style>
-/* CSS Variables - Why Section Style */
+/* CSS Variables - Enterprise Clean */
 :root {
   --compare-bg: #ffffff;
   --compare-text: #1a1a1a;
   --compare-text-secondary: #666666;
   --compare-primary: #009a61;
-  --compare-primary-hover: #00824f;
-  --compare-accent: #00d97e;
+  --compare-success: #009a61;
   --compare-danger: #ff4757;
   --compare-warning: #ffa500;
   --compare-card-bg: #ffffff;
-  --compare-border: rgba(0, 0, 0, 0.08);
-  --compare-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --compare-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --compare-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
-  --compare-gradient: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  --compare-simbye-bg: #f0faf6;
+  --compare-border: rgba(0, 0, 0, 0.06);
+  --compare-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   --compare-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dark Mode */
 [data-theme="dark"] {
-  --compare-bg: transparent;
+  --compare-bg: #0a0a0a;
   --compare-text: #f5f5f5;
   --compare-text-secondary: #999999;
   --compare-primary: #00d97e;
-  --compare-primary-hover: #009a61;
-  --compare-accent: #00ff88;
+  --compare-success: #00d97e;
   --compare-danger: #ff6b6b;
   --compare-warning: #ffd93d;
   --compare-card-bg: rgba(26, 26, 26, 0.8);
+  --compare-simbye-bg: rgba(0, 217, 126, 0.05);
   --compare-border: rgba(255, 255, 255, 0.08);
-  --compare-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --compare-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --compare-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
-  --compare-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+  --compare-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 /* Main Section */
 .comparison-section {
   width: 100%;
-  padding: 80px 0;
+  padding: 100px 0;
   background: var(--compare-bg);
   position: relative;
   overflow: hidden;
-  transition: var(--compare-transition);
-}
-
-[data-theme="light"] .comparison-section {
-  background: #ffffff;
 }
 
 [data-theme="dark"] .comparison-section {
@@ -59,9 +48,9 @@
 
 /* Container */
 .comparison-container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
   position: relative;
   z-index: 1;
 }
@@ -69,15 +58,15 @@
 /* Header */
 .comparison-header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 72px;
   animation: fadeInUp 0.8s ease;
 }
 
 .comparison-title {
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   color: var(--compare-text);
-  margin: 0 0 16px 0;
+  margin: 0 0 20px 0;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
@@ -97,38 +86,21 @@
 }
 
 .comparison-subtitle {
-  font-size: 18px;
+  font-size: 20px;
   color: var(--compare-text-secondary);
   margin: 0;
   font-weight: 400;
   line-height: 1.5;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
-/* Save Badge */
-.save-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, var(--compare-accent), #00ff88);
-  color: #0a0a0a;
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-weight: 700;
-  font-size: 14px;
-  margin-top: 20px;
-  box-shadow: 0 6px 20px rgba(0, 217, 126, 0.4);
-  animation: subtlePulse 4s ease-in-out infinite;
-}
-
-/* Table Container - MOBILE FIRST */
+/* Table Container - CLEAN ENTERPRISE STYLE */
 .comparison-table {
   background: var(--compare-card-bg);
   border-radius: 24px;
-  padding: 16px;
-  box-shadow: var(--compare-shadow-md);
-  border: 2px solid var(--compare-border);
+  padding: 0;
+  box-shadow: var(--compare-shadow);
   animation: fadeInUp 0.9s ease 0.2s both;
   overflow: hidden;
   width: 100%;
@@ -136,105 +108,90 @@
 
 [data-theme="dark"] .comparison-table {
   background: var(--compare-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
 }
 
-/* Table Layout - MOBILE OPTIMIZED */
+/* Table Wrapper */
 .table-wrapper {
   width: 100%;
   display: table;
   table-layout: fixed;
 }
 
-/* Table Header */
+/* Table Header - CLEAN */
 .table-header {
   display: table-row;
 }
 
 .table-header-cell {
   display: table-cell;
-  padding: 12px 8px;
+  padding: 24px 16px;
   vertical-align: middle;
   text-align: center;
-  border-bottom: 2px solid var(--compare-border);
+  border-bottom: 1px solid var(--compare-border);
   position: relative;
+  background: var(--compare-card-bg);
 }
 
 .table-header-cell:first-child {
   width: 35%;
   text-align: left;
-  padding-left: 4px;
+  padding-left: 24px;
+}
+
+/* Simbye Column - SUBTLE HIGHLIGHT */
+.table-header-cell.is-simbye {
+  background: var(--compare-simbye-bg);
+  position: relative;
+}
+
+/* Best Choice Badge - SMALL & CLEAN */
+.best-choice-badge {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--compare-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: 0.5px;
 }
 
 .provider-name {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--compare-text);
+  margin-top: 20px;
   margin-bottom: 4px;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
   line-height: 1.2;
 }
 
 .provider-type {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--compare-text-secondary);
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
-/* Simbye Column Highlight */
-.table-header-cell.is-simbye {
-  background: var(--compare-gradient);
-  border: 2px solid var(--compare-primary);
-  border-bottom: 2px solid var(--compare-primary);
-  border-radius: 16px 16px 0 0;
-  position: relative;
-}
-
-[data-theme="dark"] .table-header-cell.is-simbye {
-  background: linear-gradient(135deg, rgba(0, 217, 126, 0.1) 0%, transparent 100%);
-}
-
-/* Best Choice Badge */
-.best-choice-badge {
-  position: absolute;
-  top: -14px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--compare-primary), var(--compare-accent));
-  color: white;
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  white-space: nowrap;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
-}
-
 /* Table Body */
 .table-row {
   display: table-row;
-  animation: fadeInUp 0.8s ease both;
 }
-
-.table-row:nth-child(1) { animation-delay: 0.1s; }
-.table-row:nth-child(2) { animation-delay: 0.2s; }
-.table-row:nth-child(3) { animation-delay: 0.3s; }
-.table-row:nth-child(4) { animation-delay: 0.4s; }
-.table-row:nth-child(5) { animation-delay: 0.5s; }
-.table-row:nth-child(6) { animation-delay: 0.6s; }
-.table-row:nth-child(7) { animation-delay: 0.7s; }
 
 .table-cell {
   display: table-cell;
-  padding: 16px 8px;
+  padding: 20px 16px;
   vertical-align: middle;
   text-align: center;
   border-bottom: 1px solid var(--compare-border);
+  background: var(--compare-card-bg);
 }
 
 .table-row:last-child .table-cell {
@@ -243,152 +200,125 @@
 
 .table-cell:first-child {
   text-align: left;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding-left: 24px;
+  padding-right: 16px;
 }
 
+/* Simbye Column Cells */
 .table-cell.is-simbye {
-  background: var(--compare-gradient);
-  border-left: 2px solid var(--compare-primary);
-  border-right: 2px solid var(--compare-primary);
+  background: var(--compare-simbye-bg);
 }
 
-[data-theme="dark"] .table-cell.is-simbye {
-  background: rgba(0, 217, 126, 0.03);
-}
-
-.table-row:last-child .table-cell.is-simbye {
-  border-bottom: 2px solid var(--compare-primary);
-  border-radius: 0 0 16px 16px;
-}
-
-/* Feature Name with Icon */
+/* Feature Icon - SIMPLE GREEN CIRCLE */
 .feature-wrapper {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
 }
 
-.feature-icon-wrapper {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, var(--compare-primary), var(--compare-accent));
-  border-radius: 10px;
+.feature-icon-circle {
+  width: 40px;
+  height: 40px;
+  background: var(--compare-primary);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-[data-theme="dark"] .feature-icon-wrapper {
-  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
-}
-
 .feature-icon {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   color: white;
 }
 
-[data-theme="dark"] .feature-icon {
-  color: var(--compare-primary);
-}
-
 .feature-name {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--compare-text);
-  line-height: 1.2;
+  line-height: 1.3;
   word-wrap: break-word;
   overflow-wrap: break-word;
   hyphens: auto;
   text-align: left;
 }
 
-/* Values - MOBILE OPTIMIZED */
+/* Values - CLEAN ICONS */
 .value-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 44px;
+}
+
+.check-circle {
+  width: 32px;
+  height: 32px;
+  background: var(--compare-success);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.3s ease both;
 }
 
 .check-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--compare-primary);
-  animation: checkIn 0.4s ease both;
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+.x-circle {
+  width: 32px;
+  height: 32px;
+  background: var(--compare-danger);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.3s ease both;
 }
 
 .x-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--compare-danger);
-  animation: xIn 0.4s ease both;
+  width: 18px;
+  height: 18px;
+  color: white;
+}
+
+.warning-circle {
+  width: 32px;
+  height: 32px;
+  background: var(--compare-warning);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.3s ease both;
 }
 
 .warning-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--compare-warning);
-  animation: warningIn 0.4s ease both;
+  width: 18px;
+  height: 18px;
+  color: white;
 }
 
 .value-text {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--compare-text);
   font-weight: 600;
-  margin-top: 4px;
+  margin-top: 8px;
   text-align: center;
   word-wrap: break-word;
   overflow-wrap: break-word;
-  hyphens: auto;
-  max-width: 100%;
   line-height: 1.2;
 }
 
 .value-subtext {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--compare-text-secondary);
   margin-top: 2px;
-}
-
-/* Bottom CTA */
-.comparison-cta {
-  text-align: center;
-  margin-top: 48px;
-  animation: fadeInUp 0.9s ease 0.8s both;
-}
-
-.cta-text {
-  font-size: 20px;
-  color: var(--compare-text);
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 20px 48px;
-  background: linear-gradient(135deg, var(--compare-primary), var(--compare-accent));
-  color: white;
-  border: none;
-  border-radius: 100px;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--compare-transition);
-  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.3);
-  animation: subtlePulse 4s ease-in-out infinite;
-  text-decoration: none;
-}
-
-.cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--compare-shadow-lg);
 }
 
 /* Animations */
@@ -403,175 +333,141 @@
   }
 }
 
-@keyframes subtlePulse {
-  0%, 100% { 
-    transform: translateY(0) scale(1);
-  }
-  50% { 
-    transform: translateY(-3px) scale(1.02);
-  }
-}
-
-@keyframes checkIn {
-  0% {
-    transform: scale(0) rotate(-180deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2) rotate(10deg);
-  }
-  100% {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-  }
-}
-
-@keyframes xIn {
-  0% {
-    transform: scale(0) rotate(180deg);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-  }
-}
-
-@keyframes warningIn {
-  0% {
+@keyframes scaleIn {
+  from {
     transform: scale(0);
     opacity: 0;
   }
-  100% {
+  to {
     transform: scale(1);
     opacity: 1;
   }
 }
 
-/* Desktop Styles */
-@media (min-width: 768px) {
+/* Mobile Styles */
+@media (max-width: 768px) {
   .comparison-section {
-    padding: 100px 0;
+    padding: 80px 0;
   }
   
   .comparison-container {
-    padding: 0 40px;
+    padding: 0 20px;
   }
   
   .comparison-header {
-    margin-bottom: 72px;
+    margin-bottom: 48px;
   }
   
   .comparison-title {
-    margin-bottom: 20px;
+    font-size: 32px;
   }
   
   .comparison-subtitle {
-    font-size: 20px;
-  }
-  
-  .save-badge {
-    font-size: 16px;
-    padding: 10px 24px;
+    font-size: 17px;
+    padding: 0 16px;
   }
   
   .comparison-table {
-    padding: 32px;
+    border-radius: 20px;
   }
   
   .table-header-cell {
-    padding: 20px 16px;
+    padding: 16px 8px;
   }
   
   .table-header-cell:first-child {
-    width: 30%;
-    padding-left: 16px;
-  }
-  
-  .provider-name {
-    font-size: 18px;
-    margin-bottom: 6px;
-  }
-  
-  .provider-type {
-    font-size: 14px;
+    width: 38%;
+    padding-left: 12px;
   }
   
   .best-choice-badge {
-    font-size: 12px;
-    padding: 6px 16px;
-    top: -16px;
+    font-size: 9px;
+    padding: 3px 8px;
+    top: 4px;
+  }
+  
+  .provider-name {
+    font-size: 13px;
+    margin-top: 16px;
+  }
+  
+  .provider-type {
+    font-size: 11px;
   }
   
   .table-cell {
-    padding: 24px 16px;
+    padding: 14px 8px;
   }
   
   .table-cell:first-child {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 12px;
+    padding-right: 8px;
   }
   
-  .feature-icon-wrapper {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
+  .feature-icon-circle {
+    width: 32px;
+    height: 32px;
   }
   
   .feature-icon {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
   
   .feature-name {
-    font-size: 16px;
+    font-size: 13px;
+  }
+  
+  .check-circle,
+  .x-circle,
+  .warning-circle {
+    width: 28px;
+    height: 28px;
   }
   
   .check-icon,
   .x-icon,
   .warning-icon {
-    width: 28px;
-    height: 28px;
+    width: 16px;
+    height: 16px;
   }
   
   .value-text {
-    font-size: 14px;
+    font-size: 11px;
     margin-top: 6px;
   }
   
   .value-subtext {
-    font-size: 12px;
-    margin-top: 4px;
-  }
-  
-  .cta-text {
-    font-size: 24px;
-    margin-bottom: 32px;
-  }
-  
-  .cta-button {
-    font-size: 20px;
-    padding: 24px 56px;
+    font-size: 10px;
   }
 }
 
 /* Very Small Screens */
-@media (max-width: 400px) {
+@media (max-width: 480px) {
   .comparison-container {
     padding: 0 12px;
   }
   
+  .comparison-title {
+    font-size: 28px;
+  }
+  
+  .comparison-subtitle {
+    font-size: 16px;
+    padding: 0 8px;
+  }
+  
   .comparison-table {
-    padding: 12px 8px;
-    border-radius: 20px;
+    border-radius: 16px;
   }
   
   .table-header-cell {
-    padding: 10px 4px;
+    padding: 12px 4px;
   }
   
   .table-header-cell:first-child {
-    width: 38%;
+    width: 40%;
+    padding-left: 8px;
   }
   
   .provider-name {
@@ -582,16 +478,15 @@
     font-size: 10px;
   }
   
-  .best-choice-badge {
-    font-size: 9px;
-    padding: 3px 10px;
-  }
-  
   .table-cell {
     padding: 12px 4px;
   }
   
-  .feature-icon-wrapper {
+  .table-cell:first-child {
+    padding-left: 8px;
+  }
+  
+  .feature-icon-circle {
     width: 28px;
     height: 28px;
   }
@@ -605,6 +500,13 @@
     font-size: 12px;
   }
   
+  .check-circle,
+  .x-circle,
+  .warning-circle {
+    width: 24px;
+    height: 24px;
+  }
+  
   .value-text {
     font-size: 10px;
   }
@@ -613,36 +515,20 @@
     font-size: 9px;
   }
 }
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 </style>
 
 <!-- HTML Structure -->
-<section class="comparison-section" id="comparison-section">
+<section class="comparison-section">
   <div class="comparison-container">
     
     <!-- Header -->
     <div class="comparison-header">
       <h2 class="comparison-title">
-        {{ 'comparison.title_part1' | t | default: 'Compare' }} 
-        <span class="comparison-title-highlight">{{ 'comparison.title_part2' | t | default: 'Your Options' }}</span>
+        Compare <span class="comparison-title-highlight">Your Options</span>
       </h2>
       <p class="comparison-subtitle">
-        {{ 'comparison.subtitle' | t | default: 'See why eSIM is the smartest choice for travelers' }}
+        See why smart travelers choose eSIM over traditional options
       </p>
-      <div class="save-badge">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        {{ 'comparison.save_badge' | t | default: 'Save up to 85%' }}
-      </div>
     </div>
     
     <!-- Comparison Table -->
@@ -652,20 +538,20 @@
         <!-- Header Row -->
         <div class="table-header">
           <div class="table-header-cell">
-            <!-- Empty for features column -->
+            <!-- Empty for features -->
           </div>
           <div class="table-header-cell is-simbye">
-            <span class="best-choice-badge">{{ 'comparison.best_choice' | t | default: 'BEST' }}</span>
+            <span class="best-choice-badge">BEST CHOICE</span>
             <div class="provider-name">Simbye eSIM</div>
-            <div class="provider-type">{{ 'comparison.esim_type' | t | default: 'Digital' }}</div>
+            <div class="provider-type">Digital Solution</div>
           </div>
           <div class="table-header-cell">
-            <div class="provider-name">{{ 'comparison.roaming' | t | default: 'Roaming' }}</div>
-            <div class="provider-type">{{ 'comparison.roaming_type' | t | default: 'Carrier' }}</div>
+            <div class="provider-name">International Roaming</div>
+            <div class="provider-type">Your Carrier</div>
           </div>
           <div class="table-header-cell">
-            <div class="provider-name">{{ 'comparison.local_sim' | t | default: 'Local SIM' }}</div>
-            <div class="provider-type">{{ 'comparison.local_type' | t | default: 'Physical' }}</div>
+            <div class="provider-name">Local SIM Card</div>
+            <div class="provider-type">Physical Card</div>
           </div>
         </div>
         
@@ -673,112 +559,130 @@
         <div class="table-row">
           <div class="table-cell">
             <div class="feature-wrapper">
-              <div class="feature-icon-wrapper">
-                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              <div class="feature-icon-circle">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div class="feature-name">{{ 'comparison.price' | t | default: 'Price per week' }}</div>
+              <div class="feature-name">Price</div>
             </div>
           </div>
           <div class="table-cell is-simbye">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div class="value-text">€4.99</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <div class="x-circle">
+                <svg class="x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
               <div class="value-text">€50-200</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="warning-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-              </svg>
+              <div class="warning-circle">
+                <svg class="warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01" />
+                </svg>
+              </div>
               <div class="value-text">€15-30</div>
             </div>
           </div>
         </div>
         
-        <!-- Activation Row -->
+        <!-- Setup & Activation Row -->
         <div class="table-row">
           <div class="table-cell">
             <div class="feature-wrapper">
-              <div class="feature-icon-wrapper">
-                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+              <div class="feature-icon-circle">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <div class="feature-name">{{ 'comparison.activation' | t | default: 'Activation' }}</div>
+              <div class="feature-name">Setup & Activation Time</div>
             </div>
           </div>
           <div class="table-cell is-simbye">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div class="value-text">60 sec</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.instant' | t | default: 'Instant' }}</div>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="value-text">Instant</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.find_shop' | t | default: 'Find shop' }}</div>
+              <div class="x-circle">
+                <svg class="x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="value-text">Find shop</div>
             </div>
           </div>
         </div>
         
-        <!-- Keep Number Row -->
+        <!-- Keep WhatsApp Number Row -->
         <div class="table-row">
           <div class="table-cell">
             <div class="feature-wrapper">
-              <div class="feature-icon-wrapper">
-                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+              <div class="feature-icon-circle">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                 </svg>
               </div>
-              <div class="feature-name">{{ 'comparison.keep_number' | t | default: 'Keep WhatsApp' }}</div>
+              <div class="feature-name">Keep WhatsApp Number</div>
             </div>
           </div>
           <div class="table-cell is-simbye">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.yes' | t | default: 'Yes' }}</div>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="value-text">Yes</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.yes' | t | default: 'Yes' }}</div>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="value-text">Yes</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.new_number' | t | default: 'New' }}</div>
+              <div class="x-circle">
+                <svg class="x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="value-text">New number</div>
             </div>
           </div>
         </div>
@@ -787,169 +691,182 @@
         <div class="table-row">
           <div class="table-cell">
             <div class="feature-wrapper">
-              <div class="feature-icon-wrapper">
-                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+              <div class="feature-icon-circle">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
                 </svg>
               </div>
-              <div class="feature-name">{{ 'comparison.hidden_fees' | t | default: 'Hidden fees' }}</div>
+              <div class="feature-name">Hidden Fees</div>
             </div>
           </div>
           <div class="table-cell is-simbye">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.none' | t | default: 'None' }}</div>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="value-text">None</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.many' | t | default: 'Many' }}</div>
+              <div class="x-circle">
+                <svg class="x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="value-text">Many</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="warning-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.possible' | t | default: 'Possible' }}</div>
+              <div class="warning-circle">
+                <svg class="warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01" />
+                </svg>
+              </div>
+              <div class="value-text">Possible</div>
             </div>
           </div>
         </div>
         
-        <!-- Rechargeable Row -->
+        <!-- Rechargeable/Top-up Row -->
         <div class="table-row">
           <div class="table-cell">
             <div class="feature-wrapper">
-              <div class="feature-icon-wrapper">
-                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              <div class="feature-icon-circle">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                 </svg>
               </div>
-              <div class="feature-name">{{ 'comparison.rechargeable' | t | default: 'Rechargeable' }}</div>
+              <div class="feature-name">Rechargeable/Top-up</div>
             </div>
           </div>
           <div class="table-cell is-simbye">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.online' | t | default: 'Online' }}</div>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="value-text">Online</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.contract' | t | default: 'Contract' }}</div>
+              <div class="x-circle">
+                <svg class="x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="value-text">Contract</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.buy_new' | t | default: 'Buy new' }}</div>
+              <div class="x-circle">
+                <svg class="x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="value-text">Buy new</div>
             </div>
           </div>
         </div>
         
-        <!-- Network Quality Row -->
+        <!-- Network Row -->
         <div class="table-row">
           <div class="table-cell">
             <div class="feature-wrapper">
-              <div class="feature-icon-wrapper">
-                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z" />
+              <div class="feature-icon-circle">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
                 </svg>
               </div>
-              <div class="feature-name">{{ 'comparison.network' | t | default: 'Network' }}</div>
+              <div class="feature-name">Network</div>
             </div>
           </div>
           <div class="table-cell is-simbye">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div class="value-text">4G/5G</div>
-              <div class="value-subtext">{{ 'comparison.premium' | t | default: 'Premium' }}</div>
+              <div class="value-subtext">Premium</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div class="value-text">4G/5G</div>
-              <div class="value-subtext">{{ 'comparison.expensive' | t | default: 'Expensive' }}</div>
+              <div class="value-subtext">Expensive</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="warning-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.varies' | t | default: 'Varies' }}</div>
+              <div class="warning-circle">
+                <svg class="warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01" />
+                </svg>
+              </div>
+              <div class="value-text">Varies</div>
             </div>
           </div>
         </div>
         
-        <!-- Support Row -->
+        <!-- 24/7 Customer Support Row -->
         <div class="table-row">
           <div class="table-cell">
             <div class="feature-wrapper">
-              <div class="feature-icon-wrapper">
-                <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+              <div class="feature-icon-circle">
+                <svg class="feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
-              <div class="feature-name">{{ 'comparison.support' | t | default: 'Support' }}</div>
+              <div class="feature-name">24/7 Customer Support</div>
             </div>
           </div>
           <div class="table-cell is-simbye">
             <div class="value-wrapper">
-              <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m6 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <div class="check-circle">
+                <svg class="check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
               <div class="value-text">24/7</div>
               <div class="value-subtext">WhatsApp</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="warning-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.limited' | t | default: 'Limited' }}</div>
+              <div class="warning-circle">
+                <svg class="warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01" />
+                </svg>
+              </div>
+              <div class="value-text">Limited</div>
             </div>
           </div>
           <div class="table-cell">
             <div class="value-wrapper">
-              <svg class="x-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <div class="value-text">{{ 'comparison.no_support' | t | default: 'None' }}</div>
+              <div class="x-circle">
+                <svg class="x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="value-text">No support</div>
             </div>
           </div>
         </div>
         
       </div>
-    </div>
-    
-    <!-- CTA Section -->
-    <div class="comparison-cta">
-      <p class="cta-text">{{ 'comparison.cta_text' | t | default: 'Join 100,000+ smart travelers' }}</p>
-      <a href="#product-section" class="cta-button">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 24px; height: 24px;">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-        </svg>
-        {{ 'comparison.cta_button' | t | default: 'Get Your eSIM Now' }}
-      </a>
     </div>
     
   </div>
@@ -960,14 +877,13 @@
   'use strict';
   
   // Intersection Observer for animations
-  const section = document.getElementById('comparison-section');
+  const section = document.querySelector('.comparison-section');
   if (!section) return;
   
   if ('IntersectionObserver' in window) {
     const animateObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Trigger animations
           entry.target.classList.add('animate');
           animateObserver.unobserve(entry.target);
         }
@@ -977,14 +893,8 @@
       rootMargin: '0px'
     });
     
-    // Observe table rows for staggered animation
-    const rows = section.querySelectorAll('.table-row');
-    rows.forEach(row => {
-      animateObserver.observe(row);
-    });
-    
-    // Observe other elements
-    const elements = section.querySelectorAll('.comparison-header, .comparison-table, .comparison-cta');
+    // Observe elements
+    const elements = section.querySelectorAll('.comparison-header, .comparison-table');
     elements.forEach(el => {
       animateObserver.observe(el);
     });
