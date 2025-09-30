@@ -1,0 +1,960 @@
+<!-- sections/esim-vs-roaming.liquid -->
+<!-- SIMBYE eSIM VS ROAMING - FINAL ENTERPRISE VERSION 3.0 -->
+
+<style>
+/* ============================================
+   KILL SHOPIFY GRID - WIE ALLE ANDEREN SECTIONS
+   ============================================ */
+.shopify-section:has(.esim-vs-section) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* CSS Variables - KONSISTENT MIT HOW-TO & WHY */
+:root {
+  --vs-bg: #ffffff;
+  --vs-text: #1a1a1a;
+  --vs-text-secondary: #666666;
+  --vs-primary: #009a61;
+  --vs-primary-hover: #00824f;
+  --vs-accent: #00d97e;
+  --vs-success: #009a61;
+  --vs-danger: #dc3545;
+  --vs-warning: #ff9800;
+  --vs-card-bg: #ffffff;
+  --vs-simbye-bg: linear-gradient(135deg, #f0faf6 0%, #f8fffc 100%);
+  --vs-border: rgba(0, 0, 0, 0.08);
+  --vs-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --vs-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --vs-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --vs-radius: 24px;
+  --vs-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode Variables */
+[data-theme="dark"] {
+  --vs-bg: transparent;
+  --vs-text: #f5f5f5;
+  --vs-text-secondary: #999999;
+  --vs-primary: #00d97e;
+  --vs-primary-hover: #009a61;
+  --vs-accent: #00ff88;
+  --vs-success: #00d97e;
+  --vs-danger: #ff6b6b;
+  --vs-warning: #ffb800;
+  --vs-card-bg: rgba(26, 26, 26, 0.8);
+  --vs-simbye-bg: linear-gradient(135deg, rgba(0, 217, 126, 0.08) 0%, rgba(0, 154, 97, 0.08) 100%);
+  --vs-border: rgba(255, 255, 255, 0.08);
+  --vs-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --vs-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --vs-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+}
+
+/* Main Section - WIE HOW-TO */
+.esim-vs-section {
+  width: 100%;
+  padding: 100px 0;
+  background: var(--vs-bg);
+  position: relative;
+  overflow: hidden;
+  transition: var(--vs-transition);
+}
+
+/* Dark Mode Gradient - WIE HOW-TO */
+[data-theme="dark"] .esim-vs-section {
+  background: linear-gradient(180deg,
+    #0a0a0a 0%,
+    #0d100f 20%,
+    #0f1210 40%,
+    #0d100f 60%,
+    #0b0c0b 80%,
+    #040404 100%
+  );
+}
+
+/* Container - WIE HOW-TO */
+.vs-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header - EXAKT WIE HOW-TO */
+.vs-header {
+  text-align: center;
+  margin-bottom: 72px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.vs-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--vs-text);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.vs-title-highlight {
+  background: var(--vs-primary);
+  color: white;
+  padding: 4px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 0 8px;
+}
+
+[data-theme="dark"] .vs-title-highlight {
+  background: var(--vs-primary);
+  color: #fff;
+}
+
+.vs-subtitle {
+  font-size: 20px;
+  color: var(--vs-text-secondary);
+  margin: 0 auto;
+  font-weight: 400;
+  line-height: 1.5;
+  max-width: 800px;
+}
+
+/* Table Container */
+.vs-table {
+  background: var(--vs-card-bg);
+  border-radius: var(--vs-radius);
+  padding: 0;
+  box-shadow: var(--vs-shadow-lg);
+  animation: fadeInUp 0.9s ease 0.2s both;
+  overflow: hidden;
+  width: 100%;
+  border: 2px solid var(--vs-border);
+}
+
+[data-theme="dark"] .vs-table {
+  background: var(--vs-card-bg);
+  backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Table Wrapper */
+.vs-table-wrapper {
+  width: 100%;
+  display: table;
+  table-layout: fixed;
+}
+
+/* Table Header */
+.vs-table-header {
+  display: table-row;
+}
+
+.vs-header-cell {
+  display: table-cell;
+  padding: 32px 24px;
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: 2px solid var(--vs-border);
+  position: relative;
+  background: var(--vs-card-bg);
+}
+
+.vs-header-cell:first-child {
+  width: 35%;
+  text-align: left;
+  padding-left: 40px;
+}
+
+/* Simbye Column */
+.vs-header-cell.is-simbye {
+  background: var(--vs-simbye-bg);
+  position: relative;
+}
+
+/* Winner Badge */
+.vs-winner-badge {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--vs-primary);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+}
+
+.vs-provider-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--vs-text);
+  margin-top: 28px;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.vs-provider-type {
+  font-size: 14px;
+  color: var(--vs-text-secondary);
+}
+
+/* Dynamic Price */
+.vs-provider-price {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--vs-primary);
+  margin-top: 12px;
+  letter-spacing: -0.01em;
+}
+
+/* Table Body */
+.vs-table-row {
+  display: table-row;
+  transition: var(--vs-transition);
+}
+
+.vs-table-row:hover .vs-table-cell {
+  background: rgba(0, 154, 97, 0.02);
+}
+
+[data-theme="dark"] .vs-table-row:hover .vs-table-cell {
+  background: rgba(0, 217, 126, 0.02);
+}
+
+.vs-table-cell {
+  display: table-cell;
+  padding: 32px 24px;
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: 1px solid var(--vs-border);
+  background: var(--vs-card-bg);
+  transition: var(--vs-transition);
+}
+
+.vs-table-row:last-child .vs-table-cell {
+  border-bottom: none;
+}
+
+.vs-table-cell:first-child {
+  text-align: left;
+  padding-left: 40px;
+  padding-right: 24px;
+}
+
+/* Simbye Column Cells */
+.vs-table-cell.is-simbye {
+  background: var(--vs-simbye-bg);
+}
+
+/* Feature Wrapper - FIXED ALIGNMENT */
+.vs-feature-wrapper {
+  display: flex;
+  align-items: center; /* WICHTIG: Icons aligned! */
+  gap: 20px;
+}
+
+/* Feature Icon - WIE WHY SECTION */
+.vs-feature-icon-circle {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--vs-primary), var(--vs-accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.2);
+}
+
+[data-theme="dark"] .vs-feature-icon-circle {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
+  box-shadow: 
+    0 4px 12px rgba(0, 217, 126, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.vs-feature-icon {
+  width: 24px;
+  height: 24px;
+  color: white;
+  stroke-width: 1.8;
+}
+
+[data-theme="dark"] .vs-feature-icon {
+  color: var(--vs-primary);
+}
+
+/* Feature Name */
+.vs-feature-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vs-text);
+  line-height: 1.3;
+  text-align: left;
+}
+
+/* Value Icons */
+.vs-value-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  gap: 8px;
+}
+
+.vs-check-circle,
+.vs-x-circle,
+.vs-warning-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.3s ease both;
+  box-shadow: var(--vs-shadow-sm);
+}
+
+.vs-check-circle {
+  background: linear-gradient(135deg, var(--vs-success), var(--vs-accent));
+}
+
+.vs-x-circle {
+  background: linear-gradient(135deg, var(--vs-danger), #ff8a95);
+}
+
+.vs-warning-circle {
+  background: linear-gradient(135deg, var(--vs-warning), #ffc947);
+}
+
+.vs-check-icon,
+.vs-x-icon,
+.vs-warning-icon {
+  width: 22px;
+  height: 22px;
+  color: white;
+  stroke-width: 2.5;
+}
+
+.vs-value-text {
+  font-size: 14px;
+  color: var(--vs-text);
+  font-weight: 600;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.vs-value-subtext {
+  font-size: 12px;
+  color: var(--vs-text-secondary);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   MOBILE STYLES - WIE HOLAFLY
+   ============================================ */
+@media (max-width: 768px) {
+  .esim-vs-section {
+    padding: 80px 0;
+  }
+  
+  .vs-container {
+    padding: 0 16px;
+  }
+  
+  .vs-header {
+    margin-bottom: 48px;
+  }
+  
+  .vs-title {
+    font-size: 32px;
+  }
+  
+  .vs-subtitle {
+    font-size: 17px;
+    padding: 0 16px;
+  }
+  
+  .vs-table {
+    border-radius: 20px;
+  }
+  
+  /* KOMPAKTE HEADER */
+  .vs-header-cell {
+    padding: 16px 8px;
+    font-size: 12px;
+  }
+  
+  .vs-header-cell:first-child {
+    width: 38%;
+    padding-left: 12px;
+  }
+  
+  .vs-winner-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+    top: 4px;
+  }
+  
+  .vs-provider-name {
+    font-size: 13px;
+    margin-top: 16px;
+  }
+  
+  .vs-provider-type {
+    font-size: 11px;
+  }
+  
+  .vs-provider-price {
+    font-size: 16px;
+    margin-top: 4px;
+  }
+  
+  /* KOMPAKTE CELLS */
+  .vs-table-cell {
+    padding: 12px 8px;
+  }
+  
+  .vs-table-cell:first-child {
+    padding-left: 12px;
+    padding-right: 8px;
+  }
+  
+  /* KLEINERE FEATURE ICONS */
+  .vs-feature-wrapper {
+    gap: 10px;
+  }
+  
+  .vs-feature-icon-circle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .vs-feature-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .vs-feature-name {
+    font-size: 12px;
+  }
+  
+  /* KLEINERE VALUE ICONS */
+  .vs-check-circle,
+  .vs-x-circle,
+  .vs-warning-circle {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .vs-check-icon,
+  .vs-x-icon,
+  .vs-warning-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .vs-value-text {
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  
+  .vs-value-subtext {
+    font-size: 10px;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .vs-container {
+    padding: 0 12px;
+  }
+  
+  .vs-header-cell {
+    padding: 12px 4px;
+  }
+  
+  .vs-table-cell {
+    padding: 10px 4px;
+  }
+  
+  .vs-feature-icon-circle {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .vs-feature-icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .vs-feature-name {
+    font-size: 11px;
+  }
+}
+</style>
+
+<!-- HTML Structure -->
+<section class="esim-vs-section">
+  <div class="vs-container">
+    
+    <!-- Header mit Translations -->
+    <div class="vs-header">
+      <h2 class="vs-title">
+        {{ 'comparison.title_part1' | t | default: 'eSIM vs' }} 
+        <span class="vs-title-highlight">{{ 'comparison.title_part2' | t | default: 'Traditional Options' }}</span>
+      </h2>
+      <p class="vs-subtitle">
+        {{ 'comparison.subtitle' | t | default: 'Compare international mobile data solutions and save up to 85% on roaming charges' }}
+      </p>
+    </div>
+    
+    <!-- Comparison Table -->
+    <div class="vs-table">
+      <div class="vs-table-wrapper">
+        
+        <!-- Header Row -->
+        <div class="vs-table-header">
+          <div class="vs-header-cell">
+            <!-- Empty for features -->
+          </div>
+          <div class="vs-header-cell is-simbye">
+            <span class="vs-winner-badge">{{ 'comparison.recommended' | t | default: 'RECOMMENDED' }}</span>
+            <div class="vs-provider-name">{{ 'comparison.simbye_esim' | t | default: 'Simbye eSIM' }}</div>
+            <div class="vs-provider-type">{{ 'comparison.prepaid' | t | default: 'Prepaid Data' }}</div>
+            <div class="vs-provider-price" id="simbye-price">
+              {% comment %} Dynamisch gefüllt {% endcomment %}
+            </div>
+          </div>
+          <div class="vs-header-cell">
+            <div class="vs-provider-name">{{ 'comparison.roaming' | t | default: 'International Roaming' }}</div>
+            <div class="vs-provider-type">{{ 'comparison.carrier' | t | default: 'Home Carrier' }}</div>
+            <div class="vs-provider-price">€50-200</div>
+          </div>
+          <div class="vs-header-cell">
+            <div class="vs-provider-name">{{ 'comparison.local_sim' | t | default: 'Local SIM Card' }}</div>
+            <div class="vs-provider-type">{{ 'comparison.physical' | t | default: 'Physical Card' }}</div>
+            <div class="vs-provider-price">€15-30</div>
+          </div>
+        </div>
+        
+        <!-- Price per GB Row -->
+        <div class="vs-table-row">
+          <div class="vs-table-cell">
+            <div class="vs-feature-wrapper">
+              <div class="vs-feature-icon-circle">
+                <svg class="vs-feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div class="vs-feature-name">{{ 'comparison.price_gb' | t | default: 'Average Cost per GB' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell is-simbye">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text" id="simbye-price-per-gb">
+                {% comment %} Dynamisch gefüllt {% endcomment %}
+              </div>
+              <div class="vs-value-subtext">{{ 'comparison.save' | t | default: 'SAVE 85%' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-x-circle">
+                <svg class="vs-x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="vs-value-text">€10-50{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-warning-circle">
+                <svg class="vs-warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <div class="vs-value-text">€5-15{{ 'comparison.per_gb' | t | default: '/GB' }}</div>
+              <div class="vs-value-subtext">{{ 'comparison.varies' | t | default: 'Varies' }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Setup Time Row -->
+        <div class="vs-table-row">
+          <div class="vs-table-cell">
+            <div class="vs-feature-wrapper">
+              <div class="vs-feature-icon-circle">
+                <svg class="vs-feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+              </div>
+              <div class="vs-feature-name">{{ 'comparison.activation' | t | default: 'Setup & Activation Time' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell is-simbye">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.instant_60s' | t | default: '< 60 seconds' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.instant' | t | default: 'Instant' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-x-circle">
+                <svg class="vs-x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.30_60_min' | t | default: '30-60 min' }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Keep Number Row -->
+        <div class="vs-table-row">
+          <div class="vs-table-cell">
+            <div class="vs-feature-wrapper">
+              <div class="vs-feature-icon-circle">
+                <svg class="vs-feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="vs-feature-name">{{ 'comparison.keep_number' | t | default: 'Keep WhatsApp Number' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell is-simbye">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'product.yes' | t | default: 'Yes' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'product.yes' | t | default: 'Yes' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-x-circle">
+                <svg class="vs-x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'product.no' | t | default: 'No' }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hidden Fees Row -->
+        <div class="vs-table-row">
+          <div class="vs-table-cell">
+            <div class="vs-feature-wrapper">
+              <div class="vs-feature-icon-circle">
+                <svg class="vs-feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
+                </svg>
+              </div>
+              <div class="vs-feature-name">{{ 'comparison.hidden_fees' | t | default: 'Hidden Fees' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell is-simbye">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.none' | t | default: 'None' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-x-circle">
+                <svg class="vs-x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.many' | t | default: 'Many' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-warning-circle">
+                <svg class="vs-warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.sometimes' | t | default: 'Sometimes' }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Network Speed Row -->
+        <div class="vs-table-row">
+          <div class="vs-table-cell">
+            <div class="vs-feature-wrapper">
+              <div class="vs-feature-icon-circle">
+                <svg class="vs-feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+                </svg>
+              </div>
+              <div class="vs-feature-name">{{ 'comparison.network_speed' | t | default: 'Network Speed' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell is-simbye">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.5g_4g' | t | default: '5G/4G LTE' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.5g_4g' | t | default: '5G/4G LTE' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-warning-circle">
+                <svg class="vs-warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.varies' | t | default: 'Varies' }}</div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Support Row -->
+        <div class="vs-table-row">
+          <div class="vs-table-cell">
+            <div class="vs-feature-wrapper">
+              <div class="vs-feature-icon-circle">
+                <svg class="vs-feature-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
+                </svg>
+              </div>
+              <div class="vs-feature-name">{{ 'comparison.support' | t | default: '24/7 Customer Support' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell is-simbye">
+            <div class="vs-value-wrapper">
+              <div class="vs-check-circle">
+                <svg class="vs-check-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div class="vs-value-text">24/7</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-warning-circle">
+                <svg class="vs-warning-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.limited' | t | default: 'Limited' }}</div>
+            </div>
+          </div>
+          <div class="vs-table-cell">
+            <div class="vs-value-wrapper">
+              <div class="vs-x-circle">
+                <svg class="vs-x-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </div>
+              <div class="vs-value-text">{{ 'comparison.none' | t | default: 'None' }}</div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Dynamische Preisberechnung
+  function updateSimbyePrice() {
+    {% if section.settings.reference_product %}
+      {% assign ref_product = all_products[section.settings.reference_product] %}
+      
+      {% if ref_product and ref_product.variants.size > 0 %}
+        // Erste nicht-FREE Variante finden
+        {% assign selected_variant = nil %}
+        {% for variant in ref_product.variants %}
+          {% unless variant.price == 0 %}
+            {% assign selected_variant = variant %}
+            {% break %}
+          {% endunless %}
+        {% endfor %}
+        
+        {% if selected_variant %}
+          // Preis setzen
+          const priceElement = document.getElementById('simbye-price');
+          if (priceElement) {
+            priceElement.textContent = '{{ selected_variant.price | money }}';
+          }
+          
+          // Price per GB berechnen
+          const pricePerGbElement = document.getElementById('simbye-price-per-gb');
+          if (pricePerGbElement) {
+            {% assign variant_title = selected_variant.title %}
+            {% assign gb_string = variant_title | split: ' ' | first %}
+            {% assign gb_value = gb_string | replace: 'GB', '' | plus: 0 %}
+            
+            {% if gb_value > 0 %}
+              {% assign price_cents = selected_variant.price %}
+              {% assign price_per_gb_cents = price_cents | divided_by: gb_value %}
+              pricePerGbElement.textContent = '{{ price_per_gb_cents | money }}{{ 'comparison.per_gb' | t | default: '/GB' }}';
+            {% else %}
+              // Fallback wenn keine GB gefunden
+              pricePerGbElement.textContent = '{{ selected_variant.price | money }}';
+            {% endif %}
+          }
+        {% endif %}
+      {% else %}
+        // Fallback Preise
+        const priceElement = document.getElementById('simbye-price');
+        const pricePerGbElement = document.getElementById('simbye-price-per-gb');
+        
+        if (priceElement) priceElement.textContent = '€4.99';
+        if (pricePerGbElement) pricePerGbElement.textContent = '€4.99/GB';
+      {% endif %}
+    {% else %}
+      // Standard Preise wenn kein Produkt gewählt
+      const priceElement = document.getElementById('simbye-price');
+      const pricePerGbElement = document.getElementById('simbye-price-per-gb');
+      
+      if (priceElement) priceElement.textContent = '€4.99';
+      if (pricePerGbElement) pricePerGbElement.textContent = '€4.99/GB';
+    {% endif %}
+  }
+  
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateSimbyePrice);
+  } else {
+    updateSimbyePrice();
+  }
+  
+  // Intersection Observer für Animationen
+  const section = document.querySelector('.esim-vs-section');
+  if (!section) return;
+  
+  if ('IntersectionObserver' in window) {
+    const animateObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          animateObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px'
+    });
+    
+    const elements = section.querySelectorAll('.vs-header, .vs-table, .vs-table-row');
+    elements.forEach(el => {
+      el.style.animationPlayState = 'paused';
+      animateObserver.observe(el);
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "eSIM vs Roaming",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Dynamic Pricing"
+    },
+    {
+      "type": "product",
+      "id": "reference_product",
+      "label": "Reference Product",
+      "info": "Select product for dynamic pricing (e.g., Turkey eSIM)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "eSIM vs Roaming"
+    }
+  ]
+}
+{% endschema %}
