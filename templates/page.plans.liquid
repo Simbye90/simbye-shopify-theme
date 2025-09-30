@@ -145,6 +145,30 @@
     >
     <button onclick="testAPI()">TEST API</button>
     <button onclick="clearData()">CLEAR</button>
+    <button onclick="showEmailModal()" style="background: #ff6b6b;">TEST EMAIL VERIFY</button>
+  </div>
+  
+  <!-- EMAIL VERIFICATION MODAL -->
+  <div id="emailModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:9999;">
+    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:white; padding:30px; border-radius:16px; max-width:400px; width:90%;">
+      <h2 style="margin:0 0 20px; color:#009a61;">Email Verification Required</h2>
+      <p style="color:#666; margin-bottom:20px;">To view sensitive data like QR Code, please verify your email:</p>
+      <input 
+        type="email" 
+        id="emailInput" 
+        placeholder="Enter your email"
+        style="width:100%; padding:12px; border:2px solid #009a61; border-radius:8px; margin-bottom:15px; font-size:16px;"
+      >
+      <div style="display:flex; gap:10px;">
+        <button onclick="verifyEmail()" style="flex:1; padding:12px; background:#009a61; color:white; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">
+          VERIFY
+        </button>
+        <button onclick="closeEmailModal()" style="flex:1; padding:12px; background:#666; color:white; border:none; border-radius:8px; cursor:pointer;">
+          CANCEL
+        </button>
+      </div>
+      <div id="emailError" style="color:red; margin-top:15px; display:none;"></div>
+    </div>
   </div>
   
   <div class="test-orders">
@@ -189,6 +213,102 @@ function clearData() {
   document.getElementById('output').textContent = 'Cleared. Ready for new test...';
   document.getElementById('status').style.display = 'none';
   document.getElementById('importantData').style.display = 'none';
+}
+
+// Email Verification Functions
+let currentOrderNumber = null;
+
+function showEmailModal() {
+  document.getElementById('emailModal').style.display = 'block';
+  currentOrderNumber = document.getElementById('testOrder').value.trim();
+}
+
+function closeEmailModal() {
+  document.getElementById('emailModal').style.display = 'none';
+  document.getElementById('emailInput').value = '';
+  document.getElementById('emailError').style.display = 'none';
+}
+
+function verifyEmail() {
+  const email = document.getElementById('emailInput').value.trim();
+  const orderNumber = currentOrderNumber || document.getElementById('testOrder').value.trim();
+  
+  if (!email) {
+    document.getElementById('emailError').textContent = 'Please enter an email';
+    document.getElementById('emailError').style.display = 'block';
+    return;
+  }
+  
+  if (!orderNumber) {
+    document.getElementById('emailError').textContent = 'No order number found';
+    document.getElementById('emailError').style.display = 'block';
+    return;
+  }
+  
+  const output = document.getElementById('output');
+  const status = document.getElementById('status');
+  
+  // Show loading
+  document.getElementById('emailError').textContent = 'Verifying...';
+  document.getElementById('emailError').style.color = '#009a61';
+  document.getElementById('emailError').style.display = 'block';
+  
+  // API Call with Email
+  const apiUrl = 'https://simbye.com/apps/topup/info/' + orderNumber + '/' + email;
+  
+  output.textContent += '\n\n----------------------------------------\n';
+  output.textContent += '🔐 TESTING EMAIL VERIFICATION API...\n\n';
+  output.textContent += 'URL: ' + apiUrl + '\n';
+  output.textContent += 'Order: ' + orderNumber + '\n';
+  output.textContent += 'Email: ' + email + '\n\n';
+  
+  jQuery.ajax({
+    url: apiUrl,
+    method: 'GET',
+    headers: {
+      'ngrok-skip-browser-warning': 'skip',
+      'Accept': 'application/json'
+    },
+    dataType: 'json',
+    timeout: 10000,
+    success: function(response) {
+      console.log('Email Verification Response:', response);
+      
+      output.textContent += '✅ EMAIL VERIFICATION SUCCESS!\n\n';
+      output.textContent += 'VERIFIED RESPONSE:\n';
+      output.textContent += JSON.stringify(response, null, 2);
+      
+      // Check if QR Code is now visible
+      if (response && response.data && response.data.obj && response.data.obj.esimList) {
+        const esim = response.data.obj.esimList[0];
+        if (esim && esim.qrCodeUrl) {
+          output.textContent += '\n\n🎉 QR CODE URL RECEIVED:\n';
+          output.textContent += esim.qrCodeUrl + '\n';
+          
+          // Show QR Code in modal
+          document.getElementById('emailError').style.color = 'green';
+          document.getElementById('emailError').innerHTML = '✅ Verified! QR Code: <br><img src="' + esim.qrCodeUrl + '" style="width:150px; margin-top:10px;">';
+        }
+      }
+      
+      status.className = 'status success';
+      status.textContent = '✅ Email Verified Successfully!';
+      status.style.display = 'block';
+      
+      // Close modal after 3 seconds
+      setTimeout(closeEmailModal, 3000);
+    },
+    error: function(xhr, status, error) {
+      console.error('Email Verification Error:', xhr, status, error);
+      
+      output.textContent += '❌ EMAIL VERIFICATION ERROR:\n';
+      output.textContent += 'Status: ' + status + '\n';
+      output.textContent += 'Error: ' + error + '\n';
+      
+      document.getElementById('emailError').style.color = 'red';
+      document.getElementById('emailError').textContent = 'Verification failed: ' + error;
+    }
+  });
 }
 
 function testAPI() {
