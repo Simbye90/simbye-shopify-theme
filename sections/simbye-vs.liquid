@@ -295,75 +295,107 @@
   }
   
   .table-header-cell {
-    padding: 24px 16px;
+    padding: 28px 20px;
   }
   
   .table-header-cell:first-child {
     width: 35%;
-    padding-left: 24px;
+    padding-left: 32px;
   }
   
   .best-choice-badge {
-    font-size: 11px;
-    padding: 4px 12px;
-    top: 8px;
+    font-size: 12px;
+    padding: 5px 14px;
+    top: 10px;
   }
   
   .provider-name {
-    font-size: 16px;
-    margin-top: 20px;
+    font-size: 20px;
+    margin-top: 24px;
   }
   
   .provider-type {
-    font-size: 13px;
+    font-size: 14px;
   }
   
   .table-cell {
-    padding: 20px 16px;
+    padding: 28px 20px;
+    vertical-align: middle;
   }
   
   .table-cell:first-child {
-    padding-left: 24px;
-    padding-right: 16px;
+    padding-left: 32px;
+    padding-right: 20px;
+  }
+  
+  /* GRÖSSERE ICONS UND ABSTÄNDE DESKTOP */
+  .feature-wrapper {
+    gap: 20px;
   }
   
   .feature-icon-circle {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
   }
   
   .feature-icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
   
-  /* FEATURE NAME GRÖSSER AUF DESKTOP */
+  /* FEATURE NAME 24PX WIE GEWÜNSCHT */
   .feature-name {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 600;
   }
   
+  /* VALUE ICONS AUCH GRÖSSER */
   .check-circle,
   .x-circle,
   .warning-circle {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
   }
   
   .check-icon,
   .x-icon,
   .warning-icon {
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
   }
   
   .value-text {
-    font-size: 13px;
-    margin-top: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+    font-weight: 700;
   }
   
   .value-subtext {
-    font-size: 11px;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+}
+
+/* Desktop Large */
+@media (min-width: 1200px) {
+  .comparison-container {
+    padding: 0 60px;
+  }
+  
+  .table-header-cell {
+    padding: 32px 24px;
+  }
+  
+  .table-header-cell:first-child {
+    padding-left: 40px;
+  }
+  
+  .table-cell {
+    padding: 32px 24px;
+  }
+  
+  .table-cell:first-child {
+    padding-left: 40px;
   }
 }
 
