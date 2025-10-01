@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check eSIM Status</title>
+  
+  <!-- jQuery LADEN - WICHTIG! -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
 <!-- templates/page.check-esim.liquid -->
 <!-- SIMBYE CHECK ESIM - ENTERPRISE PRODUCTION VERSION -->
 
@@ -1272,7 +1282,7 @@ function initCheckEsim() {
     });
   }
   
-  // Display Basic Data - FIXED DATA USAGE
+  // Display Basic Data (without email verification)
   function displayBasicData(esim) {
     const pkg = esim.packageList && esim.packageList[0] || {};
     
@@ -1282,104 +1292,30 @@ function initCheckEsim() {
     // Package Info
     $('#packageName').text(pkg.packageName || 'eSIM Package');
     
-    // Detect type first
-    const esimType = detectEsimType(esim, pkg);
+    // Calculate data
+    const totalGB = (esim.totalVolume / 1073741824).toFixed(2);
+    const usedGB = (esim.orderUsage / 1073741824).toFixed(2);
+    const leftGB = (totalGB - usedGB).toFixed(2);
+    const percentage = esim.totalVolume > 0 ? Math.round((esim.orderUsage / esim.totalVolume) * 100) : 0;
     
-    // Calculate data - FIX for 0 usage
-    const totalBytes = esim.totalVolume || 0;
-    const usedBytes = esim.orderUsage || 0;
-    
-    let totalDisplay = '';
-    let usedDisplay = '';
-    let leftDisplay = '';
-    let percentage = 0;
-    
-    if (esimType.type === 'DAILY') {
-      // Daily: Show per day limit
-      const dailyBytes = pkg.volume || 1073741824; // 1GB default
-      const dailyGB = (dailyBytes / 1073741824).toFixed(1);
-      const totalDays = esim.totalDuration || 1;
-      
-      totalDisplay = dailyGB + ' GB/Day';
-      $('#totalData').text(dailyGB + ' GB/Day');
-      
-      // For daily, show today's usage if activated
-      if (esim.activateTime) {
-        // Calculate days passed
-        const activatedDate = new Date(esim.activateTime);
-        const today = new Date();
-        const daysPassed = Math.floor((today - activatedDate) / (1000 * 60 * 60 * 24));
-        
-        // Estimate usage (since we don't have daily breakdown)
-        const estimatedDailyUsage = usedBytes / Math.max(daysPassed, 1);
-        const todayUsedGB = (estimatedDailyUsage / 1073741824).toFixed(2);
-        const todayLeftGB = (dailyGB - todayUsedGB).toFixed(2);
-        
-        usedDisplay = todayUsedGB + ' GB today';
-        leftDisplay = todayLeftGB + ' GB today';
-        percentage = Math.round((estimatedDailyUsage / dailyBytes) * 100);
-      } else {
-        usedDisplay = '0 GB';
-        leftDisplay = dailyGB + ' GB/Day';
-        percentage = 0;
-      }
-      
-    } else if (esimType.type === 'UNLIMITED') {
-      // Unlimited: No limit
-      totalDisplay = '∞ Unlimited';
-      $('#totalData').text('∞ Unlimited');
-      
-      // Show actual usage even for unlimited
-      const usedGB = (usedBytes / 1073741824).toFixed(2);
-      usedDisplay = usedGB + ' GB';
-      leftDisplay = 'Unlimited';
-      percentage = 0; // No percentage for unlimited
-      
-    } else {
-      // Normal: Show total data
-      const totalGB = (totalBytes / 1073741824).toFixed(2);
-      const usedGB = (usedBytes / 1073741824).toFixed(2);
-      const leftGB = Math.max(0, totalGB - usedGB).toFixed(2);
-      
-      totalDisplay = totalGB + ' GB';
-      usedDisplay = usedGB + ' GB';
-      leftDisplay = leftGB + ' GB';
-      
-      $('#totalData').text(totalGB + ' GB');
-      
-      // Calculate percentage
-      if (totalBytes > 0) {
-        percentage = Math.min(100, Math.round((usedBytes / totalBytes) * 100));
-      }
-    }
-    
-    // Update validity
-    $('#validity').text((esim.totalDuration || 0) + ' ' + (esim.durationUnit || 'Days'));
-    
-    // Check activation status
-    if (!esim.activateTime) {
-      // Not activated yet - override displays
-      $('#dataUsed').text('Not Activated').css('color', '#f59e0b');
-      $('#dataLeft').text(totalDisplay);
-      $('#usagePercent').text('0%');
-      percentage = 0;
-    } else {
-      // Show calculated usage
-      $('#dataUsed').text(usedDisplay).css('color', '');
-      $('#dataLeft').text(leftDisplay);
-      $('#usagePercent').text(percentage + '%');
-    }
-    
-    // Update other stats
+    // Update Stats
+    $('#totalData').text(totalGB + ' GB');
+    $('#validity').text((esim.totalDuration || 0) + ' Days');
     $('#expiryDate').text(formatDate(esim.expiredTime));
     $('#location').text(pkg.locationCode || '-');
     
-    // Update ring progress animation
+    // Usage
+    $('#dataUsed').text(usedGB + ' GB');
+    $('#dataLeft').text(leftGB + ' GB');
+    $('#usagePercent').text(percentage + '%');
+    
+    // Update ring progress
     const circumference = 2 * Math.PI * 80;
     const offset = circumference - (percentage / 100) * circumference;
-    $('#progressRing').animate({ 'stroke-dashoffset': offset }, 1000);
+    $('#progressRing').css('stroke-dashoffset', offset);
     
-    // Detect status
+    // Detect type and status
+    const esimType = detectEsimType(esim, pkg);
     const esimStatus = getEsimStatus(esim);
     
     // Update status and type badges
@@ -1391,15 +1327,6 @@ function initCheckEsim() {
     // Show email verification needed
     $('#verifyOverlay').removeClass('hidden');
     $('#protectedContent').removeClass('unlocked');
-    
-    // Debug log
-    console.log('eSIM Data:', {
-      type: esimType.type,
-      totalVolume: esim.totalVolume,
-      orderUsage: esim.orderUsage,
-      activateTime: esim.activateTime,
-      percentage: percentage
-    });
   }
   
   // Verify Email
