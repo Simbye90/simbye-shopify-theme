@@ -8,348 +8,686 @@
   <!-- jQuery LADEN - WICHTIG! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
-<!-- templates/page.api-test.liquid -->
-<!-- SMART eSIM API TESTER - ENTERPRISE VERSION -->
+<!-- templates/page.check-esim.liquid -->
+<!-- SIMBYE CHECK ESIM - ENTERPRISE PRODUCTION VERSION -->
 
 <style>
-.api-test {
-  max-width: 1400px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: system-ui, -apple-system, sans-serif;
+/* ================================================
+   SIMBYE CHECK ESIM - ENTERPRISE DESIGN SYSTEM
+   ================================================ */
+
+:root {
+  --check-primary: #009a61;
+  --check-primary-dark: #00824f;
+  --check-accent: #00d97e;
+  --check-text: #1a1a1a;
+  --check-text-secondary: #666666;
+  --check-bg: linear-gradient(180deg, #ffffff 0%, #f8fffe 50%, #f0faf7 100%);
+  --check-card-bg: #ffffff;
+  --check-border: rgba(0, 0, 0, 0.06);
+  --check-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --check-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --check-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --check-radius: 24px;
+  --check-radius-sm: 16px;
+  --check-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.test-header {
+[data-theme="dark"] {
+  --check-text: #f5f5f5;
+  --check-text-secondary: #999999;
+  --check-bg: linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 50%, #0a0a0a 100%);
+  --check-card-bg: rgba(26, 26, 26, 0.95);
+  --check-border: rgba(255, 255, 255, 0.08);
+  --check-primary: #00d97e;
+  --check-primary-dark: #009a61;
+  --check-accent: #00ff88;
+}
+
+/* Kill Shopify Grid */
+.shopify-section:has(.check-esim-page) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* Main Page */
+.check-esim-page {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  min-height: calc(100vh - 90px);
+  background: var(--check-bg);
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Container */
+.check-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Search Section */
+.search-section {
+  background: var(--check-card-bg);
+  border-radius: var(--check-radius);
+  padding: 48px;
+  box-shadow: var(--check-shadow-lg);
+  max-width: 650px;
+  margin: 0 auto 50px;
+  position: relative;
+  animation: fadeInUp 0.8s ease;
+  border: 2px solid var(--check-border);
+}
+
+.search-header {
   text-align: center;
   margin-bottom: 40px;
-  padding: 30px;
-  background: linear-gradient(135deg, #009a61, #00d97e);
-  color: white;
-  border-radius: 16px;
 }
 
-.test-header h1 {
-  margin: 0;
-  font-size: 32px;
+.search-title {
+  font-size: 36px;
   font-weight: 800;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 12px;
 }
 
-.test-controls {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 30px;
-  padding: 25px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.test-controls input {
-  flex: 1;
-  padding: 14px 20px;
+.search-subtitle {
+  color: var(--check-text-secondary);
   font-size: 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 10px;
-  transition: all 0.3s;
 }
 
-.test-controls input:focus {
-  border-color: #009a61;
+/* Search Form */
+.search-form {
+  display: flex;
+  background: #f8f8f8;
+  border-radius: 100px;
+  padding: 6px;
+  border: 2px solid transparent;
+  transition: var(--check-transition);
+  position: relative;
+}
+
+[data-theme="dark"] .search-form {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.search-form:focus-within {
+  border-color: var(--check-primary);
+  box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
+}
+
+.search-input {
+  flex: 1;
+  padding: 18px 24px;
+  background: transparent;
+  border: none;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0,154,97,0.1);
+  font-size: 16px;
+  color: var(--check-text);
+  font-weight: 500;
 }
 
-.test-btn {
-  padding: 14px 28px;
-  background: #009a61;
+.search-button {
+  padding: 16px 42px;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
   color: white;
   border: none;
-  border-radius: 10px;
-  font-weight: 600;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.3s;
-}
-
-.test-btn:hover {
-  background: #00824f;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,154,97,0.3);
-}
-
-.test-btn.secondary {
-  background: #6b7280;
-}
-
-.test-btn.danger {
-  background: #ef4444;
-}
-
-/* Quick Test Buttons */
-.quick-tests {
-  margin-bottom: 30px;
-  padding: 20px;
-  background: #f9fafb;
-  border-radius: 12px;
-}
-
-.quick-tests h3 {
-  margin-top: 0;
-  color: #374151;
-  font-size: 14px;
+  transition: var(--check-transition);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
-.test-examples {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+.search-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
 }
 
-.example-btn {
-  padding: 10px 18px;
-  background: white;
-  border: 2px solid #e5e7eb;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.3s;
+.search-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
-.example-btn:hover {
-  border-color: #009a61;
-  background: #f0fdf4;
-}
-
-.example-btn.normal {
-  border-left: 4px solid #3b82f6;
-}
-
-.example-btn.unlimited {
-  border-left: 4px solid #8b5cf6;
-}
-
-.example-btn.daily {
-  border-left: 4px solid #f59e0b;
-}
-
-/* Status Messages */
-.status-msg {
+/* Messages */
+.message-box {
+  margin-top: 20px;
   padding: 16px 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  font-weight: 500;
+  border-radius: var(--check-radius-sm);
   display: none;
-  animation: slideIn 0.3s;
+  animation: slideIn 0.3s ease;
 }
 
-.status-msg.show {
+.message-box.show {
   display: block;
 }
 
-.status-msg.loading {
-  background: #fef3c7;
-  color: #92400e;
-  border: 1px solid #fcd34d;
+.message-box.error {
+  background: #fee2e2;
+  color: #dc2626;
+  border: 1px solid #fca5a5;
 }
 
-.status-msg.success {
+.message-box.success {
   background: #d1fae5;
   color: #065f46;
   border: 1px solid #6ee7b7;
 }
 
-.status-msg.error {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
+.message-box.warning {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
 }
 
-/* Main Results Container */
-.results-container {
+/* Loading State */
+.loading-state {
   display: none;
-  gap: 30px;
-  animation: fadeIn 0.5s;
+  text-align: center;
+  padding: 60px 20px;
 }
 
-.results-container.show {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.loading-state.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
 }
 
-/* eSIM Type Card */
-.esim-type-card {
-  background: white;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  grid-column: 1 / -1;
+.loading-spinner {
+  width: 56px;
+  height: 56px;
+  border: 3px solid rgba(0, 154, 97, 0.1);
+  border-top-color: var(--check-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 24px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Main eSIM Card */
+.esim-main-card {
+  display: none;
+  background: var(--check-card-bg);
+  border-radius: var(--check-radius);
+  overflow: hidden;
+  box-shadow: var(--check-shadow-lg);
+  max-width: 1000px;
+  margin: 0 auto;
+  border: 2px solid var(--check-border);
+}
+
+.esim-main-card.active {
+  display: block;
+  animation: fadeInUp 0.8s ease;
+}
+
+/* eSIM Header */
+.esim-header {
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  padding: 40px;
   position: relative;
   overflow: hidden;
 }
 
-.esim-type-card::before {
+.esim-header::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: subtlePulse 4s ease-in-out infinite;
 }
 
-.esim-type-card.normal::before {
-  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+.esim-header-content {
+  position: relative;
+  z-index: 1;
 }
 
-.esim-type-card.unlimited::before {
-  background: linear-gradient(90deg, #8b5cf6, #a78bfa);
-}
-
-.esim-type-card.daily::before {
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
-}
-
-.type-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
-}
-
-.type-badge {
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-weight: 700;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+.esim-package-name {
+  font-size: 32px;
+  font-weight: 800;
   color: white;
+  margin-bottom: 12px;
 }
 
-.type-badge.normal {
-  background: linear-gradient(135deg, #3b82f6, #60a5fa);
-}
-
-.type-badge.unlimited {
-  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
-}
-
-.type-badge.daily {
-  background: linear-gradient(135deg, #f59e0b, #fbbf24);
-}
-
-.esim-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #111827;
-  margin: 0;
-}
-
-/* Data Grid */
-.data-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.esim-status-row {
+  display: flex;
+  align-items: center;
   gap: 20px;
-  margin-top: 25px;
+  flex-wrap: wrap;
 }
 
-.data-item {
-  background: #f9fafb;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 100px;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.data-label {
-  font-size: 12px;
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Quick Stats Grid */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 40px;
+  background: linear-gradient(to bottom, var(--check-card-bg), rgba(248, 255, 254, 0.5));
+}
+
+[data-theme="dark"] .quick-stats {
+  background: transparent;
+}
+
+.stat-card {
+  background: var(--check-card-bg);
+  padding: 24px;
+  border-radius: var(--check-radius-sm);
+  border: 2px solid var(--check-border);
+  transition: var(--check-transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--check-shadow-md);
+}
+
+.stat-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.25);
+}
+
+.stat-icon svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+  stroke-width: 2;
+}
+
+.stat-label {
+  font-size: 13px;
   text-transform: uppercase;
-  color: #6b7280;
+  color: var(--check-text-secondary);
   letter-spacing: 0.5px;
   margin-bottom: 8px;
 }
 
-.data-value {
-  font-size: 20px;
+.stat-value {
+  font-size: 22px;
   font-weight: 700;
-  color: #111827;
+  color: var(--check-text);
 }
 
-.data-value.green {
-  color: #10b981;
+.stat-value.green { color: #10b981; }
+.stat-value.red { color: #ef4444; }
+.stat-value.yellow { color: #f59e0b; }
+
+/* Usage Visualization */
+.usage-section {
+  padding: 40px;
+  background: var(--check-card-bg);
 }
 
-.data-value.red {
-  color: #ef4444;
+.usage-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: center;
+  color: var(--check-text);
 }
 
-.data-value.yellow {
-  color: #f59e0b;
+.usage-ring-container {
+  max-width: 300px;
+  margin: 0 auto 40px;
+  position: relative;
 }
 
-.data-value.purple {
-  color: #8b5cf6;
+.usage-ring {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
 }
 
-/* Important Info Box */
-.important-box {
-  background: linear-gradient(135deg, #fef3c7, #fef9c3);
-  border: 2px solid #fbbf24;
-  border-radius: 12px;
-  padding: 20px;
-  margin-top: 20px;
+.usage-ring-bg {
+  fill: none;
+  stroke: #e5e7eb;
+  stroke-width: 20;
 }
 
-.important-box h3 {
-  margin-top: 0;
-  color: #92400e;
+[data-theme="dark"] .usage-ring-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.usage-ring-progress {
+  fill: none;
+  stroke: url(#gradient);
+  stroke-width: 20;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.usage-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.usage-percentage {
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--check-primary);
+}
+
+.usage-label {
+  font-size: 14px;
+  color: var(--check-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.usage-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 24px;
+  background: rgba(0, 154, 97, 0.05);
+  border-radius: var(--check-radius-sm);
+}
+
+.usage-stat {
+  text-align: center;
+}
+
+.usage-stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--check-text);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.usage-stat-label {
+  font-size: 13px;
+  color: var(--check-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Protected Content */
+.protected-section {
+  padding: 40px;
+  background: linear-gradient(to bottom, rgba(248, 255, 254, 0.5), var(--check-card-bg));
+  position: relative;
+}
+
+.protected-content {
+  filter: blur(10px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.4;
+  transition: var(--check-transition);
+}
+
+.protected-content.unlocked {
+  filter: none;
+  pointer-events: auto;
+  user-select: auto;
+  opacity: 1;
+}
+
+.verify-overlay {
+  position: absolute;
+  inset: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: var(--check-radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--check-border);
+  box-shadow: var(--check-shadow-lg);
+  transition: var(--check-transition);
+}
+
+[data-theme="dark"] .verify-overlay {
+  background: rgba(26, 26, 26, 0.95);
+}
+
+.verify-overlay.hidden {
+  display: none;
+}
+
+.verify-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.3);
 }
 
-.key-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin-top: 15px;
+.verify-icon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
 }
 
-.key-item {
+.verify-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--check-text);
+  margin-bottom: 12px;
+}
+
+.verify-subtitle {
+  color: var(--check-text-secondary);
+  margin-bottom: 32px;
+  text-align: center;
+  max-width: 400px;
+}
+
+.verify-button {
+  padding: 18px 48px;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--check-transition);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
+}
+
+.verify-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.4);
+}
+
+/* QR Code Section */
+.qr-container {
+  text-align: center;
+  padding: 40px;
+}
+
+.qr-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.qr-code {
+  width: 240px;
+  height: 240px;
+  border: 3px solid #e5e7eb;
+  border-radius: var(--check-radius);
+  padding: 12px;
+  background: white;
+  box-shadow: var(--check-shadow-lg);
+}
+
+.qr-actions {
   display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.qr-action-btn {
+  padding: 12px 24px;
+  background: var(--check-card-bg);
+  border: 2px solid var(--check-border);
+  border-radius: var(--check-radius-sm);
+  color: var(--check-text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--check-transition);
+  display: inline-flex;
   align-items: center;
   gap: 8px;
+}
+
+.qr-action-btn:hover {
+  border-color: var(--check-primary);
+  background: rgba(0, 154, 97, 0.05);
+}
+
+.qr-action-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Technical Details */
+.tech-details {
+  padding: 40px;
+  background: var(--check-card-bg);
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+}
+
+.detail-item {
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 217, 126, 0.05));
+  border-radius: var(--check-radius-sm);
+  border: 1px solid var(--check-border);
+}
+
+.detail-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: var(--check-text-secondary);
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.detail-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--check-text);
+  word-break: break-all;
+}
+
+/* Actions Section */
+.actions-section {
+  padding: 40px;
+  background: linear-gradient(to bottom, rgba(248, 255, 254, 0.5), var(--check-card-bg));
+  text-align: center;
+}
+
+.primary-action {
+  padding: 20px 60px;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--check-transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.3);
+  animation: subtlePulse 4s ease-in-out infinite;
+}
+
+.primary-action:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(0, 154, 97, 0.4);
+}
+
+.primary-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.action-info {
+  margin-top: 16px;
   font-size: 14px;
-  color: #92400e;
+  color: var(--check-text-secondary);
+}
+
+.action-info.warning {
+  color: #f59e0b;
   font-weight: 600;
 }
 
-/* Raw Data Display */
-.raw-data {
-  background: #1e293b;
-  color: #10b981;
-  padding: 25px;
-  border-radius: 12px;
-  font-family: 'Monaco', 'Courier New', monospace;
-  font-size: 13px;
-  line-height: 1.8;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  word-break: break-all;
-  max-height: 600px;
-  overflow-y: auto;
-}
-
-.raw-data::-webkit-scrollbar {
-  width: 8px;
-}
-
-.raw-data::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-
-.raw-data::-webkit-scrollbar-thumb {
-  background: #475569;
-  border-radius: 4px;
+.action-info.error {
+  color: #ef4444;
+  font-weight: 600;
 }
 
 /* Email Modal */
@@ -357,85 +695,102 @@
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
   z-index: 9999;
-  animation: fadeIn 0.3s;
+  animation: fadeIn 0.3s ease;
 }
 
-.modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: white;
-  padding: 40px;
-  border-radius: 20px;
-  max-width: 450px;
+.email-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-modal-content {
+  background: var(--check-card-bg);
+  padding: 48px;
+  border-radius: var(--check-radius);
+  max-width: 500px;
   width: 90%;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
 }
 
-.modal-header {
+.email-modal-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 }
 
-.modal-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
+.email-modal-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
 }
 
-.modal-title {
-  font-size: 24px;
+.email-modal-icon svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+}
+
+.email-modal-title {
+  font-size: 28px;
   font-weight: 700;
-  color: #111827;
-  margin: 0 0 10px;
+  color: var(--check-text);
+  margin-bottom: 12px;
 }
 
-.modal-subtitle {
-  color: #6b7280;
-  font-size: 14px;
+.email-modal-subtitle {
+  color: var(--check-text-secondary);
+  font-size: 15px;
 }
 
 .email-input {
   width: 100%;
-  padding: 14px 20px;
-  border: 2px solid #e5e7eb;
-  border-radius: 10px;
+  padding: 16px 20px;
+  border: 2px solid var(--check-border);
+  border-radius: var(--check-radius-sm);
   font-size: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  transition: var(--check-transition);
 }
 
 .email-input:focus {
-  border-color: #009a61;
   outline: none;
-  box-shadow: 0 0 0 3px rgba(0,154,97,0.1);
+  border-color: var(--check-primary);
+  box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
 }
 
-.modal-actions {
+.email-modal-actions {
   display: flex;
   gap: 12px;
 }
 
-.modal-btn {
+.email-modal-btn {
   flex: 1;
-  padding: 14px;
+  padding: 16px;
   border: none;
-  border-radius: 10px;
+  border-radius: var(--check-radius-sm);
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: var(--check-transition);
 }
 
-.modal-btn.primary {
-  background: linear-gradient(135deg, #009a61, #00d97e);
+.email-modal-btn.primary {
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
   color: white;
 }
 
-.modal-btn.secondary {
+.email-modal-btn.secondary {
   background: #f3f4f6;
-  color: #6b7280;
+  color: var(--check-text-secondary);
 }
 
 /* Animations */
@@ -444,485 +799,786 @@
   to { opacity: 1; }
 }
 
-@keyframes slideIn {
-  from { transform: translateY(-10px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* Responsive */
+@keyframes slideIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes subtlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  .results-container.show {
-    grid-template-columns: 1fr;
+  .check-container {
+    padding: 0 20px;
   }
   
-  .test-controls {
+  .search-section {
+    padding: 32px 24px;
+    border-radius: 20px;
+  }
+  
+  .search-title {
+    font-size: 28px;
+  }
+  
+  .search-form {
     flex-direction: column;
+    padding: 8px;
+    border-radius: 20px;
   }
   
-  .data-grid {
+  .search-button {
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  .esim-header {
+    padding: 32px 24px;
+  }
+  
+  .esim-package-name {
+    font-size: 24px;
+  }
+  
+  .quick-stats {
     grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  
+  .usage-ring-container {
+    max-width: 250px;
+  }
+  
+  .usage-percentage {
+    font-size: 36px;
+  }
+  
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .primary-action {
+    padding: 18px 40px;
+    font-size: 16px;
+  }
+  
+  .email-modal-content {
+    padding: 32px 24px;
+  }
+  
+  .email-modal-title {
+    font-size: 24px;
+  }
+  
+  /* Mobile Sticky Action */
+  .mobile-sticky-action {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    background: var(--check-card-bg);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+  }
+  
+  .mobile-sticky-action button {
+    width: 100%;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-sticky-action {
+    display: none;
   }
 }
 </style>
 
-<div class="api-test">
-  <!-- Header -->
-  <div class="test-header">
-    <h1>🔬 eSIM Smart API Tester</h1>
-    <p style="margin: 10px 0 0; opacity: 0.9;">Detects Normal, Unlimited & Daily eSIMs automatically</p>
-  </div>
-  
-  <!-- Test Controls -->
-  <div class="test-controls">
-    <input 
-      type="text" 
-      id="orderInput" 
-      placeholder="Enter Order Number or eSIM TranNo"
-    >
-    <button class="test-btn" onclick="testOrder()">🔍 TEST</button>
-    <button class="test-btn secondary" onclick="testWithEmail()">📧 TEST WITH EMAIL</button>
-    <button class="test-btn danger" onclick="clearAll()">🗑️ CLEAR</button>
-  </div>
-  
-  <!-- Quick Test Examples -->
-  <div class="quick-tests">
-    <h3>Quick Test Examples:</h3>
-    <div class="test-examples">
-      <button class="example-btn normal" onclick="quickTest('25100113120003')">
-        🔵 Albania 3GB (Normal)
-      </button>
-      <button class="example-btn daily" onclick="quickTest('25100116090001')">
-        🟡 Brazil 1GB/Day (Daily)
-      </button>
-      <button class="example-btn unlimited" onclick="quickTest('unlimited-test')">
-        🟣 Unlimited Test
-      </button>
-      <button class="example-btn" onclick="quickTest('121233')">
-        Generic: 121233
-      </button>
-      <button class="example-btn" onclick="quickTest('B25100110340001')">
-        Order: B25100110340001
-      </button>
-    </div>
-  </div>
-  
-  <!-- Status Messages -->
-  <div id="statusMsg" class="status-msg"></div>
-  
-  <!-- Results Container -->
-  <div id="results" class="results-container">
-    <!-- eSIM Type Card -->
-    <div id="typeCard" class="esim-type-card">
-      <div class="type-header">
-        <h2 class="esim-title" id="esimTitle">Loading...</h2>
-        <span id="typeBadge" class="type-badge">DETECTING...</span>
+<!-- Main HTML Structure -->
+<div class="check-esim-page">
+  <div class="check-container">
+    
+    <!-- Search Section -->
+    <div class="search-section">
+      <div class="search-header">
+        <h1 class="search-title" data-i18n="check.title">Check Your eSIM</h1>
+        <p class="search-subtitle" data-i18n="check.subtitle">Enter your order number to view status</p>
       </div>
       
-      <!-- Important Info -->
-      <div class="important-box">
-        <h3>⚡ Key Information</h3>
-        <div class="key-info" id="keyInfo"></div>
+      <div class="search-form">
+        <input 
+          type="text" 
+          id="orderInput" 
+          class="search-input"
+          placeholder="Order number (e.g. 121233)"
+          data-i18n-placeholder="check.input_placeholder"
+        >
+        <button id="searchBtn" class="search-button" data-i18n="check.search_button">
+          SEARCH
+        </button>
       </div>
       
-      <!-- Data Grid -->
-      <div class="data-grid" id="dataGrid"></div>
+      <div id="messageBox" class="message-box"></div>
     </div>
     
-    <!-- Raw JSON Display -->
-    <div style="grid-column: 1 / -1;">
-      <h3 style="margin-bottom: 15px;">📊 Raw API Response</h3>
-      <div class="raw-data" id="rawData"></div>
+    <!-- Loading State -->
+    <div id="loadingState" class="loading-state">
+      <div class="loading-spinner"></div>
+      <p data-i18n="check.loading">Loading your eSIM data...</p>
     </div>
+    
+    <!-- Main eSIM Card -->
+    <div id="esimCard" class="esim-main-card">
+      
+      <!-- Header -->
+      <div class="esim-header">
+        <div class="esim-header-content">
+          <h2 class="esim-package-name" id="packageName">Loading...</h2>
+          <div class="esim-status-row">
+            <div class="status-badge">
+              <span class="status-dot"></span>
+              <span id="statusText">Active</span>
+            </div>
+            <div class="status-badge" id="esimType">
+              <span id="typeText">Normal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Quick Stats -->
+      <div class="quick-stats">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <div class="stat-label" data-i18n="check.data_total">Total Data</div>
+          <div class="stat-value" id="totalData">0 GB</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="stat-label" data-i18n="check.validity">Validity</div>
+          <div class="stat-value" id="validity">0 Days</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div class="stat-label" data-i18n="check.expires">Expires</div>
+          <div class="stat-value" id="expiryDate">-</div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div class="stat-label" data-i18n="check.location">Location</div>
+          <div class="stat-value" id="location">-</div>
+        </div>
+      </div>
+      
+      <!-- Usage Visualization -->
+      <div class="usage-section">
+        <h3 class="usage-title" data-i18n="check.data_usage">Data Usage</h3>
+        
+        <div class="usage-ring-container">
+          <svg class="usage-ring" viewBox="0 0 200 200">
+            <defs>
+              <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#009a61" />
+                <stop offset="100%" stop-color="#00d97e" />
+              </linearGradient>
+            </defs>
+            <circle cx="100" cy="100" r="80" class="usage-ring-bg" />
+            <circle cx="100" cy="100" r="80" class="usage-ring-progress" 
+                    stroke-dasharray="502" 
+                    stroke-dashoffset="502" 
+                    id="progressRing" />
+          </svg>
+          <div class="usage-center">
+            <div class="usage-percentage" id="usagePercent">0%</div>
+            <div class="usage-label" data-i18n="check.used">Used</div>
+          </div>
+        </div>
+        
+        <div class="usage-stats">
+          <div class="usage-stat">
+            <span class="usage-stat-value" id="dataUsed">0 GB</span>
+            <span class="usage-stat-label" data-i18n="check.consumed">Consumed</span>
+          </div>
+          <div class="usage-stat">
+            <span class="usage-stat-value" id="dataLeft">0 GB</span>
+            <span class="usage-stat-label" data-i18n="check.remaining">Remaining</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Protected Section -->
+      <div class="protected-section">
+        <div class="verify-overlay" id="verifyOverlay">
+          <div class="verify-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <h3 class="verify-title" data-i18n="check.verify_title">Verify Your Identity</h3>
+          <p class="verify-subtitle" data-i18n="check.verify_subtitle">
+            To view QR code and sensitive data, please verify your email address
+          </p>
+          <button class="verify-button" id="verifyBtn" data-i18n="check.verify_button">
+            VERIFY EMAIL
+          </button>
+        </div>
+        
+        <div class="protected-content" id="protectedContent">
+          <!-- QR Code -->
+          <div class="qr-container">
+            <div class="qr-wrapper">
+              <img id="qrCode" class="qr-code" src="" alt="QR Code">
+            </div>
+            <div class="qr-actions">
+              <button class="qr-action-btn" id="downloadQR">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span data-i18n="check.download_qr">Download</span>
+              </button>
+              <button class="qr-action-btn" id="shareQR">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a9.001 9.001 0 01-7.432 3.901A9 9 0 015.416 17m13.168-3.026A9.001 9.001 0 0118.584 7m0 0a9 9 0 00-7.432-3.901m7.432 3.901L21 4.5M3 19.5l2.416-2.584" />
+                </svg>
+                <span data-i18n="check.share">Share</span>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Technical Details -->
+          <div class="tech-details">
+            <div class="details-grid">
+              <div class="detail-item">
+                <div class="detail-label">ICCID</div>
+                <div class="detail-value" id="iccid">-</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">PIN</div>
+                <div class="detail-value" id="pin">-</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">PUK</div>
+                <div class="detail-value" id="puk">-</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">APN</div>
+                <div class="detail-value" id="apn">-</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">Network</div>
+                <div class="detail-value" id="network">-</div>
+              </div>
+              <div class="detail-item">
+                <div class="detail-label">IP Export</div>
+                <div class="detail-value" id="ipExport">-</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Actions Section -->
+      <div class="actions-section">
+        <button id="primaryAction" class="primary-action">
+          TOP UP NOW
+        </button>
+        <div id="actionInfo" class="action-info"></div>
+      </div>
+      
+    </div>
+    
   </div>
 </div>
 
 <!-- Email Verification Modal -->
 <div id="emailModal" class="email-modal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <div class="modal-icon">🔐</div>
-      <h2 class="modal-title">Email Verification</h2>
-      <p class="modal-subtitle">Enter your email to unlock QR Code & sensitive data</p>
+  <div class="email-modal-content">
+    <div class="email-modal-header">
+      <div class="email-modal-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <h2 class="email-modal-title" data-i18n="check.email_title">Email Verification</h2>
+      <p class="email-modal-subtitle" data-i18n="check.email_subtitle">
+        Enter your email to unlock full access
+      </p>
     </div>
+    
     <input 
       type="email" 
       id="emailInput" 
       class="email-input"
       placeholder="your@email.com"
+      data-i18n-placeholder="check.email_placeholder"
     >
-    <div class="modal-actions">
-      <button class="modal-btn primary" onclick="verifyWithEmail()">Verify</button>
-      <button class="modal-btn secondary" onclick="closeEmailModal()">Cancel</button>
+    
+    <div class="email-modal-actions">
+      <button class="email-modal-btn primary" id="verifyEmailBtn">
+        <span data-i18n="check.verify">Verify</span>
+      </button>
+      <button class="email-modal-btn secondary" id="cancelEmailBtn">
+        <span data-i18n="check.cancel">Cancel</span>
+      </button>
     </div>
   </div>
 </div>
 
+<!-- Mobile Sticky Action (only visible on mobile) -->
+<div class="mobile-sticky-action" id="mobileAction" style="display: none;">
+  <button id="mobileActionBtn" class="primary-action">
+    TOP UP NOW
+  </button>
+</div>
+
 <script>
-// jQuery laden falls nicht vorhanden
+// Check jQuery
 if (typeof jQuery === 'undefined') {
-  document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"><\/script>');
+  var script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
+  document.head.appendChild(script);
+  script.onload = initCheckEsim;
+} else {
+  jQuery(document).ready(initCheckEsim);
 }
 
-// Global Variables
-let currentOrder = null;
-let currentEsimData = null;
-
-// Quick Test
-function quickTest(orderNumber) {
-  document.getElementById('orderInput').value = orderNumber;
-  testOrder();
-}
-
-// Clear All
-function clearAll() {
-  document.getElementById('orderInput').value = '';
-  document.getElementById('statusMsg').className = 'status-msg';
-  document.getElementById('results').classList.remove('show');
-  document.getElementById('rawData').textContent = '';
-  currentOrder = null;
-  currentEsimData = null;
-}
-
-// Test with Email
-function testWithEmail() {
-  const order = document.getElementById('orderInput').value.trim();
-  if (!order) {
-    showStatus('Please enter an order number first', 'error');
-    return;
-  }
-  currentOrder = order;
-  document.getElementById('emailModal').style.display = 'block';
-}
-
-// Close Email Modal
-function closeEmailModal() {
-  document.getElementById('emailModal').style.display = 'none';
-  document.getElementById('emailInput').value = '';
-}
-
-// Verify with Email
-function verifyWithEmail() {
-  const email = document.getElementById('emailInput').value.trim();
-  if (!email) {
-    alert('Please enter an email');
-    return;
-  }
+function initCheckEsim() {
+  const $ = jQuery;
   
-  closeEmailModal();
-  testOrderWithEmail(currentOrder, email);
-}
-
-// Test Order with Email
-function testOrderWithEmail(orderNumber, email) {
-  const apiUrl = 'https://simbye.com/apps/topup/info/' + orderNumber + '/' + email;
+  // Global Variables
+  let currentOrder = null;
+  let currentEsimData = null;
+  let isEmailVerified = false;
   
-  showStatus('🔐 Testing with email verification...', 'loading');
-  
-  jQuery.ajax({
-    url: apiUrl,
-    method: 'GET',
-    headers: {
-      'ngrok-skip-browser-warning': 'skip',
-      'Accept': 'application/json'
-    },
-    timeout: 10000,
-    success: function(response) {
-      showStatus('✅ Verified! Full data loaded with QR Code', 'success');
-      processResponse(response);
-    },
-    error: function(xhr, status, error) {
-      showStatus('❌ Verification failed: ' + error, 'error');
+  // Translations (would come from locales JSON)
+  const translations = {
+    check: {
+      title: "Check Your eSIM",
+      subtitle: "Enter your order number to view status",
+      loading: "Loading your eSIM data...",
+      error_not_found: "Order not found",
+      error_network: "Network error. Please try again",
+      error_invalid: "Invalid order number",
+      success_loaded: "eSIM data loaded successfully",
+      data_usage: "Data Usage",
+      unlimited_info: "Unlimited data - No limits",
+      daily_info: "Daily data reset at midnight UTC",
+      expired_info: "This eSIM has expired",
+      topup_available: "Top-up available",
+      topup_not_available: "Top-up not available",
+      buy_new: "Buy New eSIM",
+      not_rechargeable: "This plan cannot be recharged"
     }
-  });
-}
-
-// Main Test Function
-function testOrder() {
-  const orderNumber = document.getElementById('orderInput').value.trim();
+  };
   
-  if (!orderNumber) {
-    showStatus('Please enter an order number', 'error');
-    return;
-  }
+  // Initialize
+  init();
   
-  currentOrder = orderNumber;
-  const apiUrl = 'https://simbye.com/apps/topup/info/' + orderNumber;
-  
-  showStatus('🔄 Loading eSIM data...', 'loading');
-  
-  jQuery.ajax({
-    url: apiUrl,
-    method: 'GET',
-    headers: {
-      'ngrok-skip-browser-warning': 'skip',
-      'Accept': 'application/json'
-    },
-    timeout: 10000,
-    success: function(response) {
-      showStatus('✅ Data loaded successfully!', 'success');
-      processResponse(response);
-    },
-    error: function(xhr, status, error) {
-      showStatus('❌ Error: ' + error, 'error');
-      console.error('API Error:', xhr, status, error);
+  function init() {
+    // Check URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderFromUrl = urlParams.get('order_number');
+    
+    if (orderFromUrl) {
+      $('#orderInput').val(orderFromUrl);
+      setTimeout(() => searchOrder(), 500);
     }
-  });
-}
-
-// Process API Response
-function processResponse(response) {
-  console.log('API Response:', response);
-  
-  if (!response || !response.data || !response.data.obj || !response.data.obj.esimList) {
-    showStatus('Invalid response format', 'error');
-    return;
+    
+    // Event Listeners
+    $('#searchBtn').on('click', searchOrder);
+    $('#orderInput').on('keypress', function(e) {
+      if (e.which === 13) searchOrder();
+    });
+    $('#verifyBtn').on('click', showEmailModal);
+    $('#verifyEmailBtn').on('click', verifyEmail);
+    $('#cancelEmailBtn').on('click', hideEmailModal);
+    $('#primaryAction').on('click', handlePrimaryAction);
+    $('#mobileActionBtn').on('click', handlePrimaryAction);
+    $('#downloadQR').on('click', downloadQR);
+    $('#shareQR').on('click', shareQR);
   }
   
-  const esim = response.data.obj.esimList[0];
-  if (!esim) {
-    showStatus('No eSIM found', 'error');
-    return;
+  // Search Order
+  function searchOrder() {
+    const orderNumber = $('#orderInput').val().trim();
+    
+    if (!orderNumber) {
+      showMessage('Please enter an order number', 'warning');
+      return;
+    }
+    
+    currentOrder = orderNumber;
+    hideMessage();
+    showLoading(true);
+    
+    // API Call without email (basic data)
+    $.ajax({
+      url: 'https://simbye.com/apps/topup/info/' + orderNumber,
+      method: 'GET',
+      headers: {
+        'ngrok-skip-browser-warning': 'skip',
+        'Accept': 'application/json'
+      },
+      timeout: 10000,
+      success: function(response) {
+        showLoading(false);
+        if (response && response.data && response.data.obj && response.data.obj.esimList) {
+          const esim = response.data.obj.esimList[0];
+          if (esim) {
+            currentEsimData = esim;
+            displayBasicData(esim);
+            showMessage('eSIM found! Verify email for full access', 'success');
+          } else {
+            showMessage('No eSIM found for this order', 'error');
+          }
+        } else {
+          showMessage('Invalid response from server', 'error');
+        }
+      },
+      error: function(xhr, status, error) {
+        showLoading(false);
+        showMessage('Failed to load eSIM data: ' + error, 'error');
+      }
+    });
   }
   
-  currentEsimData = esim;
-  const pkg = esim.packageList && esim.packageList[0] || {};
+  // Display Basic Data (without email verification)
+  function displayBasicData(esim) {
+    const pkg = esim.packageList && esim.packageList[0] || {};
+    
+    // Show card
+    $('#esimCard').addClass('active');
+    
+    // Package Info
+    $('#packageName').text(pkg.packageName || 'eSIM Package');
+    
+    // Calculate data
+    const totalGB = (esim.totalVolume / 1073741824).toFixed(2);
+    const usedGB = (esim.orderUsage / 1073741824).toFixed(2);
+    const leftGB = (totalGB - usedGB).toFixed(2);
+    const percentage = esim.totalVolume > 0 ? Math.round((esim.orderUsage / esim.totalVolume) * 100) : 0;
+    
+    // Update Stats
+    $('#totalData').text(totalGB + ' GB');
+    $('#validity').text((esim.totalDuration || 0) + ' Days');
+    $('#expiryDate').text(formatDate(esim.expiredTime));
+    $('#location').text(pkg.locationCode || '-');
+    
+    // Usage
+    $('#dataUsed').text(usedGB + ' GB');
+    $('#dataLeft').text(leftGB + ' GB');
+    $('#usagePercent').text(percentage + '%');
+    
+    // Update ring progress
+    const circumference = 2 * Math.PI * 80;
+    const offset = circumference - (percentage / 100) * circumference;
+    $('#progressRing').css('stroke-dashoffset', offset);
+    
+    // Detect type and status
+    const esimType = detectEsimType(esim, pkg);
+    const esimStatus = getEsimStatus(esim);
+    
+    // Update status and type badges
+    updateStatusDisplay(esimStatus, esimType);
+    
+    // Update primary action based on type
+    updatePrimaryAction(esim, esimType);
+    
+    // Show email verification needed
+    $('#verifyOverlay').removeClass('hidden');
+    $('#protectedContent').removeClass('unlocked');
+  }
+  
+  // Verify Email
+  function verifyEmail() {
+    const email = $('#emailInput').val().trim();
+    
+    if (!email || !validateEmail(email)) {
+      alert('Please enter a valid email');
+      return;
+    }
+    
+    // API Call with email
+    $.ajax({
+      url: 'https://simbye.com/apps/topup/info/' + currentOrder + '/' + email,
+      method: 'GET',
+      headers: {
+        'ngrok-skip-browser-warning': 'skip',
+        'Accept': 'application/json'
+      },
+      timeout: 10000,
+      success: function(response) {
+        if (response && response.data && response.data.obj && response.data.obj.esimList) {
+          const esim = response.data.obj.esimList[0];
+          if (esim) {
+            currentEsimData = esim;
+            isEmailVerified = true;
+            displayFullData(esim);
+            hideEmailModal();
+            showMessage('Email verified successfully!', 'success');
+          }
+        }
+      },
+      error: function() {
+        alert('Email verification failed. Please try again.');
+      }
+    });
+  }
+  
+  // Display Full Data (after email verification)
+  function displayFullData(esim) {
+    // Update with full data
+    displayBasicData(esim);
+    
+    // Show protected content
+    $('#verifyOverlay').addClass('hidden');
+    $('#protectedContent').addClass('unlocked');
+    
+    // QR Code
+    if (esim.qrCodeUrl) {
+      $('#qrCode').attr('src', esim.qrCodeUrl);
+    }
+    
+    // Technical Details
+    $('#iccid').text(formatIccid(esim.iccid));
+    $('#pin').text(esim.pin || '-');
+    $('#puk').text(esim.puk || '-');
+    $('#apn').text(esim.apn || '-');
+    $('#network').text(esim.apn || '-');
+    $('#ipExport').text(esim.ipExport || '-');
+    
+    // Update status with full info
+    const statusText = esim.esimStatus === 'ACTIVE' ? 'Active' : 
+                      esim.esimStatus === 'GOT_RESOURCE' ? 'Ready to Install' :
+                      esim.esimStatus === 'CANCEL' ? 'Cancelled' : 'Unknown';
+    $('#statusText').text(statusText);
+  }
   
   // Detect eSIM Type
-  const esimType = detectEsimType(esim, pkg);
-  
-  // Update UI
-  displayEsimData(esim, pkg, esimType);
-  
-  // Show raw data
-  document.getElementById('rawData').textContent = JSON.stringify(response, null, 2);
-  
-  // Show results
-  document.getElementById('results').classList.add('show');
-}
-
-// Detect eSIM Type
-function detectEsimType(esim, pkg) {
-  const packageName = (pkg.packageName || '').toLowerCase();
-  const dataType = esim.dataType;
-  const fupPolicy = esim.fupPolicy;
-  const slug = pkg.slug || '';
-  
-  // Check for Daily
-  if (packageName.includes('/day') || packageName.includes('daily') || slug.includes('_Daily')) {
+  function detectEsimType(esim, pkg) {
+    const packageName = (pkg.packageName || '').toLowerCase();
+    const slug = pkg.slug || '';
+    
+    if (packageName.includes('/day') || packageName.includes('daily') || slug.includes('_Daily')) {
+      return {
+        type: 'DAILY',
+        label: 'Daily Reset',
+        canTopUp: false
+      };
+    }
+    
+    if (packageName.includes('unlimited')) {
+      return {
+        type: 'UNLIMITED',
+        label: 'Unlimited',
+        canTopUp: false
+      };
+    }
+    
     return {
-      type: 'DAILY',
-      label: '🟡 DAILY RESET',
-      description: 'Data resets daily at midnight UTC',
-      dailyLimit: formatBytes(pkg.volume || 1073741824),
-      totalDays: esim.totalDuration,
-      throttleSpeed: fupPolicy || 'No throttling',
+      type: 'NORMAL',
+      label: 'Standard',
       canTopUp: esim.supportTopUpType === 1 && !isExpired(esim)
     };
   }
   
-  // Check for Unlimited
-  if (packageName.includes('unlimited') || dataType === 2) {
-    return {
-      type: 'UNLIMITED',
-      label: '🟣 UNLIMITED',
-      description: 'No data limits',
-      totalDays: esim.totalDuration,
-      canTopUp: false
-    };
+  // Get eSIM Status
+  function getEsimStatus(esim) {
+    if (isExpired(esim)) {
+      return { status: 'EXPIRED', color: 'red' };
+    }
+    if (esim.esimStatus === 'CANCEL') {
+      return { status: 'CANCELLED', color: 'red' };
+    }
+    if (esim.activateTime) {
+      return { status: 'ACTIVE', color: 'green' };
+    }
+    return { status: 'READY', color: 'yellow' };
   }
   
-  // Normal eSIM
-  return {
-    type: 'NORMAL',
-    label: '🔵 NORMAL',
-    description: 'Fixed data volume',
-    totalData: formatBytes(esim.totalVolume),
-    totalDays: esim.totalDuration,
-    canTopUp: esim.supportTopUpType === 1 && !isExpired(esim)
-  };
-}
-
-// Display eSIM Data
-function displayEsimData(esim, pkg, esimType) {
-  // Update Type Card
-  const typeCard = document.getElementById('typeCard');
-  typeCard.className = 'esim-type-card ' + esimType.type.toLowerCase();
-  
-  // Title
-  document.getElementById('esimTitle').textContent = pkg.packageName || 'eSIM Package';
-  
-  // Type Badge
-  const typeBadge = document.getElementById('typeBadge');
-  typeBadge.textContent = esimType.label;
-  typeBadge.className = 'type-badge ' + esimType.type.toLowerCase();
-  
-  // Key Info
-  const keyInfo = document.getElementById('keyInfo');
-  keyInfo.innerHTML = '';
-  
-  if (esimType.type === 'DAILY') {
-    addKeyItem(keyInfo, '📊 Daily Limit', esimType.dailyLimit);
-    addKeyItem(keyInfo, '📅 Total Days', esimType.totalDays + ' days');
-    addKeyItem(keyInfo, '🚦 After Limit', esimType.throttleSpeed);
-    addKeyItem(keyInfo, '🔄 Resets', 'Daily at 00:00 UTC');
-  } else if (esimType.type === 'UNLIMITED') {
-    addKeyItem(keyInfo, '♾️ Data', 'Unlimited');
-    addKeyItem(keyInfo, '📅 Duration', esimType.totalDays + ' days');
-    addKeyItem(keyInfo, '🚀 Speed', 'No limits');
-  } else {
-    addKeyItem(keyInfo, '📊 Total Data', esimType.totalData);
-    addKeyItem(keyInfo, '📅 Duration', esimType.totalDays + ' days');
-    addKeyItem(keyInfo, '💰 Top-Up', esimType.canTopUp ? '✅ Available' : '❌ Not available');
+  // Update Status Display
+  function updateStatusDisplay(status, type) {
+    $('#statusText').text(status.status);
+    $('#typeText').text(type.label);
+    
+    // Update colors
+    const $statusBadge = $('#statusText').parent();
+    $statusBadge.removeClass('green yellow red').addClass(status.color);
   }
   
-  // Data Grid
-  const dataGrid = document.getElementById('dataGrid');
-  dataGrid.innerHTML = '';
-  
-  // Status
-  addDataItem(dataGrid, 'Status', getStatusDisplay(esim.esimStatus), getStatusColor(esim.esimStatus));
-  
-  // Activation
-  addDataItem(dataGrid, 'Activation', esim.activateTime ? formatDate(esim.activateTime) : 'Not activated', 
-              esim.activateTime ? 'green' : 'yellow');
-  
-  // Expiry
-  const isExp = isExpired(esim);
-  addDataItem(dataGrid, 'Expires', formatDate(esim.expiredTime), isExp ? 'red' : 'green');
-  
-  // Usage
-  const usage = calculateUsage(esim);
-  addDataItem(dataGrid, 'Data Used', usage.used + ' / ' + usage.total, 
-              usage.percentage > 80 ? 'red' : 'green');
-  
-  // Network
-  addDataItem(dataGrid, 'Network', esim.apn || 'N/A');
-  addDataItem(dataGrid, 'IP Location', esim.ipExport || 'N/A');
-  
-  // Security
-  addDataItem(dataGrid, 'QR Code', esim.qrCodeUrl ? '✅ Available' : '🔒 Need email verify', 
-              esim.qrCodeUrl ? 'green' : 'yellow');
-  
-  // Top-Up
-  const topUpStatus = getTopUpStatus(esim, esimType);
-  addDataItem(dataGrid, 'Top-Up Status', topUpStatus.text, topUpStatus.color);
-  
-  // Technical
-  addDataItem(dataGrid, 'ICCID', formatIccid(esim.iccid));
-  addDataItem(dataGrid, 'Package Code', pkg.packageCode || 'N/A');
-}
-
-// Helper Functions
-function formatBytes(bytes) {
-  const gb = bytes / 1073741824;
-  if (gb < 1) {
-    return Math.round(bytes / 1048576) + ' MB';
+  // Update Primary Action
+  function updatePrimaryAction(esim, esimType) {
+    const $btn = $('#primaryAction, #mobileActionBtn');
+    const $info = $('#actionInfo');
+    
+    if (esimType.type === 'UNLIMITED' || esimType.type === 'DAILY') {
+      $btn.text('NOT RECHARGEABLE').prop('disabled', true);
+      $info.text('Unlimited/Daily plans cannot be topped up').addClass('warning');
+    } else if (isExpired(esim)) {
+      $btn.text('BUY NEW ESIM').prop('disabled', false);
+      $info.text('This eSIM has expired').addClass('error');
+      $btn.off('click').on('click', function() {
+        window.location.href = '/';
+      });
+    } else if (esim.supportTopUpType !== 1) {
+      $btn.text('TOP-UP NOT AVAILABLE').prop('disabled', true);
+      $info.text('This plan does not support top-up').addClass('warning');
+    } else {
+      $btn.text('TOP UP NOW').prop('disabled', false);
+      $info.text('Add more data to your eSIM').removeClass('warning error');
+    }
+    
+    // Show mobile action if scrolled
+    if (window.innerWidth <= 768) {
+      $(window).on('scroll', function() {
+        if ($(window).scrollTop() > 500) {
+          $('#mobileAction').show();
+        } else {
+          $('#mobileAction').hide();
+        }
+      });
+    }
   }
-  return gb.toFixed(2) + ' GB';
-}
-
-function formatDate(dateString) {
-  if (!dateString) return 'N/A';
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  });
-}
-
-function formatIccid(iccid) {
-  if (!iccid) return 'N/A';
-  return iccid.replace(/(.{4})/g, '$1 ').trim();
-}
-
-function isExpired(esim) {
-  return new Date(esim.expiredTime) < new Date();
-}
-
-function getStatusDisplay(status) {
-  const statusMap = {
-    'ACTIVE': '🟢 Active',
-    'GOT_RESOURCE': '🟡 Ready to Install',
-    'CANCEL': '🔴 Cancelled',
-    'EXPIRED': '⚫ Expired'
-  };
-  return statusMap[status] || status;
-}
-
-function getStatusColor(status) {
-  const colorMap = {
-    'ACTIVE': 'green',
-    'GOT_RESOURCE': 'yellow',
-    'CANCEL': 'red',
-    'EXPIRED': 'red'
-  };
-  return colorMap[status] || '';
-}
-
-function calculateUsage(esim) {
-  const totalGB = esim.totalVolume / 1073741824;
-  const usedGB = esim.orderUsage / 1073741824;
-  const percentage = esim.totalVolume > 0 ? (esim.orderUsage / esim.totalVolume * 100) : 0;
   
-  return {
-    total: formatBytes(esim.totalVolume),
-    used: formatBytes(esim.orderUsage),
-    left: formatBytes(esim.totalVolume - esim.orderUsage),
-    percentage: Math.round(percentage)
-  };
-}
-
-function getTopUpStatus(esim, esimType) {
-  if (esimType.type === 'UNLIMITED' || esimType.type === 'DAILY') {
-    return { text: '❌ Not needed (Unlimited/Daily)', color: 'purple' };
+  // Handle Primary Action
+  function handlePrimaryAction() {
+    if (!currentEsimData) return;
+    
+    const pkg = currentEsimData.packageList[0] || {};
+    const esimType = detectEsimType(currentEsimData, pkg);
+    
+    if (isExpired(currentEsimData)) {
+      // Redirect to buy new
+      window.location.href = '/';
+    } else if (esimType.canTopUp && isEmailVerified) {
+      // Load top-up plans
+      loadTopUpPlans(currentEsimData.esimTranNo, pkg.packageCode);
+    } else if (!isEmailVerified) {
+      showEmailModal();
+    }
   }
-  if (isExpired(esim)) {
-    return { text: '❌ Expired - Buy new', color: 'red' };
-  }
-  if (esim.esimStatus === 'CANCEL') {
-    return { text: '❌ Cancelled', color: 'red' };
-  }
-  if (esim.supportTopUpType !== 1) {
-    return { text: '❌ Not supported', color: 'yellow' };
-  }
-  return { text: '✅ Available', color: 'green' };
-}
-
-// UI Helper Functions
-function showStatus(message, type) {
-  const statusMsg = document.getElementById('statusMsg');
-  statusMsg.textContent = message;
-  statusMsg.className = 'status-msg show ' + type;
   
-  if (type === 'success') {
-    setTimeout(() => statusMsg.classList.remove('show'), 3000);
+  // Load Top-Up Plans
+  function loadTopUpPlans(esimTranNo, packageCode) {
+    const currency = window.Shopify?.currency?.active || 'USD';
+    const url = `https://simbye.com/apps/topup/plans?esimTranNo=${esimTranNo}&packageCode=${packageCode}&currency=${currency}`;
+    
+    // Here you would load and display top-up options
+    console.log('Loading top-up plans:', url);
+    alert('Top-up modal would open here');
+  }
+  
+  // Helper Functions
+  function isExpired(esim) {
+    return new Date(esim.expiredTime) < new Date();
+  }
+  
+  function formatDate(dateString) {
+    if (!dateString) return '-';
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+  
+  function formatIccid(iccid) {
+    if (!iccid) return '-';
+    return iccid.replace(/(.{4})/g, '$1 ').trim();
+  }
+  
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+  
+  // UI Functions
+  function showMessage(msg, type) {
+    $('#messageBox').text(msg).removeClass().addClass('message-box ' + type + ' show');
+  }
+  
+  function hideMessage() {
+    $('#messageBox').removeClass('show');
+  }
+  
+  function showLoading(show) {
+    if (show) {
+      $('#loadingState').addClass('active');
+      $('#esimCard').removeClass('active');
+    } else {
+      $('#loadingState').removeClass('active');
+    }
+  }
+  
+  function showEmailModal() {
+    $('#emailModal').addClass('active');
+  }
+  
+  function hideEmailModal() {
+    $('#emailModal').removeClass('active');
+    $('#emailInput').val('');
+  }
+  
+  function downloadQR() {
+    const qrUrl = $('#qrCode').attr('src');
+    if (qrUrl) {
+      const a = document.createElement('a');
+      a.href = qrUrl;
+      a.download = 'esim-qr-code.png';
+      a.click();
+    }
+  }
+  
+  function shareQR() {
+    if (navigator.share && currentEsimData) {
+      navigator.share({
+        title: 'My eSIM QR Code',
+        text: 'Scan this QR code to install the eSIM',
+        url: currentEsimData.shortUrl
+      });
+    } else {
+      alert('Share functionality not available');
+    }
   }
 }
-
-function addKeyItem(container, label, value) {
-  const item = document.createElement('div');
-  item.className = 'key-item';
-  item.innerHTML = `<span>${label}:</span> <strong>${value}</strong>`;
-  container.appendChild(item);
-}
-
-function addDataItem(container, label, value, colorClass = '') {
-  const item = document.createElement('div');
-  item.className = 'data-item';
-  item.innerHTML = `
-    <div class="data-label">${label}</div>
-    <div class="data-value ${colorClass}">${value}</div>
-  `;
-  container.appendChild(item);
-}
-
-// Auto-test on load
-window.onload = function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const orderFromUrl = urlParams.get('order_number');
-  if (orderFromUrl) {
-    document.getElementById('orderInput').value = orderFromUrl;
-    setTimeout(testOrder, 500);
-  }
-};
 </script>
