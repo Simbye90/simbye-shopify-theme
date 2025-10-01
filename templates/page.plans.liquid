@@ -1,13 +1,3 @@
-<!DOCTYPE html>
-<html lang="{{ shop.locale }}">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Check eSIM Status</title>
-  
-  <!-- jQuery LADEN - WICHTIG! -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  
 <!-- templates/page.check-esim.liquid -->
 <!-- SIMBYE CHECK ESIM - ENTERPRISE PRODUCTION VERSION -->
 
@@ -1282,7 +1272,7 @@ function initCheckEsim() {
     });
   }
   
-  // Display Basic Data (without email verification)
+  // Display Basic Data - FIXED
   function displayBasicData(esim) {
     const pkg = esim.packageList && esim.packageList[0] || {};
     
@@ -1296,26 +1286,50 @@ function initCheckEsim() {
     const totalGB = (esim.totalVolume / 1073741824).toFixed(2);
     const usedGB = (esim.orderUsage / 1073741824).toFixed(2);
     const leftGB = (totalGB - usedGB).toFixed(2);
-    const percentage = esim.totalVolume > 0 ? Math.round((esim.orderUsage / esim.totalVolume) * 100) : 0;
     
-    // Update Stats
-    $('#totalData').text(totalGB + ' GB');
-    $('#validity').text((esim.totalDuration || 0) + ' Days');
+    // Check if activated
+    let percentage = 0;
+    if (!esim.activateTime) {
+      // Not activated yet
+      $('#dataUsed').text('Not Activated');
+      $('#dataLeft').text(totalGB + ' GB');
+      $('#usagePercent').text('0%');
+      percentage = 0;
+    } else {
+      // Calculate real usage
+      percentage = esim.totalVolume > 0 ? Math.round((esim.orderUsage / esim.totalVolume) * 100) : 0;
+      $('#dataUsed').text(usedGB + ' GB');
+      $('#dataLeft').text(leftGB + ' GB');
+      $('#usagePercent').text(percentage + '%');
+    }
+    
+    // Update Stats - Handle different types
+    const esimType = detectEsimType(esim, pkg);
+    
+    if (esimType.type === 'DAILY') {
+      // Daily: Show per day limit
+      const dailyGB = (pkg.volume / 1073741824).toFixed(1);
+      $('#totalData').text(dailyGB + ' GB/Day');
+      $('#validity').text(esim.totalDuration + ' Days');
+    } else if (esimType.type === 'UNLIMITED') {
+      // Unlimited: Show unlimited symbol
+      $('#totalData').text('∞ Unlimited');
+      $('#validity').text(esim.totalDuration + ' Days');
+    } else {
+      // Normal: Show total data
+      $('#totalData').text(totalGB + ' GB');
+      $('#validity').text((esim.totalDuration || 0) + ' Days');
+    }
+    
     $('#expiryDate').text(formatDate(esim.expiredTime));
     $('#location').text(pkg.locationCode || '-');
-    
-    // Usage
-    $('#dataUsed').text(usedGB + ' GB');
-    $('#dataLeft').text(leftGB + ' GB');
-    $('#usagePercent').text(percentage + '%');
     
     // Update ring progress
     const circumference = 2 * Math.PI * 80;
     const offset = circumference - (percentage / 100) * circumference;
     $('#progressRing').css('stroke-dashoffset', offset);
     
-    // Detect type and status
-    const esimType = detectEsimType(esim, pkg);
+    // Detect status
     const esimStatus = getEsimStatus(esim);
     
     // Update status and type badges
@@ -1394,31 +1408,42 @@ function initCheckEsim() {
     $('#statusText').text(statusText);
   }
   
-  // Detect eSIM Type
+  // Detect eSIM Type - FIXED LOGIC
   function detectEsimType(esim, pkg) {
     const packageName = (pkg.packageName || '').toLowerCase();
     const slug = pkg.slug || '';
     
-    if (packageName.includes('/day') || packageName.includes('daily') || slug.includes('_Daily')) {
+    // DAILY Detection
+    if (packageName.includes('/day') || 
+        packageName.includes('gb/day') ||
+        packageName.includes('daily') || 
+        slug.includes('_Daily')) {
       return {
         type: 'DAILY',
         label: 'Daily Reset',
-        canTopUp: false
+        canTopUp: false,
+        info: 'Resets daily at midnight UTC'
       };
     }
     
+    // UNLIMITED Detection
     if (packageName.includes('unlimited')) {
       return {
-        type: 'UNLIMITED',
+        type: 'UNLIMITED', 
         label: 'Unlimited',
-        canTopUp: false
+        canTopUp: false,
+        info: 'No data limits'
       };
     }
+    
+    // NORMAL eSIM - Check if can top up
+    const canRecharge = !isExpired(esim) && esim.esimStatus !== 'CANCEL';
     
     return {
       type: 'NORMAL',
       label: 'Standard',
-      canTopUp: esim.supportTopUpType === 1 && !isExpired(esim)
+      canTopUp: canRecharge,  // Ignore supportTopUpType - use our logic!
+      info: canRecharge ? 'Rechargeable' : 'Not rechargeable'
     };
   }
   
