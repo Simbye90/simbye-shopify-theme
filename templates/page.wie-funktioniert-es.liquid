@@ -73,11 +73,12 @@
   animation: fadeInUp 0.8s ease;
 }
 
+/* Mobile First Approach - Start mit Mobile Size */
 .installation-title {
-  font-size: 56px; /* DESKTOP DEFAULT 56px wie Hero */
+  font-size: 32px; /* Mobile First: 32px */
   font-weight: 900;
   line-height: 1.1;
-  margin: 0 0 24px 0;
+  margin: 0 0 20px 0;
   letter-spacing: -0.02em;
   color: var(--install-text);
 }
@@ -86,7 +87,7 @@
 .installation-title-line1 {
   display: block;
   color: var(--install-text);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .installation-title-highlight {
@@ -98,13 +99,11 @@
 }
 
 .installation-subtitle {
-  font-size: 19px; /* Desktop default */
+  font-size: 16px;
   color: var(--install-text-secondary);
   margin: 0;
   font-weight: 500;
   line-height: 1.5;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 /* Tab System - Connected Style */
@@ -133,7 +132,7 @@
   background: transparent;
   border: none;
   border-radius: 12px;
-  font-size: 18px;
+  font-size: 18px; /* 18px für Tab Buttons! */
   font-weight: 600;
   color: var(--install-text-secondary);
   cursor: pointer;
@@ -397,8 +396,8 @@
   text-decoration: none;
   transition: var(--install-transition);
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  min-width: 280px;
-  justify-content: center;
+  max-width: 280px; /* Button nicht zu breit! */
+  margin: 0 auto; /* Zentriert */
 }
 
 .cta-button:hover {
