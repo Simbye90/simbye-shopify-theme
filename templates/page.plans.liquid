@@ -14,6 +14,9 @@
 <!-- templates/page.check-esim.liquid -->
 <!-- SIMBYE CHECK ESIM - ENTERPRISE VERSION 2.0 -->
 
+<!-- templates/page.check-esim.liquid -->
+<!-- SIMBYE CHECK ESIM - ENTERPRISE VERSION 2.0 -->
+
 <style>
 /* ================================================
    ENTERPRISE DESIGN SYSTEM V2.0
@@ -62,11 +65,41 @@
   --primary-light: #00ff88;
 }
 
-/* Reset & Base */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* CRITICAL: ABSOLUTE SCROLL PREVENTION */
+html {
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+}
+
+body {
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
+  overflow-y: auto !important;
+}
+
+/* Wrapper for scrolling */
+.check-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ffffff 0%, #f0fff8 100%);
+  padding: 60px 20px;
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  position: relative;
 }
 
 /* Kill Shopify Default Styles */
@@ -75,18 +108,10 @@
   padding: 0 !important;
   margin: 0 !important;
   grid-template-columns: unset !important;
-  max-width: none !important;
-  overflow-x: hidden !important; /* Prevent horizontal scroll */
-}
-
-/* Page Layout */
-.check-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #ffffff 0%, #f0fff8 100%);
-  padding: 60px 20px;
-  overflow-x: hidden; /* Prevent horizontal scroll */
-  width: 100%;
-  max-width: 100vw;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  overflow-x: clip !important;
+  width: 100% !important;
 }
 
 [data-theme="dark"] .check-page {
@@ -1003,9 +1028,34 @@
 
 /* Mobile Optimizations */
 @media (max-width: 640px) {
+  /* CRITICAL: Force prevent horizontal scroll on EVERY element */
+  *, *::before, *::after {
+    max-width: 100vw !important;
+  }
+  
+  body, html {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+  
   .check-page {
     padding: 24px 16px;
-    overflow-x: hidden; /* Ensure no horizontal scroll */
+    overflow: hidden !important;
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  
+  .check-container {
+    max-width: 100% !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  
+  /* Prevent all sections from overflow */
+  .search-card, .esim-card, .modal-content {
+    max-width: calc(100vw - 32px) !important;
+    overflow: hidden !important;
   }
   
   .search-card {
@@ -1076,9 +1126,9 @@
   }
   
   .qr-code {
-    width: 180px;
-    height: 180px;
-    max-width: 90%; /* Ensure QR doesn't cause overflow */
+    width: 220px;
+    height: 220px;
+    max-width: 85vw; /* Responsive to viewport */
   }
   
   .modal-content {
@@ -1784,26 +1834,14 @@ function initEsimCheck() {
       return;
     }
     
-    if (currentEsim?.ac) {
-      // Create installation page URL with parameters
-      const installUrl = `/pages/install?order=${currentOrder}&ac=${encodeURIComponent(currentEsim.ac)}`;
-      
-      // Copy SM-DP+ code to clipboard if available
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(currentEsim.ac).then(() => {
-          // Show success message briefly then redirect
-          showMessage('SM-DP+ Code copied! Redirecting to installation guide...', 'success');
-          setTimeout(() => {
-            window.location.href = installUrl;
-          }, 1500);
-        }).catch(() => {
-          // If clipboard fails, just redirect
-          window.location.href = installUrl;
-        });
-      } else {
-        // No clipboard API, just redirect
-        window.location.href = installUrl;
-      }
+    // Check if we have shortUrl from response
+    if (currentEsim?.shortUrl) {
+      // Direct redirect to the shortUrl
+      window.location.href = currentEsim.shortUrl;
+    } else if (currentEsim?.ac) {
+      // Fallback: Build manual URL if shortUrl not available
+      const manualUrl = `/pages/manual-installation?order=${currentOrder}&ac=${encodeURIComponent(currentEsim.ac)}`;
+      window.location.href = manualUrl;
     } else {
       alert('{{ 'check.manual_unavailable' | t | default: 'Please verify email first' }}');
     }
@@ -1848,8 +1886,53 @@ function initEsimCheck() {
     }
   }
   
-  // Prevent horizontal scroll on body
-  $('body').css('overflow-x', 'hidden');
-  $('html').css('overflow-x', 'hidden');
+  // Initialize - AGGRESSIVE scroll prevention
+  function preventHorizontalScroll() {
+    // CSS Prevention
+    $('body').css({
+      'overflow-x': 'hidden',
+      'max-width': '100vw',
+      'position': 'relative'
+    });
+    
+    $('html').css({
+      'overflow-x': 'hidden',
+      'max-width': '100vw'
+    });
+    
+    // JavaScript Prevention
+    document.documentElement.style.overflowX = 'hidden';
+    document.documentElement.style.maxWidth = '100vw';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.maxWidth = '100vw';
+    
+    // Prevent touchmove horizontal
+    let xStart = null;
+    document.addEventListener('touchstart', function(e) {
+      xStart = e.touches[0].clientX;
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', function(e) {
+      if (!xStart) return;
+      let xDiff = xStart - e.touches[0].clientX;
+      
+      // If horizontal movement detected, prevent it
+      if (Math.abs(xDiff) > 0) {
+        document.body.style.transform = 'translateX(0)';
+        document.body.style.left = '0';
+        window.scrollTo(0, window.scrollY);
+      }
+    }, { passive: true });
+    
+    // Reset on resize
+    window.addEventListener('resize', function() {
+      document.body.style.width = '100%';
+      document.body.style.maxWidth = '100vw';
+      window.scrollTo(0, window.scrollY);
+    });
+  }
+  
+  // Call prevention immediately
+  preventHorizontalScroll();
 }
 </script>
