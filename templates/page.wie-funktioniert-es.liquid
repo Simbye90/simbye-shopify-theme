@@ -66,7 +66,7 @@
   z-index: 1;
 }
 
-/* Header - WIE PRODUCT PAGE & HERO */
+/* Header - IDENTISCH MIT HERO SECTION */
 .installation-header {
   text-align: center;
   margin-bottom: 72px;
@@ -74,12 +74,12 @@
 }
 
 .installation-title {
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700;
-  color: var(--install-text);
-  margin: 0 0 32px 0;
-  letter-spacing: -0.02em;
+  font-size: 32px;
+  font-weight: 900;
   line-height: 1.1;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  color: var(--install-text);
 }
 
 /* Zweizeilig wie Hero */
@@ -98,10 +98,10 @@
 }
 
 .installation-subtitle {
-  font-size: 20px;
+  font-size: 16px;
   color: var(--install-text-secondary);
   margin: 0;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.5;
 }
 
@@ -415,18 +415,45 @@
 }
 
 /* Mobile Responsive */
-@media (max-width: 768px) {
-  .installation-section {
-    padding-top: 0;
-  }
-  
+@media (max-width: 767px) {
   .installation-container {
-    padding: 0 20px;
+    padding: 30px 20px 0px 20px;
   }
   
   .installation-header {
     margin-bottom: 48px;
   }
+}
+
+/* TABLET (768px+) */
+@media (min-width: 768px) {
+  .installation-container {
+    padding: 50px 30px 70px 30px;
+  }
+  
+  .installation-header {
+    margin-bottom: 60px;
+  }
+  
+  .device-tabs {
+    margin-bottom: 40px;
+  }
+}
+
+/* DESKTOP (1024px+) */
+@media (min-width: 1024px) {
+  .installation-container {
+    padding: 60px 40px 80px 40px;
+  }
+  
+  .installation-header {
+    margin-bottom: 72px;
+  }
+  
+  .device-tabs {
+    margin-bottom: 48px;
+  }
+}
   
   .device-tabs {
     margin-bottom: 32px;
@@ -532,15 +559,15 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Open Settings & Mobile Service</h3>
+              <h3 class="step-title">{{ 'installation.apple_step1_title' | t | default: 'Open Settings & Mobile Service' }}</h3>
               <ul class="step-instructions">
-                <li>Navigate to the Settings app on your iPhone</li>
-                <li>Scroll down and tap on "Mobile Service"</li>
-                <li>You'll see your primary SIM with your phone number</li>
+                <li>{{ 'installation.apple_step1_1' | t | default: 'Navigate to the Settings app on your iPhone' }}</li>
+                <li>{{ 'installation.apple_step1_2' | t | default: 'Scroll down and tap on "Mobile Service"' }}</li>
+                <li>{{ 'installation.apple_step1_3' | t | default: 'You\'ll see your primary SIM with your phone number' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Note</p>
-                <p class="step-note-text">Ensure your iPhone is running iOS 12.1 or later for eSIM support</p>
+                <p class="step-note-title">{{ 'installation.note' | t | default: 'Note' }}</p>
+                <p class="step-note-text">{{ 'installation.apple_step1_note' | t | default: 'Ensure your iPhone is running iOS 12.1 or later for eSIM support' }}</p>
               </div>
             </div>
           </div>
@@ -556,15 +583,15 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Configure Mobile Data</h3>
+              <h3 class="step-title">{{ 'installation.apple_step2_title' | t | default: 'Configure Mobile Data' }}</h3>
               <ul class="step-instructions">
-                <li>Tap on "Mobile Data" at the top of the screen</li>
-                <li>Select your Simbye eSIM (usually listed below your primary SIM)</li>
-                <li>Enable "Turn On This Line" if not already active</li>
+                <li>{{ 'installation.apple_step2_1' | t | default: 'Tap on "Mobile Data" at the top of the screen' }}</li>
+                <li>{{ 'installation.apple_step2_2' | t | default: 'Select your Simbye eSIM (usually listed below your primary SIM)' }}</li>
+                <li>{{ 'installation.apple_step2_3' | t | default: 'Enable "Turn On This Line" if not already active' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Tip</p>
-                <p class="step-note-text">You can use both SIMs simultaneously - primary for calls, eSIM for data</p>
+                <p class="step-note-title">{{ 'installation.tip' | t | default: 'Tip' }}</p>
+                <p class="step-note-text">{{ 'installation.apple_step2_note' | t | default: 'You can use both SIMs simultaneously - primary for calls, eSIM for data' }}</p>
               </div>
             </div>
           </div>
@@ -580,15 +607,15 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Enable Data Roaming</h3>
+              <h3 class="step-title">{{ 'installation.apple_step3_title' | t | default: 'Enable Data Roaming' }}</h3>
               <ul class="step-instructions">
-                <li>Tap on your Simbye eSIM in the list</li>
-                <li>Toggle "Data Roaming" to ON (green)</li>
-                <li>Your eSIM is now ready to use!</li>
+                <li>{{ 'installation.apple_step3_1' | t | default: 'Tap on your Simbye eSIM in the list' }}</li>
+                <li>{{ 'installation.apple_step3_2' | t | default: 'Toggle "Data Roaming" to ON (green)' }}</li>
+                <li>{{ 'installation.apple_step3_3' | t | default: 'Your eSIM is now ready to use!' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Important</p>
-                <p class="step-note-text">Data Roaming must be ON for the eSIM to work abroad. No extra charges with Simbye!</p>
+                <p class="step-note-title">{{ 'installation.important' | t | default: 'Important' }}</p>
+                <p class="step-note-text">{{ 'installation.apple_step3_note' | t | default: 'Data Roaming must be ON for the eSIM to work abroad. No extra charges with Simbye!' }}</p>
               </div>
             </div>
           </div>
@@ -607,7 +634,7 @@
             <div class="step-image-wrapper">
               <span class="step-badge">1</span>
               <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/1.webp?v=1722076958" 
-                   alt="Samsung Settings" 
+                   alt="Android Settings" 
                    class="step-image">
             </div>
             <div class="step-content">
@@ -635,15 +662,15 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Add Your eSIM</h3>
+              <h3 class="step-title">{{ 'installation.android_step2_title' | t | default: 'Add Your eSIM' }}</h3>
               <ul class="step-instructions">
-                <li>In "SIM card manager", tap on "Add mobile plan"</li>
-                <li>Select "Scan carrier QR code"</li>
-                <li>Scan the Simbye QR code from your email</li>
+                <li>{{ 'installation.android_step2_1' | t | default: 'In "SIM card manager", tap on "Add mobile plan"' }}</li>
+                <li>{{ 'installation.android_step2_2' | t | default: 'Select "Scan carrier QR code"' }}</li>
+                <li>{{ 'installation.android_step2_3' | t | default: 'Scan the Simbye QR code from your email' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Alternative</p>
-                <p class="step-note-text">You can also enter the activation code manually if QR scanning fails</p>
+                <p class="step-note-title">{{ 'installation.alternative' | t | default: 'Alternative' }}</p>
+                <p class="step-note-text">{{ 'installation.android_step2_note' | t | default: 'You can also enter the activation code manually if QR scanning fails' }}</p>
               </div>
             </div>
           </div>
@@ -659,15 +686,15 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Confirm Installation</h3>
+              <h3 class="step-title">{{ 'installation.android_step3_title' | t | default: 'Confirm Installation' }}</h3>
               <ul class="step-instructions">
-                <li>Review the carrier details on screen</li>
-                <li>Tap "Confirm" to proceed with installation</li>
-                <li>Wait for activation (usually takes 10-30 seconds)</li>
+                <li>{{ 'installation.android_step3_1' | t | default: 'Review the carrier details on screen' }}</li>
+                <li>{{ 'installation.android_step3_2' | t | default: 'Tap "Confirm" to proceed with installation' }}</li>
+                <li>{{ 'installation.android_step3_3' | t | default: 'Wait for activation (usually takes 10-30 seconds)' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Network</p>
-                <p class="step-note-text">Simbye partners with premium local carriers for best coverage</p>
+                <p class="step-note-title">{{ 'installation.network' | t | default: 'Network' }}</p>
+                <p class="step-note-text">{{ 'installation.android_step3_note' | t | default: 'Simbye partners with premium local carriers for best coverage' }}</p>
               </div>
             </div>
           </div>
@@ -683,15 +710,15 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Label Your eSIM</h3>
+              <h3 class="step-title">{{ 'installation.android_step4_title' | t | default: 'Label Your eSIM' }}</h3>
               <ul class="step-instructions">
-                <li>Choose a label for easy identification</li>
-                <li>We recommend "Simbye" or "Travel Data"</li>
-                <li>Tap "Done" to save the label</li>
+                <li>{{ 'installation.android_step4_1' | t | default: 'Choose a label for easy identification' }}</li>
+                <li>{{ 'installation.android_step4_2' | t | default: 'We recommend "Simbye" or "Travel Data"' }}</li>
+                <li>{{ 'installation.android_step4_3' | t | default: 'Tap "Done" to save the label' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Organization</p>
-                <p class="step-note-text">Good labels help when managing multiple eSIMs for different countries</p>
+                <p class="step-note-title">{{ 'installation.organization' | t | default: 'Organization' }}</p>
+                <p class="step-note-text">{{ 'installation.android_step4_note' | t | default: 'Good labels help when managing multiple eSIMs for different countries' }}</p>
               </div>
             </div>
           </div>
@@ -707,16 +734,16 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Configure Data Settings</h3>
+              <h3 class="step-title">{{ 'installation.android_step5_title' | t | default: 'Configure Data Settings' }}</h3>
               <ul class="step-instructions">
-                <li>Return to "SIM card manager"</li>
-                <li>Set Simbye eSIM as preferred for "Mobile data"</li>
-                <li>Enable "Data roaming" for the eSIM</li>
-                <li>Disable "Allow data switching" to avoid charges</li>
+                <li>{{ 'installation.android_step5_1' | t | default: 'Return to "SIM card manager"' }}</li>
+                <li>{{ 'installation.android_step5_2' | t | default: 'Set Simbye eSIM as preferred for "Mobile data"' }}</li>
+                <li>{{ 'installation.android_step5_3' | t | default: 'Enable "Data roaming" for the eSIM' }}</li>
+                <li>{{ 'installation.android_step5_4' | t | default: 'Disable "Allow data switching" to avoid charges' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Important</p>
-                <p class="step-note-text">Keep your primary SIM active for calls/SMS, use eSIM for data only</p>
+                <p class="step-note-title">{{ 'installation.important' | t | default: 'Important' }}</p>
+                <p class="step-note-text">{{ 'installation.android_step5_note' | t | default: 'Keep your primary SIM active for calls/SMS, use eSIM for data only' }}</p>
               </div>
             </div>
           </div>
@@ -754,15 +781,15 @@
     
     <!-- CTA Section -->
     <div class="installation-cta">
-      <h3 class="cta-title">Is Your Device Compatible?</h3>
-      <p class="cta-subtitle">If yes, get your eSIM now and connect in 60 seconds</p>
+      <h3 class="cta-title">{{ 'installation.cta_title' | t | default: 'Is Your Device Compatible?' }}</h3>
+      <p class="cta-subtitle">{{ 'installation.cta_subtitle' | t | default: 'If yes, get your eSIM now and connect in 60 seconds' }}</p>
       <a href="/collections/all" class="cta-button">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
           <path d="M2 17l10 5 10-5"/>
           <path d="M2 12l10 5 10-5"/>
         </svg>
-        Buy eSIM Now
+        {{ 'installation.cta_button' | t | default: 'Buy eSIM Now' }}
       </a>
     </div>
     
