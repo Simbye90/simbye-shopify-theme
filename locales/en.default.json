@@ -388,7 +388,86 @@
     
     "manual_guide": "Manual Installation:\n\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%\n\nOr visit: %url%",
     "manual_unavailable": "Please verify email first"
-  }
+  },
+  "installation": {
+  "title_line1": "Install Your",
+  "title_line2": "Simbye eSIM",
+  "subtitle": "Step-by-step guide for iPhone and Android devices • Setup in under 2 minutes",
+  
+  "tab_apple": "Apple iPhone",
+  "tab_android": "Android",
+  
+  "note": "Note",
+  "tip": "Tip",
+  "important": "Important",
+  "alternative": "Alternative",
+  "network": "Network",
+  "organization": "Organization",
+  "compatibility": "Compatibility",
+  
+  "apple_step1_title": "Open Settings & Mobile Service",
+  "apple_step1_1": "Navigate to the Settings app on your iPhone",
+  "apple_step1_2": "Scroll down and tap on \"Mobile Service\"",
+  "apple_step1_3": "You'll see your primary SIM with your phone number",
+  "apple_step1_note": "Ensure your iPhone is running iOS 12.1 or later for eSIM support",
+  
+  "apple_step2_title": "Configure Mobile Data",
+  "apple_step2_1": "Tap on \"Mobile Data\" at the top of the screen",
+  "apple_step2_2": "Select your Simbye eSIM (usually listed below your primary SIM)",
+  "apple_step2_3": "Enable \"Turn On This Line\" if not already active",
+  "apple_step2_note": "You can use both SIMs simultaneously - primary for calls, eSIM for data",
+  
+  "apple_step3_title": "Enable Data Roaming",
+  "apple_step3_1": "Tap on your Simbye eSIM in the list",
+  "apple_step3_2": "Toggle \"Data Roaming\" to ON (green)",
+  "apple_step3_3": "Your eSIM is now ready to use!",
+  "apple_step3_note": "Data Roaming must be ON for the eSIM to work abroad. No extra charges with Simbye!",
+  
+  "android_step1_title": "Open Settings & Connections",
+  "android_step1_1": "Navigate to the Settings app on your Android device",
+  "android_step1_2": "Scroll down and tap on \"Connections\"",
+  "android_step1_3": "Select \"SIM card manager\" from the list",
+  "android_compatibility": "Works with Samsung Galaxy S20+, Google Pixel 3+, and other eSIM devices",
+  
+  "android_step2_title": "Add Your eSIM",
+  "android_step2_1": "In \"SIM card manager\", tap on \"Add mobile plan\"",
+  "android_step2_2": "Select \"Scan carrier QR code\"",
+  "android_step2_3": "Scan the Simbye QR code from your email",
+  "android_step2_note": "You can also enter the activation code manually if QR scanning fails",
+  
+  "android_step3_title": "Confirm Installation",
+  "android_step3_1": "Review the carrier details on screen",
+  "android_step3_2": "Tap \"Confirm\" to proceed with installation",
+  "android_step3_3": "Wait for activation (usually takes 10-30 seconds)",
+  "android_step3_note": "Simbye partners with premium local carriers for best coverage",
+  
+  "android_step4_title": "Label Your eSIM",
+  "android_step4_1": "Choose a label for easy identification",
+  "android_step4_2": "We recommend \"Simbye\" or \"Travel Data\"",
+  "android_step4_3": "Tap \"Done\" to save the label",
+  "android_step4_note": "Good labels help when managing multiple eSIMs for different countries",
+  
+  "android_step5_title": "Configure Data Settings",
+  "android_step5_1": "Return to \"SIM card manager\"",
+  "android_step5_2": "Set Simbye eSIM as preferred for \"Mobile data\"",
+  "android_step5_3": "Enable \"Data roaming\" for the eSIM",
+  "android_step5_4": "Disable \"Allow data switching\" to avoid charges",
+  "android_step5_note": "Keep your primary SIM active for calls/SMS, use eSIM for data only",
+  
+  "apn_title": "APN Configuration (Turkey eSIM Only)",
+  "apn_step1": "Go to Settings → Connections → Mobile networks",
+  "apn_step2": "Select your Simbye eSIM",
+  "apn_step3": "Tap \"Access Point Names\"",
+  "apn_step4": "Add new APN with name:",
+  "apn_step5": "Leave all other fields blank or default",
+  "apn_step6": "Save and select the new APN",
+  "apn_note_title": "Turkey eSIM Special",
+  "apn_note_text": "This step is ONLY required for Turkey eSIM. Other countries work automatically.",
+  
+  "cta_title": "Is Your Device Compatible?",
+  "cta_subtitle": "If yes, get your eSIM now and connect in 60 seconds",
+  "cta_button": "Buy eSIM Now"
+}
 }
 
 
