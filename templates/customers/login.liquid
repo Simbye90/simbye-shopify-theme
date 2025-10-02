@@ -424,62 +424,6 @@
           <!-- HIKO automatically injects Apple/Google/Facebook buttons here -->
         </div>
         
-        <!-- Divider -->
-        <div class="login-divider">
-          <span>{{ 'forms.or' | t | default: 'OR' }}</span>
-        </div>
-        
-        <!-- Email Login Form -->
-        {%- form 'customer_login', class: 'login-form' -%}
-          
-          {% if form.errors %}
-            <div class="form-error">
-              {{ form.errors | default_errors }}
-            </div>
-          {% endif %}
-          
-          <div class="form-group">
-            <label class="form-label" for="CustomerEmail">
-              {{ 'forms.email' | t | default: 'Email Address' }}
-            </label>
-            <input 
-              type="email" 
-              name="customer[email]" 
-              id="CustomerEmail"
-              class="form-input"
-              placeholder="{{ 'forms.email_hint' | t | default: 'your@email.com' }}"
-              autocomplete="email"
-              required
-            >
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label" for="CustomerPassword">
-              {{ 'forms.password' | t | default: 'Password' }}
-            </label>
-            <input 
-              type="password" 
-              name="customer[password]" 
-              id="CustomerPassword"
-              class="form-input"
-              placeholder="••••••••"
-              autocomplete="current-password"
-              required
-            >
-          </div>
-          
-          <button type="submit" class="btn-submit">
-            {{ 'forms.signin' | t | default: 'Sign In' }}
-          </button>
-          
-          <div class="form-link">
-            <a href="#recover" onclick="showRecover(); return false;">
-              {{ 'forms.forgot' | t | default: 'Forgot your password?' }}
-            </a>
-          </div>
-          
-        {%- endform -%}
-        
       </div>
       
       <!-- REGISTER TAB -->
@@ -490,160 +434,16 @@
           <!-- HIKO automatically injects buttons here too -->
         </div>
         
-        <!-- Divider -->
-        <div class="login-divider">
-          <span>{{ 'forms.or' | t | default: 'OR' }}</span>
-        </div>
-        
-        <!-- Registration Form -->
-        {%- form 'create_customer', class: 'login-form' -%}
-          
-          {% if form.errors %}
-            <div class="form-error">
-              {% for field in form.errors %}
-                {% if field == 'form' %}
-                  {{ form.errors.messages[field] }}
-                {% else %}
-                  {{ form.errors.translated_fields[field] | capitalize }} 
-                  {{ form.errors.messages[field] }}
-                {% endif %}
-                {% unless forloop.last %}<br>{% endunless %}
-              {% endfor %}
-            </div>
-          {% endif %}
-          
-          <div class="form-group">
-            <label class="form-label" for="RegisterFirstName">
-              {{ 'forms.firstname' | t | default: 'First Name' }}
-            </label>
-            <input 
-              type="text" 
-              name="customer[first_name]" 
-              id="RegisterFirstName"
-              class="form-input"
-              placeholder="{{ 'forms.firstname' | t | default: 'John' }}"
-              autocomplete="given-name"
-              required
-            >
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label" for="RegisterLastName">
-              {{ 'forms.lastname' | t | default: 'Last Name' }}
-            </label>
-            <input 
-              type="text" 
-              name="customer[last_name]" 
-              id="RegisterLastName"
-              class="form-input"
-              placeholder="{{ 'forms.lastname' | t | default: 'Doe' }}"
-              autocomplete="family-name"
-              required
-            >
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label" for="RegisterEmail">
-              {{ 'forms.email' | t | default: 'Email Address' }}
-            </label>
-            <input 
-              type="email" 
-              name="customer[email]" 
-              id="RegisterEmail"
-              class="form-input"
-              placeholder="{{ 'forms.email_hint' | t | default: 'your@email.com' }}"
-              autocomplete="email"
-              required
-            >
-          </div>
-          
-          <div class="form-group">
-            <label class="form-label" for="RegisterPassword">
-              {{ 'forms.password' | t | default: 'Password' }}
-            </label>
-            <input 
-              type="password" 
-              name="customer[password]" 
-              id="RegisterPassword"
-              class="form-input"
-              placeholder="••••••••"
-              autocomplete="new-password"
-              required
-            >
-          </div>
-          
-          <button type="submit" class="btn-submit">
-            {{ 'forms.create' | t | default: 'Create Account' }}
-          </button>
-          
-        {%- endform -%}
-        
-      </div>
-      
-      <!-- PASSWORD RECOVERY -->
-      <div id="recover-content" class="recover-section">
-        
-        <a href="#" class="back-link" onclick="hideRecover(); return false;">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-          </svg>
-          {{ 'forms.back' | t | default: 'Back to login' }}
-        </a>
-        
-        <div class="login-header">
-          <h2 class="login-title" style="font-size: 24px;">
-            {{ 'forms.reset' | t | default: 'Reset Password' }}
-          </h2>
-          <p class="login-subtitle">
-            {{ 'forms.reset_info' | t | default: 'Enter your email to receive reset instructions' }}
-          </p>
-        </div>
-        
-        {%- form 'recover_customer_password', class: 'login-form' -%}
-          
-          {% if form.posted_successfully? %}
-            <div class="form-success">
-              {{ 'forms.sent' | t | default: 'Password reset email sent! Check your inbox.' }}
-            </div>
-          {% endif %}
-          
-          {% if form.errors %}
-            <div class="form-error">
-              {{ form.errors | default_errors }}
-            </div>
-          {% endif %}
-          
-          <div class="form-group">
-            <label class="form-label" for="RecoverEmail">
-              {{ 'forms.email' | t | default: 'Email Address' }}
-            </label>
-            <input 
-              type="email" 
-              name="email" 
-              id="RecoverEmail"
-              class="form-input"
-              placeholder="{{ 'forms.email_hint' | t | default: 'your@email.com' }}"
-              autocomplete="email"
-              required
-            >
-          </div>
-          
-          <button type="submit" class="btn-submit">
-            {{ 'forms.send' | t | default: 'Send Reset Link' }}
-          </button>
-          
-        {%- endform -%}
-        
       </div>
       
     </div>
     
     <!-- Footer -->
     <div class="login-footer">
-      {{ 'customer.login.terms_text' | t | default: 'By continuing, you agree to our' }} 
-      <a href="/pages/terms">{{ 'customer.login.terms' | t | default: 'Terms of Service' }}</a> 
-      {{ 'customer.login.and' | t | default: 'and' }} 
-      <a href="/pages/privacy">{{ 'customer.login.privacy' | t | default: 'Privacy Policy' }}</a>
+      {{ 'forms.terms' | t | default: 'By continuing, you agree to our' }} 
+      <a href="/pages/terms">{{ 'forms.terms_link' | t | default: 'Terms of Service' }}</a> 
+      {{ 'forms.and' | t | default: 'and' }} 
+      <a href="/pages/privacy">{{ 'forms.privacy_link' | t | default: 'Privacy Policy' }}</a>
     </div>
     
   </div>
@@ -670,30 +470,10 @@
       tabs[1].classList.add('active');
       document.getElementById('register-content').classList.add('active');
     }
-    
-    // Hide recover if showing
-    document.getElementById('recover-content').classList.remove('active');
   };
-  
-  // Show password recovery
-  window.showRecover = function() {
-    document.getElementById('login-content').classList.remove('active');
-    document.getElementById('recover-content').classList.add('active');
-  };
-  
-  // Hide password recovery
-  window.hideRecover = function() {
-    document.getElementById('recover-content').classList.remove('active');
-    document.getElementById('login-content').classList.add('active');
-  };
-  
-  // Check URL hash for recover
-  if (window.location.hash === '#recover') {
-    showRecover();
-  }
   
   // Log for debugging
-  console.log('Simbye Login Page V2.0 - HIKO Ready');
+  console.log('Simbye Login Page V2.0 - HIKO Social Login Only');
   
 })();
 </script>
