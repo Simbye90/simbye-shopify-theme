@@ -2,38 +2,30 @@
 <!-- SIMBYE ESIM INSTALLATION GUIDE - ENTERPRISE EDITION -->
 
 <style>
-/* CSS Variables - Enterprise Installation Guide */
+/* CSS Variables */
 :root {
-  --install-bg: #ffffff;
-  --install-text: #1a1a1a;
-  --install-text-secondary: #666666;
-  --install-primary: #009a61;
-  --install-primary-hover: #00824f;
-  --install-accent: #00d97e;
-  --install-card-bg: #ffffff;
-  --install-border: rgba(0, 0, 0, 0.08);
-  --install-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --install-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --install-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
-  --install-gradient: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
-  --install-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --install-radius: 24px;
+  --primary: #009a61;
+  --primary-hover: #00824f;
+  --accent: #00d97e;
+  --text: #1a1a1a;
+  --text-secondary: #666666;
+  --bg: #ffffff;
+  --card-bg: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --radius: 24px;
 }
 
 /* Dark Mode */
 [data-theme="dark"] {
-  --install-bg: #0a0a0a;
-  --install-text: #f5f5f5;
-  --install-text-secondary: #999999;
-  --install-primary: #00d97e;
-  --install-primary-hover: #009a61;
-  --install-accent: #00ff88;
-  --install-card-bg: rgba(26, 26, 26, 0.8);
-  --install-border: rgba(255, 255, 255, 0.08);
-  --install-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --install-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --install-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
-  --install-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+  --text: #f5f5f5;
+  --text-secondary: #999999;
+  --bg: #0a0a0a;
+  --card-bg: rgba(26, 26, 26, 0.8);
+  --border: rgba(255, 255, 255, 0.08);
+  --primary: #00d97e;
+  --accent: #00ff88;
 }
 
 /* Kill Shopify Grid */
@@ -44,69 +36,64 @@
   grid-template-columns: unset !important;
 }
 
-/* Main Section - MEHR ABSTAND WIE PRODUCT PAGE */
+/* Main Section */
 .installation-section {
   width: 100%;
-  padding: 20px 0 100px 0;
-  background: var(--install-bg);
+  padding: 0;
+  background: var(--bg);
   position: relative;
   overflow: hidden;
 }
 
-[data-theme="dark"] .installation-section {
-  background: #0a0a0a;
-}
-
 /* Container */
 .installation-container {
-  max-width: 1440px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 60px 40px 80px 40px;
+  width: 100%;
   position: relative;
-  z-index: 1;
 }
 
-/* Header - IDENTISCH MIT HERO SECTION */
+/* Header */
 .installation-header {
   text-align: center;
   margin-bottom: 72px;
-  animation: fadeInUp 0.8s ease;
 }
 
-/* Mobile First Approach - Start mit Mobile Size */
+/* H1 Title - SIMPLE */
 .installation-title {
   font-size: 56px;
   font-weight: 900;
   line-height: 1.1;
-  margin: 0 0 20px 0;
+  margin: 0 0 24px 0;
   letter-spacing: -0.02em;
-  color: var(--install-text);
+  color: var(--text);
 }
 
-/* Zweizeilig wie Hero */
 .installation-title-line1 {
   display: block;
-  color: var(--install-text);
+  color: var(--text);
   margin-bottom: 6px;
 }
 
 .installation-title-highlight {
   display: block;
-  background: linear-gradient(135deg, var(--install-primary), var(--install-accent));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* Subtitle */
 .installation-subtitle {
-  font-size: 16px;
-  color: var(--install-text-secondary);
+  font-size: 19px;
+  color: var(--text-secondary);
   margin: 0;
   font-weight: 500;
   line-height: 1.5;
 }
 
-/* Tab System - Connected Style */
+/* Device Tabs */
 .device-tabs {
   display: flex;
   gap: 4px;
@@ -118,12 +105,7 @@
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  box-shadow: var(--install-shadow-sm);
-}
-
-[data-theme="dark"] .device-tabs {
-  background: rgba(0, 217, 126, 0.05);
-  border-color: rgba(0, 217, 126, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .device-tab {
@@ -132,11 +114,11 @@
   background: transparent;
   border: none;
   border-radius: 12px;
-  font-size: 18px; /* 18px für Tab Buttons! */
+  font-size: 18px;
   font-weight: 600;
-  color: var(--install-text-secondary);
+  color: var(--text-secondary);
   cursor: pointer;
-  transition: var(--install-transition);
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -146,11 +128,11 @@
 
 .device-tab:hover {
   background: rgba(0, 154, 97, 0.08);
-  color: var(--install-text);
+  color: var(--text);
 }
 
 .device-tab.active {
-  background: var(--install-primary);
+  background: var(--primary);
   color: white;
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
@@ -163,41 +145,27 @@
 /* Tab Content */
 .tab-content {
   display: none;
-  animation: fadeInUp 0.6s ease;
 }
 
 .tab-content.active {
   display: block;
 }
 
-/* Steps Container */
+/* Steps List */
 .steps-list {
   display: flex;
   flex-direction: column;
   gap: 32px;
 }
 
-/* Step Card */
+/* Step Card - KEINE HOVER ANIMATION */
 .step-card {
-  background: var(--install-card-bg);
-  border-radius: var(--install-radius);
+  background: var(--card-bg);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--install-shadow-md);
-  transition: var(--install-transition);
+  box-shadow: var(--shadow-md);
   position: relative;
-  border: 2px solid var(--install-border);
-}
-
-[data-theme="dark"] .step-card {
-  background: var(--install-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-}
-
-.step-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--install-shadow-lg);
-  border-color: var(--install-primary);
+  border: 2px solid var(--border);
 }
 
 .step-layout {
@@ -209,15 +177,11 @@
 /* Step Image */
 .step-image-wrapper {
   position: relative;
-  background: var(--install-gradient);
+  background: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-}
-
-[data-theme="dark"] .step-image-wrapper {
-  background: rgba(0, 217, 126, 0.05);
 }
 
 .step-image {
@@ -225,11 +189,6 @@
   height: 100%;
   object-fit: contain;
   padding: 20px;
-  transition: var(--install-transition);
-}
-
-.step-card:hover .step-image {
-  transform: scale(1.05);
 }
 
 /* Step Badge */
@@ -239,7 +198,7 @@
   left: 20px;
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, var(--install-primary), var(--install-accent));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -262,7 +221,7 @@
 .step-title {
   font-size: 24px;
   font-weight: 700;
-  color: var(--install-text);
+  color: var(--text);
   margin: 0 0 16px 0;
   letter-spacing: -0.01em;
 }
@@ -275,7 +234,7 @@
 
 .step-instructions li {
   font-size: 16px;
-  color: var(--install-text-secondary);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 12px;
   padding-left: 28px;
@@ -286,28 +245,23 @@
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--install-primary);
+  color: var(--primary);
   font-weight: 700;
 }
 
-/* Note/Warning Box */
+/* Note Box */
 .step-note {
-  background: var(--install-gradient);
-  border-left: 4px solid var(--install-primary);
+  background: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  border-left: 4px solid var(--primary);
   border-radius: 12px;
   padding: 16px;
   margin-top: auto;
 }
 
-[data-theme="dark"] .step-note {
-  background: rgba(0, 217, 126, 0.1);
-  border-left-color: var(--install-accent);
-}
-
 .step-note-title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--install-primary);
+  color: var(--primary);
   text-transform: uppercase;
   margin: 0 0 6px 0;
   letter-spacing: 0.05em;
@@ -315,12 +269,12 @@
 
 .step-note-text {
   font-size: 14px;
-  color: var(--install-text-secondary);
+  color: var(--text-secondary);
   line-height: 1.5;
   margin: 0;
 }
 
-/* APN Settings Special Card - OHNE BILD */
+/* APN Settings Card */
 .apn-settings-card {
   background: linear-gradient(135deg, rgba(255, 126, 80, 0.05), rgba(255, 154, 118, 0.05));
   border: 2px solid #ff7e50;
@@ -358,35 +312,28 @@
   text-align: center;
   margin-top: 80px;
   padding: 48px;
-  background: var(--install-gradient);
-  border-radius: var(--install-radius);
-  border: 2px solid var(--install-border);
-}
-
-[data-theme="dark"] .installation-cta {
-  background: rgba(0, 217, 126, 0.05);
-  border-color: rgba(0, 217, 126, 0.1);
+  background: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  border-radius: var(--radius);
+  border: 2px solid var(--border);
 }
 
 .cta-title {
   font-size: 36px;
   font-weight: 700;
-  color: var(--install-text);
+  color: var(--text);
   margin: 0 0 16px 0;
 }
 
 .cta-subtitle {
   font-size: 18px;
-  color: var(--install-text-secondary);
+  color: var(--text-secondary);
   margin: 0 0 32px 0;
 }
 
 .cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+  display: inline-block;
   padding: 20px 48px;
-  background: linear-gradient(135deg, var(--install-primary), var(--install-accent));
+  background: linear-gradient(135deg, var(--primary), var(--accent));
   color: white;
   border: none;
   border-radius: 100px;
@@ -394,10 +341,8 @@
   font-weight: 700;
   cursor: pointer;
   text-decoration: none;
-  transition: var(--install-transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  max-width: 280px; /* Button nicht zu breit! */
-  margin: 0 auto; /* Zentriert */
 }
 
 .cta-button:hover {
@@ -405,20 +350,15 @@
   box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
 }
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.cta-button svg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
-/* Mobile Responsive */
-@media (max-width: 767px) {
+/* MOBILE STYLES */
+@media (max-width: 768px) {
+  /* Container */
   .installation-container {
     padding: 30px 20px 0px 20px;
   }
@@ -426,41 +366,18 @@
   .installation-header {
     margin-bottom: 48px;
   }
-}
-
-/* TABLET (768px+) */
-@media (min-width: 768px) {
+  
+  /* H1 MOBILE: 32px */
   .installation-title {
-  font-size: 32px; /* Mobile First: 32px */
-  }
-  .installation-container {
-    padding: 50px 30px 70px 30px;
+    font-size: 32px;
+    margin-bottom: 20px;
   }
   
-  .installation-header {
-    margin-bottom: 60px;
+  .installation-subtitle {
+    font-size: 16px;
   }
   
-  .device-tabs {
-    margin-bottom: 40px;
-  }
-}
-
-/* DESKTOP (1024px+) */
-@media (min-width: 1024px) {
-  .installation-container {
-    padding: 60px 40px 80px 40px;
-  }
-  
-  .installation-header {
-    margin-bottom: 72px;
-  }
-  
-  .device-tabs {
-    margin-bottom: 48px;
-  }
-}
-  
+  /* Tabs */
   .device-tabs {
     margin-bottom: 32px;
   }
@@ -475,6 +392,7 @@
     height: 20px;
   }
   
+  /* Step Cards */
   .step-layout {
     grid-template-columns: 1fr;
   }
@@ -487,6 +405,11 @@
     padding: 24px;
   }
   
+  .step-title {
+    font-size: 20px;
+  }
+  
+  /* APN Card */
   .apn-settings-card .step-content {
     padding: 32px 24px;
   }
@@ -502,10 +425,7 @@
     height: 24px;
   }
   
-  .step-title {
-    font-size: 20px;
-  }
-  
+  /* CTA */
   .installation-cta {
     padding: 32px 24px;
   }
@@ -515,8 +435,7 @@
   }
   
   .cta-button {
-    width: 100%;
-    justify-content: center;
+    padding: 16px 32px;
   }
 }
 </style>
@@ -526,10 +445,10 @@
     
     <!-- Header -->
     <div class="installation-header">
-      <h2 class="installation-title">
+      <h1 class="installation-title">
         <span class="installation-title-line1">{{ 'installation.title_line1' | t | default: 'Install Your' }}</span>
         <span class="installation-title-highlight">{{ 'installation.title_line2' | t | default: 'Simbye eSIM' }}</span>
-      </h2>
+      </h1>
       <p class="installation-subtitle">
         {{ 'installation.subtitle' | t | default: 'Step-by-step guide for iPhone and Android devices • Setup in under 2 minutes' }}
       </p>
@@ -755,7 +674,7 @@
           </div>
         </div>
         
-        <!-- APN Settings - Special for Turkey OHNE BILD -->
+        <!-- APN Settings - Special for Turkey -->
         <div class="step-card apn-settings-card">
           <div class="step-layout">
             <div class="step-content">
