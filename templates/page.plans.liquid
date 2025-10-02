@@ -14,6 +14,9 @@
 <!-- templates/page.check-esim.liquid -->
 <!-- SIMBYE CHECK ESIM - CLEAN ENTERPRISE VERSION -->
 
+<!-- templates/page.check-esim.liquid -->
+<!-- SIMBYE CHECK ESIM - CLEAN ENTERPRISE VERSION -->
+
 <style>
 /* ================================================
    DESIGN SYSTEM - CLEAN & FOCUSED
@@ -1353,6 +1356,9 @@ function initEsimCheck() {
   
   // Display full data
   function displayFullData() {
+    // WICHTIG: Zuerst eSIM neu anzeigen
+    displayEsim();
+    
     // Show QR
     if (currentEsim.qrCodeUrl) {
       $('#qrCode').attr('src', currentEsim.qrCodeUrl).removeClass('qr-blur');
