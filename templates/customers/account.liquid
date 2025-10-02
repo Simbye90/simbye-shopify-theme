@@ -1,10 +1,10 @@
 <!-- templates/customers/account.liquid -->
-<!-- SIMBYE ENTERPRISE ACCOUNT - FIXED VERSION - ALL ESIMS DISPLAYED -->
+<!-- SIMBYE ENTERPRISE ACCOUNT - FINAL FIXED VERSION -->
 
 <style>
 /* ============================================
-   SIMBYE ENTERPRISE ACCOUNT - FIXED VERSION
-   All eSIMs, Data Usage, Top-Up, Everything Working!
+   SIMBYE ENTERPRISE ACCOUNT - FINAL VERSION
+   All eSIMs visible, Top-Up Modal, No animations
    ============================================ */
 
 /* CSS Variables */
@@ -119,20 +119,11 @@
   overflow: hidden;
 }
 
+/* REMOVED: Hover animation and green line */
 .stat-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--account-shadow-lg);
-  border-color: var(--account-primary);
-}
-
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: var(--account-gradient);
+  transform: none;
+  box-shadow: var(--account-shadow-sm);
+  border-color: var(--account-border);
 }
 
 .stat-icon {
@@ -307,9 +298,10 @@
   border-color: rgba(255, 255, 255, 0.08);
 }
 
+/* REDUCED: Hover effect */
 .esim-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--account-shadow-lg);
+  transform: translateY(-2px);
+  box-shadow: var(--account-shadow-md);
   border-color: var(--account-primary);
 }
 
@@ -614,8 +606,8 @@
   margin: 0 0 32px 0;
 }
 
-/* QR Modal */
-.qr-modal {
+/* Modals */
+.modal {
   display: none;
   position: fixed;
   top: 0;
@@ -629,11 +621,11 @@
   backdrop-filter: blur(10px);
 }
 
-.qr-modal.active {
+.modal.active {
   display: flex;
 }
 
-.qr-content {
+.modal-content {
   background: var(--account-card-bg);
   border-radius: var(--account-radius);
   padding: 40px;
@@ -642,6 +634,8 @@
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
   animation: modalSlideUp 0.4s ease;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 @keyframes modalSlideUp {
@@ -655,7 +649,7 @@
   }
 }
 
-.qr-close {
+.modal-close {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -673,10 +667,79 @@
   color: var(--account-text);
 }
 
-.qr-close:hover {
+.modal-close:hover {
   background: rgba(255, 59, 48, 0.1);
   color: var(--account-danger);
   transform: rotate(90deg);
+}
+
+/* Top-Up Modal */
+.topup-plans {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.topup-plan {
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.03), rgba(0, 217, 126, 0.03));
+  border: 2px solid var(--account-border);
+  border-radius: var(--account-radius-md);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--account-transition);
+}
+
+.topup-plan:hover {
+  border-color: var(--account-primary);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
+}
+
+.topup-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--account-text);
+  margin-bottom: 8px;
+}
+
+.topup-price {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--account-primary);
+  margin-bottom: 16px;
+}
+
+.topup-buy {
+  width: 100%;
+  padding: 12px;
+  background: var(--account-gradient);
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--account-transition);
+}
+
+.topup-buy:hover {
+  transform: scale(1.05);
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--account-primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* Animations */
@@ -774,7 +837,6 @@
     
     <!-- Statistics -->
     <div class="stats-grid">
-      {% comment %} Calculate all statistics {% endcomment %}
       {% assign total_esims = 0 %}
       {% assign active_esims = 0 %}
       {% assign expired_esims = 0 %}
@@ -898,56 +960,50 @@
         </div>
       </div>
       
-      <div class="esims-grid">
-        
+      <div class="esims-grid" id="esimsGrid">
         {% assign has_esims = false %}
-        {% assign esim_counter = 0 %}
+        {% assign debug_counter = 0 %}
         
-        {% comment %} FIXED: ZEIGT ALLE ESIMS - KEINE BREAKS, KEIN SKIP {% endcomment %}
+        {% comment %} MAIN FIX: Show ALL eSIMs without nested conditions {% endcomment %}
         {% for order in customer.orders %}
           {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
           
-          {% if orderMeta and orderMeta != empty %}
+          {% if orderMeta and orderMeta != empty and orderMeta.size > 0 %}
+            {% comment %} Loop through each eSIM in the order {% endcomment %}
             {% for esimData in orderMeta %}
               {% assign has_esims = true %}
-              {% assign esim_counter = esim_counter | plus: 1 %}
+              {% assign debug_counter = debug_counter | plus: 1 %}
               
-              {% comment %} DEFAULT FALLBACK - Verwende immer ersten Line Item {% endcomment %}
-              {% assign matched_product = order.line_items.first.product %}
-              {% assign matched_variant = order.line_items.first.variant %}
-              {% assign match_found = false %}
+              {% comment %} ALWAYS use first line item as fallback {% endcomment %}
+              {% assign display_product = order.line_items.first.product %}
+              {% assign display_variant = order.line_items.first.variant %}
               
-              {% comment %} VERSUCHE BESSERES MATCH ZU FINDEN (Optional) {% endcomment %}
+              {% comment %} TRY to find better match but don't require it {% endcomment %}
               {% if esimData.packageList and esimData.packageList.size > 0 %}
-                {% for package in esimData.packageList %}
-                  {% unless match_found %}
-                    {% for line_item in order.line_items %}
-                      {% unless match_found %}
-                        {% for variant in line_item.product.variants %}
-                          {% if variant.metafields.custom.package_code == package.packageCode %}
-                            {% assign matched_product = line_item.product %}
-                            {% assign matched_variant = variant %}
-                            {% assign match_found = true %}
-                            {% break %}
-                          {% endif %}
-                        {% endfor %}
-                      {% endunless %}
-                    {% endfor %}
-                  {% endunless %}
+                {% assign package_code = esimData.packageList.first.packageCode %}
+                {% assign package_name = esimData.packageList.first.packageName %}
+                
+                {% comment %} Simple search for matching product {% endcomment %}
+                {% for item in order.line_items %}
+                  {% if item.variant.metafields.custom.package_code == package_code %}
+                    {% assign display_product = item.product %}
+                    {% assign display_variant = item.variant %}
+                  {% endif %}
                 {% endfor %}
+              {% else %}
+                {% assign package_name = 'eSIM Package' %}
               {% endif %}
               
-              {% comment %} IMMER ESIM CARD ERSTELLEN - MIT ODER OHNE MATCH {% endcomment %}
-              
-              {% comment %} Calculate Status {% endcomment %}
+              {% comment %} Calculate Status - FIXED {% endcomment %}
               {% assign status = 'active' %}
               {% assign status_text = 'Active' %}
               {% assign days_left = 999 %}
               
-              {% if esimData.expiredTime %}
-                {% assign expiry_timestamp = esimData.expiredTime | date: '%s' | times: 1 %}
-                {% assign now_timestamp = 'now' | date: '%s' | times: 1 %}
-                {% assign days_left = expiry_timestamp | minus: now_timestamp | divided_by: 86400 %}
+              {% if esimData.expiredTime and esimData.expiredTime != blank %}
+                {% assign expiry_timestamp = esimData.expiredTime | date: '%s' | plus: 0 %}
+                {% assign now_timestamp = 'now' | date: '%s' | plus: 0 %}
+                {% assign seconds_left = expiry_timestamp | minus: now_timestamp %}
+                {% assign days_left = seconds_left | divided_by: 86400 %}
                 
                 {% if days_left < 0 %}
                   {% assign status = 'expired' %}
@@ -955,6 +1011,9 @@
                 {% elsif days_left <= 3 %}
                   {% assign status = 'expiring' %}
                   {% assign status_text = 'Expiring Soon' %}
+                {% else %}
+                  {% assign status = 'active' %}
+                  {% assign status_text = 'Active' %}
                 {% endif %}
               {% endif %}
               
@@ -981,15 +1040,19 @@
                 {% assign usage_class = 'warning' %}
               {% endif %}
               
-              <!-- eSIM Card #{{ esim_counter }} -->
-              <div class="esim-card" data-status="{{ status }}" data-esim-id="{{ esim_counter }}">
+              <!-- eSIM Card #{{ debug_counter }} -->
+              <div class="esim-card" 
+                   data-status="{{ status }}" 
+                   data-esim-id="{{ esimData.esimTranNo | default: debug_counter }}"
+                   data-order="{{ order.name }}">
+                   
                 <div class="esim-status status-{{ status }}">{{ status_text }}</div>
                 
                 <div class="esim-header">
-                  {% if matched_product.featured_image %}
+                  {% if display_product.featured_image %}
                     <img 
-                      src="{{ matched_product.featured_image | image_url: width: 128 }}" 
-                      alt="{{ matched_product.title }}"
+                      src="{{ display_product.featured_image | image_url: width: 128 }}" 
+                      alt="{{ display_product.title }}"
                       class="esim-flag"
                       loading="lazy"
                     >
@@ -999,16 +1062,22 @@
                     </div>
                   {% endif %}
                   <div class="esim-info">
-                    <h3>{{ matched_product.title | split: ' - ' | first | replace: 'eSIM', '' | strip | default: 'eSIM Package' }}</h3>
-                    <div class="esim-plan">
-                      {% if matched_variant.title != 'Default Title' %}
-                        {{ matched_variant.title }}
+                    <h3>
+                      {% if display_product.title %}
+                        {{ display_product.title | split: ' - ' | first | replace: 'eSIM', '' | strip }}
+                      {% elsif package_name %}
+                        {{ package_name | replace: 'eSIM', '' | strip }}
                       {% else %}
-                        {% if esimData.packageList.first %}
-                          {{ esimData.packageList.first.packageName | default: 'Data Plan' }}
-                        {% else %}
-                          Data Plan
-                        {% endif %}
+                        eSIM Package
+                      {% endif %}
+                    </h3>
+                    <div class="esim-plan">
+                      {% if display_variant.title and display_variant.title != 'Default Title' %}
+                        {{ display_variant.title }}
+                      {% elsif package_name %}
+                        {{ package_name }}
+                      {% else %}
+                        Data Plan
                       {% endif %}
                       • Order {{ order.name }}
                     </div>
@@ -1072,7 +1141,7 @@
                   {% if esimData.qrCodeUrl %}
                     <button 
                       class="btn btn-primary" 
-                      onclick="showQR('{{ esimData.qrCodeUrl }}', '{{ matched_product.title | escape }}')"
+                      onclick="showQR('{{ esimData.qrCodeUrl }}', '{{ display_product.title | escape }}')"
                     >
                       <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
@@ -1086,27 +1155,35 @@
                   {% endif %}
                   
                   {% if status != 'expired' %}
-                    {% comment %} Check if daily/unlimited - FIXED DETECTION {% endcomment %}
+                    {% comment %} Check if daily/unlimited {% endcomment %}
                     {% assign is_unlimited = false %}
-                    {% assign variant_title_lower = matched_variant.title | downcase %}
-                    {% assign variant_sku_lower = matched_variant.sku | downcase %}
-                    {% assign product_title_lower = matched_product.title | downcase %}
+                    {% assign check_title = display_variant.title | downcase %}
+                    {% assign check_sku = display_variant.sku | downcase %}
+                    {% assign check_product = display_product.title | downcase %}
                     
-                    {% if variant_title_lower contains 'daily' or variant_title_lower contains 'unlimited' %}
+                    {% if check_title contains 'daily' or check_title contains 'unlimited' %}
                       {% assign is_unlimited = true %}
-                    {% elsif variant_sku_lower contains 'daily' or variant_sku_lower contains 'unlimited' %}
+                    {% elsif check_sku contains 'daily' or check_sku contains 'unlimited' %}
                       {% assign is_unlimited = true %}
-                    {% elsif product_title_lower contains 'daily' or product_title_lower contains 'unlimited' %}
+                    {% elsif check_product contains 'daily' or check_product contains 'unlimited' %}
                       {% assign is_unlimited = true %}
+                    {% elsif package_name %}
+                      {% assign check_package = package_name | downcase %}
+                      {% if check_package contains 'daily' or check_package contains 'unlimited' %}
+                        {% assign is_unlimited = true %}
+                      {% endif %}
                     {% endif %}
                     
                     {% unless is_unlimited %}
-                      <a href="{{ matched_product.url }}" class="btn btn-secondary">
+                      <button 
+                        class="btn btn-secondary" 
+                        onclick="openTopUp('{{ esimData.esimTranNo }}', '{{ package_code }}', '{{ order.name }}')"
+                      >
                         <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                         </svg>
                         Top Up
-                      </a>
+                      </button>
                     {% else %}
                       <button class="btn btn-secondary" disabled style="opacity: 0.5; cursor: not-allowed;">
                         Not Rechargeable
@@ -1127,20 +1204,24 @@
           {% endif %}
         {% endfor %}
         
+        {% unless has_esims %}
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+            </svg>
+            <h3 class="empty-title">No eSIMs Yet</h3>
+            <p class="empty-text">Start your journey with a Simbye eSIM</p>
+            <a href="{{ routes.root_url }}" class="btn btn-primary">
+              Buy Your First eSIM
+            </a>
+          </div>
+        {% endunless %}
       </div>
       
-      {% unless has_esims %}
-        <div class="empty-state">
-          <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-          </svg>
-          <h3 class="empty-title">No eSIMs Yet</h3>
-          <p class="empty-text">Start your journey with a Simbye eSIM</p>
-          <a href="{{ routes.root_url }}" class="btn btn-primary">
-            Buy Your First eSIM
-          </a>
-        </div>
-      {% endunless %}
+      <!-- Debug Info -->
+      <div style="display: none;" id="debugInfo">
+        Debug: {{ debug_counter }} eSIMs found
+      </div>
     </div>
     
     <!-- Orders Tab -->
@@ -1272,9 +1353,9 @@
 </div>
 
 <!-- QR Modal -->
-<div class="qr-modal" id="qrModal">
-  <div class="qr-content">
-    <button class="qr-close" onclick="closeQR()">×</button>
+<div class="modal" id="qrModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeQR()">×</button>
     <h2 style="font-size: 24px; font-weight: 700; color: var(--account-text); margin: 0 0 24px 0;" id="qrTitle">
       eSIM QR Code
     </h2>
@@ -1287,7 +1368,30 @@
   </div>
 </div>
 
+<!-- Top-Up Modal -->
+<div class="modal" id="topupModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeTopUp()">×</button>
+    <h2 style="font-size: 24px; font-weight: 700; color: var(--account-text); margin: 0 0 12px 0;">
+      Select Top-Up Plan
+    </h2>
+    <p style="color: var(--account-text-secondary); margin: 0 0 24px 0;">
+      Choose your data package for <span id="topupOrder"></span>
+    </p>
+    <div id="topupLoading" style="text-align: center; padding: 40px;">
+      <div class="loading-spinner"></div>
+      <p style="margin-top: 16px; color: var(--account-text-secondary);">Loading plans...</p>
+    </div>
+    <div class="topup-plans" id="topupPlans" style="display: none;"></div>
+  </div>
+</div>
+
 <script>
+// Global state
+let currentEsimTranNo = null;
+let currentPackageCode = null;
+let currentOrderNumber = null;
+
 // Tab Switching
 function switchTab(tabName) {
   document.querySelectorAll('.tab-content').forEach(content => {
@@ -1326,12 +1430,13 @@ function filterEsims(status) {
     }
   });
   
-  // Show message if no results
-  const grid = document.querySelector('.esims-grid');
-  const existingMsg = grid.querySelector('.no-results-msg');
+  // Remove any existing no-results message
+  const existingMsg = document.querySelector('.no-results-msg');
   if (existingMsg) existingMsg.remove();
   
+  // Show message if no results
   if (visibleCount === 0 && cards.length > 0) {
+    const grid = document.getElementById('esimsGrid');
     const msg = document.createElement('div');
     msg.className = 'no-results-msg';
     msg.style.cssText = 'grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--account-text-secondary);';
@@ -1380,11 +1485,121 @@ function downloadQR() {
   }
 }
 
-// Close modal on outside click
+// Top-Up Modal Functions
+function openTopUp(esimTranNo, packageCode, orderNumber) {
+  currentEsimTranNo = esimTranNo;
+  currentPackageCode = packageCode;
+  currentOrderNumber = orderNumber;
+  
+  const modal = document.getElementById('topupModal');
+  const orderSpan = document.getElementById('topupOrder');
+  orderSpan.textContent = 'Order ' + orderNumber;
+  
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  
+  // Load top-up plans
+  loadTopUpPlans();
+}
+
+function closeTopUp() {
+  document.getElementById('topupModal').classList.remove('active');
+  document.body.style.overflow = '';
+  currentEsimTranNo = null;
+  currentPackageCode = null;
+  currentOrderNumber = null;
+}
+
+function loadTopUpPlans() {
+  const loadingDiv = document.getElementById('topupLoading');
+  const plansDiv = document.getElementById('topupPlans');
+  
+  loadingDiv.style.display = 'block';
+  plansDiv.style.display = 'none';
+  plansDiv.innerHTML = '';
+  
+  // Get current currency
+  const currency = window.Shopify?.currency?.active || 'EUR';
+  
+  // Fetch top-up plans
+  fetch(`https://simbye.com/apps/topup/plans?esimTranNo=${currentEsimTranNo}&packageCode=${currentPackageCode}&currency=${currency}`)
+    .then(response => response.json())
+    .then(data => {
+      loadingDiv.style.display = 'none';
+      
+      if (data?.data?.length > 0) {
+        displayTopUpPlans(data.data);
+      } else {
+        plansDiv.style.display = 'block';
+        plansDiv.innerHTML = '<p style="text-align: center; color: var(--account-text-secondary);">No top-up plans available for this eSIM.</p>';
+      }
+    })
+    .catch(error => {
+      console.error('Error loading top-up plans:', error);
+      loadingDiv.style.display = 'none';
+      plansDiv.style.display = 'block';
+      plansDiv.innerHTML = '<p style="text-align: center; color: var(--account-danger);">Failed to load plans. Please try again.</p>';
+    });
+}
+
+function displayTopUpPlans(plans) {
+  const plansDiv = document.getElementById('topupPlans');
+  let html = '';
+  
+  plans.forEach(plan => {
+    html += `
+      <div class="topup-plan">
+        <div class="topup-name">${plan.name}</div>
+        <div class="topup-price">${plan.price} ${window.Shopify?.currency?.active || 'EUR'}</div>
+        <button class="topup-buy" onclick="buyTopUp('${plan.variant_id}', '${plan.packageCode}')">
+          BUY NOW
+        </button>
+      </div>
+    `;
+  });
+  
+  plansDiv.innerHTML = html;
+  plansDiv.style.display = 'block';
+}
+
+function buyTopUp(variantId, packageCode) {
+  // Add to cart with special properties
+  fetch('/cart/add.js', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      items: [{
+        quantity: 1,
+        id: variantId,
+        properties: {
+          'packageCode': packageCode,
+          'esimTranNo': currentEsimTranNo,
+          'type': 'TOPUP'
+        }
+      }]
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    // Redirect to checkout
+    window.location.href = '/checkout';
+  })
+  .catch(error => {
+    console.error('Error adding to cart:', error);
+    alert('Failed to add to cart. Please try again.');
+  });
+}
+
+// Close modals on outside click
 document.addEventListener('click', function(e) {
-  const modal = document.getElementById('qrModal');
-  if (e.target === modal) {
-    closeQR();
+  if (e.target.classList.contains('modal')) {
+    if (e.target.id === 'qrModal') {
+      closeQR();
+    } else if (e.target.id === 'topupModal') {
+      closeTopUp();
+    }
   }
 });
 
@@ -1392,10 +1607,15 @@ document.addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeQR();
+    closeTopUp();
   }
 });
 
-// Debug Info (kann später entfernt werden)
-console.log('eSIM Account Page loaded');
-console.log('Total eSIM cards rendered:', document.querySelectorAll('.esim-card').length);
+// Debug log
+document.addEventListener('DOMContentLoaded', function() {
+  const esimCards = document.querySelectorAll('.esim-card');
+  console.log('eSIM Account Page loaded');
+  console.log('Total eSIM cards rendered:', esimCards.length);
+  console.log('Debug info:', document.getElementById('debugInfo')?.textContent);
+});
 </script>
