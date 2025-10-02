@@ -467,9 +467,28 @@
   "cta_title": "Is Your Device Compatible?",
   "cta_subtitle": "If yes, get your eSIM now and connect in 60 seconds",
   "cta_button": "Buy eSIM Now"
-
+},
+"forms": {
+  "welcome": "Welcome Back",
+  "subtitle": "Sign in to manage your eSIMs",
+  "signin": "Sign In",
+  "signup": "Register",
+  "or": "OR",
+  "email": "Email Address",
+  "email_hint": "your@email.com",
+  "password": "Password",
+  "forgot": "Forgot your password?",
+  "firstname": "First Name",
+  "lastname": "Last Name",
+  "create": "Create Account",
+  "reset": "Reset Password",
+  "reset_info": "Enter your email to receive reset instructions",
+  "back": "Back to login",
+  "send": "Send Reset Link",
+  "sent": "Password reset email sent! Check your inbox.",
+  "terms": "By continuing, you agree to our",
+  "terms_link": "Terms of Service",
+  "and": "and",
+  "privacy_link": "Privacy Policy"
 }
 }
-
-
-
