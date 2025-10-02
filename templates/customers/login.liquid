@@ -1,10 +1,10 @@
 <!-- templates/customers/login.liquid -->
-<!-- SIMBYE ENTERPRISE LOGIN PAGE V2.0 - FIXED HIKO INTEGRATION -->
+<!-- SIMBYE ENTERPRISE LOGIN PAGE V2.0 - FIXED -->
 
 <style>
 /* ============================================
    ENTERPRISE LOGIN PAGE - FIXED VERSION
-   HIKO Social Login Properly Styled
+   HIKO Social Login + Email/Password
    ============================================ */
 
 /* CSS Variables */
@@ -46,21 +46,16 @@
   grid-template-columns: unset !important;
 }
 
-/* Hide duplicate Shopify logo if exists */
-.login-page-enterprise .shopify-section > img:first-child {
-  display: none !important;
-}
-
 /* Main Section */
 .login-page-enterprise {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  background: var(--login-bg);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  transition: var(--login-transition);
+  position: relative;
 }
 
 [data-theme="dark"] .login-page-enterprise {
@@ -70,11 +65,11 @@
 /* Login Container */
 .login-container {
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
   animation: fadeInUp 0.6s ease;
 }
 
-/* Logo - ONLY ONE INSTANCE */
+/* Logo - ONLY ONE, CENTERED */
 .login-logo {
   text-align: center;
   margin-bottom: 32px;
@@ -83,7 +78,7 @@
 .login-logo img {
   width: 160px;
   height: auto;
-  object-fit: contain;
+  display: inline-block;
 }
 
 /* Card */
@@ -91,13 +86,13 @@
   background: var(--login-card-bg);
   border: 2px solid var(--login-border);
   border-radius: var(--login-radius);
-  padding: 48px 40px;
+  padding: 40px;
   box-shadow: var(--login-shadow-lg);
   margin-bottom: 24px;
 }
 
 [data-theme="dark"] .login-card {
-  background: var(--login-card-bg);
+  background: rgba(26, 26, 26, 0.95);
   border-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
 }
@@ -109,15 +104,15 @@
 }
 
 .login-title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: var(--login-text);
-  margin: 0 0 12px 0;
+  margin: 0 0 8px 0;
   letter-spacing: -0.02em;
 }
 
 .login-subtitle {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--login-text-secondary);
   margin: 0;
 }
@@ -125,12 +120,12 @@
 /* Connected Tabs */
 .login-tabs {
   display: flex;
-  gap: 4px;
+  gap: 0;
   background: rgba(0, 154, 97, 0.05);
   padding: 4px;
-  border-radius: var(--login-radius-sm);
+  border-radius: 12px;
   border: 1px solid rgba(0, 154, 97, 0.1);
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 [data-theme="dark"] .login-tabs {
@@ -140,11 +135,11 @@
 
 .login-tab {
   flex: 1;
-  padding: 14px 24px;
+  padding: 12px 24px;
   background: transparent;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--login-text-secondary);
   cursor: pointer;
@@ -152,7 +147,7 @@
   font-family: inherit;
 }
 
-.login-tab:hover {
+.login-tab:hover:not(.active) {
   background: rgba(0, 154, 97, 0.08);
   color: var(--login-text);
 }
@@ -160,7 +155,7 @@
 .login-tab.active {
   background: var(--login-primary);
   color: white;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.3);
 }
 
 /* Tab Content */
@@ -172,85 +167,9 @@
   display: block;
 }
 
-/* HIKO Social Login Container & Styling */
+/* HIKO Social Login Container - KEEP AS IS */
 .hiko-container {
   margin-bottom: 24px;
-}
-
-/* Style HIKO Social Buttons */
-.hiko-container button,
-.hiko-container a,
-[class*="social-login"],
-[class*="apple-login"],
-[class*="google-login"],
-[class*="facebook-login"] {
-  width: 100% !important;
-  padding: 14px 20px !important;
-  margin-bottom: 12px !important;
-  border-radius: 12px !important;
-  font-size: 15px !important;
-  font-weight: 600 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 12px !important;
-  border: none !important;
-  cursor: pointer !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-}
-
-/* Apple Button */
-.hiko-container button:has([aria-label*="Apple"]),
-.hiko-container button:has(svg[aria-label*="Apple"]),
-.hiko-container button[aria-label*="Apple"],
-.hiko-container a[href*="apple"],
-[class*="apple"] {
-  background: #000000 !important;
-  color: #ffffff !important;
-}
-
-.hiko-container button:has([aria-label*="Apple"]):hover,
-.hiko-container button[aria-label*="Apple"]:hover,
-.hiko-container a[href*="apple"]:hover {
-  background: #1a1a1a !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
-}
-
-/* Google Button */
-.hiko-container button:has([aria-label*="Google"]),
-.hiko-container button[aria-label*="Google"],
-.hiko-container a[href*="google"],
-[class*="google"] {
-  background: #ffffff !important;
-  color: #3c4043 !important;
-  border: 2px solid #dadce0 !important;
-}
-
-.hiko-container button:has([aria-label*="Google"]):hover,
-.hiko-container button[aria-label*="Google"]:hover,
-.hiko-container a[href*="google"]:hover {
-  background: #f8f9fa !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Facebook Button */
-.hiko-container button:has([aria-label*="Facebook"]),
-.hiko-container button[aria-label*="Facebook"],
-.hiko-container a[href*="facebook"],
-[class*="facebook"] {
-  background: #1877f2 !important;
-  color: #ffffff !important;
-}
-
-.hiko-container button:has([aria-label*="Facebook"]):hover,
-.hiko-container button[aria-label*="Facebook"]:hover,
-.hiko-container a[href*="facebook"]:hover {
-  background: #166fe5 !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 16px rgba(24, 119, 242, 0.3) !important;
 }
 
 /* Divider */
@@ -258,7 +177,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 28px 0;
+  margin: 24px 0;
   position: relative;
 }
 
@@ -276,9 +195,6 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 0 8px;
-  background: var(--login-card-bg);
-  position: relative;
 }
 
 /* Form */
@@ -287,7 +203,7 @@
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .form-label {
@@ -300,10 +216,10 @@
 
 .form-input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 12px 16px;
   background: var(--login-bg);
   border: 2px solid var(--login-border);
-  border-radius: 12px;
+  border-radius: 10px;
   font-size: 15px;
   color: var(--login-text);
   transition: var(--login-transition);
@@ -316,6 +232,11 @@
   box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
 }
 
+.form-input::placeholder {
+  color: var(--login-text-secondary);
+  opacity: 0.6;
+}
+
 [data-theme="dark"] .form-input {
   background: rgba(255, 255, 255, 0.05);
 }
@@ -323,44 +244,47 @@
 .form-error {
   background: rgba(255, 59, 48, 0.1);
   border: 1px solid rgba(255, 59, 48, 0.3);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
   color: #ff3b30;
   font-size: 14px;
   font-weight: 600;
+  text-align: center;
 }
 
 .form-success {
   background: rgba(0, 217, 126, 0.1);
   border: 1px solid rgba(0, 217, 126, 0.3);
-  border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 18px;
   color: #00d97e;
   font-size: 14px;
   font-weight: 600;
+  text-align: center;
 }
 
 /* Submit Button */
 .btn-submit {
   width: 100%;
-  padding: 16px;
+  padding: 14px;
   background: var(--login-gradient);
   color: white;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   transition: var(--login-transition);
   font-family: inherit;
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
+  margin-top: 24px;
 }
 
 .btn-submit:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--login-shadow-lg);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.3);
 }
 
 /* Links */
@@ -380,7 +304,6 @@
 
 .form-link a:hover {
   color: var(--login-primary-hover);
-  text-decoration: underline;
 }
 
 /* Password Recovery */
@@ -407,7 +330,7 @@
 
 .back-link:hover {
   color: var(--login-text);
-  gap: 12px;
+  gap: 10px;
 }
 
 .back-link svg {
@@ -457,11 +380,11 @@
   }
   
   .login-card {
-    padding: 36px 28px;
+    padding: 32px 24px;
   }
   
   .login-title {
-    font-size: 28px;
+    font-size: 24px;
   }
   
   .login-logo img {
@@ -471,44 +394,31 @@
 
 @media (max-width: 480px) {
   .login-card {
-    padding: 32px 24px;
+    padding: 28px 20px;
   }
   
   .login-title {
-    font-size: 24px;
+    font-size: 22px;
   }
   
   .login-tab {
-    padding: 12px 20px;
-    font-size: 15px;
+    padding: 10px 16px;
+    font-size: 14px;
   }
-  
-  .login-logo img {
-    width: 120px;
-  }
-}
-
-/* Additional HIKO overrides to ensure proper styling */
-div[name="hiko-container"] > * {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-}
-
-/* Ensure HIKO doesn't add its own margins */
-div[name="hiko-container"] {
-  margin-top: 0 !important;
-  margin-bottom: 24px !important;
 }
 </style>
 
 <section class="login-page-enterprise">
   <div class="login-container">
     
-    <!-- Logo - ONLY ONE INSTANCE HERE -->
+    <!-- Logo - ONLY ONE -->
     <div class="login-logo">
-      <a href="/">
+      <a href="{{ routes.root_url }}">
         <img 
-          src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
+          src="{{ 'logo.png' | asset_url }}"
           alt="{{ shop.name }}"
+          width="160"
+          height="auto"
         >
       </a>
     </div>
@@ -518,32 +428,31 @@ div[name="hiko-container"] {
       
       <!-- Header -->
       <div class="login-header">
-        <h1 class="login-title">Welcome Back</h1>
-        <p class="login-subtitle">Sign in to manage your eSIMs</p>
+        <h1 class="login-title">{{ 'customer.login.title' | t | default: 'Welcome Back' }}</h1>
+        <p class="login-subtitle">{{ 'customer.login.subtitle' | t | default: 'Sign in to manage your eSIMs' }}</p>
       </div>
       
       <!-- Connected Tabs -->
       <div class="login-tabs">
         <button class="login-tab active" onclick="switchTab('login')">
-          Sign In
+          {{ 'customer.login.sign_in' | t | default: 'Sign In' }}
         </button>
         <button class="login-tab" onclick="switchTab('register')">
-          Register
+          {{ 'customer.login.register' | t | default: 'Register' }}
         </button>
       </div>
       
       <!-- LOGIN TAB -->
       <div id="login-content" class="tab-content active">
         
-        <!-- HIKO Social Login -->
+        <!-- HIKO Social Login - KEEP THIS AS IS -->
         <div name="hiko-container" class="hiko-container">
-          <!-- HIKO will inject Apple/Google/Facebook buttons here -->
-          <!-- The CSS above will automatically style them -->
+          <!-- HIKO automatically injects Apple/Google/Facebook buttons here -->
         </div>
         
         <!-- Divider -->
         <div class="login-divider">
-          <span>Or continue with email</span>
+          <span>{{ 'customer.login.or_email' | t | default: 'OR' }}</span>
         </div>
         
         <!-- Email Login Form -->
@@ -555,32 +464,25 @@ div[name="hiko-container"] {
             </div>
           {% endif %}
           
-          {% if form.posted_successfully? %}
-            <div class="form-success">
-              Successfully logged in! Redirecting...
-            </div>
-            <script>
-              setTimeout(function() {
-                window.location.href = '/account';
-              }, 1500);
-            </script>
-          {% endif %}
-          
           <div class="form-group">
-            <label class="form-label" for="CustomerEmail">Email Address</label>
+            <label class="form-label" for="CustomerEmail">
+              {{ 'customer.login.email' | t | default: 'Email Address' }}
+            </label>
             <input 
               type="email" 
               name="customer[email]" 
               id="CustomerEmail"
               class="form-input"
-              placeholder="your@email.com"
+              placeholder="{{ 'customer.login.email_placeholder' | t | default: 'your@email.com' }}"
               autocomplete="email"
               required
             >
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="CustomerPassword">Password</label>
+            <label class="form-label" for="CustomerPassword">
+              {{ 'customer.login.password' | t | default: 'Password' }}
+            </label>
             <input 
               type="password" 
               name="customer[password]" 
@@ -593,12 +495,12 @@ div[name="hiko-container"] {
           </div>
           
           <button type="submit" class="btn-submit">
-            Sign In
+            {{ 'customer.login.sign_in' | t | default: 'Sign In' }}
           </button>
           
           <div class="form-link">
             <a href="#recover" onclick="showRecover(); return false;">
-              Forgot your password?
+              {{ 'customer.login.forgot_password' | t | default: 'Forgot your password?' }}
             </a>
           </div>
           
@@ -609,14 +511,14 @@ div[name="hiko-container"] {
       <!-- REGISTER TAB -->
       <div id="register-content" class="tab-content">
         
-        <!-- HIKO Social Login for Register -->
+        <!-- HIKO Social Login - KEEP THIS AS IS -->
         <div name="hiko-container" class="hiko-container">
-          <!-- HIKO will inject buttons here too -->
+          <!-- HIKO automatically injects buttons here too -->
         </div>
         
         <!-- Divider -->
         <div class="login-divider">
-          <span>Or register with email</span>
+          <span>{{ 'customer.login.or_email' | t | default: 'OR' }}</span>
         </div>
         
         <!-- Registration Form -->
@@ -636,53 +538,55 @@ div[name="hiko-container"] {
             </div>
           {% endif %}
           
-          {% if form.posted_successfully? %}
-            <div class="form-success">
-              Account created! Please check your email to verify.
-            </div>
-          {% endif %}
-          
           <div class="form-group">
-            <label class="form-label" for="RegisterFirstName">First Name</label>
+            <label class="form-label" for="RegisterFirstName">
+              {{ 'customer.register.first_name' | t | default: 'First Name' }}
+            </label>
             <input 
               type="text" 
               name="customer[first_name]" 
               id="RegisterFirstName"
               class="form-input"
-              placeholder="John"
+              placeholder="{{ 'customer.register.first_name_placeholder' | t | default: 'John' }}"
               autocomplete="given-name"
               required
             >
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="RegisterLastName">Last Name</label>
+            <label class="form-label" for="RegisterLastName">
+              {{ 'customer.register.last_name' | t | default: 'Last Name' }}
+            </label>
             <input 
               type="text" 
               name="customer[last_name]" 
               id="RegisterLastName"
               class="form-input"
-              placeholder="Doe"
+              placeholder="{{ 'customer.register.last_name_placeholder' | t | default: 'Doe' }}"
               autocomplete="family-name"
               required
             >
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="RegisterEmail">Email Address</label>
+            <label class="form-label" for="RegisterEmail">
+              {{ 'customer.register.email' | t | default: 'Email Address' }}
+            </label>
             <input 
               type="email" 
               name="customer[email]" 
               id="RegisterEmail"
               class="form-input"
-              placeholder="your@email.com"
+              placeholder="{{ 'customer.register.email_placeholder' | t | default: 'your@email.com' }}"
               autocomplete="email"
               required
             >
           </div>
           
           <div class="form-group">
-            <label class="form-label" for="RegisterPassword">Password</label>
+            <label class="form-label" for="RegisterPassword">
+              {{ 'customer.register.password' | t | default: 'Password' }}
+            </label>
             <input 
               type="password" 
               name="customer[password]" 
@@ -695,7 +599,7 @@ div[name="hiko-container"] {
           </div>
           
           <button type="submit" class="btn-submit">
-            Create Account
+            {{ 'customer.register.submit' | t | default: 'Create Account' }}
           </button>
           
         {%- endform -%}
@@ -703,25 +607,29 @@ div[name="hiko-container"] {
       </div>
       
       <!-- PASSWORD RECOVERY -->
-      <div id="recover-content" class="recover-section {% if recover_success == 'true' %}active{% endif %}">
+      <div id="recover-content" class="recover-section">
         
         <a href="#" class="back-link" onclick="hideRecover(); return false;">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
-          Back to login
+          {{ 'customer.recover_password.back_to_login' | t | default: 'Back to login' }}
         </a>
         
         <div class="login-header">
-          <h2 class="login-title" style="font-size: 28px;">Reset Password</h2>
-          <p class="login-subtitle">Enter your email to receive reset instructions</p>
+          <h2 class="login-title" style="font-size: 24px;">
+            {{ 'customer.recover_password.title' | t | default: 'Reset Password' }}
+          </h2>
+          <p class="login-subtitle">
+            {{ 'customer.recover_password.subtitle' | t | default: 'Enter your email to receive reset instructions' }}
+          </p>
         </div>
         
         {%- form 'recover_customer_password', class: 'login-form' -%}
           
           {% if form.posted_successfully? %}
             <div class="form-success">
-              Password reset email sent! Check your inbox.
+              {{ 'customer.recover_password.success' | t | default: 'Password reset email sent! Check your inbox.' }}
             </div>
           {% endif %}
           
@@ -732,20 +640,22 @@ div[name="hiko-container"] {
           {% endif %}
           
           <div class="form-group">
-            <label class="form-label" for="RecoverEmail">Email Address</label>
+            <label class="form-label" for="RecoverEmail">
+              {{ 'customer.recover_password.email' | t | default: 'Email Address' }}
+            </label>
             <input 
               type="email" 
               name="email" 
               id="RecoverEmail"
               class="form-input"
-              placeholder="your@email.com"
+              placeholder="{{ 'customer.recover_password.email_placeholder' | t | default: 'your@email.com' }}"
               autocomplete="email"
               required
             >
           </div>
           
           <button type="submit" class="btn-submit">
-            Send Reset Link
+            {{ 'customer.recover_password.submit' | t | default: 'Send Reset Link' }}
           </button>
           
         {%- endform -%}
@@ -756,7 +666,10 @@ div[name="hiko-container"] {
     
     <!-- Footer -->
     <div class="login-footer">
-      By continuing, you agree to our <a href="/pages/terms">Terms of Service</a> and <a href="/pages/privacy">Privacy Policy</a>
+      {{ 'customer.login.terms_text' | t | default: 'By continuing, you agree to our' }} 
+      <a href="/pages/terms">{{ 'customer.login.terms' | t | default: 'Terms of Service' }}</a> 
+      {{ 'customer.login.and' | t | default: 'and' }} 
+      <a href="/pages/privacy">{{ 'customer.login.privacy' | t | default: 'Privacy Policy' }}</a>
     </div>
     
   </div>
@@ -791,33 +704,22 @@ div[name="hiko-container"] {
   // Show password recovery
   window.showRecover = function() {
     document.getElementById('login-content').classList.remove('active');
-    document.getElementById('register-content').classList.remove('active');
     document.getElementById('recover-content').classList.add('active');
-    
-    // Hide tabs when showing recover
-    document.querySelector('.login-tabs').style.display = 'none';
   };
   
   // Hide password recovery
   window.hideRecover = function() {
     document.getElementById('recover-content').classList.remove('active');
     document.getElementById('login-content').classList.add('active');
-    
-    // Show tabs again
-    document.querySelector('.login-tabs').style.display = 'flex';
   };
   
   // Check URL hash for recover
   if (window.location.hash === '#recover') {
-    setTimeout(showRecover, 100);
+    showRecover();
   }
   
-  // Debug: Log if HIKO container exists
-  const hikoContainers = document.querySelectorAll('[name="hiko-container"]');
-  console.log('HIKO containers found:', hikoContainers.length);
-  
-  // Initialize
-  console.log('Simbye Login Page V2.0 - HIKO Integration Ready');
+  // Log for debugging
+  console.log('Simbye Login Page V2.0 - HIKO Ready');
   
 })();
 </script>
