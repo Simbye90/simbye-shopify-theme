@@ -44,10 +44,10 @@
   grid-template-columns: unset !important;
 }
 
-/* Main Section */
+/* Main Section - MEHR ABSTAND WIE PRODUCT PAGE */
 .installation-section {
   width: 100%;
-  padding: 100px 0;
+  padding: 20px 0 100px 0;
   background: var(--install-bg);
   position: relative;
   overflow: hidden;
@@ -66,7 +66,7 @@
   z-index: 1;
 }
 
-/* Header */
+/* Header - WIE PRODUCT PAGE & HERO */
 .installation-header {
   text-align: center;
   margin-bottom: 72px;
@@ -77,12 +77,20 @@
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   color: var(--install-text);
-  margin: 0 0 20px 0;
+  margin: 0 0 32px 0;
   letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
+/* Zweizeilig wie Hero */
+.installation-title-line1 {
+  display: block;
+  color: var(--install-text);
+  margin-bottom: 6px;
+}
+
 .installation-title-highlight {
+  display: block;
   background: linear-gradient(135deg, var(--install-primary), var(--install-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -311,15 +319,37 @@
   margin: 0;
 }
 
-/* APN Settings Special Card */
+/* APN Settings Special Card - OHNE BILD */
 .apn-settings-card {
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 217, 126, 0.05));
-  border: 2px solid var(--install-primary);
+  background: linear-gradient(135deg, rgba(255, 126, 80, 0.05), rgba(255, 154, 118, 0.05));
+  border: 2px solid #ff7e50;
   margin-top: 32px;
 }
 
-.apn-settings-card .step-badge {
+.apn-settings-card .step-layout {
+  grid-template-columns: 1fr;
+}
+
+.apn-settings-card .step-content {
+  padding: 48px;
+}
+
+.apn-icon-badge {
+  width: 64px;
+  height: 64px;
   background: linear-gradient(135deg, #ff7e50, #ff9a76);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 20px rgba(255, 126, 80, 0.25);
+}
+
+.apn-icon-badge svg {
+  width: 32px;
+  height: 32px;
+  color: white;
 }
 
 /* CTA Section */
@@ -386,6 +416,10 @@
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
+  .installation-section {
+    padding-top: 0;
+  }
+  
   .installation-container {
     padding: 0 20px;
   }
@@ -420,6 +454,21 @@
     padding: 24px;
   }
   
+  .apn-settings-card .step-content {
+    padding: 32px 24px;
+  }
+  
+  .apn-icon-badge {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .apn-icon-badge svg {
+    width: 24px;
+    height: 24px;
+  }
+  
   .step-title {
     font-size: 20px;
   }
@@ -445,10 +494,11 @@
     <!-- Header -->
     <div class="installation-header">
       <h2 class="installation-title">
-        Install Your <span class="installation-title-highlight">Simbye eSIM</span>
+        <span class="installation-title-line1">{{ 'installation.title_line1' | t | default: 'Install Your' }}</span>
+        <span class="installation-title-highlight">{{ 'installation.title_line2' | t | default: 'Simbye eSIM' }}</span>
       </h2>
       <p class="installation-subtitle">
-        Step-by-step guide for iPhone and Android devices • Setup in under 2 minutes
+        {{ 'installation.subtitle' | t | default: 'Step-by-step guide for iPhone and Android devices • Setup in under 2 minutes' }}
       </p>
     </div>
     
@@ -458,13 +508,13 @@
         <svg class="tab-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
         </svg>
-        Apple iPhone
+        {{ 'installation.tab_apple' | t | default: 'Apple iPhone' }}
       </button>
       <button class="device-tab" onclick="switchTab('android')">
         <svg class="tab-icon" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24a11.463 11.463 0 00-8.94 0L5.65 5.67a.643.643 0 00-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.78 10.78 0 001 18.56h22a10.78 10.78 0 00-5.4-9.08zM7 15.25a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm10 0a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/>
         </svg>
-        Android Samsung
+        {{ 'installation.tab_android' | t | default: 'Android' }}
       </button>
     </div>
     
@@ -477,7 +527,7 @@
           <div class="step-layout">
             <div class="step-image-wrapper">
               <span class="step-badge">1</span>
-              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Design_ohne_Titel-6.png?v=1758542022" 
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/iphone-settings-mobile-service.png?v=1" 
                    alt="iPhone Settings" 
                    class="step-image">
             </div>
@@ -561,15 +611,15 @@
                    class="step-image">
             </div>
             <div class="step-content">
-              <h3 class="step-title">Open Settings & Connections</h3>
+              <h3 class="step-title">{{ 'installation.android_step1_title' | t | default: 'Open Settings & Connections' }}</h3>
               <ul class="step-instructions">
-                <li>Navigate to the Settings app on your Samsung device</li>
-                <li>Scroll down and tap on "Connections"</li>
-                <li>Select "SIM card manager" from the list</li>
+                <li>{{ 'installation.android_step1_1' | t | default: 'Navigate to the Settings app on your Android device' }}</li>
+                <li>{{ 'installation.android_step1_2' | t | default: 'Scroll down and tap on "Connections"' }}</li>
+                <li>{{ 'installation.android_step1_3' | t | default: 'Select "SIM card manager" from the list' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Compatibility</p>
-                <p class="step-note-text">Works with Samsung Galaxy S20 and newer, Note20 and newer models</p>
+                <p class="step-note-title">{{ 'installation.compatibility' | t | default: 'Compatibility' }}</p>
+                <p class="step-note-text">{{ 'installation.android_compatibility' | t | default: 'Works with Samsung Galaxy S20+, Google Pixel 3+, and other eSIM devices' }}</p>
               </div>
             </div>
           </div>
@@ -672,28 +722,28 @@
           </div>
         </div>
         
-        <!-- APN Settings - Special for Turkey -->
+        <!-- APN Settings - Special for Turkey OHNE BILD -->
         <div class="step-card apn-settings-card">
           <div class="step-layout">
-            <div class="step-image-wrapper">
-              <span class="step-badge">⚙️</span>
-              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/samsung-apn-settings.png?v=1" 
-                   alt="APN Settings" 
-                   class="step-image">
-            </div>
             <div class="step-content">
-              <h3 class="step-title">APN Configuration (Turkey eSIM Only)</h3>
+              <div class="apn-icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 1v22M8 5l4-4 4 4M8 19l4 4 4-4"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+              <h3 class="step-title">{{ 'installation.apn_title' | t | default: 'APN Configuration (Turkey eSIM Only)' }}</h3>
               <ul class="step-instructions">
-                <li>Go to Settings → Connections → Mobile networks</li>
-                <li>Select your Simbye eSIM</li>
-                <li>Tap "Access Point Names"</li>
-                <li>Add new APN with name: <strong>isp</strong></li>
-                <li>Leave all other fields blank or default</li>
-                <li>Save and select the new APN</li>
+                <li>{{ 'installation.apn_step1' | t | default: 'Go to Settings → Connections → Mobile networks' }}</li>
+                <li>{{ 'installation.apn_step2' | t | default: 'Select your Simbye eSIM' }}</li>
+                <li>{{ 'installation.apn_step3' | t | default: 'Tap "Access Point Names"' }}</li>
+                <li>{{ 'installation.apn_step4' | t | default: 'Add new APN with name:' }} <strong>isp</strong></li>
+                <li>{{ 'installation.apn_step5' | t | default: 'Leave all other fields blank or default' }}</li>
+                <li>{{ 'installation.apn_step6' | t | default: 'Save and select the new APN' }}</li>
               </ul>
               <div class="step-note">
-                <p class="step-note-title">Turkey eSIM Special</p>
-                <p class="step-note-text">This step is ONLY required for Turkey eSIM. Other countries work automatically.</p>
+                <p class="step-note-title">{{ 'installation.apn_note_title' | t | default: 'Turkey eSIM Special' }}</p>
+                <p class="step-note-text">{{ 'installation.apn_note_text' | t | default: 'This step is ONLY required for Turkey eSIM. Other countries work automatically.' }}</p>
               </div>
             </div>
           </div>
