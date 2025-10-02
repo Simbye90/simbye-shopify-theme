@@ -1176,20 +1176,14 @@ let currentEsimTranNo = null;
 let currentPackageCode = null;
 let currentOrderNumber = null;
 
-// Check jQuery and load
-if (typeof jQuery === 'undefined') {
-  var script = document.createElement('script');
-  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
-  document.head.appendChild(script);
-  script.onload = function() {
-    loadAllEsims();
-  };
-} else {
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('Auto-loading all eSIMs...');
-    loadAllEsims();
-  });
-}
+// Load jQuery if not available
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof jQuery === 'undefined') {
+    var script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
+    document.head.appendChild(script);
+  }
+});
 
 // Load all eSIMs from API using jQuery AJAX
 function loadAllEsims() {
