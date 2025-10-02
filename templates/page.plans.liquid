@@ -9,12 +9,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
 <!-- templates/page.check-esim.liquid -->
-<!-- SIMBYE CHECK ESIM - ENTERPRISE PRODUCTION VERSION FIXED -->
-
-<!-- templates/page.check-esim.liquid -->
-<!-- SIMBYE CHECK ESIM - CLEAN ENTERPRISE VERSION -->
-
-<!-- templates/page.check-esim.liquid -->
 <!-- SIMBYE CHECK ESIM - CLEAN ENTERPRISE VERSION -->
 
 <style>
@@ -234,12 +228,24 @@
   font-weight: 600;
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
-  animation: pulse 2s infinite;
+.status-badge.active {
+  background: rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.status-badge.ready {
+  background: rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+}
+
+.status-badge.expired {
+  background: rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.status-badge.installed {
+  background: rgba(34, 197, 94, 0.3);
+  border: 1px solid rgba(34, 197, 94, 0.5);
 }
 
 @keyframes pulse {
@@ -673,6 +679,12 @@
 .topup-content {
   max-height: 60vh;
   overflow-y: auto;
+  position: relative;
+}
+
+.topup-content .modal-close {
+  position: sticky;
+  top: 0;
 }
 
 .topup-plans {
@@ -733,7 +745,7 @@
   right: 20px;
   width: 32px;
   height: 32px;
-  background: rgba(0, 0, 0, 0.1);
+  background: #f0f0f0;
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -741,11 +753,22 @@
   align-items: center;
   justify-content: center;
   transition: var(--transition);
+  color: var(--text);
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 1;
+  position: fixed;
+}
+
+[data-theme="dark"] .modal-close {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
 }
 
 .modal-close:hover {
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(239, 68, 68, 0.2);
   transform: rotate(90deg);
+  color: #ef4444;
 }
 
 /* Animations */
@@ -834,7 +857,7 @@
       <div class="esim-header">
         <h2 class="package-name" id="packageName">-</h2>
         <div class="status-badges">
-          <span class="status-badge">
+          <span class="status-badge" id="statusBadge">
             <span class="status-dot"></span>
             <span id="esimStatus">-</span>
           </span>
@@ -1132,13 +1155,25 @@ function initEsimCheck() {
     // Package name
     $('#packageName').text(pkg.packageName || 'eSIM');
     
-    // Status
+    // Status - SEPARATE STATUS AND TYPE!
     const status = getStatus();
     $('#esimStatus').text(status.label);
     
-    // Type
+    // Update status badge color
+    $('#statusBadge')
+      .removeClass('active ready expired installed')
+      .addClass(status.color);
+    
+    // Type (Standard/Daily/Unlimited) - SEPARATE!
     const type = getType();
     $('#esimType').text(type.label);
+    
+    // Hide type badge if it's just "Standard"
+    if (type.type === 'NORMAL' && !isExpired()) {
+      $('#typeBadge').hide();
+    } else {
+      $('#typeBadge').show();
+    }
     
     // Data calculations
     const totalGB = (currentEsim.totalVolume / 1073741824).toFixed(2);
@@ -1172,17 +1207,44 @@ function initEsimCheck() {
     showMessage('{{ 'check.found' | t | default: 'eSIM found! Verify email for full details' }}', 'success');
   }
   
-  // Get status
+  // Get status - FIXED LOGIC
   function getStatus() {
-    if (isExpired()) return { label: '{{ 'check.status_expired' | t | default: 'Expired' }}', color: 'red' };
+    if (isExpired()) return { 
+      label: '{{ 'check.status_expired' | t | default: 'Expired' }}', 
+      color: 'expired' 
+    };
     
     switch(currentEsim.esimStatus) {
-      case 'IN_USE': return { label: '{{ 'check.status_active' | t | default: 'Active' }}', color: 'green' };
-      case 'NEW': return { label: '{{ 'check.status_ready' | t | default: 'Ready' }}', color: 'yellow' };
-      case 'ONBOARD': return { label: '{{ 'check.status_installed' | t | default: 'Already Installed' }}', color: 'green' };
-      case 'GOT_RESOURCE': return { label: '{{ 'check.status_ready_install' | t | default: 'Ready to Install' }}', color: 'yellow' };
-      case 'USEDUP': return { label: '{{ 'check.status_used' | t | default: 'Used Up' }}', color: 'red' };
-      default: return { label: '{{ 'check.status_unknown' | t | default: 'Unknown' }}', color: 'gray' };
+      case 'IN_USE': 
+        return { 
+          label: '{{ 'check.status_active' | t | default: 'Active' }}', 
+          color: 'active' 
+        };
+      case 'NEW': 
+        return { 
+          label: '{{ 'check.status_ready' | t | default: 'Ready to Install' }}', 
+          color: 'ready' 
+        };
+      case 'ONBOARD': 
+        return { 
+          label: '{{ 'check.status_installed' | t | default: 'Installed' }}', 
+          color: 'installed' 
+        };
+      case 'GOT_RESOURCE': 
+        return { 
+          label: '{{ 'check.status_ready_install' | t | default: 'Ready to Install' }}', 
+          color: 'ready' 
+        };
+      case 'USEDUP': 
+        return { 
+          label: '{{ 'check.status_used' | t | default: 'Used Up' }}', 
+          color: 'expired' 
+        };
+      default: 
+        return { 
+          label: '{{ 'check.status_unknown' | t | default: 'Unknown' }}', 
+          color: 'ready' 
+        };
     }
   }
   
