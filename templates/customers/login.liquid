@@ -1,10 +1,10 @@
 <!-- templates/customers/login.liquid -->
-<!-- SIMBYE ENTERPRISE LOGIN PAGE V1.0 - WITH HIKO INTEGRATION -->
+<!-- SIMBYE ENTERPRISE LOGIN PAGE V2.0 - FIXED HIKO INTEGRATION -->
 
 <style>
 /* ============================================
-   ENTERPRISE LOGIN PAGE - FULL SYSTEM
-   HIKO Social Login + Email/Password
+   ENTERPRISE LOGIN PAGE - FIXED VERSION
+   HIKO Social Login Properly Styled
    ============================================ */
 
 /* CSS Variables */
@@ -33,9 +33,6 @@
   --login-bg: #0a0a0a;
   --login-card-bg: rgba(26, 26, 26, 0.8);
   --login-border: rgba(255, 255, 255, 0.08);
-  --login-primary: #00d97e;
-  --login-primary-hover: #009a61;
-  --login-accent: #00ff88;
   --login-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
   --login-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
   --login-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
@@ -49,11 +46,16 @@
   grid-template-columns: unset !important;
 }
 
+/* Hide duplicate Shopify logo if exists */
+.login-page-enterprise .shopify-section > img:first-child {
+  display: none !important;
+}
+
 /* Main Section */
 .login-page-enterprise {
   width: 100%;
   min-height: 100vh;
-  background: var(--login-bg);
+  background: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,7 +64,7 @@
 }
 
 [data-theme="dark"] .login-page-enterprise {
-  background: #0a0a0a;
+  background: linear-gradient(135deg, #0a0a0a 0%, #0f1f1a 100%);
 }
 
 /* Login Container */
@@ -72,15 +74,16 @@
   animation: fadeInUp 0.6s ease;
 }
 
-/* Logo */
+/* Logo - ONLY ONE INSTANCE */
 .login-logo {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .login-logo img {
-  width: 180px;
+  width: 160px;
   height: auto;
+  object-fit: contain;
 }
 
 /* Card */
@@ -88,7 +91,7 @@
   background: var(--login-card-bg);
   border: 2px solid var(--login-border);
   border-radius: var(--login-radius);
-  padding: 40px;
+  padding: 48px 40px;
   box-shadow: var(--login-shadow-lg);
   margin-bottom: 24px;
 }
@@ -160,10 +163,6 @@
   box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
 
-[data-theme="dark"] .login-tab.active {
-  color: #0a0a0a;
-}
-
 /* Tab Content */
 .tab-content {
   display: none;
@@ -173,9 +172,85 @@
   display: block;
 }
 
-/* HIKO Social Login Container */
+/* HIKO Social Login Container & Styling */
 .hiko-container {
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+}
+
+/* Style HIKO Social Buttons */
+.hiko-container button,
+.hiko-container a,
+[class*="social-login"],
+[class*="apple-login"],
+[class*="google-login"],
+[class*="facebook-login"] {
+  width: 100% !important;
+  padding: 14px 20px !important;
+  margin-bottom: 12px !important;
+  border-radius: 12px !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* Apple Button */
+.hiko-container button:has([aria-label*="Apple"]),
+.hiko-container button:has(svg[aria-label*="Apple"]),
+.hiko-container button[aria-label*="Apple"],
+.hiko-container a[href*="apple"],
+[class*="apple"] {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.hiko-container button:has([aria-label*="Apple"]):hover,
+.hiko-container button[aria-label*="Apple"]:hover,
+.hiko-container a[href*="apple"]:hover {
+  background: #1a1a1a !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Google Button */
+.hiko-container button:has([aria-label*="Google"]),
+.hiko-container button[aria-label*="Google"],
+.hiko-container a[href*="google"],
+[class*="google"] {
+  background: #ffffff !important;
+  color: #3c4043 !important;
+  border: 2px solid #dadce0 !important;
+}
+
+.hiko-container button:has([aria-label*="Google"]):hover,
+.hiko-container button[aria-label*="Google"]:hover,
+.hiko-container a[href*="google"]:hover {
+  background: #f8f9fa !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Facebook Button */
+.hiko-container button:has([aria-label*="Facebook"]),
+.hiko-container button[aria-label*="Facebook"],
+.hiko-container a[href*="facebook"],
+[class*="facebook"] {
+  background: #1877f2 !important;
+  color: #ffffff !important;
+}
+
+.hiko-container button:has([aria-label*="Facebook"]):hover,
+.hiko-container button[aria-label*="Facebook"]:hover,
+.hiko-container a[href*="facebook"]:hover {
+  background: #166fe5 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 16px rgba(24, 119, 242, 0.3) !important;
 }
 
 /* Divider */
@@ -183,7 +258,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 32px 0;
+  margin: 28px 0;
+  position: relative;
 }
 
 .login-divider::before,
@@ -195,11 +271,14 @@
 }
 
 .login-divider span {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--login-text-secondary);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  padding: 0 8px;
+  background: var(--login-card-bg);
+  position: relative;
 }
 
 /* Form */
@@ -378,7 +457,7 @@
   }
   
   .login-card {
-    padding: 32px 24px;
+    padding: 36px 28px;
   }
   
   .login-title {
@@ -386,13 +465,13 @@
   }
   
   .login-logo img {
-    width: 160px;
+    width: 140px;
   }
 }
 
 @media (max-width: 480px) {
   .login-card {
-    padding: 28px 20px;
+    padding: 32px 24px;
   }
   
   .login-title {
@@ -403,13 +482,28 @@
     padding: 12px 20px;
     font-size: 15px;
   }
+  
+  .login-logo img {
+    width: 120px;
+  }
+}
+
+/* Additional HIKO overrides to ensure proper styling */
+div[name="hiko-container"] > * {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+/* Ensure HIKO doesn't add its own margins */
+div[name="hiko-container"] {
+  margin-top: 0 !important;
+  margin-bottom: 24px !important;
 }
 </style>
 
 <section class="login-page-enterprise">
   <div class="login-container">
     
-    <!-- Logo -->
+    <!-- Logo - ONLY ONE INSTANCE HERE -->
     <div class="login-logo">
       <a href="/">
         <img 
@@ -443,7 +537,8 @@
         
         <!-- HIKO Social Login -->
         <div name="hiko-container" class="hiko-container">
-          <!-- HIKO injects Google/Facebook/Apple buttons here -->
+          <!-- HIKO will inject Apple/Google/Facebook buttons here -->
+          <!-- The CSS above will automatically style them -->
         </div>
         
         <!-- Divider -->
@@ -464,6 +559,11 @@
             <div class="form-success">
               Successfully logged in! Redirecting...
             </div>
+            <script>
+              setTimeout(function() {
+                window.location.href = '/account';
+              }, 1500);
+            </script>
           {% endif %}
           
           <div class="form-group">
@@ -509,9 +609,9 @@
       <!-- REGISTER TAB -->
       <div id="register-content" class="tab-content">
         
-        <!-- HIKO Social Login -->
+        <!-- HIKO Social Login for Register -->
         <div name="hiko-container" class="hiko-container">
-          <!-- HIKO injects buttons here too -->
+          <!-- HIKO will inject buttons here too -->
         </div>
         
         <!-- Divider -->
@@ -603,7 +703,7 @@
       </div>
       
       <!-- PASSWORD RECOVERY -->
-      <div id="recover-content" class="recover-section {% if form.posted_successfully? %}active{% endif %}">
+      <div id="recover-content" class="recover-section {% if recover_success == 'true' %}active{% endif %}">
         
         <a href="#" class="back-link" onclick="hideRecover(); return false;">
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -691,22 +791,33 @@
   // Show password recovery
   window.showRecover = function() {
     document.getElementById('login-content').classList.remove('active');
+    document.getElementById('register-content').classList.remove('active');
     document.getElementById('recover-content').classList.add('active');
+    
+    // Hide tabs when showing recover
+    document.querySelector('.login-tabs').style.display = 'none';
   };
   
   // Hide password recovery
   window.hideRecover = function() {
     document.getElementById('recover-content').classList.remove('active');
     document.getElementById('login-content').classList.add('active');
+    
+    // Show tabs again
+    document.querySelector('.login-tabs').style.display = 'flex';
   };
   
   // Check URL hash for recover
   if (window.location.hash === '#recover') {
-    showRecover();
+    setTimeout(showRecover, 100);
   }
   
+  // Debug: Log if HIKO container exists
+  const hikoContainers = document.querySelectorAll('[name="hiko-container"]');
+  console.log('HIKO containers found:', hikoContainers.length);
+  
   // Initialize
-  console.log('Simbye Login Page V1.0 - HIKO Integration Ready');
+  console.log('Simbye Login Page V2.0 - HIKO Integration Ready');
   
 })();
 </script>
