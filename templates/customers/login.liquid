@@ -1,0 +1,712 @@
+<!-- templates/customers/login.liquid -->
+<!-- SIMBYE ENTERPRISE LOGIN PAGE V1.0 - WITH HIKO INTEGRATION -->
+
+<style>
+/* ============================================
+   ENTERPRISE LOGIN PAGE - FULL SYSTEM
+   HIKO Social Login + Email/Password
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  --login-primary: #009a61;
+  --login-primary-hover: #00824f;
+  --login-accent: #00d97e;
+  --login-text: #1a1a1a;
+  --login-text-secondary: #666666;
+  --login-bg: #ffffff;
+  --login-card-bg: #ffffff;
+  --login-border: rgba(0, 0, 0, 0.08);
+  --login-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --login-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --login-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --login-gradient: linear-gradient(135deg, #009a61 0%, #00d97e 100%);
+  --login-radius: 24px;
+  --login-radius-sm: 16px;
+  --login-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --login-text: #f5f5f5;
+  --login-text-secondary: #999999;
+  --login-bg: #0a0a0a;
+  --login-card-bg: rgba(26, 26, 26, 0.8);
+  --login-border: rgba(255, 255, 255, 0.08);
+  --login-primary: #00d97e;
+  --login-primary-hover: #009a61;
+  --login-accent: #00ff88;
+  --login-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --login-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --login-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+}
+
+/* Kill Shopify Grid */
+.shopify-section:has(.login-page-enterprise) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* Main Section */
+.login-page-enterprise {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--login-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  transition: var(--login-transition);
+}
+
+[data-theme="dark"] .login-page-enterprise {
+  background: #0a0a0a;
+}
+
+/* Login Container */
+.login-container {
+  width: 100%;
+  max-width: 480px;
+  animation: fadeInUp 0.6s ease;
+}
+
+/* Logo */
+.login-logo {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.login-logo img {
+  width: 180px;
+  height: auto;
+}
+
+/* Card */
+.login-card {
+  background: var(--login-card-bg);
+  border: 2px solid var(--login-border);
+  border-radius: var(--login-radius);
+  padding: 40px;
+  box-shadow: var(--login-shadow-lg);
+  margin-bottom: 24px;
+}
+
+[data-theme="dark"] .login-card {
+  background: var(--login-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+/* Header */
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--login-text);
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+}
+
+.login-subtitle {
+  font-size: 16px;
+  color: var(--login-text-secondary);
+  margin: 0;
+}
+
+/* Connected Tabs */
+.login-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 154, 97, 0.05);
+  padding: 4px;
+  border-radius: var(--login-radius-sm);
+  border: 1px solid rgba(0, 154, 97, 0.1);
+  margin-bottom: 32px;
+}
+
+[data-theme="dark"] .login-tabs {
+  background: rgba(0, 217, 126, 0.05);
+  border-color: rgba(0, 217, 126, 0.1);
+}
+
+.login-tab {
+  flex: 1;
+  padding: 14px 24px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--login-text-secondary);
+  cursor: pointer;
+  transition: var(--login-transition);
+  font-family: inherit;
+}
+
+.login-tab:hover {
+  background: rgba(0, 154, 97, 0.08);
+  color: var(--login-text);
+}
+
+.login-tab.active {
+  background: var(--login-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+}
+
+[data-theme="dark"] .login-tab.active {
+  color: #0a0a0a;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* HIKO Social Login Container */
+.hiko-container {
+  margin-bottom: 32px;
+}
+
+/* Divider */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--login-border);
+}
+
+.login-divider span {
+  font-size: 14px;
+  color: var(--login-text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Form */
+.login-form {
+  animation: fadeIn 0.4s ease;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--login-text);
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--login-bg);
+  border: 2px solid var(--login-border);
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--login-text);
+  transition: var(--login-transition);
+  font-family: inherit;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--login-primary);
+  box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
+}
+
+[data-theme="dark"] .form-input {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.form-error {
+  background: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  color: #ff3b30;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-success {
+  background: rgba(0, 217, 126, 0.1);
+  border: 1px solid rgba(0, 217, 126, 0.3);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+  color: #00d97e;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Submit Button */
+.btn-submit {
+  width: 100%;
+  padding: 16px;
+  background: var(--login-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--login-transition);
+  font-family: inherit;
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--login-shadow-lg);
+}
+
+/* Links */
+.form-link {
+  display: block;
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.form-link a {
+  color: var(--login-primary);
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--login-transition);
+}
+
+.form-link a:hover {
+  color: var(--login-primary-hover);
+  text-decoration: underline;
+}
+
+/* Password Recovery */
+.recover-section {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.recover-section.active {
+  display: block;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--login-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: var(--login-transition);
+}
+
+.back-link:hover {
+  color: var(--login-text);
+  gap: 12px;
+}
+
+.back-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Footer */
+.login-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--login-text-secondary);
+  line-height: 1.6;
+}
+
+.login-footer a {
+  color: var(--login-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .login-page-enterprise {
+    padding: 20px;
+  }
+  
+  .login-card {
+    padding: 32px 24px;
+  }
+  
+  .login-title {
+    font-size: 28px;
+  }
+  
+  .login-logo img {
+    width: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 28px 20px;
+  }
+  
+  .login-title {
+    font-size: 24px;
+  }
+  
+  .login-tab {
+    padding: 12px 20px;
+    font-size: 15px;
+  }
+}
+</style>
+
+<section class="login-page-enterprise">
+  <div class="login-container">
+    
+    <!-- Logo -->
+    <div class="login-logo">
+      <a href="/">
+        <img 
+          src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
+          alt="{{ shop.name }}"
+        >
+      </a>
+    </div>
+    
+    <!-- Main Card -->
+    <div class="login-card">
+      
+      <!-- Header -->
+      <div class="login-header">
+        <h1 class="login-title">Welcome Back</h1>
+        <p class="login-subtitle">Sign in to manage your eSIMs</p>
+      </div>
+      
+      <!-- Connected Tabs -->
+      <div class="login-tabs">
+        <button class="login-tab active" onclick="switchTab('login')">
+          Sign In
+        </button>
+        <button class="login-tab" onclick="switchTab('register')">
+          Register
+        </button>
+      </div>
+      
+      <!-- LOGIN TAB -->
+      <div id="login-content" class="tab-content active">
+        
+        <!-- HIKO Social Login -->
+        <div name="hiko-container" class="hiko-container">
+          <!-- HIKO injects Google/Facebook/Apple buttons here -->
+        </div>
+        
+        <!-- Divider -->
+        <div class="login-divider">
+          <span>Or continue with email</span>
+        </div>
+        
+        <!-- Email Login Form -->
+        {%- form 'customer_login', class: 'login-form' -%}
+          
+          {% if form.errors %}
+            <div class="form-error">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+          
+          {% if form.posted_successfully? %}
+            <div class="form-success">
+              Successfully logged in! Redirecting...
+            </div>
+          {% endif %}
+          
+          <div class="form-group">
+            <label class="form-label" for="CustomerEmail">Email Address</label>
+            <input 
+              type="email" 
+              name="customer[email]" 
+              id="CustomerEmail"
+              class="form-input"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="CustomerPassword">Password</label>
+            <input 
+              type="password" 
+              name="customer[password]" 
+              id="CustomerPassword"
+              class="form-input"
+              placeholder="••••••••"
+              autocomplete="current-password"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="btn-submit">
+            Sign In
+          </button>
+          
+          <div class="form-link">
+            <a href="#recover" onclick="showRecover(); return false;">
+              Forgot your password?
+            </a>
+          </div>
+          
+        {%- endform -%}
+        
+      </div>
+      
+      <!-- REGISTER TAB -->
+      <div id="register-content" class="tab-content">
+        
+        <!-- HIKO Social Login -->
+        <div name="hiko-container" class="hiko-container">
+          <!-- HIKO injects buttons here too -->
+        </div>
+        
+        <!-- Divider -->
+        <div class="login-divider">
+          <span>Or register with email</span>
+        </div>
+        
+        <!-- Registration Form -->
+        {%- form 'create_customer', class: 'login-form' -%}
+          
+          {% if form.errors %}
+            <div class="form-error">
+              {% for field in form.errors %}
+                {% if field == 'form' %}
+                  {{ form.errors.messages[field] }}
+                {% else %}
+                  {{ form.errors.translated_fields[field] | capitalize }} 
+                  {{ form.errors.messages[field] }}
+                {% endif %}
+                {% unless forloop.last %}<br>{% endunless %}
+              {% endfor %}
+            </div>
+          {% endif %}
+          
+          {% if form.posted_successfully? %}
+            <div class="form-success">
+              Account created! Please check your email to verify.
+            </div>
+          {% endif %}
+          
+          <div class="form-group">
+            <label class="form-label" for="RegisterFirstName">First Name</label>
+            <input 
+              type="text" 
+              name="customer[first_name]" 
+              id="RegisterFirstName"
+              class="form-input"
+              placeholder="John"
+              autocomplete="given-name"
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="RegisterLastName">Last Name</label>
+            <input 
+              type="text" 
+              name="customer[last_name]" 
+              id="RegisterLastName"
+              class="form-input"
+              placeholder="Doe"
+              autocomplete="family-name"
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="RegisterEmail">Email Address</label>
+            <input 
+              type="email" 
+              name="customer[email]" 
+              id="RegisterEmail"
+              class="form-input"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label" for="RegisterPassword">Password</label>
+            <input 
+              type="password" 
+              name="customer[password]" 
+              id="RegisterPassword"
+              class="form-input"
+              placeholder="••••••••"
+              autocomplete="new-password"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="btn-submit">
+            Create Account
+          </button>
+          
+        {%- endform -%}
+        
+      </div>
+      
+      <!-- PASSWORD RECOVERY -->
+      <div id="recover-content" class="recover-section {% if form.posted_successfully? %}active{% endif %}">
+        
+        <a href="#" class="back-link" onclick="hideRecover(); return false;">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+          Back to login
+        </a>
+        
+        <div class="login-header">
+          <h2 class="login-title" style="font-size: 28px;">Reset Password</h2>
+          <p class="login-subtitle">Enter your email to receive reset instructions</p>
+        </div>
+        
+        {%- form 'recover_customer_password', class: 'login-form' -%}
+          
+          {% if form.posted_successfully? %}
+            <div class="form-success">
+              Password reset email sent! Check your inbox.
+            </div>
+          {% endif %}
+          
+          {% if form.errors %}
+            <div class="form-error">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+          
+          <div class="form-group">
+            <label class="form-label" for="RecoverEmail">Email Address</label>
+            <input 
+              type="email" 
+              name="email" 
+              id="RecoverEmail"
+              class="form-input"
+              placeholder="your@email.com"
+              autocomplete="email"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="btn-submit">
+            Send Reset Link
+          </button>
+          
+        {%- endform -%}
+        
+      </div>
+      
+    </div>
+    
+    <!-- Footer -->
+    <div class="login-footer">
+      By continuing, you agree to our <a href="/pages/terms">Terms of Service</a> and <a href="/pages/privacy">Privacy Policy</a>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  // Switch between Login/Register tabs
+  window.switchTab = function(tab) {
+    const tabs = document.querySelectorAll('.login-tab');
+    const contents = document.querySelectorAll('.tab-content');
+    
+    // Hide all
+    tabs.forEach(t => t.classList.remove('active'));
+    contents.forEach(c => c.classList.remove('active'));
+    
+    // Show selected
+    if (tab === 'login') {
+      tabs[0].classList.add('active');
+      document.getElementById('login-content').classList.add('active');
+    } else {
+      tabs[1].classList.add('active');
+      document.getElementById('register-content').classList.add('active');
+    }
+    
+    // Hide recover if showing
+    document.getElementById('recover-content').classList.remove('active');
+  };
+  
+  // Show password recovery
+  window.showRecover = function() {
+    document.getElementById('login-content').classList.remove('active');
+    document.getElementById('recover-content').classList.add('active');
+  };
+  
+  // Hide password recovery
+  window.hideRecover = function() {
+    document.getElementById('recover-content').classList.remove('active');
+    document.getElementById('login-content').classList.add('active');
+  };
+  
+  // Check URL hash for recover
+  if (window.location.hash === '#recover') {
+    showRecover();
+  }
+  
+  // Initialize
+  console.log('Simbye Login Page V1.0 - HIKO Integration Ready');
+  
+})();
+</script>
