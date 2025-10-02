@@ -320,6 +320,73 @@
     "network_speed": "Network Speed",
     "5g_4g": "5G/4G LTE",
     "support": "24/7 Customer Support"
+  },
+  "check": {
+    "title": "Check Your eSIM",
+    "placeholder": "Enter order number",
+    "search": "SEARCH",
+    "loading": "Loading...",
+    "enter_order": "Please enter order number",
+    "locked": "Too many attempts. Try again in %mins% minutes",
+    "not_found": "Order not found. Attempt %attempt% of %max%",
+    "found": "eSIM found! Verify email for full details",
+    
+    "total_data": "Total Data",
+    "validity": "Validity",
+    "expires": "Expires",
+    "days": "Days",
+    
+    "status_expired": "Expired",
+    "status_active": "Active", 
+    "status_ready": "Ready",
+    "status_installed": "Already Installed",
+    "status_ready_install": "Ready to Install",
+    "status_used": "Used Up",
+    "status_unknown": "Unknown",
+    
+    "type_daily": "Daily Reset",
+    "type_unlimited": "Unlimited",
+    "type_expired": "Expired",
+    "type_standard": "Standard",
+    
+    "data_usage": "Data Usage",
+    "remaining": "Remaining",
+    "consumed": "Consumed",
+    
+    "iccid": "ICCID",
+    "apn": "APN",
+    
+    "verify_text": "Verify email to view QR code",
+    "verify_button": "VERIFY EMAIL",
+    "download": "Download",
+    "manual": "Manual",
+    
+    "topup": "TOP UP NOW",
+    "buy_new": "BUY NEW ESIM",
+    "not_rechargeable": "NOT RECHARGEABLE",
+    "topup_now": "TOP UP NOW",
+    
+    "expired_info": "This eSIM has expired",
+    "daily_info": "Daily/Unlimited plans cannot be topped up",
+    "topup_info": "Add more data anytime",
+    
+    "email_title": "Email Verification",
+    "email_subtitle": "Enter your email to view QR code",
+    "email_placeholder": "your@email.com",
+    "verify": "Verify",
+    "cancel": "Cancel",
+    "enter_email": "Please enter email",
+    "verify_failed": "Verification failed",
+    "verified": "Email verified successfully!",
+    
+    "topup_title": "Select Top-Up Plan",
+    "buy": "BUY NOW",
+    "no_plans": "No top-up plans available",
+    "load_failed": "Failed to load plans",
+    "cart_failed": "Failed to add to cart",
+    
+    "manual_guide": "Manual Installation:\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%",
+    "manual_unavailable": "Please verify email first"
   }
 }
 
