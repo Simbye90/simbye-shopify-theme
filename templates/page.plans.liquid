@@ -9,7 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
 <!-- templates/page.check-esim.liquid -->
-<!-- SIMBYE CHECK ESIM - ENTERPRISE PRODUCTION VERSION -->
+<!-- SIMBYE CHECK ESIM - ENTERPRISE PRODUCTION VERSION FIXED -->
 
 <style>
 /* ================================================
@@ -83,6 +83,11 @@
   position: relative;
   animation: fadeInUp 0.8s ease;
   border: 2px solid var(--check-border);
+  transition: var(--check-transition);
+}
+
+.search-section.hidden {
+  display: none;
 }
 
 .search-header {
@@ -286,6 +291,21 @@
   font-weight: 600;
 }
 
+.status-badge.expired {
+  background: rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+}
+
+.status-badge.active {
+  background: rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+}
+
+.status-badge.ready {
+  background: rgba(245, 158, 11, 0.3);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+}
+
 .status-dot {
   width: 8px;
   height: 8px;
@@ -420,6 +440,10 @@
   font-size: 48px;
   font-weight: 800;
   color: var(--check-primary);
+}
+
+.usage-percentage.low {
+  color: #ef4444;
 }
 
 .usage-label {
@@ -690,6 +714,131 @@
   font-weight: 600;
 }
 
+/* Top-Up Modal */
+.topup-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.topup-modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.topup-modal-content {
+  background: var(--check-card-bg);
+  padding: 48px;
+  border-radius: var(--check-radius);
+  max-width: 800px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.topup-modal-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.topup-modal-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--check-text);
+  margin-bottom: 12px;
+}
+
+.topup-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--check-transition);
+}
+
+.topup-modal-close:hover {
+  background: rgba(239, 68, 68, 0.1);
+  transform: rotate(90deg);
+}
+
+.topup-modal-close svg {
+  width: 20px;
+  height: 20px;
+  color: var(--check-text);
+}
+
+.topup-plans {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.topup-plan {
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 217, 126, 0.05));
+  border: 2px solid var(--check-border);
+  border-radius: var(--check-radius-sm);
+  padding: 24px;
+  text-align: center;
+  transition: var(--check-transition);
+  cursor: pointer;
+}
+
+.topup-plan:hover {
+  border-color: var(--check-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--check-shadow-md);
+}
+
+.topup-plan-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--check-text);
+  margin-bottom: 12px;
+}
+
+.topup-plan-price {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--check-primary);
+  margin-bottom: 16px;
+}
+
+.topup-plan-button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, var(--check-primary), var(--check-accent));
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--check-transition);
+  text-transform: uppercase;
+}
+
+.topup-plan-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
+}
+
 /* Email Modal */
 .email-modal {
   display: none;
@@ -890,6 +1039,14 @@
     font-size: 24px;
   }
   
+  .topup-modal-content {
+    padding: 32px 24px;
+  }
+  
+  .topup-plans {
+    grid-template-columns: 1fr;
+  }
+  
   /* Mobile Sticky Action */
   .mobile-sticky-action {
     display: block;
@@ -920,10 +1077,10 @@
   <div class="check-container">
     
     <!-- Search Section -->
-    <div class="search-section">
+    <div class="search-section" id="searchSection">
       <div class="search-header">
-        <h1 class="search-title" data-i18n="check.title">Check Your eSIM</h1>
-        <p class="search-subtitle" data-i18n="check.subtitle">Enter your order number to view status</p>
+        <h1 class="search-title">Check Your eSIM</h1>
+        <p class="search-subtitle">Enter your order number to view status</p>
       </div>
       
       <div class="search-form">
@@ -932,9 +1089,8 @@
           id="orderInput" 
           class="search-input"
           placeholder="Order number (e.g. 121233)"
-          data-i18n-placeholder="check.input_placeholder"
         >
-        <button id="searchBtn" class="search-button" data-i18n="check.search_button">
+        <button id="searchBtn" class="search-button">
           SEARCH
         </button>
       </div>
@@ -945,7 +1101,7 @@
     <!-- Loading State -->
     <div id="loadingState" class="loading-state">
       <div class="loading-spinner"></div>
-      <p data-i18n="check.loading">Loading your eSIM data...</p>
+      <p>Loading your eSIM data...</p>
     </div>
     
     <!-- Main eSIM Card -->
@@ -956,7 +1112,7 @@
         <div class="esim-header-content">
           <h2 class="esim-package-name" id="packageName">Loading...</h2>
           <div class="esim-status-row">
-            <div class="status-badge">
+            <div class="status-badge" id="statusBadge">
               <span class="status-dot"></span>
               <span id="statusText">Active</span>
             </div>
@@ -975,7 +1131,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
           </div>
-          <div class="stat-label" data-i18n="check.data_total">Total Data</div>
+          <div class="stat-label">Total Data</div>
           <div class="stat-value" id="totalData">0 GB</div>
         </div>
         
@@ -985,7 +1141,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <div class="stat-label" data-i18n="check.validity">Validity</div>
+          <div class="stat-label">Validity</div>
           <div class="stat-value" id="validity">0 Days</div>
         </div>
         
@@ -995,7 +1151,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
           </div>
-          <div class="stat-label" data-i18n="check.expires">Expires</div>
+          <div class="stat-label">Expires</div>
           <div class="stat-value" id="expiryDate">-</div>
         </div>
         
@@ -1005,14 +1161,14 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <div class="stat-label" data-i18n="check.location">Location</div>
+          <div class="stat-label">Location</div>
           <div class="stat-value" id="location">-</div>
         </div>
       </div>
       
       <!-- Usage Visualization -->
       <div class="usage-section">
-        <h3 class="usage-title" data-i18n="check.data_usage">Data Usage</h3>
+        <h3 class="usage-title">Data Usage</h3>
         
         <div class="usage-ring-container">
           <svg class="usage-ring" viewBox="0 0 200 200">
@@ -1030,18 +1186,18 @@
           </svg>
           <div class="usage-center">
             <div class="usage-percentage" id="usagePercent">0%</div>
-            <div class="usage-label" data-i18n="check.used">Used</div>
+            <div class="usage-label">Remaining</div>
           </div>
         </div>
         
         <div class="usage-stats">
           <div class="usage-stat">
             <span class="usage-stat-value" id="dataUsed">0 GB</span>
-            <span class="usage-stat-label" data-i18n="check.consumed">Consumed</span>
+            <span class="usage-stat-label">Consumed</span>
           </div>
           <div class="usage-stat">
             <span class="usage-stat-value" id="dataLeft">0 GB</span>
-            <span class="usage-stat-label" data-i18n="check.remaining">Remaining</span>
+            <span class="usage-stat-label">Remaining</span>
           </div>
         </div>
       </div>
@@ -1054,11 +1210,11 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          <h3 class="verify-title" data-i18n="check.verify_title">Verify Your Identity</h3>
-          <p class="verify-subtitle" data-i18n="check.verify_subtitle">
+          <h3 class="verify-title">Verify Your Identity</h3>
+          <p class="verify-subtitle">
             To view QR code and sensitive data, please verify your email address
           </p>
-          <button class="verify-button" id="verifyBtn" data-i18n="check.verify_button">
+          <button class="verify-button" id="verifyBtn">
             VERIFY EMAIL
           </button>
         </div>
@@ -1074,13 +1230,13 @@
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
-                <span data-i18n="check.download_qr">Download</span>
+                <span>Download</span>
               </button>
               <button class="qr-action-btn" id="shareQR">
                 <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a9.001 9.001 0 01-7.432 3.901A9 9 0 015.416 17m13.168-3.026A9.001 9.001 0 0118.584 7m0 0a9 9 0 00-7.432-3.901m7.432 3.901L21 4.5M3 19.5l2.416-2.584" />
                 </svg>
-                <span data-i18n="check.share">Share</span>
+                <span>Share</span>
               </button>
             </div>
           </div>
@@ -1130,6 +1286,23 @@
   </div>
 </div>
 
+<!-- Top-Up Modal -->
+<div id="topupModal" class="topup-modal">
+  <div class="topup-modal-content">
+    <button class="topup-modal-close" id="closeTopup">
+      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+    <div class="topup-modal-header">
+      <h2 class="topup-modal-title">Select Top-Up Plan</h2>
+    </div>
+    <div class="topup-plans" id="topupPlans">
+      <!-- Plans will be loaded here -->
+    </div>
+  </div>
+</div>
+
 <!-- Email Verification Modal -->
 <div id="emailModal" class="email-modal">
   <div class="email-modal-content">
@@ -1139,8 +1312,8 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
       </div>
-      <h2 class="email-modal-title" data-i18n="check.email_title">Email Verification</h2>
-      <p class="email-modal-subtitle" data-i18n="check.email_subtitle">
+      <h2 class="email-modal-title">Email Verification</h2>
+      <p class="email-modal-subtitle">
         Enter your email to unlock full access
       </p>
     </div>
@@ -1150,15 +1323,14 @@
       id="emailInput" 
       class="email-input"
       placeholder="your@email.com"
-      data-i18n-placeholder="check.email_placeholder"
     >
     
     <div class="email-modal-actions">
       <button class="email-modal-btn primary" id="verifyEmailBtn">
-        <span data-i18n="check.verify">Verify</span>
+        <span>Verify</span>
       </button>
       <button class="email-modal-btn secondary" id="cancelEmailBtn">
-        <span data-i18n="check.cancel">Cancel</span>
+        <span>Cancel</span>
       </button>
     </div>
   </div>
@@ -1189,32 +1361,17 @@ function initCheckEsim() {
   let currentOrder = null;
   let currentEsimData = null;
   let isEmailVerified = false;
-  
-  // Translations (would come from locales JSON)
-  const translations = {
-    check: {
-      title: "Check Your eSIM",
-      subtitle: "Enter your order number to view status",
-      loading: "Loading your eSIM data...",
-      error_not_found: "Order not found",
-      error_network: "Network error. Please try again",
-      error_invalid: "Invalid order number",
-      success_loaded: "eSIM data loaded successfully",
-      data_usage: "Data Usage",
-      unlimited_info: "Unlimited data - No limits",
-      daily_info: "Daily data reset at midnight UTC",
-      expired_info: "This eSIM has expired",
-      topup_available: "Top-up available",
-      topup_not_available: "Top-up not available",
-      buy_new: "Buy New eSIM",
-      not_rechargeable: "This plan cannot be recharged"
-    }
-  };
+  let failedAttempts = 0;
+  let maxAttempts = 3;
+  let lockoutTime = 60 * 60 * 1000; // 1 hour
   
   // Initialize
   init();
   
   function init() {
+    // Check lockout status
+    checkLockout();
+    
     // Check URL params
     const urlParams = new URLSearchParams(window.location.search);
     const orderFromUrl = urlParams.get('order_number');
@@ -1236,10 +1393,32 @@ function initCheckEsim() {
     $('#mobileActionBtn').on('click', handlePrimaryAction);
     $('#downloadQR').on('click', downloadQR);
     $('#shareQR').on('click', shareQR);
+    $('#closeTopup').on('click', hideTopupModal);
+  }
+  
+  // Lockout Functions
+  function checkLockout() {
+    const lockoutEnd = sessionStorage.getItem('lockoutEnd');
+    if (lockoutEnd && new Date().getTime() < parseInt(lockoutEnd)) {
+      const remaining = Math.ceil((parseInt(lockoutEnd) - new Date().getTime()) / 1000 / 60);
+      showMessage(`Too many failed attempts. Try again in ${remaining} minutes`, 'error');
+      $('#searchBtn').prop('disabled', true);
+      return true;
+    }
+    $('#searchBtn').prop('disabled', false);
+    return false;
+  }
+  
+  function setLockout() {
+    const lockoutEnd = new Date().getTime() + lockoutTime;
+    sessionStorage.setItem('lockoutEnd', lockoutEnd);
+    checkLockout();
   }
   
   // Search Order
   function searchOrder() {
+    if (checkLockout()) return;
+    
     const orderNumber = $('#orderInput').val().trim();
     
     if (!orderNumber) {
@@ -1262,22 +1441,33 @@ function initCheckEsim() {
       timeout: 10000,
       success: function(response) {
         showLoading(false);
-        if (response && response.data && response.data.obj && response.data.obj.esimList) {
+        if (response && response.data && response.data.obj && response.data.obj.esimList && response.data.obj.esimList[0]) {
           const esim = response.data.obj.esimList[0];
-          if (esim) {
-            currentEsimData = esim;
-            displayBasicData(esim);
-            showMessage('eSIM found! Verify email for full access', 'success');
-          } else {
-            showMessage('No eSIM found for this order', 'error');
-          }
+          currentEsimData = esim;
+          failedAttempts = 0; // Reset on success
+          displayBasicData(esim);
+          showMessage('eSIM found! Verify email for full access', 'success');
+          // Hide search section
+          $('#searchSection').slideUp();
         } else {
-          showMessage('Invalid response from server', 'error');
+          failedAttempts++;
+          if (failedAttempts >= maxAttempts) {
+            setLockout();
+            showMessage('Too many failed attempts. Locked for 1 hour', 'error');
+          } else {
+            showMessage(`Order not found. Attempt ${failedAttempts} of ${maxAttempts}`, 'error');
+          }
         }
       },
       error: function(xhr, status, error) {
         showLoading(false);
-        showMessage('Failed to load eSIM data: ' + error, 'error');
+        failedAttempts++;
+        if (failedAttempts >= maxAttempts) {
+          setLockout();
+          showMessage('Too many failed attempts. Locked for 1 hour', 'error');
+        } else {
+          showMessage(`Failed to load data. Attempt ${failedAttempts} of ${maxAttempts}`, 'error');
+        }
       }
     });
   }
@@ -1292,11 +1482,14 @@ function initCheckEsim() {
     // Package Info
     $('#packageName').text(pkg.packageName || 'eSIM Package');
     
-    // Calculate data
+    // Calculate data CORRECTLY
     const totalGB = (esim.totalVolume / 1073741824).toFixed(2);
     const usedGB = (esim.orderUsage / 1073741824).toFixed(2);
-    const leftGB = (totalGB - usedGB).toFixed(2);
-    const percentage = esim.totalVolume > 0 ? Math.round((esim.orderUsage / esim.totalVolume) * 100) : 0;
+    const leftGB = Math.max(0, totalGB - usedGB).toFixed(2);
+    
+    // Calculate remaining percentage (NOT used percentage)
+    const usedPercent = esim.totalVolume > 0 ? (esim.orderUsage / esim.totalVolume) * 100 : 0;
+    const remainingPercent = Math.max(0, 100 - usedPercent);
     
     // Update Stats
     $('#totalData').text(totalGB + ' GB');
@@ -1304,14 +1497,19 @@ function initCheckEsim() {
     $('#expiryDate').text(formatDate(esim.expiredTime));
     $('#location').text(pkg.locationCode || '-');
     
-    // Usage
+    // Usage - show what's remaining
     $('#dataUsed').text(usedGB + ' GB');
     $('#dataLeft').text(leftGB + ' GB');
-    $('#usagePercent').text(percentage + '%');
+    $('#usagePercent').text(Math.round(remainingPercent) + '%');
     
-    // Update ring progress
+    // Add color class if low
+    if (remainingPercent < 20) {
+      $('#usagePercent').addClass('low');
+    }
+    
+    // Update ring progress to show remaining
     const circumference = 2 * Math.PI * 80;
-    const offset = circumference - (percentage / 100) * circumference;
+    const offset = circumference - (remainingPercent / 100) * circumference;
     $('#progressRing').css('stroke-dashoffset', offset);
     
     // Detect type and status
@@ -1327,6 +1525,167 @@ function initCheckEsim() {
     // Show email verification needed
     $('#verifyOverlay').removeClass('hidden');
     $('#protectedContent').removeClass('unlocked');
+  }
+  
+  // Detect eSIM Type - FIXED LOGIC using SLUG
+  function detectEsimType(esim, pkg) {
+    const slug = (pkg.slug || '').toLowerCase();
+    const packageName = (pkg.packageName || '').toLowerCase();
+    
+    // 1. DAILY Check via SLUG (most reliable)
+    if (slug.includes('daily') || slug.includes('_daily')) {
+      return {
+        type: 'DAILY',
+        label: 'Daily Reset',
+        canTopUp: false,
+        info: '1GB/Day - Resets at midnight UTC'
+      };
+    }
+    
+    // 2. UNLIMITED Check
+    if (packageName.includes('unlimited')) {
+      return {
+        type: 'UNLIMITED',
+        label: 'Unlimited',
+        canTopUp: false,
+        info: 'No data limits'
+      };
+    }
+    
+    // 3. EXPIRED Check
+    if (isExpired(esim)) {
+      return {
+        type: 'EXPIRED',
+        label: 'Expired',
+        canTopUp: false,
+        info: 'This eSIM has expired'
+      };
+    }
+    
+    // 4. USEDUP Check
+    if (esim.esimStatus === 'USEDUP') {
+      return {
+        type: 'USEDUP',
+        label: 'Used Up',
+        canTopUp: true, // Can still top up even if used up!
+        info: '100% data consumed - Top up to continue'
+      };
+    }
+    
+    // 5. NORMAL eSIM - Always rechargeable
+    return {
+      type: 'NORMAL',
+      label: 'Standard',
+      canTopUp: true,
+      info: 'Can be recharged anytime'
+    };
+  }
+  
+  // Get eSIM Status - FIXED with correct status values
+  function getEsimStatus(esim) {
+    // Check expired first
+    if (isExpired(esim)) {
+      return { 
+        status: 'EXPIRED', 
+        label: 'Expired',
+        color: 'expired' 
+      };
+    }
+    
+    // Use actual API status values
+    switch(esim.esimStatus) {
+      case 'IN_USE':
+        return { 
+          status: 'IN_USE', 
+          label: 'Active',
+          color: 'active' 
+        };
+      case 'NEW':
+        return { 
+          status: 'NEW', 
+          label: 'Ready',
+          color: 'ready' 
+        };
+      case 'ONBOARD':
+        return { 
+          status: 'ONBOARD', 
+          label: 'Installed',
+          color: 'ready' 
+        };
+      case 'EXPIRED':
+        return { 
+          status: 'EXPIRED', 
+          label: 'Expired',
+          color: 'expired' 
+        };
+      case 'USEDUP':
+        return { 
+          status: 'USEDUP', 
+          label: 'Used Up',
+          color: 'expired' 
+        };
+      case 'GOT_RESOURCE':
+        return { 
+          status: 'GOT_RESOURCE', 
+          label: 'Ready to Install',
+          color: 'ready' 
+        };
+      default:
+        return { 
+          status: 'UNKNOWN', 
+          label: 'Unknown',
+          color: 'ready' 
+        };
+    }
+  }
+  
+  // Update Status Display
+  function updateStatusDisplay(status, type) {
+    $('#statusText').text(status.label);
+    $('#typeText').text(type.label);
+    
+    // Update badge classes
+    $('#statusBadge').removeClass('active ready expired').addClass(status.color);
+  }
+  
+  // Update Primary Action - FIXED without supportTopUpType
+  function updatePrimaryAction(esim, esimType) {
+    const $btn = $('#primaryAction, #mobileActionBtn');
+    const $info = $('#actionInfo');
+    
+    // Use ONLY our logic, NOT supportTopUpType!
+    if (esimType.type === 'DAILY' || esimType.type === 'UNLIMITED') {
+      $btn.text('NOT RECHARGEABLE').prop('disabled', true);
+      $info.text('Daily/Unlimited plans cannot be topped up').addClass('warning');
+      
+    } else if (esimType.type === 'EXPIRED') {
+      $btn.text('BUY NEW ESIM').prop('disabled', false);
+      $info.text('This eSIM has expired').addClass('error');
+      $btn.off('click').on('click', function() {
+        window.location.href = '/collections/all';
+      });
+      
+    } else if (esimType.canTopUp) {
+      // NORMAL or USEDUP - Can top up!
+      $btn.text('TOP UP NOW').prop('disabled', false);
+      $info.text('Add more data to your eSIM').removeClass('warning error');
+      
+    } else {
+      // Fallback
+      $btn.text('NOT AVAILABLE').prop('disabled', true);
+      $info.text('Contact support').addClass('error');
+    }
+    
+    // Show mobile action if scrolled
+    if (window.innerWidth <= 768) {
+      $(window).on('scroll', function() {
+        if ($(window).scrollTop() > 500) {
+          $('#mobileAction').show();
+        } else {
+          $('#mobileAction').hide();
+        }
+      });
+    }
   }
   
   // Verify Email
@@ -1386,109 +1745,6 @@ function initCheckEsim() {
     $('#apn').text(esim.apn || '-');
     $('#network').text(esim.apn || '-');
     $('#ipExport').text(esim.ipExport || '-');
-    
-    // Update status with full info
-    const statusText = esim.esimStatus === 'ACTIVE' ? 'Active' : 
-                      esim.esimStatus === 'GOT_RESOURCE' ? 'Ready to Install' :
-                      esim.esimStatus === 'CANCEL' ? 'Cancelled' : 'Unknown';
-    $('#statusText').text(statusText);
-  }
-  
-  // Detect eSIM Type - FIXED LOGIC
-  function detectEsimType(esim, pkg) {
-    const packageName = (pkg.packageName || '').toLowerCase();
-    const slug = pkg.slug || '';
-    
-    // DAILY Detection
-    if (packageName.includes('/day') || 
-        packageName.includes('gb/day') ||
-        packageName.includes('daily') || 
-        slug.includes('_Daily')) {
-      return {
-        type: 'DAILY',
-        label: 'Daily Reset',
-        canTopUp: false,
-        info: 'Resets daily at midnight UTC'
-      };
-    }
-    
-    // UNLIMITED Detection
-    if (packageName.includes('unlimited')) {
-      return {
-        type: 'UNLIMITED', 
-        label: 'Unlimited',
-        canTopUp: false,
-        info: 'No data limits'
-      };
-    }
-    
-    // NORMAL eSIM - Check if can top up
-    const canRecharge = !isExpired(esim) && esim.esimStatus !== 'CANCEL';
-    
-    return {
-      type: 'NORMAL',
-      label: 'Standard',
-      canTopUp: canRecharge,  // Ignore supportTopUpType - use our logic!
-      info: canRecharge ? 'Rechargeable' : 'Not rechargeable'
-    };
-  }
-  
-  // Get eSIM Status
-  function getEsimStatus(esim) {
-    if (isExpired(esim)) {
-      return { status: 'EXPIRED', color: 'red' };
-    }
-    if (esim.esimStatus === 'CANCEL') {
-      return { status: 'CANCELLED', color: 'red' };
-    }
-    if (esim.activateTime) {
-      return { status: 'ACTIVE', color: 'green' };
-    }
-    return { status: 'READY', color: 'yellow' };
-  }
-  
-  // Update Status Display
-  function updateStatusDisplay(status, type) {
-    $('#statusText').text(status.status);
-    $('#typeText').text(type.label);
-    
-    // Update colors
-    const $statusBadge = $('#statusText').parent();
-    $statusBadge.removeClass('green yellow red').addClass(status.color);
-  }
-  
-  // Update Primary Action
-  function updatePrimaryAction(esim, esimType) {
-    const $btn = $('#primaryAction, #mobileActionBtn');
-    const $info = $('#actionInfo');
-    
-    if (esimType.type === 'UNLIMITED' || esimType.type === 'DAILY') {
-      $btn.text('NOT RECHARGEABLE').prop('disabled', true);
-      $info.text('Unlimited/Daily plans cannot be topped up').addClass('warning');
-    } else if (isExpired(esim)) {
-      $btn.text('BUY NEW ESIM').prop('disabled', false);
-      $info.text('This eSIM has expired').addClass('error');
-      $btn.off('click').on('click', function() {
-        window.location.href = '/';
-      });
-    } else if (esim.supportTopUpType !== 1) {
-      $btn.text('TOP-UP NOT AVAILABLE').prop('disabled', true);
-      $info.text('This plan does not support top-up').addClass('warning');
-    } else {
-      $btn.text('TOP UP NOW').prop('disabled', false);
-      $info.text('Add more data to your eSIM').removeClass('warning error');
-    }
-    
-    // Show mobile action if scrolled
-    if (window.innerWidth <= 768) {
-      $(window).on('scroll', function() {
-        if ($(window).scrollTop() > 500) {
-          $('#mobileAction').show();
-        } else {
-          $('#mobileAction').hide();
-        }
-      });
-    }
   }
   
   // Handle Primary Action
@@ -1498,25 +1754,94 @@ function initCheckEsim() {
     const pkg = currentEsimData.packageList[0] || {};
     const esimType = detectEsimType(currentEsimData, pkg);
     
-    if (isExpired(currentEsimData)) {
+    if (esimType.type === 'EXPIRED') {
       // Redirect to buy new
-      window.location.href = '/';
-    } else if (esimType.canTopUp && isEmailVerified) {
-      // Load top-up plans
-      loadTopUpPlans(currentEsimData.esimTranNo, pkg.packageCode);
-    } else if (!isEmailVerified) {
-      showEmailModal();
+      window.location.href = '/collections/all';
+    } else if (esimType.canTopUp) {
+      if (!isEmailVerified) {
+        showEmailModal();
+      } else {
+        loadTopUpPlans(currentEsimData.esimTranNo, pkg.packageCode);
+      }
     }
   }
   
-  // Load Top-Up Plans
+  // Load Top-Up Plans - FULLY IMPLEMENTED
   function loadTopUpPlans(esimTranNo, packageCode) {
-    const currency = window.Shopify?.currency?.active || 'USD';
-    const url = `https://simbye.com/apps/topup/plans?esimTranNo=${esimTranNo}&packageCode=${packageCode}&currency=${currency}`;
+    const currency = window.Shopify?.currency?.active || 'EUR';
     
-    // Here you would load and display top-up options
-    console.log('Loading top-up plans:', url);
-    alert('Top-up modal would open here');
+    showLoading(true);
+    
+    $.ajax({
+      url: `https://simbye.com/apps/topup/plans?esimTranNo=${esimTranNo}&packageCode=${packageCode}&currency=${currency}`,
+      method: 'GET',
+      headers: {
+        'ngrok-skip-browser-warning': 'skip',
+        'Accept': 'application/json'
+      },
+      timeout: 10000,
+      success: function(response) {
+        showLoading(false);
+        if (response && response.data && response.data.length > 0) {
+          displayTopUpPlans(response.data);
+        } else {
+          alert('No top-up plans available for this eSIM');
+        }
+      },
+      error: function() {
+        showLoading(false);
+        alert('Failed to load top-up plans. Please try again.');
+      }
+    });
+  }
+  
+  // Display Top-Up Plans
+  function displayTopUpPlans(plans) {
+    let html = '';
+    plans.forEach(plan => {
+      html += `
+        <div class="topup-plan">
+          <div class="topup-plan-name">${plan.name}</div>
+          <div class="topup-plan-price">${plan.price} ${window.Shopify?.currency?.active || 'EUR'}</div>
+          <button class="topup-plan-button" 
+                  data-variant="${plan.variant_id}"
+                  data-package="${plan.packageCode}">
+            BUY NOW
+          </button>
+        </div>
+      `;
+    });
+    
+    $('#topupPlans').html(html);
+    $('#topupModal').addClass('active');
+    
+    // Add click handlers for buy buttons
+    $('.topup-plan-button').on('click', function() {
+      const variantId = $(this).data('variant');
+      const packageCode = $(this).data('package');
+      purchaseTopUp(variantId, packageCode);
+    });
+  }
+  
+  // Purchase Top-Up
+  function purchaseTopUp(variantId, packageCode) {
+    $.post('/cart/add.js', {
+      items: [{
+        quantity: 1,
+        id: variantId,
+        properties: {
+          'packageCode': packageCode,
+          'esimTranNo': currentEsimData.esimTranNo,
+          'type': 'TOPUP'
+        }
+      }]
+    })
+    .done(function() {
+      window.location.href = '/checkout';
+    })
+    .fail(function() {
+      alert('Failed to add top-up to cart. Please try again.');
+    });
   }
   
   // Helper Functions
@@ -1570,6 +1895,10 @@ function initCheckEsim() {
     $('#emailInput').val('');
   }
   
+  function hideTopupModal() {
+    $('#topupModal').removeClass('active');
+  }
+  
   function downloadQR() {
     const qrUrl = $('#qrCode').attr('src');
     if (qrUrl) {
@@ -1585,7 +1914,7 @@ function initCheckEsim() {
       navigator.share({
         title: 'My eSIM QR Code',
         text: 'Scan this QR code to install the eSIM',
-        url: currentEsimData.shortUrl
+        url: currentEsimData.shortUrl || window.location.href
       });
     } else {
       alert('Share functionality not available');
