@@ -111,27 +111,10 @@
   overflow: hidden;
 }
 
-.search-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-light));
-}
+/* Removed green stripe */
 
 .search-card.hidden {
-  animation: slideUp 0.4s ease forwards;
-  pointer-events: none;
-}
-
-@keyframes slideUp {
-  to {
-    transform: translateY(-20px);
-    opacity: 0;
-    visibility: hidden;
-  }
+  display: none !important;
 }
 
 .search-title {
@@ -331,7 +314,7 @@
 }
 
 .package-name {
-  font-size: 30px; /* Increased from 24px */
+  font-size: 34px; /* Increased from 30px */
   font-weight: 800;
   margin-bottom: 16px;
   letter-spacing: -0.5px;
@@ -948,7 +931,7 @@
 
 .topup-plan:hover {
   border-color: var(--primary);
-  transform: scale(1.02);
+  /* Removed transform scale */
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
 }
 
@@ -1062,7 +1045,7 @@
   
   /* Package Name Mobile */
   .package-name {
-    font-size: 24px;
+    font-size: 28px;
   }
   
   .esim-header {
@@ -1440,7 +1423,7 @@ function initEsimCheck() {
       $('#topupLoading').removeClass('active');
       // FIX: Show search card again when closing modal
       if (!currentEsim) {
-        $('#searchCard').removeClass('hidden');
+        $('#searchCard').show();
       }
     });
     
@@ -1494,7 +1477,7 @@ function initEsimCheck() {
           currentEsim = response.data.obj.esimList[0];
           attempts = 0;
           displayEsim();
-          $('#searchCard').addClass('hidden');
+          $('#searchCard').hide(); // Direct hide instead of class
         } else {
           handleFailedAttempt();
         }
@@ -1799,19 +1782,24 @@ function initEsimCheck() {
     }
     
     if (currentEsim?.ac) {
-      // Create short URL or show installation guide
-      const shortUrl = `simbye.com/i/${currentOrder}`;
-      const manualGuide = `{{ 'check.manual_guide' | t | default: 'Manual Installation:\n\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%\n\nOr visit: %url%' }}`
-        .replace('%code%', currentEsim.ac)
-        .replace('%url%', shortUrl);
+      // Create installation page URL with parameters
+      const installUrl = `/pages/install?order=${currentOrder}&ac=${encodeURIComponent(currentEsim.ac)}`;
       
-      // Show in a better modal or copy to clipboard
+      // Copy SM-DP+ code to clipboard if available
       if (navigator.clipboard) {
         navigator.clipboard.writeText(currentEsim.ac).then(() => {
-          alert(manualGuide + '\n\n✓ Code copied to clipboard!');
+          // Show success message briefly then redirect
+          showMessage('SM-DP+ Code copied! Redirecting to installation guide...', 'success');
+          setTimeout(() => {
+            window.location.href = installUrl;
+          }, 1500);
+        }).catch(() => {
+          // If clipboard fails, just redirect
+          window.location.href = installUrl;
         });
       } else {
-        alert(manualGuide);
+        // No clipboard API, just redirect
+        window.location.href = installUrl;
       }
     } else {
       alert('{{ 'check.manual_unavailable' | t | default: 'Please verify email first' }}');
