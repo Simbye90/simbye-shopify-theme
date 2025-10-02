@@ -1,63 +1,32 @@
 <!-- templates/customers/account.liquid -->
-<!-- SIMBYE ENTERPRISE ACCOUNT - FINAL CLEAN VERSION -->
+<!-- SIMBYE ACCOUNT - FINAL VERSION -->
 
 <style>
-/* ============================================
-   SIMBYE ENTERPRISE ACCOUNT - CLEAN VERSION
-   ============================================ */
-
-/* CSS Variables */
 :root {
   --account-primary: #009a61;
   --account-primary-hover: #00824f;
-  --account-primary-light: rgba(0, 154, 97, 0.1);
-  --account-accent: #00d97e;
-  --account-success: #00d97e;
-  --account-warning: #ff9a00;
-  --account-danger: #ff3b30;
-  --account-info: #007aff;
   --account-text: #1a1a1a;
   --account-text-secondary: #666666;
-  --account-text-muted: #999999;
   --account-bg: #ffffff;
   --account-bg-secondary: #f8f9fa;
   --account-card-bg: #ffffff;
   --account-border: rgba(0, 0, 0, 0.08);
-  --account-shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.04);
   --account-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
   --account-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --account-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
   --account-gradient: linear-gradient(135deg, #009a61 0%, #00d97e 100%);
   --account-radius: 24px;
-  --account-radius-md: 16px;
-  --account-radius-sm: 12px;
   --account-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode */
 [data-theme="dark"] {
   --account-text: #f5f5f5;
   --account-text-secondary: #b0b0b0;
-  --account-text-muted: #808080;
   --account-bg: #0a0a0a;
   --account-bg-secondary: #141414;
   --account-card-bg: #1a1a1a;
   --account-border: rgba(255, 255, 255, 0.08);
-  --account-primary-light: rgba(0, 217, 126, 0.1);
-  --account-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --account-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --account-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
 }
 
-/* Kill Shopify Grid */
-.shopify-section:has(.account-enterprise) {
-  display: block !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  grid-template-columns: unset !important;
-}
-
-/* Main Layout */
 .account-enterprise {
   width: 100%;
   min-height: 100vh;
@@ -66,21 +35,15 @@
   font-family: system-ui, -apple-system, sans-serif;
 }
 
-[data-theme="dark"] .account-enterprise {
-  background: #0a0a0a;
-}
-
 .account-container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Header */
 .account-header {
   text-align: center;
   margin-bottom: 48px;
-  animation: fadeInUp 0.6s ease;
 }
 
 .account-title {
@@ -88,7 +51,6 @@
   font-weight: 800;
   color: var(--account-text);
   margin: 0 0 12px 0;
-  letter-spacing: -0.03em;
 }
 
 .account-subtitle {
@@ -97,22 +59,14 @@
   margin: 0;
 }
 
-/* Tab Navigation */
 .account-tabs {
   display: flex;
   gap: 4px;
   background: rgba(0, 154, 97, 0.05);
   padding: 4px;
-  border-radius: var(--account-radius-sm);
+  border-radius: 12px;
   border: 1px solid rgba(0, 154, 97, 0.1);
   margin-bottom: 48px;
-  box-shadow: var(--account-shadow-sm);
-  animation: fadeInUp 0.8s ease 0.2s both;
-}
-
-[data-theme="dark"] .account-tabs {
-  background: rgba(0, 217, 126, 0.05);
-  border-color: rgba(0, 217, 126, 0.1);
 }
 
 .tab-btn {
@@ -149,71 +103,14 @@
   height: 20px;
 }
 
-/* Tab Content */
 .tab-content {
   display: none;
-  animation: fadeIn 0.4s ease;
 }
 
 .tab-content.active {
   display: block;
 }
 
-/* Section Header */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.section-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--account-text);
-  margin: 0;
-}
-
-.section-actions {
-  display: flex;
-  gap: 12px;
-}
-
-/* Filter Buttons */
-.filter-group {
-  display: flex;
-  gap: 8px;
-  padding: 4px;
-  background: var(--account-bg-secondary);
-  border-radius: 10px;
-}
-
-.filter-btn {
-  padding: 8px 16px;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--account-text-secondary);
-  cursor: pointer;
-  transition: var(--account-transition);
-  font-family: inherit;
-}
-
-.filter-btn.active {
-  background: white;
-  color: var(--account-primary);
-  box-shadow: var(--account-shadow-sm);
-}
-
-[data-theme="dark"] .filter-btn.active {
-  background: var(--account-card-bg);
-}
-
-/* eSIM Cards Grid */
 .esims-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -228,12 +125,6 @@
   padding: 28px;
   transition: var(--account-transition);
   position: relative;
-  cursor: pointer;
-}
-
-[data-theme="dark"] .esim-card {
-  background: var(--account-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
 }
 
 .esim-card:hover {
@@ -242,39 +133,6 @@
   border-color: var(--account-primary);
 }
 
-/* Status Badge */
-.esim-status {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 6px 14px;
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: var(--account-shadow-sm);
-}
-
-.status-active {
-  background: rgba(0, 217, 126, 0.1);
-  color: var(--account-success);
-  border: 1px solid rgba(0, 217, 126, 0.3);
-}
-
-.status-expired {
-  background: rgba(255, 59, 48, 0.1);
-  color: var(--account-danger);
-  border: 1px solid rgba(255, 59, 48, 0.3);
-}
-
-.status-expiring {
-  background: rgba(255, 154, 0, 0.1);
-  color: var(--account-warning);
-  border: 1px solid rgba(255, 154, 0, 0.3);
-}
-
-/* eSIM Header */
 .esim-header {
   display: flex;
   align-items: center;
@@ -296,7 +154,6 @@
   font-weight: 700;
   color: var(--account-text);
   margin: 0 0 4px 0;
-  padding-right: 80px;
 }
 
 .esim-plan {
@@ -305,7 +162,6 @@
   font-weight: 500;
 }
 
-/* Data Usage Bar */
 .usage-meter {
   margin-bottom: 20px;
 }
@@ -333,7 +189,6 @@
   background: var(--account-bg-secondary);
   border-radius: 100px;
   overflow: hidden;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .usage-fill {
@@ -341,38 +196,8 @@
   background: var(--account-gradient);
   border-radius: 100px;
   transition: width 1s ease;
-  position: relative;
-  overflow: hidden;
 }
 
-.usage-fill::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.3), 
-    transparent);
-  transform: translateX(-100%);
-  animation: shimmer 2s infinite;
-}
-
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
-}
-
-.usage-fill.warning {
-  background: linear-gradient(135deg, #ff9a00, #ffb347);
-}
-
-.usage-fill.danger {
-  background: linear-gradient(135deg, #ff3b30, #ff6b60);
-}
-
-/* eSIM Details */
 .esim-details {
   margin-bottom: 20px;
 }
@@ -393,15 +218,6 @@
 .detail-label {
   color: var(--account-text-secondary);
   font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.detail-label svg {
-  width: 16px;
-  height: 16px;
-  opacity: 0.6;
 }
 
 .detail-value {
@@ -409,7 +225,6 @@
   font-weight: 600;
 }
 
-/* eSIM Actions */
 .esim-actions {
   display: flex;
   gap: 12px;
@@ -442,7 +257,7 @@
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--account-shadow-lg);
+  box-shadow: 0 8px 20px rgba(0, 154, 97, 0.3);
 }
 
 .btn-secondary {
@@ -456,33 +271,13 @@
   color: white;
 }
 
-.btn-danger {
-  background: transparent;
-  color: var(--account-danger);
-  border: 2px solid var(--account-danger);
-}
-
-.btn-danger:hover {
-  background: var(--account-danger);
-  color: white;
-}
-
-/* Loading State */
-.loading-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 60px 20px;
-  grid-column: 1/-1;
-}
-
 .loading-spinner {
   display: inline-block;
-  width: 40px;
-  height: 40px;
-  border: 4px solid rgba(0, 154, 97, 0.1);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
-  border-top-color: var(--account-primary);
+  border-top-color: white;
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -490,7 +285,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* Empty State */
 .empty-state {
   text-align: center;
   padding: 80px 20px;
@@ -518,56 +312,6 @@
   margin: 0 0 32px 0;
 }
 
-/* Orders Table */
-.table-container {
-  background: var(--account-card-bg);
-  border: 2px solid var(--account-border);
-  border-radius: var(--account-radius);
-  overflow: hidden;
-  box-shadow: var(--account-shadow-md);
-}
-
-.orders-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.orders-table thead {
-  background: var(--account-bg-secondary);
-}
-
-.orders-table th {
-  padding: 20px 24px;
-  text-align: left;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--account-text);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.orders-table td {
-  padding: 20px 24px;
-  border-top: 1px solid var(--account-border);
-  font-size: 15px;
-  color: var(--account-text);
-}
-
-.orders-table tbody tr:hover {
-  background: var(--account-bg-secondary);
-}
-
-.order-number {
-  color: var(--account-primary);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.order-number:hover {
-  text-decoration: underline;
-}
-
-/* Modals */
 .modal {
   display: none;
   position: fixed;
@@ -594,20 +338,8 @@
   width: 90%;
   position: relative;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: modalSlideUp 0.4s ease;
   max-height: 80vh;
   overflow-y: auto;
-}
-
-@keyframes modalSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 }
 
 .modal-close {
@@ -621,7 +353,6 @@
   border-radius: 50%;
   font-size: 24px;
   cursor: pointer;
-  transition: var(--account-transition);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -630,94 +361,12 @@
 
 .modal-close:hover {
   background: rgba(255, 59, 48, 0.1);
-  color: var(--account-danger);
   transform: rotate(90deg);
 }
 
-/* Top-Up Modal */
-.topup-plans {
-  display: grid;
-  gap: 16px;
-  margin-top: 24px;
-  max-height: 400px;
-  overflow-y: auto;
-}
-
-.topup-plan {
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.03), rgba(0, 217, 126, 0.03));
-  border: 2px solid var(--account-border);
-  border-radius: var(--account-radius-md);
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: var(--account-transition);
-}
-
-.topup-plan:hover {
-  border-color: var(--account-primary);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
-}
-
-.topup-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--account-text);
-  margin-bottom: 8px;
-}
-
-.topup-price {
-  font-size: 28px;
-  font-weight: 800;
-  color: var(--account-primary);
-  margin-bottom: 16px;
-}
-
-.topup-buy {
-  width: 100%;
-  padding: 12px;
-  background: var(--account-gradient);
-  color: white;
-  border: none;
-  border-radius: 100px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: var(--account-transition);
-}
-
-.topup-buy:hover {
-  transform: scale(1.05);
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Mobile */
 @media (max-width: 768px) {
-  .account-container {
-    padding: 0 16px;
-  }
-  
   .account-title {
     font-size: 32px;
-  }
-  
-  .account-tabs {
-    gap: 2px;
-    padding: 3px;
-  }
-  
-  .tab-btn {
-    padding: 14px 16px;
-    font-size: 14px;
   }
   
   .tab-icon {
@@ -732,30 +381,12 @@
   .esim-actions {
     flex-direction: column;
   }
-  
-  .table-container {
-    overflow-x: auto;
-  }
-  
-  .orders-table {
-    min-width: 600px;
-  }
-  
-  .section-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .filter-group {
-    width: 100%;
-  }
 }
 </style>
 
 <div class="account-enterprise">
   <div class="account-container">
     
-    <!-- Header -->
     <div class="account-header">
       <h1 class="account-title">
         Welcome back, {{ customer.first_name | default: customer.email | split: '@' | first }}!
@@ -763,7 +394,6 @@
       <p class="account-subtitle">Manage your eSIMs and travel data from one place</p>
     </div>
     
-    <!-- Tab Navigation -->
     <div class="account-tabs">
       <button class="tab-btn active" onclick="switchTab('esims')">
         <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -778,359 +408,75 @@
         </svg>
         <span>Order History</span>
       </button>
-      
-      <button class="tab-btn" onclick="switchTab('account')">
-        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        <span>Settings</span>
-      </button>
     </div>
     
-    <!-- My eSIMs Tab -->
     <div id="esims-tab" class="tab-content active">
-      
-      <div class="section-header">
-        <h2 class="section-title">Your eSIM Collection</h2>
-        <div class="section-actions">
-          <div class="filter-group">
-            <button class="filter-btn active" onclick="filterEsims('all')">All</button>
-            <button class="filter-btn" onclick="filterEsims('active')">Active</button>
-            <button class="filter-btn" onclick="filterEsims('expired')">Expired</button>
-          </div>
-        </div>
-      </div>
       
       <div class="esims-grid" id="esimsGrid">
         
-        {% comment %} First show eSIMs from Metafields {% endcomment %}
-        {% assign has_esims = false %}
-        {% assign shown_from_meta = 0 %}
-        
         {% for order in customer.orders %}
-          {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
           
-          {% if orderMeta and orderMeta != empty and orderMeta.size > 0 %}
-            {% for esimData in orderMeta %}
-              {% assign has_esims = true %}
-              {% assign shown_from_meta = shown_from_meta | plus: 1 %}
-              
-              {% assign display_product = order.line_items.first.product %}
-              {% assign display_variant = order.line_items.first.variant %}
-              {% assign package_name = 'eSIM Package' %}
-              
-              {% if esimData.packageList and esimData.packageList.size > 0 %}
-                {% assign package_name = esimData.packageList.first.packageName %}
-              {% endif %}
-              
-              {% comment %} Calculate Status {% endcomment %}
-              {% assign status = 'active' %}
-              {% assign status_text = 'Active' %}
-              {% assign days_left = 999 %}
-              
-              {% if esimData.expiredTime and esimData.expiredTime != blank %}
-                {% assign expiry_timestamp = esimData.expiredTime | date: '%s' | plus: 0 %}
-                {% assign now_timestamp = 'now' | date: '%s' | plus: 0 %}
-                {% assign seconds_left = expiry_timestamp | minus: now_timestamp %}
-                {% assign days_left = seconds_left | divided_by: 86400 %}
-                
-                {% if days_left < 0 %}
-                  {% assign status = 'expired' %}
-                  {% assign status_text = 'Expired' %}
-                {% elsif days_left <= 3 %}
-                  {% assign status = 'expiring' %}
-                  {% assign status_text = 'Expiring Soon' %}
-                {% endif %}
-              {% endif %}
-              
-              {% comment %} Calculate Data Usage {% endcomment %}
-              {% assign data_total_gb = 0 %}
-              {% assign data_used_gb = 0 %}
-              {% assign usage_percent = 0 %}
-              
-              {% if esimData.totalVolume %}
-                {% assign data_total_gb = esimData.totalVolume | divided_by: 1073741824.0 %}
-              {% endif %}
-              
-              {% if esimData.orderUsage %}
-                {% assign data_used_gb = esimData.orderUsage | divided_by: 1073741824.0 %}
-                {% if data_total_gb > 0 %}
-                  {% assign usage_percent = data_used_gb | divided_by: data_total_gb | times: 100 %}
-                {% endif %}
-              {% endif %}
-              
-              {% assign usage_class = '' %}
-              {% if usage_percent >= 80 %}
-                {% assign usage_class = 'danger' %}
-              {% elsif usage_percent >= 60 %}
-                {% assign usage_class = 'warning' %}
-              {% endif %}
-              
-              <!-- eSIM Card from Metafields -->
-              <div class="esim-card" data-status="{{ status }}" data-from="metafield" data-order="{{ order.name }}">
-                <div class="esim-status status-{{ status }}">{{ status_text }}</div>
-                
-                <div class="esim-header">
-                  {% if display_product.featured_image %}
-                    <img 
-                      src="{{ display_product.featured_image | image_url: width: 128 }}" 
-                      alt="{{ display_product.title }}"
-                      class="esim-flag"
-                      loading="lazy"
-                    >
-                  {% else %}
-                    <div class="esim-flag" style="background: var(--account-gradient); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-                      eSIM
-                    </div>
-                  {% endif %}
-                  <div class="esim-info">
-                    <h3>{{ package_name | replace: 'eSIM', '' | strip }}</h3>
-                    <div class="esim-plan">{{ package_name }} • Order {{ order.name }}</div>
-                  </div>
-                </div>
-                
-                {% if status != 'expired' and data_total_gb > 0 %}
-                  <div class="usage-meter">
-                    <div class="usage-header">
-                      <span class="usage-label">Data Usage</span>
-                      <span class="usage-value">{{ data_used_gb | round: 1 }}GB / {{ data_total_gb | round }}GB</span>
-                    </div>
-                    <div class="usage-bar">
-                      <div class="usage-fill {{ usage_class }}" style="width: {{ usage_percent | round }}%"></div>
-                    </div>
-                  </div>
-                {% endif %}
-                
-                <div class="esim-details">
-                  <div class="detail-row">
-                    <span class="detail-label">
-                      <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                      </svg>
-                      Purchased
-                    </span>
-                    <span class="detail-value">{{ order.created_at | date: '%b %d, %Y' }}</span>
-                  </div>
-                  
-                  {% if esimData.expiredTime %}
-                    <div class="detail-row">
-                      <span class="detail-label">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                        {% if status == 'expired' %}Expired{% else %}Expires{% endif %}
-                      </span>
-                      <span class="detail-value">
-                        {{ esimData.expiredTime | date: '%b %d, %Y' }}
-                        {% if days_left >= 0 %}
-                          ({{ days_left }} days)
-                        {% endif %}
-                      </span>
-                    </div>
-                  {% endif %}
-                  
-                  {% if esimData.iccid %}
-                    <div class="detail-row">
-                      <span class="detail-label">
-                        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"/>
-                        </svg>
-                        ICCID
-                      </span>
-                      <span class="detail-value">...{{ esimData.iccid | slice: -8, 8 }}</span>
-                    </div>
-                  {% endif %}
-                </div>
-                
-                <div class="esim-actions">
-                  {% if esimData.qrCodeUrl %}
-                    <button 
-                      class="btn btn-primary" 
-                      onclick="showQR('{{ esimData.qrCodeUrl }}', '{{ package_name | escape }}')"
-                    >
-                      <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
-                      </svg>
-                      QR Code
-                    </button>
-                  {% else %}
-                    <button class="btn btn-primary" disabled style="opacity: 0.5; cursor: not-allowed;">
-                      No QR Available
-                    </button>
-                  {% endif %}
-                  
-                  <button 
-                    class="btn btn-secondary" 
-                    onclick="window.location.href='/pages/check-esim?order_number={{ order.name | remove: '#' }}'"
-                  >
-                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                    </svg>
-                    Details
-                  </button>
-                </div>
+          <div class="esim-card" data-order="{{ order.name | remove: '#' }}" id="card-{{ order.id }}">
+            
+            <div class="esim-header">
+              <div class="esim-flag" style="background: var(--account-gradient); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
+                {{ order.name | remove: 'Order ' | remove: '#' | truncate: 4, '' }}
               </div>
+              <div class="esim-info">
+                <h3>Order {{ order.name }}</h3>
+                <div class="esim-plan">{{ order.created_at | date: '%b %d, %Y' }}</div>
+              </div>
+            </div>
+            
+            <div class="loading-details" style="display: none; padding: 20px; text-align: center;">
+              <div class="loading-spinner" style="width: 30px; height: 30px; border-width: 3px; margin: 0 auto;"></div>
+              <p style="margin-top: 10px; color: var(--account-text-secondary); font-size: 14px;">Loading eSIM...</p>
+            </div>
+            
+            <div class="esim-details-container" style="display: none;"></div>
+            
+            <div class="esim-actions">
+              <button 
+                class="btn btn-primary" 
+                onclick="loadEsimDetails('{{ order.name | remove: '#' }}', '{{ order.id }}')"
+                id="btn-{{ order.id }}"
+              >
+                View eSIM
+              </button>
               
-            {% endfor %}
-          {% endif %}
+              <a 
+                href="/pages/check-esim?order_number={{ order.name | remove: '#' }}" 
+                class="btn btn-secondary"
+                target="_blank"
+              >
+                Check Page
+              </a>
+            </div>
+            
+          </div>
+          
         {% endfor %}
         
-        {% comment %} Show loading if we need to load more {% endcomment %}
-        {% if shown_from_meta < customer.orders.size %}
-          <div class="loading-container" id="loadingMore" style="grid-column: 1/-1;">
-            <div style="text-align: center;">
-              <div class="loading-spinner"></div>
-              <p style="margin-top: 20px; color: var(--account-text-secondary);">Loading more eSIMs...</p>
-            </div>
-          </div>
-        {% endif %}
-        
-        {% comment %} Show empty state if nothing {% endcomment %}
-        {% unless has_esims %}
-          <div class="empty-state" id="emptyState">
+        {% if customer.orders.size == 0 %}
+          <div class="empty-state">
             <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
             </svg>
-            <h3 class="empty-title">Loading eSIMs...</h3>
-            <p class="empty-text">Please wait while we load your eSIMs</p>
+            <h3 class="empty-title">No Orders Yet</h3>
+            <p class="empty-text">Start your journey with a Simbye eSIM</p>
+            <a href="/" class="btn btn-primary">Buy Your First eSIM</a>
           </div>
-        {% endunless %}
+        {% endif %}
         
       </div>
       
-      <!-- Manual Load Button (as fallback) -->
-      <div style="text-align: center; margin-top: 20px;">
-        <button onclick="window.location.href='/pages/check-esim'" class="btn btn-primary" style="padding: 16px 32px;">
-          Go to Check eSIM Page
-        </button>
-      </div>
-      
     </div>
     
-    <!-- Orders Tab -->
     <div id="orders-tab" class="tab-content">
-      
-      <div class="section-header">
-        <h2 class="section-title">Order History</h2>
+      <div style="padding: 40px; text-align: center;">
+        <h2 style="color: var(--account-text); margin-bottom: 20px;">Order History</h2>
+        <p style="color: var(--account-text-secondary);">View your eSIMs in the My eSIMs tab</p>
       </div>
-      
-      {% if customer.orders.size > 0 %}
-        <div class="table-container">
-          <table class="orders-table">
-            <thead>
-              <tr>
-                <th>Order</th>
-                <th>Date</th>
-                <th>Items</th>
-                <th>Payment</th>
-                <th>Total</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% paginate customer.orders by 20 %}
-                {% for order in customer.orders %}
-                  <tr>
-                    <td>
-                      <a href="{{ order.customer_url }}" class="order-number">
-                        {{ order.name }}
-                      </a>
-                    </td>
-                    <td>{{ order.created_at | date: '%b %d, %Y' }}</td>
-                    <td>{{ order.line_items.size }} item(s)</td>
-                    <td>
-                      <span class="status-badge status-{{ order.financial_status | handleize }}">
-                        {{ order.financial_status_label }}
-                      </span>
-                    </td>
-                    <td><strong>{{ order.total_price | money }}</strong></td>
-                    <td>
-                      <a href="{{ order.customer_url }}" class="btn-link">View Details</a>
-                    </td>
-                  </tr>
-                {% endfor %}
-              {% endpaginate %}
-            </tbody>
-          </table>
-        </div>
-      {% else %}
-        <div class="empty-state">
-          <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-          </svg>
-          <h3 class="empty-title">No Orders Yet</h3>
-          <p class="empty-text">You haven't placed any orders yet</p>
-          <a href="{{ routes.root_url }}" class="btn btn-primary">Start Shopping</a>
-        </div>
-      {% endif %}
-      
-    </div>
-    
-    <!-- Account Settings Tab -->
-    <div id="account-tab" class="tab-content">
-      
-      <div class="section-header">
-        <h2 class="section-title">Account Settings</h2>
-      </div>
-      
-      <div style="max-width: 800px; margin: 0 auto;">
-        <div class="settings-card" style="background: var(--account-card-bg); border: 2px solid var(--account-border); border-radius: var(--account-radius); padding: 40px; box-shadow: var(--account-shadow-md); margin-bottom: 32px;">
-          <h3 style="font-size: 24px; font-weight: 700; color: var(--account-text); margin: 0 0 32px 0;">Personal Information</h3>
-          
-          <form method="post" action="{{ routes.account_url }}" accept-charset="UTF-8">
-            <input type="hidden" name="form_type" value="customer">
-            <input type="hidden" name="utf8" value="✓">
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
-              <div>
-                <label style="display: block; font-size: 14px; font-weight: 600; color: var(--account-text); margin-bottom: 8px;">
-                  First Name
-                </label>
-                <input 
-                  type="text" 
-                  name="customer[first_name]" 
-                  value="{{ customer.first_name }}"
-                  style="width: 100%; padding: 14px 16px; background: var(--account-bg); border: 2px solid var(--account-border); border-radius: 12px; font-size: 15px; color: var(--account-text); font-family: inherit;"
-                >
-              </div>
-              
-              <div>
-                <label style="display: block; font-size: 14px; font-weight: 600; color: var(--account-text); margin-bottom: 8px;">
-                  Last Name
-                </label>
-                <input 
-                  type="text" 
-                  name="customer[last_name]" 
-                  value="{{ customer.last_name }}"
-                  style="width: 100%; padding: 14px 16px; background: var(--account-bg); border: 2px solid var(--account-border); border-radius: 12px; font-size: 15px; color: var(--account-text); font-family: inherit;"
-                >
-              </div>
-            </div>
-            
-            <div style="margin-bottom: 32px;">
-              <label style="display: block; font-size: 14px; font-weight: 600; color: var(--account-text); margin-bottom: 8px;">
-                Email Address
-              </label>
-              <input 
-                type="email" 
-                value="{{ customer.email }}"
-                style="width: 100%; padding: 14px 16px; background: rgba(0, 0, 0, 0.02); border: 2px solid var(--account-border); border-radius: 12px; font-size: 15px; color: var(--account-text-secondary); font-family: inherit; cursor: not-allowed;"
-                readonly
-              >
-            </div>
-            
-            <div style="display: flex; gap: 12px; padding-top: 20px; border-top: 1px solid var(--account-border);">
-              <button type="submit" class="btn btn-primary">Save Changes</button>
-              <a href="{{ routes.account_login_url }}#recover" class="btn btn-secondary">Change Password</a>
-              <a href="{{ routes.account_logout_url }}" class="btn btn-danger" style="margin-left: auto;">
-                Logout
-              </a>
-            </div>
-          </form>
-        </div>
-      </div>
-      
     </div>
     
   </div>
@@ -1146,286 +492,164 @@
     <div style="background: white; padding: 24px; border-radius: 16px; margin-bottom: 24px;">
       <img id="qrImage" src="" alt="QR Code" style="width: 100%; height: auto; display: block;">
     </div>
-    <button onclick="downloadQR()" style="width: 100%; padding: 16px; background: var(--account-gradient); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit;">
+    <button onclick="downloadQR()" style="width: 100%; padding: 16px; background: var(--account-gradient); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer;">
       Download QR Code
     </button>
   </div>
 </div>
 
-<!-- Top-Up Modal -->
-<div class="modal" id="topupModal">
-  <div class="modal-content">
-    <button class="modal-close" onclick="closeTopUp()">×</button>
-    <h2 style="font-size: 24px; font-weight: 700; color: var(--account-text); margin: 0 0 12px 0;">
-      Select Top-Up Plan
-    </h2>
-    <p style="color: var(--account-text-secondary); margin: 0 0 24px 0;">
-      Choose your data package for <span id="topupOrder"></span>
-    </p>
-    <div id="topupLoading" style="text-align: center; padding: 40px;">
-      <div class="loading-spinner"></div>
-      <p style="margin-top: 16px; color: var(--account-text-secondary);">Loading plans...</p>
-    </div>
-    <div class="topup-plans" id="topupPlans" style="display: none;"></div>
-  </div>
-</div>
-
 <script>
-// Global state
-let currentEsimTranNo = null;
-let currentPackageCode = null;
-let currentOrderNumber = null;
-
 // Load jQuery if not available
-document.addEventListener('DOMContentLoaded', function() {
-  if (typeof jQuery === 'undefined') {
-    var script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
-    document.head.appendChild(script);
-  }
-});
+if (typeof jQuery === 'undefined') {
+  var script = document.createElement('script');
+  script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js';
+  document.head.appendChild(script);
+}
 
-// Load all eSIMs from API using jQuery AJAX
-function loadAllEsims() {
-  const $ = jQuery || $;
-  const allOrders = [
-    {% for order in customer.orders %}
-      '{{ order.name }}',
-    {% endfor %}
-  ];
+// Load eSIM details for single order
+function loadEsimDetails(orderNumber, orderId) {
+  const $ = jQuery || window.$;
+  if (!$) {
+    console.error('jQuery not loaded');
+    return;
+  }
   
-  const grid = document.getElementById('esimsGrid');
-  const loadingState = document.getElementById('loadingState');
+  const card = document.getElementById('card-' + orderId);
+  const btn = document.getElementById('btn-' + orderId);
+  const loadingDiv = card.querySelector('.loading-details');
+  const detailsContainer = card.querySelector('.esim-details-container');
   
-  let fetchCount = 0;
-  let successCount = 0;
-  let totalEsimsFound = 0;
+  // Show loading
+  loadingDiv.style.display = 'block';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="loading-spinner"></span> Loading...';
   
-  allOrders.forEach(orderNumber => {
-    const cleanOrder = orderNumber.replace('#', '');
-    
-    // Use jQuery AJAX to avoid CORS issues
-    $.ajax({
-      url: `https://simbye.com/apps/topup/info/${cleanOrder}`,
-      method: 'GET',
-      headers: { 'Accept': 'application/json' },
-      timeout: 15000,
-      success: function(data) {
-        fetchCount++;
-        
-        if (data?.data?.obj?.esimList?.length > 0) {
-          successCount++;
-          totalEsimsFound += data.data.obj.esimList.length;
-          
-          // Remove loading state on first success
-          if (loadingState) {
-            loadingState.remove();
-          }
-          
-          // Create eSIM cards
-          data.data.obj.esimList.forEach(esimData => {
-            const card = createEsimCard(esimData, orderNumber);
-            grid.insertAdjacentHTML('beforeend', card);
-          });
+  const customerEmail = '{{ customer.email }}';
+  
+  // Try with email first
+  $.ajax({
+    url: `https://simbye.com/apps/topup/info/${orderNumber}/${customerEmail}`,
+    method: 'GET',
+    headers: { 'Accept': 'application/json' },
+    timeout: 15000,
+    success: function(data) {
+      handleEsimData(data, card, btn, loadingDiv, detailsContainer, orderNumber);
+    },
+    error: function() {
+      // Try without email
+      $.ajax({
+        url: `https://simbye.com/apps/topup/info/${orderNumber}`,
+        method: 'GET',
+        headers: { 'Accept': 'application/json' },
+        timeout: 15000,
+        success: function(data) {
+          handleEsimData(data, card, btn, loadingDiv, detailsContainer, orderNumber);
+        },
+        error: function() {
+          loadingDiv.style.display = 'none';
+          detailsContainer.innerHTML = '<p style="text-align: center; color: #ff3b30; padding: 20px;">Could not load eSIM. Use "Check Page" button.</p>';
+          detailsContainer.style.display = 'block';
+          btn.style.display = 'none';
         }
-        
-        // Check if all done
-        if (fetchCount === allOrders.length) {
-          if (totalEsimsFound === 0) {
-            grid.innerHTML = `
-              <div class="empty-state">
-                <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-                </svg>
-                <h3 class="empty-title">No eSIMs Yet</h3>
-                <p class="empty-text">Start your journey with a Simbye eSIM</p>
-                <a href="/" class="btn btn-primary">Buy Your First eSIM</a>
-              </div>
-            `;
-          }
-          console.log(`Loaded ${totalEsimsFound} eSIMs from ${successCount} orders`);
-        }
-      },
-      error: function(xhr, status, error) {
-        fetchCount++;
-        console.log(`Order ${orderNumber}: ${status}`);
-        
-        if (fetchCount === allOrders.length) {
-          if (totalEsimsFound === 0) {
-            if (loadingState) {
-              loadingState.innerHTML = `
-                <div class="empty-state">
-                  <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
-                  </svg>
-                  <h3 class="empty-title">No eSIMs Found</h3>
-                  <p class="empty-text">Start your journey with a Simbye eSIM</p>
-                  <a href="/" class="btn btn-primary">Buy Your First eSIM</a>
-                </div>
-              `;
-            }
-          } else {
-            // Remove loading state if we found at least some eSIMs
-            if (loadingState) {
-              loadingState.remove();
-            }
-          }
-        }
-      }
-    });
+      });
+    }
   });
 }
 
-// Create eSIM card HTML
-function createEsimCard(esimData, orderNumber) {
-  // Calculate status
-  let status = 'active';
-  let statusText = 'Active';
-  let daysLeft = 999;
+function handleEsimData(data, card, btn, loadingDiv, detailsContainer, orderNumber) {
+  loadingDiv.style.display = 'none';
   
-  if (esimData.expiredTime) {
-    const expiry = new Date(esimData.expiredTime);
-    const now = new Date();
-    const diffMs = expiry - now;
-    daysLeft = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  if (data?.data?.obj?.esimList?.length > 0) {
+    const esimData = data.data.obj.esimList[0];
     
-    if (daysLeft < 0) {
-      status = 'expired';
-      statusText = 'Expired';
-    } else if (daysLeft <= 3) {
-      status = 'expiring';
-      statusText = 'Expiring Soon';
-    } else {
-      status = 'active';
-      statusText = 'Active';
+    let detailsHTML = '';
+    
+    // QR Code
+    if (esimData.qrCodeUrl) {
+      detailsHTML += `
+        <div style="text-align: center; margin: 20px 0;">
+          <img src="${esimData.qrCodeUrl}" alt="QR Code" 
+               style="width: 180px; height: 180px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer;"
+               onclick="showQR('${esimData.qrCodeUrl}', 'eSIM ${orderNumber}')">
+        </div>
+      `;
     }
-  }
-  
-  // Check API status
-  if (esimData.esimStatus === 'USEDUP') {
-    status = 'expired';
-    statusText = 'Used Up';
-  } else if (esimData.esimStatus === 'NEW') {
-    statusText = 'Ready';
-  }
-  
-  // Calculate data
-  const totalGB = (esimData.totalVolume / 1073741824).toFixed(2);
-  const usedGB = (esimData.orderUsage / 1073741824).toFixed(2);
-  const usagePercent = Math.min(100, Math.round((esimData.orderUsage / esimData.totalVolume) * 100));
-  
-  // Get package info
-  const packageName = esimData.packageList?.[0]?.packageName || 'eSIM Package';
-  const packageCode = esimData.packageList?.[0]?.packageCode || '';
-  
-  // Check if unlimited/daily
-  const isUnlimited = packageName.toLowerCase().includes('daily') || 
-                      packageName.toLowerCase().includes('unlimited') ||
-                      packageCode.toLowerCase().includes('daily');
-  
-  // Usage bar color
-  let usageClass = '';
-  if (usagePercent >= 80) usageClass = 'danger';
-  else if (usagePercent >= 60) usageClass = 'warning';
-  
-  return `
-    <div class="esim-card" data-status="${status}" data-esim-id="${esimData.esimTranNo}" data-order="${orderNumber}">
-      <div class="esim-status status-${status}">${statusText}</div>
+    
+    // Data Usage
+    if (esimData.totalVolume) {
+      const totalGB = (esimData.totalVolume / 1073741824).toFixed(2);
+      const usedGB = (esimData.orderUsage / 1073741824).toFixed(2);
+      const usagePercent = Math.min(100, Math.round((esimData.orderUsage / esimData.totalVolume) * 100));
       
-      <div class="esim-header">
-        <div class="esim-flag" style="background: var(--account-gradient); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">
-          eSIM
-        </div>
-        <div class="esim-info">
-          <h3>${packageName.replace('eSIM', '').trim()}</h3>
-          <div class="esim-plan">${packageName} • Order ${orderNumber}</div>
-        </div>
-      </div>
-      
-      ${status !== 'expired' && totalGB > 0 ? `
+      detailsHTML += `
         <div class="usage-meter">
           <div class="usage-header">
             <span class="usage-label">Data Usage</span>
             <span class="usage-value">${usedGB}GB / ${totalGB}GB</span>
           </div>
           <div class="usage-bar">
-            <div class="usage-fill ${usageClass}" style="width: ${usagePercent}%"></div>
+            <div class="usage-fill" style="width: ${usagePercent}%"></div>
           </div>
         </div>
-      ` : ''}
-      
-      <div class="esim-details">
+      `;
+    }
+    
+    // Details
+    detailsHTML += '<div class="esim-details">';
+    
+    if (esimData.packageList?.[0]) {
+      detailsHTML += `
         <div class="detail-row">
-          <span class="detail-label">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-            Order
-          </span>
-          <span class="detail-value">${orderNumber}</span>
+          <span class="detail-label">Package</span>
+          <span class="detail-value">${esimData.packageList[0].packageName}</span>
         </div>
-        
-        ${esimData.expiredTime ? `
-          <div class="detail-row">
-            <span class="detail-label">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              ${status === 'expired' ? 'Expired' : 'Expires'}
-            </span>
-            <span class="detail-value">
-              ${new Date(esimData.expiredTime).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
-              ${daysLeft >= 0 ? ` (${daysLeft} days)` : ''}
-            </span>
-          </div>
-        ` : ''}
-        
-        ${esimData.iccid ? `
-          <div class="detail-row">
-            <span class="detail-label">
-              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"/>
-              </svg>
-              ICCID
-            </span>
-            <span class="detail-value">...${esimData.iccid.slice(-8)}</span>
-          </div>
-        ` : ''}
-      </div>
-      
-      <div class="esim-actions">
-        ${esimData.qrCodeUrl ? `
-          <button class="btn btn-primary" onclick="showQR('${esimData.qrCodeUrl}', '${packageName.replace(/'/g, "\\'")}')">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
-            </svg>
-            QR Code
-          </button>
-        ` : '<button class="btn btn-primary" disabled style="opacity: 0.5;">No QR</button>'}
-        
-        ${status !== 'expired' ? 
-          (!isUnlimited ? `
-            <button class="btn btn-secondary" onclick="openTopUp('${esimData.esimTranNo}', '${packageCode}', '${orderNumber}')">
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-              </svg>
-              Top Up
-            </button>
-          ` : '<button class="btn btn-secondary" disabled style="opacity: 0.5;">Not Rechargeable</button>')
-        : `
-          <a href="/" class="btn btn-danger">
-            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-            </svg>
-            Buy New
-          </a>
-        `}
-      </div>
-    </div>
-  `;
+      `;
+    }
+    
+    if (esimData.iccid) {
+      detailsHTML += `
+        <div class="detail-row">
+          <span class="detail-label">ICCID</span>
+          <span class="detail-value">${esimData.iccid}</span>
+        </div>
+      `;
+    }
+    
+    if (esimData.expiredTime) {
+      const expiry = new Date(esimData.expiredTime);
+      detailsHTML += `
+        <div class="detail-row">
+          <span class="detail-label">Expires</span>
+          <span class="detail-value">${expiry.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</span>
+        </div>
+      `;
+    }
+    
+    detailsHTML += '</div>';
+    
+    detailsContainer.innerHTML = detailsHTML;
+    detailsContainer.style.display = 'block';
+    
+    // Update button
+    if (esimData.qrCodeUrl) {
+      btn.innerHTML = 'Download QR';
+      btn.disabled = false;
+      btn.onclick = function() {
+        const link = document.createElement('a');
+        link.href = esimData.qrCodeUrl;
+        link.download = `esim-${orderNumber}.png`;
+        link.click();
+      };
+    } else {
+      btn.style.display = 'none';
+    }
+  } else {
+    detailsContainer.innerHTML = '<p style="text-align: center; color: var(--account-text-secondary); padding: 20px;">No eSIM data found.</p>';
+    detailsContainer.style.display = 'block';
+    btn.style.display = 'none';
+  }
 }
 
-// Tab Switching
 function switchTab(tabName) {
   document.querySelectorAll('.tab-content').forEach(content => {
     content.classList.remove('active');
@@ -1439,35 +663,9 @@ function switchTab(tabName) {
   event.target.closest('.tab-btn').classList.add('active');
 }
 
-// Filter eSIMs
-function filterEsims(status) {
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.classList.remove('active');
-  });
-  event.target.classList.add('active');
-  
-  const cards = document.querySelectorAll('.esim-card');
-  let visibleCount = 0;
-  
-  cards.forEach(card => {
-    if (status === 'all') {
-      card.style.display = '';
-      visibleCount++;
-    } else {
-      if (card.dataset.status === status) {
-        card.style.display = '';
-        visibleCount++;
-      } else {
-        card.style.display = 'none';
-      }
-    }
-  });
-}
-
-// QR Modal
 function showQR(qrUrl, title) {
   document.getElementById('qrImage').src = qrUrl;
-  document.getElementById('qrTitle').textContent = title + ' QR Code';
+  document.getElementById('qrTitle').textContent = title;
   document.getElementById('qrModal').classList.add('active');
   document.getElementById('qrModal').dataset.qrUrl = qrUrl;
   document.getElementById('qrModal').dataset.title = title;
@@ -1494,109 +692,15 @@ function downloadQR() {
   }
 }
 
-// Top-Up Functions
-function openTopUp(esimTranNo, packageCode, orderNumber) {
-  currentEsimTranNo = esimTranNo;
-  currentPackageCode = packageCode;
-  currentOrderNumber = orderNumber;
-  
-  document.getElementById('topupOrder').textContent = 'Order ' + orderNumber;
-  document.getElementById('topupModal').classList.add('active');
-  document.body.style.overflow = 'hidden';
-  
-  loadTopUpPlans();
-}
-
-function closeTopUp() {
-  document.getElementById('topupModal').classList.remove('active');
-  document.body.style.overflow = '';
-  currentEsimTranNo = null;
-  currentPackageCode = null;
-  currentOrderNumber = null;
-}
-
-function loadTopUpPlans() {
-  const loadingDiv = document.getElementById('topupLoading');
-  const plansDiv = document.getElementById('topupPlans');
-  
-  loadingDiv.style.display = 'block';
-  plansDiv.style.display = 'none';
-  plansDiv.innerHTML = '';
-  
-  const currency = window.Shopify?.currency?.active || 'EUR';
-  
-  fetch(`https://simbye.com/apps/topup/plans?esimTranNo=${currentEsimTranNo}&packageCode=${currentPackageCode}&currency=${currency}`)
-    .then(response => response.json())
-    .then(data => {
-      loadingDiv.style.display = 'none';
-      
-      if (data?.data?.length > 0) {
-        let html = '';
-        data.data.forEach(plan => {
-          html += `
-            <div class="topup-plan">
-              <div class="topup-name">${plan.name}</div>
-              <div class="topup-price">${plan.price} ${currency}</div>
-              <button class="topup-buy" onclick="buyTopUp('${plan.variant_id}', '${plan.packageCode}')">
-                BUY NOW
-              </button>
-            </div>
-          `;
-        });
-        plansDiv.innerHTML = html;
-        plansDiv.style.display = 'block';
-      } else {
-        plansDiv.innerHTML = '<p style="text-align: center; color: var(--account-text-secondary);">No top-up plans available.</p>';
-        plansDiv.style.display = 'block';
-      }
-    })
-    .catch(error => {
-      console.error('Error loading plans:', error);
-      loadingDiv.style.display = 'none';
-      plansDiv.innerHTML = '<p style="text-align: center; color: var(--account-danger);">Failed to load plans.</p>';
-      plansDiv.style.display = 'block';
-    });
-}
-
-function buyTopUp(variantId, packageCode) {
-  fetch('/cart/add.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      items: [{
-        quantity: 1,
-        id: variantId,
-        properties: {
-          'packageCode': packageCode,
-          'esimTranNo': currentEsimTranNo,
-          'type': 'TOPUP'
-        }
-      }]
-    })
-  })
-  .then(response => response.json())
-  .then(data => {
-    window.location.href = '/checkout';
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Failed to add to cart.');
-  });
-}
-
-// Close modals on click outside
 document.addEventListener('click', function(e) {
   if (e.target.classList.contains('modal')) {
-    if (e.target.id === 'qrModal') closeQR();
-    if (e.target.id === 'topupModal') closeTopUp();
+    closeQR();
   }
 });
 
-// Close on ESC
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeQR();
-    closeTopUp();
   }
 });
 </script>
