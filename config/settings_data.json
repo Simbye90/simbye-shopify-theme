@@ -19,5 +19,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".hdivider {display: none !important;}"
+    ]
   }
 }
