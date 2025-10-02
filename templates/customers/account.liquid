@@ -963,32 +963,8 @@
       <div class="esims-grid" id="esimsGrid">
         {% assign has_esims = false %}
         {% assign debug_counter = 0 %}
-        {% assign orders_with_meta = 0 %}
-        {% assign orders_without_meta = 0 %}
         
-        <!-- DEBUG INFO -->
-        <div style="grid-column: 1/-1; background: #f0f0f0; padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: monospace; font-size: 12px;">
-          <strong>DEBUG MODE:</strong><br>
-          Total Orders: {{ customer.orders.size }}<br>
-          
-          {% for order in customer.orders %}
-            {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
-            Order {{ order.name }}: 
-            {% if orderMeta and orderMeta != empty %}
-              <span style="color: green;">✓ HAS META ({{ orderMeta.size }} eSIMs)</span><br>
-              {% assign orders_with_meta = orders_with_meta | plus: 1 %}
-            {% else %}
-              <span style="color: red;">✗ NO META - Try API fetch for this order!</span><br>
-              {% assign orders_without_meta = orders_without_meta | plus: 1 %}
-            {% endif %}
-          {% endfor %}
-          
-          <br><strong>Summary:</strong><br>
-          Orders with Metafields: {{ orders_with_meta }}<br>
-          Orders without Metafields: {{ orders_without_meta }}<br>
-        </div>
-        
-        {% comment %} MAIN FIX: Show ALL eSIMs without nested conditions {% endcomment %}
+        {% comment %} MAIN LOOP: Show ALL eSIMs from Metafields {% endcomment %}
         {% for order in customer.orders %}
           {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
           
@@ -1242,12 +1218,13 @@
         {% endunless %}
       </div>
       
-      <!-- Debug Info -->
-      <div id="debugInfo" style="grid-column: 1/-1; background: #ff6b6b; color: white; padding: 15px; border-radius: 8px; margin-top: 20px;">
-        <strong>⚠️ IMPORTANT:</strong> Found {{ debug_counter }} eSIMs from Metafields<br>
-        But you have {{ customer.orders.size }} orders total!<br>
-        <button onclick="fetchMissingEsims()" style="margin-top: 10px; padding: 8px 16px; background: white; color: #ff6b6b; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
-          LOAD ALL eSIMs FROM API
+      <!-- Load Missing Button -->
+      <div style="text-align: center; margin-top: 20px;">
+        <button onclick="fetchMissingEsims()" class="btn btn-primary" style="padding: 16px 32px;">
+          <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+          </svg>
+          Load All eSIMs from Server
         </button>
       </div>
     </div>
@@ -1639,36 +1616,20 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-// Debug log
 document.addEventListener('DOMContentLoaded', function() {
   const esimCards = document.querySelectorAll('.esim-card');
-  console.log('eSIM Account Page loaded');
-  console.log('Total eSIM cards rendered:', esimCards.length);
-  console.log('Debug info:', document.getElementById('debugInfo')?.textContent);
-  
-  // Check if we need to load more eSIMs
   const orderCount = {{ customer.orders.size }};
-  const foundEsims = esimCards.length;
   
-  if (foundEsims < orderCount) {
-    console.warn(`Only ${foundEsims} eSIMs found but ${orderCount} orders exist!`);
-    console.log('Orders without metafields need API fetch:');
-    
-    // List orders that need API fetch
-    const allOrders = [
-      {% for order in customer.orders %}
-        {
-          number: '{{ order.name }}',
-          hasMeta: {% if order.metafields.Simbye.esimaccess_details %}true{% else %}false{% endif %}
-        },
-      {% endfor %}
-    ];
-    
-    allOrders.forEach(order => {
-      if (!order.hasMeta) {
-        console.log(`- Order ${order.number}: No metafields, needs API fetch`);
-      }
-    });
+  // Auto-load if we don't have enough eSIMs
+  if (esimCards.length < 5 && orderCount > 5) {
+    console.log('Auto-loading eSIMs from API...');
+    // Click the load button automatically
+    const loadBtn = document.querySelector('[onclick="fetchMissingEsims()"]');
+    if (loadBtn) {
+      setTimeout(() => {
+        loadBtn.click();
+      }, 1000);
+    }
   }
 });
 
@@ -1777,10 +1738,7 @@ function createEsimCardFromAPI(esimData, orderNumber) {
   
   // Build HTML
   return `
-    <div class="esim-card" data-status="${status}" data-esim-id="${esimData.esimTranNo}" data-order="${orderNumber}" style="background: #ffffcc; border: 3px dashed #ff9900;">
-      <div style="position: absolute; top: 5px; left: 5px; background: #ff9900; color: white; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold;">
-        API LOADED
-      </div>
+    <div class="esim-card" data-status="${status}" data-esim-id="${esimData.esimTranNo}" data-order="${orderNumber}">
       <div class="esim-status status-${status}">${statusText}</div>
       
       <div class="esim-header">
