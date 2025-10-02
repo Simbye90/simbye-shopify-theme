@@ -1,0 +1,736 @@
+<!-- sections/esim-installation.liquid -->
+<!-- SIMBYE ESIM INSTALLATION GUIDE - ENTERPRISE EDITION -->
+
+<style>
+/* CSS Variables - Enterprise Installation Guide */
+:root {
+  --install-bg: #ffffff;
+  --install-text: #1a1a1a;
+  --install-text-secondary: #666666;
+  --install-primary: #009a61;
+  --install-primary-hover: #00824f;
+  --install-accent: #00d97e;
+  --install-card-bg: #ffffff;
+  --install-border: rgba(0, 0, 0, 0.08);
+  --install-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --install-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --install-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --install-gradient: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  --install-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --install-radius: 24px;
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --install-bg: #0a0a0a;
+  --install-text: #f5f5f5;
+  --install-text-secondary: #999999;
+  --install-primary: #00d97e;
+  --install-primary-hover: #009a61;
+  --install-accent: #00ff88;
+  --install-card-bg: rgba(26, 26, 26, 0.8);
+  --install-border: rgba(255, 255, 255, 0.08);
+  --install-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --install-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --install-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+  --install-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+}
+
+/* Kill Shopify Grid */
+.shopify-section:has(.installation-section) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* Main Section */
+.installation-section {
+  width: 100%;
+  padding: 100px 0;
+  background: var(--install-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .installation-section {
+  background: #0a0a0a;
+}
+
+/* Container */
+.installation-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.installation-header {
+  text-align: center;
+  margin-bottom: 72px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.installation-title {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--install-text);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.installation-title-highlight {
+  background: linear-gradient(135deg, var(--install-primary), var(--install-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.installation-subtitle {
+  font-size: 20px;
+  color: var(--install-text-secondary);
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* Tab System - Connected Style */
+.device-tabs {
+  display: flex;
+  gap: 4px;
+  background: rgba(0, 154, 97, 0.05);
+  padding: 4px;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 154, 97, 0.1);
+  margin-bottom: 48px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: var(--install-shadow-sm);
+}
+
+[data-theme="dark"] .device-tabs {
+  background: rgba(0, 217, 126, 0.05);
+  border-color: rgba(0, 217, 126, 0.1);
+}
+
+.device-tab {
+  flex: 1;
+  padding: 16px 32px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--install-text-secondary);
+  cursor: pointer;
+  transition: var(--install-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-family: inherit;
+}
+
+.device-tab:hover {
+  background: rgba(0, 154, 97, 0.08);
+  color: var(--install-text);
+}
+
+.device-tab.active {
+  background: var(--install-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+}
+
+.tab-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  animation: fadeInUp 0.6s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Steps Container */
+.steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Step Card */
+.step-card {
+  background: var(--install-card-bg);
+  border-radius: var(--install-radius);
+  overflow: hidden;
+  box-shadow: var(--install-shadow-md);
+  transition: var(--install-transition);
+  position: relative;
+  border: 2px solid var(--install-border);
+}
+
+[data-theme="dark"] .step-card {
+  background: var(--install-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--install-shadow-lg);
+  border-color: var(--install-primary);
+}
+
+.step-layout {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  min-height: 320px;
+}
+
+/* Step Image */
+.step-image-wrapper {
+  position: relative;
+  background: var(--install-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .step-image-wrapper {
+  background: rgba(0, 217, 126, 0.05);
+}
+
+.step-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 20px;
+  transition: var(--install-transition);
+}
+
+.step-card:hover .step-image {
+  transform: scale(1.05);
+}
+
+/* Step Badge */
+.step-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--install-primary), var(--install-accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(0, 154, 97, 0.3);
+  z-index: 2;
+}
+
+/* Step Content */
+.step-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.step-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--install-text);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.01em;
+}
+
+.step-instructions {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px 0;
+}
+
+.step-instructions li {
+  font-size: 16px;
+  color: var(--install-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+  padding-left: 28px;
+  position: relative;
+}
+
+.step-instructions li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--install-primary);
+  font-weight: 700;
+}
+
+/* Note/Warning Box */
+.step-note {
+  background: var(--install-gradient);
+  border-left: 4px solid var(--install-primary);
+  border-radius: 12px;
+  padding: 16px;
+  margin-top: auto;
+}
+
+[data-theme="dark"] .step-note {
+  background: rgba(0, 217, 126, 0.1);
+  border-left-color: var(--install-accent);
+}
+
+.step-note-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--install-primary);
+  text-transform: uppercase;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.05em;
+}
+
+.step-note-text {
+  font-size: 14px;
+  color: var(--install-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* APN Settings Special Card */
+.apn-settings-card {
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 217, 126, 0.05));
+  border: 2px solid var(--install-primary);
+  margin-top: 32px;
+}
+
+.apn-settings-card .step-badge {
+  background: linear-gradient(135deg, #ff7e50, #ff9a76);
+}
+
+/* CTA Section */
+.installation-cta {
+  text-align: center;
+  margin-top: 80px;
+  padding: 48px;
+  background: var(--install-gradient);
+  border-radius: var(--install-radius);
+  border: 2px solid var(--install-border);
+}
+
+[data-theme="dark"] .installation-cta {
+  background: rgba(0, 217, 126, 0.05);
+  border-color: rgba(0, 217, 126, 0.1);
+}
+
+.cta-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--install-text);
+  margin: 0 0 16px 0;
+}
+
+.cta-subtitle {
+  font-size: 18px;
+  color: var(--install-text-secondary);
+  margin: 0 0 32px 0;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 48px;
+  background: linear-gradient(135deg, var(--install-primary), var(--install-accent));
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--install-transition);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 154, 97, 0.35);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .installation-container {
+    padding: 0 20px;
+  }
+  
+  .installation-header {
+    margin-bottom: 48px;
+  }
+  
+  .device-tabs {
+    margin-bottom: 32px;
+  }
+  
+  .device-tab {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+  
+  .tab-icon {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .step-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .step-image-wrapper {
+    height: 240px;
+  }
+  
+  .step-content {
+    padding: 24px;
+  }
+  
+  .step-title {
+    font-size: 20px;
+  }
+  
+  .installation-cta {
+    padding: 32px 24px;
+  }
+  
+  .cta-title {
+    font-size: 28px;
+  }
+  
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+
+<section class="installation-section">
+  <div class="installation-container">
+    
+    <!-- Header -->
+    <div class="installation-header">
+      <h2 class="installation-title">
+        Install Your <span class="installation-title-highlight">Simbye eSIM</span>
+      </h2>
+      <p class="installation-subtitle">
+        Step-by-step guide for iPhone and Android devices • Setup in under 2 minutes
+      </p>
+    </div>
+    
+    <!-- Device Tabs -->
+    <div class="device-tabs">
+      <button class="device-tab active" onclick="switchTab('apple')">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+        </svg>
+        Apple iPhone
+      </button>
+      <button class="device-tab" onclick="switchTab('android')">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 00-.83.22l-1.88 3.24a11.463 11.463 0 00-8.94 0L5.65 5.67a.643.643 0 00-.87-.2c-.28.18-.37.54-.22.83L6.4 9.48A10.78 10.78 0 001 18.56h22a10.78 10.78 0 00-5.4-9.08zM7 15.25a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5zm10 0a1.25 1.25 0 110-2.5 1.25 1.25 0 010 2.5z"/>
+        </svg>
+        Android Samsung
+      </button>
+    </div>
+    
+    <!-- Apple Content -->
+    <div class="tab-content active" id="apple-content">
+      <div class="steps-list">
+        
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">1</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/iphone-settings-mobile-service.png?v=1" 
+                   alt="iPhone Settings" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Open Settings & Mobile Service</h3>
+              <ul class="step-instructions">
+                <li>Navigate to the Settings app on your iPhone</li>
+                <li>Scroll down and tap on "Mobile Service"</li>
+                <li>You'll see your primary SIM with your phone number</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Note</p>
+                <p class="step-note-text">Ensure your iPhone is running iOS 12.1 or later for eSIM support</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">2</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/iphone-mobile-data-select.png?v=1" 
+                   alt="Select Mobile Data" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Configure Mobile Data</h3>
+              <ul class="step-instructions">
+                <li>Tap on "Mobile Data" at the top of the screen</li>
+                <li>Select your Simbye eSIM (usually listed below your primary SIM)</li>
+                <li>Enable "Turn On This Line" if not already active</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Tip</p>
+                <p class="step-note-text">You can use both SIMs simultaneously - primary for calls, eSIM for data</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">3</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/iphone-data-roaming.png?v=1" 
+                   alt="Enable Data Roaming" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Enable Data Roaming</h3>
+              <ul class="step-instructions">
+                <li>Tap on your Simbye eSIM in the list</li>
+                <li>Toggle "Data Roaming" to ON (green)</li>
+                <li>Your eSIM is now ready to use!</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Important</p>
+                <p class="step-note-text">Data Roaming must be ON for the eSIM to work abroad. No extra charges with Simbye!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Android Content -->
+    <div class="tab-content" id="android-content">
+      <div class="steps-list">
+        
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">1</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/1.webp?v=1722076958" 
+                   alt="Samsung Settings" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Open Settings & Connections</h3>
+              <ul class="step-instructions">
+                <li>Navigate to the Settings app on your Samsung device</li>
+                <li>Scroll down and tap on "Connections"</li>
+                <li>Select "SIM card manager" from the list</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Compatibility</p>
+                <p class="step-note-text">Works with Samsung Galaxy S20 and newer, Note20 and newer models</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">2</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/2.webp?v=1722076958" 
+                   alt="Add eSIM" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Add Your eSIM</h3>
+              <ul class="step-instructions">
+                <li>In "SIM card manager", tap on "Add mobile plan"</li>
+                <li>Select "Scan carrier QR code"</li>
+                <li>Scan the Simbye QR code from your email</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Alternative</p>
+                <p class="step-note-text">You can also enter the activation code manually if QR scanning fails</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">3</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/3.webp?v=1722076958" 
+                   alt="Confirm Details" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Confirm Installation</h3>
+              <ul class="step-instructions">
+                <li>Review the carrier details on screen</li>
+                <li>Tap "Confirm" to proceed with installation</li>
+                <li>Wait for activation (usually takes 10-30 seconds)</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Network</p>
+                <p class="step-note-text">Simbye partners with premium local carriers for best coverage</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">4</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/4.webp?v=1722076958" 
+                   alt="Label eSIM" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Label Your eSIM</h3>
+              <ul class="step-instructions">
+                <li>Choose a label for easy identification</li>
+                <li>We recommend "Simbye" or "Travel Data"</li>
+                <li>Tap "Done" to save the label</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Organization</p>
+                <p class="step-note-text">Good labels help when managing multiple eSIMs for different countries</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Step 5 -->
+        <div class="step-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">5</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/5.webp?v=1722076958" 
+                   alt="Set Default Line" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Configure Data Settings</h3>
+              <ul class="step-instructions">
+                <li>Return to "SIM card manager"</li>
+                <li>Set Simbye eSIM as preferred for "Mobile data"</li>
+                <li>Enable "Data roaming" for the eSIM</li>
+                <li>Disable "Allow data switching" to avoid charges</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Important</p>
+                <p class="step-note-text">Keep your primary SIM active for calls/SMS, use eSIM for data only</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- APN Settings - Special for Turkey -->
+        <div class="step-card apn-settings-card">
+          <div class="step-layout">
+            <div class="step-image-wrapper">
+              <span class="step-badge">⚙️</span>
+              <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/samsung-apn-settings.png?v=1" 
+                   alt="APN Settings" 
+                   class="step-image">
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">APN Configuration (Turkey eSIM Only)</h3>
+              <ul class="step-instructions">
+                <li>Go to Settings → Connections → Mobile networks</li>
+                <li>Select your Simbye eSIM</li>
+                <li>Tap "Access Point Names"</li>
+                <li>Add new APN with name: <strong>isp</strong></li>
+                <li>Leave all other fields blank or default</li>
+                <li>Save and select the new APN</li>
+              </ul>
+              <div class="step-note">
+                <p class="step-note-title">Turkey eSIM Special</p>
+                <p class="step-note-text">This step is ONLY required for Turkey eSIM. Other countries work automatically.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- CTA Section -->
+    <div class="installation-cta">
+      <h3 class="cta-title">Is Your Device Compatible?</h3>
+      <p class="cta-subtitle">If yes, get your eSIM now and connect in 60 seconds</p>
+      <a href="/collections/all" class="cta-button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+          <path d="M2 17l10 5 10-5"/>
+          <path d="M2 12l10 5 10-5"/>
+        </svg>
+        Buy eSIM Now
+      </a>
+    </div>
+    
+  </div>
+</section>
+
+<script>
+function switchTab(device) {
+  // Update tabs
+  document.querySelectorAll('.device-tab').forEach(tab => {
+    tab.classList.remove('active');
+  });
+  event.target.closest('.device-tab').classList.add('active');
+  
+  // Update content
+  document.querySelectorAll('.tab-content').forEach(content => {
+    content.classList.remove('active');
+  });
+  document.getElementById(`${device}-content`).classList.add('active');
+}
+</script>
