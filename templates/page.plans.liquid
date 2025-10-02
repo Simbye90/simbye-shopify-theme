@@ -8,141 +8,231 @@
   <!-- jQuery LADEN - WICHTIG! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   
-$('#downloadBtn').click(downloadQR);
-    $('#manualBtn').click(showManual);<!-- templates/page.check-esim.liquid -->
-<!-- SIMBYE CHECK ESIM - CLEAN ENTERPRISE VERSION -->
+<!-- templates/page.check-esim.liquid -->
+<!-- SIMBYE CHECK ESIM - ENTERPRISE VERSION 2.0 -->
 
 <style>
 /* ================================================
-   DESIGN SYSTEM - CLEAN & FOCUSED
+   ENTERPRISE DESIGN SYSTEM V2.0
    ================================================ */
 
 :root {
   --primary: #009a61;
   --primary-dark: #00824f;
-  --accent: #00d97e;
-  --text: #1a1a1a;
-  --text-secondary: #666666;
-  --bg-page: linear-gradient(180deg, #ffffff 0%, #f8fffe 100%);
+  --primary-light: #00d97e;
+  --accent: #00ff88;
+  
+  --text: #0a0a0a;
+  --text-secondary: #4a4a4a;
+  --text-muted: #888888;
+  
+  --bg-page: #ffffff;
   --bg-card: #ffffff;
-  --border: rgba(0, 0, 0, 0.06);
-  --shadow: 0 12px 32px rgba(0, 154, 97, 0.15);
-  --radius: 24px;
+  --bg-overlay: rgba(250, 255, 253, 0.98);
+  
+  --border: rgba(0, 154, 97, 0.08);
+  --border-light: rgba(0, 154, 97, 0.04);
+  
+  --shadow-sm: 0 2px 8px rgba(0, 154, 97, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 154, 97, 0.08);
+  --shadow-lg: 0 16px 48px rgba(0, 154, 97, 0.12);
+  --shadow-xl: 0 24px 64px rgba(0, 154, 97, 0.16);
+  
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-full: 100px;
+  
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 [data-theme="dark"] {
-  --text: #f5f5f5;
-  --text-secondary: #999999;
+  --text: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #666666;
   --bg-page: #0a0a0a;
   --bg-card: #1a1a1a;
+  --bg-overlay: rgba(26, 26, 26, 0.98);
   --border: rgba(255, 255, 255, 0.08);
-  --primary: #00d97e;
-  --accent: #00ff88;
+  --border-light: rgba(255, 255, 255, 0.04);
+  --primary-light: #00ff88;
 }
 
-/* Kill Shopify Grid */
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Kill Shopify Default Styles */
 .shopify-section:has(.check-page) {
   display: block !important;
   padding: 0 !important;
   margin: 0 !important;
   grid-template-columns: unset !important;
+  max-width: none !important;
+  overflow-x: hidden !important; /* Prevent horizontal scroll */
 }
 
 /* Page Layout */
 .check-page {
   min-height: 100vh;
-  background: var(--bg-page);
-  padding: 40px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f0fff8 100%);
+  padding: 60px 20px;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  width: 100%;
+  max-width: 100vw;
+}
+
+[data-theme="dark"] .check-page {
+  background: linear-gradient(135deg, #0a0a0a 0%, #0f1f1a 100%);
 }
 
 .check-container {
-  max-width: 600px;
+  max-width: 680px;
   margin: 0 auto;
+  width: 100%;
+  position: relative;
 }
 
-/* Search Card */
+/* Search Card - Enterprise Style */
 .search-card {
   background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 40px;
-  box-shadow: var(--shadow);
-  margin-bottom: 24px;
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  box-shadow: var(--shadow-xl);
+  margin-bottom: 32px;
   text-align: center;
   transition: var(--transition);
-  max-width: 100%;
-  box-sizing: border-box;
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
 }
 
 .search-card.hidden {
-  display: none;
+  animation: slideUp 0.4s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes slideUp {
+  to {
+    transform: translateY(-20px);
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .search-title {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
 }
 
+/* Search Form - Enterprise Style */
 .search-form {
   display: flex;
-  background: #f8f8f8;
-  border-radius: 100px;
-  padding: 4px;
+  background: linear-gradient(135deg, #f8f8f8, #f0f0f0);
+  border-radius: var(--radius-full);
+  padding: 6px;
   border: 2px solid transparent;
   transition: var(--transition);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
 [data-theme="dark"] .search-form {
-  background: rgba(255, 255, 255, 0.05);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
 }
 
 .search-form:focus-within {
   border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(0, 154, 97, 0.1), inset 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .search-input {
   flex: 1;
-  padding: 16px 24px;
+  padding: 18px 28px;
   background: transparent;
   border: none;
   outline: none;
   font-size: 16px;
+  font-weight: 500;
   color: var(--text);
+  letter-spacing: 0.2px;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 .search-btn {
-  padding: 14px 32px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 16px 40px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
   border: none;
-  border-radius: 100px;
+  border-radius: var(--radius-full);
+  font-size: 15px;
   font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.2);
+  white-space: nowrap;
 }
 
 .search-btn:hover:not(:disabled) {
   transform: scale(1.05);
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.3);
+}
+
+.search-btn:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .search-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* Message */
+/* Message Styling */
 .message {
-  margin-top: 16px;
-  padding: 12px 20px;
-  border-radius: 12px;
+  margin-top: 20px;
+  padding: 14px 20px;
+  border-radius: var(--radius-sm);
   font-size: 14px;
+  font-weight: 500;
   display: none;
+  animation: messageSlide 0.3s ease;
+}
+
+@keyframes messageSlide {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .message.show {
@@ -150,68 +240,103 @@ $('#downloadBtn').click(downloadQR);
 }
 
 .message.error {
-  background: #fee2e2;
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
   color: #dc2626;
+  border: 1px solid rgba(220, 38, 38, 0.2);
 }
 
 .message.success {
-  background: #d1fae5;
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
   color: #065f46;
+  border: 1px solid rgba(6, 95, 70, 0.2);
 }
 
-/* Loading */
+/* Loading State */
 .loading {
   display: none;
   text-align: center;
-  padding: 60px;
+  padding: 80px;
 }
 
 .loading.active {
   display: block;
+  animation: fadeIn 0.3s ease;
 }
 
 .spinner {
-  width: 48px;
-  height: 48px;
-  border: 3px solid rgba(0, 154, 97, 0.1);
+  width: 56px;
+  height: 56px;
+  border: 4px solid rgba(0, 154, 97, 0.1);
   border-top-color: var(--primary);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
-  margin: 0 auto 16px;
+  margin: 0 auto 20px;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* Main eSIM Card */
+/* Main eSIM Card - Enterprise Style */
 .esim-card {
   display: none;
   background: var(--bg-card);
-  border-radius: var(--radius);
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow);
-  animation: fadeIn 0.5s ease;
-  max-width: 100%;
-  box-sizing: border-box;
+  box-shadow: var(--shadow-xl);
+  animation: slideIn 0.5s ease;
+  border: 1px solid var(--border-light);
+  position: relative;
 }
 
 .esim-card.active {
   display: block;
 }
 
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* eSIM Header */
 .esim-header {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
-  padding: 32px;
+  padding: 40px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.esim-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.8; }
 }
 
 .package-name {
-  font-size: 30px;
+  font-size: 30px; /* Increased from 24px */
   font-weight: 800;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
 }
 
 .status-badges {
@@ -219,18 +344,21 @@ $('#downloadBtn').click(downloadQR);
   justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 .status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 16px;
+  gap: 8px;
+  padding: 8px 20px;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  border-radius: 100px;
+  border-radius: var(--radius-full);
   font-size: 13px;
   font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .status-dot {
@@ -238,10 +366,10 @@ $('#downloadBtn').click(downloadQR);
   height: 8px;
   border-radius: 50%;
   background: currentColor;
-  animation: pulse 2s infinite;
+  animation: blink 2s infinite;
 }
 
-@keyframes pulse {
+@keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
 }
@@ -250,9 +378,10 @@ $('#downloadBtn').click(downloadQR);
 .quick-info {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 24px;
-  gap: 16px;
-  background: linear-gradient(to bottom, transparent, rgba(0, 154, 97, 0.03));
+  padding: 32px;
+  gap: 20px;
+  background: linear-gradient(to bottom, rgba(0, 154, 97, 0.02), transparent);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .info-item {
@@ -260,61 +389,68 @@ $('#downloadBtn').click(downloadQR);
 }
 
 .info-icon {
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 8px;
+  margin: 0 auto 12px;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.2);
 }
 
 .info-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   color: white;
 }
 
 .info-label {
   font-size: 11px;
   text-transform: uppercase;
-  color: var(--text-secondary);
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+  margin-bottom: 6px;
+  font-weight: 600;
 }
 
 .info-value {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: var(--text);
+  letter-spacing: -0.3px;
 }
 
 /* QR Section */
 .qr-section {
-  padding: 32px;
+  padding: 40px;
   text-align: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-light);
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.01), transparent);
   position: relative;
 }
 
 .qr-container {
   position: relative;
   display: inline-block;
+  max-width: 100%;
 }
 
 .qr-code {
-  width: 200px;
-  height: 200px;
-  border: 2px solid var(--border);
-  border-radius: 20px;
-  padding: 10px;
+  width: 220px;
+  height: 220px;
+  border: 3px solid var(--border);
+  border-radius: 24px;
+  padding: 12px;
   background: white;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
+  max-width: 100%;
 }
 
 .qr-blur {
-  filter: blur(10px);
+  filter: blur(12px);
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -325,10 +461,11 @@ $('#downloadBtn').click(downloadQR);
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 20px;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: inset 0 0 0 1px var(--border);
 }
 
 [data-theme="dark"] .verify-overlay {
@@ -336,97 +473,116 @@ $('#downloadBtn').click(downloadQR);
 }
 
 .verify-overlay.hidden {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: var(--transition);
 }
 
 .verify-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.3);
 }
 
 .verify-icon svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   color: white;
 }
 
 .verify-text {
-  font-size: 14px;
+  font-size: 15px;
   color: var(--text-secondary);
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  font-weight: 500;
 }
 
 .verify-btn {
-  padding: 10px 24px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 12px 32px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
   border: none;
-  border-radius: 100px;
+  border-radius: var(--radius-full);
   font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.3);
 }
 
 .verify-btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.4);
 }
 
+/* QR Actions - Hide initially */
 .qr-actions {
-  display: flex;
+  display: none; /* Hidden by default */
   gap: 12px;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.qr-actions.visible {
+  display: flex;
+  opacity: 1;
 }
 
 .qr-action {
-  padding: 10px 20px;
+  padding: 12px 24px;
   background: var(--bg-card);
   border: 2px solid var(--border);
-  border-radius: 12px;
-  font-size: 13px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: var(--transition);
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .qr-action:hover {
   border-color: var(--primary);
-  background: rgba(0, 154, 97, 0.05);
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 217, 126, 0.05));
+  transform: translateY(-2px);
 }
 
 .qr-action svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
 }
 
 /* Usage Section */
 .usage-section {
-  padding: 32px;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border);
+  padding: 40px;
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.01), transparent);
+  border-bottom: 1px solid var(--border-light);
 }
 
 .usage-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   color: var(--text);
+  letter-spacing: -0.3px;
 }
 
 .usage-visual {
   max-width: 200px;
-  margin: 0 auto 24px;
+  margin: 0 auto 32px;
   position: relative;
 }
 
@@ -437,12 +593,8 @@ $('#downloadBtn').click(downloadQR);
 
 .ring-bg {
   fill: none;
-  stroke: #e5e7eb;
+  stroke: var(--border);
   stroke-width: 12;
-}
-
-[data-theme="dark"] .ring-bg {
-  stroke: rgba(255, 255, 255, 0.1);
 }
 
 .ring-progress {
@@ -452,7 +604,7 @@ $('#downloadBtn').click(downloadQR);
   stroke-linecap: round;
   transform: rotate(-90deg);
   transform-origin: center;
-  transition: stroke-dashoffset 1s ease;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .usage-center {
@@ -464,27 +616,37 @@ $('#downloadBtn').click(downloadQR);
 }
 
 .usage-percent {
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 800;
   color: var(--primary);
+  letter-spacing: -1px;
 }
 
 .usage-percent.low {
   color: #ef4444;
+  animation: lowPulse 1.5s ease infinite;
+}
+
+@keyframes lowPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 .usage-label {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
 }
 
 .usage-stats {
   display: flex;
   justify-content: space-around;
-  padding: 20px;
-  background: rgba(0, 154, 97, 0.05);
-  border-radius: 16px;
+  padding: 24px;
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.03), rgba(0, 217, 126, 0.03));
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
 }
 
 .usage-stat {
@@ -492,22 +654,25 @@ $('#downloadBtn').click(downloadQR);
 }
 
 .stat-value {
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 700;
   color: var(--text);
   display: block;
+  letter-spacing: -0.5px;
 }
 
 .stat-label {
   font-size: 11px;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   text-transform: uppercase;
-  margin-top: 4px;
+  letter-spacing: 0.8px;
+  margin-top: 6px;
+  font-weight: 600;
 }
 
 /* Details Section */
 .details-section {
-  padding: 32px;
+  padding: 40px;
   background: var(--bg-card);
 }
 
@@ -520,16 +685,24 @@ $('#downloadBtn').click(downloadQR);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background: rgba(0, 154, 97, 0.03);
-  border-radius: 12px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.02), transparent);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  transition: var(--transition);
+}
+
+.detail-row:hover {
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.04), transparent);
+  border-color: var(--border);
 }
 
 .detail-label {
   font-size: 13px;
   text-transform: uppercase;
-  color: var(--text-secondary);
-  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.8px;
+  font-weight: 600;
 }
 
 .detail-value {
@@ -537,42 +710,66 @@ $('#downloadBtn').click(downloadQR);
   font-weight: 600;
   color: var(--text);
   word-break: break-all;
+  font-family: 'SF Mono', 'Monaco', monospace;
 }
 
 /* Action Section */
 .action-section {
-  padding: 32px;
+  padding: 40px;
   text-align: center;
-  background: linear-gradient(to bottom, rgba(0, 154, 97, 0.03), transparent);
+  background: linear-gradient(to bottom, rgba(0, 154, 97, 0.02), transparent);
 }
 
 .primary-btn {
-  padding: 18px 48px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 20px 56px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
   border: none;
-  border-radius: 100px;
+  border-radius: var(--radius-full);
   font-size: 16px;
   font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: var(--transition);
-  box-shadow: 0 10px 30px rgba(0, 154, 97, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 154, 97, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.primary-btn:hover:not(:disabled)::before {
+  width: 300px;
+  height: 300px;
 }
 
 .primary-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 15px 40px rgba(0, 154, 97, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 154, 97, 0.4);
 }
 
 .primary-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .action-info {
-  margin-top: 12px;
-  font-size: 13px;
+  margin-top: 16px;
+  font-size: 14px;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .action-info.warning {
@@ -583,63 +780,87 @@ $('#downloadBtn').click(downloadQR);
   color: #ef4444;
 }
 
-/* Modals */
+/* Modals - Enterprise Style */
 .modal {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
   z-index: 9999;
   align-items: center;
   justify-content: center;
   padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .modal.active {
   display: flex;
+  opacity: 1;
 }
 
 .modal-content {
   background: var(--bg-card);
-  padding: 40px;
-  border-radius: var(--radius);
-  max-width: 500px;
+  padding: 48px;
+  border-radius: var(--radius-lg);
+  max-width: 520px;
   width: 100%;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4);
   position: relative;
+  animation: modalSlide 0.3s ease;
+  border: 1px solid var(--border-light);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes modalSlide {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .modal-title {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--text);
   margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
 
 .modal-subtitle {
   color: var(--text-secondary);
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .modal-input {
   width: 100%;
-  padding: 14px 20px;
+  padding: 16px 20px;
   border: 2px solid var(--border);
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   font-size: 15px;
-  margin-bottom: 20px;
+  font-weight: 500;
+  margin-bottom: 24px;
   transition: var(--transition);
+  background: var(--bg-card);
+  color: var(--text);
 }
 
 .modal-input:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(0, 154, 97, 0.1);
 }
 
 .modal-actions {
@@ -649,9 +870,9 @@ $('#downloadBtn').click(downloadQR);
 
 .modal-btn {
   flex: 1;
-  padding: 14px;
+  padding: 16px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
@@ -659,8 +880,14 @@ $('#downloadBtn').click(downloadQR);
 }
 
 .modal-btn.primary {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.3);
+}
+
+.modal-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.4);
 }
 
 .modal-btn.secondary {
@@ -668,37 +895,61 @@ $('#downloadBtn').click(downloadQR);
   color: var(--text-secondary);
 }
 
-/* Top-Up Modal */
-.topup-content {
-  max-height: 60vh;
-  overflow-y: auto;
-  position: relative;
+[data-theme="dark"] .modal-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
 }
 
-.topup-content .modal-close {
-  position: sticky;
-  top: 0;
+.modal-btn.secondary:hover {
+  background: #e5e7eb;
+}
+
+/* Top-Up Modal */
+.topup-content {
+  max-height: 80vh;
+  overflow-y: auto;
 }
 
 .topup-plans {
   display: grid;
   gap: 16px;
   margin-bottom: 20px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
 .topup-plan {
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), rgba(0, 217, 126, 0.05));
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.03), rgba(0, 217, 126, 0.03));
   border: 2px solid var(--border);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: var(--radius-md);
+  padding: 24px;
   text-align: center;
   cursor: pointer;
   transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.topup-plan::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 154, 97, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.topup-plan:hover::before {
+  left: 100%;
 }
 
 .topup-plan:hover {
   border-color: var(--primary);
   transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.15);
 }
 
 .topup-name {
@@ -706,39 +957,47 @@ $('#downloadBtn').click(downloadQR);
   font-weight: 700;
   color: var(--text);
   margin-bottom: 8px;
+  letter-spacing: -0.3px;
 }
 
 .topup-price {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
 }
 
 .topup-buy {
   width: 100%;
-  padding: 10px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 12px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: white;
   border: none;
-  border-radius: 100px;
+  border-radius: var(--radius-full);
   font-size: 14px;
   font-weight: 700;
+  letter-spacing: 0.5px;
   cursor: pointer;
   transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.2);
 }
 
 .topup-buy:hover {
   transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 154, 97, 0.3);
 }
 
 .modal-close {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 32px;
-  height: 32px;
-  background: #f0f0f0;
+  top: 24px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.05);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -746,22 +1005,132 @@ $('#downloadBtn').click(downloadQR);
   align-items: center;
   justify-content: center;
   transition: var(--transition);
-  color: var(--text);
   font-size: 20px;
-  font-weight: bold;
-  z-index: 1;
-  position: fixed;
-}
-
-[data-theme="dark"] .modal-close {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  color: var(--text-secondary);
 }
 
 .modal-close:hover {
-  background: rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.1);
   transform: rotate(90deg);
   color: #ef4444;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+  .check-page {
+    padding: 24px 16px;
+    overflow-x: hidden; /* Ensure no horizontal scroll */
+  }
+  
+  .search-card {
+    padding: 32px 20px;
+    border-radius: var(--radius-md);
+  }
+  
+  .search-title {
+    font-size: 26px;
+  }
+  
+  /* Mobile Search Form - Improved */
+  .search-form {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, #f8f8f8, #f4f4f4);
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 16px 20px;
+    background: white;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    font-size: 16px; /* Prevent zoom on iOS */
+  }
+  
+  [data-theme="dark"] .search-input {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .search-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+  }
+  
+  /* Package Name Mobile */
+  .package-name {
+    font-size: 24px;
+  }
+  
+  .esim-header {
+    padding: 32px 24px;
+  }
+  
+  .quick-info {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 24px 16px;
+    gap: 12px;
+  }
+  
+  .info-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .info-value {
+    font-size: 16px;
+  }
+  
+  .qr-section {
+    padding: 32px 20px;
+    overflow: hidden; /* Prevent horizontal scroll */
+  }
+  
+  .qr-code {
+    width: 180px;
+    height: 180px;
+    max-width: 90%; /* Ensure QR doesn't cause overflow */
+  }
+  
+  .modal-content {
+    padding: 32px 20px;
+    margin: 20px;
+    max-width: calc(100vw - 40px); /* Prevent horizontal scroll */
+  }
+  
+  .modal-title {
+    font-size: 22px;
+  }
+  
+  .usage-stats {
+    padding: 20px 16px;
+  }
+  
+  .stat-value {
+    font-size: 20px;
+  }
+  
+  .primary-btn {
+    padding: 18px 32px;
+    font-size: 15px;
+  }
+  
+  /* Prevent horizontal scroll on all sections */
+  .check-container,
+  .search-card,
+  .esim-card,
+  .esim-header,
+  .quick-info,
+  .qr-section,
+  .usage-section,
+  .details-section,
+  .action-section {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
 }
 
 /* Animations */
@@ -770,76 +1139,27 @@ $('#downloadBtn').click(downloadQR);
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mobile */
-@media (max-width: 640px) {
-  .check-page {
-    padding: 20px 16px;
-    overflow-x: hidden;
-  }
-  
-  .check-container {
-    overflow-x: hidden;
-    max-width: 100%;
-  }
-  
-  .search-card {
-    padding: 32px 24px;
-    border-radius: 20px;
-  }
-  
-  .search-title {
-    font-size: 24px;
-  }
-  
-  .search-form {
-    flex-direction: column;
-    gap: 8px;
-    padding: 6px;
-  }
-  
-  .search-input {
-    padding: 14px 20px;
-    font-size: 16px;
-  }
-  
-  .search-btn {
-    width: 100%;
-    padding: 14px;
-  }
-  
-  .package-name {
-    font-size: 26px;
-  }
-  
-  .quick-info {
-    grid-template-columns: repeat(3, 1fr);
-    padding: 20px;
-    gap: 12px;
-  }
-  
-  .info-value {
-    font-size: 16px;
-  }
-  
-  .qr-code {
-    width: 180px;
-    height: 180px;
-  }
-  
-  .modal-content {
-    padding: 32px 24px;
-    max-width: 90%;
-    margin: 0 auto;
-  }
-  
-  /* Fix horizontal scroll */
-  .esim-card {
-    overflow-x: hidden;
-  }
-  
-  .qr-section {
-    overflow-x: hidden;
-  }
+/* Loading Overlay for Modals */
+.modal-loading {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-lg);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+[data-theme="dark"] .modal-loading {
+  background: rgba(26, 26, 26, 0.9);
+}
+
+.modal-loading.active {
+  opacity: 1;
+  visibility: visible;
 }
 </style>
 
@@ -857,6 +1177,7 @@ $('#downloadBtn').click(downloadQR);
           id="orderInput" 
           class="search-input"
           placeholder="{{ 'check.placeholder' | t | default: 'Enter order number' }}"
+          autocomplete="off"
         >
         <button id="searchBtn" class="search-btn">
           {{ 'check.search' | t | default: 'SEARCH' }}
@@ -869,7 +1190,7 @@ $('#downloadBtn').click(downloadQR);
     <!-- Loading -->
     <div id="loading" class="loading">
       <div class="spinner"></div>
-      <p>{{ 'check.loading' | t | default: 'Loading...' }}</p>
+      <p>{{ 'check.loading' | t | default: 'Loading your eSIM...' }}</p>
     </div>
     
     <!-- Main eSIM Card -->
@@ -938,7 +1259,7 @@ $('#downloadBtn').click(downloadQR);
             </button>
           </div>
         </div>
-        <div class="qr-actions">
+        <div class="qr-actions" id="qrActions">
           <button class="qr-action" id="downloadBtn">
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -1030,6 +1351,7 @@ $('#downloadBtn').click(downloadQR);
       id="emailInput" 
       class="modal-input"
       placeholder="{{ 'check.email_placeholder' | t | default: 'your@email.com' }}"
+      autocomplete="email"
     >
     <div class="modal-actions">
       <button class="modal-btn primary" id="verifyEmail">
@@ -1038,6 +1360,9 @@ $('#downloadBtn').click(downloadQR);
       <button class="modal-btn secondary" id="cancelEmail">
         {{ 'check.cancel' | t | default: 'Cancel' }}
       </button>
+    </div>
+    <div class="modal-loading" id="emailLoading">
+      <div class="spinner"></div>
     </div>
   </div>
 </div>
@@ -1048,9 +1373,13 @@ $('#downloadBtn').click(downloadQR);
     <button class="modal-close" id="closeTopup">✕</button>
     <div class="modal-header">
       <h3 class="modal-title">{{ 'check.topup_title' | t | default: 'Select Top-Up Plan' }}</h3>
+      <p class="modal-subtitle">{{ 'check.topup_subtitle' | t | default: 'Choose your data package' }}</p>
     </div>
     <div class="topup-plans" id="topupPlans">
       <!-- Plans will load here -->
+    </div>
+    <div class="modal-loading" id="topupLoading">
+      <div class="spinner"></div>
     </div>
   </div>
 </div>
@@ -1069,7 +1398,7 @@ if (typeof jQuery === 'undefined') {
 function initEsimCheck() {
   const $ = jQuery;
   
-  // State
+  // State Management
   let currentOrder = null;
   let currentEsim = null;
   let isEmailVerified = false;
@@ -1089,17 +1418,42 @@ function initEsimCheck() {
     const orderParam = urlParams.get('order_number');
     if (orderParam) {
       $('#orderInput').val(orderParam);
-      search();
+      setTimeout(() => search(), 500);
     }
     
-    // Events
+    // Event Handlers
     $('#searchBtn').click(search);
     $('#orderInput').keypress(e => { if (e.which === 13) search(); });
+    
+    // Email Verification
     $('#verifyBtn').click(() => $('#emailModal').addClass('active'));
     $('#verifyEmail').click(verifyEmail);
-    $('#cancelEmail, #closeEmail').click(() => $('#emailModal').removeClass('active'));
-    $('#closeTopup').click(() => $('#topupModal').removeClass('active'));
+    $('#cancelEmail, #closeEmail').click(() => {
+      $('#emailModal').removeClass('active');
+      $('#emailInput').val('');
+      $('#emailLoading').removeClass('active');
+    });
+    
+    // Top-Up Modal
+    $('#closeTopup').click(() => {
+      $('#topupModal').removeClass('active');
+      $('#topupLoading').removeClass('active');
+      // FIX: Show search card again when closing modal
+      if (!currentEsim) {
+        $('#searchCard').removeClass('hidden');
+      }
+    });
+    
     $('#actionBtn').click(handleAction);
+    $('#downloadBtn').click(downloadQR);
+    $('#manualBtn').click(showManual);
+    
+    // Prevent body scroll when modal is open
+    $('.modal').on('wheel touchmove', function(e) {
+      if ($(e.target).closest('.modal-content').length === 0) {
+        e.preventDefault();
+      }
+    });
   }
   
   // Check lockout
@@ -1133,14 +1487,14 @@ function initEsimCheck() {
       url: 'https://simbye.com/apps/topup/info/' + order,
       method: 'GET',
       headers: { 'Accept': 'application/json' },
-      timeout: 10000,
+      timeout: 15000,
       success: response => {
         showLoading(false);
         if (response?.data?.obj?.esimList?.[0]) {
           currentEsim = response.data.obj.esimList[0];
           attempts = 0;
           displayEsim();
-          $('#searchCard').slideUp();
+          $('#searchCard').addClass('hidden');
         } else {
           handleFailedAttempt();
         }
@@ -1173,7 +1527,7 @@ function initEsimCheck() {
     $('#esimCard').addClass('active');
     
     // Package name
-    $('#packageName').text(pkg.packageName || 'eSIM');
+    $('#packageName').text(pkg.packageName || 'eSIM Package');
     
     // Status
     const status = getStatus();
@@ -1194,7 +1548,7 @@ function initEsimCheck() {
     $('#validity').text((currentEsim.totalDuration || 0) + ' {{ 'check.days' | t | default: 'Days' }}');
     $('#expiryDate').text(formatDate(currentEsim.expiredTime));
     
-    // Usage
+    // Usage visualization
     $('#usagePercent').text(Math.round(remainingPercent) + '%');
     if (remainingPercent < 20) $('#usagePercent').addClass('low');
     
@@ -1205,9 +1559,12 @@ function initEsimCheck() {
     $('#dataUsed').text(usedGB + ' GB');
     $('#dataLeft').text(leftGB + ' GB');
     
-    // Details (without email)
+    // Details (hide sensitive data until verified)
     $('#iccid').text(formatIccid(currentEsim.iccid));
-    $('#apn').text('-'); // Hidden until email verify
+    $('#apn').text('****'); // Hidden until verified
+    
+    // Hide QR actions initially
+    $('#qrActions').removeClass('visible');
     
     // Action button
     updateAction(type);
@@ -1291,7 +1648,6 @@ function initEsimCheck() {
   function handleAction() {
     const type = getType();
     if (type.canTopUp) {
-      // Direct to top-up WITHOUT email check
       loadTopUp();
     }
   }
@@ -1303,23 +1659,27 @@ function initEsimCheck() {
     const pkg = currentEsim.packageList?.[0] || {};
     const currency = window.Shopify?.currency?.active || 'EUR';
     
-    showLoading(true);
+    $('#topupModal').addClass('active');
+    $('#topupLoading').addClass('active');
     
     $.ajax({
       url: `https://simbye.com/apps/topup/plans?esimTranNo=${currentEsim.esimTranNo}&packageCode=${pkg.packageCode}&currency=${currency}`,
       method: 'GET',
       headers: { 'Accept': 'application/json' },
+      timeout: 15000,
       success: response => {
-        showLoading(false);
+        $('#topupLoading').removeClass('active');
         if (response?.data?.length > 0) {
           displayTopUp(response.data);
         } else {
           alert('{{ 'check.no_plans' | t | default: 'No top-up plans available' }}');
+          $('#topupModal').removeClass('active');
         }
       },
       error: () => {
-        showLoading(false);
+        $('#topupLoading').removeClass('active');
         alert('{{ 'check.load_failed' | t | default: 'Failed to load plans' }}');
+        $('#topupModal').removeClass('active');
       }
     });
   }
@@ -1340,7 +1700,6 @@ function initEsimCheck() {
     });
     
     $('#topupPlans').html(html);
-    $('#topupModal').addClass('active');
     
     // Buy handlers
     $('.topup-buy').click(function() {
@@ -1368,72 +1727,91 @@ function initEsimCheck() {
   // Verify email
   function verifyEmail() {
     const email = $('#emailInput').val().trim();
-    if (!email) {
-      alert('{{ 'check.enter_email' | t | default: 'Please enter email' }}');
+    if (!email || !email.includes('@')) {
+      alert('{{ 'check.enter_email' | t | default: 'Please enter valid email' }}');
       return;
     }
     
-    showLoading(true);
+    $('#emailLoading').addClass('active');
     
     $.ajax({
       url: `https://simbye.com/apps/topup/info/${currentOrder}/${email}`,
       method: 'GET',
       headers: { 'Accept': 'application/json' },
+      timeout: 15000,
       success: response => {
-        showLoading(false);
+        $('#emailLoading').removeClass('active');
         if (response?.data?.obj?.esimList?.[0]) {
           currentEsim = response.data.obj.esimList[0];
           isEmailVerified = true;
           displayFullData();
           $('#emailModal').removeClass('active');
+          $('#emailInput').val('');
         } else {
           alert('{{ 'check.verify_failed' | t | default: 'Verification failed' }}');
         }
       },
       error: () => {
-        showLoading(false);
+        $('#emailLoading').removeClass('active');
         alert('{{ 'check.verify_failed' | t | default: 'Verification failed' }}');
       }
     });
   }
   
-  // Display full data
+  // Display full data after verification
   function displayFullData() {
-    // WICHTIG: Zuerst eSIM neu anzeigen
-    displayEsim();
-    
-    // Show QR
+    // Show QR Code
     if (currentEsim.qrCodeUrl) {
       $('#qrCode').attr('src', currentEsim.qrCodeUrl).removeClass('qr-blur');
       $('#verifyOverlay').addClass('hidden');
     }
     
     // Show APN
-    $('#apn').text(currentEsim.apn || '-');
+    $('#apn').text(currentEsim.apn || 'internet');
+    
+    // Show QR actions
+    $('#qrActions').addClass('visible');
     
     showMessage('{{ 'check.verified' | t | default: 'Email verified successfully!' }}', 'success');
   }
   
   // Download QR
   function downloadQR() {
+    if (!isEmailVerified) {
+      $('#emailModal').addClass('active');
+      return;
+    }
+    
     const url = $('#qrCode').attr('src');
     if (url) {
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'esim-qr.png';
+      a.download = `esim-qr-${currentOrder}.png`;
       a.click();
     }
   }
   
-  // Show manual
+  // Show manual installation
   function showManual() {
+    if (!isEmailVerified) {
+      $('#emailModal').addClass('active');
+      return;
+    }
+    
     if (currentEsim?.ac) {
-      const message = `{{ 'check.manual_guide' | t | default: 'Manual Installation:\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%' }}`.replace('%code%', currentEsim.ac);
+      // Create short URL or show installation guide
+      const shortUrl = `simbye.com/i/${currentOrder}`;
+      const manualGuide = `{{ 'check.manual_guide' | t | default: 'Manual Installation:\n\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%\n\nOr visit: %url%' }}`
+        .replace('%code%', currentEsim.ac)
+        .replace('%url%', shortUrl);
       
-      if (currentEsim.shortUrl) {
-        alert(message + '\n\nShort URL: ' + currentEsim.shortUrl);
+      // Show in a better modal or copy to clipboard
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(currentEsim.ac).then(() => {
+          alert(manualGuide + '\n\n✓ Code copied to clipboard!');
+        });
       } else {
-        alert(message);
+        alert(manualGuide);
       }
     } else {
       alert('{{ 'check.manual_unavailable' | t | default: 'Please verify email first' }}');
@@ -1442,21 +1820,28 @@ function initEsimCheck() {
   
   // Helpers
   function isExpired() {
+    if (!currentEsim?.expiredTime) return false;
     return new Date(currentEsim.expiredTime) < new Date();
   }
   
   function formatDate(str) {
     if (!str) return '-';
-    return new Date(str).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+    return new Date(str).toLocaleDateString('en-US', options);
   }
   
   function formatIccid(str) {
     if (!str) return '-';
+    // Show partial ICCID until verified
+    if (!isEmailVerified) {
+      return str.substring(0, 8) + '****' + str.substring(str.length - 4);
+    }
     return str.replace(/(.{4})/g, '$1 ').trim();
   }
   
   function showMessage(msg, type) {
     $('#message').text(msg).removeClass().addClass('message ' + type + ' show');
+    setTimeout(() => hideMessage(), 5000);
   }
   
   function hideMessage() {
@@ -1471,5 +1856,9 @@ function initEsimCheck() {
       $('#loading').removeClass('active');
     }
   }
+  
+  // Prevent horizontal scroll on body
+  $('body').css('overflow-x', 'hidden');
+  $('html').css('overflow-x', 'hidden');
 }
 </script>
