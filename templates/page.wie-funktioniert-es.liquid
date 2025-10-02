@@ -25,7 +25,54 @@
   --card-bg: rgba(26, 26, 26, 0.8);
   --border: rgba(255, 255, 255, 0.08);
   --primary: #00d97e;
+  --primary-hover: #009a61;
   --accent: #00ff88;
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Dark Mode Section Background */
+[data-theme="dark"] .installation-section {
+  background: #0a0a0a;
+}
+
+/* Dark Mode Tab System */
+[data-theme="dark"] .device-tabs {
+  background: rgba(0, 217, 126, 0.05);
+  border-color: rgba(0, 217, 126, 0.1);
+}
+
+[data-theme="dark"] .device-tab:hover {
+  background: rgba(0, 217, 126, 0.08);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .device-tab.active {
+  background: var(--primary);
+  color: #0a0a0a;
+}
+
+/* Dark Mode Step Cards */
+[data-theme="dark"] .step-card {
+  background: rgba(26, 26, 26, 0.8);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .step-image-wrapper {
+  background: rgba(0, 217, 126, 0.05);
+}
+
+/* Dark Mode Note Box */
+[data-theme="dark"] .step-note {
+  background: rgba(0, 217, 126, 0.1);
+  border-left-color: var(--accent);
+}
+
+/* Dark Mode CTA Section */
+[data-theme="dark"] .installation-cta {
+  background: rgba(0, 217, 126, 0.05);
+  border-color: rgba(0, 217, 126, 0.1);
 }
 
 /* Kill Shopify Grid */
