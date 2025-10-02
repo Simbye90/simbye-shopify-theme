@@ -389,7 +389,7 @@
     "manual_guide": "Manual Installation:\n\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%\n\nOr visit: %url%",
     "manual_unavailable": "Please verify email first"
   },
-  "installation": {
+"installation": {
   "title_line1": "Install Your",
   "title_line2": "Simbye eSIM",
   "subtitle": "Step-by-step guide for iPhone and Android devices • Setup in under 2 minutes",
@@ -467,6 +467,7 @@
   "cta_title": "Is Your Device Compatible?",
   "cta_subtitle": "If yes, get your eSIM now and connect in 60 seconds",
   "cta_button": "Buy eSIM Now"
+
 }
 }
 
