@@ -69,17 +69,7 @@
   animation: fadeInUp 0.6s ease;
 }
 
-/* Logo - ONLY ONE, CENTERED */
-.login-logo {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.login-logo img {
-  width: 160px;
-  height: auto;
-  display: inline-block;
-}
+/* Logo removed */
 
 /* Card */
 .login-card {
@@ -386,10 +376,6 @@
   .login-title {
     font-size: 24px;
   }
-  
-  .login-logo img {
-    width: 140px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -410,18 +396,6 @@
 
 <section class="login-page-enterprise">
   <div class="login-container">
-    
-    <!-- Logo - ONLY ONE -->
-    <div class="login-logo">
-      <a href="{{ routes.root_url }}">
-        <img 
-          src="{{ 'logo.png' | asset_url }}"
-          alt="{{ shop.name }}"
-          width="160"
-          height="auto"
-        >
-      </a>
-    </div>
     
     <!-- Main Card -->
     <div class="login-card">
