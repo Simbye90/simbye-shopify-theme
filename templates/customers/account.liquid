@@ -586,8 +586,19 @@
             <div class="esim-header">
               <div class="esim-icon">eSIM</div>
               <div class="esim-info">
-                <h3>eSIM Package</h3>
-                <div class="esim-plan">Order {{ order.name }}</div>
+                <h3>
+                  {% if order.line_items.first.product.title %}
+                    {{ order.line_items.first.product.title | replace: 'eSIM', '' | strip }}
+                  {% else %}
+                    eSIM Package
+                  {% endif %}
+                </h3>
+                <div class="esim-plan">
+                  {% if order.line_items.first.variant.title != 'Default Title' %}
+                    {{ order.line_items.first.variant.title }} • 
+                  {% endif %}
+                  Order {{ order.name }}
+                </div>
               </div>
             </div>
             
@@ -826,12 +837,13 @@ function switchTab(tabName) {
   event.target.closest('.tab-btn').classList.add('active');
 }
 
-// Show eSIM Details
+// Show eSIM Details  
 function showEsimDetails(orderNumber) {
   currentOrder = orderNumber;
   
   // Open modal
-  document.getElementById('esimModal').classList.add('active');
+  const modal = document.getElementById('esimModal');
+  modal.classList.add('active');
   document.getElementById('modalLoading').style.display = 'block';
   document.getElementById('modalContent').style.display = 'none';
   document.getElementById('topupSection').style.display = 'none';
@@ -839,24 +851,131 @@ function showEsimDetails(orderNumber) {
   // Set title
   document.getElementById('modalSubtitle').textContent = 'Order #' + orderNumber;
   
-  // Fetch eSIM data from API
-  jQuery.ajax({
-    url: `https://simbye.com/apps/topup/info/${orderNumber}`,
+  // Try different API endpoints
+  const $ = jQuery;
+  
+  // First try the main API endpoint
+  $.ajax({
+    url: 'https://simbye.com/apps/topup/info/' + orderNumber,
     method: 'GET',
-    headers: { 'Accept': 'application/json' },
+    dataType: 'json',
+    crossDomain: true,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
     timeout: 15000,
     success: function(response) {
+      console.log('API Response:', response);
       if (response?.data?.obj?.esimList?.[0]) {
         currentEsimData = response.data.obj.esimList[0];
         displayEsimData();
       } else {
-        showError('No eSIM data found for this order');
+        // Try with email parameter
+        tryWithEmail(orderNumber);
+      }
+    },
+    error: function(xhr, status, error) {
+      console.log('API Error:', status, error);
+      // If CORS error, try alternative approach
+      tryAlternativeMethod(orderNumber);
+    }
+  });
+}
+
+// Try with customer email
+function tryWithEmail(orderNumber) {
+  const customerEmail = '{{ customer.email }}';
+  const $ = jQuery;
+  
+  $.ajax({
+    url: `https://simbye.com/apps/topup/info/${orderNumber}/${customerEmail}`,
+    method: 'GET',
+    dataType: 'json',
+    crossDomain: true,
+    headers: {
+      'Accept': 'application/json'
+    },
+    timeout: 15000,
+    success: function(response) {
+      console.log('API with email Response:', response);
+      if (response?.data?.obj?.esimList?.[0]) {
+        currentEsimData = response.data.obj.esimList[0];
+        displayEsimData();
+      } else {
+        showFallbackData(orderNumber);
       }
     },
     error: function() {
-      showError('Could not load eSIM data. Please try again.');
+      showFallbackData(orderNumber);
     }
   });
+}
+
+// Alternative: Use JSONP if available
+function tryAlternativeMethod(orderNumber) {
+  const $ = jQuery;
+  
+  // Try JSONP to bypass CORS
+  $.ajax({
+    url: 'https://simbye.com/apps/topup/info/' + orderNumber,
+    dataType: 'jsonp',
+    timeout: 10000,
+    success: function(response) {
+      console.log('JSONP Response:', response);
+      if (response?.data?.obj?.esimList?.[0]) {
+        currentEsimData = response.data.obj.esimList[0];
+        displayEsimData();
+      } else {
+        showFallbackData(orderNumber);
+      }
+    },
+    error: function() {
+      // Last resort: show fallback
+      showFallbackData(orderNumber);
+    }
+  });
+}
+
+// Fallback: Show basic data with link to Check eSIM page
+function showFallbackData(orderNumber) {
+  document.getElementById('modalLoading').style.display = 'none';
+  document.getElementById('modalContent').style.display = 'block';
+  
+  // Hide elements that need API data
+  document.querySelector('.qr-section').style.display = 'none';
+  document.getElementById('usageSection').style.display = 'none';
+  document.getElementById('topupBtn').style.display = 'none';
+  
+  // Show what we can
+  document.getElementById('modalTitle').textContent = 'Order #' + orderNumber;
+  document.getElementById('iccid').textContent = 'Click button below to view';
+  document.getElementById('status').textContent = 'Check Details';
+  
+  // Add a button to go to Check eSIM page
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <div style="text-align: center; padding: 40px;">
+      <h3 style="font-size: 24px; margin-bottom: 16px; color: var(--text);">
+        Order #${orderNumber}
+      </h3>
+      <p style="color: var(--text-secondary); margin-bottom: 32px;">
+        To view your eSIM details, QR code and top-up options,<br>
+        please use our dedicated eSIM check page.
+      </p>
+      <a href="/pages/check-esim?order_number=${orderNumber}" 
+         class="btn btn-primary" 
+         style="display: inline-block; padding: 16px 40px; font-size: 16px;">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+        </svg>
+        View eSIM Details
+      </a>
+      <button class="btn btn-secondary" onclick="closeModal()" style="display: block; width: 100%; margin-top: 12px; padding: 16px;">
+        Close
+      </button>
+    </div>
+  `;
 }
 
 // Display eSIM Data
