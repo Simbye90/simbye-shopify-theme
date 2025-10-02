@@ -402,17 +402,17 @@
       
       <!-- Header -->
       <div class="login-header">
-        <h1 class="login-title">{{ 'customer.login.title' | t | default: 'Welcome Back' }}</h1>
-        <p class="login-subtitle">{{ 'customer.login.subtitle' | t | default: 'Sign in to manage your eSIMs' }}</p>
+        <h1 class="login-title">{{ 'forms.welcome' | t | default: 'Welcome Back' }}</h1>
+        <p class="login-subtitle">{{ 'forms.subtitle' | t | default: 'Sign in to manage your eSIMs' }}</p>
       </div>
       
       <!-- Connected Tabs -->
       <div class="login-tabs">
         <button class="login-tab active" onclick="switchTab('login')">
-          {{ 'customer.login.sign_in' | t | default: 'Sign In' }}
+          {{ 'forms.signin' | t | default: 'Sign In' }}
         </button>
         <button class="login-tab" onclick="switchTab('register')">
-          {{ 'customer.login.register' | t | default: 'Register' }}
+          {{ 'forms.signup' | t | default: 'Register' }}
         </button>
       </div>
       
@@ -426,7 +426,7 @@
         
         <!-- Divider -->
         <div class="login-divider">
-          <span>{{ 'customer.login.or_email' | t | default: 'OR' }}</span>
+          <span>{{ 'forms.or' | t | default: 'OR' }}</span>
         </div>
         
         <!-- Email Login Form -->
@@ -440,14 +440,14 @@
           
           <div class="form-group">
             <label class="form-label" for="CustomerEmail">
-              {{ 'customer.login.email' | t | default: 'Email Address' }}
+              {{ 'forms.email' | t | default: 'Email Address' }}
             </label>
             <input 
               type="email" 
               name="customer[email]" 
               id="CustomerEmail"
               class="form-input"
-              placeholder="{{ 'customer.login.email_placeholder' | t | default: 'your@email.com' }}"
+              placeholder="{{ 'forms.email_hint' | t | default: 'your@email.com' }}"
               autocomplete="email"
               required
             >
@@ -455,7 +455,7 @@
           
           <div class="form-group">
             <label class="form-label" for="CustomerPassword">
-              {{ 'customer.login.password' | t | default: 'Password' }}
+              {{ 'forms.password' | t | default: 'Password' }}
             </label>
             <input 
               type="password" 
@@ -469,12 +469,12 @@
           </div>
           
           <button type="submit" class="btn-submit">
-            {{ 'customer.login.sign_in' | t | default: 'Sign In' }}
+            {{ 'forms.signin' | t | default: 'Sign In' }}
           </button>
           
           <div class="form-link">
             <a href="#recover" onclick="showRecover(); return false;">
-              {{ 'customer.login.forgot_password' | t | default: 'Forgot your password?' }}
+              {{ 'forms.forgot' | t | default: 'Forgot your password?' }}
             </a>
           </div>
           
@@ -492,7 +492,7 @@
         
         <!-- Divider -->
         <div class="login-divider">
-          <span>{{ 'customer.login.or_email' | t | default: 'OR' }}</span>
+          <span>{{ 'forms.or' | t | default: 'OR' }}</span>
         </div>
         
         <!-- Registration Form -->
@@ -514,14 +514,14 @@
           
           <div class="form-group">
             <label class="form-label" for="RegisterFirstName">
-              {{ 'customer.register.first_name' | t | default: 'First Name' }}
+              {{ 'forms.firstname' | t | default: 'First Name' }}
             </label>
             <input 
               type="text" 
               name="customer[first_name]" 
               id="RegisterFirstName"
               class="form-input"
-              placeholder="{{ 'customer.register.first_name_placeholder' | t | default: 'John' }}"
+              placeholder="{{ 'forms.firstname' | t | default: 'John' }}"
               autocomplete="given-name"
               required
             >
@@ -529,14 +529,14 @@
           
           <div class="form-group">
             <label class="form-label" for="RegisterLastName">
-              {{ 'customer.register.last_name' | t | default: 'Last Name' }}
+              {{ 'forms.lastname' | t | default: 'Last Name' }}
             </label>
             <input 
               type="text" 
               name="customer[last_name]" 
               id="RegisterLastName"
               class="form-input"
-              placeholder="{{ 'customer.register.last_name_placeholder' | t | default: 'Doe' }}"
+              placeholder="{{ 'forms.lastname' | t | default: 'Doe' }}"
               autocomplete="family-name"
               required
             >
@@ -544,14 +544,14 @@
           
           <div class="form-group">
             <label class="form-label" for="RegisterEmail">
-              {{ 'customer.register.email' | t | default: 'Email Address' }}
+              {{ 'forms.email' | t | default: 'Email Address' }}
             </label>
             <input 
               type="email" 
               name="customer[email]" 
               id="RegisterEmail"
               class="form-input"
-              placeholder="{{ 'customer.register.email_placeholder' | t | default: 'your@email.com' }}"
+              placeholder="{{ 'forms.email_hint' | t | default: 'your@email.com' }}"
               autocomplete="email"
               required
             >
@@ -559,7 +559,7 @@
           
           <div class="form-group">
             <label class="form-label" for="RegisterPassword">
-              {{ 'customer.register.password' | t | default: 'Password' }}
+              {{ 'forms.password' | t | default: 'Password' }}
             </label>
             <input 
               type="password" 
@@ -573,7 +573,7 @@
           </div>
           
           <button type="submit" class="btn-submit">
-            {{ 'customer.register.submit' | t | default: 'Create Account' }}
+            {{ 'forms.create' | t | default: 'Create Account' }}
           </button>
           
         {%- endform -%}
@@ -587,15 +587,15 @@
           <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
           </svg>
-          {{ 'customer.recover_password.back_to_login' | t | default: 'Back to login' }}
+          {{ 'forms.back' | t | default: 'Back to login' }}
         </a>
         
         <div class="login-header">
           <h2 class="login-title" style="font-size: 24px;">
-            {{ 'customer.recover_password.title' | t | default: 'Reset Password' }}
+            {{ 'forms.reset' | t | default: 'Reset Password' }}
           </h2>
           <p class="login-subtitle">
-            {{ 'customer.recover_password.subtitle' | t | default: 'Enter your email to receive reset instructions' }}
+            {{ 'forms.reset_info' | t | default: 'Enter your email to receive reset instructions' }}
           </p>
         </div>
         
@@ -603,7 +603,7 @@
           
           {% if form.posted_successfully? %}
             <div class="form-success">
-              {{ 'customer.recover_password.success' | t | default: 'Password reset email sent! Check your inbox.' }}
+              {{ 'forms.sent' | t | default: 'Password reset email sent! Check your inbox.' }}
             </div>
           {% endif %}
           
@@ -615,21 +615,21 @@
           
           <div class="form-group">
             <label class="form-label" for="RecoverEmail">
-              {{ 'customer.recover_password.email' | t | default: 'Email Address' }}
+              {{ 'forms.email' | t | default: 'Email Address' }}
             </label>
             <input 
               type="email" 
               name="email" 
               id="RecoverEmail"
               class="form-input"
-              placeholder="{{ 'customer.recover_password.email_placeholder' | t | default: 'your@email.com' }}"
+              placeholder="{{ 'forms.email_hint' | t | default: 'your@email.com' }}"
               autocomplete="email"
               required
             >
           </div>
           
           <button type="submit" class="btn-submit">
-            {{ 'customer.recover_password.submit' | t | default: 'Send Reset Link' }}
+            {{ 'forms.send' | t | default: 'Send Reset Link' }}
           </button>
           
         {%- endform -%}
