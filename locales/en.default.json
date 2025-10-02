@@ -321,11 +321,11 @@
     "5g_4g": "5G/4G LTE",
     "support": "24/7 Customer Support"
   },
-  "check": {
+ "check": {
     "title": "Check Your eSIM",
     "placeholder": "Enter order number",
     "search": "SEARCH",
-    "loading": "Loading...",
+    "loading": "Loading your eSIM...",
     "enter_order": "Please enter order number",
     "locked": "Too many attempts. Try again in %mins% minutes",
     "not_found": "Order not found. Attempt %attempt% of %max%",
@@ -337,7 +337,7 @@
     "days": "Days",
     
     "status_expired": "Expired",
-    "status_active": "Active", 
+    "status_active": "Active",
     "status_ready": "Ready",
     "status_installed": "Already Installed",
     "status_ready_install": "Ready to Install",
@@ -375,17 +375,18 @@
     "email_placeholder": "your@email.com",
     "verify": "Verify",
     "cancel": "Cancel",
-    "enter_email": "Please enter email",
+    "enter_email": "Please enter valid email",
     "verify_failed": "Verification failed",
     "verified": "Email verified successfully!",
     
     "topup_title": "Select Top-Up Plan",
+    "topup_subtitle": "Choose your data package",
     "buy": "BUY NOW",
     "no_plans": "No top-up plans available",
     "load_failed": "Failed to load plans",
     "cart_failed": "Failed to add to cart",
     
-    "manual_guide": "Manual Installation:\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%",
+    "manual_guide": "Manual Installation:\n\n1. Go to Settings > Cellular\n2. Add Cellular Plan\n3. Enter manually\n4. SM-DP+: %code%\n\nOr visit: %url%",
     "manual_unavailable": "Please verify email first"
   }
 }
