@@ -963,6 +963,30 @@
       <div class="esims-grid" id="esimsGrid">
         {% assign has_esims = false %}
         {% assign debug_counter = 0 %}
+        {% assign orders_with_meta = 0 %}
+        {% assign orders_without_meta = 0 %}
+        
+        <!-- DEBUG INFO -->
+        <div style="grid-column: 1/-1; background: #f0f0f0; padding: 20px; border-radius: 8px; margin-bottom: 20px; font-family: monospace; font-size: 12px;">
+          <strong>DEBUG MODE:</strong><br>
+          Total Orders: {{ customer.orders.size }}<br>
+          
+          {% for order in customer.orders %}
+            {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
+            Order {{ order.name }}: 
+            {% if orderMeta and orderMeta != empty %}
+              <span style="color: green;">✓ HAS META ({{ orderMeta.size }} eSIMs)</span><br>
+              {% assign orders_with_meta = orders_with_meta | plus: 1 %}
+            {% else %}
+              <span style="color: red;">✗ NO META - Try API fetch for this order!</span><br>
+              {% assign orders_without_meta = orders_without_meta | plus: 1 %}
+            {% endif %}
+          {% endfor %}
+          
+          <br><strong>Summary:</strong><br>
+          Orders with Metafields: {{ orders_with_meta }}<br>
+          Orders without Metafields: {{ orders_without_meta }}<br>
+        </div>
         
         {% comment %} MAIN FIX: Show ALL eSIMs without nested conditions {% endcomment %}
         {% for order in customer.orders %}
@@ -1219,8 +1243,12 @@
       </div>
       
       <!-- Debug Info -->
-      <div style="display: none;" id="debugInfo">
-        Debug: {{ debug_counter }} eSIMs found
+      <div id="debugInfo" style="grid-column: 1/-1; background: #ff6b6b; color: white; padding: 15px; border-radius: 8px; margin-top: 20px;">
+        <strong>⚠️ IMPORTANT:</strong> Found {{ debug_counter }} eSIMs from Metafields<br>
+        But you have {{ customer.orders.size }} orders total!<br>
+        <button onclick="fetchMissingEsims()" style="margin-top: 10px; padding: 8px 16px; background: white; color: #ff6b6b; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+          LOAD ALL eSIMs FROM API
+        </button>
       </div>
     </div>
     
