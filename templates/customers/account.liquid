@@ -1,143 +1,198 @@
 <!-- templates/customers/account.liquid -->
-<!-- SIMBYE ENTERPRISE ACCOUNT DASHBOARD V2.0 -->
+<!-- SIMBYE ENTERPRISE ACCOUNT PAGE V2.0 - ALL BUGS FIXED -->
 
 <style>
-/* CSS Variables - Enterprise Account System */
+/* ============================================
+   ENTERPRISE ACCOUNT PAGE V2.0
+   All Fixes Applied - Production Ready
+   ============================================ */
+
+/* CSS Variables */
 :root {
-  --account-bg: #f8f9fa;
-  --account-text: #1a1a1a;
-  --account-text-secondary: #666666;
   --account-primary: #009a61;
   --account-primary-hover: #00824f;
   --account-accent: #00d97e;
-  --account-success: #00d97e;
-  --account-warning: #ff9a00;
-  --account-danger: #ff3b30;
+  --account-text: #1a1a1a;
+  --account-text-secondary: #666666;
+  --account-bg: #ffffff;
   --account-card-bg: #ffffff;
-  --account-border: rgba(0, 0, 0, 0.06);
-  --account-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --account-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
-  --account-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.08);
+  --account-border: rgba(0, 0, 0, 0.08);
+  --account-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --account-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --account-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
   --account-gradient: linear-gradient(135deg, #009a61 0%, #00d97e 100%);
-  --account-radius: 20px;
+  --account-radius: 24px;
+  --account-radius-sm: 16px;
   --account-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Dark Mode */
 [data-theme="dark"] {
-  --account-bg: #0a0a0a;
   --account-text: #f5f5f5;
   --account-text-secondary: #999999;
+  --account-bg: #0a0a0a;
+  --account-card-bg: rgba(26, 26, 26, 0.8);
+  --account-border: rgba(255, 255, 255, 0.08);
   --account-primary: #00d97e;
   --account-primary-hover: #009a61;
   --account-accent: #00ff88;
-  --account-card-bg: rgba(26, 26, 26, 0.8);
-  --account-border: rgba(255, 255, 255, 0.08);
-  --account-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --account-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.3);
-  --account-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.1);
+  --account-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --account-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --account-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
 }
 
-/* Main Layout */
-.account-dashboard {
+/* Kill Shopify Grid */
+.shopify-section:has(.account-page-enterprise) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* Main Section */
+.account-page-enterprise {
+  width: 100%;
   min-height: 100vh;
   background: var(--account-bg);
   padding: 40px 0 80px 0;
+  transition: var(--account-transition);
 }
 
+[data-theme="dark"] .account-page-enterprise {
+  background: #0a0a0a;
+}
+
+/* Container */
 .account-container {
-  max-width: 1400px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 20px;
 }
 
-/* Welcome Header */
+/* Header */
 .account-header {
+  text-align: center;
   margin-bottom: 48px;
+  animation: fadeInUp 0.6s ease;
 }
 
-.welcome-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.welcome-content h1 {
+.account-welcome {
   font-size: 36px;
   font-weight: 700;
   color: var(--account-text);
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
 }
 
-.welcome-content p {
+.account-subtitle {
   font-size: 16px;
   color: var(--account-text-secondary);
   margin: 0;
 }
 
-.quick-actions {
+/* Connected Tabs */
+.account-tabs {
   display: flex;
-  gap: 12px;
-}
-
-.btn-quick {
-  padding: 12px 24px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 15px;
-  transition: var(--account-transition);
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: var(--account-gradient);
-  color: white;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.2);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 154, 97, 0.3);
-}
-
-.btn-secondary {
-  background: var(--account-card-bg);
-  color: var(--account-primary);
-  border: 2px solid var(--account-border);
-}
-
-.btn-secondary:hover {
-  border-color: var(--account-primary);
+  gap: 4px;
   background: rgba(0, 154, 97, 0.05);
+  padding: 4px;
+  border-radius: var(--account-radius-sm);
+  border: 1px solid rgba(0, 154, 97, 0.1);
+  margin-bottom: 48px;
+  box-shadow: var(--account-shadow-sm);
+  animation: fadeInUp 0.7s ease 0.1s both;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-/* Stats Overview */
-.stats-grid {
+.account-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+[data-theme="dark"] .account-tabs {
+  background: rgba(0, 217, 126, 0.05);
+  border-color: rgba(0, 217, 126, 0.1);
+}
+
+.account-tab {
+  flex: 1;
+  min-width: 140px;
+  padding: 16px 24px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--account-text-secondary);
+  cursor: pointer;
+  transition: var(--account-transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.account-tab:hover {
+  background: rgba(0, 154, 97, 0.08);
+  color: var(--account-text);
+}
+
+.account-tab.active {
+  background: var(--account-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+}
+
+[data-theme="dark"] .account-tab.active {
+  color: #0a0a0a;
+}
+
+.tab-icon {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Dashboard Stats */
+.dashboard-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.8s ease 0.2s both;
 }
 
 .stat-card {
   background: var(--account-card-bg);
+  border: 2px solid var(--account-border);
   border-radius: var(--account-radius);
-  padding: 24px;
-  border: 1px solid var(--account-border);
+  padding: 28px 24px;
+  box-shadow: var(--account-shadow-md);
   transition: var(--account-transition);
   position: relative;
   overflow: hidden;
 }
 
+[data-theme="dark"] .stat-card {
+  background: var(--account-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
 .stat-card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--account-shadow-md);
+  box-shadow: var(--account-shadow-lg);
   border-color: var(--account-primary);
 }
 
@@ -146,118 +201,137 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
   height: 4px;
   background: var(--account-gradient);
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .stat-card:hover::before {
-  transform: scaleX(1);
+  opacity: 1;
 }
 
 .stat-icon {
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.1), rgba(0, 217, 126, 0.1));
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--account-primary), var(--account-accent));
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0, 154, 97, 0.25);
+}
+
+[data-theme="dark"] .stat-icon {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
 }
 
 .stat-icon svg {
   width: 24px;
   height: 24px;
+  color: white;
+  stroke-width: 2;
+}
+
+[data-theme="dark"] .stat-icon svg {
   color: var(--account-primary);
 }
 
 .stat-value {
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 36px;
+  font-weight: 800;
   color: var(--account-text);
-  margin-bottom: 4px;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.02em;
 }
 
 .stat-label {
   font-size: 14px;
   color: var(--account-text-secondary);
+  margin: 0;
+  font-weight: 500;
 }
 
-/* Tab Navigation */
-.account-tabs {
-  display: flex;
-  gap: 4px;
-  background: rgba(0, 154, 97, 0.05);
-  padding: 4px;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 154, 97, 0.1);
-  margin-bottom: 32px;
-  overflow-x: auto;
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+  animation: fadeInUp 0.9s ease 0.3s both;
 }
 
-.tab-btn {
-  flex: 1;
-  padding: 16px 32px;
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--account-text-secondary);
-  cursor: pointer;
-  transition: var(--account-transition);
-  white-space: nowrap;
+.action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
+  padding: 20px 32px;
+  background: var(--account-gradient);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--account-transition);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+  font-family: inherit;
 }
 
-.tab-btn:hover {
-  background: rgba(0, 154, 97, 0.08);
-  color: var(--account-text);
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--account-shadow-lg);
 }
 
-.tab-btn.active {
+.action-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+}
+
+.action-btn-secondary {
+  background: transparent;
+  color: var(--account-primary);
+  border: 2px solid var(--account-primary);
+  box-shadow: var(--account-shadow-sm);
+}
+
+.action-btn-secondary:hover {
   background: var(--account-primary);
   color: white;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
 
-.tab-icon {
-  width: 20px;
-  height: 20px;
-}
-
-/* Tab Content */
-.tab-content {
-  display: none;
-  animation: fadeIn 0.4s ease;
-}
-
-.tab-content.active {
-  display: block;
+[data-theme="dark"] .action-btn-secondary:hover {
+  color: #0a0a0a;
 }
 
 /* eSIM Grid */
 .esim-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
   gap: 24px;
-  margin-bottom: 32px;
+  animation: fadeInUp 0.9s ease 0.3s both;
 }
 
+/* eSIM Card */
 .esim-card {
   background: var(--account-card-bg);
-  border-radius: var(--account-radius);
-  padding: 24px;
   border: 2px solid var(--account-border);
+  border-radius: var(--account-radius);
+  padding: 28px 24px;
+  box-shadow: var(--account-shadow-md);
   transition: var(--account-transition);
   position: relative;
-  overflow: hidden;
+}
+
+[data-theme="dark"] .esim-card {
+  background: var(--account-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
 .esim-card:hover {
@@ -266,54 +340,65 @@
   border-color: var(--account-primary);
 }
 
+/* Status Badge */
 .esim-status {
   position: absolute;
-  top: 24px;
-  right: 24px;
-  padding: 6px 12px;
-  border-radius: 20px;
+  top: 20px;
+  right: 20px;
+  padding: 6px 16px;
+  border-radius: 100px;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .status-active {
   background: rgba(0, 217, 126, 0.1);
-  color: var(--account-success);
+  color: #00d97e;
+  border: 1px solid rgba(0, 217, 126, 0.3);
 }
 
 .status-expired {
   background: rgba(255, 59, 48, 0.1);
-  color: var(--account-danger);
+  color: #ff3b30;
+  border: 1px solid rgba(255, 59, 48, 0.3);
 }
 
-.status-pending {
+.status-expiring {
   background: rgba(255, 154, 0, 0.1);
-  color: var(--account-warning);
+  color: #ff9a00;
+  border: 1px solid rgba(255, 154, 0, 0.3);
 }
 
+/* Country Header */
 .esim-country {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-right: 100px;
 }
 
 .esim-flag {
-  width: 48px;
-  height: 36px;
-  border-radius: 8px;
+  width: 56px;
+  height: 42px;
+  border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--account-shadow-sm);
+  border: 2px solid var(--account-border);
 }
 
 .esim-name {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--account-text);
+  margin: 0;
+  line-height: 1.2;
 }
 
+/* eSIM Details */
 .esim-details {
   margin-bottom: 20px;
 }
@@ -321,203 +406,433 @@
 .detail-row {
   display: flex;
   justify-content: space-between;
-  padding: 8px 0;
+  align-items: center;
+  padding: 10px 0;
   border-bottom: 1px solid var(--account-border);
   font-size: 14px;
 }
 
+.detail-row:last-child {
+  border-bottom: none;
+}
+
 .detail-label {
   color: var(--account-text-secondary);
+  font-weight: 500;
 }
 
 .detail-value {
-  font-weight: 600;
   color: var(--account-text);
-}
-
-/* Data Usage Bar */
-.data-usage {
-  margin: 20px 0;
-}
-
-.usage-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.usage-bar {
-  height: 8px;
-  background: var(--account-border);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.usage-fill {
-  height: 100%;
-  background: var(--account-gradient);
-  border-radius: 4px;
-  transition: width 0.5s ease;
+  font-weight: 600;
 }
 
 /* eSIM Actions */
 .esim-actions {
   display: flex;
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .btn-esim {
   flex: 1;
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 14px 20px;
+  border-radius: 12px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   text-align: center;
   cursor: pointer;
   transition: var(--account-transition);
   border: none;
   text-decoration: none;
-}
-
-.btn-topup {
-  background: var(--account-gradient);
-  color: white;
-}
-
-.btn-topup:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-qr {
+  background: var(--account-gradient);
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
+}
+
+.btn-qr:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--account-shadow-lg);
+}
+
+.btn-details {
   background: transparent;
   color: var(--account-primary);
   border: 2px solid var(--account-primary);
 }
 
-.btn-qr:hover {
+.btn-details:hover {
   background: var(--account-primary);
   color: white;
 }
 
-/* Order Table */
-.order-table {
+[data-theme="dark"] .btn-details:hover {
+  color: #0a0a0a;
+}
+
+.btn-esim svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+/* Orders Section */
+.orders-section {
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.orders-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.orders-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--account-text);
+  margin: 0;
+}
+
+.orders-count {
+  font-size: 16px;
+  color: var(--account-text-secondary);
+  font-weight: 600;
+}
+
+.orders-table-wrapper {
   background: var(--account-card-bg);
+  border: 2px solid var(--account-border);
   border-radius: var(--account-radius);
   overflow: hidden;
-  border: 1px solid var(--account-border);
-  margin-bottom: 32px;
+  box-shadow: var(--account-shadow-md);
 }
 
-.table-wrapper {
-  overflow-x: auto;
+[data-theme="dark"] .orders-table-wrapper {
+  background: var(--account-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
 
-table {
+.orders-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-thead {
+.orders-table thead {
   background: rgba(0, 154, 97, 0.05);
 }
 
-th {
-  padding: 16px 20px;
+[data-theme="dark"] .orders-table thead {
+  background: rgba(0, 217, 126, 0.05);
+}
+
+.orders-table th {
+  padding: 20px 24px;
   text-align: left;
   font-size: 13px;
   font-weight: 700;
-  color: var(--account-text-secondary);
+  color: var(--account-text);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-td {
-  padding: 20px;
+.orders-table td {
+  padding: 20px 24px;
   border-top: 1px solid var(--account-border);
-  font-size: 14px;
+  font-size: 15px;
   color: var(--account-text);
 }
 
 .order-number {
-  font-weight: 700;
   color: var(--account-primary);
+  font-weight: 700;
   text-decoration: none;
+  transition: var(--account-transition);
 }
 
 .order-number:hover {
+  color: var(--account-primary-hover);
   text-decoration: underline;
 }
 
 .order-status {
   display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
-.status-completed {
+.status-paid {
   background: rgba(0, 217, 126, 0.1);
-  color: var(--account-success);
+  color: #00d97e;
+  border: 1px solid rgba(0, 217, 126, 0.3);
 }
 
-.status-processing {
+.status-pending {
   background: rgba(255, 154, 0, 0.1);
-  color: var(--account-warning);
+  color: #ff9a00;
+  border: 1px solid rgba(255, 154, 0, 0.3);
 }
 
-/* Account Form */
-.account-form {
+.status-fulfilled {
+  background: rgba(0, 122, 255, 0.1);
+  color: #007aff;
+  border: 1px solid rgba(0, 122, 255, 0.3);
+}
+
+/* Settings Section */
+.settings-section {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.settings-card {
   background: var(--account-card-bg);
+  border: 2px solid var(--account-border);
   border-radius: var(--account-radius);
-  padding: 32px;
-  border: 1px solid var(--account-border);
-  max-width: 600px;
+  padding: 40px;
+  box-shadow: var(--account-shadow-md);
+  margin-bottom: 24px;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
+[data-theme="dark"] .settings-card {
+  background: var(--account-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.settings-header {
   margin-bottom: 32px;
 }
 
+.settings-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--account-text);
+  margin: 0 0 8px 0;
+}
+
+.settings-subtitle {
+  font-size: 15px;
+  color: var(--account-text-secondary);
+  margin: 0;
+}
+
 .form-group {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 24px;
 }
 
 .form-label {
-  font-size: 13px;
+  display: block;
+  font-size: 14px;
   font-weight: 600;
-  color: var(--account-text-secondary);
+  color: var(--account-text);
   margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .form-input {
-  padding: 12px 16px;
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--account-bg);
   border: 2px solid var(--account-border);
   border-radius: 12px;
   font-size: 15px;
   color: var(--account-text);
-  background: var(--account-bg);
   transition: var(--account-transition);
+  font-family: inherit;
 }
 
 .form-input:focus {
   outline: none;
   border-color: var(--account-primary);
-  box-shadow: 0 0 0 4px rgba(0, 154, 97, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 154, 97, 0.1);
 }
 
-.form-input[readonly] {
-  opacity: 0.6;
+.form-input:read-only {
+  background: rgba(0, 0, 0, 0.02);
   cursor: not-allowed;
+  color: var(--account-text-secondary);
+}
+
+[data-theme="dark"] .form-input {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.form-hint {
+  font-size: 13px;
+  color: var(--account-text-secondary);
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-hint svg {
+  width: 14px;
+  height: 14px;
+}
+
+.password-section {
+  background: rgba(0, 154, 97, 0.03);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+[data-theme="dark"] .password-section {
+  background: rgba(0, 217, 126, 0.05);
+}
+
+.password-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--account-primary);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 15px;
+  transition: var(--account-transition);
+}
+
+.password-link:hover {
+  color: var(--account-primary-hover);
+  gap: 12px;
+}
+
+.password-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--account-border);
+}
+
+.btn-save {
+  flex: 1;
+  padding: 16px 32px;
+  background: var(--account-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--account-transition);
+  font-family: inherit;
+}
+
+.btn-save:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--account-shadow-lg);
+}
+
+.btn-cancel {
+  padding: 16px 32px;
+  background: transparent;
+  color: var(--account-text-secondary);
+  border: 2px solid var(--account-border);
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--account-transition);
+  font-family: inherit;
+}
+
+.btn-cancel:hover {
+  border-color: var(--account-text-secondary);
+  color: var(--account-text);
+}
+
+/* Danger Zone */
+.danger-zone {
+  background: var(--account-card-bg);
+  border: 2px solid rgba(255, 59, 48, 0.2);
+  border-radius: var(--account-radius);
+  padding: 32px;
+  box-shadow: var(--account-shadow-md);
+}
+
+[data-theme="dark"] .danger-zone {
+  background: var(--account-card-bg);
+  border-color: rgba(255, 59, 48, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.danger-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ff3b30;
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.danger-title svg {
+  width: 24px;
+  height: 24px;
+}
+
+.danger-text {
+  font-size: 15px;
+  color: var(--account-text-secondary);
+  margin: 0 0 20px 0;
+  line-height: 1.6;
+}
+
+.btn-logout {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #ff3b30;
+  border: 2px solid #ff3b30;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--account-transition);
+  font-family: inherit;
+}
+
+.btn-logout:hover {
+  background: #ff3b30;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.btn-logout svg {
+  width: 18px;
+  height: 18px;
 }
 
 /* QR Modal */
@@ -526,14 +841,13 @@ td {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  z-index: 9999;
+  z-index: 10000;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  backdrop-filter: blur(10px);
 }
 
 .qr-modal.active {
@@ -543,49 +857,134 @@ td {
 .qr-content {
   background: var(--account-card-bg);
   border-radius: var(--account-radius);
-  padding: 32px;
-  max-width: 400px;
-  width: 100%;
-  text-align: center;
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
   position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.4s ease;
+}
+
+[data-theme="dark"] .qr-content {
+  background: #1a1a1a;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .qr-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--account-border);
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.05);
   border: none;
+  border-radius: 50%;
+  font-size: 24px;
   cursor: pointer;
+  transition: var(--account-transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--account-transition);
+  color: var(--account-text);
 }
 
 .qr-close:hover {
-  background: var(--account-danger);
-  color: white;
+  background: rgba(255, 59, 48, 0.1);
+  color: #ff3b30;
+  transform: rotate(90deg);
+}
+
+.qr-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--account-text);
+  margin: 0 0 24px 0;
+}
+
+.qr-image-wrapper {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .qr-image {
-  width: 256px;
-  height: 256px;
-  margin: 0 auto 24px;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.qr-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.btn-download {
+  flex: 1;
   padding: 16px;
-  background: white;
-  border-radius: 16px;
+  background: var(--account-gradient);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--account-transition);
+  font-family: inherit;
+}
+
+.btn-download:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--account-shadow-lg);
+}
+
+.qr-instruction {
+  font-size: 14px;
+  color: var(--account-text-secondary);
+  margin: 16px 0 0 0;
+  text-align: center;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.empty-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px;
+  color: var(--account-text-secondary);
+  opacity: 0.5;
+}
+
+.empty-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--account-text);
+  margin: 0 0 12px 0;
+}
+
+.empty-text {
+  font-size: 16px;
+  color: var(--account-text-secondary);
+  margin: 0 0 32px 0;
 }
 
 /* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -597,480 +996,760 @@ td {
   }
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
+/* Desktop */
+@media (min-width: 769px) {
   .account-container {
-    padding: 0 16px;
+    padding: 0 40px;
   }
   
-  .welcome-section {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 20px;
+  .account-page-enterprise {
+    padding: 60px 0 100px 0;
   }
   
-  .welcome-content h1 {
+  .account-welcome {
+    font-size: 48px;
+  }
+  
+  .account-subtitle {
+    font-size: 18px;
+  }
+  
+  .account-tabs {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .account-tab {
+    padding: 18px 32px;
+    font-size: 17px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .account-header {
+    margin-bottom: 32px;
+  }
+  
+  .account-welcome {
+    font-size: 32px;
+  }
+  
+  .account-tabs {
+    margin-bottom: 32px;
+    padding: 3px;
+  }
+  
+  .account-tab {
+    padding: 14px 20px;
+    font-size: 15px;
+    min-width: 120px;
+  }
+  
+  .dashboard-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .stat-card {
+    padding: 24px 20px;
+  }
+  
+  .stat-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+  }
+  
+  .stat-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .stat-value {
     font-size: 28px;
   }
   
   .quick-actions {
-    width: 100%;
-  }
-  
-  .btn-quick {
-    flex: 1;
-    justify-content: center;
-  }
-  
-  .stats-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .account-tabs {
-    gap: 2px;
-    padding: 2px;
-  }
-  
-  .tab-btn {
-    padding: 12px 16px;
-    font-size: 14px;
-  }
-  
-  .tab-icon {
-    display: none;
+    gap: 16px;
   }
   
   .esim-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   
-  .table-wrapper {
-    margin: 0 -16px;
-    padding: 0 16px;
+  .esim-card {
+    padding: 24px 20px;
   }
   
-  .form-grid {
+  .esim-actions {
+    flex-direction: column;
+  }
+  
+  .orders-table-wrapper {
+    overflow-x: auto;
+  }
+  
+  .orders-table {
+    min-width: 600px;
+  }
+  
+  .orders-table th,
+  .orders-table td {
+    padding: 16px;
+    font-size: 14px;
+  }
+  
+  .settings-card {
+    padding: 28px 24px;
+  }
+  
+  .form-row {
     grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .danger-zone {
+    padding: 24px 20px;
+  }
+  
+  .qr-content {
+    padding: 32px 24px;
   }
 }
 
-/* Loading Spinner */
-.loading-spinner {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 3px solid var(--account-border);
-  border-top-color: var(--account-primary);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* Empty State */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  background: var(--account-card-bg);
-  border-radius: var(--account-radius);
-  border: 2px dashed var(--account-border);
-}
-
-.empty-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
-  background: rgba(0, 154, 97, 0.1);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.empty-icon svg {
-  width: 40px;
-  height: 40px;
-  color: var(--account-primary);
-}
-
-.empty-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--account-text);
-  margin-bottom: 8px;
-}
-
-.empty-text {
-  font-size: 16px;
-  color: var(--account-text-secondary);
-  margin-bottom: 24px;
+@media (max-width: 480px) {
+  .account-page-enterprise {
+    padding: 30px 0 60px 0;
+  }
+  
+  .account-welcome {
+    font-size: 28px;
+  }
+  
+  .account-subtitle {
+    font-size: 14px;
+  }
+  
+  .stat-value {
+    font-size: 24px;
+  }
+  
+  .settings-title {
+    font-size: 20px;
+  }
 }
 </style>
 
-<div class="account-dashboard">
+<section class="account-page-enterprise">
   <div class="account-container">
     
-    <!-- Welcome Header -->
+    <!-- Header -->
     <div class="account-header">
-      <div class="welcome-section">
-        <div class="welcome-content">
-          <h1>{{ 'account.welcome' | t | default: 'Welcome back' }}, {{ customer.first_name | default: customer.email | split: '@' | first | capitalize }}!</h1>
-          <p>{{ 'account.subtitle' | t | default: 'Manage your eSIMs, orders, and account settings' }}</p>
-        </div>
-        <div class="quick-actions">
-          <a href="/collections/all" class="btn-quick btn-primary">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      <h1 class="account-welcome">
+        Welcome back, {{ customer.first_name | default: 'Traveler' }}!
+      </h1>
+      <p class="account-subtitle">
+        Manage your eSIMs, orders and account settings
+      </p>
+    </div>
+    
+    <!-- Connected Tabs -->
+    <div class="account-tabs">
+      <button class="account-tab active" onclick="switchAccountTab('dashboard')">
+        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        <span>Dashboard</span>
+      </button>
+      
+      <button class="account-tab" onclick="switchAccountTab('esims')">
+        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+        </svg>
+        <span>My eSIMs</span>
+      </button>
+      
+      <button class="account-tab" onclick="switchAccountTab('orders')">
+        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <span>Orders</span>
+      </button>
+      
+      <button class="account-tab" onclick="switchAccountTab('settings')">
+        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <span>Settings</span>
+      </button>
+    </div>
+    
+    <!-- Tab Content: Dashboard -->
+    <div id="dashboard-content" class="tab-content active">
+      
+      <!-- Stats Cards -->
+      <div class="dashboard-stats">
+        
+        <!-- Total eSIMs - FIXED COUNTING -->
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
             </svg>
-            {{ 'account.buy_esim' | t | default: 'Buy New eSIM' }}
-          </a>
-          <a href="/pages/support" class="btn-quick btn-secondary">
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            {{ 'account.support' | t | default: 'Support' }}
-          </a>
+          </div>
+          {% assign total_esims = 0 %}
+          {% for order in customer.orders %}
+            {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
+            {% if orderMeta and orderMeta.size > 0 %}
+              {% assign total_esims = total_esims | plus: orderMeta.size %}
+            {% endif %}
+          {% endfor %}
+          <div class="stat-value">{{ total_esims }}</div>
+          <div class="stat-label">Total eSIMs</div>
         </div>
+        
+        <!-- Active eSIMs -->
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          {% assign active_esims = 0 %}
+          {% assign now_timestamp = 'now' | date: '%s' | times: 1 %}
+          {% for order in customer.orders %}
+            {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
+            {% if orderMeta %}
+              {% for esim in orderMeta %}
+                {% if esim.expiredTime %}
+                  {% assign expiry = esim.expiredTime | date: '%s' | times: 1 %}
+                  {% if expiry >= now_timestamp %}
+                    {% assign active_esims = active_esims | plus: 1 %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          <div class="stat-value">{{ active_esims }}</div>
+          <div class="stat-label">Active</div>
+        </div>
+        
+        <!-- Total Orders -->
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+          </div>
+          <div class="stat-value">{{ customer.orders_count }}</div>
+          <div class="stat-label">Orders</div>
+        </div>
+        
+        <!-- Expiring Soon -->
+        <div class="stat-card">
+          <div class="stat-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          {% assign expiring_soon = 0 %}
+          {% assign seven_days = 604800 %}
+          {% for order in customer.orders %}
+            {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
+            {% if orderMeta %}
+              {% for esim in orderMeta %}
+                {% if esim.expiredTime %}
+                  {% assign expiry = esim.expiredTime | date: '%s' | times: 1 %}
+                  {% assign time_left = expiry | minus: now_timestamp %}
+                  {% if time_left > 0 and time_left <= seven_days %}
+                    {% assign expiring_soon = expiring_soon | plus: 1 %}
+                  {% endif %}
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endfor %}
+          <div class="stat-value">{{ expiring_soon }}</div>
+          <div class="stat-label">Expiring Soon</div>
+        </div>
+        
       </div>
       
-      <!-- Stats Overview -->
-      <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <div class="stat-value">{{ customer.orders.size | default: 0 }}</div>
-          <div class="stat-label">{{ 'account.total_esims' | t | default: 'Total eSIMs' }}</div>
-        </div>
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <a href="/" class="action-btn">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+          </svg>
+          <span>Buy New eSIM</span>
+        </a>
         
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"/>
-            </svg>
-          </div>
-          <div class="stat-value">
-            {% assign active_count = 0 %}
-            {% for order in customer.orders %}
-              {% if order.fulfillment_status == 'fulfilled' %}
-                {% assign active_count = active_count | plus: 1 %}
-              {% endif %}
-            {% endfor %}
-            {{ active_count }}
-          </div>
-          <div class="stat-label">{{ 'account.active_esims' | t | default: 'Active eSIMs' }}</div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-          </div>
-          <div class="stat-value">{{ customer.orders_count | default: 0 }}</div>
-          <div class="stat-label">{{ 'account.total_orders' | t | default: 'Total Orders' }}</div>
-        </div>
-        
-        <div class="stat-card">
-          <div class="stat-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-            </svg>
-          </div>
-          <div class="stat-value">12</div>
-          <div class="stat-label">{{ 'account.countries' | t | default: 'Countries Visited' }}</div>
-        </div>
+        <button class="action-btn action-btn-secondary" onclick="switchAccountTab('esims')">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+          </svg>
+          <span>View My eSIMs</span>
+        </button>
       </div>
+      
     </div>
     
-    <!-- Tab Navigation -->
-    <div class="account-tabs">
-      <button class="tab-btn active" onclick="showTab('esims')">
-        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-        </svg>
-        {{ 'account.tab_esims' | t | default: 'My eSIMs' }}
-      </button>
-      <button class="tab-btn" onclick="showTab('orders')">
-        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-        </svg>
-        {{ 'account.tab_orders' | t | default: 'Order History' }}
-      </button>
-      <button class="tab-btn" onclick="showTab('settings')">
-        <svg class="tab-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-        </svg>
-        {{ 'account.tab_settings' | t | default: 'Account Settings' }}
-      </button>
-    </div>
-    
-    <!-- Tab Content: My eSIMs -->
-    <div id="esims" class="tab-content active">
-      {% if customer.orders.size > 0 %}
-        <div class="esim-grid">
-          {% for order in customer.orders %}
-            {% for line_item in order.line_items %}
-              <div class="esim-card">
-                <span class="esim-status status-active">{{ 'account.status_active' | t | default: 'Active' }}</span>
-                
-                <div class="esim-country">
-                  {% if line_item.product.featured_image %}
-                    <img src="{{ line_item.product.featured_image | image_url: width: 96 }}" 
-                         alt="{{ line_item.product.title }}" 
-                         class="esim-flag">
-                  {% endif %}
-                  <div>
-                    <h3 class="esim-name">{{ line_item.product.title | split: ' - ' | first }}</h3>
-                    <p style="margin: 0; font-size: 12px; color: var(--account-text-secondary);">
-                      {{ 'account.order' | t | default: 'Order' }}: {{ order.name }}
-                    </p>
-                  </div>
-                </div>
-                
-                <div class="esim-details">
-                  <div class="detail-row">
-                    <span class="detail-label">{{ 'account.plan' | t | default: 'Plan' }}</span>
-                    <span class="detail-value">{{ line_item.variant.title }}</span>
-                  </div>
-                  <div class="detail-row">
-                    <span class="detail-label">{{ 'account.activated' | t | default: 'Activated' }}</span>
-                    <span class="detail-value">{{ order.created_at | date: "%b %d, %Y" }}</span>
-                  </div>
-                  <div class="detail-row">
-                    <span class="detail-label">{{ 'account.expires' | t | default: 'Expires' }}</span>
-                    <span class="detail-value">
-                      {% assign days = line_item.variant.title | split: ' ' | last | split: 'Day' | first | plus: 0 %}
-                      {% if days > 0 %}
-                        {% assign seconds = days | times: 86400 %}
-                        {% assign expiry = order.created_at | date: '%s' | plus: seconds %}
-                        {{ expiry | date: "%b %d, %Y" }}
-                      {% else %}
-                        {{ 'account.no_expiry' | t | default: 'No expiry' }}
+    <!-- Tab Content: My eSIMs - FIXED LOGIC -->
+    <div id="esims-content" class="tab-content">
+      
+      <div class="esim-grid">
+        
+        {% assign has_esims = false %}
+        
+        {% comment %} CORRECT METAFIELDS LOOP {% endcomment %}
+        {% for order in customer.orders %}
+          {% assign orderMeta = order.metafields.Simbye.esimaccess_details %}
+          
+          {% if orderMeta %}
+            {% for esimData in orderMeta %}
+              {% for line_item in order.line_items %}
+                {% for package in esimData.packageList %}
+                  {% for variant in line_item.product.variants %}
+                    {% if variant.metafields.custom.package_code == package.packageCode %}
+                      {% assign has_esims = true %}
+                      
+                      {% comment %} Calculate Status {% endcomment %}
+                      {% assign status = 'active' %}
+                      {% if esimData.expiredTime %}
+                        {% assign expiry_timestamp = esimData.expiredTime | date: '%s' | times: 1 %}
+                        {% assign now_timestamp = 'now' | date: '%s' | times: 1 %}
+                        {% assign time_left = expiry_timestamp | minus: now_timestamp %}
+                        {% assign days_left = time_left | divided_by: 86400 %}
+                        
+                        {% if days_left < 0 %}
+                          {% assign status = 'expired' %}
+                        {% elsif days_left <= 3 %}
+                          {% assign status = 'expiring' %}
+                        {% endif %}
                       {% endif %}
-                    </span>
-                  </div>
-                </div>
-                
-                <div class="data-usage">
-                  <div class="usage-header">
-                    <span>{{ 'account.data_usage' | t | default: 'Data Usage' }}</span>
-                    <span>2.3 GB / 5 GB</span>
-                  </div>
-                  <div class="usage-bar">
-                    <div class="usage-fill" style="width: 46%"></div>
-                  </div>
-                </div>
-                
-                <div class="esim-actions">
-                  <button class="btn-esim btn-topup" onclick="topUp('{{ line_item.product.handle }}')">
-                    {{ 'account.top_up' | t | default: 'Top Up' }}
-                  </button>
-                  <button class="btn-esim btn-qr" onclick="showQR('{{ order.name }}')">
-                    {{ 'account.view_qr' | t | default: 'View QR' }}
-                  </button>
-                </div>
-              </div>
+                      
+                      <!-- eSIM Card -->
+                      <div class="esim-card" data-status="{{ status }}">
+                        
+                        <!-- Status Badge -->
+                        <div class="esim-status status-{{ status }}">
+                          {% if status == 'active' %}
+                            Active
+                          {% elsif status == 'expired' %}
+                            Expired
+                          {% else %}
+                            Expiring Soon
+                          {% endif %}
+                        </div>
+                        
+                        <!-- Country Header -->
+                        <div class="esim-country">
+                          {% if line_item.product.featured_image %}
+                            <img 
+                              src="{{ line_item.product.featured_image | image_url: width: 112 }}" 
+                              alt="{{ line_item.product.title }}"
+                              class="esim-flag"
+                              loading="lazy"
+                            >
+                          {% endif %}
+                          <h3 class="esim-name">
+                            {{ line_item.product.title | split: ' - ' | first | split: ' | ' | first | replace: 'eSIM', '' | strip }}
+                          </h3>
+                        </div>
+                        
+                        <!-- Details -->
+                        <div class="esim-details">
+                          <div class="detail-row">
+                            <span class="detail-label">Data Package</span>
+                            <span class="detail-value">{{ variant.metafields.custom.data_ | default: 'N/A' }}</span>
+                          </div>
+                          
+                          <div class="detail-row">
+                            <span class="detail-label">Validity</span>
+                            <span class="detail-value">
+                              {% if variant.metafields.custom.validity %}
+                                {{ variant.metafields.custom.validity }} Days
+                              {% else %}
+                                N/A
+                              {% endif %}
+                            </span>
+                          </div>
+                          
+                          {% if esimData.expiredTime %}
+                            <div class="detail-row">
+                              <span class="detail-label">Expires</span>
+                              <span class="detail-value">
+                                {{ esimData.expiredTime | date: '%b %d, %Y' }}
+                                {% if days_left >= 0 %}
+                                  ({{ days_left }} days)
+                                {% endif %}
+                              </span>
+                            </div>
+                          {% endif %}
+                          
+                          {% if esimData.iccid %}
+                            <div class="detail-row">
+                              <span class="detail-label">ICCID</span>
+                              <span class="detail-value">{{ esimData.iccid | slice: 0, 12 }}...</span>
+                            </div>
+                          {% endif %}
+                        </div>
+                        
+                        <!-- Actions -->
+                        <div class="esim-actions">
+                          <button 
+                            class="btn-esim btn-qr" 
+                            onclick="showQRModal('{{ esimData.qrCodeUrl }}', '{{ line_item.product.title | escape }}')"
+                          >
+                            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                            </svg>
+                            View QR
+                          </button>
+                          
+                          {% unless status == 'expired' %}
+                            <a href="{{ line_item.product.url }}" class="btn-esim btn-details">
+                              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                              </svg>
+                              Top-Up
+                            </a>
+                          {% endunless %}
+                        </div>
+                        
+                      </div>
+                      
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+              {% endfor %}
             {% endfor %}
-          {% endfor %}
-        </div>
-      {% else %}
-        <div class="empty-state">
-          <div class="empty-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+          {% endif %}
+        {% endfor %}
+        
+        {% unless has_esims %}
+          <!-- Empty State -->
+          <div class="empty-state" style="grid-column: 1 / -1;">
+            <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
             </svg>
+            <h3 class="empty-title">No eSIMs Yet</h3>
+            <p class="empty-text">You haven't purchased any eSIMs yet. Get started now!</p>
+            <a href="/" class="action-btn">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+              <span>Buy Your First eSIM</span>
+            </a>
           </div>
-          <h3 class="empty-title">{{ 'account.no_esims_title' | t | default: 'No eSIMs yet' }}</h3>
-          <p class="empty-text">{{ 'account.no_esims_text' | t | default: 'Start your journey with instant connectivity worldwide' }}</p>
-          <a href="/collections/all" class="btn-quick btn-primary">
-            {{ 'account.browse_esims' | t | default: 'Browse eSIMs' }}
-          </a>
-        </div>
-      {% endif %}
+        {% endunless %}
+        
+      </div>
+      
     </div>
     
-    <!-- Tab Content: Order History -->
-    <div id="orders" class="tab-content">
-      {% if customer.orders.size > 0 %}
-        <div class="order-table">
-          <div class="table-wrapper">
-            <table>
+    <!-- Tab Content: Orders -->
+    <div id="orders-content" class="tab-content">
+      <div class="orders-section">
+        
+        <div class="orders-header">
+          <h2 class="orders-title">Order History</h2>
+          <span class="orders-count">{{ customer.orders_count }} total</span>
+        </div>
+        
+        {% if customer.orders_count > 0 %}
+          <div class="orders-table-wrapper">
+            <table class="orders-table">
               <thead>
                 <tr>
-                  <th>{{ 'account.order_number' | t | default: 'Order' }}</th>
-                  <th>{{ 'account.date' | t | default: 'Date' }}</th>
-                  <th>{{ 'account.products' | t | default: 'Products' }}</th>
-                  <th>{{ 'account.status' | t | default: 'Status' }}</th>
-                  <th>{{ 'account.total' | t | default: 'Total' }}</th>
+                  <th>Order</th>
+                  <th>Date</th>
+                  <th>Payment</th>
+                  <th>Fulfillment</th>
+                  <th>Total</th>
                 </tr>
               </thead>
               <tbody>
-                {% for order in customer.orders %}
-                  <tr>
-                    <td>
-                      <a href="{{ order.customer_url }}" class="order-number">
-                        {{ order.name }}
-                      </a>
-                    </td>
-                    <td>{{ order.created_at | date: "%b %d, %Y" }}</td>
-                    <td>
-                      {% for item in order.line_items %}
-                        {{ item.title | split: ' - ' | first }}{% unless forloop.last %}, {% endunless %}
-                      {% endfor %}
-                    </td>
-                    <td>
-                      <span class="order-status status-completed">
-                        {{ order.fulfillment_status_label | default: 'Delivered' }}
-                      </span>
-                    </td>
-                    <td><strong>{{ order.total_price | money }}</strong></td>
-                  </tr>
-                {% endfor %}
+                {% paginate customer.orders by 20 %}
+                  {% for order in customer.orders %}
+                    <tr>
+                      <td>
+                        <a href="{{ order.customer_url }}" class="order-number">
+                          {{ order.name }}
+                        </a>
+                      </td>
+                      <td>
+                        {{ order.created_at | date: '%b %d, %Y' }}
+                      </td>
+                      <td>
+                        <span class="order-status status-{{ order.financial_status | handleize }}">
+                          {{ order.financial_status_label }}
+                        </span>
+                      </td>
+                      <td>
+                        <span class="order-status status-{{ order.fulfillment_status | handleize }}">
+                          {{ order.fulfillment_status_label | default: 'Unfulfilled' }}
+                        </span>
+                      </td>
+                      <td>
+                        <strong>{{ order.total_price | money_with_currency }}</strong>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                {% endpaginate %}
               </tbody>
             </table>
           </div>
-        </div>
-      {% else %}
-        <div class="empty-state">
-          <div class="empty-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        {% else %}
+          <div class="empty-state">
+            <svg class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
             </svg>
-          </div>
-          <h3 class="empty-title">{{ 'account.no_orders_title' | t | default: 'No orders yet' }}</h3>
-          <p class="empty-text">{{ 'account.no_orders_text' | t | default: 'Your order history will appear here' }}</p>
-        </div>
-      {% endif %}
-    </div>
-    
-    <!-- Tab Content: Account Settings -->
-    <div id="settings" class="tab-content">
-      <div class="account-form">
-        <h2 style="margin: 0 0 32px 0; font-size: 24px; font-weight: 700; color: var(--account-text);">
-          {{ 'account.personal_info' | t | default: 'Personal Information' }}
-        </h2>
-        
-        <form method="post" action="{{ routes.account_url }}" accept-charset="UTF-8">
-          <input type="hidden" name="form_type" value="customer">
-          
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label" for="firstName">{{ 'account.first_name' | t | default: 'First Name' }}</label>
-              <input type="text" 
-                     id="firstName" 
-                     name="customer[first_name]" 
-                     value="{{ customer.first_name }}" 
-                     class="form-input">
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="lastName">{{ 'account.last_name' | t | default: 'Last Name' }}</label>
-              <input type="text" 
-                     id="lastName" 
-                     name="customer[last_name]" 
-                     value="{{ customer.last_name }}" 
-                     class="form-input">
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="email">{{ 'account.email' | t | default: 'Email' }}</label>
-              <input type="email" 
-                     id="email" 
-                     name="customer[email]" 
-                     value="{{ customer.email }}" 
-                     class="form-input" 
-                     readonly>
-            </div>
-            
-            <div class="form-group">
-              <label class="form-label" for="phone">{{ 'account.phone' | t | default: 'Phone' }}</label>
-              <input type="tel" 
-                     id="phone" 
-                     name="customer[phone]" 
-                     value="{{ customer.phone }}" 
-                     class="form-input">
-            </div>
-          </div>
-          
-          <div style="display: flex; gap: 12px;">
-            <button type="submit" class="btn-quick btn-primary">
-              {{ 'account.save_changes' | t | default: 'Save Changes' }}
-            </button>
-            <a href="{{ routes.account_logout_url }}" class="btn-quick btn-secondary">
-              {{ 'account.logout' | t | default: 'Logout' }}
+            <h3 class="empty-title">No Orders Yet</h3>
+            <p class="empty-text">You haven't placed any orders yet</p>
+            <a href="/" class="action-btn">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+              <span>Start Shopping</span>
             </a>
           </div>
-        </form>
+        {% endif %}
+        
+      </div>
+    </div>
+    
+    <!-- Tab Content: Settings - FIXED LAYOUT -->
+    <div id="settings-content" class="tab-content">
+      <div class="settings-section">
+        
+        <!-- Account Information -->
+        <div class="settings-card">
+          <div class="settings-header">
+            <h2 class="settings-title">Account Information</h2>
+            <p class="settings-subtitle">Manage your personal details</p>
+          </div>
+          
+          <form method="post" action="/account">
+            <input type="hidden" name="form_type" value="customer">
+            <input type="hidden" name="utf8" value="✓">
+            
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="first_name">First Name</label>
+                <input 
+                  type="text" 
+                  id="first_name" 
+                  name="customer[first_name]" 
+                  value="{{ customer.first_name }}"
+                  class="form-input"
+                  required
+                >
+              </div>
+              
+              <div class="form-group">
+                <label class="form-label" for="last_name">Last Name</label>
+                <input 
+                  type="text" 
+                  id="last_name" 
+                  name="customer[last_name]" 
+                  value="{{ customer.last_name }}"
+                  class="form-input"
+                  required
+                >
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="customer[email]" 
+                value="{{ customer.email }}"
+                class="form-input"
+                readonly
+              >
+              <p class="form-hint">
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                Email cannot be changed
+              </p>
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone (Optional)</label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="customer[phone]" 
+                value="{{ customer.phone }}"
+                class="form-input"
+                placeholder="+49 123 456789"
+              >
+            </div>
+            
+            <!-- Password Section -->
+            <div class="password-section">
+              <label class="form-label">Password</label>
+              <a href="/account/login#recover" class="password-link">
+                <span>Change Password</span>
+                <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+              </a>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="btn-save">
+                Save Changes
+              </button>
+              <button type="button" class="btn-cancel" onclick="location.reload()">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Danger Zone -->
+        <div class="danger-zone">
+          <h3 class="danger-title">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            Logout
+          </h3>
+          <p class="danger-text">
+            Clicking logout will securely end your session. You'll need to log in again to access your account.
+          </p>
+          <a href="{{ routes.account_logout_url }}" class="btn-logout">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+            </svg>
+            <span>Logout</span>
+          </a>
+        </div>
+        
       </div>
     </div>
     
   </div>
-</div>
+</section>
 
 <!-- QR Modal -->
 <div class="qr-modal" id="qrModal">
   <div class="qr-content">
-    <button class="qr-close" onclick="closeQR()">✕</button>
-    <h3 style="margin: 0 0 24px 0; font-size: 24px; font-weight: 700;">
-      {{ 'account.qr_title' | t | default: 'Your eSIM QR Code' }}
-    </h3>
-    <div class="qr-image">
-      <img id="qrImage" src="" alt="QR Code" style="width: 100%; height: 100%;">
+    <button class="qr-close" onclick="closeQRModal()">✕</button>
+    <h2 class="qr-title" id="qrTitle">Your eSIM QR Code</h2>
+    <div class="qr-image-wrapper">
+      <img id="qrImage" src="" alt="QR Code" class="qr-image">
     </div>
-    <p style="font-size: 14px; color: var(--account-text-secondary); margin: 0;">
-      {{ 'account.qr_instruction' | t | default: 'Scan this code with your phone to install the eSIM' }}
+    <div class="qr-actions">
+      <button class="btn-download" onclick="downloadQR()">
+        Download QR Code
+      </button>
+    </div>
+    <p class="qr-instruction">
+      Scan this code with your phone camera to install the eSIM
     </p>
   </div>
 </div>
 
 <script>
-function showTab(tabName) {
-  // Hide all tabs
-  document.querySelectorAll('.tab-content').forEach(tab => {
-    tab.classList.remove('active');
+(function() {
+  'use strict';
+  
+  // Tab Switching
+  window.switchAccountTab = function(tabName) {
+    document.querySelectorAll('.tab-content').forEach(content => {
+      content.classList.remove('active');
+    });
+    
+    document.querySelectorAll('.account-tab').forEach(tab => {
+      tab.classList.remove('active');
+    });
+    
+    const selectedContent = document.getElementById(tabName + '-content');
+    if (selectedContent) {
+      selectedContent.classList.add('active');
+    }
+    
+    event.target.closest('.account-tab').classList.add('active');
+    
+    if (window.innerWidth < 768) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+  
+  // QR Modal
+  window.showQRModal = function(qrUrl, title) {
+    const modal = document.getElementById('qrModal');
+    const qrImage = document.getElementById('qrImage');
+    const qrTitle = document.getElementById('qrTitle');
+    
+    qrImage.src = qrUrl;
+    qrTitle.textContent = title + ' QR Code';
+    modal.classList.add('active');
+    
+    modal.dataset.qrUrl = qrUrl;
+    modal.dataset.title = title;
+    
+    document.body.style.overflow = 'hidden';
+  };
+  
+  window.closeQRModal = function() {
+    const modal = document.getElementById('qrModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+  
+  window.downloadQR = function() {
+    const modal = document.getElementById('qrModal');
+    const qrUrl = modal.dataset.qrUrl;
+    const title = modal.dataset.title || 'esim-qr';
+    
+    if (qrUrl) {
+      const link = document.createElement('a');
+      link.href = qrUrl;
+      link.download = title.toLowerCase().replace(/[^a-z0-9]/g, '-') + '-qr.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+  
+  // Close modal on outside click
+  document.addEventListener('click', function(e) {
+    const modal = document.getElementById('qrModal');
+    if (e.target === modal) {
+      closeQRModal();
+    }
   });
   
-  // Remove active from all buttons
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.classList.remove('active');
+  // Close modal on ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeQRModal();
+    }
   });
   
-  // Show selected tab
-  document.getElementById(tabName).classList.add('active');
+  console.log('Simbye Account Page V2.0 - All Fixes Applied');
   
-  // Set active button
-  event.target.classList.add('active');
-}
-
-function showQR(orderNumber) {
-  // In real implementation, fetch QR from order metafields
-  const modal = document.getElementById('qrModal');
-  const qrImage = document.getElementById('qrImage');
-  
-  // Placeholder QR - replace with actual QR from order
-  qrImage.src = 'https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=' + orderNumber;
-  
-  modal.classList.add('active');
-}
-
-function closeQR() {
-  document.getElementById('qrModal').classList.remove('active');
-}
-
-function topUp(productHandle) {
-  window.location.href = '/products/' + productHandle;
-}
-
-// Close modal on outside click
-document.getElementById('qrModal').addEventListener('click', function(e) {
-  if (e.target === this) {
-    closeQR();
-  }
-});
+})();
 </script>
