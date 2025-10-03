@@ -3,6 +3,10 @@
 
 <style>
 /* FULL WIDTH SECTION */
+.shopify-section:has(.hero-enterprise) {
+  overflow: visible !important;
+}
+
 .hero-enterprise {
   width: 100vw;
   position: relative;
@@ -1260,49 +1264,36 @@
         });
     }
     
- // Display products
-function displayProducts(products) {
-  if (products.length === 0) {
-    displayEmpty();
-    return;
-  }
-  
-  let html = '';
-  
-  products.forEach(product => {
-    // Extract country from title
-    const title = product.title.replace('eSIM', '').replace('-', '').trim();
-    const imageUrl = product.featured_image?.url || '';
-    
-    // PRICE LOGIC: Wenn erste Variante 0€ ist, nimm zweite Variante
-    let price = '';
-    if (product.variants && product.variants.length > 0) {
-      let variantToUse = product.variants[0];
-      
-      // Check if first variant is FREE (price = 0)
-      const firstPrice = parseFloat(variantToUse.price || 0);
-      if (firstPrice === 0 && product.variants.length > 1) {
-        variantToUse = product.variants[1];
+    // Display products
+    function displayProducts(products) {
+      if (products.length === 0) {
+        displayEmpty();
+        return;
       }
       
-      price = variantToUse.price ? `${variantToUse.price}` : '';
+      let html = '';
+      
+      products.forEach(product => {
+        // Extract country from title
+        const title = product.title.replace('eSIM', '').replace('-', '').trim();
+        const price = product.price ? `${product.price}` : '';
+        const imageUrl = product.featured_image?.url || '';
+        
+      html += `
+  <a href="${product.url}" class="suggestion-item">
+    ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="suggestion-image">` : '<span class="suggestion-image">🌍</span>'}
+    <div class="suggestion-content">
+      <span class="suggestion-title">${title}</span>
+    </div>
+    ${price ? `<span class="suggestion-price">${price}</span>` : ''}
+  </a>
+        `;
+      });
+      
+      suggestions.innerHTML = html;
+      showSuggestions();
+      selectedIndex = -1;
     }
-    
-    html += `
-      <a href="${product.url}" class="suggestion-item">
-        ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="suggestion-image">` : '<span class="suggestion-image">🌍</span>'}
-        <div class="suggestion-content">
-          <span class="suggestion-title">${title}</span>
-        </div>
-        ${price ? `<span class="suggestion-price">${price}</span>` : ''}
-      </a>
-    `;
-  });
-  
-  suggestions.innerHTML = html;
-  showSuggestions();
-  selectedIndex = -1;
-}
     
     // Display empty state
     function displayEmpty() {
