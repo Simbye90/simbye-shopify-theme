@@ -1080,16 +1080,15 @@
     <!-- View All Countries Button -->
     {% if section.blocks.size > 0 %}
       <div class="dest-view-all-wrapper">
-        <button 
-          type="button"
-          class="dest-view-all"
-          id="dest-show-all-btn"
-        >
-          <span>{{ 'destinations.view_all_countries' | t | default: 'VIEW ALL 150+ COUNTRIES' }}</span>
-          <svg class="dest-view-all-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
+    <a 
+  href="/collections/{{ section.settings.all_countries_collection }}"
+  class="dest-view-all"
+>
+  <span>{{ 'destinations.view_all_countries' | t | default: 'VIEW ALL 150+ COUNTRIES' }}</span>
+  <svg class="dest-view-all-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
       </div>
     {% endif %}
     
