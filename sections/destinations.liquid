@@ -1078,19 +1078,19 @@
     </div>
     
     <!-- View All Countries Button -->
-{% if section.blocks.size > 0 %}
-  <div class="dest-view-all-wrapper">
+    {% if section.blocks.size > 0 %}
+      <div class="dest-view-all-wrapper">
     <a 
-      href="{{ routes.root_url }}collections/{{ section.settings.all_countries_collection }}"
-      class="dest-view-all"
-    >
-      <span>{{ 'destinations.view_all_countries' | t | default: 'VIEW ALL 150+ COUNTRIES' }}</span>
-      <svg class="dest-view-all-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-  </div>
-{% endif %}
+  href="/collections/{{ section.settings.all_countries_collection }}"
+  class="dest-view-all"
+>
+  <span>{{ 'destinations.view_all_countries' | t | default: 'VIEW ALL 150+ COUNTRIES' }}</span>
+  <svg class="dest-view-all-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path d="M5 12h14M12 5l7 7-7 7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</a>
+      </div>
+    {% endif %}
     
     <!-- Hidden Section für alle Länder -->
     <div id="all-countries-section" style="display: none;">
