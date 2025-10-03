@@ -73,64 +73,7 @@
   z-index: 1;
 }
 
-/* Hero Section mit Bild */
-.collection-hero {
-  position: relative;
-  margin-bottom: 60px;
-  border-radius: 32px;
-  overflow: hidden;
-  animation: fadeInUp 0.8s ease;
-}
-
-.collection-hero.has-image {
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.collection-hero-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-
-.collection-hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, 
-    rgba(0, 154, 97, 0.85) 0%, 
-    rgba(0, 217, 126, 0.75) 100%);
-  z-index: 1;
-}
-
-[data-theme="dark"] .collection-hero-overlay {
-  background: linear-gradient(135deg, 
-    rgba(0, 154, 97, 0.9) 0%, 
-    rgba(0, 217, 126, 0.8) 100%);
-}
-
-.collection-hero-content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 80px 40px;
-}
-
-.collection-hero.has-image .collection-title,
-.collection-hero.has-image .collection-description {
-  color: white;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Header ohne Bild */
+/* Header mit Suchbalken */
 .collection-header {
   text-align: center;
   margin-bottom: 60px;
@@ -777,43 +720,17 @@
 <section class="collection-enterprise">
   <div class="collection-container">
     
-    <!-- Hero Section mit/ohne Bild -->
-    {% if section.settings.collection_image != blank or collection.image != blank %}
-      <div class="collection-hero has-image">
-        {% if section.settings.collection_image != blank %}
-          <img 
-            src="{{ section.settings.collection_image | image_url: width: 1600 }}" 
-            alt="{{ collection.title }}"
-            class="collection-hero-image"
-            loading="eager"
-            width="1600"
-            height="400"
-          >
-        {% elsif collection.image %}
-          <img 
-            src="{{ collection.image | image_url: width: 1600 }}" 
-            alt="{{ collection.title }}"
-            class="collection-hero-image"
-            loading="eager"
-            width="1600"
-            height="400"
-          >
-        {% endif %}
-        
-        <div class="collection-hero-overlay"></div>
-        
-        <div class="collection-hero-content">
-          <h1 class="collection-title">{{ collection.title }}</h1>
-          
-          {% if collection.description != blank %}
-            <div class="collection-description">
-              {{ collection.description }}
-            </div>
-          {% endif %}
-        </div>
-      </div>
+    <!-- Header -->
+    <div class="collection-header">
+      <h1 class="collection-title">{{ collection.title }}</h1>
       
-      <!-- Search Bar (außerhalb Hero) -->
+      {% if collection.description != blank %}
+        <div class="collection-description">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+      
+      <!-- Search Bar -->
       <div class="collection-search">
         <form action="{{ collection.url }}" method="get" class="search-container">
           <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -835,42 +752,7 @@
           </button>
         </form>
       </div>
-      
-    {% else %}
-      <!-- Standard Header ohne Bild -->
-      <div class="collection-header">
-        <h1 class="collection-title">{{ collection.title }}</h1>
-        
-        {% if collection.description != blank %}
-          <div class="collection-description">
-            {{ collection.description }}
-          </div>
-        {% endif %}
-        
-        <!-- Search Bar -->
-        <div class="collection-search">
-          <form action="{{ collection.url }}" method="get" class="search-container">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.35-4.35"/>
-            </svg>
-            
-            <input 
-              type="search" 
-              name="q" 
-              class="search-input"
-              placeholder="Search {{ collection.title | downcase }}..."
-              value="{{ search.terms | escape }}"
-              autocomplete="off"
-            >
-            
-            <button type="submit" class="search-button">
-              Search
-            </button>
-          </form>
-        </div>
-      </div>
-    {% endif %}
+    </div>
     
     <!-- Tag Filter (Connected Tabs) -->
     {% if collection.all_tags.size > 0 %}
@@ -1064,25 +946,73 @@
   "settings": [
     {
       "type": "header",
-      "content": "Collection Hero Image"
+      "content": "Featured Collections (Optional)"
     },
     {
-      "type": "image_picker",
-      "id": "collection_image",
-      "label": "Collection Hero Image",
-      "info": "Upload a hero image for this collection (1600x400px recommended). Falls empty, uses collection's default image."
+      "type": "checkbox",
+      "id": "show_featured_collections",
+      "label": "Show Featured Collections Tabs",
+      "default": false,
+      "info": "Display additional collections as tabs above main collection"
     },
     {
-      "type": "paragraph",
-      "content": "If no image is uploaded, the collection will display in standard header format."
+      "type": "collection",
+      "id": "featured_collection_1",
+      "label": "Featured Collection 1"
+    },
+    {
+      "type": "text",
+      "id": "featured_tab_1",
+      "label": "Tab Label 1",
+      "default": "Popular"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection_2",
+      "label": "Featured Collection 2"
+    },
+    {
+      "type": "text",
+      "id": "featured_tab_2",
+      "label": "Tab Label 2",
+      "default": "Regional"
+    },
+    {
+      "type": "collection",
+      "id": "featured_collection_3",
+      "label": "Featured Collection 3"
+    },
+    {
+      "type": "text",
+      "id": "featured_tab_3",
+      "label": "Tab Label 3",
+      "default": "Global"
     },
     {
       "type": "header",
-      "content": "Collection Settings"
+      "content": "Related Collections"
     },
     {
-      "type": "paragraph",
-      "content": "This section displays your collection products in an enterprise grid layout similar to the Destinations section."
+      "type": "checkbox",
+      "id": "show_related",
+      "label": "Show Related Collections",
+      "default": false,
+      "info": "Display related collections at the bottom"
+    },
+    {
+      "type": "collection",
+      "id": "related_collection_1",
+      "label": "Related Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "related_collection_2",
+      "label": "Related Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "related_collection_3",
+      "label": "Related Collection 3"
     }
   ]
 }
