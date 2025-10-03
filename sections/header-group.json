@@ -14,7 +14,9 @@
     "header": {
       "type": "header",
       "custom_css": [],
-      "settings": {}
+      "settings": {
+        "main_menu": "footer-memu"
+      }
     }
   },
   "order": [
