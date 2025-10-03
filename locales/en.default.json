@@ -528,10 +528,8 @@
     "buy_now": "BUY NOW",
     "failed_cart": "Failed to add to cart. Please try again."
   },
-   "product_howto": {
-    "title_start": "How does",
-    "title_brand": "Simbye eSIM",
-    "title_middle": "work for",
+ "product_howto": {
+    "title_start": "How does Simbye eSIM work for",
     "subtitle": "Get connected in under 2 minutes",
     "step1_title_start": "Choose Your eSIM Data Plan for",
     "step1_desc": "Select a plan that suits your needs and purchase it. You will receive a QR code via email.",
