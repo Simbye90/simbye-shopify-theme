@@ -12,7 +12,7 @@
     "main": {
       "type": "hello-world",
       "settings": {
-        "hero_image": "shopify://shop_images/Design_ohne_Titel-5.png",
+        "hero_image": "shopify://shop_images/Design-ohne-Titel-5.webp",
         "product_1": "esim-africa",
         "product_1_gb": "12GB /12€",
         "product_1_price": "",
@@ -65,13 +65,13 @@
       "type": "how-to",
       "name": "How-To Section",
       "settings": {
-        "step1_image": "shopify://shop_images/Iphone-1.webp",
+        "step1_image": "shopify://shop_images/Design-ohne-Titel-14-2.webp",
         "step1_title": "Datenpaket wählen",
         "step1_desc": "190+ Länder verfügbar. Sofort per E-Mail erhalten.",
-        "step2_image": "shopify://shop_images/iphone-3.webp",
+        "step2_image": "shopify://shop_images/Design-ohne-Titel-15-2.webp",
         "step2_title": "QR-Code scannen",
         "step2_desc": "Mit der Kamera-App scannen. Keine zusätzliche App nötig.",
-        "step3_image": "shopify://shop_images/iphone-2.webp",
+        "step3_image": "shopify://shop_images/Design-ohne-Titel-16-3-2.webp",
         "step3_title": "eSIM aktivieren",
         "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
       }
