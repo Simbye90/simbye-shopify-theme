@@ -107,12 +107,17 @@
 }
 
 .product-howto-title-highlight {
-  color: var(--product-howto-primary);
+  background: var(--product-howto-primary);
+  color: white;
+  padding: 4px 20px;
+  border-radius: 12px;
   display: inline-block;
+  margin: 0 8px;
 }
 
 [data-theme="dark"] .product-howto-title-highlight {
-  color: var(--product-howto-primary);
+  background: var(--product-howto-primary);
+  color: #0a0a0a;
 }
 
 .product-howto-subtitle {
@@ -378,9 +383,7 @@
     <!-- Header with Dynamic Product Title -->
     <div class="product-howto-header">
       <h2 class="product-howto-title">
-        {{ 'product_howto.title_start' | t | default: 'How does' }} 
-        <span class="product-howto-title-highlight">{{ 'product_howto.title_brand' | t | default: 'Simbye eSIM' }}</span> 
-        {{ 'product_howto.title_middle' | t | default: 'work for' }} 
+        {{ 'product_howto.title_start' | t | default: 'How does Simbye eSIM work for' }} 
         <span class="product-howto-title-highlight">{{ product.title }}</span>?
       </h2>
       <p class="product-howto-subtitle">
