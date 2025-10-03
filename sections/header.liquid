@@ -439,234 +439,125 @@ body { padding-top: var(--header-height); }
   </nav>
   
   <!-- Settings -->
-  <div class="mobile-settings">
-    <!-- Language -->
-    <div class="settings-row" id="mobile-language-row">
-      <span class="settings-label">{{ 'header.language' | t | default: 'Language' }}</span>
-      <div class="settings-value">
-        <span>🌐</span>
-        <span>{{ localization.language.iso_code | upcase }}</span>
-      </div>
-      <div class="mobile-dropdown" role="menu" aria-label="Languages">
+<!-- SWITCHER GROUP (Complex DIV Variante) -->
+<div class="switcher-group" id="switcher-group">
+
+  <!-- LANGUAGE SWITCHER -->
+  <div class="switcher" id="language-switcher" aria-haspopup="true" aria-expanded="false">
+    <span>🌐</span>
+    <span id="current-locale">{{ localization.language.iso_code | upcase }}</span>
+
+    <div class="switcher-dropdown" role="menu" aria-label="Languages">
+      <localization-form>
+        {% form 'localization', id: 'lang-form', action: routes.localization_url %}
+          <!-- Rücksprungziel: auf Market-Root weiterleiten (empfohlen bei Domain/Subfolder-Wechsel) -->
+          <input type="hidden" name="return_to" value="{{ routes.root_url }}">
+          <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+          {% for language in localization.available_languages %}
+            <button type="button"
+                    class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}"
+                    data-language="{{ language.iso_code }}"
+                    aria-pressed="{% if language.iso_code == localization.language.iso_code %}true{% else %}false{% endif %}">
+              <span>{{ language.endonym_name }}</span>
+            </button>
+          {% endfor %}
+        {% endform %}
+      </localization-form>
+    </div>
+  </div>
+
+  <!-- CURRENCY/COUNTRY SWITCHER (ohne doppelte Währungen) -->
+  <div class="switcher" id="country-switcher" aria-haspopup="true" aria-expanded="false">
+    <span id="current-country">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
+
+    <div class="switcher-dropdown" role="menu" aria-label="Currencies">
+      {% if localization.available_countries.size > 1 %}
+        {% assign seen = '' %}
         <localization-form>
-          {% form 'localization' %}
-            <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
-            <input type="hidden" name="return_to" value="{{ request.url }}">
-            {% for language in localization.available_languages %}
-              <button type="submit"
-                      class="mobile-dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}"
-                      data-value="{{ language.iso_code }}"
-                      onclick="this.form.querySelector('[name=language_code]').value='{{ language.iso_code }}'">
-                <span>{{ language.endonym_name }}</span>
-              </button>
+          {% form 'localization', id: 'country-form', action: routes.localization_url %}
+            <!-- Rücksprungziel: Market-Root (verhindert „nichts passiert“ bei Domainwechseln) -->
+            <input type="hidden" name="return_to" value="{{ routes.root_url }}">
+            <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+
+            {% for country in localization.available_countries %}
+              {% assign ccurr = country.currency.iso_code %}
+              {% unless seen contains ccurr %}
+                {% assign seen = seen | append: ccurr | append: ',' %}
+                <button type="button"
+                        class="dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}"
+                        data-country="{{ country.iso_code }}"
+                        data-currency="{{ country.currency.iso_code }}"
+                        aria-pressed="{% if country.iso_code == localization.country.iso_code %}true{% else %}false{% endif %}">
+                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                </button>
+              {% endunless %}
             {% endfor %}
           {% endform %}
         </localization-form>
-      </div>
-    </div>
-    
-    <!-- Currency (NO DUPLICATES) -->
-    <div class="settings-row" id="mobile-country-row">
-      <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
-      <div class="settings-value">
-        <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
-      </div>
-      <div class="mobile-dropdown" role="menu" aria-label="Currencies">
-        {% if localization.available_countries.size > 1 %}
-          {% assign shown_currencies_mobile = '' %}
-          <localization-form>
-            {% form 'localization' %}
-              <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-              <input type="hidden" name="return_to" value="{{ request.url }}">
-              {% for country in localization.available_countries %}
-                {% assign currency_code = country.currency.iso_code %}
-                {% unless shown_currencies_mobile contains currency_code %}
-                  {% assign shown_currencies_mobile = shown_currencies_mobile | append: currency_code | append: ',' %}
-                  <button type="submit"
-                          class="mobile-dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}"
-                          data-value="{{ country.iso_code }}"
-                          onclick="this.form.querySelector('[name=country_code]').value='{{ country.iso_code }}'">
-                    <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
-                  </button>
-                {% endunless %}
-              {% endfor %}
-            {% endform %}
-          </localization-form>
-        {% endif %}
-      </div>
-    </div>
-    
-    <div class="settings-row">
-      <span class="settings-label">{{ 'header.dark_mode' | t | default: 'Dark Mode' }}</span>
-      <div class="dark-mode-switch" id="dark-mode-switch">
-        <div class="dark-mode-switch-handle"></div>
-      </div>
+      {% endif %}
     </div>
   </div>
-  
-  <!-- Footer -->
-  <div class="mobile-footer">© 2025 Simbye eSIM</div>
-</nav>
+
+</div>
 
 <script>
 (function() {
   'use strict';
-  
-  // Elements
-  const header = document.getElementById('enterprise-header');
-  const mobileToggle = document.getElementById('mobile-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileOverlay = document.getElementById('mobile-overlay');
-  const mobileClose = document.getElementById('mobile-close');
-  const themeToggle = document.getElementById('theme-toggle');
-  const darkModeSwitch = document.getElementById('dark-mode-switch');
-  const languageSwitcher = document.getElementById('language-switcher');
-  const countrySwitcher = document.getElementById('country-switcher');
-  
-  // State
-  let currentTheme = (function(){
-    try { return localStorage.getItem('theme') || 'light'; } catch(e) { return 'light'; }
-  })();
-  let isMenuOpen = false;
-  
-  // Initialize
-  function init() {
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    bindEvents();
-    handleScroll();
-    markActiveNav();
+
+  // Hilfsfunktionen für Öffnen/Schließen der Dropdowns (nutzt deine existierenden .switcher/.switcher-dropdown Styles)
+  const switchers = document.querySelectorAll('.switcher');
+  function closeAll() { switchers.forEach(sw => sw.classList.remove('active')); }
+  function toggle(el) {
+    const isActive = el.classList.contains('active');
+    closeAll();
+    if (!isActive) el.classList.add('active');
   }
-  
-  // Event Bindings
-  function bindEvents() {
-    // Scroll
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Mobile Menu
-    if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
-    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
-    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
-    
-    // Theme Toggles
-    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
-    if (darkModeSwitch) darkModeSwitch.addEventListener('click', toggleTheme);
-    
-    // Switcher Dropdowns - Desktop
-    if (languageSwitcher) {
-      languageSwitcher.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleSwitcher(languageSwitcher);
-      });
-    }
-    if (countrySwitcher) {
-      countrySwitcher.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleSwitcher(countrySwitcher);
-      });
-    }
-    
-    // Mobile Language/Country Switchers
-    const mobileLanguageRow = document.getElementById('mobile-language-row');
-    const mobileCountryRow = document.getElementById('mobile-country-row');
-    if (mobileLanguageRow) {
-      const languageValue = mobileLanguageRow.querySelector('.settings-value');
-      if (languageValue) languageValue.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileDropdown(mobileLanguageRow); });
-    }
-    if (mobileCountryRow) {
-      const countryValue = mobileCountryRow.querySelector('.settings-value');
-      if (countryValue) countryValue.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileDropdown(mobileCountryRow); });
-    }
-    
-    // Close dropdowns on outside click
-    document.addEventListener('click', function() {
-      closeSwitchers();
-      closeMobileDropdowns();
+
+  // Click-Handling: nur auf Kopf klicken zum Öffnen/Schließen (nicht auf Dropdown-Inhalt)
+  switchers.forEach(sw => {
+    sw.addEventListener('click', function(e) {
+      // Klicke auf den Header-Bereich → toggle; Klicke im Dropdown → nicht togglen
+      const dropdown = sw.querySelector('.switcher-dropdown');
+      if (dropdown && dropdown.contains(e.target)) return; // Klick im Dropdown
+      toggle(sw);
     });
-    
-    // Escape Key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        if (isMenuOpen) closeMobileMenu();
-        closeSwitchers();
-        closeMobileDropdowns();
-      }
-    });
-    
-    // Swipe to Close
-    let touchStartX = 0;
-    if (mobileMenu) {
-      mobileMenu.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
-      mobileMenu.addEventListener('touchend', function(e) {
-        const touchEndX = e.changedTouches[0].clientX;
-        if (touchEndX - touchStartX > 80) closeMobileMenu();
-      }, { passive: true });
-    }
-  }
-  
-  // Scroll Handler
-  function handleScroll() {
-    if (window.scrollY > 10) header.classList.add('scrolled');
-    else header.classList.remove('scrolled');
-  }
-  
-  // Mobile Menu Functions
-  function openMobileMenu() {
-    isMenuOpen = true;
-    mobileToggle.classList.add('active');
-    mobileMenu.classList.add('active');
-    mobileOverlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    mobileOverlay.setAttribute('aria-hidden', 'false');
-  }
-  function closeMobileMenu() {
-    isMenuOpen = false;
-    mobileToggle.classList.remove('active');
-    mobileMenu.classList.remove('active');
-    mobileOverlay.classList.remove('active');
-    document.body.style.overflow = '';
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    mobileOverlay.setAttribute('aria-hidden', 'true');
-  }
-  
-  // Theme Toggle
-  function toggleTheme() {
-    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    try { localStorage.setItem('theme', currentTheme); } catch(e) {}
-  }
-  
-  // Switcher Functions (Desktop)
-  function toggleSwitcher(switcher) {
-    const isActive = switcher.classList.contains('active');
-    closeSwitchers();
-    if (!isActive) switcher.classList.add('active');
-  }
-  function closeSwitchers() {
-    document.querySelectorAll('.switcher').forEach(function(sw){ sw.classList.remove('active'); });
-  }
-  
-  // Mobile Dropdown Functions
-  function toggleMobileDropdown(row) {
-    const isActive = row.classList.contains('active');
-    closeMobileDropdowns();
-    if (!isActive) row.classList.add('active');
-  }
-  function closeMobileDropdowns() {
-    document.querySelectorAll('.settings-row').forEach(function(row){ row.classList.remove('active'); });
-  }
-  
-  // Mark Active Navigation
-  function markActiveNav() {
-    const path = window.location.pathname.replace(/\/+$/, '');
-    document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(function(link) {
-      const href = link.getAttribute('href').replace(/\/+$/, '');
-      if (href === path) link.classList.add('active');
+  });
+
+  // Outside Click schließt alles
+  document.addEventListener('click', function(e){
+    if (![...switchers].some(sw => sw.contains(e.target))) closeAll();
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeAll(); });
+
+  // LANGUAGE: sichere, entkoppelte Submit-Logik
+  const langForm = document.getElementById('lang-form');
+  if (langForm) {
+    langForm.closest('.switcher-dropdown').addEventListener('click', function(e) {
+      const btn = e.target.closest('[data-language]');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      try {
+        langForm.querySelector('input[name="language_code"]').value = btn.dataset.language;
+        langForm.submit();
+      } catch (err) { console.warn('Language submit failed', err); }
     });
   }
-  
-  // Start
-  init();
+
+  // COUNTRY/CURRENCY: dedupliziert per Serverseite, zuverlässiger Submit
+  const countryForm = document.getElementById('country-form');
+  if (countryForm) {
+    countryForm.closest('.switcher-dropdown').addEventListener('click', function(e) {
+      const btn = e.target.closest('[data-country]');
+      if (!btn) return;
+      e.preventDefault();
+      e.stopPropagation();
+      try {
+        countryForm.querySelector('input[name="country_code"]').value = btn.dataset.country;
+        countryForm.submit();
+      } catch (err) { console.warn('Country submit failed', err); }
+    });
+  }
 })();
 </script>
 
