@@ -440,9 +440,10 @@
                       {% if customer %}
                         <span class="plan-price">{{ 0 | money }}</span>
                       {% else %}
-                        <a href="{{ login_free_url }}" class="free-login-button">
-                          {{ 'product.login_for_free' | t | default: 'Login for FREE' }}
-                        </a>
+                   <a href="/account/login" class="free-login-button">
+  {{ 'product.login_for_free' | t | default: 'Login for FREE' }}
+</a>
+
                       {% endif %}
                     {% else %}
                       <span class="plan-price">{{ variant.price | money }}</span>
