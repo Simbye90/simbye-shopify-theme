@@ -14,40 +14,40 @@
 
 /* CSS Variables */
 :root {
-  --article-primary: #009a61;
-  --article-primary-dark: #00824f;
-  --article-accent: #00d97e;
-  --article-text: #1a1a1a;
-  --article-text-secondary: #666666;
-  --article-bg: #ffffff;
-  --article-card-bg: #ffffff;
-  --article-border: rgba(0, 0, 0, 0.08);
-  --article-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --article-radius: 24px;
-  --article-reading-width: 720px;
+  --article-primary: #009a61 !important;
+  --article-primary-dark: #00824f !important;
+  --article-accent: #00d97e !important;
+  --article-text: #1a1a1a !important;
+  --article-text-secondary: #666666 !important;
+  --article-bg: #ffffff !important;
+  --article-card-bg: #ffffff !important;
+  --article-border: rgba(0, 0, 0, 0.08) !important;
+  --article-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  --article-radius: 24px !important;
+  --article-reading-width: 720px !important;
 }
 
 [data-theme="dark"] {
-  --article-text: #f5f5f5;
-  --article-text-secondary: #999999;
-  --article-bg: #0a0a0a;
-  --article-card-bg: rgba(26, 26, 26, 0.8);
-  --article-border: rgba(255, 255, 255, 0.08);
-  --article-primary: #00d97e;
-  --article-accent: #00ff88;
-  --article-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --article-text: #f5f5f5 !important;
+  --article-text-secondary: #999999 !important;
+  --article-bg: #0a0a0a !important;
+  --article-card-bg: rgba(26, 26, 26, 0.8) !important;
+  --article-border: rgba(255, 255, 255, 0.08) !important;
+  --article-primary: #00d97e !important;
+  --article-accent: #00ff88 !important;
+  --article-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Main Section */
 .article-section {
-  width: 100%;
-  background: var(--article-bg);
-  padding: 80px 0;
-  min-height: 100vh;
+  width: 100% !important;
+  background: var(--article-bg) !important;
+  padding: 80px 0 !important;
+  min-height: 100vh !important;
 }
 
 [data-theme="dark"] .article-section {
-  background: #0a0a0a;
+  background: #0a0a0a !important;
 }
 
 /* Container */
@@ -342,39 +342,40 @@
 
 /* Blockquotes */
 .article-content blockquote {
-  border-left: 4px solid var(--article-primary);
-  padding: 20px 0 20px 28px;
-  margin: 32px 0;
-  font-style: italic;
-  color: var(--article-text-secondary);
-  font-size: 20px;
-  line-height: 1.7;
-  background: rgba(0, 154, 97, 0.03);
-  border-radius: 0 12px 12px 0;
+  border-left: 4px solid var(--article-primary) !important;
+  padding: 20px 0 20px 28px !important;
+  margin: 32px 0 !important;
+  font-style: italic !important;
+  color: var(--article-text-secondary) !important;
+  font-size: 20px !important;
+  line-height: 1.7 !important;
+  background: rgba(0, 154, 97, 0.03) !important;
+  border-radius: 0 12px 12px 0 !important;
 }
 
 [data-theme="dark"] .article-content blockquote {
-  background: rgba(0, 217, 126, 0.05);
+  background: rgba(0, 217, 126, 0.05) !important;
+  border-left-color: var(--article-primary) !important;
 }
 
 .article-content blockquote p {
-  margin-bottom: 12px;
+  margin-bottom: 12px !important;
 }
 
 .article-content blockquote p:last-child {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 
 .article-content blockquote cite {
-  display: block;
-  font-size: 16px;
-  font-style: normal;
-  margin-top: 12px;
-  color: var(--article-text-secondary);
+  display: block !important;
+  font-size: 16px !important;
+  font-style: normal !important;
+  margin-top: 12px !important;
+  color: var(--article-text-secondary) !important;
 }
 
 .article-content blockquote cite::before {
-  content: "— ";
+  content: "— " !important;
 }
 
 /* Images */
@@ -593,120 +594,54 @@
   border-bottom: 1px solid var(--article-border);
 }
 
-/* Share Section */
-.article-share {
-  margin: 60px auto;
-  padding: 32px;
-  background: var(--article-card-bg);
-  border: 2px solid var(--article-border);
-  border-radius: var(--article-radius);
-  text-align: center;
-  max-width: var(--article-reading-width);
-}
-
-[data-theme="dark"] .article-share {
-  background: var(--article-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-}
-
-.article-share h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--article-text);
-  margin: 0 0 20px 0;
-}
-
-.share-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.share-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: var(--article-card-bg);
-  border: 2px solid var(--article-border);
-  border-radius: 12px;
-  color: var(--article-text);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.share-btn svg {
-  width: 18px;
-  height: 18px;
-}
-
-.share-btn-twitter {
-  color: #1DA1F2;
-  border-color: #1DA1F2;
-}
-
-.share-btn-facebook {
-  color: #1877F2;
-  border-color: #1877F2;
-}
-
-.share-btn-linkedin {
-  color: #0A66C2;
-  border-color: #0A66C2;
-}
-
 /* Author Section */
 .article-author {
-  margin: 60px auto;
-  padding: 32px;
-  background: var(--article-card-bg);
-  border: 2px solid var(--article-border);
-  border-radius: var(--article-radius);
-  max-width: var(--article-reading-width);
-  display: flex;
-  align-items: center;
-  gap: 24px;
+  margin: 60px auto !important;
+  padding: 32px !important;
+  background: var(--article-card-bg) !important;
+  border: 2px solid var(--article-border) !important;
+  border-radius: var(--article-radius) !important;
+  max-width: var(--article-reading-width) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 24px !important;
 }
 
 [data-theme="dark"] .article-author {
-  background: var(--article-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
+  background: var(--article-card-bg) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(10px) !important;
 }
 
 .author-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--article-primary), var(--article-accent));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 50% !important;
+  background: linear-gradient(135deg, var(--article-primary), var(--article-accent)) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
 }
 
 .author-avatar svg {
-  width: 40px;
-  height: 40px;
-  color: white;
+  width: 40px !important;
+  height: 40px !important;
+  color: white !important;
 }
 
 .author-info h4 {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--article-text);
-  margin: 0 0 8px 0;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  color: var(--article-text) !important;
+  margin: 0 0 8px 0 !important;
 }
 
 .author-info p {
-  font-size: 15px;
-  color: var(--article-text-secondary);
-  margin: 0;
-  line-height: 1.6;
+  font-size: 15px !important;
+  color: var(--article-text-secondary) !important;
+  margin: 0 !important;
+  line-height: 1.6 !important;
 }
 
 /* Comments Section */
@@ -1246,53 +1181,10 @@
       </div>
     {% endif %}
     
-    <!-- Article Content -->
+          <!-- Article Content -->
     <div class="article-content-wrapper">
       <div class="article-content">
         {{ article.content }}
-      </div>
-      
-      <!-- Share Section -->
-      <div class="article-share">
-        <h3>Share this article</h3>
-        <div class="share-buttons">
-          <a 
-            href="https://twitter.com/intent/tweet?text={{ article.title | url_encode }}&url={{ article.url | prepend: shop.url | url_encode }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="share-btn share-btn-twitter"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
-            </svg>
-            Twitter
-          </a>
-          
-          <a 
-            href="https://www.facebook.com/sharer/sharer.php?u={{ article.url | prepend: shop.url | url_encode }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="share-btn share-btn-facebook"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
-            </svg>
-            Facebook
-          </a>
-          
-          <a 
-            href="https://www.linkedin.com/sharing/share-offsite/?url={{ article.url | prepend: shop.url | url_encode }}"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="share-btn share-btn-linkedin"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
-              <circle cx="4" cy="4" r="2"/>
-            </svg>
-            LinkedIn
-          </a>
-        </div>
       </div>
       
       <!-- Author Section -->
