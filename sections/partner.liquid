@@ -1,0 +1,804 @@
+<!-- sections/partner-program.liquid -->
+<!-- SIMBYE PARTNER PROGRAM - AFFILIATE PAGE -->
+
+<style>
+/* CSS Variables */
+:root {
+  --partner-primary: #009a61;
+  --partner-primary-hover: #00824f;
+  --partner-accent: #00d97e;
+  --partner-text: #1a1a1a;
+  --partner-text-secondary: #666666;
+  --partner-bg: #ffffff;
+  --partner-card-bg: #ffffff;
+  --partner-border: rgba(0, 0, 0, 0.08);
+  --partner-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --partner-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --partner-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --partner-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --partner-text: #f5f5f5;
+  --partner-text-secondary: #999999;
+  --partner-bg: #0a0a0a;
+  --partner-card-bg: rgba(26, 26, 26, 0.8);
+  --partner-border: rgba(255, 255, 255, 0.08);
+  --partner-primary: #00d97e;
+  --partner-accent: #00ff88;
+  --partner-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --partner-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --partner-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.2);
+}
+
+/* Kill Shopify Grid */
+.shopify-section:has(.partner-program-section) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* Main Section */
+.partner-program-section {
+  width: 100%;
+  background: var(--partner-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .partner-program-section {
+  background: #0a0a0a;
+}
+
+/* Hero Section */
+.partner-hero {
+  padding: 120px 0 80px 0;
+  background: linear-gradient(135deg, #f0faf7 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .partner-hero {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+}
+
+.partner-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 70% 50%, rgba(0, 154, 97, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.partner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.partner-hero-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease;
+}
+
+.partner-label {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--partner-primary);
+  color: white;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+[data-theme="dark"] .partner-label {
+  background: var(--partner-primary);
+  color: #0a0a0a;
+}
+
+.partner-hero-title {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800;
+  color: var(--partner-text);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.partner-hero-highlight {
+  background: linear-gradient(135deg, var(--partner-primary), var(--partner-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.partner-hero-subtitle {
+  font-size: 20px;
+  color: var(--partner-text-secondary);
+  line-height: 1.6;
+  margin: 0 0 40px 0;
+}
+
+.partner-hero-cta {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.partner-cta-primary,
+.partner-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 40px;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: var(--partner-transition);
+  gap: 8px;
+}
+
+.partner-cta-primary {
+  background: var(--partner-primary);
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+}
+
+.partner-cta-primary:hover {
+  background: var(--partner-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--partner-shadow-lg);
+}
+
+.partner-cta-secondary {
+  background: transparent;
+  color: var(--partner-primary);
+  border: 2px solid var(--partner-primary);
+}
+
+.partner-cta-secondary:hover {
+  background: rgba(0, 154, 97, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Commission Tiers - GLASSMORPHISM */
+.partner-tiers {
+  padding: 80px 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .partner-tiers {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.partner-tiers-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.partner-tiers-header h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--partner-text);
+  margin: 0 0 16px 0;
+}
+
+.partner-tiers-header p {
+  font-size: 18px;
+  color: var(--partner-text-secondary);
+}
+
+.partner-tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.partner-tier {
+  background: var(--partner-card-bg);
+  border: 2px solid var(--partner-border);
+  border-radius: 24px;
+  padding: 40px 32px;
+  text-align: center;
+  transition: var(--partner-transition);
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: calc(var(--tier-index) * 0.1s);
+  position: relative;
+}
+
+.partner-tier:nth-child(1) { --tier-index: 0; }
+.partner-tier:nth-child(2) { --tier-index: 1; }
+.partner-tier:nth-child(3) { --tier-index: 2; }
+
+[data-theme="dark"] .partner-tier {
+  background: var(--partner-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.partner-tier.featured {
+  border-color: var(--partner-primary);
+  transform: scale(1.05);
+  box-shadow: var(--partner-shadow-lg);
+}
+
+.partner-tier:hover {
+  transform: translateY(-4px);
+  border-color: var(--partner-primary);
+  box-shadow: var(--partner-shadow-lg);
+}
+
+.partner-tier.featured:hover {
+  transform: scale(1.05) translateY(-4px);
+}
+
+.partner-tier-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ff7e50, #ff9a76);
+  color: white;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: 0 4px 12px rgba(255, 126, 80, 0.4);
+}
+
+.partner-tier-name {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--partner-text);
+  margin: 0 0 16px 0;
+}
+
+.partner-tier-commission {
+  font-size: 56px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--partner-primary), var(--partner-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 8px 0;
+  line-height: 1;
+}
+
+.partner-tier-subtitle {
+  font-size: 14px;
+  color: var(--partner-text-secondary);
+  margin: 0 0 32px 0;
+}
+
+.partner-tier-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  text-align: left;
+}
+
+.partner-tier-features li {
+  padding: 12px 0;
+  font-size: 15px;
+  color: var(--partner-text);
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.partner-tier-features svg {
+  width: 20px;
+  height: 20px;
+  color: var(--partner-primary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Benefits Section */
+.partner-benefits {
+  padding: 100px 0;
+  background: var(--partner-bg);
+}
+
+.partner-benefits-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 80px;
+}
+
+.partner-benefits-header h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--partner-text);
+  margin: 0 0 20px 0;
+}
+
+.partner-benefits-header p {
+  font-size: 18px;
+  color: var(--partner-text-secondary);
+}
+
+.partner-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.partner-benefit {
+  text-align: center;
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: calc(var(--benefit-index) * 0.1s);
+}
+
+.partner-benefit:nth-child(1) { --benefit-index: 0; }
+.partner-benefit:nth-child(2) { --benefit-index: 1; }
+.partner-benefit:nth-child(3) { --benefit-index: 2; }
+.partner-benefit:nth-child(4) { --benefit-index: 3; }
+.partner-benefit:nth-child(5) { --benefit-index: 4; }
+.partner-benefit:nth-child(6) { --benefit-index: 5; }
+
+.partner-benefit-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--partner-primary), var(--partner-accent));
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  box-shadow: 0 8px 20px rgba(0, 154, 97, 0.25);
+}
+
+[data-theme="dark"] .partner-benefit-icon {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
+  box-shadow: 0 8px 20px rgba(0, 217, 126, 0.2);
+}
+
+.partner-benefit-icon svg {
+  width: 40px;
+  height: 40px;
+  color: white;
+  stroke-width: 2;
+}
+
+[data-theme="dark"] .partner-benefit-icon svg {
+  color: var(--partner-primary);
+}
+
+.partner-benefit h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--partner-text);
+  margin: 0 0 12px 0;
+}
+
+.partner-benefit p {
+  font-size: 15px;
+  color: var(--partner-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Final CTA */
+.partner-final-cta {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f0faf7 0%, #ffffff 100%);
+  text-align: center;
+}
+
+[data-theme="dark"] .partner-final-cta {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+}
+
+.partner-final-cta h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--partner-text);
+  margin: 0 0 24px 0;
+}
+
+.partner-final-cta p {
+  font-size: 18px;
+  color: var(--partner-text-secondary);
+  margin: 0 0 40px 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .partner-container {
+    padding: 0 32px;
+  }
+  
+  .partner-tiers-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .partner-tier.featured {
+    transform: scale(1);
+  }
+  
+  .partner-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .partner-hero {
+    padding: 80px 0 60px 0;
+  }
+  
+  .partner-container {
+    padding: 0 20px;
+  }
+  
+  .partner-hero-title {
+    font-size: 36px;
+  }
+  
+  .partner-hero-subtitle {
+    font-size: 17px;
+  }
+  
+  .partner-hero-cta {
+    flex-direction: column;
+  }
+  
+  .partner-cta-primary,
+  .partner-cta-secondary {
+    width: 100%;
+  }
+  
+  .partner-tiers {
+    padding: 60px 0;
+  }
+  
+  .partner-tier-commission {
+    font-size: 48px;
+  }
+  
+  .partner-benefits {
+    padding: 60px 0;
+  }
+  
+  .partner-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .partner-final-cta {
+    padding: 60px 0;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+
+<section class="partner-program-section">
+  
+  <!-- Hero -->
+  <div class="partner-hero">
+    <div class="partner-container">
+      <div class="partner-hero-content">
+        <span class="partner-label">{{ 'partner.label' | t | default: 'Partner Program' }}</span>
+        <h1 class="partner-hero-title">
+          {{ 'partner.hero_title_start' | t | default: 'Earn' }} 
+          <span class="partner-hero-highlight">{{ 'partner.hero_title_highlight' | t | default: 'Up to 20%' }}</span> 
+          {{ 'partner.hero_title_end' | t | default: 'Commission' }}
+        </h1>
+        <p class="partner-hero-subtitle">
+          {{ 'partner.hero_subtitle' | t | default: 'Join our global partner network. Promote Simbye eSIM and earn generous commissions on every sale. Perfect for travel bloggers, influencers, and content creators.' }}
+        </p>
+        <div class="partner-hero-cta">
+          <a href="https://s2.affiliatly.com/af-1070019/affiliate.panel?mode=affiliates" target="_blank" rel="noopener" class="partner-cta-primary">
+            {{ 'partner.cta_primary' | t | default: 'Join as Partner' }}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="https://ui.awin.com/merchant-profile/107814" target="_blank" rel="noopener" class="partner-cta-secondary">
+            {{ 'partner.cta_secondary' | t | default: 'View on Awin' }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Commission Tiers - GLASSMORPHISM -->
+  <div class="partner-tiers">
+    <div class="partner-container">
+      <div class="partner-tiers-header">
+        <h2>{{ 'partner.tiers_title' | t | default: 'Commission Structure' }}</h2>
+        <p>{{ 'partner.tiers_subtitle' | t | default: 'Grow your earnings as you scale' }}</p>
+      </div>
+      
+      <div class="partner-tiers-grid">
+        <!-- Tier 1: Starter -->
+        <div class="partner-tier">
+          <h3 class="partner-tier-name">{{ 'partner.tier1_name' | t | default: 'Starter' }}</h3>
+          <div class="partner-tier-commission">10%</div>
+          <p class="partner-tier-subtitle">{{ 'partner.tier1_subtitle' | t | default: '0-10 sales/month' }}</p>
+          <ul class="partner-tier-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier1_feat1' | t | default: 'Marketing materials' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier1_feat2' | t | default: 'Real-time tracking' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier1_feat3' | t | default: '30-day cookie duration' }}
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Tier 2: Pro (FEATURED) -->
+        <div class="partner-tier featured">
+          <span class="partner-tier-badge">{{ 'partner.most_popular' | t | default: 'Most Popular' }}</span>
+          <h3 class="partner-tier-name">{{ 'partner.tier2_name' | t | default: 'Pro' }}</h3>
+          <div class="partner-tier-commission">15%</div>
+          <p class="partner-tier-subtitle">{{ 'partner.tier2_subtitle' | t | default: '11-50 sales/month' }}</p>
+          <ul class="partner-tier-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier2_feat1' | t | default: 'Everything in Starter' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier2_feat2' | t | default: 'Dedicated support' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier2_feat3' | t | default: 'Custom promo codes' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier2_feat4' | t | default: 'Priority payouts' }}
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Tier 3: Elite -->
+        <div class="partner-tier">
+          <h3 class="partner-tier-name">{{ 'partner.tier3_name' | t | default: 'Elite' }}</h3>
+          <div class="partner-tier-commission">20%</div>
+          <p class="partner-tier-subtitle">{{ 'partner.tier3_subtitle' | t | default: '50+ sales/month' }}</p>
+          <ul class="partner-tier-features">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier3_feat1' | t | default: 'Everything in Pro' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier3_feat2' | t | default: 'Account manager' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier3_feat3' | t | default: 'Exclusive campaigns' }}
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+              {{ 'partner.tier3_feat4' | t | default: 'Co-marketing opportunities' }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Benefits -->
+  <div class="partner-benefits">
+    <div class="partner-container">
+      <div class="partner-benefits-header">
+        <h2>{{ 'partner.benefits_title' | t | default: 'Why Partner with Simbye?' }}</h2>
+        <p>{{ 'partner.benefits_subtitle' | t | default: 'Everything you need to succeed' }}</p>
+      </div>
+      
+      <div class="partner-benefits-grid">
+        <!-- Benefit 1 -->
+        <div class="partner-benefit">
+          <div class="partner-benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2v20M2 12h20"/>
+            </svg>
+          </div>
+          <h3>{{ 'partner.benefit1_title' | t | default: 'High Conversion Rates' }}</h3>
+          <p>{{ 'partner.benefit1_text' | t | default: 'Our optimized checkout converts visitors to customers at 5%+ rate' }}</p>
+        </div>
+        
+        <!-- Benefit 2 -->
+        <div class="partner-benefit">
+          <div class="partner-benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3>{{ 'partner.benefit2_title' | t | default: 'Dedicated Support' }}</h3>
+          <p>{{ 'partner.benefit2_text' | t | default: 'Personal affiliate manager to help you maximize earnings' }}</p>
+        </div>
+        
+        <!-- Benefit 3 -->
+        <div class="partner-benefit">
+          <div class="partner-benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+            </svg>
+          </div>
+          <h3>{{ 'partner.benefit3_title' | t | default: 'Marketing Materials' }}</h3>
+          <p>{{ 'partner.benefit3_text' | t | default: 'Professional banners, landing pages, and promotional content' }}</p>
+        </div>
+        
+        <!-- Benefit 4 -->
+        <div class="partner-benefit">
+          <div class="partner-benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+              <path d="M2 17l10 5 10-5"/>
+              <path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3>{{ 'partner.benefit4_title' | t | default: 'Real-Time Analytics' }}</h3>
+          <p>{{ 'partner.benefit4_text' | t | default: 'Track clicks, conversions, and earnings in real-time' }}</p>
+        </div>
+        
+        <!-- Benefit 5 -->
+        <div class="partner-benefit">
+          <div class="partner-benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h3>{{ 'partner.benefit5_title' | t | default: 'Fast Payouts' }}</h3>
+          <p>{{ 'partner.benefit5_text' | t | default: 'Monthly payouts with multiple payment methods available' }}</p>
+        </div>
+        
+        <!-- Benefit 6 -->
+        <div class="partner-benefit">
+          <div class="partner-benefit-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/>
+            </svg>
+          </div>
+          <h3>{{ 'partner.benefit6_title' | t | default: 'Global Reach' }}</h3>
+          <p>{{ 'partner.benefit6_text' | t | default: 'Promote eSIMs for 190+ countries to a worldwide audience' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Final CTA -->
+  <div class="partner-final-cta">
+    <div class="partner-container">
+      <h2>{{ 'partner.final_title' | t | default: 'Ready to Start Earning?' }}</h2>
+      <p>{{ 'partner.final_subtitle' | t | default: 'Join thousands of partners earning with Simbye. Sign up takes less than 2 minutes.' }}</p>
+      <div class="partner-hero-cta">
+        <a href="https://s2.affiliatly.com/af-1070019/affiliate.panel?mode=affiliates" target="_blank" rel="noopener" class="partner-cta-primary">
+          {{ 'partner.final_cta' | t | default: 'Become a Partner' }}
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  const section = document.querySelector('.partner-program-section');
+  if (!section) return;
+  
+  // Animate on scroll
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '50px'
+    });
+    
+    // Observe all animated elements
+    document.querySelectorAll('.partner-tier, .partner-benefit').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Partner Program",
+  "class": "partner-program-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Partner Program"
+    }
+  ]
+}
+{% endschema %}
