@@ -904,11 +904,11 @@ body {
           <span id="current-currency">{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
           
           <div class="switcher-dropdown">
-            {% for currency in localization.available_countries.first.currency %}
+            {% for country in localization.available_countries %}
               <form method="post" action="{{ routes.root_url }}localization">
-                <input type="hidden" name="country_code" value="{{ currency.iso_code }}">
-                <button type="submit" class="dropdown-item {% if currency.iso_code == cart.currency.iso_code %}active{% endif %}">
-                  <span>{{ currency.symbol }} {{ currency.iso_code }}</span>
+                <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                <button type="submit" class="dropdown-item {% if country.currency.iso_code == cart.currency.iso_code %}active{% endif %}">
+                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
                 </button>
               </form>
             {% endfor %}
@@ -1013,11 +1013,11 @@ body {
       </div>
       
       <div class="mobile-dropdown">
-        {% for currency in localization.available_countries.first.currency %}
+        {% for country in localization.available_countries %}
           <form method="post" action="{{ routes.root_url }}localization">
-            <input type="hidden" name="country_code" value="{{ currency.iso_code }}">
-            <button type="submit" class="mobile-dropdown-item {% if currency.iso_code == cart.currency.iso_code %}active{% endif %}">
-              <span>{{ currency.symbol }} {{ currency.iso_code }}</span>
+            <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+            <button type="submit" class="mobile-dropdown-item {% if country.currency.iso_code == cart.currency.iso_code %}active{% endif %}">
+              <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
             </button>
           </form>
         {% endfor %}
