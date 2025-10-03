@@ -65,13 +65,13 @@
       "type": "how-to",
       "name": "How-To Section",
       "settings": {
-        "step1_image": "shopify://shop_images/Design_ohne_Titel-6.png",
+        "step1_image": "shopify://shop_images/Iphone-1.webp",
         "step1_title": "Datenpaket wählen",
         "step1_desc": "190+ Länder verfügbar. Sofort per E-Mail erhalten.",
-        "step2_image": "shopify://shop_images/Design_ohne_Titel-6.png",
+        "step2_image": "shopify://shop_images/iphone-3.webp",
         "step2_title": "QR-Code scannen",
         "step2_desc": "Mit der Kamera-App scannen. Keine zusätzliche App nötig.",
-        "step3_image": "shopify://shop_images/Design_ohne_Titel-6.png",
+        "step3_image": "shopify://shop_images/iphone-2.webp",
         "step3_title": "eSIM aktivieren",
         "step3_desc": "Mobile Daten einschalten & lossurfen. Kein Roaming!"
       }
@@ -115,7 +115,10 @@
           "type": "faq_item",
           "settings": {
             "question": "Kann mein Handy eSIM?",
-            "answer": "<p>Die meisten modernen Smartphones ab 2018 unterstützen eSIM-Technologie. Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer. Du kannst die Kompatibilität deines Geräts auf unserer Website überprüfen.</p>"
+            "answer": "<p>Die meisten modernen Smartphones ab 2018 unterstützen eSIM-Technologie. Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer. Du kannst die Kompatibilität deines Geräts auf unserer Website überprüfen.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
           }
         },
         "faq_item_dVVkHb": {
@@ -257,6 +260,9 @@
       ],
       "name": "FAQ Premium",
       "settings": {
+        "title_part1": "Your",
+        "title_part2": "Questions",
+        "title_part3": "Answered",
         "subtitle": "Everything you need to know about Simbye eSIM"
       }
     }
