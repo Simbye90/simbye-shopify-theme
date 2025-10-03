@@ -943,7 +943,7 @@
 }
 </script>
 
-<!-- Search JavaScript -->
+<!-- Search JavaScript - SHOPIFY PREDICTIVE SEARCH API -->
 <script>
 (function() {
   'use strict';
@@ -953,53 +953,76 @@
   const searchResults = document.getElementById('searchResults');
   
   let searchTimeout = null;
-  let allProducts = [];
+  let currentRequest = null;
   
-  // Load all products from current page
-  function loadProducts() {
-    const productCards = document.querySelectorAll('.product-card');
-    allProducts = Array.from(productCards).map(card => ({
-      url: card.href,
-      title: card.querySelector('.product-name')?.textContent.trim() || '',
-      price: card.querySelector('.product-price')?.textContent.trim() || '',
-      image: card.querySelector('.product-flag')?.src || card.querySelector('.product-flag-emoji')?.textContent || '🌍'
-    }));
-  }
-  
-  // Search products
+  // Search products via Shopify API
   function searchProducts(query) {
     if (!query || query.length < 2) {
       searchResults.style.display = 'none';
       return;
     }
     
-    const lowerQuery = query.toLowerCase();
-    const results = allProducts.filter(product => 
-      product.title.toLowerCase().includes(lowerQuery)
-    );
+    // Cancel previous request
+    if (currentRequest) {
+      currentRequest.abort();
+    }
     
-    displayResults(results);
+    // Show loading
+    searchResults.innerHTML = '<div class="search-loading">Searching...</div>';
+    searchResults.style.display = 'block';
+    
+    // Create new request
+    currentRequest = new XMLHttpRequest();
+    const url = `/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6`;
+    
+    currentRequest.open('GET', url, true);
+    currentRequest.setRequestHeader('Content-Type', 'application/json');
+    
+    currentRequest.onload = function() {
+      if (currentRequest.status === 200) {
+        try {
+          const data = JSON.parse(currentRequest.responseText);
+          displayResults(data.resources.results.products || []);
+        } catch(e) {
+          console.error('Search error:', e);
+          searchResults.innerHTML = '<div class="search-empty">Search failed</div>';
+        }
+      } else {
+        searchResults.innerHTML = '<div class="search-empty">Search failed</div>';
+      }
+      currentRequest = null;
+    };
+    
+    currentRequest.onerror = function() {
+      searchResults.innerHTML = '<div class="search-empty">Search failed</div>';
+      currentRequest = null;
+    };
+    
+    currentRequest.send();
   }
   
   // Display search results
-  function displayResults(results) {
-    if (results.length === 0) {
+  function displayResults(products) {
+    if (!products || products.length === 0) {
       searchResults.innerHTML = '<div class="search-empty">No products found</div>';
       searchResults.style.display = 'block';
       return;
     }
     
     let html = '';
-    results.slice(0, 5).forEach(product => {
+    products.forEach(product => {
+      const price = product.price ? (product.price / 100).toFixed(2) : '0.00';
+      const imageUrl = product.featured_image || product.image;
+      
       html += `
         <a href="${product.url}" class="search-result-item">
-          ${typeof product.image === 'string' && product.image.startsWith('http') 
-            ? `<img src="${product.image}" class="search-result-image" loading="lazy">`
-            : `<div class="search-result-image" style="display: flex; align-items: center; justify-content: center; font-size: 24px; background: rgba(0, 154, 97, 0.1); border-radius: 8px;">${product.image}</div>`
+          ${imageUrl 
+            ? `<img src="${imageUrl}" class="search-result-image" alt="${product.title}" loading="lazy">`
+            : `<div class="search-result-image" style="display: flex; align-items: center; justify-content: center; font-size: 24px; background: rgba(0, 154, 97, 0.1); border-radius: 8px;">🌍</div>`
           }
           <div class="search-result-info">
-            <h4 class="search-result-title">${product.title}</h4>
-            <p class="search-result-price">${product.price}</p>
+            <h4 class="search-result-title">${product.title.replace('eSIM', '').replace('Esim', '').trim()}</h4>
+            <p class="search-result-price">${product.price_min ? '€' + (product.price_min / 100).toFixed(2) : 'Price not available'}</p>
           </div>
         </a>
       `;
@@ -1011,9 +1034,6 @@
   
   // Event listeners
   if (searchInput) {
-    // Load products on page load
-    loadProducts();
-    
     searchInput.addEventListener('input', function(e) {
       clearTimeout(searchTimeout);
       const query = e.target.value.trim();
@@ -1023,6 +1043,7 @@
         return;
       }
       
+      // Wait 300ms after last keystroke
       searchTimeout = setTimeout(() => {
         searchProducts(query);
       }, 300);
@@ -1046,7 +1067,8 @@
   
   // Close results when clicking outside
   document.addEventListener('click', function(e) {
-    if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+    const searchContainer = document.getElementById('collectionSearch');
+    if (searchContainer && !searchContainer.contains(e.target) && !searchResults.contains(e.target)) {
       searchResults.style.display = 'none';
     }
   });
@@ -1058,6 +1080,20 @@
       searchInput.blur();
     }
   });
+  
+  // Enter key to search
+  if (searchInput) {
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        if (query) {
+          // Redirect to full search page
+          window.location.href = `/search?q=${encodeURIComponent(query)}`;
+        }
+      }
+    });
+  }
 })();
 </script>
 
