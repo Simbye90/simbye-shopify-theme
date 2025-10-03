@@ -13,9 +13,7 @@
   "sections": {
     "header": {
       "type": "header",
-      "custom_css": [
-        ".enterprise-header.scrolled {display: none;}"
-      ],
+      "custom_css": [],
       "settings": {}
     }
   },
