@@ -2,10 +2,7 @@
 <!-- SIMBYE ENTERPRISE PRODUCT PAGE – FREE (0€) ENFORCEMENT + LOGIN REDIRECT + TITLE FIX + MOBILE STICKY FIX -->
 
 <style>
-  .enterprise-header.scrolled { display: none; } 
-  .mobile-toggle {
-  display: none !important;
-}
+
 
   /* RESET SHOPIFY GRID */
   .shopify-section:has(.product-enterprise) {
@@ -183,6 +180,11 @@
   /* MOBILE */
   .sticky-cart{ display:none; }
   @media screen and (max-width:768px){
+      .enterprise-header.scrolled { display: none; } 
+  .mobile-toggle {
+  display: none !important;
+}
+
     .product-enterprise{ padding-top:0 !important; }
     .product-hero{ padding:0 !important; max-width:100% !important; position:relative; margin-bottom:32px; }
     .product-hero::before{
