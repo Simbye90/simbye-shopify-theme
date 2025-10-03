@@ -1,11 +1,11 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 Enhanced - Simbye eSIM -->
+<!-- Enterprise Header V6.0 - FIXED & ENHANCED -->
 
 <style>
-/* CSS Variables - ENHANCED */
+/* CSS Variables - OPTIMIZED */
 :root {
-  --header-height: 80px;
-  --header-mobile-height: 65px;
+  --header-height: 90px; /* +10px mehr Abstand */
+  --header-mobile-height: 70px; /* +5px mehr */
   --primary-color: #009a61;
   --primary-hover: #00824f;
   --primary-accent: #00d97e;
@@ -23,7 +23,7 @@
   --border-radius-sm: 16px;
 }
 
-/* Dark Mode - ENHANCED */
+/* Dark Mode */
 [data-theme="dark"] {
   --text-color: #f5f5f5;
   --text-secondary: #999999;
@@ -36,7 +36,7 @@
   --primary-accent: #00ff88;
 }
 
-/* Header - FIXED POSITION STATT STICKY */
+/* Header - FIXED POSITION */
 .enterprise-header {
   position: fixed;
   top: 0;
@@ -50,7 +50,7 @@
   border-bottom: 1px solid transparent;
 }
 
-/* Body Padding für Fixed Header */
+/* Body Padding */
 body {
   padding-top: var(--header-height);
 }
@@ -86,7 +86,7 @@ body {
   gap: 40px;
 }
 
-/* Logo - UNCHANGED POSITION & SIZE */
+/* Logo - UNVERÄNDERT */
 .header-logo {
   display: flex;
   align-items: center;
@@ -105,7 +105,7 @@ body {
   transform: scale(1.02);
 }
 
-/* Desktop Navigation - ENHANCED */
+/* Desktop Navigation - STÄRKERES FONT-WEIGHT */
 .header-nav {
   display: flex;
   align-items: center;
@@ -118,13 +118,14 @@ body {
   align-items: center;
   padding: 12px 24px;
   color: var(--text-color);
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 18px; /* Reduziert von 22px */
+  font-weight: 600; /* Erhöht von 500 */
   text-decoration: none;
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
+  letter-spacing: -0.01em;
 }
 
 .nav-link::before {
@@ -166,7 +167,7 @@ body {
   transform: scaleX(1);
 }
 
-/* Desktop Actions - ENHANCED */
+/* Desktop Actions */
 .header-actions {
   display: flex;
   align-items: center;
@@ -174,55 +175,63 @@ body {
   height: 100%;
 }
 
-/* Login Button Desktop - OHNE ANIMATION */
+/* Login Button - NEUER STYLE */
 .auth-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 32px;
-  height: 48px;
-  font-size: 16px;
+  padding: 0 28px;
+  height: 44px;
+  font-size: 15px;
   font-weight: 600;
   color: white;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-accent));
+  background: var(--primary-color);
   text-decoration: none;
-  border-radius: 100px;
-  transition: all var(--transition-base);
+  border-radius: 12px;
+  transition: all var(--transition-fast);
   gap: 8px;
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 154, 97, 0.2);
+  border: none;
+  letter-spacing: -0.01em;
 }
 
 .auth-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3);
 }
 
 .auth-btn:active {
   transform: scale(0.98);
 }
 
-/* Switchers - ENHANCED */
+.auth-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Switchers - KOMPLETT NEU MIT DROPDOWNS */
 .switcher-group {
   display: flex;
   gap: 8px;
 }
 
 .switcher {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
-  border-radius: var(--border-radius-sm);
+  padding: 10px 16px;
+  border-radius: 12px;
   background: var(--header-gradient);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   color: var(--text-color);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-sm);
+  user-select: none;
 }
 
 .switcher:hover {
@@ -236,16 +245,93 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Dark Mode Toggle Desktop - ENHANCED */
+/* Dropdown Arrow */
+.switcher::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  opacity: 0.6;
+  transition: transform var(--transition-fast);
+}
+
+.switcher.active::after {
+  transform: rotate(180deg);
+}
+
+/* Dropdown Menu */
+.switcher-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 180px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all var(--transition-fast);
+  z-index: 1001;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .switcher-dropdown {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.switcher.active .switcher-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 14px;
+  transition: background var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.dropdown-item:hover {
+  background: rgba(0, 154, 97, 0.08);
+}
+
+.dropdown-item.active {
+  background: rgba(0, 154, 97, 0.12);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .dropdown-item:hover {
+  background: rgba(0, 217, 126, 0.1);
+}
+
+/* Dark Mode Toggle Desktop */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--border-radius-sm);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   background: var(--header-gradient);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all var(--transition-base);
   position: relative;
@@ -265,8 +351,8 @@ body {
 }
 
 .theme-toggle svg {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   transition: all var(--transition-base);
   position: absolute;
   color: var(--text-color);
@@ -293,18 +379,23 @@ body {
   transform: rotate(180deg) scale(0);
 }
 
-/* Mobile Toggle - OHNE ANIMATION UND SHADOW */
+/* Mobile Toggle */
 .mobile-toggle {
   display: none;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radius-sm);
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-accent));
+  border-radius: 12px;
+  background: var(--primary-color);
   cursor: pointer;
   border: none;
   position: relative;
+  transition: all var(--transition-fast);
+}
+
+.mobile-toggle:hover {
+  background: var(--primary-hover);
 }
 
 .mobile-toggle:active {
@@ -312,8 +403,8 @@ body {
 }
 
 .mobile-toggle .burger {
-  width: 22px;
-  height: 18px;
+  width: 20px;
+  height: 16px;
   position: relative;
 }
 
@@ -328,11 +419,11 @@ body {
 }
 
 .mobile-toggle .burger span:nth-child(1) { top: 0; }
-.mobile-toggle .burger span:nth-child(2) { top: 8px; }
+.mobile-toggle .burger span:nth-child(2) { top: 7px; }
 .mobile-toggle .burger span:nth-child(3) { bottom: 0; }
 
 .mobile-toggle.active .burger span:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .mobile-toggle.active .burger span:nth-child(2) {
@@ -341,10 +432,10 @@ body {
 }
 
 .mobile-toggle.active .burger span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* Mobile Menu - ENHANCED PREMIUM STYLE */
+/* Mobile Menu */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -388,7 +479,7 @@ body {
   visibility: visible;
 }
 
-/* Mobile Menu Header - 18PX LOGIN */
+/* Mobile Menu Header - NEUER LOGIN STYLE */
 .mobile-menu-header {
   padding: 20px;
   border-bottom: 2px solid var(--border-color);
@@ -406,26 +497,26 @@ body {
 .mobile-header-login {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   text-decoration: none;
-  color: var(--text-color);
-  font-size: 18px;
+  color: white;
+  font-size: 15px;
   font-weight: 600;
   transition: all var(--transition-fast);
-  padding: 8px 18px;
-  border-radius: 100px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-accent));
-  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  background: var(--primary-color);
+  letter-spacing: -0.01em;
 }
 
 .mobile-header-login:hover {
+  background: var(--primary-hover);
   transform: translateX(2px);
-  opacity: 0.9;
 }
 
 .mobile-header-login svg {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
 }
 
 .mobile-close {
@@ -447,10 +538,6 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-[data-theme="dark"] .mobile-close svg {
-  color: #f5f5f5;
-}
-
 .mobile-close:hover {
   background: rgba(255, 59, 48, 0.1);
   border-color: #ff3b30;
@@ -461,7 +548,7 @@ body {
   color: #ff3b30;
 }
 
-/* Mobile Navigation - 18PX FONT */
+/* Mobile Navigation */
 .mobile-nav {
   padding: 20px;
 }
@@ -470,14 +557,15 @@ body {
   display: block;
   padding: 16px 20px;
   color: var(--text-color);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
   text-decoration: none;
-  border-radius: var(--border-radius-sm);
+  border-radius: 12px;
   transition: all var(--transition-fast);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   background: var(--header-gradient);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
+  letter-spacing: -0.01em;
 }
 
 [data-theme="dark"] .mobile-nav-item {
@@ -493,7 +581,7 @@ body {
   color: var(--primary-color);
 }
 
-/* Mobile Settings - 16PX FONT UND KLEINERE FELDER */
+/* Mobile Settings */
 .mobile-settings {
   padding: 20px;
   border-top: 2px solid var(--border-color);
@@ -512,8 +600,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  border-radius: var(--border-radius-sm);
+  padding: 12px;
+  border-radius: 12px;
   background: rgba(0, 0, 0, 0.02);
 }
 
@@ -522,23 +610,31 @@ body {
 }
 
 .settings-label {
-  font-size: 16px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: -0.01em;
 }
 
 .settings-value {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 10px;
   background: white;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-color);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.settings-value:hover {
+  border-color: var(--primary-color);
+  transform: translateX(2px);
 }
 
 [data-theme="dark"] .settings-value {
@@ -546,7 +642,7 @@ body {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Dark Mode Switch - ENHANCED */
+/* Dark Mode Switch */
 .dark-mode-switch {
   position: relative;
   width: 48px;
@@ -559,7 +655,7 @@ body {
 }
 
 [data-theme="dark"] .dark-mode-switch {
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-accent));
+  background: var(--primary-color);
   box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3);
 }
 
@@ -589,12 +685,6 @@ body {
   border-top: 1px solid var(--border-color);
 }
 
-/* Animations - NUR NOCH DIESE BEIDEN */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 /* Responsive */
 @media (max-width: 1200px) {
   .header-container {
@@ -602,7 +692,7 @@ body {
   }
   
   .nav-link {
-    font-size: 20px;
+    font-size: 17px;
     padding: 10px 20px;
   }
 }
@@ -645,7 +735,7 @@ body {
   }
 }
 
-/* Scrollbar - ENHANCED */
+/* Scrollbar */
 .mobile-menu::-webkit-scrollbar {
   width: 6px;
 }
@@ -656,7 +746,7 @@ body {
 }
 
 .mobile-menu::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary-color), var(--primary-accent));
+  background: var(--primary-color);
   border-radius: 3px;
 }
 
@@ -667,7 +757,7 @@ body {
 
 <header class="enterprise-header" id="enterprise-header">
   <div class="header-container">
-    <!-- Logo - UNCHANGED -->
+    <!-- Logo -->
     <div class="header-logo">
       <a href="{{ routes.root_url }}">
         <img 
@@ -699,9 +789,9 @@ body {
       <!-- Login -->
       {% if customer %}
         <a href="{{ routes.account_url }}" class="auth-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2"/>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
           </svg>
           {{ customer.first_name | default: 'Account' }}
         </a>
@@ -713,14 +803,38 @@ body {
       
       <!-- Switchers -->
       <div class="switcher-group">
-        <button class="switcher" id="language-switcher">
+        <!-- Language Switcher -->
+        <div class="switcher" id="language-switcher">
           <span>🌐</span>
-          <span>{{ shop.locale | upcase }}</span>
-        </button>
+          <span id="current-locale">{{ localization.language.iso_code | upcase }}</span>
+          
+          <div class="switcher-dropdown">
+            {% for language in localization.available_languages %}
+              <form method="post" action="{{ routes.root_url }}localization">
+                <input type="hidden" name="language_code" value="{{ language.iso_code }}">
+                <button type="submit" class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
+                  <span>{{ language.endonym_name }}</span>
+                </button>
+              </form>
+            {% endfor %}
+          </div>
+        </div>
         
-        <button class="switcher" id="currency-switcher">
-          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-        </button>
+        <!-- Currency Switcher -->
+        <div class="switcher" id="currency-switcher">
+          <span id="current-currency">{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+          
+          <div class="switcher-dropdown">
+            {% for currency in localization.available_countries.first.currency %}
+              <form method="post" action="{{ routes.root_url }}localization">
+                <input type="hidden" name="country_code" value="{{ currency.iso_code }}">
+                <button type="submit" class="dropdown-item {% if currency.iso_code == cart.currency.iso_code %}active{% endif %}">
+                  <span>{{ currency.symbol }} {{ currency.iso_code }}</span>
+                </button>
+              </form>
+            {% endfor %}
+          </div>
+        </div>
       </div>
       
       <!-- Dark Mode -->
@@ -749,7 +863,7 @@ body {
 <!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobile-overlay"></div>
 <nav class="mobile-menu" id="mobile-menu">
-  <!-- Header - LOGIN + CLOSE BUTTON -->
+  <!-- Header -->
   <div class="mobile-menu-header">
     {% if customer %}
       <a href="{{ routes.account_url }}" class="mobile-header-login">
@@ -796,15 +910,15 @@ body {
   <div class="mobile-settings">
     <div class="settings-row">
       <span class="settings-label">{{ 'header.language' | t | default: 'Language' }}</span>
-      <div class="settings-value">
+      <div class="settings-value" id="mobile-language">
         <span>🌐</span>
-        <span>{{ shop.locale | upcase }}</span>
+        <span>{{ localization.language.iso_code | upcase }}</span>
       </div>
     </div>
     
     <div class="settings-row">
       <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
-      <div class="settings-value">
+      <div class="settings-value" id="mobile-currency">
         <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
       </div>
     </div>
@@ -835,6 +949,8 @@ body {
   const mobileClose = document.getElementById('mobile-close');
   const themeToggle = document.getElementById('theme-toggle');
   const darkModeSwitch = document.getElementById('dark-mode-switch');
+  const languageSwitcher = document.getElementById('language-switcher');
+  const currencySwitcher = document.getElementById('currency-switcher');
   
   // State
   let currentTheme = localStorage.getItem('theme') || 'light';
@@ -858,12 +974,10 @@ body {
       mobileToggle.addEventListener('click', openMobileMenu);
     }
     
-    // Close Button
     if (mobileClose) {
       mobileClose.addEventListener('click', closeMobileMenu);
     }
     
-    // Overlay
     if (mobileOverlay) {
       mobileOverlay.addEventListener('click', closeMobileMenu);
     }
@@ -877,10 +991,33 @@ body {
       darkModeSwitch.addEventListener('click', toggleTheme);
     }
     
+    // Switcher Dropdowns
+    if (languageSwitcher) {
+      languageSwitcher.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSwitcher(languageSwitcher);
+      });
+    }
+    
+    if (currencySwitcher) {
+      currencySwitcher.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSwitcher(currencySwitcher);
+      });
+    }
+    
+    // Close dropdowns on outside click
+    document.addEventListener('click', function() {
+      closeSwitchers();
+    });
+    
     // Escape Key
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && isMenuOpen) {
-        closeMobileMenu();
+      if (e.key === 'Escape') {
+        if (isMenuOpen) {
+          closeMobileMenu();
+        }
+        closeSwitchers();
       }
     });
     
@@ -933,8 +1070,23 @@ body {
     try {
       localStorage.setItem('theme', currentTheme);
     } catch(e) {
-      // localStorage not available
+      console.warn('localStorage not available');
     }
+  }
+  
+  // Switcher Functions
+  function toggleSwitcher(switcher) {
+    const isActive = switcher.classList.contains('active');
+    closeSwitchers();
+    if (!isActive) {
+      switcher.classList.add('active');
+    }
+  }
+  
+  function closeSwitchers() {
+    document.querySelectorAll('.switcher').forEach(function(sw) {
+      sw.classList.remove('active');
+    });
   }
   
   // Mark Active Navigation
@@ -951,3 +1103,15 @@ body {
   init();
 })();
 </script>
+
+{% schema %}
+{
+  "name": "Enterprise Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Settings"
+    }
+  ]
+}
+{% endschema %}
