@@ -38,7 +38,7 @@
 /* Main Section */
 .why-section {
   width: 100%;
- padding: 0 0 20px 0; 
+  padding: 0 0 20px 0; 
   background: var(--why-bg);
   position: relative;
   overflow: hidden;
@@ -71,7 +71,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-
   pointer-events: none;
   z-index: 0;
 }
@@ -189,7 +188,6 @@
   left: -2px;
   right: -2px;
   bottom: -2px;
-
   border-radius: 24px;
   opacity: 0;
   z-index: -1;
@@ -214,32 +212,6 @@
 
 [data-theme="dark"] .why-icon svg {
   color: var(--why-primary);
-}
-
-/* Feature Number Badge */
-.why-feature-number {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 28px;
-  height: 28px;
-  background: white;
-  color: var(--why-primary);
-  border: 2px solid var(--why-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 700;
-  z-index: 1;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-[data-theme="dark"] .why-feature-number {
-  background: var(--why-primary);
-  color: #0a0a0a;
-  border-color: var(--why-primary);
 }
 
 /* Icon Animations */
@@ -392,14 +364,6 @@
     height: 30px;
   }
   
-  .why-feature-number {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-    top: -5px;
-    right: -5px;
-  }
-  
   /* Content rechts neben Icon */
   .why-feature-content {
     flex: 1;
@@ -495,7 +459,6 @@
       <!-- Feature 1: Aufladbar -->
       <div class="why-feature">
         <div class="why-icon">
-          <span class="why-feature-number">1</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -512,7 +475,6 @@
       <!-- Feature 2: Günstigster Anbieter -->
       <div class="why-feature">
         <div class="why-icon">
-          <span class="why-feature-number">2</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" stroke-linecap="round" stroke-linejoin="round"/>
             <polyline points="16 7 22 7 22 13" stroke-linecap="round" stroke-linejoin="round"/>
@@ -530,7 +492,6 @@
       <!-- Feature 3: 24/7 Support -->
       <div class="why-feature">
         <div class="why-icon">
-          <span class="why-feature-number">3</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M3 18v-6a9 9 0 0 1 18 0v6M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -547,7 +508,6 @@
       <!-- Feature 4: Gratis Testen -->
       <div class="why-feature">
         <div class="why-icon">
-          <span class="why-feature-number">4</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <rect x="3" y="8" width="18" height="13" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M12 8v13M3 12h18" stroke-linecap="round" stroke-linejoin="round"/>
@@ -566,7 +526,6 @@
       <!-- Feature 5: Premium Netze -->
       <div class="why-feature">
         <div class="why-icon">
-          <span class="why-feature-number">5</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <circle cx="12" cy="12" r="10" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M12 2v20M2 12h20" stroke-linecap="round" stroke-linejoin="round"/>
@@ -585,7 +544,6 @@
       <!-- Feature 6: 100K+ Kunden -->
       <div class="why-feature">
         <div class="why-icon">
-          <span class="why-feature-number">6</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
