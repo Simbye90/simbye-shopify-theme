@@ -1,11 +1,12 @@
 <!-- sections/product.liquid -->
-<!-- SIMBYE ENTERPRISE PRODUCT PAGE V13.0 - WHY SECTION STYLING FIXED -->
+<!-- SIMBYE ENTERPRISE PRODUCT PAGE V14.0 - ALL CRITICAL FIXES -->
 
 <style>
-  .enterprise-header.scrolled {
+.enterprise-header.scrolled {
   display: none;
 }
-/* KILL SHOPIFY GRID - ENHANCED */
+
+/* KILL SHOPIFY GRID */
 .shopify-section:has(.product-enterprise) {
   display: block !important;
   padding: 0 !important;
@@ -15,21 +16,14 @@
   width: 100% !important;
 }
 
-.shopify-section:has(.product-enterprise) > * {
-  grid-column: unset !important;
-  margin: 0 !important;
-}
-
 .product-enterprise {
   width: 100vw !important;
   margin: 0 !important;
   padding: 0 !important;
   position: relative !important;
-  left: 0 !important;
-  right: 0 !important;
 }
 
-/* CSS Variables - ENHANCED MIT WHY SECTION FARBEN */
+/* CSS Variables */
 :root {
   --product-primary: #009a61;
   --product-primary-dark: #00824f;
@@ -48,7 +42,6 @@
   --product-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark Mode - ENHANCED */
 [data-theme="dark"] {
   --product-text: #f5f5f5;
   --product-text-secondary: #999999;
@@ -56,12 +49,10 @@
   --product-card-bg: rgba(26, 26, 26, 0.8);
   --product-border: rgba(255, 255, 255, 0.08);
   --product-primary: #00d97e;
-  --product-primary-dark: #009a61;
   --product-accent: #00ff88;
   --product-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
   --product-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
   --product-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
-  --product-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
 }
 
 /* Main Section */
@@ -72,18 +63,6 @@
   min-height: 100vh;
   position: relative;
   transition: var(--product-transition);
-}
-
-/* Background Pattern wie Why Section */
-.product-enterprise::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  z-index: 0;
 }
 
 [data-theme="dark"] .product-enterprise {
@@ -107,7 +86,6 @@
   align-items: center;
 }
 
-/* Hero Image - ENHANCED ANIMATION */
 .hero-image-section {
   position: relative;
   animation: fadeInUp 0.8s ease;
@@ -136,12 +114,10 @@
   object-fit: cover;
 }
 
-/* Hero Info - ENHANCED */
 .hero-info-section {
   animation: fadeInUp 0.8s ease 0.2s both;
 }
 
-/* Title mit Flagge - ENHANCED */
 .product-title-wrapper {
   display: flex;
   align-items: center;
@@ -185,7 +161,6 @@
   color: #ffffff;
 }
 
-/* Subtitle - ENHANCED */
 .hero-subtitle {
   font-size: 18px;
   color: var(--product-text-secondary);
@@ -194,7 +169,6 @@
   animation: fadeInUp 0.8s ease 0.4s both;
 }
 
-/* Features - ENHANCED MIT ICON CONTAINERS */
 .hero-features {
   display: flex;
   flex-direction: column;
@@ -216,7 +190,6 @@
 .hero-feature:nth-child(2) { --feature-index: 1; }
 .hero-feature:nth-child(3) { --feature-index: 2; }
 
-/* Icon Container - WIE WHY SECTION */
 .hero-feature-icon {
   width: 48px;
   height: 48px;
@@ -225,31 +198,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   box-shadow: 0 8px 20px rgba(0, 154, 97, 0.25);
-  animation: subtlePulse 4s ease-in-out infinite;
   flex-shrink: 0;
-}
-
-.hero-feature-icon::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border-radius: 14px;
-  opacity: 0;
-  z-index: -1;
-  filter: blur(20px);
-  animation: glow 4s ease-in-out infinite;
 }
 
 [data-theme="dark"] .hero-feature-icon {
   background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
-  box-shadow: 
-    0 8px 20px rgba(0, 217, 126, 0.2),
-    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 217, 126, 0.2);
 }
 
 .hero-feature-icon svg {
@@ -257,14 +212,12 @@
   height: 24px;
   color: white;
   stroke-width: 1.8;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
 
 [data-theme="dark"] .hero-feature-icon svg {
   color: var(--product-primary);
 }
 
-/* Trust Badges - ENHANCED */
 .trust-badges {
   display: flex;
   gap: 20px;
@@ -280,11 +233,6 @@
   color: var(--product-text-secondary);
   font-size: 14px;
   transition: var(--product-transition);
-}
-
-.trust-badge:hover {
-  transform: translateX(4px);
-  color: var(--product-text);
 }
 
 .trust-badge svg {
@@ -303,7 +251,6 @@
   z-index: 1;
 }
 
-/* Tab System - CONNECTED TABS WIE ORIGINAL */
 .variant-tabs {
   display: flex;
   gap: 4px;
@@ -313,12 +260,6 @@
   border: 1px solid rgba(0, 154, 97, 0.1);
   margin-bottom: 32px;
   box-shadow: var(--product-shadow-sm);
-  animation: fadeInUp 0.9s ease both;
-}
-
-[data-theme="dark"] .variant-tabs {
-  background: rgba(0, 217, 126, 0.05);
-  border-color: rgba(0, 217, 126, 0.1);
 }
 
 .variant-tab {
@@ -339,16 +280,6 @@
   font-family: inherit;
 }
 
-.variant-tab:hover {
-  background: rgba(0, 154, 97, 0.08);
-  color: var(--product-text);
-}
-
-[data-theme="dark"] .variant-tab:hover {
-  background: rgba(0, 217, 126, 0.08);
-  color: #ffffff;
-}
-
 .variant-tab.active {
   background: var(--product-primary);
   color: white;
@@ -360,72 +291,12 @@
   height: 20px;
 }
 
-/* Fair Use Notice - ENHANCED */
-.fair-use-notice {
-  background: var(--product-card-bg);
-  border: 2px solid var(--product-border);
-  border-radius: var(--product-radius);
-  padding: 32px;
-  margin-bottom: 32px;
-  display: none;
-  animation: fadeInUp 0.4s ease;
-  box-shadow: var(--product-shadow-md);
-  position: relative;
-  overflow: hidden;
-}
-
-[data-theme="dark"] .fair-use-notice {
-  background: var(--product-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-}
-
-.fair-use-notice.active {
-  display: block;
-}
-
-.fair-use-notice::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05) 0%, rgba(0, 217, 126, 0.05) 100%);
-  pointer-events: none;
-}
-
-.fair-use-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  position: relative;
-}
-
-.fair-use-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--product-primary);
-  margin: 0;
-}
-
-.fair-use-text {
-  font-size: 15px;
-  color: var(--product-text-secondary);
-  line-height: 1.6;
-  margin: 0;
-  position: relative;
-}
-
-/* Selection Grid */
 .selection-grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   gap: 40px;
 }
 
-/* Plans Container */
 .plans-container {
   display: flex;
   flex-direction: column;
@@ -436,7 +307,7 @@
   flex-direction: column;
 }
 
-/* Plan Cards - ENHANCED STYLING */
+/* Plan Cards */
 .plan-card {
   position: relative;
   background: var(--product-card-bg);
@@ -445,28 +316,14 @@
   padding: 36px 28px;
   cursor: pointer;
   transition: var(--product-transition);
-  overflow: visible;
   margin-bottom: 24px !important;
   box-shadow: var(--product-shadow-md);
-  animation: fadeInUp 0.9s ease both;
 }
-
-/* Staggered animations */
-.plan-card:nth-child(1) { animation-delay: 0.1s; }
-.plan-card:nth-child(2) { animation-delay: 0.2s; }
-.plan-card:nth-child(3) { animation-delay: 0.3s; }
-.plan-card:nth-child(4) { animation-delay: 0.4s; }
-.plan-card:nth-child(5) { animation-delay: 0.5s; }
-.plan-card:nth-child(6) { animation-delay: 0.6s; }
 
 [data-theme="dark"] .plan-card {
   background: var(--product-card-bg);
   border-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10px);
-}
-
-.plan-card:last-child {
-  margin-bottom: 0 !important;
 }
 
 .plan-card:hover {
@@ -477,30 +334,18 @@
 
 .plan-card.selected {
   border-color: var(--product-primary);
-  border-width: 2px;
-  background: var(--product-card-bg);
   box-shadow: var(--product-shadow-lg);
-  position: relative;
 }
 
-.plan-card.selected::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.03) 0%, rgba(0, 217, 126, 0.03) 100%);
-  border-radius: var(--product-radius);
-  pointer-events: none;
+/* HIDE FREE PLAN wenn bereits gekauft */
+.plan-card[data-is-free="true"].already-claimed {
+  display: none !important;
 }
 
 .plan-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  z-index: 1;
 }
 
 .plan-info {
@@ -513,20 +358,17 @@
   color: var(--product-text);
   margin-bottom: 8px;
   letter-spacing: -0.01em;
-  line-height: 1.2;
 }
 
 .plan-validity {
   font-size: 15px;
   color: var(--product-text-secondary);
-  line-height: 1.6;
 }
 
 .plan-price-wrapper {
   text-align: right;
 }
 
-/* Durchgestrichener Preis */
 .plan-price-old {
   display: block;
   font-size: 16px;
@@ -541,10 +383,8 @@
   font-weight: 800;
   color: var(--product-primary);
   letter-spacing: -0.02em;
-  line-height: 1;
 }
 
-/* FREE Badge - ENHANCED */
 .free-badge {
   position: absolute;
   top: -12px;
@@ -558,10 +398,8 @@
   text-transform: uppercase;
   box-shadow: 0 6px 20px rgba(0, 217, 126, 0.4);
   z-index: 2;
-  animation: subtlePulse 4s ease-in-out infinite;
 }
 
-/* FREE Login Button - ENHANCED */
 .free-login-button {
   display: inline-flex;
   align-items: center;
@@ -573,12 +411,9 @@
   border-radius: 100px;
   font-weight: 700;
   font-size: 15px;
-  text-align: center;
   text-decoration: none;
   transition: var(--product-transition);
-  white-space: nowrap;
   box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
-  animation: subtlePulse 4s ease-in-out infinite;
 }
 
 .free-login-button:hover {
@@ -586,7 +421,6 @@
   box-shadow: var(--product-shadow-lg);
 }
 
-/* Popular Badge - ENHANCED */
 .popular-badge {
   position: absolute;
   top: -12px;
@@ -600,10 +434,9 @@
   text-transform: uppercase;
   box-shadow: 0 6px 20px rgba(255, 126, 80, 0.4);
   z-index: 2;
-  animation: subtlePulse 4s ease-in-out infinite;
 }
 
-/* Purchase Box - ENHANCED */
+/* Purchase Box */
 .purchase-box {
   position: sticky;
   top: 120px;
@@ -612,13 +445,6 @@
   border-radius: var(--product-radius);
   padding: 36px 32px;
   box-shadow: var(--product-shadow-lg);
-  animation: fadeInUp 0.9s ease 0.7s both;
-}
-
-[data-theme="dark"] .purchase-box {
-  background: var(--product-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
 }
 
 .purchase-title {
@@ -626,7 +452,6 @@
   font-weight: 700;
   color: var(--product-text);
   margin-bottom: 24px;
-  letter-spacing: -0.01em;
 }
 
 .summary-box {
@@ -659,14 +484,6 @@
   color: var(--product-text);
 }
 
-.summary-row:last-child .summary-label,
-.summary-row:last-child .summary-value {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--product-primary);
-}
-
-/* Checkout Button - ENHANCED */
 .checkout-button {
   width: 100%;
   background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
@@ -684,34 +501,13 @@
   justify-content: center;
   gap: 12px;
   margin-bottom: 24px;
-  position: relative;
-  animation: subtlePulse 4s ease-in-out infinite;
-}
-
-.checkout-button::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  border-radius: 100px;
-  opacity: 0;
-  z-index: -1;
-  filter: blur(20px);
-  animation: glow 4s ease-in-out infinite;
 }
 
 .checkout-button:hover:not(:disabled) {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-2px);
   box-shadow: var(--product-shadow-lg);
 }
 
-.checkout-button:active:not(:disabled) {
-  transform: scale(0.98);
-}
-
-/* Payment Methods - ENHANCED */
 .payment-methods {
   display: flex;
   justify-content: center;
@@ -723,12 +519,6 @@
 .payment-method {
   height: 24px;
   opacity: 0.7;
-  transition: var(--product-transition);
-}
-
-.payment-method:hover {
-  opacity: 1;
-  transform: scale(1.1);
 }
 
 /* Animations */
@@ -743,88 +533,27 @@
   }
 }
 
-@keyframes subtlePulse {
-  0%, 100% { 
-    transform: translateY(0) scale(1);
-  }
-  50% { 
-    transform: translateY(-3px) scale(1.02);
-  }
-}
-
-@keyframes glow {
-  0%, 100% { 
-    opacity: 0;
-  }
-  50% { 
-    opacity: 0.6;
-  }
-}
-
-@keyframes iconBounceIn {
-  0% {
-    transform: scale(0) rotate(-180deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.1) rotate(10deg);
-  }
-  100% {
-    transform: scale(1) rotate(0);
-    opacity: 1;
-  }
-}
-
-/* MOBILE STICKY CART */
+/* Mobile Sticky Cart */
 .sticky-cart {
   display: none;
 }
 
 /* MOBILE STYLES */
 @media screen and (max-width: 768px) {
-  /* Kein Header Abstand Mobile */
   .product-enterprise {
     padding-top: 0 !important;
   }
   
-  /* Hero Mobile */
   .product-hero {
     padding: 0 !important;
-    max-width: 100% !important;
-    position: relative;
     margin-bottom: 32px;
-  }
-  
-  /* Header-zu-Hero Gradient für sanften Übergang */
-  .product-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 80px;
-    background: linear-gradient(to bottom, 
-      var(--bg-header) 0%,
-      rgba(255, 255, 255, 0.9) 50%,
-      transparent 100%);
-    z-index: 3;
-    pointer-events: none;
-  }
-  
-  [data-theme="dark"] .product-hero::before {
-    background: linear-gradient(to bottom, 
-      #0a0a0a 0%,
-      rgba(10, 10, 10, 0.9) 50%,
-      transparent 100%);
   }
   
   .hero-container {
     grid-template-columns: 1fr;
     gap: 0;
-    position: relative;
   }
   
-  /* Hero Image als Background */
   .hero-image-section {
     position: absolute;
     top: 0;
@@ -841,157 +570,48 @@
     border: none !important;
     width: 100vw !important;
     height: 100%;
-    margin: 0 !important;
     box-shadow: none !important;
-    animation: none;
   }
   
-  /* Gradient für bessere Lesbarkeit */
-  .hero-image-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to bottom, 
-      rgba(255, 255, 255, 0.5) 0%,
-      rgba(255, 255, 255, 0.75) 50%,
-      rgba(255, 255, 255, 0.92) 100%);
-    z-index: 1;
-  }
-  
-  [data-theme="dark"] .hero-image-wrapper::after {
-    background: linear-gradient(to bottom, 
-      rgba(10, 10, 10, 0.75) 0%,
-      rgba(10, 10, 10, 0.88) 50%,
-      rgba(10, 10, 10, 0.96) 100%);
-  }
-  
-  .hero-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 1;
-  }
-  
-  /* Hero Info über dem Bild */
   .hero-info-section {
     position: relative;
     z-index: 4;
     padding: 60px 20px 40px !important;
-    text-align: left;
-  }
-  
-  /* Mobile Title mit Kreis-Flagge */
-  .product-title-wrapper {
-    justify-content: flex-start;
-    margin-bottom: 20px;
-    align-items: flex-start;
-    gap: 12px;
   }
   
   .product-flag {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 2px solid white;
-  }
-  
-  [data-theme="dark"] .product-flag {
-    border-color: rgba(255, 255, 255, 0.1);
   }
   
   .product-title {
     font-size: 28px;
-    line-height: 1.2;
   }
   
-  .hero-subtitle {
-    font-size: 15px;
-    margin-bottom: 20px;
-    line-height: 1.5;
-  }
-  
-  .hero-features {
-    gap: 16px;
-  }
-  
-  .hero-feature {
-    font-size: 14px;
-  }
-  
-  .hero-feature-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 12px;
-  }
-  
-  .hero-feature-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-  
-  /* Trust Badges ausblenden auf Mobile */
   .trust-badges {
     display: none !important;
   }
   
-  /* Selection Mobile */
   .product-selection {
-    padding: 0 20px 60px !important;
+    padding: 0 20px 80px !important;
   }
   
   .selection-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
   
   .purchase-box {
     display: none !important;
   }
   
-  /* Tabs Mobile */
-  .variant-tabs {
-    margin-bottom: 20px;
-  }
-  
-  .variant-tab {
-    padding: 12px 16px;
-    font-size: 15px;
-  }
-  
-  .tab-icon {
-    width: 18px;
-    height: 18px;
-  }
-  
-  /* Varianten Mobile */
   .plan-card {
-    margin-bottom: 16px !important;
     padding: 24px 20px;
     border-radius: 20px;
+    margin-bottom: 16px !important;
   }
   
-  .plan-card:last-child {
-    margin-bottom: 0 !important;
-  }
-  
-  .plan-name {
-    font-size: 19px;
-  }
-  
-  .plan-price {
-    font-size: 26px;
-  }
-  
-  .plan-price-old {
-    font-size: 14px;
-  }
-  
-  /* Sticky Cart Mobile - ENHANCED */
+  /* Mobile Sticky Cart */
   .sticky-cart {
     display: block;
     position: fixed;
@@ -1031,18 +651,20 @@
     transform: translateY(-50%);
   }
   
-  .sticky-cart-menu a {
+  .sticky-cart-menu button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none;
+    background: transparent;
+    border: none;
     cursor: pointer;
     color: var(--product-text);
+    padding: 8px;
   }
   
   .sticky-cart-title {
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 700;
     color: var(--product-text);
   }
   
@@ -1053,10 +675,9 @@
     width: 100%;
     background: linear-gradient(135deg, var(--product-primary), var(--product-accent));
     border-radius: 100px;
-    text-decoration: none;
     padding: 17px 24px;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 16px;
     gap: 10px;
     margin-top: 10px;
@@ -1069,15 +690,6 @@
     transform: scale(0.98);
   }
 }
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 </style>
 
 <!-- Product Page HTML -->
@@ -1087,39 +699,28 @@
   <div class="product-hero">
     <div class="hero-container">
       
-      <!-- Hero Image - ZWEITES BILD ALS BACKGROUND (Mobile) -->
       <div class="hero-image-section">
         <div class="hero-image-wrapper">
           {% if product.images[1] %}
             {{ product.images[1] | image_url: width: 800 | image_tag: 
                class: 'hero-image',
                loading: 'eager',
-               fetchpriority: 'high',
                alt: product.title }}
           {% else %}
             {{ product.featured_image | image_url: width: 800 | image_tag: 
                class: 'hero-image',
                loading: 'eager',
-               fetchpriority: 'high',
                alt: product.title }}
           {% endif %}
         </div>
       </div>
       
-      <!-- Hero Info -->
       <div class="hero-info-section">
-        <!-- Title mit Flagge -->
         <div class="product-title-wrapper">
           {% if product.featured_image %}
             {{ product.featured_image | image_url: width: 80 | image_tag: 
                class: 'product-flag',
                alt: product.title }}
-          {% else %}
-            {% assign country_code = product.handle | split: '-' | first %}
-            <img src="https://flagcdn.com/w80/{{ country_code }}.png" 
-                 class="product-flag" 
-                 alt="{{ product.title }} flag"
-                 onerror="this.style.display='none'">
           {% endif %}
           
           <h1 class="product-title">
@@ -1129,52 +730,43 @@
           </h1>
         </div>
         
-        <!-- Subtitle -->
         <p class="hero-subtitle">
-          {{ 'product.hero_subtitle' | t: country: product.title | default: 'Prepaid eSIM data plans. Activated in 60 seconds, keep your WhatsApp number, no contract.' }}
+          {{ 'product.hero_subtitle' | t | default: 'Prepaid eSIM data plans. Activated in 60 seconds, no contract.' }}
         </p>
         
-        <!-- Features List mit Icon Containers - FIXED -->
         <div class="hero-features">
           <div class="hero-feature">
             <div class="hero-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <span>{{ 'product.instant_delivery' | t | default: 'Instant delivery' }}</span>
+            <span>Instant delivery</span>
           </div>
           <div class="hero-feature">
             <div class="hero-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
               </svg>
             </div>
-            <span>{{ 'product.premium_network' | t | default: 'Premium 4G/5G network' }}</span>
+            <span>Premium 4G/5G</span>
           </div>
           <div class="hero-feature">
             <div class="hero-feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
               </svg>
             </div>
-            <span>{{ 'product.whatsapp_support' | t | default: '24/7 WhatsApp support' }}</span>
+            <span>24/7 Support</span>
           </div>
         </div>
         
-        <!-- Trust Badges - NUR DESKTOP -->
         <div class="trust-badges">
           <div class="trust-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
             </svg>
-            <span>{{ 'product.money_back' | t | default: 'Money-back guarantee' }}</span>
-          </div>
-          <div class="trust-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
-            </svg>
-            <span>{{ 'product.secure_payment' | t | default: 'Secure payment' }}</span>
+            <span>Money-back guarantee</span>
           </div>
         </div>
       </div>
@@ -1184,56 +776,41 @@
   <!-- Product Selection -->
   <div class="product-selection">
     
-    <!-- Check for unlimited variants WITH SKU -->
+    <!-- Check for unlimited variants -->
     {% assign has_unlimited = false %}
     {% for variant in product.variants %}
-      {% if variant.sku contains 'daily' or variant.sku contains 'Daily' or variant.sku contains 'unlimited' %}
+      {% if variant.sku contains 'daily' or variant.sku contains 'unlimited' %}
         {% assign has_unlimited = true %}
       {% endif %}
     {% endfor %}
     
-    <!-- Tab System - NUR wenn Unlimited existiert - CONNECTED STYLE -->
     {% if has_unlimited %}
       <div class="variant-tabs">
         <button class="variant-tab active" data-tab="normal">
-          <svg class="tab-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" />
+          <svg class="tab-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375" />
           </svg>
-          <span>{{ 'product.data_plans' | t | default: 'Data Plans' }}</span>
+          <span>Data Plans</span>
         </button>
         <button class="variant-tab" data-tab="unlimited">
-          <!-- Infinity Symbol für Unlimited -->
-          <svg class="tab-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <svg class="tab-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path d="M9.5 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zM14.5 12c0-1.657 1.343-3 3-3s3 1.343 3 3-1.343 3-3 3-3-1.343-3-3z"/>
             <path d="M9.5 12h5"/>
           </svg>
-          <span>{{ 'product.unlimited_daily' | t | default: 'Unlimited Daily' }}</span>
+          <span>Unlimited Daily</span>
         </button>
-      </div>
-      
-      <!-- Fair Use Notice -->
-      <div class="fair-use-notice" id="fair-use-notice">
-        <div class="fair-use-header">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="24" height="24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
-          </svg>
-          <h3 class="fair-use-title">{{ 'product.fair_use_title' | t | default: 'Fair Use Policy' }}</h3>
-        </div>
-        <p class="fair-use-text">{{ 'product.fair_use_text' | t | default: '1GB daily at high speed. After 1GB, speed reduced to 128kbps. Data resets daily at midnight.' }}</p>
       </div>
     {% endif %}
     
-    <!-- Selection Grid -->
     <div class="selection-grid">
       
-      <!-- Plans Container -->
       <div class="plans-container">
         
         <!-- Normal Variants -->
-        <div class="variant-group" id="normal-variants" style="display: block;">
+        <div class="variant-group" id="normal-variants">
           {% assign variant_index = 0 %}
           {% for variant in product.variants %}
-            {% unless variant.sku contains 'daily' or variant.sku contains 'Daily' or variant.sku contains 'unlimited' %}
+            {% unless variant.sku contains 'daily' or variant.sku contains 'unlimited' %}
               {% assign variant_index = variant_index | plus: 1 %}
               {% assign is_free = false %}
               {% if variant.price == 0 or variant.title contains '100MB' %}
@@ -1242,16 +819,15 @@
               
               <div class="plan-card {% if variant_index == 1 and is_free == false %}selected{% endif %}" 
                    data-variant-id="{{ variant.id }}" 
-                   data-is-free="{{ is_free }}">
+                   data-is-free="{{ is_free }}"
+                   data-fingerprint="">
                 
-                <!-- FREE Badge -->
                 {% if is_free %}
                   <span class="free-badge">FREE</span>
                 {% endif %}
                 
-                <!-- Popular Badge bei 3. Variante -->
                 {% if variant_index == 3 %}
-                  <span class="popular-badge">{{ 'product.popular' | t | default: 'POPULAR' }}</span>
+                  <span class="popular-badge">POPULAR</span>
                 {% endif %}
                 
                 <input type="radio" 
@@ -1272,39 +848,26 @@
                       {% endif %}
                     </div>
                     <div class="plan-validity">
-                      {% if is_free %}
-                        {{ 'product.valid_for' | t | default: 'Valid for' }} 7 {{ 'product.days' | t | default: 'days' }}
-                      {% else %}
-                        {{ 'product.valid_for' | t | default: 'Valid for' }}
-                        {% assign title_parts = variant.title | split: " " %}
-                        {% assign days_index = title_parts.size | minus: 2 %}
-                        {{ title_parts[days_index] }}
-                        {{ 'product.days' | t | default: 'days' }}
-                      {% endif %}
+                      Valid for 7 days
                     </div>
                   </div>
                   <div class="plan-price-wrapper">
-                    <!-- Compare at Price -->
-                    {% if section.settings.show_compare_price and is_free == false %}
-                      {% if variant.compare_at_price and variant.compare_at_price > variant.price %}
-                        <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
-                      {% elsif section.settings.price_increase_percent > 0 %}
-                        {% assign multiplier = section.settings.price_increase_percent | plus: 100 | times: 1.0 | divided_by: 100 %}
-                        {% assign old_price = variant.price | times: multiplier %}
-                        <span class="plan-price-old">{{ old_price | money }}</span>
-                      {% endif %}
-                    {% endif %}
-                    
                     {% if is_free %}
-                      <!-- Login Button direkt als Preis -->
-                      <a href="/account/login?return_url={{ request.path }}" 
-                         class="free-login-button">
-                        {{ 'product.login_for_free' | t | default: 'Login for FREE' }}
-                      </a>
+                      {% if customer %}
+                        <form action="/cart/add" method="post" class="free-form">
+                          <input type="hidden" name="id" value="{{ variant.id }}">
+                          <button type="submit" class="free-login-button">
+                            Get FREE eSIM
+                          </button>
+                        </form>
+                      {% else %}
+                        <a href="/account/login?checkout_url=/cart/{{ variant.id }}:1" 
+                           class="free-login-button">
+                          Login for FREE
+                        </a>
+                      {% endif %}
                     {% else %}
-                      <span class="plan-price">
-                        {{ variant.price | money }}
-                      </span>
+                      <span class="plan-price">{{ variant.price | money }}</span>
                     {% endif %}
                   </div>
                 </div>
@@ -1317,7 +880,7 @@
         {% if has_unlimited %}
           <div class="variant-group" id="unlimited-variants" style="display: none;">
             {% for variant in product.variants %}
-              {% if variant.sku contains 'daily' or variant.sku contains 'Daily' or variant.sku contains 'unlimited' %}
+              {% if variant.sku contains 'daily' or variant.sku contains 'unlimited' %}
                 <div class="plan-card" data-variant-id="{{ variant.id }}">
                   <input type="radio" 
                          name="variant" 
@@ -1329,21 +892,9 @@
                   <div class="plan-content">
                     <div class="plan-info">
                       <div class="plan-name">{{ variant.title }}</div>
-                      <div class="plan-validity">
-                        {{ 'product.gb_per_day_for' | t: days: variant.title | default: '1GB/day' }}
-                      </div>
+                      <div class="plan-validity">1GB/day</div>
                     </div>
                     <div class="plan-price-wrapper">
-                      <!-- Compare at Price for Unlimited -->
-                      {% if section.settings.show_compare_price %}
-                        {% if variant.compare_at_price and variant.compare_at_price > variant.price %}
-                          <span class="plan-price-old">{{ variant.compare_at_price | money }}</span>
-                        {% elsif section.settings.price_increase_percent > 0 %}
-                          {% assign multiplier = section.settings.price_increase_percent | plus: 100 | times: 1.0 | divided_by: 100 %}
-                          {% assign old_price = variant.price | times: multiplier %}
-                          <span class="plan-price-old">{{ old_price | money }}</span>
-                        {% endif %}
-                      {% endif %}
                       <span class="plan-price">{{ variant.price | money }}</span>
                     </div>
                   </div>
@@ -1356,7 +907,7 @@
       
       <!-- Purchase Box -->
       <div class="purchase-box">
-        <h3 class="purchase-title">{{ 'product.your_selection' | t | default: 'Your Selection' }}</h3>
+        <h3 class="purchase-title">Your Selection</h3>
         
         <div class="summary-box">
           <div class="summary-row">
@@ -1364,34 +915,29 @@
             <span class="summary-value" id="selected-variant">-</span>
           </div>
           <div class="summary-row">
-            <span class="summary-label">{{ 'product.network' | t | default: 'Network' }}</span>
-            <span class="summary-value">{{ product.metafields.custom.plantyp | default: 'Avea, Turkcell' }}</span>
+            <span class="summary-label">Network</span>
+            <span class="summary-value">{{ product.metafields.custom.plantyp | default: 'Premium' }}</span>
           </div>
           <div class="summary-row">
-            <span class="summary-label">{{ 'product.activation' | t | default: 'Activation' }}</span>
-            <span class="summary-value">{{ 'product.instant' | t | default: 'Instant' }}</span>
-          </div>
-          <div class="summary-row">
-            <span class="summary-label">{{ 'product.total' | t | default: 'Total' }}</span>
+            <span class="summary-label">Total</span>
             <span class="summary-value" id="total-price">-</span>
           </div>
         </div>
         
-        <form action="/cart/add?return_to=/checkout" method="post" id="product-form">
+        <form action="/cart/add" method="post" id="product-form">
           <input type="hidden" name="id" id="variant-input" value="">
           <button type="submit" class="checkout-button">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 20px; height: 20px;">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
-            <span>{{ 'product.buy_now' | t | default: 'Buy Now' }}</span>
+            <span>Buy Now</span>
           </button>
         </form>
         
         <div class="payment-methods">
-          {% assign payment_types = 'visa,master,apple_pay,google_pay,paypal' | split: ',' %}
-          {% for type in payment_types %}
-            {{ type | payment_type_svg_tag: class: 'payment-method' }}
-          {% endfor %}
+          {{ 'visa' | payment_type_svg_tag: class: 'payment-method' }}
+          {{ 'master' | payment_type_svg_tag: class: 'payment-method' }}
+          {{ 'apple_pay' | payment_type_svg_tag: class: 'payment-method' }}
         </div>
       </div>
     </div>
@@ -1402,15 +948,15 @@
     <div class="sticky-cart-header">
       <div class="sticky-cart-title" id="sticky-title">-</div>
       <div class="sticky-cart-menu">
-        <a href="#product-selection">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="24" height="24">
+        <button type="button" id="open-mobile-menu" aria-label="Open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24" height="24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
           </svg>
-        </a>
+        </button>
       </div>
     </div>
     <button class="sticky-cart-button" id="sticky-button">
-      {{ 'product.buy_now' | t | default: 'Buy Now' }}
+      Buy Now
     </button>
   </div>
 </section>
@@ -1419,57 +965,86 @@
 (function() {
   'use strict';
   
-  // Elements
   const section = document.querySelector('.product-enterprise');
-  const variantTabs = section.querySelectorAll('.variant-tab');
-  const normalGroup = section.querySelector('#normal-variants');
-  const unlimitedGroup = section.querySelector('#unlimited-variants');
-  const fairUseNotice = section.querySelector('#fair-use-notice');
   const planCards = section.querySelectorAll('.plan-card');
   const variantInput = section.querySelector('#variant-input');
   const selectedVariantText = section.querySelector('#selected-variant');
   const totalPriceText = section.querySelector('#total-price');
   const productForm = section.querySelector('#product-form');
-  
-  // Sticky Cart
   const stickyCart = document.querySelector('#sticky-cart');
   const stickyTitle = document.querySelector('#sticky-title');
   const stickyButton = document.querySelector('#sticky-button');
+  const openMobileMenuBtn = document.querySelector('#open-mobile-menu');
   
-  // State
   let currentVariant = null;
-  let isCustomerLoggedIn = {{ customer.id | default: 'null' }} !== null;
+  const isCustomerLoggedIn = {{ customer.id | default: 'null' }} !== null;
+  const customerId = {{ customer.id | default: 'null' }};
   
-  // Global function for free button
-  window.selectPlan = selectPlan;
-  
-  // Intersection Observer for animations
-  if ('IntersectionObserver' in window) {
-    const animateObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate');
-          animateObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px'
-    });
+  // Browser Fingerprint
+  function generateFingerprint() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '14px Arial';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(125, 1, 62, 20);
+    ctx.fillStyle = '#069';
+    ctx.fillText('Simbye', 2, 15);
     
-    // Observe plan cards
-    planCards.forEach(card => {
-      animateObserver.observe(card);
-    });
+    const fingerprint = canvas.toDataURL();
+    const screen = `${window.screen.width}x${window.screen.height}`;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    const lang = navigator.language;
+    const platform = navigator.platform;
     
-    // Observe other elements
-    const animateElements = section.querySelectorAll('.hero-feature, .trust-badge, .purchase-box');
-    animateElements.forEach(el => {
-      animateObserver.observe(el);
-    });
+    return btoa(`${fingerprint}|${screen}|${timezone}|${lang}|${platform}`).substring(0, 32);
   }
   
-  // Variant Tab Switching
+  const deviceFingerprint = generateFingerprint();
+  
+  // Check FREE eSIM bereits gekauft
+  function checkFreePurchase() {
+    const freePurchases = JSON.parse(localStorage.getItem('simbye_free_purchases') || '[]');
+    const freeCard = section.querySelector('.plan-card[data-is-free="true"]');
+    
+    if (!freeCard) return;
+    
+    // Check Customer ID
+    if (isCustomerLoggedIn && freePurchases.includes(`customer_${customerId}`)) {
+      freeCard.classList.add('already-claimed');
+      return true;
+    }
+    
+    // Check Fingerprint
+    if (freePurchases.includes(`fp_${deviceFingerprint}`)) {
+      freeCard.classList.add('already-claimed');
+      return true;
+    }
+    
+    return false;
+  }
+  
+  // Mark FREE as purchased
+  function markFreePurchased() {
+    const freePurchases = JSON.parse(localStorage.getItem('simbye_free_purchases') || '[]');
+    
+    if (isCustomerLoggedIn) {
+      freePurchases.push(`customer_${customerId}`);
+    }
+    freePurchases.push(`fp_${deviceFingerprint}`);
+    
+    localStorage.setItem('simbye_free_purchases', JSON.stringify([...new Set(freePurchases)]));
+  }
+  
+  // Initialize
+  checkFreePurchase();
+  
+  // Variant Tabs
+  const variantTabs = section.querySelectorAll('.variant-tab');
+  const normalGroup = section.querySelector('#normal-variants');
+  const unlimitedGroup = section.querySelector('#unlimited-variants');
+  
   if (variantTabs.length > 0) {
     variantTabs.forEach(tab => {
       tab.addEventListener('click', function() {
@@ -1481,29 +1056,22 @@
         if (tabType === 'unlimited') {
           if (normalGroup) normalGroup.style.display = 'none';
           if (unlimitedGroup) unlimitedGroup.style.display = 'block';
-          if (fairUseNotice) fairUseNotice.classList.add('active');
         } else {
           if (normalGroup) normalGroup.style.display = 'block';
           if (unlimitedGroup) unlimitedGroup.style.display = 'none';
-          if (fairUseNotice) fairUseNotice.classList.remove('active');
         }
         
-        // Select first variant in active group
         const activeGroup = tabType === 'unlimited' ? unlimitedGroup : normalGroup;
         const firstCard = activeGroup?.querySelector('.plan-card:not([data-is-free="true"])');
-        if (firstCard) {
-          selectPlan(firstCard);
-        }
+        if (firstCard) selectPlan(firstCard);
       });
     });
   }
   
-  // Plan Selection
+  // Select Plan
   function selectPlan(card) {
     const isFree = card.dataset.isFree === 'true';
-    if (isFree && !isCustomerLoggedIn) {
-      return;
-    }
+    if (isFree) return; // FREE cards haben eigene Logik
     
     planCards.forEach(c => c.classList.remove('selected'));
     card.classList.add('selected');
@@ -1517,38 +1085,49 @@
         title: radio.dataset.title
       };
       
-      // Update UI
       variantInput.value = currentVariant.id;
       selectedVariantText.textContent = currentVariant.title;
       totalPriceText.textContent = currentVariant.price;
       
-      // Update sticky
       if (stickyCart) {
         stickyTitle.textContent = currentVariant.title + ' - ' + currentVariant.price;
       }
     }
   }
   
-  // Add click listeners to plan cards
+  // Plan Card Clicks
   planCards.forEach(card => {
     card.addEventListener('click', function(e) {
-      if (e.target.closest('a')) {
+      if (e.target.closest('a') || e.target.closest('form') || e.target.closest('button')) {
         return;
       }
       selectPlan(this);
     });
   });
   
-  // Form submission
+  // FREE Form Submission
+  const freeForms = section.querySelectorAll('.free-form');
+  freeForms.forEach(form => {
+    form.addEventListener('submit', function(e) {
+      if (checkFreePurchase()) {
+        e.preventDefault();
+        alert('You have already claimed your FREE eSIM. Each customer can only get one FREE eSIM.');
+        return;
+      }
+      markFreePurchased();
+    });
+  });
+  
+  // Product Form
   productForm.addEventListener('submit', function(e) {
     if (!currentVariant) {
       e.preventDefault();
-      alert('{{ "product.select_variant" | t | default: "Please select a variant" }}');
+      alert('Please select a plan');
       return;
     }
   });
   
-  // Mobile Sticky Cart on Scroll
+  // Mobile Sticky Cart Scroll
   let ticking = false;
   window.addEventListener('scroll', function() {
     if (!ticking && window.innerWidth <= 768) {
@@ -1566,52 +1145,41 @@
     }
   });
   
-  // Sticky button click
+  // Sticky Button - FIXED: Trigger echtes Submit
   if (stickyButton) {
-    stickyButton.addEventListener('click', function() {
-      productForm.dispatchEvent(new Event('submit'));
+    stickyButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (currentVariant && productForm) {
+        productForm.submit(); // ECHTES Submit, nicht nur Event
+      } else {
+        alert('Please select a plan');
+      }
     });
   }
   
-  // Initialize - Select first non-free variant
-  const firstCard = section.querySelector('.plan-card:not([data-is-free="true"])');
-  if (firstCard) {
-    selectPlan(firstCard);
+  // Open Mobile Menu from Sticky Cart - FIXED
+  if (openMobileMenuBtn) {
+    openMobileMenuBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      // Trigger Header Mobile Toggle
+      const mobileToggle = document.getElementById('mobile-toggle');
+      if (mobileToggle) {
+        mobileToggle.click();
+      }
+    });
   }
+  
+  // Initialize first variant
+  const firstCard = section.querySelector('.plan-card:not([data-is-free="true"])');
+  if (firstCard) selectPlan(firstCard);
 })();
 </script>
 
 {% schema %}
 {
   "name": "Product Page",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Pricing Display"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_compare_price",
-      "label": "Show Compare at Price",
-      "default": false,
-      "info": "Display crossed-out old price"
-    },
-    {
-      "type": "range",
-      "id": "price_increase_percent",
-      "label": "Price Increase Percentage",
-      "min": 0,
-      "max": 100,
-      "step": 5,
-      "default": 0,
-      "unit": "%",
-      "info": "Show old price as X% higher than current (only if compare price not set)"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Product Page"
-    }
-  ]
+  "settings": []
 }
 {% endschema %}
