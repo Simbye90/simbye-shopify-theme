@@ -1011,18 +1011,34 @@
     
     let html = '';
     products.forEach(product => {
-      const price = product.price ? (product.price / 100).toFixed(2) : '0.00';
-      const imageUrl = product.featured_image || product.image;
+      // Get image URL - handle different formats
+      let imageUrl = '';
+      if (product.image) {
+        imageUrl = typeof product.image === 'string' ? product.image : product.image.url || product.image.src;
+      } else if (product.featured_image) {
+        imageUrl = typeof product.featured_image === 'string' ? product.featured_image : product.featured_image.url || product.featured_image.src;
+      }
+      
+      // Ensure image has proper size parameter
+      if (imageUrl && !imageUrl.includes('_small') && !imageUrl.includes('_compact')) {
+        imageUrl = imageUrl.replace(/\.(jpg|jpeg|png|webp)/i, '_small.$1');
+      }
+      
+      // Get price
+      const price = product.price_min ? '€' + (product.price_min / 100).toFixed(2) : 
+                   product.price ? '€' + (product.price / 100).toFixed(2) : 
+                   'Price not available';
       
       html += `
         <a href="${product.url}" class="search-result-item">
           ${imageUrl 
-            ? `<img src="${imageUrl}" class="search-result-image" alt="${product.title}" loading="lazy">`
+            ? `<img src="${imageUrl}" class="search-result-image" alt="${product.title}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+               <div class="search-result-image" style="display: none; align-items: center; justify-content: center; font-size: 24px; background: rgba(0, 154, 97, 0.1); border-radius: 8px;">🌍</div>`
             : `<div class="search-result-image" style="display: flex; align-items: center; justify-content: center; font-size: 24px; background: rgba(0, 154, 97, 0.1); border-radius: 8px;">🌍</div>`
           }
           <div class="search-result-info">
             <h4 class="search-result-title">${product.title.replace('eSIM', '').replace('Esim', '').trim()}</h4>
-            <p class="search-result-price">${product.price_min ? '€' + (product.price_min / 100).toFixed(2) : 'Price not available'}</p>
+            <p class="search-result-price">${price}</p>
           </div>
         </a>
       `;
