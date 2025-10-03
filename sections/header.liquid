@@ -1,16 +1,23 @@
 <!-- sections/header.liquid -->
 <!-- Enterprise Header V6.0 - FIXED & ENHANCED -->
 <!-- 
-  WICHTIG: SHOPIFY MARKETS KONFIGURATION
+  ✅ CURRENCY SWITCHER - NUR EINZIGARTIGE WÄHRUNGEN
   
-  Für Multi-Currency Support:
-  1. Shopify Admin → Settings → Payments → Shopify Payments aktivieren
-  2. Settings → Markets → "Add market" → Länder hinzufügen
-  3. Für jeden Market: Products and pricing → "Show prices in local currency" ✓
-  4. Der Country Selector wechselt automatisch Land + Währung
+  Problem gelöst:
+  - Keine doppelten Währungen mehr (z.B. nur 1x USD statt USA, Canada, Australia)
+  - Liquid filtert automatisch und zeigt nur unique currencies
+  - Desktop + Mobile beide optimiert
   
-  Verfügbare Länder werden über localization.available_countries bereitgestellt.
-  Jedes Land hat seine eigene Währung (country.currency.iso_code).
+  Shopify Markets Setup:
+  1. Settings → Payments → Shopify Payments aktivieren
+  2. Settings → Markets → Länder hinzufügen
+  3. Products and pricing → "Show prices in local currency" ✓
+  
+  Wie es funktioniert:
+  - Loop durch alle available_countries
+  - Speichere bereits gezeigte Währungen in 'shown_currencies'
+  - Zeige nur Währungen, die noch nicht in der Liste sind
+  - User wählt € EUR → Shopify wählt erstes Land mit EUR (z.B. Germany)
 -->
 
 <style>
@@ -901,7 +908,7 @@ body {
           
           <div class="switcher-dropdown">
             {% for language in localization.available_languages %}
-              <form method="post" action="{{ routes.root_url }}localization">
+              <form method="post" action="/localization">
                 <input type="hidden" name="language_code" value="{{ language.iso_code }}">
                 <button type="submit" class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
                   <span>{{ language.endonym_name }}</span>
@@ -911,19 +918,24 @@ body {
           </div>
         </div>
         
-        <!-- Country Switcher (Controls Currency via Shopify Markets) -->
+        <!-- Currency Switcher (Grouped by unique currencies) -->
         <div class="switcher" id="country-switcher">
           <span id="current-country">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
           
           <div class="switcher-dropdown">
             {% if localization.available_countries.size > 1 %}
+              {% assign shown_currencies = '' %}
               {% for country in localization.available_countries %}
-                <form method="post" action="{{ routes.root_url }}localization">
-                  <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-                  <button type="submit" class="dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
-                    <span>{{ country.name }} ({{ country.currency.symbol }} {{ country.currency.iso_code }})</span>
-                  </button>
-                </form>
+                {% assign currency_code = country.currency.iso_code %}
+                {% unless shown_currencies contains currency_code %}
+                  {% assign shown_currencies = shown_currencies | append: currency_code | append: ',' %}
+                  <form method="post" action="/localization">
+                    <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                    <button type="submit" class="dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}">
+                      <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                    </button>
+                  </form>
+                {% endunless %}
               {% endfor %}
             {% endif %}
           </div>
@@ -1010,7 +1022,7 @@ body {
       
       <div class="mobile-dropdown">
         {% for language in localization.available_languages %}
-          <form method="post" action="{{ routes.root_url }}localization">
+          <form method="post" action="/localization">
             <input type="hidden" name="language_code" value="{{ language.iso_code }}">
             <button type="submit" class="mobile-dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
               <span>{{ language.endonym_name }}</span>
@@ -1021,20 +1033,25 @@ body {
     </div>
     
     <div class="settings-row" id="mobile-country-row">
-      <span class="settings-label">{{ 'header.country' | t | default: 'Country / Currency' }}</span>
+      <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
       <div class="settings-value">
         <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
       </div>
       
       <div class="mobile-dropdown">
         {% if localization.available_countries.size > 1 %}
+          {% assign shown_currencies_mobile = '' %}
           {% for country in localization.available_countries %}
-            <form method="post" action="{{ routes.root_url }}localization">
-              <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-              <button type="submit" class="mobile-dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
-                <span>{{ country.name }} ({{ country.currency.symbol }} {{ country.currency.iso_code }})</span>
-              </button>
-            </form>
+            {% assign currency_code = country.currency.iso_code %}
+            {% unless shown_currencies_mobile contains currency_code %}
+              {% assign shown_currencies_mobile = shown_currencies_mobile | append: currency_code | append: ',' %}
+              <form method="post" action="/localization">
+                <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                <button type="submit" class="mobile-dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}">
+                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                </button>
+              </form>
+            {% endunless %}
           {% endfor %}
         {% endif %}
       </div>
