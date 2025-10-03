@@ -1,5 +1,17 @@
 <!-- sections/header.liquid -->
 <!-- Enterprise Header V6.0 - FIXED & ENHANCED -->
+<!-- 
+  WICHTIG: SHOPIFY MARKETS KONFIGURATION
+  
+  Für Multi-Currency Support:
+  1. Shopify Admin → Settings → Payments → Shopify Payments aktivieren
+  2. Settings → Markets → "Add market" → Länder hinzufügen
+  3. Für jeden Market: Products and pricing → "Show prices in local currency" ✓
+  4. Der Country Selector wechselt automatisch Land + Währung
+  
+  Verfügbare Länder werden über localization.available_countries bereitgestellt.
+  Jedes Land hat seine eigene Währung (country.currency.iso_code).
+-->
 
 <style>
 /* CSS Variables - OPTIMIZED */
@@ -306,27 +318,6 @@ body {
   width: 100%;
   text-align: left;
   font-family: inherit;
-}
-
-.dropdown-item .country-flag {
-  width: 20px;
-  height: 15px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.dropdown-item .country-flag img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 2px;
-}
-
-.dropdown-item .country-name {
-  opacity: 0.6;
-  font-size: 12px;
-  margin-left: auto;
 }
 
 .dropdown-item:hover {
@@ -724,21 +715,6 @@ body {
   font-weight: 500;
 }
 
-.mobile-dropdown-item .country-flag-mobile {
-  width: 20px;
-  height: 15px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-}
-
-.mobile-dropdown-item .country-flag-mobile img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: 2px;
-}
-
 .mobile-dropdown-item:hover {
   background: rgba(0, 154, 97, 0.08);
 }
@@ -935,21 +911,21 @@ body {
           </div>
         </div>
         
-        <!-- Country/Currency Switcher -->
+        <!-- Country Switcher (Controls Currency via Shopify Markets) -->
         <div class="switcher" id="country-switcher">
           <span id="current-country">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
           
           <div class="switcher-dropdown">
-            {% for country in localization.available_countries %}
-              <form method="post" action="{{ routes.root_url }}localization">
-                <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-                <button type="submit" class="dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
-                  <span class="country-flag">{{ country.iso_code | slice: 0, 2 | downcase | prepend: 'https://flagcdn.com/w20/' | append: '.png' | img_tag: country.name }}</span>
-                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
-                  <span class="country-name">{{ country.name }}</span>
-                </button>
-              </form>
-            {% endfor %}
+            {% if localization.available_countries.size > 1 %}
+              {% for country in localization.available_countries %}
+                <form method="post" action="{{ routes.root_url }}localization">
+                  <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                  <button type="submit" class="dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
+                    <span>{{ country.name }} ({{ country.currency.symbol }} {{ country.currency.iso_code }})</span>
+                  </button>
+                </form>
+              {% endfor %}
+            {% endif %}
           </div>
         </div>
       </div>
@@ -1045,21 +1021,22 @@ body {
     </div>
     
     <div class="settings-row" id="mobile-country-row">
-      <span class="settings-label">{{ 'header.country_currency' | t | default: 'Country / Currency' }}</span>
+      <span class="settings-label">{{ 'header.country' | t | default: 'Country / Currency' }}</span>
       <div class="settings-value">
         <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
       </div>
       
       <div class="mobile-dropdown">
-        {% for country in localization.available_countries %}
-          <form method="post" action="{{ routes.root_url }}localization">
-            <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-            <button type="submit" class="mobile-dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
-              <span class="country-flag-mobile">{{ country.iso_code | slice: 0, 2 | downcase | prepend: 'https://flagcdn.com/w20/' | append: '.png' | img_tag: country.name }}</span>
-              <span>{{ country.currency.symbol }} {{ country.currency.iso_code }} - {{ country.name }}</span>
-            </button>
-          </form>
-        {% endfor %}
+        {% if localization.available_countries.size > 1 %}
+          {% for country in localization.available_countries %}
+            <form method="post" action="{{ routes.root_url }}localization">
+              <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+              <button type="submit" class="mobile-dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
+                <span>{{ country.name }} ({{ country.currency.symbol }} {{ country.currency.iso_code }})</span>
+              </button>
+            </form>
+          {% endfor %}
+        {% endif %}
       </div>
     </div>
     
