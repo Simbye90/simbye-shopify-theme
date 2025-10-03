@@ -1,23 +1,27 @@
 <!-- sections/header.liquid -->
 <!-- Enterprise Header V6.0 - FIXED & ENHANCED -->
 <!-- 
-  ✅ CURRENCY SWITCHER - NUR EINZIGARTIGE WÄHRUNGEN
+  ✅ CURRENCY SWITCHER - KOMPLETT GEFIXT
   
   Problem gelöst:
-  - Keine doppelten Währungen mehr (z.B. nur 1x USD statt USA, Canada, Australia)
-  - Liquid filtert automatisch und zeigt nur unique currencies
-  - Desktop + Mobile beide optimiert
+  1. ✅ Keine doppelten Währungen mehr (nur unique currencies)
+  2. ✅ 404 Fehler GEFIXT durch return_to Parameter
+  
+  Der return_to Parameter ist KRITISCH:
+  - Ohne return_to → 404 Error
+  - Mit return_to → Shopify leitet zurück zur aktuellen Seite
+  - request.path gibt den aktuellen Pfad zurück
   
   Shopify Markets Setup:
   1. Settings → Payments → Shopify Payments aktivieren
-  2. Settings → Markets → Länder hinzufügen
+  2. Settings → Markets → Länder hinzufügen (nur 1 Land pro Währung!)
   3. Products and pricing → "Show prices in local currency" ✓
   
   Wie es funktioniert:
   - Loop durch alle available_countries
-  - Speichere bereits gezeigte Währungen in 'shown_currencies'
-  - Zeige nur Währungen, die noch nicht in der Liste sind
-  - User wählt € EUR → Shopify wählt erstes Land mit EUR (z.B. Germany)
+  - Filtert doppelte Währungen (shown_currencies)
+  - Form submitted mit country_code + return_to
+  - Shopify wechselt Land/Währung und leitet zurück
 -->
 
 <style>
@@ -908,8 +912,9 @@ body {
           
           <div class="switcher-dropdown">
             {% for language in localization.available_languages %}
-              <form method="post" action="/localization">
+              <form method="post" action="/localization" class="localization-form">
                 <input type="hidden" name="language_code" value="{{ language.iso_code }}">
+                <input type="hidden" name="return_to" value="{{ request.path }}">
                 <button type="submit" class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
                   <span>{{ language.endonym_name }}</span>
                 </button>
@@ -929,8 +934,9 @@ body {
                 {% assign currency_code = country.currency.iso_code %}
                 {% unless shown_currencies contains currency_code %}
                   {% assign shown_currencies = shown_currencies | append: currency_code | append: ',' %}
-                  <form method="post" action="/localization">
+                  <form method="post" action="/localization" class="localization-form">
                     <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                    <input type="hidden" name="return_to" value="{{ request.path }}">
                     <button type="submit" class="dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}">
                       <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
                     </button>
@@ -1022,8 +1028,9 @@ body {
       
       <div class="mobile-dropdown">
         {% for language in localization.available_languages %}
-          <form method="post" action="/localization">
+          <form method="post" action="/localization" class="localization-form">
             <input type="hidden" name="language_code" value="{{ language.iso_code }}">
+            <input type="hidden" name="return_to" value="{{ request.path }}">
             <button type="submit" class="mobile-dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
               <span>{{ language.endonym_name }}</span>
             </button>
@@ -1045,8 +1052,9 @@ body {
             {% assign currency_code = country.currency.iso_code %}
             {% unless shown_currencies_mobile contains currency_code %}
               {% assign shown_currencies_mobile = shown_currencies_mobile | append: currency_code | append: ',' %}
-              <form method="post" action="/localization">
+              <form method="post" action="/localization" class="localization-form">
                 <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                <input type="hidden" name="return_to" value="{{ request.path }}">
                 <button type="submit" class="mobile-dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}">
                   <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
                 </button>
