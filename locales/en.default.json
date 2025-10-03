@@ -289,7 +289,7 @@
     "more": "...and many more"
   },
   "comparison": {
-    "title_part1": "eSIM vs",
+    "title_part1": "  {{ product.title }} eSIM vs",
     "title_part2": "Traditional Options",
     "subtitle": "Compare international mobile data solutions and save up to 85% on roaming charges",
     
