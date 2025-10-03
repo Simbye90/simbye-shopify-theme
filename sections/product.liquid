@@ -243,16 +243,25 @@
 </style>
 
 {%- comment -%} ---------- LOGIN RETURN URL (RELATIVE) + claim=free ---------- {%- endcomment -%}
+{%- comment -%} Return-URL: gleiche Produktseite + claim=free {%- endcomment -%}
 {% capture _current_rel %}{{ request.path }}{% if request.query_string != blank %}?{{ request.query_string }}{% endif %}{% endcapture %}
 {% assign _current_rel = _current_rel | strip %}
+
 {% if request.query_string != blank %}
   {% assign _sep = '&' %}
 {% else %}
   {% assign _sep = '?' %}
 {% endif %}
-{% capture _return_after_login %}{{ _current_rel }}{{ _sep }}claim=free{% endcapture %}
-{% assign _encoded_return_after_login = _return_after_login | url_encode %}
-{% assign login_free_url = routes.account_login_url | append: '?return_url=' | append: _encoded_return_after_login %}
+
+{% capture _return_to %}{{ _current_rel }}{{ _sep }}claim=free{% endcapture %}
+{% assign _return_to_encoded = _return_to | url_encode %}
+
+{%- comment -%}
+  WICHTIG: statt /account/login benutzen wir /customer_authentication/login
+  (unterstützt return_to; muss RELATIVE URL sein)
+{%- endcomment -%}
+{% assign login_free_url = '/customer_authentication/login?return_to=' | append: _return_to_encoded %}
+
 
 {%- comment -%} ---------- PRECOMPUTE FREE VARIANTS & BLOCK STATE ---------- {%- endcomment -%}
 {% assign free_variant_ids = '' %}
