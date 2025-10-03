@@ -13,15 +13,46 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "destination_link_mcaVRM": {
+          "type": "destination_link",
+          "settings": {
+            "text": "Turkey eS",
+            "url": ""
+          }
+        },
+        "destination_link_zFnNf4": {
+          "type": "destination_link",
+          "settings": {
+            "text": "Turkey",
+            "url": ""
+          }
+        }
+      },
+      "block_order": [
+        "destination_link_mcaVRM",
+        "destination_link_zFnNf4"
+      ],
       "settings": {
-        "logo": "shopify://shop_images/SIMBYE_820_x_300_px_512_x_512_px.png",
-        "show_apps": false,
-        "ios_link": "",
-        "android_link": "",
-        "destinations_title": "Popular Destinations",
-        "show_payment": true,
-        "copyright": "All rights reserved.",
-        "legal_menu": "footer-memu"
+        "app_store_url": "",
+        "google_play_url": "",
+        "col1_heading": "Popular Destinations",
+        "col2_heading": "Company",
+        "col3_heading": "eSIM",
+        "col4_heading": "Follow Us",
+        "facebook_url": "",
+        "twitter_url": "",
+        "instagram_url": "",
+        "youtube_url": "",
+        "linkedin_url": "",
+        "reddit_url": "",
+        "privacy_url": "",
+        "privacy_text": "Privacy Policy",
+        "terms_url": "",
+        "terms_text": "Terms of Service",
+        "cookie_url": "",
+        "cookie_text": "Cookie Preferencsdssde",
+        "copyright_text": "All rights reservedsdsd."
       }
     }
   },
