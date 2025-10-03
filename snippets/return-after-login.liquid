@@ -1,0 +1,52 @@
+<script>
+(function(){
+  try {
+    var loggedIn = {{ customer.id | json }} ? true : false;
+    var path = location.pathname;
+    var params = new URLSearchParams(location.search);
+    var redirectUrl = null;
+
+    // 1) URL-Param
+    if (params.has('return_to')) {
+      redirectUrl = decodeURIComponent(params.get('return_to'));
+    }
+    // 2) sessionStorage / localStorage
+    if (!redirectUrl) {
+      try {
+        redirectUrl = sessionStorage.getItem('return_to_product') || localStorage.getItem('return_to_product');
+      } catch(e){}
+    }
+    // 3) Cookie
+    if (!redirectUrl) {
+      var m = document.cookie.match(/(?:^|;\s*)return_to_product=([^;]+)/);
+      if (m) redirectUrl = decodeURIComponent(m[1]);
+    }
+
+    function isAccountArea(){
+      return /^\/(account|customer|challenge)/.test(path) || params.has('return_to');
+    }
+    function isSafe(url){
+      return typeof url === 'string' && url.charAt(0) === '/' && !/^\/{2}/.test(url);
+    }
+    function clearStores(){
+      try{
+        sessionStorage.removeItem('return_to_product');
+        localStorage.removeItem('return_to_product');
+      }catch(e){}
+      document.cookie = 'return_to_product=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
+    }
+
+    // Nur wenn eingeloggt + im Account/Challenge-Bereich + Ziel vorhanden
+    if (loggedIn && redirectUrl && isAccountArea()){
+      if (isSafe(redirectUrl) && redirectUrl !== (location.pathname + location.search)) {
+        clearStores();
+        location.replace(redirectUrl);
+      } else {
+        clearStores();
+      }
+    }
+  } catch(e) {
+    console.warn('Return redirect error', e);
+  }
+})();
+</script>
