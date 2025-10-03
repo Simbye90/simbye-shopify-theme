@@ -287,16 +287,16 @@ body { padding-top: var(--header-height); }
     
     <!-- Desktop Navigation (locale-aware via routes.root_url) -->
     <nav class="header-nav">
-      <a href="{{ routes.root_url }}pages/how-it-works" class="nav-link">
+      <a href="{{ routes.root_url }}/pages/how-it-works" class="nav-link">
         {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
       </a>
-      <a href="{{ routes.root_url }}pages/check-esim" class="nav-link">
+      <a href="{{ routes.root_url }}/pages/check-esim" class="nav-link">
         {{ 'header.check_esim' | t | default: 'Check eSIM' }}
       </a>
-      <a href="{{ routes.root_url }}pages/faq" class="nav-link">
+      <a href="{{ routes.root_url }}/pages/faq" class="nav-link">
         {{ 'header.faq' | t | default: 'FAQ' }}
       </a>
-      <a href="{{ routes.root_url }}pages/support" class="nav-link">
+      <a href="{{ routes.root_url }}/pages/support" class="nav-link">
         {{ 'header.support' | t | default: 'Support' }}
       </a>
     </nav>
