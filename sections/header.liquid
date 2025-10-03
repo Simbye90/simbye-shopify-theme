@@ -1,10 +1,10 @@
 {% comment %}
-  Enterprise Header V7.0 - Final
-  - Locale-safe URLs ({{ routes.root_url }})
-  - return_to für Page-Persistenz
-  - Unique Währungen (keine Duplikate)
-  - Full Accessibility (ARIA, Focus Trap)
-  - Shopify Markets Integration
+  Section: Enterprise Header (locale-safe)
+  - Verwendet Shopify <localization-form> + {% form 'localization' %} für Sprache + Land/Währung
+  - return_to = {{ request.url }} (sicherer als request.path)
+  - Links sind locale-aware via {{ routes.root_url }}
+  - Kein Gruppieren nach Währungen -> 404-Risiko minimiert
+  - A11y: ARIA-Attribute, Esc-Schließen, Focus-Trap für Mobile-Menu
 {% endcomment %}
 
 <style>
@@ -29,6 +29,7 @@
   --radius-sm:16px;
 }
 
+/* Dark Mode */
 [data-theme="dark"]{
   --text-color:#f5f5f5;
   --text-secondary:#999;
@@ -41,6 +42,7 @@
   --primary-accent:#00ff88;
 }
 
+/* Layout */
 .enterprise-header{
   position:fixed; inset:0 0 auto 0; width:100vw;
   height:var(--header-height); background:var(--bg-header);
@@ -49,7 +51,7 @@
 }
 body{ padding-top:var(--header-height); }
 @media (max-width:768px){
-  .enterprise-header{ height:var(--header-mobile-height); }
+  .enterprise-header{ height:var(--header-mobile-height); width:100vw; }
   body{ padding-top:var(--header-mobile-height); }
 }
 .enterprise-header.scrolled{ box-shadow:var(--shadow-md); border-bottom-color:var(--border-color); backdrop-filter:blur(10px); }
@@ -61,14 +63,16 @@ body{ padding-top:var(--header-height); }
   height:100%; max-width:1600px; margin:0 auto; padding:0 40px; gap:40px;
 }
 
+/* Logo */
 .header-logo{ display:flex; align-items:center; height:100%; width:200px; }
 .header-logo img{ width:200px; height:auto; object-fit:contain; transition:transform var(--transition-fast); }
 .header-logo:hover img{ transform:scale(1.02); }
 
+/* Desktop Nav */
 .header-nav{ display:flex; align-items:center; gap:8px; height:100%; }
 .nav-link{
   display:inline-flex; align-items:center; padding:14px 26px; color:var(--text-color);
-  font-size:22px; font-weight:600; text-decoration:none; border-radius:var(--radius-sm);
+  font-size:18px; font-weight:600; text-decoration:none; border-radius:var(--radius-sm);
   transition:all var(--transition-fast); position:relative; overflow:hidden; letter-spacing:-.01em;
 }
 .nav-link::before{
@@ -84,35 +88,37 @@ body{ padding-top:var(--header-height); }
 }
 .nav-link.active::after, .nav-link:hover::after{ transform:scaleX(1); }
 
+/* Actions */
 .header-actions{ display:flex; align-items:center; gap:12px; height:100%; }
 .auth-btn{
   display:inline-flex; align-items:center; justify-content:center; padding:0 28px; height:44px;
   font-size:15px; font-weight:600; color:#fff; background:var(--primary-color); text-decoration:none;
-  border-radius:12px; transition:all var(--transition-fast); gap:8px; box-shadow:0 2px 8px rgba(0,154,97,.2);
-  border:none; letter-spacing:-.01em;
+  border-radius:12px; transition:all var(--transition-fast); gap:8px; box-shadow:0 2px 8px rgba(0,154,97,.2); border:none;
 }
 .auth-btn:hover{ background:var(--primary-hover); transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,154,97,.3); }
 .auth-btn:active{ transform:scale(.98); }
 .auth-btn svg{ width:18px; height:18px; }
 
+/* Switchers */
 .switcher-group{ display:flex; gap:8px; }
 .switcher{
   position:relative; display:flex; align-items:center; gap:8px; padding:10px 16px; border-radius:12px;
-  background:var(--header-gradient); border:1px solid var(--border-color); color:var(--text-color); font-size:14px;
-  font-weight:500; cursor:pointer; transition:all var(--transition-fast); box-shadow:var(--shadow-sm); user-select:none;
+  background:var(--header-gradient); border:1px solid var(--border-color); color:var(--text-color); font-size:14px; font-weight:500;
+  cursor:pointer; transition:all var(--transition-fast); box-shadow:var(--shadow-sm); user-select:none;
 }
 .switcher:hover{ border-color:var(--primary-color); transform:translateY(-1px); box-shadow:var(--shadow-md); }
 [data-theme="dark"] .switcher{ background:rgba(26,26,26,.8); backdrop-filter:blur(10px); }
+.switcher[aria-expanded="true"]::after{ transform:rotate(180deg); }
 .switcher::after{
   content:''; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent;
   border-top:5px solid currentColor; opacity:.6; transition:transform var(--transition-fast);
 }
-.switcher[aria-expanded="true"]::after{ transform:rotate(180deg); }
 
+/* Dropdown */
 .switcher-dropdown{
   position:absolute; top:calc(100% + 8px); left:0; min-width:220px; background:#fff; border:1px solid var(--border-color);
   border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); opacity:0; visibility:hidden; transform:translateY(-10px);
-  transition:all var(--transition-fast); z-index:1001; overflow:hidden; max-height:320px; overflow-y:auto;
+  transition:all var(--transition-fast); z-index:1001; overflow:hidden;
 }
 [data-theme="dark"] .switcher-dropdown{ background:#1a1a1a; border-color:rgba(255,255,255,.08); box-shadow:0 8px 24px rgba(0,0,0,.4); }
 .switcher[aria-expanded="true"] .switcher-dropdown{ opacity:1; visibility:visible; transform:translateY(0); }
@@ -125,6 +131,7 @@ body{ padding-top:var(--header-height); }
 .dropdown-item.active{ background:rgba(0,154,97,.12); color:var(--primary-color); font-weight:600; }
 [data-theme="dark"] .dropdown-item:hover{ background:rgba(0,217,126,.1); }
 
+/* Theme toggle */
 .theme-toggle{
   display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px;
   background:var(--header-gradient); border:1px solid var(--border-color); cursor:pointer; transition:all var(--transition-base);
@@ -138,6 +145,7 @@ body{ padding-top:var(--header-height); }
 [data-theme="dark"] .sun-icon{ opacity:1; transform:rotate(0) scale(1); color:var(--primary-accent); }
 [data-theme="dark"] .moon-icon{ opacity:0; transform:rotate(180deg) scale(0); }
 
+/* Mobile toggle */
 .mobile-toggle{
   display:none; width:44px; height:44px; align-items:center; justify-content:center; border-radius:12px;
   background:var(--primary-color); cursor:pointer; border:none; position:relative; transition:all var(--transition-fast);
@@ -151,6 +159,7 @@ body{ padding-top:var(--header-height); }
 .mobile-toggle.active .burger span:nth-child(2){ opacity:0; transform:translateX(-10px); }
 .mobile-toggle.active .burger span:nth-child(3){ transform:rotate(-45deg) translate(5px,-5px); }
 
+/* Mobile menu */
 .mobile-menu{
   position:fixed; top:0; right:0; width:75%; max-width:360px; height:100vh; background:var(--bg-header);
   transform:translateX(100%); transition:transform var(--transition-base); z-index:1001; overflow-y:auto;
@@ -163,16 +172,16 @@ body{ padding-top:var(--header-height); }
 }
 .mobile-overlay.active{ opacity:1; visibility:visible; }
 
+/* Mobile header */
 .mobile-menu-header{
-  padding:20px; border-bottom:2px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; min-height:70px;
+  padding:20px; border-bottom:2px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; min-height:70px; background:transparent;
 }
 [data-theme="dark"] .mobile-menu-header{ border-bottom-color:rgba(255,255,255,.08); }
 .mobile-header-login{
-  display:flex; align-items:center; gap:8px; text-decoration:none; color:#fff; font-size:15px; font-weight:600;
-  padding:10px 20px; border-radius:12px; background:var(--primary-color); letter-spacing:-.01em; transition:all var(--transition-fast);
+  display:flex; align-items:center; gap:8px; text-decoration:none; color:#fff; font-size:15px; font-weight:600; transition:all var(--transition-fast);
+  padding:10px 20px; border-radius:12px; background:var(--primary-color); letter-spacing:-.01em;
 }
 .mobile-header-login:hover{ background:var(--primary-hover); transform:translateX(2px); }
-.mobile-header-login svg{ width:18px; height:18px; }
 .mobile-close{
   width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,.1); border:2px solid var(--border-color);
   display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all var(--transition-fast); box-shadow:var(--shadow-sm);
@@ -183,26 +192,29 @@ body{ padding-top:var(--header-height); }
 .mobile-close:hover{ background:rgba(255,59,48,.1); border-color:#ff3b30; transform:rotate(90deg); }
 .mobile-close:hover svg{ color:#ff3b30; }
 
+/* Mobile nav */
 .mobile-nav{ padding:20px; }
 .mobile-nav-item{
-  display:block; padding:16px 20px; color:var(--text-color); font-size:17px; font-weight:600; text-decoration:none; border-radius:12px;
-  transition:all var(--transition-fast); margin-bottom:8px; background:var(--header-gradient); border:1px solid var(--border-color); letter-spacing:-.01em;
+  display:block; padding:16px 20px; color:var(--text-color); font-size:17px; font-weight:600; text-decoration:none; border-radius:12px; transition:all var(--transition-fast);
+  margin-bottom:8px; background:var(--header-gradient); border:1px solid var(--border-color); letter-spacing:-.01em;
 }
 [data-theme="dark"] .mobile-nav-item{ background:rgba(26,26,26,.5); border-color:rgba(255,255,255,.08); }
 .mobile-nav-item:hover, .mobile-nav-item:active{ background:rgba(0,154,97,.1); border-color:var(--primary-color); transform:translateX(4px); color:var(--primary-color); }
 
+/* Mobile settings */
 .mobile-settings{ padding:20px; border-top:2px solid var(--border-color); display:flex; flex-direction:column; gap:12px; background:var(--header-gradient); }
 [data-theme="dark"] .mobile-settings{ background:rgba(0,217,126,.02); border-top-color:rgba(255,255,255,.08); }
 .settings-row{ display:flex; align-items:center; justify-content:space-between; padding:12px; border-radius:12px; background:rgba(0,0,0,.02); position:relative; }
 [data-theme="dark"] .settings-row{ background:rgba(255,255,255,.03); }
 .settings-label{ font-size:15px; font-weight:600; color:var(--text-color); letter-spacing:-.01em; }
 .settings-value{
-  display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:10px; background:#fff; font-size:14px; font-weight:600;
-  color:var(--text-color); box-shadow:var(--shadow-sm); border:1px solid var(--border-color); cursor:pointer; transition:all var(--transition-fast);
+  display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:10px; background:#fff; font-size:14px; font-weight:600; color:var(--text-color);
+  box-shadow:var(--shadow-sm); border:1px solid var(--border-color); cursor:pointer; transition:all var(--transition-fast);
 }
 .settings-value:hover{ border-color:var(--primary-color); transform:translateX(2px); }
 [data-theme="dark"] .settings-value{ background:rgba(26,26,26,.8); border-color:rgba(255,255,255,.08); }
 
+/* Mobile dropdown */
 .mobile-dropdown{
   position:absolute; bottom:calc(100% + 8px); right:0; min-width:240px; background:#fff; border:1px solid var(--border-color);
   border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); opacity:0; visibility:hidden; transform:translateY(10px);
@@ -211,29 +223,20 @@ body{ padding-top:var(--header-height); }
 [data-theme="dark"] .mobile-dropdown{ background:#1a1a1a; border-color:rgba(255,255,255,.08); box-shadow:0 8px 24px rgba(0,0,0,.4); }
 .settings-row.active .mobile-dropdown{ opacity:1; visibility:visible; transform:translateY(0); }
 .mobile-dropdown-item{
-  display:flex; align-items:center; gap:10px; padding:12px 16px; color:var(--text-color); text-decoration:none; font-size:14px;
-  transition:background var(--transition-fast); cursor:pointer; border:none; background:none; width:100%; text-align:left; font-family:inherit; font-weight:500;
+  display:flex; align-items:center; gap:10px; padding:12px 16px; color:var(--text-color); text-decoration:none; font-size:14px; transition:background var(--transition-fast);
+  cursor:pointer; border:none; background:none; width:100%; text-align:left; font-family:inherit; font-weight:500;
 }
 .mobile-dropdown-item:hover{ background:rgba(0,154,97,.08); }
 .mobile-dropdown-item.active{ background:rgba(0,154,97,.12); color:var(--primary-color); font-weight:600; }
 [data-theme="dark"] .mobile-dropdown-item:hover{ background:rgba(0,217,126,.1); }
 
-.dark-mode-switch{
-  position:relative; width:48px; height:26px; background:#e0e0e0; border-radius:13px; cursor:pointer;
-  transition:background var(--transition-fast); box-shadow:inset 0 2px 4px rgba(0,0,0,.1);
-}
-[data-theme="dark"] .dark-mode-switch{ background:var(--primary-color); box-shadow:0 4px 12px rgba(0,217,126,.3); }
-.dark-mode-switch-handle{
-  position:absolute; top:3px; left:3px; width:20px; height:20px; background:#fff; border-radius:50%;
-  transition:transform var(--transition-fast); box-shadow:0 2px 6px rgba(0,0,0,.2);
-}
-[data-theme="dark"] .dark-mode-switch-handle{ transform:translateX(22px); }
-
+/* Footer */
 .mobile-footer{ padding:20px; text-align:center; font-size:12px; color:var(--text-secondary); opacity:.6; border-top:1px solid var(--border-color); }
 
+/* Responsive */
 @media (max-width:1200px){
   .header-container{ padding:0 24px; }
-  .nav-link{ font-size:20px; padding:12px 22px; }
+  .nav-link{ font-size:17px; padding:10px 20px; }
 }
 @media (max-width:768px){
   .header-container{ grid-template-columns:160px 1fr; padding:0 20px; gap:12px; max-width:none; }
@@ -244,14 +247,16 @@ body{ padding-top:var(--header-height); }
   .header-actions{ justify-content:flex-end; }
 }
 
-.mobile-menu::-webkit-scrollbar, .mobile-dropdown::-webkit-scrollbar, .switcher-dropdown::-webkit-scrollbar{ width:6px; }
-.mobile-menu::-webkit-scrollbar-track, .mobile-dropdown::-webkit-scrollbar-track, .switcher-dropdown::-webkit-scrollbar-track{ background:rgba(0,0,0,.05); border-radius:3px; }
-.mobile-menu::-webkit-scrollbar-thumb, .mobile-dropdown::-webkit-scrollbar-thumb, .switcher-dropdown::-webkit-scrollbar-thumb{ background:var(--primary-color); border-radius:3px; }
-[data-theme="dark"] .mobile-menu::-webkit-scrollbar-track, [data-theme="dark"] .mobile-dropdown::-webkit-scrollbar-track, [data-theme="dark"] .switcher-dropdown::-webkit-scrollbar-track{ background:rgba(255,255,255,.05); }
+/* Scrollbars for mobile lists */
+.mobile-menu::-webkit-scrollbar, .mobile-dropdown::-webkit-scrollbar{ width:6px; }
+.mobile-menu::-webkit-scrollbar-track, .mobile-dropdown::-webkit-scrollbar-track{ background:rgba(0,0,0,.05); border-radius:3px; }
+.mobile-menu::-webkit-scrollbar-thumb, .mobile-dropdown::-webkit-scrollbar-thumb{ background:var(--primary-color); border-radius:3px; }
+[data-theme="dark"] .mobile-menu::-webkit-scrollbar-track, [data-theme="dark"] .mobile-dropdown::-webkit-scrollbar-track{ background:rgba(255,255,255,.05); }
 </style>
 
 <header class="enterprise-header" id="enterprise-header">
   <div class="header-container">
+    <!-- Logo -->
     <div class="header-logo">
       <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
         <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
@@ -259,6 +264,7 @@ body{ padding-top:var(--header-height); }
       </a>
     </div>
 
+    <!-- Desktop Navigation (locale-aware via routes.root_url) -->
     <nav class="header-nav" aria-label="Main">
       <a href="{{ routes.root_url }}pages/how-it-works" class="nav-link">
         {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
@@ -274,7 +280,9 @@ body{ padding-top:var(--header-height); }
       </a>
     </nav>
 
+    <!-- Desktop Actions -->
     <div class="header-actions">
+      <!-- Login -->
       {% if customer %}
         <a href="{{ routes.account_url }}" class="auth-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -289,13 +297,14 @@ body{ padding-top:var(--header-height); }
         </a>
       {% endif %}
 
+      <!-- Switchers -->
       <div class="switcher-group">
         <!-- Language Switcher -->
         <div class="switcher" id="language-switcher" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">
           <span aria-hidden="true">🌐</span>
-          <span>{{ localization.language.iso_code | upcase }}</span>
+          <span id="current-locale">{{ localization.language.iso_code | upcase }}</span>
 
-          <div class="switcher-dropdown" role="menu">
+          <div class="switcher-dropdown" role="menu" aria-label="{{ 'header.language' | t | default: 'Language' }}">
             <localization-form>
               {% form 'localization' %}
                 <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
@@ -304,8 +313,9 @@ body{ padding-top:var(--header-height); }
                   <button type="submit"
                           class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}"
                           role="menuitem"
+                          data-value="{{ language.iso_code }}"
                           onclick="this.form.querySelector('[name=language_code]').value='{{ language.iso_code }}'">
-                    {{ language.endonym_name }}
+                    <span>{{ language.endonym_name }}</span>
                   </button>
                 {% endfor %}
               {% endform %}
@@ -313,27 +323,25 @@ body{ padding-top:var(--header-height); }
           </div>
         </div>
 
-        <!-- Currency Switcher (Unique Currencies Only) -->
-        <div class="switcher" id="currency-switcher" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">
-          <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
+        <!-- Country/Currency Switcher -->
+        <div class="switcher" id="country-switcher" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">
+          <span id="current-country">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
 
-          <div class="switcher-dropdown" role="menu">
+          <div class="switcher-dropdown" role="menu" aria-label="{{ 'header.currency' | t | default: 'Currency' }}">
             {% if localization.available_countries.size > 1 %}
-              {% assign seen_currencies = '' | split: '' %}
               <localization-form>
                 {% form 'localization' %}
                   <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
                   <input type="hidden" name="return_to" value="{{ request.url }}">
                   {% for country in localization.available_countries %}
-                    {% unless seen_currencies contains country.currency.iso_code %}
-                      {% assign seen_currencies = seen_currencies | push: country.currency.iso_code %}
-                      <button type="submit"
-                              class="dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}"
-                              role="menuitem"
-                              onclick="this.form.querySelector('[name=country_code]').value='{{ country.iso_code }}'">
-                        <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
-                      </button>
-                    {% endunless %}
+                    <button type="submit"
+                            class="dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}"
+                            role="menuitem"
+                            data-value="{{ country.iso_code }}"
+                            onclick="this.form.querySelector('[name=country_code]').value='{{ country.iso_code }}'">
+                      <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                      <span style="opacity:.6; margin-left:auto;">{{ country.name }}</span>
+                    </button>
                   {% endfor %}
                 {% endform %}
               </localization-form>
@@ -342,6 +350,7 @@ body{ padding-top:var(--header-height); }
         </div>
       </div>
 
+      <!-- Theme Toggle -->
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="12" cy="12" r="5"></circle>
@@ -352,6 +361,7 @@ body{ padding-top:var(--header-height); }
         </svg>
       </button>
 
+      <!-- Mobile Toggle -->
       <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <div class="burger"><span></span><span></span><span></span></div>
       </button>
@@ -359,8 +369,10 @@ body{ padding-top:var(--header-height); }
   </div>
 </header>
 
+<!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
 <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" aria-hidden="true">
+  <!-- Header -->
   <div class="mobile-menu-header">
     {% if customer %}
       <a href="{{ routes.account_url }}" class="mobile-header-login">
@@ -368,7 +380,7 @@ body{ padding-top:var(--header-height); }
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
         </svg>
-        {{ customer.first_name | default: 'Account' }}
+        <span>{{ customer.first_name | default: 'Account' }}</span>
       </a>
     {% else %}
       <a href="{{ routes.account_login_url }}" class="mobile-header-login">
@@ -376,17 +388,18 @@ body{ padding-top:var(--header-height); }
           <circle cx="12" cy="8" r="4"></circle>
           <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
         </svg>
-        {{ 'header.login' | t | default: 'Login' }}
+        <span>{{ 'header.login' | t | default: 'Login' }}</span>
       </a>
     {% endif %}
 
     <button class="mobile-close" id="mobile-close" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
         <path d="M18 6L6 18M6 6l12 12"></path>
       </svg>
     </button>
   </div>
 
+  <!-- Navigation (locale-aware) -->
   <div class="mobile-nav">
     <a href="{{ routes.root_url }}pages/how-it-works" class="mobile-nav-item">
       {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
@@ -402,6 +415,7 @@ body{ padding-top:var(--header-height); }
     </a>
   </div>
 
+  <!-- Settings -->
   <div class="mobile-settings">
     <!-- Language -->
     <div class="settings-row" id="mobile-language-row">
@@ -410,7 +424,7 @@ body{ padding-top:var(--header-height); }
         <span>🌐</span>
         <span>{{ localization.language.iso_code | upcase }}</span>
       </div>
-      <div class="mobile-dropdown" role="menu">
+      <div class="mobile-dropdown" role="menu" aria-label="{{ 'header.language' | t | default: 'Language' }}">
         <localization-form>
           {% form 'localization' %}
             <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
@@ -419,8 +433,9 @@ body{ padding-top:var(--header-height); }
               <button type="submit"
                       class="mobile-dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}"
                       role="menuitem"
+                      data-value="{{ language.iso_code }}"
                       onclick="this.form.querySelector('[name=language_code]').value='{{ language.iso_code }}'">
-                {{ language.endonym_name }}
+                <span>{{ language.endonym_name }}</span>
               </button>
             {% endfor %}
           {% endform %}
@@ -428,29 +443,27 @@ body{ padding-top:var(--header-height); }
       </div>
     </div>
 
-    <!-- Currency (Unique Only) -->
-    <div class="settings-row" id="mobile-currency-row">
+    <!-- Country/Currency -->
+    <div class="settings-row" id="mobile-country-row">
       <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
       <div class="settings-value" role="button" tabindex="0" aria-expanded="false">
         <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
       </div>
-      <div class="mobile-dropdown" role="menu">
+      <div class="mobile-dropdown" role="menu" aria-label="{{ 'header.currency' | t | default: 'Currency' }}">
         {% if localization.available_countries.size > 1 %}
-          {% assign seen_currencies_mobile = '' | split: '' %}
           <localization-form>
             {% form 'localization' %}
               <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
               <input type="hidden" name="return_to" value="{{ request.url }}">
               {% for country in localization.available_countries %}
-                {% unless seen_currencies_mobile contains country.currency.iso_code %}
-                  {% assign seen_currencies_mobile = seen_currencies_mobile | push: country.currency.iso_code %}
-                  <button type="submit"
-                          class="mobile-dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}"
-                          role="menuitem"
-                          onclick="this.form.querySelector('[name=country_code]').value='{{ country.iso_code }}'">
-                    <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
-                  </button>
-                {% endunless %}
+                <button type="submit"
+                        class="mobile-dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}"
+                        role="menuitem"
+                        data-value="{{ country.iso_code }}"
+                        onclick="this.form.querySelector('[name=country_code]').value='{{ country.iso_code }}'">
+                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                  <span style="opacity:.6; margin-left:auto;">{{ country.name }}</span>
+                </button>
               {% endfor %}
             {% endform %}
           </localization-form>
@@ -467,6 +480,7 @@ body{ padding-top:var(--header-height); }
     </div>
   </div>
 
+  <!-- Footer -->
   <div class="mobile-footer">© {{ 'now' | date: "%Y" }} {{ shop.name }}</div>
 </nav>
 
@@ -474,6 +488,7 @@ body{ padding-top:var(--header-height); }
 (function(){
   'use strict';
 
+  // Elements
   const header = document.getElementById('enterprise-header');
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -482,14 +497,16 @@ body{ padding-top:var(--header-height); }
   const themeToggle = document.getElementById('theme-toggle');
   const darkModeSwitch = document.getElementById('dark-mode-switch');
   const languageSwitcher = document.getElementById('language-switcher');
-  const currencySwitcher = document.getElementById('currency-switcher');
+  const countrySwitcher = document.getElementById('country-switcher');
 
+  // State
   let currentTheme = (()=>{
     try{ return localStorage.getItem('theme') || 'light'; }catch(e){ return 'light'; }
   })();
   let isMenuOpen = false;
   let lastFocus = null;
 
+  // Init
   (function init(){
     document.documentElement.setAttribute('data-theme', currentTheme);
     if(darkModeSwitch){ darkModeSwitch.setAttribute('aria-checked', currentTheme === 'dark' ? 'true' : 'false'); }
@@ -498,25 +515,39 @@ body{ padding-top:var(--header-height); }
     markActiveNav();
   })();
 
+  // Helpers
+  function qs(sel, root=document){ return root.querySelector(sel); }
+  function qsa(sel, root=document){ return [...root.querySelectorAll(sel)]; }
+
+  // Events
   function bindEvents(){
+    // Scroll
     window.addEventListener('scroll', handleScroll, { passive:true });
 
+    // Theme
     [themeToggle, darkModeSwitch].forEach(el=>{
       if(!el) return;
       el.addEventListener('click', toggleTheme);
       el.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleTheme(); } });
     });
 
+    // Desktop switchers
     setupSwitcher(languageSwitcher);
-    setupSwitcher(currencySwitcher);
-    setupMobileDropdown('mobile-language-row');
-    setupMobileDropdown('mobile-currency-row');
+    setupSwitcher(countrySwitcher);
 
+    // Mobile dropdowns
+    setupMobileDropdown('mobile-language-row');
+    setupMobileDropdown('mobile-country-row');
+
+    // Mobile menu open/close
     if(mobileToggle){ mobileToggle.addEventListener('click', openMobileMenu); }
     if(mobileClose){ mobileClose.addEventListener('click', closeMobileMenu); }
     if(mobileOverlay){ mobileOverlay.addEventListener('click', closeMobileMenu); }
 
+    // Global close on click outside
     document.addEventListener('click', closeAllSwitchers);
+
+    // Esc handling
     document.addEventListener('keydown', e=>{
       if(e.key==='Escape'){
         closeMobileMenu();
@@ -524,6 +555,7 @@ body{ padding-top:var(--header-height); }
       }
     });
 
+    // Swipe to close mobile menu
     let touchStartX = 0;
     if(mobileMenu){
       mobileMenu.addEventListener('touchstart', e=>{ touchStartX = e.touches[0].clientX; }, { passive:true });
@@ -534,11 +566,13 @@ body{ padding-top:var(--header-height); }
     }
   }
 
+  // Scroll handler
   function handleScroll(){
     if(window.scrollY > 10){ header.classList.add('scrolled'); }
     else{ header.classList.remove('scrolled'); }
   }
 
+  // Theme toggle
   function toggleTheme(){
     currentTheme = (currentTheme === 'light') ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
@@ -546,9 +580,12 @@ body{ padding-top:var(--header-height); }
     try{ localStorage.setItem('theme', currentTheme); }catch(e){}
   }
 
+  // Switcher (desktop)
   function setupSwitcher(el){
     if(!el) return;
-    const toggle = (expand)=>{ el.setAttribute('aria-expanded', expand ? 'true' : 'false'); };
+    const toggle = (expand)=>{
+      el.setAttribute('aria-expanded', expand ? 'true' : 'false');
+    };
     el.addEventListener('click', e=>{
       e.stopPropagation();
       const expanded = el.getAttribute('aria-expanded') === 'true';
@@ -566,21 +603,22 @@ body{ padding-top:var(--header-height); }
   }
 
   function closeAllSwitchers(){
-    document.querySelectorAll('.switcher[aria-expanded="true"]').forEach(sw=> sw.setAttribute('aria-expanded','false'));
-    document.querySelectorAll('.settings-row.active').forEach(r=> r.classList.remove('active'));
-    document.querySelectorAll('.settings-row .settings-value[aria-expanded="true"]').forEach(v=> v.setAttribute('aria-expanded','false'));
+    qsa('.switcher[aria-expanded="true"]').forEach(sw=> sw.setAttribute('aria-expanded','false'));
+    qsa('.settings-row.active').forEach(r=> r.classList.remove('active'));
+    qsa('.settings-row .settings-value[aria-expanded="true"]').forEach(v=> v.setAttribute('aria-expanded','false'));
   }
 
+  // Mobile dropdowns
   function setupMobileDropdown(rowId){
     const row = document.getElementById(rowId);
     if(!row) return;
-    const val = row.querySelector('.settings-value');
+    const val = qs('.settings-value', row);
     if(!val) return;
 
     val.addEventListener('click', e=>{
       e.stopPropagation();
       const active = row.classList.contains('active');
-      document.querySelectorAll('.settings-row').forEach(r=> r.classList.remove('active'));
+      qsa('.settings-row').forEach(r=> r.classList.remove('active'));
       if(!active){ row.classList.add('active'); }
       val.setAttribute('aria-expanded', !active ? 'true' : 'false');
     });
@@ -593,6 +631,7 @@ body{ padding-top:var(--header-height); }
     });
   }
 
+  // Mobile menu
   function openMobileMenu(){
     isMenuOpen = true;
     lastFocus = document.activeElement;
@@ -604,8 +643,9 @@ body{ padding-top:var(--header-height); }
     mobileOverlay.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
 
+    // focus trap start
     setTimeout(()=>{
-      const firstBtn = mobileMenu.querySelector('a, button');
+      const firstBtn = qs('.mobile-menu a, .mobile-menu button');
       if(firstBtn) firstBtn.focus();
     }, 0);
     document.addEventListener('focus', trapFocus, true);
@@ -629,14 +669,15 @@ body{ padding-top:var(--header-height); }
     if(!isMenuOpen) return;
     if(!mobileMenu.contains(e.target)){
       e.stopPropagation();
-      const firstBtn = mobileMenu.querySelector('a, button');
+      const firstBtn = qs('.mobile-menu a, .mobile-menu button');
       if(firstBtn) firstBtn.focus();
     }
   }
 
+  // Active nav marker (locale-aware)
   function markActiveNav(){
-    const path = window.location.pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?\//i,'/');
-    document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link=>{
+    const path = window.location.pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?\//i,'/'); // entfernt evtl. /de/ oder /en-eu/
+    qsa('.nav-link, .mobile-nav-item').forEach(link=>{
       try{
         const href = new URL(link.getAttribute('href'), window.location.origin).pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?\//i,'/');
         if(href === path){ link.classList.add('active'); }
@@ -649,7 +690,11 @@ body{ padding-top:var(--header-height); }
 
 {% schema %}
 {
-  "name": "Enterprise Header V7.0",
-  "settings": []
+  "name": "Enterprise Header ",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    { "name": "Enterprise Header " }
+  ]
 }
 {% endschema %}
