@@ -4,8 +4,8 @@
 <style>
 /* CSS Variables - OPTIMIZED */
 :root {
-  --header-height: 90px; /* +10px mehr Abstand */
-  --header-mobile-height: 70px; /* +5px mehr */
+  --header-height: 100px; /* +20px mehr Abstand */
+  --header-mobile-height: 75px; /* +10px mehr */
   --primary-color: #009a61;
   --primary-hover: #00824f;
   --primary-accent: #00d97e;
@@ -118,7 +118,7 @@ body {
   align-items: center;
   padding: 12px 24px;
   color: var(--text-color);
-  font-size: 18px; /* Reduziert von 22px */
+  font-size: 24px; /* Erhöht auf 24px */
   font-weight: 600; /* Erhöht von 500 */
   text-decoration: none;
   border-radius: var(--border-radius-sm);
@@ -630,6 +630,7 @@ body {
   border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all var(--transition-fast);
+  position: relative;
 }
 
 .settings-value:hover {
@@ -640,6 +641,41 @@ body {
 [data-theme="dark"] .settings-value {
   background: rgba(26, 26, 26, 0.8);
   border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Mobile Switcher Dropdowns */
+.mobile-switcher {
+  position: relative;
+}
+
+.mobile-switcher-dropdown {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all var(--transition-fast);
+  z-index: 1002;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+[data-theme="dark"] .mobile-switcher-dropdown {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-switcher.active .mobile-switcher-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 /* Dark Mode Switch */
@@ -692,7 +728,7 @@ body {
   }
   
   .nav-link {
-    font-size: 17px;
+    font-size: 22px; /* Etwas kleiner auf Tablets */
     padding: 10px 20px;
   }
 }
@@ -825,13 +861,19 @@ body {
           <span id="current-currency">{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
           
           <div class="switcher-dropdown">
-            {% for currency in localization.available_countries.first.currency %}
-              <form method="post" action="{{ routes.root_url }}localization">
-                <input type="hidden" name="country_code" value="{{ currency.iso_code }}">
-                <button type="submit" class="dropdown-item {% if currency.iso_code == cart.currency.iso_code %}active{% endif %}">
-                  <span>{{ currency.symbol }} {{ currency.iso_code }}</span>
+            {% for country in localization.available_countries %}
+              {% if country.currency.iso_code != cart.currency.iso_code %}
+                <form method="post" action="{{ routes.root_url }}localization">
+                  <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                  <button type="submit" class="dropdown-item">
+                    <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                  </button>
+                </form>
+              {% else %}
+                <button type="button" class="dropdown-item active">
+                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
                 </button>
-              </form>
+              {% endif %}
             {% endfor %}
           </div>
         </div>
@@ -908,18 +950,48 @@ body {
   
   <!-- Settings -->
   <div class="mobile-settings">
+    <!-- Language Mobile -->
     <div class="settings-row">
       <span class="settings-label">{{ 'header.language' | t | default: 'Language' }}</span>
-      <div class="settings-value" id="mobile-language">
+      <div class="settings-value mobile-switcher" id="mobile-language-switcher">
         <span>🌐</span>
         <span>{{ localization.language.iso_code | upcase }}</span>
+        
+        <div class="mobile-switcher-dropdown">
+          {% for language in localization.available_languages %}
+            <form method="post" action="{{ routes.root_url }}localization">
+              <input type="hidden" name="language_code" value="{{ language.iso_code }}">
+              <button type="submit" class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
+                <span>{{ language.endonym_name }}</span>
+              </button>
+            </form>
+          {% endfor %}
+        </div>
       </div>
     </div>
     
+    <!-- Currency Mobile -->
     <div class="settings-row">
       <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
-      <div class="settings-value" id="mobile-currency">
+      <div class="settings-value mobile-switcher" id="mobile-currency-switcher">
         <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+        
+        <div class="mobile-switcher-dropdown">
+          {% for country in localization.available_countries %}
+            {% if country.currency.iso_code != cart.currency.iso_code %}
+              <form method="post" action="{{ routes.root_url }}localization">
+                <input type="hidden" name="country_code" value="{{ country.iso_code }}">
+                <button type="submit" class="dropdown-item">
+                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                </button>
+              </form>
+            {% else %}
+              <button type="button" class="dropdown-item active">
+                <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+              </button>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     </div>
     
@@ -951,6 +1023,8 @@ body {
   const darkModeSwitch = document.getElementById('dark-mode-switch');
   const languageSwitcher = document.getElementById('language-switcher');
   const currencySwitcher = document.getElementById('currency-switcher');
+  const mobileLanguageSwitcher = document.getElementById('mobile-language-switcher');
+  const mobileCurrencySwitcher = document.getElementById('mobile-currency-switcher');
   
   // State
   let currentTheme = localStorage.getItem('theme') || 'light';
@@ -1006,9 +1080,25 @@ body {
       });
     }
     
+    // Mobile Switchers
+    if (mobileLanguageSwitcher) {
+      mobileLanguageSwitcher.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMobileSwitcher(mobileLanguageSwitcher);
+      });
+    }
+    
+    if (mobileCurrencySwitcher) {
+      mobileCurrencySwitcher.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleMobileSwitcher(mobileCurrencySwitcher);
+      });
+    }
+    
     // Close dropdowns on outside click
     document.addEventListener('click', function() {
       closeSwitchers();
+      closeMobileSwitchers();
     });
     
     // Escape Key
@@ -1018,6 +1108,7 @@ body {
           closeMobileMenu();
         }
         closeSwitchers();
+        closeMobileSwitchers();
       }
     });
     
@@ -1078,6 +1169,7 @@ body {
   function toggleSwitcher(switcher) {
     const isActive = switcher.classList.contains('active');
     closeSwitchers();
+    closeMobileSwitchers();
     if (!isActive) {
       switcher.classList.add('active');
     }
@@ -1085,6 +1177,22 @@ body {
   
   function closeSwitchers() {
     document.querySelectorAll('.switcher').forEach(function(sw) {
+      sw.classList.remove('active');
+    });
+  }
+  
+  // Mobile Switcher Functions
+  function toggleMobileSwitcher(switcher) {
+    const isActive = switcher.classList.contains('active');
+    closeMobileSwitchers();
+    closeSwitchers();
+    if (!isActive) {
+      switcher.classList.add('active');
+    }
+  }
+  
+  function closeMobileSwitchers() {
+    document.querySelectorAll('.mobile-switcher').forEach(function(sw) {
       sw.classList.remove('active');
     });
   }
