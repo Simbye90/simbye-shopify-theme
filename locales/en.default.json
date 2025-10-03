@@ -541,6 +541,33 @@
     "step3_desc_start": "The eSIM can only be activated in",
     "step3_desc_end": "Then enable data roaming for automatic connection.",
     "step3_alt": "Enable data roaming"
+},
+  "about": {
+    "label": "About Us",
+    "hero_title_start": "Connecting",
+    "hero_title_highlight": "100,000+ Travelers",
+    "hero_title_end": "Worldwide",
+    "hero_subtitle": "Making global connectivity simple, affordable, and instant. No more expensive roaming fees, no more searching for local SIM cards.",
+    "story_title": "Our Story",
+    "story_p1": "Simbye was founded by travelers, for travelers. We know the frustration of arriving in a new country and immediately facing connectivity challenges - expensive roaming fees, complicated local SIM purchases, or unreliable WiFi.",
+    "story_p2": "Our mission is simple: make global connectivity as easy as booking a flight. With eSIM technology, we deliver instant data plans for 190+ countries directly to your phone - no physical SIM card needed.",
+    "story_p3": "Today, over 100,000 travelers trust Simbye to stay connected worldwide. From digital nomads working remotely to business travelers closing deals internationally, we are proud to be the connectivity partner of choice.",
+    "story_image_alt": "Simbye Team",
+    "stat1": "Countries",
+    "stat2": "Happy Customers",
+    "stat3": "Customer Rating",
+    "stat4": "Avg. Activation Time",
+    "values_title": "What We Stand For",
+    "values_subtitle": "Our core values guide everything we do",
+    "value1_title": "Transparency",
+    "value1_text": "No hidden fees, no surprise charges. What you see is what you pay. Clear pricing, honest communication, and complete visibility into your data usage.",
+    "value2_title": "Innovation",
+    "value2_text": "We leverage cutting-edge eSIM technology to deliver instant connectivity. From QR code activation to real-time data tracking, we are constantly innovating.",
+    "value3_title": "Customer First",
+    "value3_text": "15 support agents available 24/7 in 12 languages. Whether you need help with activation or have questions about coverage, we are always here for you.",
+    "cta_title": "Ready to Stay Connected?",
+    "cta_text": "Join 100,000+ travelers who trust Simbye for their global connectivity. Get started with 100 MB completely free.",
+    "cta_button": "Explore eSIM Plans"
   }
 }
 
