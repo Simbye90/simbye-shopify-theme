@@ -308,6 +308,27 @@ body {
   font-family: inherit;
 }
 
+.dropdown-item .country-flag {
+  width: 20px;
+  height: 15px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-item .country-flag img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.dropdown-item .country-name {
+  opacity: 0.6;
+  font-size: 12px;
+  margin-left: auto;
+}
+
 .dropdown-item:hover {
   background: rgba(0, 154, 97, 0.08);
 }
@@ -703,6 +724,21 @@ body {
   font-weight: 500;
 }
 
+.mobile-dropdown-item .country-flag-mobile {
+  width: 20px;
+  height: 15px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-dropdown-item .country-flag-mobile img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
 .mobile-dropdown-item:hover {
   background: rgba(0, 154, 97, 0.08);
 }
@@ -899,16 +935,18 @@ body {
           </div>
         </div>
         
-        <!-- Currency Switcher -->
-        <div class="switcher" id="currency-switcher">
-          <span id="current-currency">{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+        <!-- Country/Currency Switcher -->
+        <div class="switcher" id="country-switcher">
+          <span id="current-country">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
           
           <div class="switcher-dropdown">
             {% for country in localization.available_countries %}
               <form method="post" action="{{ routes.root_url }}localization">
                 <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-                <button type="submit" class="dropdown-item {% if country.currency.iso_code == cart.currency.iso_code %}active{% endif %}">
+                <button type="submit" class="dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
+                  <span class="country-flag">{{ country.iso_code | slice: 0, 2 | downcase | prepend: 'https://flagcdn.com/w20/' | append: '.png' | img_tag: country.name }}</span>
                   <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+                  <span class="country-name">{{ country.name }}</span>
                 </button>
               </form>
             {% endfor %}
@@ -1006,18 +1044,19 @@ body {
       </div>
     </div>
     
-    <div class="settings-row" id="mobile-currency-row">
-      <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
+    <div class="settings-row" id="mobile-country-row">
+      <span class="settings-label">{{ 'header.country_currency' | t | default: 'Country / Currency' }}</span>
       <div class="settings-value">
-        <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
+        <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
       </div>
       
       <div class="mobile-dropdown">
         {% for country in localization.available_countries %}
           <form method="post" action="{{ routes.root_url }}localization">
             <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-            <button type="submit" class="mobile-dropdown-item {% if country.currency.iso_code == cart.currency.iso_code %}active{% endif %}">
-              <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+            <button type="submit" class="mobile-dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}">
+              <span class="country-flag-mobile">{{ country.iso_code | slice: 0, 2 | downcase | prepend: 'https://flagcdn.com/w20/' | append: '.png' | img_tag: country.name }}</span>
+              <span>{{ country.currency.symbol }} {{ country.currency.iso_code }} - {{ country.name }}</span>
             </button>
           </form>
         {% endfor %}
@@ -1051,7 +1090,7 @@ body {
   const themeToggle = document.getElementById('theme-toggle');
   const darkModeSwitch = document.getElementById('dark-mode-switch');
   const languageSwitcher = document.getElementById('language-switcher');
-  const currencySwitcher = document.getElementById('currency-switcher');
+  const countrySwitcher = document.getElementById('country-switcher');
   
   // State
   let currentTheme = localStorage.getItem('theme') || 'light';
@@ -1100,16 +1139,16 @@ body {
       });
     }
     
-    if (currencySwitcher) {
-      currencySwitcher.addEventListener('click', function(e) {
+    if (countrySwitcher) {
+      countrySwitcher.addEventListener('click', function(e) {
         e.stopPropagation();
-        toggleSwitcher(currencySwitcher);
+        toggleSwitcher(countrySwitcher);
       });
     }
     
-    // Mobile Language/Currency Switchers
+    // Mobile Language/Country Switchers
     const mobileLanguageRow = document.getElementById('mobile-language-row');
-    const mobileCurrencyRow = document.getElementById('mobile-currency-row');
+    const mobileCountryRow = document.getElementById('mobile-country-row');
     
     if (mobileLanguageRow) {
       const languageValue = mobileLanguageRow.querySelector('.settings-value');
@@ -1121,12 +1160,12 @@ body {
       }
     }
     
-    if (mobileCurrencyRow) {
-      const currencyValue = mobileCurrencyRow.querySelector('.settings-value');
-      if (currencyValue) {
-        currencyValue.addEventListener('click', function(e) {
+    if (mobileCountryRow) {
+      const countryValue = mobileCountryRow.querySelector('.settings-value');
+      if (countryValue) {
+        countryValue.addEventListener('click', function(e) {
           e.stopPropagation();
-          toggleMobileDropdown(mobileCurrencyRow);
+          toggleMobileDropdown(mobileCountryRow);
         });
       }
     }
