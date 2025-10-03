@@ -138,7 +138,7 @@
   width: 100%;
 }
 
-/* Feature Card */
+/* Feature Card - DESKTOP WIE MOBILE */
 .why-feature {
   background: var(--why-card-bg);
   border-radius: 24px;
@@ -150,6 +150,9 @@
   border: 2px solid var(--why-border);
   animation: fadeInUp 0.9s ease both;
   animation-delay: calc(var(--feature-index) * 0.1s);
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
 }
 
 .why-feature:nth-child(1) { --feature-index: 1; }
@@ -174,10 +177,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 28px;
+  margin-bottom: 0;
   position: relative;
   box-shadow: 0 10px 30px rgba(0, 154, 97, 0.25);
   animation: subtlePulse 4s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
 /* Animated Glow Effect */
