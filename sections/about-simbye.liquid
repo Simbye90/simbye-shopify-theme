@@ -1,0 +1,660 @@
+<!-- sections/about-us.liquid -->
+<!-- SIMBYE ABOUT US - ENTERPRISE VERSION -->
+
+<style>
+/* CSS Variables */
+:root {
+  --about-primary: #009a61;
+  --about-primary-hover: #00824f;
+  --about-accent: #00d97e;
+  --about-text: #1a1a1a;
+  --about-text-secondary: #666666;
+  --about-bg: #ffffff;
+  --about-card-bg: #ffffff;
+  --about-border: rgba(0, 0, 0, 0.08);
+  --about-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --about-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --about-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --about-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --about-text: #f5f5f5;
+  --about-text-secondary: #999999;
+  --about-bg: #0a0a0a;
+  --about-card-bg: rgba(26, 26, 26, 0.8);
+  --about-border: rgba(255, 255, 255, 0.08);
+  --about-primary: #00d97e;
+  --about-accent: #00ff88;
+  --about-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --about-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --about-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.2);
+}
+
+/* Kill Shopify Grid */
+.shopify-section:has(.about-us-section) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+}
+
+/* Main Section */
+.about-us-section {
+  width: 100%;
+  background: var(--about-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .about-us-section {
+  background: #0a0a0a;
+}
+
+/* Hero Section */
+.about-hero {
+  padding: 120px 0 80px 0;
+  background: linear-gradient(135deg, #f0faf7 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .about-hero {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(0, 154, 97, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s ease;
+}
+
+.about-label {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--about-primary);
+  color: white;
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 24px;
+}
+
+[data-theme="dark"] .about-label {
+  background: var(--about-primary);
+  color: #0a0a0a;
+}
+
+.about-hero-title {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800;
+  color: var(--about-text);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.about-hero-highlight {
+  background: linear-gradient(135deg, var(--about-primary), var(--about-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.about-hero-subtitle {
+  font-size: 20px;
+  color: var(--about-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Story Section */
+.about-story {
+  padding: 100px 0;
+  background: var(--about-bg);
+}
+
+.about-story-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-story-content h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--about-text);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.01em;
+}
+
+.about-story-text {
+  font-size: 17px;
+  color: var(--about-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.about-story-image {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--about-shadow-lg);
+  aspect-ratio: 4/3;
+  background: var(--about-card-bg);
+}
+
+.about-story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Stats Section - GLASSMORPHISM */
+.about-stats {
+  padding: 80px 0;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+[data-theme="dark"] .about-stats {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.about-stat {
+  text-align: center;
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: calc(var(--stat-index) * 0.1s);
+}
+
+.about-stat:nth-child(1) { --stat-index: 0; }
+.about-stat:nth-child(2) { --stat-index: 1; }
+.about-stat:nth-child(3) { --stat-index: 2; }
+.about-stat:nth-child(4) { --stat-index: 3; }
+
+.about-stat-number {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--about-primary), var(--about-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.about-stat-label {
+  font-size: 16px;
+  color: var(--about-text-secondary);
+  font-weight: 500;
+}
+
+/* Values Section */
+.about-values {
+  padding: 100px 0;
+  background: var(--about-bg);
+}
+
+.about-values-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 80px;
+}
+
+.about-values-header h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--about-text);
+  margin: 0 0 20px 0;
+}
+
+.about-values-header p {
+  font-size: 18px;
+  color: var(--about-text-secondary);
+  line-height: 1.6;
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.about-value {
+  padding: 40px 32px;
+  background: var(--about-card-bg);
+  border: 2px solid var(--about-border);
+  border-radius: 24px;
+  transition: var(--about-transition);
+  animation: fadeInUp 0.8s ease both;
+  animation-delay: calc(var(--value-index) * 0.1s);
+}
+
+.about-value:nth-child(1) { --value-index: 0; }
+.about-value:nth-child(2) { --value-index: 1; }
+.about-value:nth-child(3) { --value-index: 2; }
+
+[data-theme="dark"] .about-value {
+  background: var(--about-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.about-value:hover {
+  transform: translateY(-4px);
+  border-color: var(--about-primary);
+  box-shadow: var(--about-shadow-lg);
+}
+
+.about-value-icon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, var(--about-primary), var(--about-accent));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 20px rgba(0, 154, 97, 0.25);
+}
+
+[data-theme="dark"] .about-value-icon {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.2), rgba(0, 154, 97, 0.2));
+  box-shadow: 0 8px 20px rgba(0, 217, 126, 0.2);
+}
+
+.about-value-icon svg {
+  width: 32px;
+  height: 32px;
+  color: white;
+  stroke-width: 2;
+}
+
+[data-theme="dark"] .about-value-icon svg {
+  color: var(--about-primary);
+}
+
+.about-value h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--about-text);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.01em;
+}
+
+.about-value p {
+  font-size: 16px;
+  color: var(--about-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA Section */
+.about-cta {
+  padding: 100px 0;
+  background: linear-gradient(135deg, #f0faf7 0%, #ffffff 100%);
+  text-align: center;
+}
+
+[data-theme="dark"] .about-cta {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+}
+
+.about-cta h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  color: var(--about-text);
+  margin: 0 0 24px 0;
+}
+
+.about-cta p {
+  font-size: 18px;
+  color: var(--about-text-secondary);
+  margin: 0 0 40px 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 40px;
+  background: var(--about-primary);
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: var(--about-transition);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+}
+
+.about-cta-button:hover {
+  background: var(--about-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--about-shadow-lg);
+}
+
+/* Responsive - Tablet */
+@media (max-width: 1024px) {
+  .about-container {
+    padding: 0 32px;
+  }
+  
+  .about-story-grid {
+    gap: 60px;
+  }
+  
+  .about-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+  
+  .about-values-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .about-hero {
+    padding: 80px 0 60px 0;
+  }
+  
+  .about-container {
+    padding: 0 20px;
+  }
+  
+  .about-hero-title {
+    font-size: 36px;
+  }
+  
+  .about-hero-subtitle {
+    font-size: 17px;
+  }
+  
+  .about-story {
+    padding: 60px 0;
+  }
+  
+  .about-story-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .about-stats {
+    padding: 60px 0;
+  }
+  
+  .about-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  
+  .about-values {
+    padding: 60px 0;
+  }
+  
+  .about-values-header {
+    margin-bottom: 60px;
+  }
+  
+  .about-cta {
+    padding: 60px 0;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+
+<section class="about-us-section">
+  
+  <!-- Hero -->
+  <div class="about-hero">
+    <div class="about-container">
+      <div class="about-hero-content">
+        <span class="about-label">{{ 'about.label' | t | default: 'About Us' }}</span>
+        <h1 class="about-hero-title">
+          {{ 'about.hero_title_start' | t | default: 'Connecting' }} 
+          <span class="about-hero-highlight">{{ 'about.hero_title_highlight' | t | default: '100,000+ Travelers' }}</span> 
+          {{ 'about.hero_title_end' | t | default: 'Worldwide' }}
+        </h1>
+        <p class="about-hero-subtitle">
+          {{ 'about.hero_subtitle' | t | default: 'Making global connectivity simple, affordable, and instant. No more expensive roaming fees, no more searching for local SIM cards.' }}
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Story -->
+  <div class="about-story">
+    <div class="about-container">
+      <div class="about-story-grid">
+        <div class="about-story-content">
+          <h2>{{ 'about.story_title' | t | default: 'Our Story' }}</h2>
+          <p class="about-story-text">
+            {{ 'about.story_p1' | t | default: 'Simbye was founded by travelers, for travelers. We know the frustration of arriving in a new country and immediately facing connectivity challenges - expensive roaming fees, complicated local SIM purchases, or unreliable WiFi.' }}
+          </p>
+          <p class="about-story-text">
+            {{ 'about.story_p2' | t | default: 'Our mission is simple: make global connectivity as easy as booking a flight. With eSIM technology, we deliver instant data plans for 190+ countries directly to your phone - no physical SIM card needed.' }}
+          </p>
+          <p class="about-story-text">
+            {{ 'about.story_p3' | t | default: 'Today, over 100,000 travelers trust Simbye to stay connected worldwide. From digital nomads working remotely to business travelers closing deals internationally, we are proud to be the connectivity partner of choice.' }}
+          </p>
+        </div>
+        <div class="about-story-image">
+          {% if section.settings.story_image %}
+            <img 
+              src="{{ section.settings.story_image | image_url: width: 800 }}" 
+              alt="{{ 'about.story_image_alt' | t | default: 'Simbye Team' }}"
+              loading="lazy"
+            >
+          {% else %}
+            <img 
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" 
+              alt="{{ 'about.story_image_alt' | t | default: 'Simbye Team' }}"
+            >
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Stats - GLASSMORPHISM -->
+  <div class="about-stats">
+    <div class="about-container">
+      <div class="about-stats-grid">
+        <div class="about-stat">
+          <span class="about-stat-number">190+</span>
+          <span class="about-stat-label">{{ 'about.stat1' | t | default: 'Countries' }}</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-number">100K+</span>
+          <span class="about-stat-label">{{ 'about.stat2' | t | default: 'Happy Customers' }}</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-number">4.9★</span>
+          <span class="about-stat-label">{{ 'about.stat3' | t | default: 'Customer Rating' }}</span>
+        </div>
+        <div class="about-stat">
+          <span class="about-stat-number">2 Min</span>
+          <span class="about-stat-label">{{ 'about.stat4' | t | default: 'Avg. Activation Time' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Values -->
+  <div class="about-values">
+    <div class="about-container">
+      <div class="about-values-header">
+        <h2>{{ 'about.values_title' | t | default: 'What We Stand For' }}</h2>
+        <p>{{ 'about.values_subtitle' | t | default: 'Our core values guide everything we do' }}</p>
+      </div>
+      
+      <div class="about-values-grid">
+        <!-- Value 1: Transparency -->
+        <div class="about-value">
+          <div class="about-value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3>{{ 'about.value1_title' | t | default: 'Transparency' }}</h3>
+          <p>{{ 'about.value1_text' | t | default: 'No hidden fees, no surprise charges. What you see is what you pay. Clear pricing, honest communication, and complete visibility into your data usage.' }}</p>
+        </div>
+        
+        <!-- Value 2: Innovation -->
+        <div class="about-value">
+          <div class="about-value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </div>
+          <h3>{{ 'about.value2_title' | t | default: 'Innovation' }}</h3>
+          <p>{{ 'about.value2_text' | t | default: 'We leverage cutting-edge eSIM technology to deliver instant connectivity. From QR code activation to real-time data tracking, we are constantly innovating.' }}</p>
+        </div>
+        
+        <!-- Value 3: Customer First -->
+        <div class="about-value">
+          <div class="about-value-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3>{{ 'about.value3_title' | t | default: 'Customer First' }}</h3>
+          <p>{{ 'about.value3_text' | t | default: '15 support agents available 24/7 in 12 languages. Whether you need help with activation or have questions about coverage, we are always here for you.' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CTA -->
+  <div class="about-cta">
+    <div class="about-container">
+      <h2>{{ 'about.cta_title' | t | default: 'Ready to Stay Connected?' }}</h2>
+      <p>{{ 'about.cta_text' | t | default: 'Join 100,000+ travelers who trust Simbye for their global connectivity. Get started with 100 MB completely free.' }}</p>
+      <a href="{{ routes.root_url }}" class="about-cta-button">
+        {{ 'about.cta_button' | t | default: 'Explore eSIM Plans' }}
+      </a>
+    </div>
+  </div>
+  
+</section>
+
+<script>
+(function() {
+  'use strict';
+  
+  const section = document.querySelector('.about-us-section');
+  if (!section) return;
+  
+  // Animate on scroll
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '50px'
+    });
+    
+    // Observe all animated elements
+    document.querySelectorAll('.about-stat, .about-value').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = 'all 0.6s ease';
+      observer.observe(el);
+    });
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "About Us",
+  "class": "about-us-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Story Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "story_image",
+      "label": "Story Image",
+      "info": "Recommended: 800x600px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us"
+    }
+  ]
+}
+{% endschema %}
