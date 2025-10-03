@@ -1,265 +1,292 @@
-{% comment %}
-  Enterprise Header V7.0 - Final
-  - Locale-safe URLs ({{ routes.root_url }})
-  - return_to für Page-Persistenz
-  - Unique Währungen (keine Duplikate)
-  - Full Accessibility (ARIA, Focus Trap)
-  - Shopify Markets Integration
-{% endcomment %}
-
 <style>
-/* ========== CSS Variables ========== */
-:root{
-  --header-height:90px;
-  --header-mobile-height:70px;
-  --primary-color:#009a61;
-  --primary-hover:#00824f;
-  --primary-accent:#00d97e;
-  --text-color:#1a1a1a;
-  --text-secondary:#666;
-  --bg-header:#fff;
-  --border-color:rgba(0,0,0,.08);
-  --shadow-sm:0 4px 12px rgba(0,0,0,.06);
-  --shadow-md:0 8px 24px rgba(0,0,0,.08);
-  --shadow-lg:0 12px 32px rgba(0,154,97,.15);
-  --header-gradient:linear-gradient(135deg,#f8fffe 0%,#fff 100%);
-  --transition-fast:150ms cubic-bezier(.4,0,.2,1);
-  --transition-base:250ms cubic-bezier(.4,0,.2,1);
-  --radius:24px;
-  --radius-sm:16px;
+/* CSS Variables - OPTIMIZED */
+:root {
+  --header-height: 90px; /* +10px mehr Abstand */
+  --header-mobile-height: 70px; /* +5px mehr */
+  --primary-color: #009a61;
+  --primary-hover: #00824f;
+  --primary-accent: #00d97e;
+  --text-color: #1a1a1a;
+  --text-secondary: #666666;
+  --bg-header: #ffffff;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --header-gradient: linear-gradient(135deg, #f8fffe 0%, #ffffff 100%);
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius: 24px;
+  --border-radius-sm: 16px;
 }
 
-[data-theme="dark"]{
-  --text-color:#f5f5f5;
-  --text-secondary:#999;
-  --bg-header:#0a0a0a;
-  --border-color:rgba(255,255,255,.08);
-  --shadow-sm:0 4px 12px rgba(0,0,0,.3);
-  --shadow-md:0 8px 24px rgba(0,0,0,.4);
-  --shadow-lg:0 12px 32px rgba(0,217,126,.15);
-  --header-gradient:linear-gradient(135deg,rgba(0,217,126,.05) 0%,transparent 100%);
-  --primary-accent:#00ff88;
+/* Dark Mode */
+[data-theme="dark"] {
+  --text-color: #f5f5f5;
+  --text-secondary: #999999;
+  --bg-header: #0a0a0a;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+  --header-gradient: linear-gradient(135deg, rgba(0, 217, 126, 0.05) 0%, transparent 100%);
+  --primary-accent: #00ff88;
 }
 
-.enterprise-header{
-  position:fixed; inset:0 0 auto 0; width:100vw;
-  height:var(--header-height); background:var(--bg-header);
-  z-index:1000; transition:all var(--transition-base);
-  border-bottom:1px solid transparent;
-}
-body{ padding-top:var(--header-height); }
-@media (max-width:768px){
-  .enterprise-header{ height:var(--header-mobile-height); }
-  body{ padding-top:var(--header-mobile-height); }
-}
-.enterprise-header.scrolled{ box-shadow:var(--shadow-md); border-bottom-color:var(--border-color); backdrop-filter:blur(10px); }
-[data-theme="dark"] .enterprise-header{ background:#0a0a0a; }
-[data-theme="dark"] .enterprise-header.scrolled{ background:rgba(10,10,10,.95); }
-
-.header-container{
-  display:grid; grid-template-columns:200px 1fr auto; align-items:center;
-  height:100%; max-width:1600px; margin:0 auto; padding:0 40px; gap:40px;
+/* Header - FIXED POSITION */
+.enterprise-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: var(--header-height);
+  background: var(--bg-header);
+  z-index: 1000;
+  transition: all var(--transition-base);
+  border-bottom: 1px solid transparent;
 }
 
-.header-logo{ display:flex; align-items:center; height:100%; width:200px; }
-.header-logo img{ width:200px; height:auto; object-fit:contain; transition:transform var(--transition-fast); }
-.header-logo:hover img{ transform:scale(1.02); }
+/* Body Padding */
+body { padding-top: var(--header-height); }
+@media (max-width: 768px) { body { padding-top: var(--header-mobile-height); } }
 
-.header-nav{ display:flex; align-items:center; gap:8px; height:100%; }
-.nav-link{
-  display:inline-flex; align-items:center; padding:14px 26px; color:var(--text-color);
-  font-size:22px; font-weight:600; text-decoration:none; border-radius:var(--radius-sm);
-  transition:all var(--transition-fast); position:relative; overflow:hidden; letter-spacing:-.01em;
-}
-.nav-link::before{
-  content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(0,154,97,.08),rgba(0,217,126,.08));
-  opacity:0; transition:opacity var(--transition-fast);
-}
-.nav-link:hover::before{ opacity:1; }
-.nav-link:hover{ color:var(--primary-color); transform:translateY(-1px); }
-.nav-link::after{
-  content:''; position:absolute; bottom:8px; left:24px; right:24px; height:2px;
-  background:linear-gradient(90deg,var(--primary-color),var(--primary-accent));
-  transform:scaleX(0); transition:transform var(--transition-fast); border-radius:1px;
-}
-.nav-link.active::after, .nav-link:hover::after{ transform:scaleX(1); }
-
-.header-actions{ display:flex; align-items:center; gap:12px; height:100%; }
-.auth-btn{
-  display:inline-flex; align-items:center; justify-content:center; padding:0 28px; height:44px;
-  font-size:15px; font-weight:600; color:#fff; background:var(--primary-color); text-decoration:none;
-  border-radius:12px; transition:all var(--transition-fast); gap:8px; box-shadow:0 2px 8px rgba(0,154,97,.2);
-  border:none; letter-spacing:-.01em;
-}
-.auth-btn:hover{ background:var(--primary-hover); transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,154,97,.3); }
-.auth-btn:active{ transform:scale(.98); }
-.auth-btn svg{ width:18px; height:18px; }
-
-.switcher-group{ display:flex; gap:8px; }
-.switcher{
-  position:relative; display:flex; align-items:center; gap:8px; padding:10px 16px; border-radius:12px;
-  background:var(--header-gradient); border:1px solid var(--border-color); color:var(--text-color); font-size:14px;
-  font-weight:500; cursor:pointer; transition:all var(--transition-fast); box-shadow:var(--shadow-sm); user-select:none;
-}
-.switcher:hover{ border-color:var(--primary-color); transform:translateY(-1px); box-shadow:var(--shadow-md); }
-[data-theme="dark"] .switcher{ background:rgba(26,26,26,.8); backdrop-filter:blur(10px); }
-.switcher::after{
-  content:''; width:0; height:0; border-left:4px solid transparent; border-right:4px solid transparent;
-  border-top:5px solid currentColor; opacity:.6; transition:transform var(--transition-fast);
-}
-.switcher[aria-expanded="true"]::after{ transform:rotate(180deg); }
-
-.switcher-dropdown{
-  position:absolute; top:calc(100% + 8px); left:0; min-width:220px; background:#fff; border:1px solid var(--border-color);
-  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); opacity:0; visibility:hidden; transform:translateY(-10px);
-  transition:all var(--transition-fast); z-index:1001; overflow:hidden; max-height:320px; overflow-y:auto;
-}
-[data-theme="dark"] .switcher-dropdown{ background:#1a1a1a; border-color:rgba(255,255,255,.08); box-shadow:0 8px 24px rgba(0,0,0,.4); }
-.switcher[aria-expanded="true"] .switcher-dropdown{ opacity:1; visibility:visible; transform:translateY(0); }
-
-.dropdown-item{
-  display:flex; align-items:center; gap:10px; padding:10px 16px; color:var(--text-color); text-decoration:none; font-size:14px;
-  transition:background var(--transition-fast); cursor:pointer; border:none; background:none; width:100%; text-align:left; font-family:inherit;
-}
-.dropdown-item:hover{ background:rgba(0,154,97,.08); }
-.dropdown-item.active{ background:rgba(0,154,97,.12); color:var(--primary-color); font-weight:600; }
-[data-theme="dark"] .dropdown-item:hover{ background:rgba(0,217,126,.1); }
-
-.theme-toggle{
-  display:flex; align-items:center; justify-content:center; width:44px; height:44px; border-radius:12px;
-  background:var(--header-gradient); border:1px solid var(--border-color); cursor:pointer; transition:all var(--transition-base);
-  position:relative; overflow:hidden; box-shadow:var(--shadow-sm);
-}
-.theme-toggle:hover{ border-color:var(--primary-color); transform:rotate(15deg) scale(1.05); box-shadow:var(--shadow-md); }
-[data-theme="dark"] .theme-toggle{ background:rgba(26,26,26,.8); backdrop-filter:blur(10px); }
-.theme-toggle svg{ width:20px; height:20px; transition:all var(--transition-base); position:absolute; color:var(--text-color); }
-.sun-icon{ opacity:0; transform:rotate(-180deg) scale(0); }
-.moon-icon{ opacity:1; transform:rotate(0) scale(1); }
-[data-theme="dark"] .sun-icon{ opacity:1; transform:rotate(0) scale(1); color:var(--primary-accent); }
-[data-theme="dark"] .moon-icon{ opacity:0; transform:rotate(180deg) scale(0); }
-
-.mobile-toggle{
-  display:none; width:44px; height:44px; align-items:center; justify-content:center; border-radius:12px;
-  background:var(--primary-color); cursor:pointer; border:none; position:relative; transition:all var(--transition-fast);
-}
-.mobile-toggle:hover{ background:var(--primary-hover); }
-.mobile-toggle:active{ transform:scale(.95); }
-.mobile-toggle .burger{ width:20px; height:16px; position:relative; }
-.mobile-toggle .burger span{ display:block; position:absolute; width:100%; height:2px; background:#fff; border-radius:2px; transition:all var(--transition-base); }
-.mobile-toggle .burger span:nth-child(1){ top:0; } .mobile-toggle .burger span:nth-child(2){ top:7px; } .mobile-toggle .burger span:nth-child(3){ bottom:0; }
-.mobile-toggle.active .burger span:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }
-.mobile-toggle.active .burger span:nth-child(2){ opacity:0; transform:translateX(-10px); }
-.mobile-toggle.active .burger span:nth-child(3){ transform:rotate(-45deg) translate(5px,-5px); }
-
-.mobile-menu{
-  position:fixed; top:0; right:0; width:75%; max-width:360px; height:100vh; background:var(--bg-header);
-  transform:translateX(100%); transition:transform var(--transition-base); z-index:1001; overflow-y:auto;
-  box-shadow:-8px 0 32px rgba(0,0,0,.15);
-}
-[data-theme="dark"] .mobile-menu{ background:#0a0a0a; box-shadow:-8px 0 32px rgba(0,0,0,.5); }
-.mobile-menu.active{ transform:translateX(0); }
-.mobile-overlay{
-  position:fixed; inset:0; background:rgba(0,0,0,.6); opacity:0; visibility:hidden; transition:all var(--transition-base); z-index:1000; backdrop-filter:blur(4px);
-}
-.mobile-overlay.active{ opacity:1; visibility:visible; }
-
-.mobile-menu-header{
-  padding:20px; border-bottom:2px solid var(--border-color); display:flex; justify-content:space-between; align-items:center; min-height:70px;
-}
-[data-theme="dark"] .mobile-menu-header{ border-bottom-color:rgba(255,255,255,.08); }
-.mobile-header-login{
-  display:flex; align-items:center; gap:8px; text-decoration:none; color:#fff; font-size:15px; font-weight:600;
-  padding:10px 20px; border-radius:12px; background:var(--primary-color); letter-spacing:-.01em; transition:all var(--transition-fast);
-}
-.mobile-header-login:hover{ background:var(--primary-hover); transform:translateX(2px); }
-.mobile-header-login svg{ width:18px; height:18px; }
-.mobile-close{
-  width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,.1); border:2px solid var(--border-color);
-  display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all var(--transition-fast); box-shadow:var(--shadow-sm);
-}
-.mobile-close svg{ color:#1a1a1a; width:20px; height:20px; }
-[data-theme="dark"] .mobile-close{ border-color:rgba(255,255,255,.15); background:rgba(255,255,255,.05); }
-[data-theme="dark"] .mobile-close svg{ color:#fff; }
-.mobile-close:hover{ background:rgba(255,59,48,.1); border-color:#ff3b30; transform:rotate(90deg); }
-.mobile-close:hover svg{ color:#ff3b30; }
-
-.mobile-nav{ padding:20px; }
-.mobile-nav-item{
-  display:block; padding:16px 20px; color:var(--text-color); font-size:17px; font-weight:600; text-decoration:none; border-radius:12px;
-  transition:all var(--transition-fast); margin-bottom:8px; background:var(--header-gradient); border:1px solid var(--border-color); letter-spacing:-.01em;
-}
-[data-theme="dark"] .mobile-nav-item{ background:rgba(26,26,26,.5); border-color:rgba(255,255,255,.08); }
-.mobile-nav-item:hover, .mobile-nav-item:active{ background:rgba(0,154,97,.1); border-color:var(--primary-color); transform:translateX(4px); color:var(--primary-color); }
-
-.mobile-settings{ padding:20px; border-top:2px solid var(--border-color); display:flex; flex-direction:column; gap:12px; background:var(--header-gradient); }
-[data-theme="dark"] .mobile-settings{ background:rgba(0,217,126,.02); border-top-color:rgba(255,255,255,.08); }
-.settings-row{ display:flex; align-items:center; justify-content:space-between; padding:12px; border-radius:12px; background:rgba(0,0,0,.02); position:relative; }
-[data-theme="dark"] .settings-row{ background:rgba(255,255,255,.03); }
-.settings-label{ font-size:15px; font-weight:600; color:var(--text-color); letter-spacing:-.01em; }
-.settings-value{
-  display:flex; align-items:center; gap:8px; padding:8px 14px; border-radius:10px; background:#fff; font-size:14px; font-weight:600;
-  color:var(--text-color); box-shadow:var(--shadow-sm); border:1px solid var(--border-color); cursor:pointer; transition:all var(--transition-fast);
-}
-.settings-value:hover{ border-color:var(--primary-color); transform:translateX(2px); }
-[data-theme="dark"] .settings-value{ background:rgba(26,26,26,.8); border-color:rgba(255,255,255,.08); }
-
-.mobile-dropdown{
-  position:absolute; bottom:calc(100% + 8px); right:0; min-width:240px; background:#fff; border:1px solid var(--border-color);
-  border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.12); opacity:0; visibility:hidden; transform:translateY(10px);
-  transition:all var(--transition-fast); z-index:1002; overflow:hidden; max-height:300px; overflow-y:auto;
-}
-[data-theme="dark"] .mobile-dropdown{ background:#1a1a1a; border-color:rgba(255,255,255,.08); box-shadow:0 8px 24px rgba(0,0,0,.4); }
-.settings-row.active .mobile-dropdown{ opacity:1; visibility:visible; transform:translateY(0); }
-.mobile-dropdown-item{
-  display:flex; align-items:center; gap:10px; padding:12px 16px; color:var(--text-color); text-decoration:none; font-size:14px;
-  transition:background var(--transition-fast); cursor:pointer; border:none; background:none; width:100%; text-align:left; font-family:inherit; font-weight:500;
-}
-.mobile-dropdown-item:hover{ background:rgba(0,154,97,.08); }
-.mobile-dropdown-item.active{ background:rgba(0,154,97,.12); color:var(--primary-color); font-weight:600; }
-[data-theme="dark"] .mobile-dropdown-item:hover{ background:rgba(0,217,126,.1); }
-
-.dark-mode-switch{
-  position:relative; width:48px; height:26px; background:#e0e0e0; border-radius:13px; cursor:pointer;
-  transition:background var(--transition-fast); box-shadow:inset 0 2px 4px rgba(0,0,0,.1);
-}
-[data-theme="dark"] .dark-mode-switch{ background:var(--primary-color); box-shadow:0 4px 12px rgba(0,217,126,.3); }
-.dark-mode-switch-handle{
-  position:absolute; top:3px; left:3px; width:20px; height:20px; background:#fff; border-radius:50%;
-  transition:transform var(--transition-fast); box-shadow:0 2px 6px rgba(0,0,0,.2);
-}
-[data-theme="dark"] .dark-mode-switch-handle{ transform:translateX(22px); }
-
-.mobile-footer{ padding:20px; text-align:center; font-size:12px; color:var(--text-secondary); opacity:.6; border-top:1px solid var(--border-color); }
-
-@media (max-width:1200px){
-  .header-container{ padding:0 24px; }
-  .nav-link{ font-size:20px; padding:12px 22px; }
-}
-@media (max-width:768px){
-  .header-container{ grid-template-columns:160px 1fr; padding:0 20px; gap:12px; max-width:none; }
-  .header-logo{ width:160px; }
-  .header-logo img{ width:160px; max-width:160px; }
-  .header-nav, .switcher-group, .theme-toggle, .auth-btn{ display:none; }
-  .mobile-toggle{ display:flex; }
-  .header-actions{ justify-content:flex-end; }
+.enterprise-header.scrolled {
+  box-shadow: var(--shadow-md);
+  border-bottom-color: var(--border-color);
+  backdrop-filter: blur(10px);
 }
 
-.mobile-menu::-webkit-scrollbar, .mobile-dropdown::-webkit-scrollbar, .switcher-dropdown::-webkit-scrollbar{ width:6px; }
-.mobile-menu::-webkit-scrollbar-track, .mobile-dropdown::-webkit-scrollbar-track, .switcher-dropdown::-webkit-scrollbar-track{ background:rgba(0,0,0,.05); border-radius:3px; }
-.mobile-menu::-webkit-scrollbar-thumb, .mobile-dropdown::-webkit-scrollbar-thumb, .switcher-dropdown::-webkit-scrollbar-thumb{ background:var(--primary-color); border-radius:3px; }
-[data-theme="dark"] .mobile-menu::-webkit-scrollbar-track, [data-theme="dark"] .mobile-dropdown::-webkit-scrollbar-track, [data-theme="dark"] .switcher-dropdown::-webkit-scrollbar-track{ background:rgba(255,255,255,.05); }
+[data-theme="dark"] .enterprise-header { background: #0a0a0a; }
+[data-theme="dark"] .enterprise-header.scrolled { background: rgba(10, 10, 10, 0.95); }
+
+.header-container {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  align-items: center;
+  height: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 40px;
+  gap: 40px;
+}
+
+/* Logo */
+.header-logo { display: flex; align-items: center; height: 100%; width: 200px; }
+.header-logo img { width: 200px; height: auto; object-fit: contain; transition: transform var(--transition-fast); }
+.header-logo:hover img { transform: scale(1.02); }
+
+/* Desktop Navigation */
+.header-nav { display: flex; align-items: center; gap: 8px; height: 100%; }
+.nav-link {
+  display: inline-flex; align-items: center; padding: 14px 26px; color: var(--text-color);
+  font-size: 22px; font-weight: 600; text-decoration: none; border-radius: var(--border-radius-sm);
+  transition: all var(--transition-fast); position: relative; overflow: hidden; letter-spacing: -0.01em;
+}
+.nav-link::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.08), rgba(0, 217, 126, 0.08));
+  opacity: 0; transition: opacity var(--transition-fast);
+}
+.nav-link:hover::before { opacity: 1; }
+.nav-link:hover { color: var(--primary-color); transform: translateY(-1px); }
+.nav-link::after {
+  content: ''; position: absolute; bottom: 8px; left: 24px; right: 24px; height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-accent));
+  transform: scaleX(0); transition: transform var(--transition-fast); border-radius: 1px;
+}
+.nav-link.active::after, .nav-link:hover::after { transform: scaleX(1); }
+
+/* Desktop Actions */
+.header-actions { display: flex; align-items: center; gap: 12px; height: 100%; }
+
+/* Login Button */
+.auth-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0 28px; height: 44px; font-size: 15px; font-weight: 600; color: white;
+  background: var(--primary-color); text-decoration: none; border-radius: 12px;
+  transition: all var(--transition-fast); gap: 8px; box-shadow: 0 2px 8px rgba(0, 154, 97, 0.2);
+  border: none; letter-spacing: -0.01em;
+}
+.auth-btn:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 154, 97, 0.3); }
+.auth-btn:active { transform: scale(0.98); }
+.auth-btn svg { width: 18px; height: 18px; }
+
+/* Switchers */
+.switcher-group { display: flex; gap: 8px; }
+.switcher {
+  position: relative; display: flex; align-items: center; gap: 8px; padding: 10px 16px;
+  border-radius: 12px; background: var(--header-gradient); border: 1px solid var(--border-color);
+  color: var(--text-color); font-size: 14px; font-weight: 500; cursor: pointer;
+  transition: all var(--transition-fast); box-shadow: var(--shadow-sm); user-select: none;
+}
+.switcher:hover { border-color: var(--primary-color); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+[data-theme="dark"] .switcher { background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(10px); }
+
+/* Dropdown Arrow */
+.switcher::after {
+  content: ''; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent;
+  border-top: 5px solid currentColor; opacity: 0.6; transition: transform var(--transition-fast);
+}
+.switcher.active::after { transform: rotate(180deg); }
+
+/* Dropdown Menu */
+.switcher-dropdown {
+  position: absolute; top: calc(100% + 8px); left: 0; min-width: 220px; background: white;
+  border: 1px solid var(--border-color); border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all var(--transition-fast);
+  z-index: 1001; overflow: hidden;
+}
+[data-theme="dark"] .switcher-dropdown {
+  background: #1a1a1a; border-color: rgba(255, 255, 255, 0.08); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.switcher.active .switcher-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.dropdown-item {
+  display: flex; align-items: center; gap: 10px; padding: 10px 16px; color: var(--text-color);
+  text-decoration: none; font-size: 14px; transition: background var(--transition-fast); cursor: pointer;
+  border: none; background: none; width: 100%; text-align: left; font-family: inherit;
+}
+.dropdown-item:hover { background: rgba(0, 154, 97, 0.08); }
+.dropdown-item.active { background: rgba(0, 154, 97, 0.12); color: var(--primary-color); font-weight: 600; }
+
+/* Dark Mode Toggle Desktop */
+.theme-toggle {
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px;
+  border-radius: 12px; background: var(--header-gradient); border: 1px solid var(--border-color);
+  cursor: pointer; transition: all var(--transition-base); position: relative; overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.theme-toggle:hover { border-color: var(--primary-color); transform: rotate(15deg) scale(1.05); box-shadow: var(--shadow-md); }
+[data-theme="dark"] .theme-toggle { background: rgba(26, 26, 26, 0.8); backdrop-filter: blur(10px); }
+.theme-toggle svg { width: 20px; height: 20px; transition: all var(--transition-base); position: absolute; color: var(--text-color); }
+.theme-toggle .sun-icon { opacity: 0; transform: rotate(-180deg) scale(0); }
+.theme-toggle .moon-icon { opacity: 1; transform: rotate(0) scale(1); }
+[data-theme="dark"] .theme-toggle .sun-icon { opacity: 1; transform: rotate(0) scale(1); color: var(--primary-accent); }
+[data-theme="dark"] .theme-toggle .moon-icon { opacity: 0; transform: rotate(180deg) scale(0); }
+
+/* Mobile Toggle */
+.mobile-toggle { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 12px; background: var(--primary-color); cursor: pointer; border: none; position: relative; transition: all var(--transition-fast); }
+.mobile-toggle:hover { background: var(--primary-hover); }
+.mobile-toggle:active { transform: scale(0.95); }
+.mobile-toggle .burger { width: 20px; height: 16px; position: relative; }
+.mobile-toggle .burger span { display: block; position: absolute; width: 100%; height: 2px; background: white; border-radius: 2px; transition: all var(--transition-base); }
+.mobile-toggle .burger span:nth-child(1) { top: 0; }
+.mobile-toggle .burger span:nth-child(2) { top: 7px; }
+.mobile-toggle .burger span:nth-child(3) { bottom: 0; }
+.mobile-toggle.active .burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.mobile-toggle.active .burger span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+.mobile-toggle.active .burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* Mobile Menu */
+.mobile-menu { position: fixed; top: 0; right: 0; width: 75%; max-width: 360px; height: 100vh; background: var(--bg-header); transform: translateX(100%); transition: transform var(--transition-base); z-index: 1001; overflow-y: auto; box-shadow: -8px 0 32px rgba(0, 0, 0, 0.15); }
+[data-theme="dark"] .mobile-menu { background: #0a0a0a; box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5); }
+.mobile-menu.active { transform: translateX(0); }
+
+.mobile-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6); opacity: 0; visibility: hidden; transition: all var(--transition-base); z-index: 1000; backdrop-filter: blur(4px); }
+.mobile-overlay.active { opacity: 1; visibility: visible; }
+
+/* Mobile Menu Header */
+.mobile-menu-header { padding: 20px; border-bottom: 2px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; min-height: 70px; background: transparent; }
+[data-theme="dark"] .mobile-menu-header { border-bottom-color: rgba(255, 255, 255, 0.08); }
+
+.mobile-header-login {
+  display: flex; align-items: center; gap: 8px; text-decoration: none; color: white; font-size: 15px; font-weight: 600; transition: all var(--transition-fast); padding: 10px 20px; border-radius: 12px; background: var(--primary-color); letter-spacing: -0.01em;
+}
+.mobile-header-login:hover { background: var(--primary-hover); transform: translateX(2px); }
+.mobile-header-login svg { width: 18px; height: 18px; }
+
+.mobile-close { width: 40px; height: 40px; border-radius: 12px; background: rgba(255, 255, 255, 0.1); border: 2px solid var(--border-color); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all var(--transition-fast); box-shadow: var(--shadow-sm); }
+.mobile-close svg { color: #1a1a1a; width: 20px; height: 20px; }
+[data-theme="dark"] .mobile-close { border-color: rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.05); }
+[data-theme="dark"] .mobile-close svg { color: #ffffff; }
+.mobile-close:hover { background: rgba(255, 59, 48, 0.1); border-color: #ff3b30; transform: rotate(90deg); }
+.mobile-close:hover svg { color: #ff3b30; }
+
+/* Mobile Navigation */
+.mobile-nav { padding: 20px; }
+.mobile-nav-item {
+  display: block; padding: 16px 20px; color: var(--text-color); font-size: 17px; font-weight: 600;
+  text-decoration: none; border-radius: 12px; transition: all var(--transition-fast); margin-bottom: 8px;
+  background: var(--header-gradient); border: 1px solid var(--border-color); letter-spacing: -0.01em;
+}
+[data-theme="dark"] .mobile-nav-item { background: rgba(26, 26, 26, 0.5); border-color: rgba(255, 255, 255, 0.08); }
+.mobile-nav-item:hover, .mobile-nav-item:active { background: rgba(0, 154, 97, 0.1); border-color: var(--primary-color); transform: translateX(4px); color: var(--primary-color); }
+
+/* Mobile Settings */
+.mobile-settings { padding: 20px; border-top: 2px solid var(--border-color); display: flex; flex-direction: column; gap: 12px; background: var(--header-gradient); }
+[data-theme="dark"] .mobile-settings { background: rgba(0, 217, 126, 0.02); border-top-color: rgba(255, 255, 255, 0.08); }
+
+.settings-row { display: flex; align-items: center; justify-content: space-between; padding: 12px; border-radius: 12px; background: rgba(0, 0, 0, 0.02); position: relative; }
+[data-theme="dark"] .settings-row { background: rgba(255, 255, 255, 0.03); }
+
+.settings-label { font-size: 15px; font-weight: 600; color: var(--text-color); letter-spacing: -0.01em; }
+.settings-value {
+  display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 10px; background: white; font-size: 14px; font-weight: 600; color: var(--text-color); box-shadow: var(--shadow-sm); border: 1px solid var(--border-color); cursor: pointer; transition: all var(--transition-fast);
+}
+.settings-value:hover { border-color: var(--primary-color); transform: translateX(2px); }
+[data-theme="dark"] .settings-value { background: rgba(26, 26, 26, 0.8); border-color: rgba(255, 255, 255, 0.08); }
+
+/* Mobile Dropdown */
+.mobile-dropdown {
+  position: absolute; bottom: calc(100% + 8px); right: 0; min-width: 220px; background: white; border: 1px solid var(--border-color);
+  border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); opacity: 0; visibility: hidden; transform: translateY(10px);
+  transition: all var(--transition-fast); z-index: 1002; overflow: hidden; max-height: 300px; overflow-y: auto;
+}
+[data-theme="dark"] .mobile-dropdown { background: #1a1a1a; border-color: rgba(255, 255, 255, 0.08); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); }
+.settings-row.active .mobile-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.mobile-dropdown-item {
+  display: flex; align-items: center; gap: 10px; padding: 12px 16px; color: var(--text-color); text-decoration: none; font-size: 14px; transition: background var(--transition-fast); cursor: pointer; border: none; background: none; width: 100%; text-align: left; font-family: inherit; font-weight: 500;
+}
+.mobile-dropdown-item:hover { background: rgba(0, 154, 97, 0.08); }
+.mobile-dropdown-item.active { background: rgba(0, 154, 97, 0.12); color: var(--primary-color); font-weight: 600; }
+
+/* Dark Mode Switch */
+.dark-mode-switch { position: relative; width: 48px; height: 26px; background: #e0e0e0; border-radius: 13px; cursor: pointer; transition: background var(--transition-fast); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); }
+[data-theme="dark"] .dark-mode-switch { background: var(--primary-color); box-shadow: 0 4px 12px rgba(0, 217, 126, 0.3); }
+.dark-mode-switch-handle { position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: white; border-radius: 50%; transition: transform var(--transition-fast); box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); }
+[data-theme="dark"] .dark-mode-switch-handle { transform: translateX(22px); }
+
+/* Mobile Footer */
+.mobile-footer { padding: 20px; text-align: center; font-size: 12px; color: var(--text-secondary); opacity: 0.6; border-top: 1px solid var(--border-color); }
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .header-container { padding: 0 24px; }
+  .nav-link { font-size: 17px; padding: 10px 20px; }
+}
+@media (max-width: 768px) {
+  .enterprise-header { height: var(--header-mobile-height); width: 100vw; }
+  .header-container { grid-template-columns: 160px 1fr; padding: 0 20px; gap: 12px; max-width: none; }
+  .header-logo { width: 160px; }
+  .header-logo img { width: 160px; max-width: 160px; }
+  .header-nav, .switcher-group, .theme-toggle, .auth-btn { display: none; }
+  .mobile-toggle { display: flex; }
+  .header-actions { justify-content: flex-end; }
+}
+
+/* Scrollbar */
+.mobile-menu::-webkit-scrollbar, .mobile-dropdown::-webkit-scrollbar { width: 6px; }
+.mobile-menu::-webkit-scrollbar-track, .mobile-dropdown::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); border-radius: 3px; }
+.mobile-menu::-webkit-scrollbar-thumb, .mobile-dropdown::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 3px; }
+[data-theme="dark"] .mobile-menu::-webkit-scrollbar-track, [data-theme="dark"] .mobile-dropdown::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
 </style>
 
 <header class="enterprise-header" id="enterprise-header">
   <div class="header-container">
+    <!-- Logo -->
     <div class="header-logo">
-      <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
-        <img src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
-             alt="{{ shop.name | escape }}" loading="eager">
+      <a href="{{ routes.root_url }}">
+        <img 
+          src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
+          alt="{{ shop.name }}"
+          loading="eager"
+        >
       </a>
     </div>
-
-    <nav class="header-nav" aria-label="Main">
+    
+    <!-- Desktop Navigation (locale-aware via routes.root_url) -->
+    <nav class="header-nav">
       <a href="{{ routes.root_url }}pages/how-it-works" class="nav-link">
         {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
       </a>
@@ -273,13 +300,15 @@ body{ padding-top:var(--header-height); }
         {{ 'header.support' | t | default: 'Support' }}
       </a>
     </nav>
-
+    
+    <!-- Desktop Actions -->
     <div class="header-actions">
+      <!-- Login -->
       {% if customer %}
         <a href="{{ routes.account_url }}" class="auth-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <circle cx="12" cy="8" r="4"></circle>
-            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
           </svg>
           {{ customer.first_name | default: 'Account' }}
         </a>
@@ -288,14 +317,15 @@ body{ padding-top:var(--header-height); }
           {{ 'header.login' | t | default: 'Login' }}
         </a>
       {% endif %}
-
+      
+      <!-- Switchers -->
       <div class="switcher-group">
         <!-- Language Switcher -->
-        <div class="switcher" id="language-switcher" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">
-          <span aria-hidden="true">🌐</span>
-          <span>{{ localization.language.iso_code | upcase }}</span>
-
-          <div class="switcher-dropdown" role="menu">
+        <div class="switcher" id="language-switcher" aria-haspopup="true" aria-expanded="false">
+          <span>🌐</span>
+          <span id="current-locale">{{ localization.language.iso_code | upcase }}</span>
+          
+          <div class="switcher-dropdown" role="menu" aria-label="Languages">
             <localization-form>
               {% form 'localization' %}
                 <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
@@ -303,33 +333,34 @@ body{ padding-top:var(--header-height); }
                 {% for language in localization.available_languages %}
                   <button type="submit"
                           class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}"
-                          role="menuitem"
+                          data-value="{{ language.iso_code }}"
                           onclick="this.form.querySelector('[name=language_code]').value='{{ language.iso_code }}'">
-                    {{ language.endonym_name }}
+                    <span>{{ language.endonym_name }}</span>
                   </button>
                 {% endfor %}
               {% endform %}
             </localization-form>
           </div>
         </div>
-
-        <!-- Currency Switcher (Unique Currencies Only) -->
-        <div class="switcher" id="currency-switcher" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">
-          <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
-
-          <div class="switcher-dropdown" role="menu">
+        
+        <!-- Currency/Country Switcher (NO DUPLICATES) -->
+        <div class="switcher" id="country-switcher" aria-haspopup="true" aria-expanded="false">
+          <span id="current-country">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
+          
+          <div class="switcher-dropdown" role="menu" aria-label="Currencies">
             {% if localization.available_countries.size > 1 %}
-              {% assign seen_currencies = '' | split: '' %}
+              {% assign shown_currencies = '' %}
               <localization-form>
                 {% form 'localization' %}
                   <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
                   <input type="hidden" name="return_to" value="{{ request.url }}">
                   {% for country in localization.available_countries %}
-                    {% unless seen_currencies contains country.currency.iso_code %}
-                      {% assign seen_currencies = seen_currencies | push: country.currency.iso_code %}
+                    {% assign currency_code = country.currency.iso_code %}
+                    {% unless shown_currencies contains currency_code %}
+                      {% assign shown_currencies = shown_currencies | append: currency_code | append: ',' %}
                       <button type="submit"
-                              class="dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}"
-                              role="menuitem"
+                              class="dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}"
+                              data-value="{{ country.iso_code }}"
                               onclick="this.form.querySelector('[name=country_code]').value='{{ country.iso_code }}'">
                         <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
                       </button>
@@ -341,53 +372,58 @@ body{ padding-top:var(--header-height); }
           </div>
         </div>
       </div>
-
+      
+      <!-- Dark Mode -->
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="12" r="5"></circle>
-          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
         </svg>
         <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
         </svg>
       </button>
-
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
-        <div class="burger"><span></span><span></span><span></span></div>
+      
+      <!-- Mobile Toggle -->
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+        <div class="burger">
+          <span></span><span></span><span></span>
+        </div>
       </button>
     </div>
   </div>
 </header>
 
+<!-- Mobile Menu -->
 <div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" aria-hidden="true">
+<nav class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <!-- Header -->
   <div class="mobile-menu-header">
     {% if customer %}
       <a href="{{ routes.account_url }}" class="mobile-header-login">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="8" r="4"></circle>
-          <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
         </svg>
-        {{ customer.first_name | default: 'Account' }}
+        <span>{{ customer.first_name | default: 'Account' }}</span>
       </a>
     {% else %}
       <a href="{{ routes.account_login_url }}" class="mobile-header-login">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <circle cx="12" cy="8" r="4"></circle>
-          <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+          <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
         </svg>
-        {{ 'header.login' | t | default: 'Login' }}
+        <span>{{ 'header.login' | t | default: 'Login' }}</span>
       </a>
     {% endif %}
-
+    
     <button class="mobile-close" id="mobile-close" aria-label="Close menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-        <path d="M18 6L6 18M6 6l12 12"></path>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M18 6L6 18M6 6l12 12"/>
       </svg>
     </button>
   </div>
-
-  <div class="mobile-nav">
+  
+  <!-- Navigation -->
+  <nav class="mobile-nav">
     <a href="{{ routes.root_url }}pages/how-it-works" class="mobile-nav-item">
       {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
     </a>
@@ -400,17 +436,18 @@ body{ padding-top:var(--header-height); }
     <a href="{{ routes.root_url }}pages/support" class="mobile-nav-item">
       {{ 'header.support' | t | default: 'Support' }}
     </a>
-  </div>
-
+  </nav>
+  
+  <!-- Settings -->
   <div class="mobile-settings">
     <!-- Language -->
     <div class="settings-row" id="mobile-language-row">
       <span class="settings-label">{{ 'header.language' | t | default: 'Language' }}</span>
-      <div class="settings-value" role="button" tabindex="0" aria-expanded="false">
+      <div class="settings-value">
         <span>🌐</span>
         <span>{{ localization.language.iso_code | upcase }}</span>
       </div>
-      <div class="mobile-dropdown" role="menu">
+      <div class="mobile-dropdown" role="menu" aria-label="Languages">
         <localization-form>
           {% form 'localization' %}
             <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
@@ -418,35 +455,36 @@ body{ padding-top:var(--header-height); }
             {% for language in localization.available_languages %}
               <button type="submit"
                       class="mobile-dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}"
-                      role="menuitem"
+                      data-value="{{ language.iso_code }}"
                       onclick="this.form.querySelector('[name=language_code]').value='{{ language.iso_code }}'">
-                {{ language.endonym_name }}
+                <span>{{ language.endonym_name }}</span>
               </button>
             {% endfor %}
           {% endform %}
         </localization-form>
       </div>
     </div>
-
-    <!-- Currency (Unique Only) -->
-    <div class="settings-row" id="mobile-currency-row">
+    
+    <!-- Currency (NO DUPLICATES) -->
+    <div class="settings-row" id="mobile-country-row">
       <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
-      <div class="settings-value" role="button" tabindex="0" aria-expanded="false">
+      <div class="settings-value">
         <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
       </div>
-      <div class="mobile-dropdown" role="menu">
+      <div class="mobile-dropdown" role="menu" aria-label="Currencies">
         {% if localization.available_countries.size > 1 %}
-          {% assign seen_currencies_mobile = '' | split: '' %}
+          {% assign shown_currencies_mobile = '' %}
           <localization-form>
             {% form 'localization' %}
               <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
               <input type="hidden" name="return_to" value="{{ request.url }}">
               {% for country in localization.available_countries %}
-                {% unless seen_currencies_mobile contains country.currency.iso_code %}
-                  {% assign seen_currencies_mobile = seen_currencies_mobile | push: country.currency.iso_code %}
+                {% assign currency_code = country.currency.iso_code %}
+                {% unless shown_currencies_mobile contains currency_code %}
+                  {% assign shown_currencies_mobile = shown_currencies_mobile | append: currency_code | append: ',' %}
                   <button type="submit"
-                          class="mobile-dropdown-item {% if country.currency.iso_code == localization.country.currency.iso_code %}active{% endif %}"
-                          role="menuitem"
+                          class="mobile-dropdown-item {% if country.iso_code == localization.country.iso_code %}active{% endif %}"
+                          data-value="{{ country.iso_code }}"
                           onclick="this.form.querySelector('[name=country_code]').value='{{ country.iso_code }}'">
                     <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
                   </button>
@@ -457,23 +495,24 @@ body{ padding-top:var(--header-height); }
         {% endif %}
       </div>
     </div>
-
-    <!-- Dark Mode -->
+    
     <div class="settings-row">
       <span class="settings-label">{{ 'header.dark_mode' | t | default: 'Dark Mode' }}</span>
-      <div class="dark-mode-switch" id="dark-mode-switch" role="switch" aria-checked="false" tabindex="0">
+      <div class="dark-mode-switch" id="dark-mode-switch">
         <div class="dark-mode-switch-handle"></div>
       </div>
     </div>
   </div>
-
-  <div class="mobile-footer">© {{ 'now' | date: "%Y" }} {{ shop.name }}</div>
+  
+  <!-- Footer -->
+  <div class="mobile-footer">© 2025 Simbye eSIM</div>
 </nav>
 
 <script>
-(function(){
+(function() {
   'use strict';
-
+  
+  // Elements
   const header = document.getElementById('enterprise-header');
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -482,174 +521,163 @@ body{ padding-top:var(--header-height); }
   const themeToggle = document.getElementById('theme-toggle');
   const darkModeSwitch = document.getElementById('dark-mode-switch');
   const languageSwitcher = document.getElementById('language-switcher');
-  const currencySwitcher = document.getElementById('currency-switcher');
-
-  let currentTheme = (()=>{
-    try{ return localStorage.getItem('theme') || 'light'; }catch(e){ return 'light'; }
+  const countrySwitcher = document.getElementById('country-switcher');
+  
+  // State
+  let currentTheme = (function(){
+    try { return localStorage.getItem('theme') || 'light'; } catch(e) { return 'light'; }
   })();
   let isMenuOpen = false;
-  let lastFocus = null;
-
-  (function init(){
+  
+  // Initialize
+  function init() {
     document.documentElement.setAttribute('data-theme', currentTheme);
-    if(darkModeSwitch){ darkModeSwitch.setAttribute('aria-checked', currentTheme === 'dark' ? 'true' : 'false'); }
     bindEvents();
     handleScroll();
     markActiveNav();
-  })();
-
-  function bindEvents(){
-    window.addEventListener('scroll', handleScroll, { passive:true });
-
-    [themeToggle, darkModeSwitch].forEach(el=>{
-      if(!el) return;
-      el.addEventListener('click', toggleTheme);
-      el.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleTheme(); } });
+  }
+  
+  // Event Bindings
+  function bindEvents() {
+    // Scroll
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    // Mobile Menu
+    if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
+    
+    // Theme Toggles
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (darkModeSwitch) darkModeSwitch.addEventListener('click', toggleTheme);
+    
+    // Switcher Dropdowns - Desktop
+    if (languageSwitcher) {
+      languageSwitcher.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSwitcher(languageSwitcher);
+      });
+    }
+    if (countrySwitcher) {
+      countrySwitcher.addEventListener('click', function(e) {
+        e.stopPropagation();
+        toggleSwitcher(countrySwitcher);
+      });
+    }
+    
+    // Mobile Language/Country Switchers
+    const mobileLanguageRow = document.getElementById('mobile-language-row');
+    const mobileCountryRow = document.getElementById('mobile-country-row');
+    if (mobileLanguageRow) {
+      const languageValue = mobileLanguageRow.querySelector('.settings-value');
+      if (languageValue) languageValue.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileDropdown(mobileLanguageRow); });
+    }
+    if (mobileCountryRow) {
+      const countryValue = mobileCountryRow.querySelector('.settings-value');
+      if (countryValue) countryValue.addEventListener('click', function(e){ e.stopPropagation(); toggleMobileDropdown(mobileCountryRow); });
+    }
+    
+    // Close dropdowns on outside click
+    document.addEventListener('click', function() {
+      closeSwitchers();
+      closeMobileDropdowns();
     });
-
-    setupSwitcher(languageSwitcher);
-    setupSwitcher(currencySwitcher);
-    setupMobileDropdown('mobile-language-row');
-    setupMobileDropdown('mobile-currency-row');
-
-    if(mobileToggle){ mobileToggle.addEventListener('click', openMobileMenu); }
-    if(mobileClose){ mobileClose.addEventListener('click', closeMobileMenu); }
-    if(mobileOverlay){ mobileOverlay.addEventListener('click', closeMobileMenu); }
-
-    document.addEventListener('click', closeAllSwitchers);
-    document.addEventListener('keydown', e=>{
-      if(e.key==='Escape'){
-        closeMobileMenu();
-        closeAllSwitchers();
+    
+    // Escape Key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        if (isMenuOpen) closeMobileMenu();
+        closeSwitchers();
+        closeMobileDropdowns();
       }
     });
-
+    
+    // Swipe to Close
     let touchStartX = 0;
-    if(mobileMenu){
-      mobileMenu.addEventListener('touchstart', e=>{ touchStartX = e.touches[0].clientX; }, { passive:true });
-      mobileMenu.addEventListener('touchend', e=>{
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if(dx > 80){ closeMobileMenu(); }
-      }, { passive:true });
+    if (mobileMenu) {
+      mobileMenu.addEventListener('touchstart', function(e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+      mobileMenu.addEventListener('touchend', function(e) {
+        const touchEndX = e.changedTouches[0].clientX;
+        if (touchEndX - touchStartX > 80) closeMobileMenu();
+      }, { passive: true });
     }
   }
-
-  function handleScroll(){
-    if(window.scrollY > 10){ header.classList.add('scrolled'); }
-    else{ header.classList.remove('scrolled'); }
+  
+  // Scroll Handler
+  function handleScroll() {
+    if (window.scrollY > 10) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
   }
-
-  function toggleTheme(){
-    currentTheme = (currentTheme === 'light') ? 'dark' : 'light';
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    if(darkModeSwitch){ darkModeSwitch.setAttribute('aria-checked', currentTheme === 'dark' ? 'true' : 'false'); }
-    try{ localStorage.setItem('theme', currentTheme); }catch(e){}
-  }
-
-  function setupSwitcher(el){
-    if(!el) return;
-    const toggle = (expand)=>{ el.setAttribute('aria-expanded', expand ? 'true' : 'false'); };
-    el.addEventListener('click', e=>{
-      e.stopPropagation();
-      const expanded = el.getAttribute('aria-expanded') === 'true';
-      closeAllSwitchers();
-      toggle(!expanded);
-    });
-    el.addEventListener('keydown', e=>{
-      if(e.key==='Enter' || e.key===' '){
-        e.preventDefault();
-        const expanded = el.getAttribute('aria-expanded') === 'true';
-        closeAllSwitchers();
-        toggle(!expanded);
-      }
-    });
-  }
-
-  function closeAllSwitchers(){
-    document.querySelectorAll('.switcher[aria-expanded="true"]').forEach(sw=> sw.setAttribute('aria-expanded','false'));
-    document.querySelectorAll('.settings-row.active').forEach(r=> r.classList.remove('active'));
-    document.querySelectorAll('.settings-row .settings-value[aria-expanded="true"]').forEach(v=> v.setAttribute('aria-expanded','false'));
-  }
-
-  function setupMobileDropdown(rowId){
-    const row = document.getElementById(rowId);
-    if(!row) return;
-    const val = row.querySelector('.settings-value');
-    if(!val) return;
-
-    val.addEventListener('click', e=>{
-      e.stopPropagation();
-      const active = row.classList.contains('active');
-      document.querySelectorAll('.settings-row').forEach(r=> r.classList.remove('active'));
-      if(!active){ row.classList.add('active'); }
-      val.setAttribute('aria-expanded', !active ? 'true' : 'false');
-    });
-
-    val.addEventListener('keydown', e=>{
-      if(e.key==='Enter' || e.key===' '){
-        e.preventDefault();
-        val.click();
-      }
-    });
-  }
-
-  function openMobileMenu(){
+  
+  // Mobile Menu Functions
+  function openMobileMenu() {
     isMenuOpen = true;
-    lastFocus = document.activeElement;
     mobileToggle.classList.add('active');
-    mobileToggle.setAttribute('aria-expanded','true');
     mobileMenu.classList.add('active');
-    mobileMenu.setAttribute('aria-hidden','false');
     mobileOverlay.classList.add('active');
-    mobileOverlay.setAttribute('aria-hidden','false');
-    document.body.style.overflow='hidden';
-
-    setTimeout(()=>{
-      const firstBtn = mobileMenu.querySelector('a, button');
-      if(firstBtn) firstBtn.focus();
-    }, 0);
-    document.addEventListener('focus', trapFocus, true);
+    document.body.style.overflow = 'hidden';
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileOverlay.setAttribute('aria-hidden', 'false');
   }
-
-  function closeMobileMenu(){
-    if(!isMenuOpen) return;
+  function closeMobileMenu() {
     isMenuOpen = false;
     mobileToggle.classList.remove('active');
-    mobileToggle.setAttribute('aria-expanded','false');
     mobileMenu.classList.remove('active');
-    mobileMenu.setAttribute('aria-hidden','true');
     mobileOverlay.classList.remove('active');
-    mobileOverlay.setAttribute('aria-hidden','true');
-    document.body.style.overflow='';
-    document.removeEventListener('focus', trapFocus, true);
-    if(lastFocus && typeof lastFocus.focus === 'function'){ lastFocus.focus(); }
+    document.body.style.overflow = '';
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileOverlay.setAttribute('aria-hidden', 'true');
   }
-
-  function trapFocus(e){
-    if(!isMenuOpen) return;
-    if(!mobileMenu.contains(e.target)){
-      e.stopPropagation();
-      const firstBtn = mobileMenu.querySelector('a, button');
-      if(firstBtn) firstBtn.focus();
-    }
+  
+  // Theme Toggle
+  function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    try { localStorage.setItem('theme', currentTheme); } catch(e) {}
   }
-
-  function markActiveNav(){
-    const path = window.location.pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?\//i,'/');
-    document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link=>{
-      try{
-        const href = new URL(link.getAttribute('href'), window.location.origin).pathname.replace(/^\/[a-z]{2}(-[a-z]{2})?\//i,'/');
-        if(href === path){ link.classList.add('active'); }
-      }catch(_e){}
+  
+  // Switcher Functions (Desktop)
+  function toggleSwitcher(switcher) {
+    const isActive = switcher.classList.contains('active');
+    closeSwitchers();
+    if (!isActive) switcher.classList.add('active');
+  }
+  function closeSwitchers() {
+    document.querySelectorAll('.switcher').forEach(function(sw){ sw.classList.remove('active'); });
+  }
+  
+  // Mobile Dropdown Functions
+  function toggleMobileDropdown(row) {
+    const isActive = row.classList.contains('active');
+    closeMobileDropdowns();
+    if (!isActive) row.classList.add('active');
+  }
+  function closeMobileDropdowns() {
+    document.querySelectorAll('.settings-row').forEach(function(row){ row.classList.remove('active'); });
+  }
+  
+  // Mark Active Navigation
+  function markActiveNav() {
+    const path = window.location.pathname.replace(/\/+$/, '');
+    document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(function(link) {
+      const href = link.getAttribute('href').replace(/\/+$/, '');
+      if (href === path) link.classList.add('active');
     });
   }
-
+  
+  // Start
+  init();
 })();
 </script>
 
 {% schema %}
 {
-  "name": "Enterprise Header V7.0",
-  "settings": []
+  "name": "Enterprise Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Settings"
+    }
+  ]
 }
 {% endschema %}
