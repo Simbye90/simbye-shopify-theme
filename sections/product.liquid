@@ -706,6 +706,40 @@
 })();
 </script>
 
+<script>
+// Speichert aktuelle Produkt-URL (mit ?claim=free) in Storage + Cookie
+function saveReturnUrlClaimFree(){
+  var current = location.pathname + location.search;
+  var sep = location.search ? '&' : '?';
+  var withClaim = current + sep + 'claim=free';
+  try {
+    sessionStorage.setItem('return_to_product', withClaim);
+    localStorage.setItem('return_to_product', withClaim);
+  } catch(e){}
+  var d = new Date(); d.setTime(d.getTime() + 24*60*60*1000);
+  document.cookie = 'return_to_product=' + encodeURIComponent(withClaim) + '; expires=' + d.toUTCString() + '; path=/';
+  return withClaim;
+}
+
+// Hängt return_to an Login-Links + speichert vorher
+(function attachLoginReturn(){
+  var links = document.querySelectorAll('.free-login-button, a[href^="/account/login"], a[href^="/customer_authentication/login"]');
+  links.forEach(function(a){
+    a.addEventListener('click', function(){
+      var withClaim = saveReturnUrlClaimFree();
+      // Fallback: ?return_to anhängen (hilft, falls App/Shopify es doch übernimmt)
+      var encoded = encodeURIComponent(withClaim);
+      if (this.href.indexOf('/customer_authentication/login') === 0) {
+        this.href = '/customer_authentication/login?return_to=' + encoded;
+      } else if (this.href.indexOf('/account/login') === 0) {
+        this.href = '/account/login?return_to=' + encoded;
+      }
+    }, { capture:true, once:false, passive:true });
+  });
+})();
+</script>
+
+
 {% schema %}
 {
   "name": "Product Page",
