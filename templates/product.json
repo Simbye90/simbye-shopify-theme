@@ -14,7 +14,7 @@
       "custom_css": [],
       "settings": {
         "show_compare_price": true,
-        "price_increase_percent": 50
+        "price_increase_percent": 0
       }
     },
     "product_info_tabs_jTcRT8": {
@@ -136,13 +136,6 @@
         "title_part3": "Answered",
         "subtitle": "Everything you need to know about Simbye eSIM"
       }
-    },
-    "custom_liquid_c9b8a3": {
-      "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
-      "settings": {
-        "custom_liquid": "<!-- DEBUG: Was ist reference_product? -->\n<div style=\"background: red; color: white; padding: 10px;\">\n  Setting Type: {{ section.settings.reference_product | json }}<br>\n  Has Variants: {{ section.settings.reference_product.variants }}<br>\n  Title Direct: {{ section.settings.reference_product.title }}<br>\n  Via all_products: {{ all_products[section.settings.reference_product].title }}<br>\n</div>"
-      }
     }
   },
   "order": [
@@ -150,7 +143,6 @@
     "product_info_tabs_jTcRT8",
     "mobile_apps_qb8J9x",
     "simbye_vs_A7x9RL",
-    "faq_rdt6jk",
-    "custom_liquid_c9b8a3"
+    "faq_rdt6jk"
   ]
 }
