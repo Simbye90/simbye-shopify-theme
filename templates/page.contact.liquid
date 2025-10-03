@@ -1,0 +1,605 @@
+<!-- sections/contact.liquid -->
+<!-- SIMBYE ENTERPRISE CONTACT PAGE -->
+
+<style>
+/* ============================================
+   ENTERPRISE CONTACT PAGE - SIMBYE STYLE
+   ============================================ */
+
+/* CSS Variables */
+:root {
+  --contact-primary: #009a61;
+  --contact-accent: #00d97e;
+  --contact-text: #1a1a1a;
+  --contact-text-secondary: #666666;
+  --contact-bg: #ffffff;
+  --contact-card-bg: #ffffff;
+  --contact-border: rgba(0, 0, 0, 0.08);
+  --contact-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --contact-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --contact-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --contact-text: #f5f5f5;
+  --contact-text-secondary: #999999;
+  --contact-bg: #0a0a0a;
+  --contact-card-bg: rgba(26, 26, 26, 0.8);
+  --contact-border: rgba(255, 255, 255, 0.08);
+  --contact-primary: #00d97e;
+  --contact-accent: #00ff88;
+  --contact-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --contact-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* Kill Shopify Grid */
+.shopify-section:has(.contact-enterprise) {
+  display: block !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: unset !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Main Section */
+.contact-enterprise {
+  width: 100%;
+  padding: 80px 0 100px 0;
+  background: var(--contact-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="light"] .contact-enterprise {
+  background: #ffffff;
+}
+
+[data-theme="dark"] .contact-enterprise {
+  background: #0a0a0a;
+}
+
+/* Container */
+.contact-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Header */
+.contact-header {
+  text-align: center;
+  margin-bottom: 72px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.contact-title {
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: 700;
+  color: var(--contact-text);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.contact-subtitle {
+  font-size: 20px;
+  color: var(--contact-text-secondary);
+  margin: 0;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+/* Content Grid */
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  animation: fadeInUp 0.9s ease 0.1s both;
+}
+
+/* Contact Form */
+.contact-form-wrapper {
+  background: var(--contact-card-bg);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: var(--contact-shadow-md);
+  border: 2px solid var(--contact-border);
+}
+
+[data-theme="dark"] .contact-form-wrapper {
+  background: rgba(26, 26, 26, 0.8);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.form-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--contact-text);
+  margin: 0 0 24px 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--contact-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-input,
+.form-textarea {
+  padding: 16px 20px;
+  border: 2px solid var(--contact-border);
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--contact-text);
+  background: var(--contact-bg);
+  font-family: inherit;
+  transition: var(--contact-transition);
+  outline: none;
+}
+
+[data-theme="dark"] .form-input,
+[data-theme="dark"] .form-textarea {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  border-color: var(--contact-primary);
+  box-shadow: 0 0 0 4px rgba(0, 154, 97, 0.1);
+}
+
+.form-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.form-submit {
+  padding: 18px 32px;
+  background: linear-gradient(135deg, var(--contact-primary), var(--contact-accent));
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--contact-transition);
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
+  font-family: inherit;
+}
+
+.form-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.35);
+}
+
+.form-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Contact Info */
+.contact-info-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Info Card */
+.info-card {
+  background: var(--contact-card-bg);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--contact-shadow-md);
+  border: 2px solid var(--contact-border);
+  transition: var(--contact-transition);
+}
+
+[data-theme="dark"] .info-card {
+  background: rgba(26, 26, 26, 0.8);
+  border-color: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.info-card:hover {
+  border-color: var(--contact-primary);
+  transform: translateY(-2px);
+}
+
+.info-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--contact-text);
+  margin: 0 0 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.info-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--contact-primary);
+  flex-shrink: 0;
+}
+
+.info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--contact-text-secondary);
+  font-size: 16px;
+}
+
+.info-item-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--contact-primary);
+  flex-shrink: 0;
+}
+
+.info-item strong {
+  color: var(--contact-text);
+  font-weight: 600;
+}
+
+/* Support Channels */
+.support-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.support-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--contact-bg);
+  border: 2px solid var(--contact-border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--contact-text);
+  font-weight: 600;
+  transition: var(--contact-transition);
+}
+
+[data-theme="dark"] .support-btn {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.support-btn:hover {
+  border-color: var(--contact-primary);
+  transform: translateX(4px);
+}
+
+.support-btn svg {
+  width: 24px;
+  height: 24px;
+  color: var(--contact-primary);
+}
+
+/* FAQ Link */
+.faq-card {
+  background: linear-gradient(135deg, rgba(0, 154, 97, 0.05), transparent);
+  border: 2px solid var(--contact-primary);
+}
+
+[data-theme="dark"] .faq-card {
+  background: linear-gradient(135deg, rgba(0, 217, 126, 0.1), transparent);
+}
+
+.faq-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--contact-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--contact-transition);
+}
+
+.faq-link:hover {
+  gap: 12px;
+}
+
+/* Success Message */
+.form-success {
+  padding: 16px 20px;
+  background: rgba(0, 217, 126, 0.1);
+  border: 2px solid var(--contact-primary);
+  border-radius: 12px;
+  color: var(--contact-primary);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.5s ease;
+}
+
+/* Error Message */
+.form-error {
+  padding: 16px 20px;
+  background: rgba(255, 59, 48, 0.1);
+  border: 2px solid #ff3b30;
+  border-radius: 12px;
+  color: #ff3b30;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.5s ease;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .contact-content {
+    gap: 32px;
+  }
+  
+  .contact-form-wrapper,
+  .info-card {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-enterprise {
+    padding: 60px 0 80px 0;
+  }
+  
+  .contact-container {
+    padding: 0 20px;
+  }
+  
+  .contact-title {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  
+  .contact-subtitle {
+    font-size: 16px;
+  }
+  
+  .contact-header {
+    margin-bottom: 48px;
+  }
+  
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .contact-form-wrapper,
+  .info-card {
+    padding: 28px 24px;
+  }
+  
+  .form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .info-card-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form-wrapper,
+  .info-card {
+    padding: 24px 20px;
+  }
+  
+  .form-input,
+  .form-textarea {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  
+  .form-submit {
+    padding: 16px 24px;
+    font-size: 15px;
+  }
+}
+</style>
+
+<!-- Main Section -->
+<section class="contact-enterprise">
+  <div class="contact-container">
+    
+    <!-- Header -->
+    <div class="contact-header">
+      <h1 class="contact-title">Contact Us</h1>
+      <p class="contact-subtitle">
+        Need help with your eSIM? Our support team is available 24/7 to assist you with any questions or issues.
+      </p>
+    </div>
+    
+    <!-- Content -->
+    <div class="contact-content">
+      
+      <!-- Contact Form -->
+      <div class="contact-form-wrapper">
+        <h2 class="form-title">Send us a Message</h2>
+        
+        {% form 'contact' %}
+          {% if form.posted_successfully? %}
+            <div class="form-success">
+              Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.
+            </div>
+          {% endif %}
+          
+          {% if form.errors %}
+            <div class="form-error">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+          
+          <div class="contact-form">
+            <div class="form-group">
+              <label class="form-label" for="contact-name">Name *</label>
+              <input 
+                type="text" 
+                id="contact-name"
+                name="contact[name]"
+                class="form-input"
+                required
+                placeholder="Your full name"
+                value="{% if form.name %}{{ form.name }}{% endif %}"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="contact-email">Email *</label>
+              <input 
+                type="email" 
+                id="contact-email"
+                name="contact[email]"
+                class="form-input"
+                required
+                placeholder="your@email.com"
+                value="{% if form.email %}{{ form.email }}{% endif %}"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="contact-phone">Phone (Optional)</label>
+              <input 
+                type="tel" 
+                id="contact-phone"
+                name="contact[phone]"
+                class="form-input"
+                placeholder="+49 123 456789"
+                value="{% if form.phone %}{{ form.phone }}{% endif %}"
+              >
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label" for="contact-message">Message *</label>
+              <textarea 
+                id="contact-message"
+                name="contact[body]"
+                class="form-textarea"
+                required
+                placeholder="How can we help you?"
+              >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+            </div>
+            
+            <button type="submit" class="form-submit">
+              Send Message
+            </button>
+          </div>
+        {% endform %}
+      </div>
+      
+      <!-- Contact Info -->
+      <div class="contact-info-wrapper">
+        
+        <!-- Support Info - NUR EMAIL -->
+        <div class="info-card">
+          <h3 class="info-card-title">
+            <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <span>Email Support</span>
+          </h3>
+          
+          <div class="info-list">
+            <div class="info-item">
+              <svg class="info-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <span><strong>Email:</strong> support@simbye.com</span>
+            </div>
+            
+            <div class="info-item">
+              <svg class="info-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span><strong>Response Time:</strong> Within 24 hours</span>
+            </div>
+            
+            <div class="info-item">
+              <svg class="info-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span><strong>Availability:</strong> Monday - Friday, 9:00 - 18:00</span>
+            </div>
+          </div>
+          
+          <div style="margin-top: 24px;">
+            <a href="mailto:support@simbye.com" class="support-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <span>Send Email</span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- FAQ Link -->
+        <div class="info-card faq-card">
+          <h3 class="info-card-title">
+            <svg class="info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            <span>Frequently Asked Questions</span>
+          </h3>
+          
+          <p style="color: var(--contact-text-secondary); margin: 0 0 16px 0; font-size: 15px;">
+            Find quick answers to common questions about eSIM setup, data usage, compatibility, and more.
+          </p>
+          
+          <a href="/pages/faq" class="faq-link">
+            <span>Visit FAQ Page</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+        
+      </div>
+      
+    </div>
+    
+  </div>
+</section>
+
