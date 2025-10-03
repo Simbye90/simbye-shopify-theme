@@ -1,11 +1,7 @@
 <style>
-
-
-
-
 :root {
-  --header-height: 95px; /* +10px mehr Abstand */
-  --header-mobile-height: 80px; /* +5px mehr */
+  --header-height: 95px; /* +10px more spacing */
+  --header-mobile-height: 80px; /* +5px more */
   --primary-color: #009a61;
   --primary-hover: #00824f;
   --primary-accent: #00d97e;
@@ -39,9 +35,7 @@
 /* Header - FIXED POSITION */
 .enterprise-header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   width: 100vw;
   height: var(--header-height);
   background: var(--bg-header);
@@ -184,7 +178,7 @@ body { padding-top: var(--header-height); }
 .mobile-toggle .burger { width: 20px; height: 16px; position: relative; }
 .mobile-toggle .burger span { display: block; position: absolute; width: 100%; height: 2px; background: white; border-radius: 2px; transition: all var(--transition-base); }
 .mobile-toggle .burger span:nth-child(1) { top: 0; }
-.mobile-toggle .burger span:nth-child(2) { top: 7px; }
+mobile-toggle .burger span:nth-child(2) { top: 7px; }
 .mobile-toggle .burger span:nth-child(3) { bottom: 0; }
 .mobile-toggle.active .burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
 .mobile-toggle.active .burger span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
@@ -297,20 +291,28 @@ body { padding-top: var(--header-height); }
       </a>
     </div>
     
-    <!-- Desktop Navigation (locale-aware via routes.root_url) -->
+    <!-- Desktop Navigation (menu from section setting; fallback to defaults) -->
     <nav class="header-nav">
-      <a href="{{ routes.root_url }}/pages/how-it-works" class="nav-link">
-        {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
-      </a>
-      <a href="{{ routes.root_url }}/pages/check-esim" class="nav-link">
-        {{ 'header.check_esim' | t | default: 'Check eSIM' }}
-      </a>
-      <a href="{{ routes.root_url }}/pages/faq" class="nav-link">
-        {{ 'header.faq' | t | default: 'FAQ' }}
-      </a>
-      <a href="{{ routes.root_url }}/pages/support" class="nav-link">
-        {{ 'header.support' | t | default: 'Support' }}
-      </a>
+      {% if section.settings.main_menu and section.settings.main_menu.links.size > 0 %}
+        {% for link in section.settings.main_menu.links %}
+          <a href="{{ link.url }}" class="nav-link">
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.root_url }}/pages/how-it-works" class="nav-link">
+          {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
+        </a>
+        <a href="{{ routes.root_url }}/pages/check-esim" class="nav-link">
+          {{ 'header.check_esim' | t | default: 'Check eSIM' }}
+        </a>
+        <a href="{{ routes.root_url }}/pages/faq" class="nav-link">
+          {{ 'header.faq' | t | default: 'FAQ' }}
+        </a>
+        <a href="{{ routes.root_url }}/pages/support" class="nav-link">
+          {{ 'header.support' | t | default: 'Support' }}
+        </a>
+      {% endif %}
     </nav>
     
     <!-- Desktop Actions -->
@@ -355,7 +357,7 @@ body { padding-top: var(--header-height); }
           </div>
         </div>
         
-        <!-- Currency/Country Switcher (NO DUPLICATES) -->
+        <!-- Currency/Country Switcher (no duplicates) -->
         <div class="switcher" id="country-switcher" aria-haspopup="true" aria-expanded="false">
           <span id="current-country">{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
           
@@ -434,20 +436,28 @@ body { padding-top: var(--header-height); }
     </button>
   </div>
   
-  <!-- Navigation -->
+  <!-- Navigation (menu from section setting; fallback to defaults) -->
   <nav class="mobile-nav">
-    <a href="{{ routes.root_url }}pages/how-it-works" class="mobile-nav-item">
-      {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
-    </a>
-    <a href="{{ routes.root_url }}pages/check-esim" class="mobile-nav-item">
-      {{ 'header.check_esim' | t | default: 'Check eSIM' }}
-    </a>
-    <a href="{{ routes.root_url }}pages/faq" class="mobile-nav-item">
-      {{ 'header.faq' | t | default: 'FAQ' }}
-    </a>
-    <a href="{{ routes.root_url }}pages/support" class="mobile-nav-item">
-      {{ 'header.support' | t | default: 'Support' }}
-    </a>
+    {% if section.settings.main_menu and section.settings.main_menu.links.size > 0 %}
+      {% for link in section.settings.main_menu.links %}
+        <a href="{{ link.url }}" class="mobile-nav-item">
+          {{ link.title }}
+        </a>
+      {% endfor %}
+    {% else %}
+      <a href="{{ routes.root_url }}/pages/how-it-works" class="mobile-nav-item">
+        {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
+      </a>
+      <a href="{{ routes.root_url }}/pages/check-esim" class="mobile-nav-item">
+        {{ 'header.check_esim' | t | default: 'Check eSIM' }}
+      </a>
+      <a href="{{ routes.root_url }}/pages/faq" class="mobile-nav-item">
+        {{ 'header.faq' | t | default: 'FAQ' }}
+      </a>
+      <a href="{{ routes.root_url }}/pages/support" class="mobile-nav-item">
+        {{ 'header.support' | t | default: 'Support' }}
+      </a>
+    {% endif %}
   </nav>
   
   <!-- Settings -->
@@ -477,7 +487,7 @@ body { padding-top: var(--header-height); }
       </div>
     </div>
     
-    <!-- Currency (NO DUPLICATES) -->
+    <!-- Currency (no duplicates) -->
     <div class="settings-row" id="mobile-country-row">
       <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
       <div class="settings-value">
@@ -668,12 +678,20 @@ body { padding-top: var(--header-height); }
     document.querySelectorAll('.settings-row').forEach(function(row){ row.classList.remove('active'); });
   }
   
-  // Mark Active Navigation
+  // Mark Active Navigation (works with absolute/relative URLs)
   function markActiveNav() {
-    const path = window.location.pathname.replace(/\/+$/, '');
+    const current = window.location.pathname.replace(/\/+$/, '');
+    function norm(href){
+      try {
+        const u = new URL(href, window.location.origin);
+        return u.pathname.replace(/\/+$/, '');
+      } catch(e) {
+        return (href || '').replace(/\/+$/, '');
+      }
+    }
     document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(function(link) {
-      const href = link.getAttribute('href').replace(/\/+$/, '');
-      if (href === path) link.classList.add('active');
+      const href = norm(link.getAttribute('href'));
+      if (href === current) link.classList.add('active');
     });
   }
   
@@ -689,6 +707,12 @@ body { padding-top: var(--header-height); }
     {
       "type": "header",
       "content": "Header Settings"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Navigation (Desktop & Mobile)",
+      "info": "Select the menu to display for both desktop and mobile. If none selected, fallback links are used."
     }
   ]
 }
