@@ -1275,15 +1275,14 @@
         const price = product.price ? `${product.price}` : '';
         const imageUrl = product.featured_image?.url || '';
         
-        html += `
-          <a href="${product.url}" class="suggestion-item">
-            ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="suggestion-image">` : '<span class="suggestion-image">🌍</span>'}
-            <div class="suggestion-content">
-              <span class="suggestion-title">${title}</span>
-              ${product.vendor ? `<span class="suggestion-subtitle">${product.vendor}</span>` : ''}
-            </div>
-            ${price ? `<span class="suggestion-price">${price}</span>` : ''}
-          </a>
+      html += `
+  <a href="${product.url}" class="suggestion-item">
+    ${imageUrl ? `<img src="${imageUrl}" alt="${title}" class="suggestion-image">` : '<span class="suggestion-image">🌍</span>'}
+    <div class="suggestion-content">
+      <span class="suggestion-title">${title}</span>
+    </div>
+    ${price ? `<span class="suggestion-price">${price}</span>` : ''}
+  </a>
         `;
       });
       
