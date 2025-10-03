@@ -4,8 +4,8 @@
 <style>
 /* CSS Variables - OPTIMIZED */
 :root {
-  --header-height: 100px; /* +20px mehr Abstand */
-  --header-mobile-height: 75px; /* +10px mehr */
+  --header-height: 90px; /* +10px mehr Abstand */
+  --header-mobile-height: 70px; /* +5px mehr */
   --primary-color: #009a61;
   --primary-hover: #00824f;
   --primary-accent: #00d97e;
@@ -116,10 +116,10 @@ body {
 .nav-link {
   display: inline-flex;
   align-items: center;
-  padding: 12px 24px;
+  padding: 14px 26px;
   color: var(--text-color);
-  font-size: 24px; /* Erhöht auf 24px */
-  font-weight: 600; /* Erhöht von 500 */
+  font-size: 22px;
+  font-weight: 600;
   text-decoration: none;
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
@@ -533,9 +533,19 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+.mobile-close svg {
+  color: #1a1a1a;
+  width: 20px;
+  height: 20px;
+}
+
 [data-theme="dark"] .mobile-close {
   border-color: rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .mobile-close svg {
+  color: #ffffff;
 }
 
 .mobile-close:hover {
@@ -603,6 +613,7 @@ body {
   padding: 12px;
   border-radius: 12px;
   background: rgba(0, 0, 0, 0.02);
+  position: relative;
 }
 
 [data-theme="dark"] .settings-row {
@@ -630,7 +641,6 @@ body {
   border: 1px solid var(--border-color);
   cursor: pointer;
   transition: all var(--transition-fast);
-  position: relative;
 }
 
 .settings-value:hover {
@@ -643,12 +653,8 @@ body {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Mobile Switcher Dropdowns */
-.mobile-switcher {
-  position: relative;
-}
-
-.mobile-switcher-dropdown {
+/* Mobile Dropdown */
+.mobile-dropdown {
   position: absolute;
   bottom: calc(100% + 8px);
   right: 0;
@@ -662,20 +668,53 @@ body {
   transform: translateY(10px);
   transition: all var(--transition-fast);
   z-index: 1002;
+  overflow: hidden;
   max-height: 300px;
   overflow-y: auto;
 }
 
-[data-theme="dark"] .mobile-switcher-dropdown {
+[data-theme="dark"] .mobile-dropdown {
   background: #1a1a1a;
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.mobile-switcher.active .mobile-switcher-dropdown {
+.settings-row.active .mobile-dropdown {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+.mobile-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 14px;
+  transition: background var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-weight: 500;
+}
+
+.mobile-dropdown-item:hover {
+  background: rgba(0, 154, 97, 0.08);
+}
+
+.mobile-dropdown-item.active {
+  background: rgba(0, 154, 97, 0.12);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .mobile-dropdown-item:hover {
+  background: rgba(0, 217, 126, 0.1);
 }
 
 /* Dark Mode Switch */
@@ -728,7 +767,7 @@ body {
   }
   
   .nav-link {
-    font-size: 22px; /* Etwas kleiner auf Tablets */
+    font-size: 17px;
     padding: 10px 20px;
   }
 }
@@ -772,21 +811,25 @@ body {
 }
 
 /* Scrollbar */
-.mobile-menu::-webkit-scrollbar {
+.mobile-menu::-webkit-scrollbar,
+.mobile-dropdown::-webkit-scrollbar {
   width: 6px;
 }
 
-.mobile-menu::-webkit-scrollbar-track {
+.mobile-menu::-webkit-scrollbar-track,
+.mobile-dropdown::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.05);
   border-radius: 3px;
 }
 
-.mobile-menu::-webkit-scrollbar-thumb {
+.mobile-menu::-webkit-scrollbar-thumb,
+.mobile-dropdown::-webkit-scrollbar-thumb {
   background: var(--primary-color);
   border-radius: 3px;
 }
 
-[data-theme="dark"] .mobile-menu::-webkit-scrollbar-track {
+[data-theme="dark"] .mobile-menu::-webkit-scrollbar-track,
+[data-theme="dark"] .mobile-dropdown::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
 }
 </style>
@@ -861,19 +904,13 @@ body {
           <span id="current-currency">{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
           
           <div class="switcher-dropdown">
-            {% for country in localization.available_countries %}
-              {% if country.currency.iso_code != cart.currency.iso_code %}
-                <form method="post" action="{{ routes.root_url }}localization">
-                  <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-                  <button type="submit" class="dropdown-item">
-                    <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
-                  </button>
-                </form>
-              {% else %}
-                <button type="button" class="dropdown-item active">
-                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
+            {% for currency in localization.available_countries.first.currency %}
+              <form method="post" action="{{ routes.root_url }}localization">
+                <input type="hidden" name="country_code" value="{{ currency.iso_code }}">
+                <button type="submit" class="dropdown-item {% if currency.iso_code == cart.currency.iso_code %}active{% endif %}">
+                  <span>{{ currency.symbol }} {{ currency.iso_code }}</span>
                 </button>
-              {% endif %}
+              </form>
             {% endfor %}
           </div>
         </div>
@@ -950,48 +987,40 @@ body {
   
   <!-- Settings -->
   <div class="mobile-settings">
-    <!-- Language Mobile -->
-    <div class="settings-row">
+    <div class="settings-row" id="mobile-language-row">
       <span class="settings-label">{{ 'header.language' | t | default: 'Language' }}</span>
-      <div class="settings-value mobile-switcher" id="mobile-language-switcher">
+      <div class="settings-value">
         <span>🌐</span>
         <span>{{ localization.language.iso_code | upcase }}</span>
-        
-        <div class="mobile-switcher-dropdown">
-          {% for language in localization.available_languages %}
-            <form method="post" action="{{ routes.root_url }}localization">
-              <input type="hidden" name="language_code" value="{{ language.iso_code }}">
-              <button type="submit" class="dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
-                <span>{{ language.endonym_name }}</span>
-              </button>
-            </form>
-          {% endfor %}
-        </div>
+      </div>
+      
+      <div class="mobile-dropdown">
+        {% for language in localization.available_languages %}
+          <form method="post" action="{{ routes.root_url }}localization">
+            <input type="hidden" name="language_code" value="{{ language.iso_code }}">
+            <button type="submit" class="mobile-dropdown-item {% if language.iso_code == localization.language.iso_code %}active{% endif %}">
+              <span>{{ language.endonym_name }}</span>
+            </button>
+          </form>
+        {% endfor %}
       </div>
     </div>
     
-    <!-- Currency Mobile -->
-    <div class="settings-row">
+    <div class="settings-row" id="mobile-currency-row">
       <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
-      <div class="settings-value mobile-switcher" id="mobile-currency-switcher">
+      <div class="settings-value">
         <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-        
-        <div class="mobile-switcher-dropdown">
-          {% for country in localization.available_countries %}
-            {% if country.currency.iso_code != cart.currency.iso_code %}
-              <form method="post" action="{{ routes.root_url }}localization">
-                <input type="hidden" name="country_code" value="{{ country.iso_code }}">
-                <button type="submit" class="dropdown-item">
-                  <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
-                </button>
-              </form>
-            {% else %}
-              <button type="button" class="dropdown-item active">
-                <span>{{ country.currency.symbol }} {{ country.currency.iso_code }}</span>
-              </button>
-            {% endif %}
-          {% endfor %}
-        </div>
+      </div>
+      
+      <div class="mobile-dropdown">
+        {% for currency in localization.available_countries.first.currency %}
+          <form method="post" action="{{ routes.root_url }}localization">
+            <input type="hidden" name="country_code" value="{{ currency.iso_code }}">
+            <button type="submit" class="mobile-dropdown-item {% if currency.iso_code == cart.currency.iso_code %}active{% endif %}">
+              <span>{{ currency.symbol }} {{ currency.iso_code }}</span>
+            </button>
+          </form>
+        {% endfor %}
       </div>
     </div>
     
@@ -1023,8 +1052,6 @@ body {
   const darkModeSwitch = document.getElementById('dark-mode-switch');
   const languageSwitcher = document.getElementById('language-switcher');
   const currencySwitcher = document.getElementById('currency-switcher');
-  const mobileLanguageSwitcher = document.getElementById('mobile-language-switcher');
-  const mobileCurrencySwitcher = document.getElementById('mobile-currency-switcher');
   
   // State
   let currentTheme = localStorage.getItem('theme') || 'light';
@@ -1065,7 +1092,7 @@ body {
       darkModeSwitch.addEventListener('click', toggleTheme);
     }
     
-    // Switcher Dropdowns
+    // Switcher Dropdowns - Desktop
     if (languageSwitcher) {
       languageSwitcher.addEventListener('click', function(e) {
         e.stopPropagation();
@@ -1080,25 +1107,34 @@ body {
       });
     }
     
-    // Mobile Switchers
-    if (mobileLanguageSwitcher) {
-      mobileLanguageSwitcher.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMobileSwitcher(mobileLanguageSwitcher);
-      });
+    // Mobile Language/Currency Switchers
+    const mobileLanguageRow = document.getElementById('mobile-language-row');
+    const mobileCurrencyRow = document.getElementById('mobile-currency-row');
+    
+    if (mobileLanguageRow) {
+      const languageValue = mobileLanguageRow.querySelector('.settings-value');
+      if (languageValue) {
+        languageValue.addEventListener('click', function(e) {
+          e.stopPropagation();
+          toggleMobileDropdown(mobileLanguageRow);
+        });
+      }
     }
     
-    if (mobileCurrencySwitcher) {
-      mobileCurrencySwitcher.addEventListener('click', function(e) {
-        e.stopPropagation();
-        toggleMobileSwitcher(mobileCurrencySwitcher);
-      });
+    if (mobileCurrencyRow) {
+      const currencyValue = mobileCurrencyRow.querySelector('.settings-value');
+      if (currencyValue) {
+        currencyValue.addEventListener('click', function(e) {
+          e.stopPropagation();
+          toggleMobileDropdown(mobileCurrencyRow);
+        });
+      }
     }
     
     // Close dropdowns on outside click
     document.addEventListener('click', function() {
       closeSwitchers();
-      closeMobileSwitchers();
+      closeMobileDropdowns();
     });
     
     // Escape Key
@@ -1108,7 +1144,7 @@ body {
           closeMobileMenu();
         }
         closeSwitchers();
-        closeMobileSwitchers();
+        closeMobileDropdowns();
       }
     });
     
@@ -1169,7 +1205,6 @@ body {
   function toggleSwitcher(switcher) {
     const isActive = switcher.classList.contains('active');
     closeSwitchers();
-    closeMobileSwitchers();
     if (!isActive) {
       switcher.classList.add('active');
     }
@@ -1181,19 +1216,18 @@ body {
     });
   }
   
-  // Mobile Switcher Functions
-  function toggleMobileSwitcher(switcher) {
-    const isActive = switcher.classList.contains('active');
-    closeMobileSwitchers();
-    closeSwitchers();
+  // Mobile Dropdown Functions
+  function toggleMobileDropdown(row) {
+    const isActive = row.classList.contains('active');
+    closeMobileDropdowns();
     if (!isActive) {
-      switcher.classList.add('active');
+      row.classList.add('active');
     }
   }
   
-  function closeMobileSwitchers() {
-    document.querySelectorAll('.mobile-switcher').forEach(function(sw) {
-      sw.classList.remove('active');
+  function closeMobileDropdowns() {
+    document.querySelectorAll('.settings-row').forEach(function(row) {
+      row.classList.remove('active');
     });
   }
   
