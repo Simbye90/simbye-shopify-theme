@@ -135,6 +135,239 @@
 }
 
 /* ============================================
+   MEGA AGGRESSIVE OVERRIDE - ALLES KILLEN
+   ============================================ */
+
+/* Kill ALL Custom Styles */
+.article-content-wrapper *,
+.article-content *,
+.wrap *,
+article * {
+  font-family: inherit !important;
+  color: var(--article-text) !important;
+}
+
+/* Container Breiter */
+.article-content-wrapper {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+}
+
+/* Images - Maximale Größe + Responsive */
+.article-content img,
+.article-content figure img,
+.wrap img,
+article img {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+  border-radius: 16px !important;
+  margin: 32px auto !important;
+  display: block !important;
+  box-shadow: var(--article-shadow-md) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="dark"] .article-content img,
+[data-theme="dark"] .wrap img,
+[data-theme="dark"] article img {
+  filter: brightness(0.95) !important;
+  opacity: 1 !important;
+}
+
+/* Images in Hero - Begrenzen */
+.hero img,
+.article-featured-image img {
+  max-width: 1200px !important;
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+
+/* Kill Custom Kicker/Badge Styles */
+.kicker,
+.badge,
+.meta span {
+  color: var(--article-primary) !important;
+  background: rgba(0, 154, 97, 0.1) !important;
+  border-color: var(--article-primary) !important;
+}
+
+[data-theme="dark"] .kicker,
+[data-theme="dark"] .badge,
+[data-theme="dark"] .meta span {
+  background: rgba(0, 217, 126, 0.15) !important;
+}
+
+/* Kill Custom Callout/Note Styles */
+.callout,
+.note {
+  background: rgba(0, 154, 97, 0.05) !important;
+  border-left: 4px solid var(--article-primary) !important;
+  padding: 20px !important;
+  border-radius: 12px !important;
+  color: var(--article-text) !important;
+}
+
+[data-theme="dark"] .callout,
+[data-theme="dark"] .note {
+  background: rgba(0, 217, 126, 0.08) !important;
+}
+
+.callout *,
+.note * {
+  color: var(--article-text) !important;
+}
+
+/* Kill Custom Button Styles */
+.btn,
+.cta a,
+button {
+  background: linear-gradient(135deg, var(--article-primary), var(--article-accent)) !important;
+  color: white !important;
+  border: none !important;
+  padding: 14px 28px !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  font-weight: 700 !important;
+}
+
+/* Kill Custom Table Styles */
+.table,
+table {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: auto !important;
+  display: block !important;
+}
+
+.table th,
+.table td,
+table th,
+table td {
+  color: var(--article-text) !important;
+  background: var(--article-card-bg) !important;
+  border-color: var(--article-border) !important;
+  padding: 16px 20px !important;
+}
+
+/* Kill Custom FAQ Styles */
+.faq details,
+details {
+  background: var(--article-card-bg) !important;
+  border: 2px solid var(--article-border) !important;
+  color: var(--article-text) !important;
+  padding: 20px !important;
+  border-radius: 12px !important;
+  margin-bottom: 16px !important;
+}
+
+[data-theme="dark"] .faq details,
+[data-theme="dark"] details {
+  background: rgba(26, 26, 26, 0.6) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.faq summary,
+summary {
+  color: var(--article-text) !important;
+  font-weight: 700 !important;
+}
+
+/* Kill Custom Grid Styles */
+.grid {
+  display: block !important;
+  max-width: 100% !important;
+}
+
+/* Kill Sep/Divider Styles */
+.sep {
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, var(--article-border), transparent) !important;
+  margin: 48px 0 !important;
+  border: none !important;
+}
+
+/* ============================================
+   AGGRESSIVE DARK MODE FIX - ALLE ELEMENTE
+   ============================================ */
+
+/* Article Container - Force Colors */
+.article-section .article-content-wrapper,
+.article-section .article-content,
+.article-section .article-content * {
+  color: var(--article-text) !important;
+}
+
+/* Images - Force Visible */
+.article-section .article-content img,
+.article-section .article-content figure img {
+  opacity: 1 !important;
+  filter: none !important;
+  background: transparent !important;
+}
+
+[data-theme="dark"] .article-section .article-content img,
+[data-theme="dark"] .article-section .article-content figure img {
+  opacity: 1 !important;
+  filter: brightness(0.95) !important;
+}
+
+/* Figcaption - Force Color */
+.article-section .article-content figcaption {
+  color: var(--article-text-secondary) !important;
+  opacity: 1 !important;
+}
+
+/* Links - Force Color */
+.article-section .article-content a {
+  color: var(--article-primary) !important;
+}
+
+/* Lists - Force Bullets Visible */
+.article-section .article-content ul li::before {
+  background: var(--article-primary) !important;
+  opacity: 1 !important;
+}
+
+.article-section .article-content ol li::before {
+  color: var(--article-primary) !important;
+  opacity: 1 !important;
+}
+
+/* Code - Force Visible */
+.article-section .article-content code {
+  color: var(--article-primary) !important;
+  background: rgba(0, 154, 97, 0.1) !important;
+  opacity: 1 !important;
+}
+
+[data-theme="dark"] .article-section .article-content code {
+  background: rgba(0, 217, 126, 0.15) !important;
+  color: var(--article-primary) !important;
+}
+
+.article-section .article-content pre code {
+  color: var(--article-text) !important;
+}
+
+/* Tables - Force All Colors */
+.article-section .article-content table,
+.article-section .article-content th,
+.article-section .article-content td {
+  color: var(--article-text) !important;
+  border-color: var(--article-border) !important;
+}
+
+/* Blockquote - Force Color */
+.article-section .article-content blockquote,
+.article-section .article-content blockquote * {
+  color: var(--article-text-secondary) !important;
+}
+
+/* ============================================
    ALLE TYPOGRAPHY ELEMENTE - VOLLSTÄNDIG
    ============================================ */
 
