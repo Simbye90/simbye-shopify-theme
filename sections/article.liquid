@@ -138,11 +138,11 @@
    MEGA AGGRESSIVE OVERRIDE - ALLES KILLEN
    ============================================ */
 
-/* Kill ALL Custom Styles */
+/* Kill ALL Custom Styles - ABER NICHT HEADER/FOOTER */
 .article-content-wrapper *,
 .article-content *,
-.wrap *,
-article * {
+.wrap *:not(.enterprise-header *):not(.footer *):not(header *):not(footer *),
+article *:not(.enterprise-header *):not(.footer *):not(header *):not(footer *) {
   font-family: inherit !important;
   color: var(--article-text) !important;
 }
@@ -156,9 +156,9 @@ article * {
 /* Images - Maximale Größe + Responsive */
 .article-content img,
 .article-content figure img,
-.wrap img,
-article img {
-  max-width: 100% !important;
+.wrap img:not(.enterprise-header img):not(.footer img):not(header img):not(footer img),
+article img:not(.enterprise-header img):not(.footer img):not(header img):not(footer img) {
+  max-width: 900px !important;
   width: 100% !important;
   height: auto !important;
   border-radius: 16px !important;
@@ -169,8 +169,8 @@ article img {
 }
 
 [data-theme="dark"] .article-content img,
-[data-theme="dark"] .wrap img,
-[data-theme="dark"] article img {
+[data-theme="dark"] .wrap img:not(.enterprise-header img):not(.footer img),
+[data-theme="dark"] article img:not(.enterprise-header img):not(.footer img) {
   filter: brightness(0.95) !important;
   opacity: 1 !important;
 }
@@ -178,7 +178,7 @@ article img {
 /* Images in Hero - Begrenzen */
 .hero img,
 .article-featured-image img {
-  max-width: 1200px !important;
+  max-width: 1000px !important;
   width: 100% !important;
   height: auto !important;
   margin: 0 auto !important;
@@ -223,7 +223,7 @@ article img {
 /* Kill Custom Button Styles */
 .btn,
 .cta a,
-button {
+button:not(.enterprise-header button):not(.footer button):not(header button):not(footer button) {
   background: linear-gradient(135deg, var(--article-primary), var(--article-accent)) !important;
   color: white !important;
   border: none !important;
