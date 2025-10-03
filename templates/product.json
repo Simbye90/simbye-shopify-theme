@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "product",
+      "custom_css": [],
       "settings": {
         "show_compare_price": true,
         "price_increase_percent": 50
@@ -18,6 +19,7 @@
     },
     "product_info_tabs_jTcRT8": {
       "type": "product-info-tabs",
+      "custom_css": [],
       "name": "Product Info Tabs",
       "settings": {}
     },

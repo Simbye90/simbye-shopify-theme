@@ -46,13 +46,15 @@
         "youtube_url": "",
         "linkedin_url": "",
         "reddit_url": "",
-        "privacy_url": "",
-        "privacy_text": "Privacy Policy",
-        "terms_url": "",
+        "privacy_url": "shopify://products/esim-sudan",
+        "privacy_text": "",
+        "terms_url": "shopify://blogs/blog",
         "terms_text": "Terms of Service",
-        "cookie_url": "",
+        "cookie_url": "shopify://blogs/blog/top-10-esim-countries-in-2025-why-choose-an-esim-from-simbye",
         "cookie_text": "Cookie Preferencsdssde",
-        "copyright_text": "All rights reservedsdsd."
+        "copyright_text": "All rights reservedsdsd.",
+        "show_payment": true,
+        "payment_label": "Secure payments:"
       }
     }
   },

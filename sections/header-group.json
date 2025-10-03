@@ -13,10 +13,13 @@
   "sections": {
     "header": {
       "type": "header",
+      "custom_css": [
+        ".enterprise-header.scrolled {display: none;}"
+      ],
       "settings": {}
     }
   },
   "order": [
     "header"
-  ],
+  ]
 }
