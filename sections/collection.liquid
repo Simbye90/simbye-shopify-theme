@@ -99,149 +99,7 @@
   line-height: 1.5;
 }
 
-/* SEARCH BAR - WIE HERO SECTION */
-.collection-search {
-  max-width: 600px;
-  margin: 0 auto 48px auto;
-  position: relative;
-}
 
-.search-container {
-  display: flex;
-  align-items: center;
-  background: var(--coll-card-bg);
-  border-radius: 100px;
-  box-shadow: var(--coll-shadow);
-  overflow: hidden;
-  height: 60px;
-  border: 2px solid var(--coll-border);
-  transition: var(--coll-transition);
-}
-
-.search-container:focus-within {
-  box-shadow: 0 8px 32px rgba(0, 154, 97, 0.2);
-  border-color: rgba(0, 154, 97, 0.3);
-}
-
-[data-theme="dark"] .search-container {
-  background: rgba(26, 26, 26, 0.8);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-}
-
-.search-icon {
-  width: 24px;
-  height: 24px;
-  margin-left: 24px;
-  color: var(--coll-text-secondary);
-  flex-shrink: 0;
-}
-
-.search-input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  padding: 0 20px;
-  font-size: 16px;
-  color: var(--coll-text);
-  outline: none;
-  font-family: inherit;
-}
-
-.search-input::placeholder {
-  color: var(--coll-text-secondary);
-}
-
-[data-theme="dark"] .search-input {
-  color: #f5f5f5;
-}
-
-.search-button {
-  padding: 0 32px;
-  height: 100%;
-  background: linear-gradient(135deg, var(--coll-primary), var(--coll-accent));
-  color: white;
-  border: none;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-  transition: var(--coll-transition);
-  white-space: nowrap;
-}
-
-.search-button:hover {
-  background: linear-gradient(135deg, var(--coll-primary-hover), var(--coll-primary));
-}
-
-/* TAG FILTER - CONNECTED TABS WIE DESTINATIONS */
-.collection-tags {
-  display: flex;
-  gap: 4px;
-  background: rgba(0, 154, 97, 0.05);
-  padding: 4px;
-  border-radius: 16px;
-  border: 1px solid rgba(0, 154, 97, 0.1);
-  margin-bottom: 56px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: var(--coll-shadow);
-  animation: fadeInUp 0.8s ease 0.1s both;
-}
-
-[data-theme="dark"] .collection-tags {
-  background: rgba(0, 217, 126, 0.05);
-  border-color: rgba(0, 217, 126, 0.1);
-}
-
-.tag-btn {
-  padding: 16px 32px;
-  background: transparent;
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--coll-text-secondary);
-  cursor: pointer;
-  transition: var(--coll-transition);
-  white-space: nowrap;
-  outline: none;
-  opacity: 0.7;
-  font-family: inherit;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-[data-theme="dark"] .tag-btn {
-  color: #b0b0b0;
-}
-
-.tag-btn:hover:not(.active) {
-  opacity: 1;
-  background: rgba(0, 154, 97, 0.08);
-  transform: translateY(-1px);
-}
-
-[data-theme="dark"] .tag-btn:hover:not(.active) {
-  background: rgba(0, 217, 126, 0.1);
-  color: #e0e0e0;
-}
-
-.tag-btn.active {
-  background: var(--coll-primary) !important;
-  color: white !important;
-  opacity: 1;
-  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.35);
-  transform: scale(1.05);
-}
-
-[data-theme="dark"] .tag-btn.active {
-  background: #00d97e !important;
-  color: #0a0a0a !important;
-  box-shadow: 0 4px 12px rgba(0, 217, 126, 0.35);
-}
 
 /* Products Count */
 .products-count {
@@ -590,48 +448,6 @@
     margin-bottom: 32px;
   }
   
-  .collection-search {
-    margin-bottom: 32px;
-  }
-  
-  .search-container {
-    height: 54px;
-  }
-  
-  .search-icon {
-    width: 20px;
-    height: 20px;
-    margin-left: 20px;
-  }
-  
-  .search-input {
-    font-size: 15px;
-    padding: 0 16px;
-  }
-  
-  .search-button {
-    padding: 0 24px;
-    font-size: 14px;
-  }
-  
-  .collection-tags {
-    width: calc(100% - 40px);
-    max-width: 500px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    margin-bottom: 40px;
-  }
-  
-  .collection-tags::-webkit-scrollbar {
-    display: none;
-  }
-  
-  .tag-btn {
-    padding: 12px 24px;
-    font-size: 16px;
-  }
-  
   .collection-grid {
     gap: 16px;
   }
@@ -688,19 +504,6 @@
     padding: 0 16px;
   }
   
-  .collection-search {
-    margin-bottom: 28px;
-  }
-  
-  .search-container {
-    height: 52px;
-  }
-  
-  .tag-btn {
-    padding: 10px 20px;
-    font-size: 15px;
-  }
-  
   .product-card {
     padding: 18px;
   }
@@ -729,45 +532,7 @@
           {{ collection.description }}
         </div>
       {% endif %}
-      
-      <!-- Search Bar -->
-      <div class="collection-search">
-        <form action="{{ collection.url }}" method="get" class="search-container">
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="11" cy="11" r="8"/>
-            <path d="m21 21-4.35-4.35"/>
-          </svg>
-          
-          <input 
-            type="search" 
-            name="q" 
-            class="search-input"
-            placeholder="Search {{ collection.title | downcase }}..."
-            value="{{ search.terms | escape }}"
-            autocomplete="off"
-          >
-          
-          <button type="submit" class="search-button">
-            Search
-          </button>
-        </form>
-      </div>
     </div>
-    
-    <!-- Tag Filter (Connected Tabs) -->
-    {% if collection.all_tags.size > 0 %}
-      <div class="collection-tags" role="tablist">
-        <a href="{{ collection.url }}" class="tag-btn {% unless current_tags %}active{% endunless %}">
-          All Products
-        </a>
-        {% for tag in collection.all_tags limit: 5 %}
-          <a href="{{ collection.url }}/{{ tag | handle }}" 
-             class="tag-btn {% if current_tags contains tag %}active{% endif %}">
-            {{ tag }}
-          </a>
-        {% endfor %}
-      </div>
-    {% endif %}
     
     <!-- Products Count -->
     {% if collection.products_count > 0 %}
@@ -946,73 +711,11 @@
   "settings": [
     {
       "type": "header",
-      "content": "Featured Collections (Optional)"
+      "content": "Collection Settings"
     },
     {
-      "type": "checkbox",
-      "id": "show_featured_collections",
-      "label": "Show Featured Collections Tabs",
-      "default": false,
-      "info": "Display additional collections as tabs above main collection"
-    },
-    {
-      "type": "collection",
-      "id": "featured_collection_1",
-      "label": "Featured Collection 1"
-    },
-    {
-      "type": "text",
-      "id": "featured_tab_1",
-      "label": "Tab Label 1",
-      "default": "Popular"
-    },
-    {
-      "type": "collection",
-      "id": "featured_collection_2",
-      "label": "Featured Collection 2"
-    },
-    {
-      "type": "text",
-      "id": "featured_tab_2",
-      "label": "Tab Label 2",
-      "default": "Regional"
-    },
-    {
-      "type": "collection",
-      "id": "featured_collection_3",
-      "label": "Featured Collection 3"
-    },
-    {
-      "type": "text",
-      "id": "featured_tab_3",
-      "label": "Tab Label 3",
-      "default": "Global"
-    },
-    {
-      "type": "header",
-      "content": "Related Collections"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_related",
-      "label": "Show Related Collections",
-      "default": false,
-      "info": "Display related collections at the bottom"
-    },
-    {
-      "type": "collection",
-      "id": "related_collection_1",
-      "label": "Related Collection 1"
-    },
-    {
-      "type": "collection",
-      "id": "related_collection_2",
-      "label": "Related Collection 2"
-    },
-    {
-      "type": "collection",
-      "id": "related_collection_3",
-      "label": "Related Collection 3"
+      "type": "paragraph",
+      "content": "This section displays your collection products in an enterprise grid layout similar to the Destinations section."
     }
   ]
 }
