@@ -14,40 +14,64 @@
 
 /* CSS Variables */
 :root {
-  --blog-primary: #009a61;
-  --blog-primary-dark: #00824f;
-  --blog-accent: #00d97e;
-  --blog-text: #1a1a1a;
-  --blog-text-secondary: #666666;
-  --blog-bg: #ffffff;
-  --blog-card-bg: #ffffff;
-  --blog-border: rgba(0, 0, 0, 0.08);
-  --blog-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --blog-radius: 24px;
-  --blog-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --blog-primary: #009a61 !important;
+  --blog-primary-dark: #00824f !important;
+  --blog-accent: #00d97e !important;
+  --blog-text: #1a1a1a !important;
+  --blog-text-secondary: #666666 !important;
+  --blog-bg: #ffffff !important;
+  --blog-card-bg: #ffffff !important;
+  --blog-border: rgba(0, 0, 0, 0.08) !important;
+  --blog-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+  --blog-radius: 24px !important;
+  --blog-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 [data-theme="dark"] {
-  --blog-text: #f5f5f5;
-  --blog-text-secondary: #999999;
-  --blog-bg: #0a0a0a;
-  --blog-card-bg: rgba(26, 26, 26, 0.8);
-  --blog-border: rgba(255, 255, 255, 0.08);
-  --blog-primary: #00d97e;
-  --blog-accent: #00ff88;
-  --blog-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --blog-text: #ffffff !important;
+  --blog-text-secondary: #cccccc !important;
+  --blog-bg: #0a0a0a !important;
+  --blog-card-bg: rgba(26, 26, 26, 0.8) !important;
+  --blog-border: rgba(255, 255, 255, 0.08) !important;
+  --blog-primary: #00d97e !important;
+  --blog-accent: #00ff88 !important;
+  --blog-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
 /* Main Section */
 .blog-section {
-  width: 100%;
-  background: var(--blog-bg);
-  padding: 80px 0;
-  min-height: 100vh;
+  width: 100% !important;
+  background: var(--blog-bg) !important;
+  padding: 80px 0 !important;
+  min-height: 100vh !important;
 }
 
 [data-theme="dark"] .blog-section {
-  background: #0a0a0a;
+  background: #0a0a0a !important;
+}
+
+/* Force All Text Colors */
+.blog-section,
+.blog-section * {
+  color: var(--blog-text) !important;
+}
+
+.blog-section .article-meta,
+.blog-section .article-date,
+.blog-section .article-author,
+.blog-section .article-excerpt {
+  color: var(--blog-text-secondary) !important;
+}
+
+/* Force Images Visible */
+.blog-section img {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+[data-theme="dark"] .blog-section img {
+  opacity: 1 !important;
+  filter: brightness(0.95) !important;
 }
 
 /* Container */
