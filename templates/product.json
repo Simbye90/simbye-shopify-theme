@@ -23,6 +23,15 @@
       "name": "Product Info Tabs",
       "settings": {}
     },
+    "how_to_product_Re4nXp": {
+      "type": "how-to-product",
+      "name": "Product How-To",
+      "settings": {
+        "step1_image": "shopify://shop_images/Design-ohne-Titel-17-2_8f9ba899-20e9-4e17-aa81-c1e1d97bea78.webp",
+        "step2_image": "shopify://shop_images/Design-ohne-Titel-18-2.webp",
+        "step3_image": "shopify://shop_images/Design-ohne-Titel-19-2.webp"
+      }
+    },
     "mobile_apps_qb8J9x": {
       "type": "mobile-apps",
       "name": "Mobile Apps",
@@ -141,6 +150,7 @@
   "order": [
     "main",
     "product_info_tabs_jTcRT8",
+    "how_to_product_Re4nXp",
     "mobile_apps_qb8J9x",
     "simbye_vs_A7x9RL",
     "faq_rdt6jk"
