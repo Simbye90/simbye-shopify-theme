@@ -1,11 +1,13 @@
 <!-- sections/header.liquid -->
-<!-- Enterprise Header 2025 Enhanced - Simbye eSIM -->
+<!-- SIMBYE ENTERPRISE HEADER V6.0 - OPTIMIZED -->
 
 <style>
-/* CSS Variables - ENHANCED */
+/* ============================================
+   CSS VARIABLES - ENHANCED
+   ============================================ */
 :root {
-  --header-height: 80px;
-  --header-mobile-height: 65px;
+  --header-height: 90px; /* +10px für mehr Abstand */
+  --header-mobile-height: 70px;
   --primary-color: #009a61;
   --primary-hover: #00824f;
   --primary-accent: #00d97e;
@@ -23,7 +25,7 @@
   --border-radius-sm: 16px;
 }
 
-/* Dark Mode - ENHANCED */
+/* Dark Mode */
 [data-theme="dark"] {
   --text-color: #f5f5f5;
   --text-secondary: #999999;
@@ -36,7 +38,9 @@
   --primary-accent: #00ff88;
 }
 
-/* Header - FIXED POSITION STATT STICKY */
+/* ============================================
+   HEADER - FIXED POSITION
+   ============================================ */
 .enterprise-header {
   position: fixed;
   top: 0;
@@ -50,7 +54,7 @@
   border-bottom: 1px solid transparent;
 }
 
-/* Body Padding für Fixed Header */
+/* Body Padding */
 body {
   padding-top: var(--header-height);
 }
@@ -75,28 +79,43 @@ body {
   background: rgba(10, 10, 10, 0.95);
 }
 
+/* ============================================
+   HEADER CONTAINER - OPTIMIERTE ABSTÄNDE
+   ============================================ */
 .header-container {
   display: grid;
-  grid-template-columns: 200px 1fr auto;
+  grid-template-columns: 220px 1fr auto;
   align-items: center;
   height: 100%;
   max-width: 1600px;
   margin: 0 auto;
   padding: 0 40px;
-  gap: 40px;
+  gap: 48px; /* Mehr Abstand */
 }
 
-/* Logo - UNCHANGED POSITION & SIZE */
+/* ============================================
+   LOGO - FIXED & OPTIMIZED
+   ============================================ */
 .header-logo {
   display: flex;
   align-items: center;
   height: 100%;
-  width: 200px;
+  width: 220px;
+  padding: 8px 0; /* Vertikaler Abstand */
+}
+
+.header-logo a {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
 .header-logo img {
-  width: 200px;
+  width: 100%;
+  max-width: 220px;
   height: auto;
+  max-height: 50px;
   object-fit: contain;
   transition: transform var(--transition-fast);
 }
@@ -105,12 +124,15 @@ body {
   transform: scale(1.02);
 }
 
-/* Desktop Navigation - ENHANCED */
+/* ============================================
+   DESKTOP NAVIGATION - VERBESSERTE LESBARKEIT
+   ============================================ */
 .header-nav {
   display: flex;
   align-items: center;
   gap: 8px;
   height: 100%;
+  padding: 8px 0; /* Vertikaler Abstand */
 }
 
 .nav-link {
@@ -118,13 +140,14 @@ body {
   align-items: center;
   padding: 12px 24px;
   color: var(--text-color);
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 18px; /* Von 22px auf 18px reduziert für bessere Balance */
+  font-weight: 600; /* Von 500 auf 600 erhöht - WICHTIG! */
   text-decoration: none;
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
+  letter-spacing: -0.01em; /* Leicht enger für bessere Lesbarkeit */
 }
 
 .nav-link::before {
@@ -151,14 +174,14 @@ body {
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 8px;
+  bottom: 10px;
   left: 24px;
   right: 24px;
-  height: 2px;
+  height: 3px; /* Von 2px auf 3px */
   background: linear-gradient(90deg, var(--primary-color), var(--primary-accent));
   transform: scaleX(0);
   transition: transform var(--transition-fast);
-  border-radius: 1px;
+  border-radius: 2px;
 }
 
 .nav-link.active::after,
@@ -166,44 +189,58 @@ body {
   transform: scaleX(1);
 }
 
-/* Desktop Actions - ENHANCED */
+/* ============================================
+   DESKTOP ACTIONS - OPTIMIERT
+   ============================================ */
 .header-actions {
   display: flex;
   align-items: center;
   gap: 12px;
   height: 100%;
+  padding: 8px 0; /* Vertikaler Abstand */
 }
 
-/* Login Button Desktop - OHNE ANIMATION */
+/* ============================================
+   LOGIN BUTTON - VERBESSERTES DESIGN
+   ============================================ */
 .auth-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 32px;
-  height: 48px;
+  padding: 0 28px; /* Etwas kompakter */
+  height: 50px; /* Höher für bessere Proportionen */
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700; /* Von 600 auf 700 */
   color: white;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-accent));
   text-decoration: none;
   border-radius: 100px;
   transition: all var(--transition-base);
   gap: 8px;
-  box-shadow: 0 8px 24px rgba(0, 154, 97, 0.25);
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.25); /* Weniger Shadow */
   position: relative;
   overflow: hidden;
+  letter-spacing: 0.02em;
+  text-transform: none; /* Kein uppercase */
+}
+
+.auth-btn svg {
+  width: 20px;
+  height: 20px;
 }
 
 .auth-btn:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 28px rgba(0, 154, 97, 0.3);
 }
 
 .auth-btn:active {
-  transform: scale(0.98);
+  transform: translateY(0) scale(0.98);
 }
 
-/* Switchers - ENHANCED */
+/* ============================================
+   SWITCHERS - SHOPIFY INTEGRATION
+   ============================================ */
 .switcher-group {
   display: flex;
   gap: 8px;
@@ -213,13 +250,13 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
+  padding: 12px 18px;
   border-radius: var(--border-radius-sm);
   background: var(--header-gradient);
   border: 2px solid var(--border-color);
   color: var(--text-color);
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600; /* Von 500 auf 600 */
   cursor: pointer;
   transition: all var(--transition-fast);
   box-shadow: var(--shadow-sm);
@@ -236,13 +273,15 @@ body {
   backdrop-filter: blur(10px);
 }
 
-/* Dark Mode Toggle Desktop - ENHANCED */
+/* ============================================
+   DARK MODE TOGGLE
+   ============================================ */
 .theme-toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 50px; /* Größer */
+  height: 50px;
   border-radius: var(--border-radius-sm);
   background: var(--header-gradient);
   border: 2px solid var(--border-color);
@@ -293,11 +332,13 @@ body {
   transform: rotate(180deg) scale(0);
 }
 
-/* Mobile Toggle - OHNE ANIMATION UND SHADOW */
+/* ============================================
+   MOBILE TOGGLE
+   ============================================ */
 .mobile-toggle {
   display: none;
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius-sm);
@@ -305,6 +346,7 @@ body {
   cursor: pointer;
   border: none;
   position: relative;
+  box-shadow: 0 4px 12px rgba(0, 154, 97, 0.25);
 }
 
 .mobile-toggle:active {
@@ -321,7 +363,7 @@ body {
   display: block;
   position: absolute;
   width: 100%;
-  height: 2px;
+  height: 2.5px; /* Dicker */
   background: white;
   border-radius: 2px;
   transition: all var(--transition-base);
@@ -344,13 +386,15 @@ body {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Mobile Menu - ENHANCED PREMIUM STYLE */
+/* ============================================
+   MOBILE MENU
+   ============================================ */
 .mobile-menu {
   position: fixed;
   top: 0;
   right: 0;
-  width: 75%;
-  max-width: 360px;
+  width: 80%; /* Etwas breiter */
+  max-width: 380px;
   height: 100vh;
   background: var(--bg-header);
   transform: translateX(100%);
@@ -388,14 +432,16 @@ body {
   visibility: visible;
 }
 
-/* Mobile Menu Header - 18PX LOGIN */
+/* ============================================
+   MOBILE MENU HEADER - VERBESSERTER LOGIN
+   ============================================ */
 .mobile-menu-header {
   padding: 20px;
   border-bottom: 2px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 70px;
+  min-height: 80px;
   background: transparent;
 }
 
@@ -408,19 +454,20 @@ body {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  color: var(--text-color);
-  font-size: 18px;
-  font-weight: 600;
-  transition: all var(--transition-fast);
-  padding: 8px 18px;
+  font-size: 17px;
+  font-weight: 700; /* Von 600 auf 700 */
+  padding: 12px 22px; /* Größer */
   border-radius: 100px;
   background: linear-gradient(135deg, var(--primary-color), var(--primary-accent));
   color: white;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(0, 154, 97, 0.25);
+  letter-spacing: 0.01em;
 }
 
 .mobile-header-login:hover {
   transform: translateX(2px);
-  opacity: 0.9;
+  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.3);
 }
 
 .mobile-header-login svg {
@@ -429,8 +476,8 @@ body {
 }
 
 .mobile-close {
-  width: 40px;
-  height: 40px;
+  width: 44px; /* Größer */
+  height: 44px;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid var(--border-color);
@@ -447,10 +494,6 @@ body {
   background: rgba(255, 255, 255, 0.05);
 }
 
-[data-theme="dark"] .mobile-close svg {
-  color: #f5f5f5;
-}
-
 .mobile-close:hover {
   background: rgba(255, 59, 48, 0.1);
   border-color: #ff3b30;
@@ -461,21 +504,23 @@ body {
   color: #ff3b30;
 }
 
-/* Mobile Navigation - 18PX FONT */
+/* ============================================
+   MOBILE NAVIGATION
+   ============================================ */
 .mobile-nav {
   padding: 20px;
 }
 
 .mobile-nav-item {
   display: block;
-  padding: 16px 20px;
+  padding: 18px 20px; /* Höher */
   color: var(--text-color);
   font-size: 18px;
   font-weight: 600;
   text-decoration: none;
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-fast);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   background: var(--header-gradient);
   border: 2px solid var(--border-color);
 }
@@ -493,13 +538,15 @@ body {
   color: var(--primary-color);
 }
 
-/* Mobile Settings - 16PX FONT UND KLEINERE FELDER */
+/* ============================================
+   MOBILE SETTINGS
+   ============================================ */
 .mobile-settings {
   padding: 20px;
   border-top: 2px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   background: var(--header-gradient);
 }
 
@@ -512,7 +559,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 12px;
   border-radius: var(--border-radius-sm);
   background: rgba(0, 0, 0, 0.02);
 }
@@ -523,7 +570,7 @@ body {
 
 .settings-label {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600; /* Von 500 auf 600 */
   color: var(--text-secondary);
 }
 
@@ -531,14 +578,21 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: 10px;
   background: white;
-  font-size: 16px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   color: var(--text-color);
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.settings-value:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
 }
 
 [data-theme="dark"] .settings-value {
@@ -546,13 +600,13 @@ body {
   border-color: rgba(255, 255, 255, 0.08);
 }
 
-/* Dark Mode Switch - ENHANCED */
+/* Dark Mode Switch */
 .dark-mode-switch {
   position: relative;
-  width: 48px;
-  height: 26px;
+  width: 52px; /* Größer */
+  height: 28px;
   background: #e0e0e0;
-  border-radius: 13px;
+  border-radius: 14px;
   cursor: pointer;
   transition: background var(--transition-fast);
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -567,8 +621,8 @@ body {
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   background: white;
   border-radius: 50%;
   transition: transform var(--transition-fast);
@@ -576,33 +630,31 @@ body {
 }
 
 [data-theme="dark"] .dark-mode-switch-handle {
-  transform: translateX(22px);
+  transform: translateX(24px);
 }
 
 /* Mobile Footer */
 .mobile-footer {
   padding: 20px;
   text-align: center;
-  font-size: 12px;
+  font-size: 13px;
+  font-weight: 600;
   color: var(--text-secondary);
   opacity: 0.6;
   border-top: 1px solid var(--border-color);
 }
 
-/* Animations - NUR NOCH DIESE BEIDEN */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Responsive */
+/* ============================================
+   RESPONSIVE
+   ============================================ */
 @media (max-width: 1200px) {
   .header-container {
-    padding: 0 24px;
+    padding: 0 30px;
+    gap: 32px;
   }
   
   .nav-link {
-    font-size: 20px;
+    font-size: 17px;
     padding: 10px 20px;
   }
 }
@@ -610,23 +662,23 @@ body {
 @media (max-width: 768px) {
   .enterprise-header {
     height: var(--header-mobile-height);
-    width: 100vw;
   }
   
   .header-container {
-    grid-template-columns: 160px 1fr;
+    grid-template-columns: 170px 1fr;
     padding: 0 20px;
     gap: 12px;
     max-width: none;
   }
   
   .header-logo {
-    width: 160px;
+    width: 170px;
+    padding: 6px 0;
   }
   
   .header-logo img {
-    width: 160px;
-    max-width: 160px;
+    max-width: 170px;
+    max-height: 40px;
   }
   
   .header-nav,
@@ -642,10 +694,11 @@ body {
   
   .header-actions {
     justify-content: flex-end;
+    padding: 0;
   }
 }
 
-/* Scrollbar - ENHANCED */
+/* Scrollbar Styling */
 .mobile-menu::-webkit-scrollbar {
   width: 6px;
 }
@@ -667,19 +720,21 @@ body {
 
 <header class="enterprise-header" id="enterprise-header">
   <div class="header-container">
-    <!-- Logo - UNCHANGED -->
+    <!-- Logo -->
     <div class="header-logo">
-      <a href="{{ routes.root_url }}">
+      <a href="{{ routes.root_url }}" aria-label="Simbye Home">
         <img 
           src="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616"
           alt="{{ shop.name }}"
+          width="220"
+          height="50"
           loading="eager"
         >
       </a>
     </div>
     
     <!-- Desktop Navigation -->
-    <nav class="header-nav">
+    <nav class="header-nav" aria-label="Main navigation">
       <a href="/pages/how-it-works" class="nav-link">
         {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
       </a>
@@ -696,34 +751,58 @@ body {
     
     <!-- Desktop Actions -->
     <div class="header-actions">
-      <!-- Login -->
+      <!-- Login Button -->
       {% if customer %}
-        <a href="{{ routes.account_url }}" class="auth-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2"/>
-            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="currentColor" stroke-width="2"/>
+        <a href="{{ routes.account_url }}" class="auth-btn" aria-label="Account">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="8" r="4"/>
+            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
           </svg>
           {{ customer.first_name | default: 'Account' }}
         </a>
       {% else %}
-        <a href="{{ routes.account_login_url }}" class="auth-btn">
+        <a href="{{ routes.account_login_url }}" class="auth-btn" aria-label="Login">
           {{ 'header.login' | t | default: 'Login' }}
         </a>
       {% endif %}
       
-      <!-- Switchers -->
+      <!-- Language & Currency Switchers -->
       <div class="switcher-group">
-        <button class="switcher" id="language-switcher">
-          <span>🌐</span>
-          <span>{{ shop.locale | upcase }}</span>
-        </button>
+        <!-- Language Switcher - Shopify Integration -->
+        {% form 'localization', class: 'switcher-form', id: 'language-form' %}
+          <button type="button" class="switcher" id="language-switcher" aria-label="Change language">
+            <span>🌐</span>
+            <span>{{ localization.language.iso_code | upcase }}</span>
+          </button>
+          
+          <!-- Hidden Select für Shopify -->
+          <select name="locale_code" class="hidden-select" style="display: none;">
+            {% for language in localization.available_languages %}
+              <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+                {{ language.endonym_name }}
+              </option>
+            {% endfor %}
+          </select>
+        {% endform %}
         
-        <button class="switcher" id="currency-switcher">
-          <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-        </button>
+        <!-- Currency Switcher - Shopify Integration -->
+        {% form 'localization', class: 'switcher-form', id: 'currency-form' %}
+          <button type="button" class="switcher" id="currency-switcher" aria-label="Change currency">
+            <span>{{ localization.country.currency.symbol }} {{ localization.country.currency.iso_code }}</span>
+          </button>
+          
+          <!-- Hidden Select für Shopify -->
+          <select name="country_code" class="hidden-select" style="display: none;">
+            {% for country in localization.available_countries %}
+              <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+                {{ country.currency.symbol }} {{ country.currency.iso_code }}
+              </option>
+            {% endfor %}
+          </select>
+        {% endform %}
       </div>
       
-      <!-- Dark Mode -->
+      <!-- Dark Mode Toggle -->
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"/>
@@ -734,8 +813,8 @@ body {
         </svg>
       </button>
       
-      <!-- Mobile Toggle -->
-      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle menu">
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Open menu">
         <div class="burger">
           <span></span>
           <span></span>
@@ -746,10 +825,12 @@ body {
   </div>
 </header>
 
-<!-- Mobile Menu -->
+<!-- Mobile Overlay -->
 <div class="mobile-overlay" id="mobile-overlay"></div>
-<nav class="mobile-menu" id="mobile-menu">
-  <!-- Header - LOGIN + CLOSE BUTTON -->
+
+<!-- Mobile Menu -->
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <!-- Mobile Header -->
   <div class="mobile-menu-header">
     {% if customer %}
       <a href="{{ routes.account_url }}" class="mobile-header-login">
@@ -776,8 +857,8 @@ body {
     </button>
   </div>
   
-  <!-- Navigation -->
-  <nav class="mobile-nav">
+  <!-- Mobile Navigation Links -->
+  <div class="mobile-nav">
     <a href="/pages/how-it-works" class="mobile-nav-item">
       {{ 'header.how_esim_works' | t | default: 'How eSIM Works' }}
     </a>
@@ -790,25 +871,39 @@ body {
     <a href="/pages/support" class="mobile-nav-item">
       {{ 'header.support' | t | default: 'Support' }}
     </a>
-  </nav>
+  </div>
   
-  <!-- Settings -->
+  <!-- Mobile Settings -->
   <div class="mobile-settings">
+    <!-- Language Switcher Mobile -->
     <div class="settings-row">
       <span class="settings-label">{{ 'header.language' | t | default: 'Language' }}</span>
-      <div class="settings-value">
-        <span>🌐</span>
-        <span>{{ shop.locale | upcase }}</span>
-      </div>
+      {% form 'localization', id: 'mobile-language-form' %}
+        <select name="locale_code" class="settings-value" id="mobile-language-select">
+          {% for language in localization.available_languages %}
+            <option value="{{ language.iso_code }}" {% if language.iso_code == localization.language.iso_code %}selected{% endif %}>
+              🌐 {{ language.endonym_name }}
+            </option>
+          {% endfor %}
+        </select>
+      {% endform %}
     </div>
     
+    <!-- Currency Switcher Mobile -->
     <div class="settings-row">
       <span class="settings-label">{{ 'header.currency' | t | default: 'Currency' }}</span>
-      <div class="settings-value">
-        <span>{{ cart.currency.symbol }} {{ cart.currency.iso_code }}</span>
-      </div>
+      {% form 'localization', id: 'mobile-currency-form' %}
+        <select name="country_code" class="settings-value" id="mobile-currency-select">
+          {% for country in localization.available_countries %}
+            <option value="{{ country.iso_code }}" {% if country.iso_code == localization.country.iso_code %}selected{% endif %}>
+              {{ country.currency.symbol }} {{ country.currency.iso_code }}
+            </option>
+          {% endfor %}
+        </select>
+      {% endform %}
     </div>
     
+    <!-- Dark Mode Toggle Mobile -->
     <div class="settings-row">
       <span class="settings-label">{{ 'header.dark_mode' | t | default: 'Dark Mode' }}</span>
       <div class="dark-mode-switch" id="dark-mode-switch">
@@ -817,7 +912,7 @@ body {
     </div>
   </div>
   
-  <!-- Footer -->
+  <!-- Mobile Footer -->
   <div class="mobile-footer">
     © 2025 Simbye eSIM
   </div>
@@ -827,7 +922,9 @@ body {
 (function() {
   'use strict';
   
-  // Elements
+  // ============================================
+  // ELEMENTS
+  // ============================================
   const header = document.getElementById('enterprise-header');
   const mobileToggle = document.getElementById('mobile-toggle');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -836,11 +933,23 @@ body {
   const themeToggle = document.getElementById('theme-toggle');
   const darkModeSwitch = document.getElementById('dark-mode-switch');
   
-  // State
+  // Language & Currency Forms
+  const languageForm = document.getElementById('language-form');
+  const currencyForm = document.getElementById('currency-form');
+  const mobileLanguageForm = document.getElementById('mobile-language-form');
+  const mobileCurrencyForm = document.getElementById('mobile-currency-form');
+  const mobileLanguageSelect = document.getElementById('mobile-language-select');
+  const mobileCurrencySelect = document.getElementById('mobile-currency-select');
+  
+  // ============================================
+  // STATE
+  // ============================================
   let currentTheme = localStorage.getItem('theme') || 'light';
   let isMenuOpen = false;
   
-  // Initialize
+  // ============================================
+  // INITIALIZE
+  // ============================================
   function init() {
     document.documentElement.setAttribute('data-theme', currentTheme);
     bindEvents();
@@ -848,33 +957,33 @@ body {
     markActiveNav();
   }
   
-  // Event Bindings
+  // ============================================
+  // EVENT BINDINGS
+  // ============================================
   function bindEvents() {
     // Scroll
     window.addEventListener('scroll', handleScroll, { passive: true });
     
     // Mobile Menu
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', openMobileMenu);
-    }
-    
-    // Close Button
-    if (mobileClose) {
-      mobileClose.addEventListener('click', closeMobileMenu);
-    }
-    
-    // Overlay
-    if (mobileOverlay) {
-      mobileOverlay.addEventListener('click', closeMobileMenu);
-    }
+    if (mobileToggle) mobileToggle.addEventListener('click', openMobileMenu);
+    if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
+    if (mobileOverlay) mobileOverlay.addEventListener('click', closeMobileMenu);
     
     // Theme Toggles
-    if (themeToggle) {
-      themeToggle.addEventListener('click', toggleTheme);
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (darkModeSwitch) darkModeSwitch.addEventListener('click', toggleTheme);
+    
+    // Language & Currency Switchers Mobile
+    if (mobileLanguageSelect) {
+      mobileLanguageSelect.addEventListener('change', function() {
+        if (mobileLanguageForm) mobileLanguageForm.submit();
+      });
     }
     
-    if (darkModeSwitch) {
-      darkModeSwitch.addEventListener('click', toggleTheme);
+    if (mobileCurrencySelect) {
+      mobileCurrencySelect.addEventListener('change', function() {
+        if (mobileCurrencyForm) mobileCurrencyForm.submit();
+      });
     }
     
     // Escape Key
@@ -900,7 +1009,9 @@ body {
     }
   }
   
-  // Scroll Handler
+  // ============================================
+  // SCROLL HANDLER
+  // ============================================
   function handleScroll() {
     if (window.scrollY > 10) {
       header.classList.add('scrolled');
@@ -909,7 +1020,9 @@ body {
     }
   }
   
-  // Mobile Menu Functions
+  // ============================================
+  // MOBILE MENU FUNCTIONS
+  // ============================================
   function openMobileMenu() {
     isMenuOpen = true;
     mobileToggle.classList.add('active');
@@ -926,18 +1039,22 @@ body {
     document.body.style.overflow = '';
   }
   
-  // Theme Toggle
+  // ============================================
+  // THEME TOGGLE
+  // ============================================
   function toggleTheme() {
     currentTheme = currentTheme === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', currentTheme);
     try {
       localStorage.setItem('theme', currentTheme);
     } catch(e) {
-      // localStorage not available
+      console.log('LocalStorage not available');
     }
   }
   
-  // Mark Active Navigation
+  // ============================================
+  // MARK ACTIVE NAVIGATION
+  // ============================================
   function markActiveNav() {
     const path = window.location.pathname;
     document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(function(link) {
@@ -947,7 +1064,27 @@ body {
     });
   }
   
-  // Start
+  // ============================================
+  // START
+  // ============================================
   init();
 })();
 </script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header Settings"
+    },
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement Text",
+      "default": "Free shipping on orders over $50"
+    }
+  ]
+}
+{% endschema %}
