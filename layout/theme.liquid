@@ -62,45 +62,45 @@
   {% endif %}
   
   <!-- ========================================
-       HREFLANG (FINAL FIX - COMPLETELY WORKING)
-       Published Locales Only - Optimized URL Construction
+       HREFLANG (SHOPIFY PRIMARY LOCALE FIX)
+       Published Locales Only - Correct URL Construction
        ======================================== -->
   {% if shop.published_locales.size > 1 %}
     {% comment %}
-      FINAL SOLUTION for hreflang URL construction:
+      SHOPIFY PRIMARY LOCALE PROBLEM & SOLUTION:
       
-      PROBLEM:
-      - Default locale (en): request.path = "/products/esim-uk", locale.root_url = "/"
-        → After remove "/" we get "products/esim-uk" (NO leading slash!)
-        → Result: simbye.com/deproducts/esim-uk ❌
+      Shopify's Liquid has a design flaw:
+      - Primary locale (English): locale.root_url = "/"
+      - Other locales (German): locale.root_url = "/de"
       
-      - Other locale (de): request.path = "/de/products/esim-uk", locale.root_url = "/de"
-        → After remove "/de" we get "/products/esim-uk" (HAS leading slash!)
-        → Result: simbye.com/de/products/esim-uk ✅
+      If we do: shop.url + locale.root_url + path
+      - Primary: simbye.com + "/" + "/products/esim" = "simbye.com//products/esim" ❌
+      - German: simbye.com + "/de" + "/products/esim" = "simbye.com/de/products/esim" ✅
       
-      FIX: Check first character and add "/" if missing
+      SOLUTION: Only add locale.root_url if locale is NOT primary
+      Source: Shopify Community discussions on locale URL handling
     {% endcomment %}
     
-    {% comment %} Step 1: Remove current locale prefix from path {% endcomment %}
+    {% comment %} Step 1: Get path without current locale prefix {% endcomment %}
     {% assign base_path = request.path | remove_first: request.locale.root_url %}
     
-    {% comment %} Step 2: Check if first character is "/" and add if missing {% endcomment %}
+    {% comment %} Step 2: Ensure base_path starts with "/" {% endcomment %}
     {% assign first_char = base_path | slice: 0 %}
-    {% if first_char != "/" %}
+    {% unless first_char == "/" %}
       {% assign base_path = "/" | append: base_path %}
-    {% endif %}
+    {% endunless %}
     
     {% comment %} Step 3: Generate hreflang for all published locales {% endcomment %}
     {% for locale in shop.published_locales %}
       <link rel="alternate" 
             hreflang="{{ locale.iso_code }}" 
-            href="{{ shop.url }}{{ locale.root_url }}{{ base_path }}">
+            href="{{ shop.url }}{% unless locale.primary %}{{ locale.root_url }}{% endunless %}{{ base_path }}">
     {% endfor %}
     
-    {% comment %} Step 4: x-default points to primary locale (usually English) {% endcomment %}
+    {% comment %} Step 4: x-default points to primary locale {% endcomment %}
     <link rel="alternate" 
           hreflang="x-default" 
-          href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ base_path }}">
+          href="{{ shop.url }}{{ base_path }}">
   {% endif %}
   
   <!-- ========================================
