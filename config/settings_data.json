@@ -160,49 +160,81 @@
           "faq_item_GbrcJm": {
             "type": "faq_item",
             "settings": {
-              "category": "compatibility",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+              "category": "usage",
+              "question": "How do I check my data usage?",
+              "answer": "<p>You can track your data usage in three easy ways: log into your customer account, use the link in your confirmation email, or visit our top-up page and enter your order number. You'll see your remaining data in real-time, so you always know when it's time to top up!</p>"
             }
           },
           "faq_item_iWbCBK": {
             "type": "faq_item",
             "settings": {
-              "category": "compatibility",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+              "category": "usage",
+              "question": "What happens when my data runs out?",
+              "answer": "<p>When your data is depleted, your eSIM will stop working until you top up. Simply visit our top-up page or log into your account, enter your order number, and purchase a new data package. Your eSIM reactivates instantly – no need to install a new one. Top up in seconds and stay connected!</p>"
             }
           },
           "faq_item_X87wfm": {
             "type": "faq_item",
             "settings": {
-              "category": "compatibility",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+              "category": "usage",
+              "question": "Can I use my eSIM as a mobile hotspot?",
+              "answer": "<p>Yes! You can share your Simbye eSIM data connection with other devices using your phone's mobile hotspot feature. Simply enable hotspot in your device settings and connect your laptop, tablet, or other devices. Keep in mind that hotspot usage counts toward your data package limit.</p>"
             }
           },
           "faq_item_ghAcXj": {
             "type": "faq_item",
             "settings": {
-              "category": "compatibility",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+              "category": "usage",
+              "question": "What network speeds can I expect?",
+              "answer": "<p>You'll enjoy full 4G/5G speeds up to 1 Gbit/s depending on local network capabilities. We partner with premium tier-1 carriers in each country to ensure you get the same fast speeds as local customers. Stream, video call, and browse without lag – just like you would at home!</p>"
             }
           },
           "faq_item_HiDrR9": {
             "type": "faq_item",
             "settings": {
-              "category": "compatibility",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+              "category": "usage",
+              "question": "Will my WhatsApp work with the eSIM?",
+              "answer": "<p>Absolutely! Your WhatsApp works perfectly with Simbye eSIM because it uses data, not your phone number. You keep your existing WhatsApp number and all your chats, contacts, and groups stay exactly the same. Message, call, and video chat as usual – just with affordable local data rates!</p>"
             }
           },
           "faq_item_efckWp": {
             "type": "faq_item",
             "settings": {
-              "category": "compatibility",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+              "category": "usage",
+              "question": "Can I make phone calls with my eSIM?",
+              "answer": "<p>No, Simbye eSIM is data-only and doesn't include a phone number for traditional calls. However, you can make unlimited voice calls using internet-based apps like WhatsApp, Telegram, FaceTime, Skype, or any VoIP service. Your contacts won't notice any difference!</p>"
+            }
+          },
+          "faq_item_KxAxfU": {
+            "type": "faq_item",
+            "settings": {
+              "category": "troubleshooting",
+              "question": "Why is my eSIM not connecting to the network?",
+              "answer": "<p>First, ensure you've arrived at your destination country and data roaming is enabled in settings. Try restarting your phone or toggling airplane mode on/off. If still not working, check that you've selected the Simbye eSIM as your data line. Still having issues? Contact our 24/7 support team for immediate assistance!</p>"
+            }
+          },
+          "faq_item_t6icrm": {
+            "type": "faq_item",
+            "settings": {
+              "category": "troubleshooting",
+              "question": "What should I do if I have no internet connection?",
+              "answer": "<p>Check these quick fixes: 1) Enable data roaming for your Simbye eSIM, 2) Make sure mobile data is turned on, 3) Restart your device, 4) Toggle airplane mode on/off. If the problem persists, verify you have remaining data balance in your account. Our 24/7 support team is always ready to help troubleshoot!</p>"
+            }
+          },
+          "faq_item_KY6QRB": {
+            "type": "faq_item",
+            "settings": {
+              "category": "troubleshooting",
+              "question": "My eSIM shows \"No Service\" – what should I do?",
+              "answer": "<p>This usually means you haven't arrived at your destination yet or data roaming isn't enabled. Make sure you're in the country where your eSIM is valid, enable data roaming in settings, and restart your device. The eSIM should connect automatically. Still seeing \"No Service\"? Contact our support team anytime!</p>"
+            }
+          },
+          "faq_item_mE9xW9": {
+            "type": "faq_item",
+            "settings": {
+              "category": "troubleshooting",
+              "question": "What should I do if my data isn't working after installation?",
+              "answer": "<p>Double-check that data roaming is enabled for your Simbye eSIM and that it's selected as your data line in settings. Restart your phone and ensure you're in the coverage area. If you've just installed it before arriving at your destination, remember – it only activates once you're in the country. Need help? Our 24/7 support is here!</p>"
             }
           }
         },
@@ -230,7 +262,11 @@
           "faq_item_X87wfm",
           "faq_item_ghAcXj",
           "faq_item_HiDrR9",
-          "faq_item_efckWp"
+          "faq_item_efckWp",
+          "faq_item_KxAxfU",
+          "faq_item_t6icrm",
+          "faq_item_KY6QRB",
+          "faq_item_mE9xW9"
         ],
         "settings": {
           "title": "Frequently Asked Questions",
