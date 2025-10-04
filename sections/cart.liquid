@@ -530,14 +530,14 @@
     
     <!-- Header -->
     <div class="cart-header">
-      <h1 class="cart-title">{{ 'cart.general.title' | t | default: 'Shopping Cart' }}</h1>
+      <h1 class="cart-title">Shopping Cart</h1>
       {% if cart.item_count > 0 %}
         <p class="cart-item-count">
-          {{ 'cart.general.item_count' | t: count: cart.item_count | default: cart.item_count }} 
+          {{ cart.item_count }} 
           {% if cart.item_count == 1 %}
-            {{ 'cart.general.item' | t | default: 'item' }}
+            item
           {% else %}
-            {{ 'cart.general.items' | t | default: 'items' }}
+            items
           {% endif %}
         </p>
       {% endif %}
@@ -589,7 +589,7 @@
               <div class="cart-item-remove">
                 <a href="{{ item.url_to_remove }}" 
                    class="remove-btn" 
-                   aria-label="{{ 'cart.general.remove' | t | default: 'Remove' }} {{ item.title }}">
+                   aria-label="Remove {{ item.title }}">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                     <path d="M18 6L6 18M6 6l12 12"/>
                   </svg>
@@ -602,36 +602,36 @@
         
         <!-- Cart Summary -->
         <div class="cart-summary">
-          <h2 class="summary-title">{{ 'cart.general.summary' | t | default: 'Order Summary' }}</h2>
+          <h2 class="summary-title">Order Summary</h2>
           
           <!-- Subtotal -->
           <div class="summary-row">
-            <span class="summary-label">{{ 'cart.general.subtotal' | t | default: 'Subtotal' }}</span>
+            <span class="summary-label">Subtotal</span>
             <span class="summary-value">{{ cart.total_price | money }}</span>
           </div>
           
           <!-- Shipping -->
           <div class="summary-row">
-            <span class="summary-label">{{ 'cart.general.shipping' | t | default: 'Shipping' }}</span>
-            <span class="summary-value">{{ 'cart.general.calculated_at_checkout' | t | default: 'Calculated at checkout' }}</span>
+            <span class="summary-label">Shipping</span>
+            <span class="summary-value">Calculated at checkout</span>
           </div>
           
           <!-- Total -->
           <div class="summary-total">
-            <span class="summary-total-label">{{ 'cart.general.total' | t | default: 'Total' }}</span>
+            <span class="summary-total-label">Total</span>
             <span class="summary-total-value">{{ cart.total_price | money }}</span>
           </div>
           
           <!-- Checkout Button -->
           <form action="{{ routes.cart_url }}" method="post">
             <button type="submit" name="checkout" class="checkout-btn">
-              {{ 'cart.general.checkout' | t | default: 'Proceed to Checkout' }}
+              Proceed to Checkout
             </button>
           </form>
           
           <!-- Continue Shopping -->
           <a href="{{ routes.all_products_url }}" class="continue-shopping">
-            {{ 'cart.general.continue_shopping' | t | default: 'Continue Shopping' }}
+            Continue Shopping
           </a>
           
           <!-- Trust Badges -->
@@ -640,14 +640,14 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
               </svg>
-              <span>{{ 'cart.general.secure_checkout' | t | default: 'Secure checkout' }}</span>
+              <span>Secure checkout</span>
             </div>
             
             <div class="trust-item">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M20 6L9 17l-5-5"/>
               </svg>
-              <span>{{ 'cart.general.instant_delivery' | t | default: 'Instant delivery via email' }}</span>
+              <span>Instant delivery via email</span>
             </div>
             
             <div class="trust-item">
@@ -655,7 +655,7 @@
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
                 <polyline points="9 22 9 12 15 12 15 22"/>
               </svg>
-              <span>{{ 'cart.general.support' | t | default: '24/7 customer support' }}</span>
+              <span>24/7 customer support</span>
             </div>
           </div>
         </div>
