@@ -207,8 +207,8 @@
     "fair_use_text": "1 GB täglich mit Highspeed. Nach 1 GB wird die Geschwindigkeit auf 128 kbps reduziert. Daten werden täglich um Mitternacht (Ortszeit) zurückgesetzt.",
     "your_selection": "Ihre Auswahl",
     "network": "Netz",
-    "activation": "Gültig",
-    "instant": "Gültig",
+    "activation": "Gültigkeit",
+    "instant": "Sofort",
     "total": "Gesamt",
     "buy_now": "Jetzt kaufen",
     "valid_for": "Gültig für",
@@ -268,7 +268,7 @@
     "yes": "Ja",
     "no": "Nein",
     "days": "Tage",
-    "instant": "180 Tage"
+    "instant": "180"
   },
   "apps": {
     "title_part1": "Mobiles Internet für",
