@@ -289,6 +289,34 @@
         "settings": {
           "social_font": "enable"
         }
+      },
+      "15683396631634586217": {
+        "type": "shopify://apps/inbox/blocks/chat/841fc607-4181-4ad1-842d-e24d7f8bad6b",
+        "disabled": false,
+        "settings": {
+          "button_color": "#000000",
+          "secondary_color": "#FFFFFF",
+          "ternary_color": "#6A6A6A",
+          "button_icon": "chat_bubble",
+          "button_text": "chat_with_us",
+          "button_horizontal_position": "bottom_right",
+          "button_vertical_position": "lowest",
+          "greeting_message": ""
+        }
+      },
+      "6146500278089136509": {
+        "type": "shopify://apps/bm-country-blocker-ip-blocker/blocks/boostmark-blocker/bf9db4b9-be4b-45e1-8127-bbcc07d93e7e",
+        "disabled": false,
+        "settings": {}
+      },
+      "13440586637131102011": {
+        "type": "shopify://apps/tinycookie/blocks/cookie-embed/b65baef5-7248-4353-8fd9-b676240311dc",
+        "disabled": false,
+        "settings": {
+          "custom_css": "",
+          "hide_in_theme_editor": false,
+          "hide_in_password_page": false
+        }
       }
     }
   },
