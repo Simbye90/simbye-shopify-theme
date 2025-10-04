@@ -17,8 +17,8 @@
         "destination_link_mcaVRM": {
           "type": "destination_link",
           "settings": {
-            "text": "Turkey eS",
-            "url": ""
+            "text": "Turkey eSIM",
+            "url": "shopify://products/esim-turkey"
           }
         },
         "destination_link_zFnNf4": {

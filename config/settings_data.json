@@ -13,28 +13,72 @@
       "faq-site": {
         "type": "faq-site",
         "blocks": {
+          "faq_item_TgHTYA": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "Will msdy phone work with yosdur eSIM?",
+              "answer": "<p>Most modern iPhones and Androids with eSIM support will work. Check our compatibility page or contact support.</p>"
+            }
+          },
+          "faq_item_KBNtb9": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "Will my phone work with your eSIM?",
+              "answer": "<p>Most modern iPhones and Androids with eSIM support will work. Check our compatibility page or contact support.</p>"
+            }
+          },
+          "faq_item_ECyDQd": {
+            "type": "faq_item",
+            "settings": {
+              "category": "usage",
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+            }
+          },
+          "faq_item_Cm8JMf": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+            }
+          },
+          "faq_item_e88F9M": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "Will my phone worksd with your eSIM?",
+              "answer": "<p>Most modern iPhones and Androids with eSIM support wilsdsl work. Check our compatibility page or contact support.</p>"
+            }
+          },
           "faq_item_gWMheT": {
             "type": "faq_item",
             "settings": {
               "category": "purchase",
               "question": "What is eSIM?sd",
-              "answer": "<p>An eSIM is a digital SIM card.sd</p>"
+              "answer": "<p>An eSIM is a digital SIM card.sdsd</p>"
             }
           }
         },
         "block_order": [
+          "faq_item_TgHTYA",
+          "faq_item_KBNtb9",
+          "faq_item_ECyDQd",
+          "faq_item_Cm8JMf",
+          "faq_item_e88F9M",
           "faq_item_gWMheT"
         ],
         "settings": {
           "title": "Frequently Asked Questions",
           "subtitle": "Find answers to common questions about our eSIM service",
-          "search_placeholder": "Search for answers...",
-          "cat_compatibility": "Compatibility &s Requirements",
-          "cat_purchase": "Purchase & Plans",
-          "cat_activation": "Activation & sdSetup",
-          "cat_usage": "Using Your eSIM",
-          "cat_troubleshooting": "Troubleshooting"
+          "search_placeholder": "Search for answers..."
         }
+      },
+      "wie-site": {
+        "type": "wie-site",
+        "settings": {}
       }
     },
     "content_for_index": [],
