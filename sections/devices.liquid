@@ -1,0 +1,1088 @@
+<!-- templates/page.devices.liquid -->
+<!-- SIMBYE COMPLETE eSIM DEVICES PAGE -->
+
+<style>
+/* CSS Variables */
+:root {
+  --devices-primary: #009a61;
+  --devices-primary-hover: #00824f;
+  --devices-accent: #00d97e;
+  --devices-text: #1a1a1a;
+  --devices-text-secondary: #666666;
+  --devices-bg: #ffffff;
+  --devices-card-bg: #f5f5f7;
+  --devices-tab-bg: #f5f5f7;
+  --devices-tab-active: #343a40;
+  --devices-tab-hover: #535353;
+  --devices-border: rgba(0, 0, 0, 0.08);
+  --devices-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --devices-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --devices-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --devices-radius: 24px;
+  --devices-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --devices-text: #f5f5f5;
+  --devices-text-secondary: #999999;
+  --devices-bg: #0a0a0a;
+  --devices-card-bg: rgba(26, 26, 26, 0.8);
+  --devices-tab-bg: rgba(26, 26, 26, 0.8);
+  --devices-tab-active: #00d97e;
+  --devices-tab-hover: rgba(0, 217, 126, 0.2);
+  --devices-primary: #00d97e;
+  --devices-primary-hover: #009a61;
+  --devices-accent: #00ff88;
+  --devices-border: rgba(255, 255, 255, 0.08);
+  --devices-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --devices-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --devices-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.2);
+}
+
+/* Global Reset */
+* { box-sizing: border-box; }
+
+/* Main Wrapper */
+.devices-page {
+  width: 100%;
+  background: var(--devices-bg);
+  overflow-x: hidden;
+}
+
+[data-theme="dark"] .devices-page {
+  background: #0a0a0a;
+}
+
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+.devices-hero {
+  width: 100%;
+  padding: 140px 0 80px 0;
+  background: linear-gradient(180deg, 
+    var(--devices-bg) 0%,
+    rgba(0, 154, 97, 0.03) 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .devices-hero {
+  background: linear-gradient(180deg,
+    #0a0a0a 0%,
+    rgba(0, 217, 126, 0.05) 100%
+  );
+}
+
+.devices-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(0, 154, 97, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 20px;
+  background: rgba(0, 154, 97, 0.1);
+  border: 1px solid var(--devices-primary);
+  border-radius: 100px;
+  color: var(--devices-primary);
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.6s ease;
+}
+
+[data-theme="dark"] .hero-badge {
+  background: rgba(0, 217, 126, 0.1);
+  border-color: var(--devices-primary);
+}
+
+.hero-badge svg {
+  width: 16px;
+  height: 16px;
+}
+
+.hero-title {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 900;
+  color: var(--devices-text);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  animation: fadeInUp 0.6s ease 0.1s both;
+}
+
+.hero-title-highlight {
+  background: linear-gradient(135deg, var(--devices-primary), var(--devices-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-subtitle {
+  font-size: 20px;
+  color: var(--devices-text-secondary);
+  margin: 0 0 40px 0;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+  animation: fadeInUp 0.6s ease 0.2s both;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  animation: fadeInUp 0.6s ease 0.3s both;
+}
+
+.hero-stat {
+  text-align: center;
+}
+
+.hero-stat-number {
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--devices-primary);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.hero-stat-label {
+  font-size: 14px;
+  color: var(--devices-text-secondary);
+  font-weight: 500;
+}
+
+/* ==========================================
+   DEVICE TABS SECTION
+   ========================================== */
+.devices-tabs-section {
+  width: 100%;
+  padding: 80px 0;
+}
+
+.tabs-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Hide radio inputs */
+input[type="radio"][name="device-tab"] {
+  display: none;
+}
+
+/* Tabs Navigation */
+.tabs-navigation {
+  background: var(--devices-tab-bg);
+  border-radius: 16px 16px 0 0;
+  padding: 8px;
+  display: flex;
+  gap: 8px;
+  box-shadow: var(--devices-shadow-sm);
+  margin-bottom: 0;
+}
+
+.tab-label {
+  flex: 1;
+  text-align: center;
+  padding: 16px 24px;
+  background: transparent;
+  color: var(--devices-text-secondary);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 600;
+  transition: var(--devices-transition);
+  user-select: none;
+}
+
+.tab-label:hover {
+  background: var(--devices-tab-hover);
+  color: white;
+}
+
+/* Active Tab State */
+#tab-apple:checked ~ .tabs-navigation .tab-label[for="tab-apple"],
+#tab-samsung:checked ~ .tabs-navigation .tab-label[for="tab-samsung"],
+#tab-google:checked ~ .tabs-navigation .tab-label[for="tab-google"],
+#tab-other:checked ~ .tabs-navigation .tab-label[for="tab-other"] {
+  background: var(--devices-tab-active);
+  color: white;
+}
+
+[data-theme="dark"] #tab-apple:checked ~ .tabs-navigation .tab-label[for="tab-apple"],
+[data-theme="dark"] #tab-samsung:checked ~ .tabs-navigation .tab-label[for="tab-samsung"],
+[data-theme="dark"] #tab-google:checked ~ .tabs-navigation .tab-label[for="tab-google"],
+[data-theme="dark"] #tab-other:checked ~ .tabs-navigation .tab-label[for="tab-other"] {
+  background: var(--devices-primary);
+  color: #0a0a0a;
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  background: white;
+  border-radius: 0 0 16px 16px;
+  padding: 40px;
+  box-shadow: var(--devices-shadow-md);
+  min-height: 500px;
+  animation: fadeInContent 0.3s ease;
+}
+
+[data-theme="dark"] .tab-content {
+  background: rgba(26, 26, 26, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#tab-apple:checked ~ #content-apple,
+#tab-samsung:checked ~ #content-samsung,
+#tab-google:checked ~ #content-google,
+#tab-other:checked ~ #content-other {
+  display: block;
+}
+
+/* Device Grid */
+.device-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.device-item {
+  background: var(--devices-card-bg);
+  padding: 18px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--devices-text);
+  transition: var(--devices-transition);
+  border: 2px solid transparent;
+  text-decoration: none;
+  display: block;
+}
+
+.device-item:hover {
+  background: rgba(0, 154, 97, 0.08);
+  border-color: var(--devices-primary);
+  transform: translateY(-2px);
+  color: var(--devices-primary);
+}
+
+[data-theme="dark"] .device-item {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .device-item:hover {
+  background: rgba(0, 217, 126, 0.1);
+  border-color: var(--devices-primary);
+  color: var(--devices-primary);
+}
+
+.view-all-btn {
+  display: none;
+  width: 100%;
+  padding: 16px;
+  margin-top: 24px;
+  background: var(--devices-primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--devices-transition);
+}
+
+.view-all-btn:hover {
+  background: var(--devices-primary-hover);
+  transform: translateY(-2px);
+}
+
+.device-grid.show-all .device-item {
+  display: block !important;
+}
+
+/* ==========================================
+   WHY CHECK SECTION
+   ========================================== */
+.why-check-section {
+  width: 100%;
+  padding: 80px 0;
+  background: linear-gradient(180deg,
+    var(--devices-bg) 0%,
+    rgba(0, 154, 97, 0.02) 100%
+  );
+}
+
+[data-theme="dark"] .why-check-section {
+  background: linear-gradient(180deg,
+    #0a0a0a 0%,
+    rgba(0, 217, 126, 0.03) 100%
+  );
+}
+
+.why-check-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.why-check-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.why-check-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--devices-text);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.why-check-subtitle {
+  font-size: 18px;
+  color: var(--devices-text-secondary);
+  margin: 0;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+.feature-card {
+  background: white;
+  padding: 32px;
+  border-radius: var(--devices-radius);
+  border: 2px solid var(--devices-border);
+  transition: var(--devices-transition);
+}
+
+.feature-card:hover {
+  border-color: var(--devices-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--devices-shadow-lg);
+}
+
+[data-theme="dark"] .feature-card {
+  background: rgba(26, 26, 26, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.feature-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--devices-primary), var(--devices-accent));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0, 154, 97, 0.25);
+}
+
+.feature-icon svg {
+  width: 28px;
+  height: 28px;
+  color: white;
+}
+
+.feature-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--devices-text);
+  margin: 0 0 12px 0;
+}
+
+.feature-desc {
+  font-size: 15px;
+  color: var(--devices-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ==========================================
+   FAQ SECTION
+   ========================================== */
+.faq-section {
+  width: 100%;
+  padding: 80px 0;
+}
+
+.faq-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.faq-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  color: var(--devices-text);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.faq-subtitle {
+  font-size: 18px;
+  color: var(--devices-text-secondary);
+  margin: 0;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.faq-item {
+  background: white;
+  border: 2px solid var(--devices-border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: var(--devices-transition);
+}
+
+[data-theme="dark"] .faq-item {
+  background: rgba(26, 26, 26, 0.5);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 24px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--devices-text);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--devices-transition);
+}
+
+.faq-question:hover {
+  color: var(--devices-primary);
+}
+
+.faq-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--devices-primary);
+  transition: transform var(--devices-transition);
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.faq-answer-content {
+  padding: 0 24px 24px 24px;
+  font-size: 15px;
+  color: var(--devices-text-secondary);
+  line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+}
+
+/* ==========================================
+   CTA SECTION
+   ========================================== */
+.cta-section {
+  width: 100%;
+  padding: 80px 0;
+  background: linear-gradient(135deg, var(--devices-primary), var(--devices-accent));
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cta-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  color: white;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+}
+
+.cta-subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 40px;
+  background: white;
+  color: var(--devices-primary);
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--devices-transition);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cta-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+  .devices-hero {
+    padding: 120px 0 60px 0;
+  }
+  
+  .hero-container {
+    padding: 0 20px;
+  }
+  
+  .hero-title {
+    font-size: 36px;
+  }
+  
+  .hero-subtitle {
+    font-size: 16px;
+  }
+  
+  .hero-stats {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .devices-tabs-section,
+  .why-check-section,
+  .faq-section,
+  .cta-section {
+    padding: 60px 0;
+  }
+  
+  .tabs-container,
+  .why-check-container,
+  .faq-container,
+  .cta-container {
+    padding: 0 20px;
+  }
+  
+  .tabs-navigation {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tab-label {
+    padding: 14px 20px;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+  
+  .tab-content {
+    padding: 24px;
+  }
+  
+  .device-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .device-grid .device-item {
+    display: none;
+  }
+  
+  .device-grid .device-item:nth-child(-n+6) {
+    display: block;
+  }
+  
+  .view-all-btn {
+    display: block;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  .cta-title {
+    font-size: 28px;
+  }
+  
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+</style>
+
+<!-- HERO SECTION -->
+<section class="devices-hero">
+  <div class="hero-container">
+    <div class="hero-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      Compatibility Checker
+    </div>
+    
+    <h1 class="hero-title">
+      <span class="hero-title-highlight">200+ Devices</span><br>
+      Support Simbye eSIM
+    </h1>
+    
+    <p class="hero-subtitle">
+      Check if your smartphone or tablet is compatible with eSIM technology. 
+      Most modern devices from Apple, Samsung, Google, and other brands support eSIM.
+    </p>
+    
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-number">200+</span>
+        <span class="hero-stat-label">Compatible Devices</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">4</span>
+        <span class="hero-stat-label">Major Brands</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-number">2 Min</span>
+        <span class="hero-stat-label">Setup Time</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVICE TABS SECTION -->
+<section class="devices-tabs-section">
+  <div class="tabs-container">
+    
+    <!-- Radio Inputs -->
+    <input type="radio" id="tab-apple" name="device-tab" checked>
+    <input type="radio" id="tab-samsung" name="device-tab">
+    <input type="radio" id="tab-google" name="device-tab">
+    <input type="radio" id="tab-other" name="device-tab">
+    
+    <!-- Tabs Navigation -->
+    <div class="tabs-navigation">
+      <label class="tab-label" for="tab-apple">Apple</label>
+      <label class="tab-label" for="tab-samsung">Samsung</label>
+      <label class="tab-label" for="tab-google">Google</label>
+      <label class="tab-label" for="tab-other">Other Brands</label>
+    </div>
+    
+    <!-- Apple Content -->
+    <div id="content-apple" class="tab-content">
+      <div class="device-grid" id="grid-apple">
+        <a class="device-item" href="/blogs/news/iphone16-esim">iPhone 16</a>
+        <a class="device-item" href="/blogs/news/iphone16-esim">iPhone 16 Plus</a>
+        <a class="device-item" href="/blogs/news/iphone16-esim">iPhone 16 Pro</a>
+        <a class="device-item" href="/blogs/news/iphone16-esim">iPhone 16 Pro Max</a>
+        <a class="device-item" href="/blogs/news/iphone15-esim">iPhone 15</a>
+        <a class="device-item" href="/blogs/news/iphone15-esim">iPhone 15 Plus</a>
+        <a class="device-item" href="/blogs/news/iphone15-esim">iPhone 15 Pro</a>
+        <a class="device-item" href="/blogs/news/iphone15-esim">iPhone 15 Pro Max</a>
+        <a class="device-item" href="/blogs/news/iphone14-esim">iPhone 14</a>
+        <a class="device-item" href="/blogs/news/iphone14-esim">iPhone 14 Plus</a>
+        <a class="device-item" href="/blogs/news/iphone14-esim">iPhone 14 Pro</a>
+        <a class="device-item" href="/blogs/news/iphone14-esim">iPhone 14 Pro Max</a>
+        <a class="device-item" href="/blogs/news/iphone13-esim">iPhone 13</a>
+        <a class="device-item" href="/blogs/news/iphone13-esim">iPhone 13 Pro</a>
+        <a class="device-item" href="/blogs/news/iphone13-esim">iPhone 13 Pro Max</a>
+        <a class="device-item" href="/blogs/news/iphone13-esim">iPhone 13 mini</a>
+        <a class="device-item" href="/blogs/news/iphone12-esim">iPhone 12</a>
+        <a class="device-item" href="/blogs/news/iphone12-esim">iPhone 12 Pro</a>
+        <a class="device-item" href="/blogs/news/iphone12-esim">iPhone 12 Pro Max</a>
+        <a class="device-item" href="/blogs/news/iphone12-esim">iPhone 12 mini</a>
+        <a class="device-item" href="/blogs/news/iphone11-esim">iPhone 11</a>
+        <a class="device-item" href="/blogs/news/iphone11-esim">iPhone 11 Pro</a>
+        <a class="device-item" href="/blogs/news/iphone11-esim">iPhone 11 Pro Max</a>
+        <div class="device-item">iPhone SE (2020)</div>
+        <div class="device-item">iPhone SE (2022)</div>
+        <div class="device-item">iPhone XS</div>
+        <div class="device-item">iPhone XS Max</div>
+        <div class="device-item">iPhone XR</div>
+        <div class="device-item">iPad Air (2014)</div>
+        <div class="device-item">iPad Air (2019)</div>
+        <div class="device-item">iPad Air (2020)</div>
+        <div class="device-item">iPad Air (2022)</div>
+        <div class="device-item">iPad Pro 11 (2018)</div>
+        <div class="device-item">iPad Pro 11 (2020)</div>
+        <div class="device-item">iPad Pro 12.9 (2015)</div>
+        <div class="device-item">iPad Pro 12.9 (2017)</div>
+        <div class="device-item">iPad Pro 10.5 (2017)</div>
+        <div class="device-item">iPad Pro 9.7 (2016)</div>
+        <div class="device-item">iPad 10.2 (2019)</div>
+        <div class="device-item">iPad 10.2 (2020)</div>
+        <div class="device-item">iPad 10.2 (2021)</div>
+        <div class="device-item">iPad 9.7 (2016)</div>
+        <div class="device-item">iPad 9.7 (2017)</div>
+        <div class="device-item">iPad 9.7 (2018)</div>
+        <div class="device-item">iPad mini 4 (2015)</div>
+        <div class="device-item">iPad mini 3</div>
+        <div class="device-item">iPad mini (2019)</div>
+        <div class="device-item">iPad mini (2021)</div>
+      </div>
+      <button class="view-all-btn" onclick="document.getElementById('grid-apple').classList.toggle('show-all'); this.textContent = this.textContent === 'View All' ? 'Show Less' : 'View All';">View All</button>
+    </div>
+    
+    <!-- Samsung Content -->
+    <div id="content-samsung" class="tab-content">
+      <div class="device-grid" id="grid-samsung">
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S24 Ultra</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S24+</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S24</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S24 FE</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S23 Ultra</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S23+</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S23</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S22 Ultra</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S22+</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S22</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S21+ Ultra 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S21+ 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S21</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S20 Ultra 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S20 Ultra</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S20+ 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S20+</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy S20</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Note 20 Ultra 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Note 20</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Fold6 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Fold5 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Fold4</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Fold3 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Fold2 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Fold</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Flip6 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Flip5 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Flip4</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Flip3 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy Z Flip</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy A55 5G</a>
+        <a class="device-item" href="/blogs/news/esim-samsung-supported">Samsung Galaxy A35</a>
+      </div>
+      <button class="view-all-btn" onclick="document.getElementById('grid-samsung').classList.toggle('show-all'); this.textContent = this.textContent === 'View All' ? 'Show Less' : 'View All';">View All</button>
+    </div>
+    
+    <!-- Google Content -->
+    <div id="content-google" class="tab-content">
+      <div class="device-grid" id="grid-google">
+        <div class="device-item">Google Pixel Fold</div>
+        <div class="device-item">Google Pixel 8 Pro</div>
+        <div class="device-item">Google Pixel 8</div>
+        <div class="device-item">Google Pixel 7 Pro</div>
+        <div class="device-item">Google Pixel 7</div>
+        <div class="device-item">Google Pixel 7a</div>
+        <div class="device-item">Google Pixel 6 Pro</div>
+        <div class="device-item">Google Pixel 6a</div>
+        <div class="device-item">Google Pixel 6</div>
+        <div class="device-item">Google Pixel 5a</div>
+        <div class="device-item">Google Pixel 5</div>
+        <div class="device-item">Google Pixel 4 XL</div>
+        <div class="device-item">Google Pixel 4a</div>
+        <div class="device-item">Google Pixel 4</div>
+        <div class="device-item">Google Pixel 3a XL</div>
+        <div class="device-item">Google Pixel 3a</div>
+        <div class="device-item">Google Pixel 3 XL</div>
+        <div class="device-item">Google Pixel 3</div>
+        <div class="device-item">Google Pixel 2 XL</div>
+        <div class="device-item">Google Pixel 2</div>
+      </div>
+      <button class="view-all-btn" onclick="document.getElementById('grid-google').classList.toggle('show-all'); this.textContent = this.textContent === 'View All' ? 'Show Less' : 'View All';">View All</button>
+    </div>
+    
+    <!-- Other Brands Content -->
+    <div id="content-other" class="tab-content">
+      <div class="device-grid" id="grid-other">
+        <div class="device-item">Motorola Razr+</div>
+        <div class="device-item">Motorola Razr 40 Ultra</div>
+        <div class="device-item">Motorola Razr 40</div>
+        <div class="device-item">Motorola Razr 5G</div>
+        <div class="device-item">Motorola Razr 2022</div>
+        <div class="device-item">Motorola Razr 2019</div>
+        <div class="device-item">Motorola Edge+ (2023)</div>
+        <div class="device-item">Motorola Edge 2023</div>
+        <div class="device-item">Motorola Edge 2022</div>
+        <div class="device-item">Motorola Edge 40 Pro</div>
+        <div class="device-item">Motorola Edge 40</div>
+        <div class="device-item">Motorola Edge 40 Neo</div>
+        <div class="device-item">Motorola Edge 50 Ultra</div>
+        <div class="device-item">Motorola Edge 50 Pro</div>
+        <div class="device-item">Motorola Edge 50 Fusion</div>
+        <div class="device-item">Motorola Moto G Power 5G (2024)</div>
+        <div class="device-item">Motorola G52J 5G II</div>
+        <div class="device-item">Motorola G52J 5G</div>
+        <div class="device-item">Motorola G53J 5G</div>
+        <div class="device-item">Moto G54 5G</div>
+        <div class="device-item">Motorola G84</div>
+        <div class="device-item">Motorola G34</div>
+        <div class="device-item">Motorola Moto G53</div>
+        <div class="device-item">Motorola Moto G54</div>
+        <div class="device-item">Oppo Find X5 Pro</div>
+        <div class="device-item">Oppo Find X5</div>
+        <div class="device-item">Oppo Find N2 Flip</div>
+        <div class="device-item">Oppo Reno 9A</div>
+        <div class="device-item">Oppo Reno 6 Pro 5G</div>
+        <div class="device-item">Oppo Reno 5A</div>
+        <div class="device-item">Oppo Find X3 Pro</div>
+        <div class="device-item">Oppo Find X3</div>
+        <div class="device-item">Oppo A55s 5G</div>
+        <div class="device-item">Huawei Mate 60 Pro</div>
+        <div class="device-item">Huawei Mate 60</div>
+        <div class="device-item">Huawei P60 Pro</div>
+        <div class="device-item">Huawei P60</div>
+        <div class="device-item">Huawei Mate X3</div>
+        <div class="device-item">Huawei Mate X2</div>
+        <div class="device-item">Huawei Mate 50 Pro</div>
+        <div class="device-item">Huawei Mate 50</div>
+        <div class="device-item">Huawei P50 Pro</div>
+        <div class="device-item">Huawei P50 Pocket</div>
+        <div class="device-item">Huawei P50</div>
+        <div class="device-item">Huawei Mate X</div>
+        <div class="device-item">Huawei Mate 40 Pro</div>
+        <div class="device-item">Huawei Mate 40</div>
+        <div class="device-item">Huawei P40 Pro</div>
+        <div class="device-item">Huawei P40</div>
+      </div>
+      <button class="view-all-btn" onclick="document.getElementById('grid-other').classList.toggle('show-all'); this.textContent = this.textContent === 'View All' ? 'Show Less' : 'View All';">View All</button>
+    </div>
+    
+  </div>
+</section>
+
+<!-- WHY CHECK COMPATIBILITY -->
+<section class="why-check-section">
+  <div class="why-check-container">
+    <div class="why-check-header">
+      <h2 class="why-check-title">Why Check Device Compatibility?</h2>
+      <p class="why-check-subtitle">
+        Not all devices support eSIM technology. Make sure yours does before purchasing.
+      </p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Instant Verification</h3>
+        <p class="feature-desc">
+          Quickly verify if your device supports eSIM before making a purchase. Save time and avoid compatibility issues.
+        </p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Latest Devices</h3>
+        <p class="feature-desc">
+          Our database includes the newest smartphones and tablets from all major manufacturers worldwide.
+        </p>
+      </div>
+      
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <h3 class="feature-title">Carrier Unlocked</h3>
+        <p class="feature-desc">
+          Even if your device supports eSIM, it must be carrier unlocked to work with Simbye eSIM plans.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+  <div class="faq-container">
+    <div class="faq-header">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <p class="faq-subtitle">Everything you need to know about eSIM compatibility</p>
+    </div>
+    
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>How do I know if my device supports eSIM?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Check the list above to see if your device is listed. Most modern smartphones released after 2018 support eSIM. You can also check your device settings under "Mobile Data" or "Cellular" to see if there's an option to add an eSIM.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>Does my device need to be unlocked?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes, your device must be carrier unlocked to use Simbye eSIM. Contact your current carrier to request an unlock if needed. Most carriers will unlock your device for free after your contract period ends.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>Can I use eSIM and physical SIM at the same time?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            Yes! Most eSIM-compatible devices support dual SIM functionality, allowing you to use both a physical SIM and an eSIM simultaneously. This is perfect for keeping your home number while using a local data plan when traveling.
+          </div>
+        </div>
+      </div>
+      
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('active')">
+          <span>What if my device isn't listed?</span>
+          <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            If your device isn't on our list, check your device manufacturer's website or contact our support team. New devices are constantly adding eSIM support, so your device might be compatible even if it's not listed yet.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="cta-container">
+    <h2 class="cta-title">Ready to Get Your eSIM?</h2>
+    <p class="cta-subtitle">
+      Your device is compatible? Great! Choose your destination and get connected in minutes.
+    </p>
+    <a href="/collections/all" class="cta-button">
+      Browse All Destinations
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+  </div>
+</section>
