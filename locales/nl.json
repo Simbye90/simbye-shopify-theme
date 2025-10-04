@@ -208,7 +208,7 @@
     "your_selection": "Jouw Selectie",
     "network": "Netwerk",
     "activation": "Activering",
-    "instant": "Direct",
+    "instant": "Geldigheid",
     "total": "Totaal",
     "buy_now": "Nu Kopen",
     "valid_for": "Geldig voor",
@@ -268,7 +268,7 @@
     "yes": "Ja",
     "no": "Nee",
     "days": "Dagen",
-    "instant": "Direct na aankoop"
+    "instant": "180 Dagen"
   },
   "apps": {
     "title_part1": "Mobiel Internet voor",
