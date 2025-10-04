@@ -256,13 +256,8 @@
   </script>
   {% endunless %}
   
-  <!-- 5. Product Schema (PRODUCT PAGES ONLY - WITH CUSTOM REVIEWS) -->
+  <!-- 5. Product Schema (PRODUCT PAGES ONLY - OPTIMIZED FOR ZERO WARNINGS) -->
   {% if request.page_type == 'product' %}
-  {% comment %}
-    IMPORTANT: This replaces Shopify's default {{ product | structured_data }}
-    Reason: We need custom metafields (rating, rating_count) for Rich Snippets
-    Shopify's default structured_data doesn't support custom review metafields
-  {% endcomment %}
   
   {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
   {% assign rating_count = product.metafields.custom.rating_count | plus: 0 %}
@@ -305,19 +300,47 @@
         "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
         "shippingDetails": {
           "@type": "OfferShippingDetails",
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "Worldwide"
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": {{ localization.country.currency.iso_code | default: shop.currency | json }}
           },
+          "shippingDestination": [
+            {"@type": "DefinedRegion", "addressCountry": "DE"},
+            {"@type": "DefinedRegion", "addressCountry": "AT"},
+            {"@type": "DefinedRegion", "addressCountry": "CH"},
+            {"@type": "DefinedRegion", "addressCountry": "US"},
+            {"@type": "DefinedRegion", "addressCountry": "GB"},
+            {"@type": "DefinedRegion", "addressCountry": "FR"},
+            {"@type": "DefinedRegion", "addressCountry": "IT"},
+            {"@type": "DefinedRegion", "addressCountry": "ES"},
+            {"@type": "DefinedRegion", "addressCountry": "NL"},
+            {"@type": "DefinedRegion", "addressCountry": "PL"},
+            {"@type": "DefinedRegion", "addressCountry": "TR"}
+          ],
           "deliveryTime": {
             "@type": "ShippingDeliveryTime",
             "handlingTime": {
               "@type": "QuantitativeValue",
               "minValue": 0,
               "maxValue": 0,
-              "unitCode": "MIN"
+              "unitCode": "HUR"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 0,
+              "unitCode": "HUR"
             }
           }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": ["DE","AT","CH","US","GB","FR","IT","ES","NL","PL","TR"],
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 30,
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/FreeReturn"
         }
       }{% unless forloop.last %},{% endunless %}
       {% endfor %}
@@ -333,19 +356,47 @@
       "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
       "shippingDetails": {
         "@type": "OfferShippingDetails",
-        "shippingDestination": {
-          "@type": "DefinedRegion",
-          "addressCountry": "Worldwide"
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": {{ localization.country.currency.iso_code | default: shop.currency | json }}
         },
+        "shippingDestination": [
+          {"@type": "DefinedRegion", "addressCountry": "DE"},
+          {"@type": "DefinedRegion", "addressCountry": "AT"},
+          {"@type": "DefinedRegion", "addressCountry": "CH"},
+          {"@type": "DefinedRegion", "addressCountry": "US"},
+          {"@type": "DefinedRegion", "addressCountry": "GB"},
+          {"@type": "DefinedRegion", "addressCountry": "FR"},
+          {"@type": "DefinedRegion", "addressCountry": "IT"},
+          {"@type": "DefinedRegion", "addressCountry": "ES"},
+          {"@type": "DefinedRegion", "addressCountry": "NL"},
+          {"@type": "DefinedRegion", "addressCountry": "PL"},
+          {"@type": "DefinedRegion", "addressCountry": "TR"}
+        ],
         "deliveryTime": {
           "@type": "ShippingDeliveryTime",
           "handlingTime": {
             "@type": "QuantitativeValue",
             "minValue": 0,
             "maxValue": 0,
-            "unitCode": "MIN"
+            "unitCode": "HUR"
+          },
+          "transitTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "HUR"
           }
         }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": ["DE","AT","CH","US","GB","FR","IT","ES","NL","PL","TR"],
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 30,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/FreeReturn"
       }
     }
     {% endif %}
