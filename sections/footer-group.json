@@ -119,13 +119,6 @@
             "url": "shopify://pages/how-it-works"
           }
         },
-        "esim_link_mQddRC": {
-          "type": "esim_link",
-          "settings": {
-            "text": "What is an eSIM?",
-            "url": ""
-          }
-        },
         "company_link_PK7XNa": {
           "type": "company_link",
           "settings": {
@@ -150,11 +143,10 @@
         "esim_link_Mpk38m",
         "esim_link_Gx7qim",
         "esim_link_pJFqmT",
-        "esim_link_mQddRC",
         "company_link_PK7XNa"
       ],
       "custom_css": [
-        ".footer-top {display: none !important; }"
+        ".footer-top {display: none !important;}"
       ],
       "settings": {
         "app_store_url": "",
