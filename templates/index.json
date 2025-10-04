@@ -104,9 +104,9 @@
         "faq_item_GpiEcD": {
           "type": "faq_item",
           "settings": {
-            "question": "Can my phone use eSIM?",
-            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer. Check our compatibility list to confirm your device.</p>",
-            "show_cta": true,
+            "question": "What is an eSIM?",
+            "answer": "<p>An <a href=\"/blogs/blog/what-is-an-esim-the-clear-guide-to-embedded-sims-in-2025\" title=\"What Is an eSIM? The Clear Guide to Embedded SIMs in 2025\">eSIM</a> (embedded SIM) is a digital SIM card built directly into your smartphone that lets you activate mobile data plans without a physical SIM card. Instead of swapping plastic SIM cards, you simply scan a QR code to instantly connect to local networks worldwide. With Simbye eSIM, you get prepaid data packages for 190+ countries with no roaming fees – perfect for travelers who want to stay connected abroad without the hassle of buying local SIM cards at every </p>",
+            "show_cta": false,
             "cta_text": "Check Compatibilitys",
             "cta_link": "/pages/check-esim"
           }
@@ -114,8 +114,8 @@
         "faq_item_Xc84eW": {
           "type": "faq_item",
           "settings": {
-            "question": "Kann mein Handy eSIM?",
-            "answer": "<p>Die meisten modernen Smartphones ab 2018 unterstützen eSIM-Technologie. Dazu gehören iPhone XS und neuer, Samsung Galaxy S20 und neuer, Google Pixel 3 und neuer. Du kannst die Kompatibilität deines Geräts auf unserer Website überprüfen.</p>",
+            "question": "Can I top up my eSIM?",
+            "answer": "<p>Yes! You can top up any Simbye eSIM  when you need more data. Simply log into your account or visit our <a href=\"/pages/topup\" title=\"Top Up\">top-up page</a>, enter your order number, and select a new data package. Your existing eSIM stays active – just add more gigabytes instantly. Top up now!</p>",
             "show_cta": false,
             "cta_text": "Learn More",
             "cta_link": ""
