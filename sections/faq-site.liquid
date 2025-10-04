@@ -341,22 +341,46 @@
     
     <div id="faq-content">
       {% assign category_order = 'compatibility,purchase,activation,usage,troubleshooting' | split: ',' %}
+      {% assign default_names = 'Compatibility & Requirements,Purchase & Plans,Activation & Setup,Using Your eSIM,Troubleshooting' | split: ',' %}
       
       {% for category_id in category_order %}
         {% assign category_blocks = section.blocks | where: 'settings.category', category_id %}
         
         {% if category_blocks.size > 0 %}
+          {% assign category_name = '' %}
+          {% assign loop_index = forloop.index0 %}
+          
           {% case category_id %}
             {% when 'compatibility' %}
-              {% assign category_name = section.settings.cat_compatibility %}
+              {% if section.settings.cat_compatibility != blank %}
+                {% assign category_name = section.settings.cat_compatibility %}
+              {% else %}
+                {% assign category_name = default_names[loop_index] %}
+              {% endif %}
             {% when 'purchase' %}
-              {% assign category_name = section.settings.cat_purchase %}
+              {% if section.settings.cat_purchase != blank %}
+                {% assign category_name = section.settings.cat_purchase %}
+              {% else %}
+                {% assign category_name = default_names[loop_index] %}
+              {% endif %}
             {% when 'activation' %}
-              {% assign category_name = section.settings.cat_activation %}
+              {% if section.settings.cat_activation != blank %}
+                {% assign category_name = section.settings.cat_activation %}
+              {% else %}
+                {% assign category_name = default_names[loop_index] %}
+              {% endif %}
             {% when 'usage' %}
-              {% assign category_name = section.settings.cat_usage %}
+              {% if section.settings.cat_usage != blank %}
+                {% assign category_name = section.settings.cat_usage %}
+              {% else %}
+                {% assign category_name = default_names[loop_index] %}
+              {% endif %}
             {% when 'troubleshooting' %}
-              {% assign category_name = section.settings.cat_troubleshooting %}
+              {% if section.settings.cat_troubleshooting != blank %}
+                {% assign category_name = section.settings.cat_troubleshooting %}
+              {% else %}
+                {% assign category_name = default_names[loop_index] %}
+              {% endif %}
           {% endcase %}
           
           <div class="faq-category" id="{{ category_id }}" data-category="{{ category_id }}" data-name="{{ category_name }}">
