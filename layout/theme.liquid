@@ -8,7 +8,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Intelligent Robots Meta (noindex für Cart/Search/Account) -->
+  <!-- ========================================
+       INTELLIGENT ROBOTS META (SINGLE SOURCE OF TRUTH)
+       ======================================== -->
   {% liquid
     assign noindex = false
     if request.page_type == 'search' or request.page_type == 'cart' or template contains 'customers' or request.path contains '/policies' or request.path contains '/account'
@@ -17,6 +19,7 @@
   %}
   <meta name="robots" content="{% if noindex %}noindex, nofollow{% else %}index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1{% endif %}">
   <meta name="googlebot" content="{% if noindex %}noindex, nofollow{% else %}index, follow, max-snippet:-1, max-image-preview:large{% endif %}">
+  <meta name="bingbot" content="{% if noindex %}noindex, nofollow{% else %}index, follow, max-snippet:-1, max-image-preview:large{% endif %}">
   
   <!-- Theme Color (Browser UI) -->
   <meta name="theme-color" content="#009a61" media="(prefers-color-scheme: light)">
@@ -56,21 +59,29 @@
   {% endif %}
   
   <!-- ========================================
-       HREFLANG (Published Locales Only)
+       HREFLANG (SINGLE SOURCE OF TRUTH)
+       Published Locales Only - Optimized URL Construction
        ======================================== -->
   {% if shop.published_locales.size > 1 %}
-    {% assign primary_root = '/' %}
+    {% comment %}
+      URL Construction:
+      1. Get current path WITHOUT locale prefix
+      2. Add each locale's root_url prefix
+      3. Ensures clean URLs like /de/products/esim-turkey (not /deproducts/esim-turkey)
+    {% endcomment %}
+    
+    {% assign clean_path = request.path | remove_first: request.locale.root_url %}
+    
     {% for locale in shop.published_locales %}
       <link rel="alternate" 
             hreflang="{{ locale.iso_code }}" 
-            href="{{ shop.url }}{{ locale.root_url }}{{ request.path | remove_first: request.locale.root_url }}">
-      {% if locale.iso_code == shop.primary_locale.iso_code %}
-        {% assign primary_root = locale.root_url %}
-      {% endif %}
+            href="{{ shop.url }}{{ locale.root_url }}{{ clean_path }}">
     {% endfor %}
+    
+    {% comment %} x-default points to primary locale (usually English) {% endcomment %}
     <link rel="alternate" 
           hreflang="x-default" 
-          href="{{ shop.url }}{{ primary_root }}{{ request.path | remove_first: request.locale.root_url }}">
+          href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ clean_path }}">
   {% endif %}
   
   <!-- ========================================
@@ -125,8 +136,8 @@
   }
   </script>
   
-  <!-- 3. FAQPage Schema for Homepage -->
-  {% if template == 'index' %}
+  <!-- 3. FAQ Schema (General Company FAQ) -->
+  {% unless request.page_type == 'product' %}
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -137,31 +148,23 @@
         "name": "What is an eSIM?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "An eSIM (embedded SIM) is a digital SIM card built into your device. No physical card needed - perfect for international travel. Supported by iPhone XS and newer, Samsung Galaxy S20+, Google Pixel 3+ and many modern smartphones."
+          "text": "An eSIM (embedded SIM) is a digital SIM that allows you to activate a mobile plan without a physical SIM card. It's built into your device and can be activated instantly."
         }
       },
       {
         "@type": "Question",
-        "name": "How fast is eSIM delivery?",
+        "name": "How do I activate my Simbye eSIM?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Instant delivery within 2 minutes after purchase. You receive the QR code via email and can activate immediately. No waiting, no shipping."
+          "text": "After purchase, you'll receive a QR code via email. Simply scan it with your phone's camera, follow the prompts, and your eSIM will activate within minutes."
         }
       },
       {
         "@type": "Question",
-        "name": "Which countries does Simbye eSIM cover?",
+        "name": "Can I use WhatsApp with Simbye eSIM?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "190+ countries worldwide including USA, Turkey, Germany, Spain, France, UK, Italy, Greece, Thailand, Japan and more. Full 4G/5G coverage in most destinations."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I keep my WhatsApp number with eSIM?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. WhatsApp is linked to your phone number, not your SIM card. You can use Simbye eSIM for data while keeping your original number for WhatsApp, calls and SMS."
+          "text": "Yes! WhatsApp is linked to your phone number, not your SIM card. You can use Simbye eSIM for data while keeping your original number for WhatsApp, calls and SMS."
         }
       },
       {
@@ -175,7 +178,7 @@
     ]
   }
   </script>
-  {% endif %}
+  {% endunless %}
   
   <!-- 4. Breadcrumbs Schema -->
   {% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
@@ -234,8 +237,14 @@
   </script>
   {% endunless %}
   
-  <!-- 5. Product Schema (Numeric Prices + Dynamic Currency + Variants) -->
+  <!-- 5. Product Schema (WITH CUSTOM REVIEWS - SINGLE SOURCE OF TRUTH) -->
   {% if request.page_type == 'product' %}
+  {% comment %}
+    ⚠️ IMPORTANT: This replaces Shopify's default {{ product | structured_data }}
+    Reason: We need custom metafields (rating, rating_count) for Rich Snippets
+    Shopify's default doesn't support custom review metafields
+  {% endcomment %}
+  
   {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
   {% assign rating_count = product.metafields.custom.rating_count | plus: 0 %}
   
@@ -275,16 +284,11 @@
         "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
         "itemCondition": "https://schema.org/NewCondition",
         "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
-        "seller": {
-          "@type": "Organization",
-          "name": "Simbye"
-        },
         "shippingDetails": {
           "@type": "OfferShippingDetails",
-          "shippingRate": {
-            "@type": "MonetaryAmount",
-            "value": "0",
-            "currency": "EUR"
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "Worldwide"
           },
           "deliveryTime": {
             "@type": "ShippingDeliveryTime",
@@ -308,16 +312,11 @@
       "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
       "itemCondition": "https://schema.org/NewCondition",
       "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
-      "seller": {
-        "@type": "Organization",
-        "name": "Simbye"
-      },
       "shippingDetails": {
         "@type": "OfferShippingDetails",
-        "shippingRate": {
-          "@type": "MonetaryAmount",
-          "value": "0",
-          "currency": "EUR"
+        "shippingDestination": {
+          "@type": "DefinedRegion",
+          "addressCountry": "Worldwide"
         },
         "deliveryTime": {
           "@type": "ShippingDeliveryTime",
