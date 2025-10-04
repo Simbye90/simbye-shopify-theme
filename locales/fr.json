@@ -208,7 +208,7 @@
     "your_selection": "Votre sélection",
     "network": "Réseau",
     "activation": "Activation",
-    "instant": "Instantané",
+    "instant": "Validité",
     "total": "Total",
     "buy_now": "Acheter maintenant",
     "valid_for": "Valable pour",
@@ -268,7 +268,7 @@
     "yes": "Oui",
     "no": "Non",
     "days": "Jours",
-    "instant": "Immédiatement après l'achat"
+    "instant": "180 Jours"
   },
   "apps": {
     "title_part1": "Internet mobile pour",
