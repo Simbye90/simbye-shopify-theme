@@ -124,11 +124,11 @@
         "faq_item_dVVkHb": {
           "type": "faq_item",
           "settings": {
-            "question": "Can my phone use eSIM?",
-            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
-            "show_cta": false,
-            "cta_text": "Learn More",
-            "cta_link": ""
+            "question": "Is my device eSIM compatible?",
+            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM, including iPhone XS+, Samsung Galaxy S20+, and Google Pixel 3+. Check our compatibility page for your specific device model or look for \"eSIM\" in your phone settings. View all compatible devices!</p>",
+            "show_cta": true,
+            "cta_text": "eSIM Compatible Devices",
+            "cta_link": "shopify://pages/esim-compatible-devices"
           }
         },
         "faq_item_XJPNUW": {
