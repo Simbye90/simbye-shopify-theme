@@ -17,16 +17,16 @@
             "type": "faq_item",
             "settings": {
               "category": "compatibility",
-              "question": "Will msdy phone work with yosdur eSIM?",
-              "answer": "<p>Most modern iPhones and Androids with eSIM support will work. Check our compatibility page or contact support.</p>"
+              "question": "Which devices are compatible with Simbye eSIM?",
+              "answer": "<p>Most modern smartphones from 2018 onwards support eSIM, including iPhone XS+, Samsung Galaxy S20+, and Google Pixel 3+. Check our compatibility page for your specific device model or look for \"eSIM\" in your phone settings. View all <a href=\"/pages/esim-compatible-devices\" title=\"eSIM Compatible Devices\">compatible devices</a>!</p>"
             }
           },
           "faq_item_KBNtb9": {
             "type": "faq_item",
             "settings": {
               "category": "compatibility",
-              "question": "Will my phone work with your eSIM?",
-              "answer": "<p>Most modern iPhones and Androids with eSIM support will work. Check our compatibility page or contact support.</p>"
+              "question": "How do I check if my phone supports eSIM?",
+              "answer": "<p>The easiest way is to check your phone settings: On iPhone, go to Settings &gt; Cellular/Mobile Data &gt; Add eSIM. On Android, go to Settings &gt; Network & Internet &gt; SIM cards. If you see these options, your device supports eSIM. Alternatively, dial *#06# to see if an EID number appears. Check our full compatibility list for your device!</p>"
             }
           },
           "faq_item_ECyDQd": {
@@ -41,24 +41,32 @@
             "type": "faq_item",
             "settings": {
               "category": "compatibility",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+              "question": "Can I use eSIM and physical SIM at the same time?",
+              "answer": "<p>Yes! Most modern smartphones support dual SIM functionality, allowing you to use your physical SIM and Simbye eSIM simultaneously. This means you can keep your home number active for calls and texts while using the eSIM for affordable mobile data abroad. Simply enable both SIMs in your phone settings and choose which one to use for data.</p>"
             }
           },
           "faq_item_e88F9M": {
             "type": "faq_item",
             "settings": {
               "category": "compatibility",
-              "question": "Will my phone worksd with your eSIM?",
-              "answer": "<p>Most modern iPhones and Androids with eSIM support wilsdsl work. Check our compatibility page or contact support.</p>"
+              "question": "What do I need to install an eSIM?",
+              "answer": "<p>You only need three things: an eSIM-compatible device, a stable WiFi or internet connection, and your eSIM QR code from Simbye. The installation process takes less than 60 seconds – just scan the QR code and follow the simple on-screen instructions. No technical knowledge required!</p>"
+            }
+          },
+          "faq_item_DCCBix": {
+            "type": "faq_item",
+            "settings": {
+              "category": "purchase",
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
             }
           },
           "faq_item_gWMheT": {
             "type": "faq_item",
             "settings": {
-              "category": "purchase",
-              "question": "What is eSIM?sd",
-              "answer": "<p>An eSIM is a digital SIM card.sdsd</p>"
+              "category": "compatibility",
+              "question": "Can I transfer my eSIM to a new phone?",
+              "answer": "<p>No, eSIMs cannot be transferred between devices. Once installed and activated on one device, the eSIM is permanently linked to that phone. If you get a new device, you'll need to purchase a new eSIM. However, Simbye eSIMs are affordable and start from just $1, making it easy to get connected on any device!</p>"
             }
           }
         },
@@ -68,12 +76,15 @@
           "faq_item_ECyDQd",
           "faq_item_Cm8JMf",
           "faq_item_e88F9M",
+          "faq_item_DCCBix",
           "faq_item_gWMheT"
         ],
         "settings": {
           "title": "Frequently Asked Questions",
           "subtitle": "Find answers to common questions about our eSIM service",
-          "search_placeholder": "Search for answers..."
+          "show_search": true,
+          "search_placeholder": "Search for answers...",
+          "show_quick_nav": true
         }
       },
       "wie-site": {
