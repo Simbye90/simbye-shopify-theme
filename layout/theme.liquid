@@ -45,10 +45,15 @@
   <!-- Meta Tags Snippet (includes OG, Twitter, AI tags) -->
   {% render 'meta-tags' %}
   
-  <!-- Favicons -->
+  <!-- Favicons - FIXED WITH FALLBACK -->
   <link rel="icon" type="image/webp" sizes="192x192" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | img_url: '32x32' }}">
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
+  {% if settings.favicon %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | img_url: '32x32' }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
+  {% else %}
+    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
+  {% endif %}
   
   <!-- /index.html Redirect Fix -->
   {% if request.path == '/index.html' %}
@@ -59,29 +64,43 @@
   {% endif %}
   
   <!-- ========================================
-       HREFLANG (SINGLE SOURCE OF TRUTH)
+       HREFLANG (SINGLE SOURCE OF TRUTH) - FIXED!
        Published Locales Only - Optimized URL Construction
        ======================================== -->
   {% if shop.published_locales.size > 1 %}
     {% comment %}
-      URL Construction:
-      1. Get current path WITHOUT locale prefix
-      2. Add each locale's root_url prefix
-      3. Ensures clean URLs like /de/products/esim-turkey (not /deproducts/esim-turkey)
+      CRITICAL FIX: Properly handle leading slash in paths
+      
+      Problem: request.path can be either:
+        - "/" (homepage)
+        - "/products/esim-turkey" (default locale)
+        - "/de/products/esim-turkey" (non-default locale)
+      
+      Solution: 
+      1. Remove current locale prefix from path
+      2. Ensure path always starts with "/"
+      3. Concatenate: shop.url + locale.root_url + path
     {% endcomment %}
     
-    {% assign clean_path = request.path | remove_first: request.locale.root_url %}
+    {% comment %} Step 1: Remove current locale prefix {% endcomment %}
+    {% assign base_path = request.path | remove_first: request.locale.root_url %}
     
+    {% comment %} Step 2: Ensure leading slash {% endcomment %}
+    {% unless base_path contains '/' %}
+      {% assign base_path = '/' | append: base_path %}
+    {% endunless %}
+    
+    {% comment %} Step 3: Generate hreflang for all locales {% endcomment %}
     {% for locale in shop.published_locales %}
       <link rel="alternate" 
             hreflang="{{ locale.iso_code }}" 
-            href="{{ shop.url }}{{ locale.root_url }}{{ clean_path }}">
+            href="{{ shop.url }}{{ locale.root_url }}{{ base_path }}">
     {% endfor %}
     
-    {% comment %} x-default points to primary locale (usually English) {% endcomment %}
+    {% comment %} x-default points to primary locale {% endcomment %}
     <link rel="alternate" 
           hreflang="x-default" 
-          href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ clean_path }}">
+          href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ base_path }}">
   {% endif %}
   
   <!-- ========================================
