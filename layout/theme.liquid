@@ -142,7 +142,7 @@
   </script>
   {% endif %}
   
-  <!-- 3. Breadcrumbs Schema -->
+  <!-- 4. Breadcrumbs Schema -->
   {% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
   <script type="application/ld+json">
   {
@@ -199,7 +199,7 @@
   </script>
   {% endunless %}
   
-  <!-- 4. Product Schema (Enhanced with Reviews) -->
+  <!-- 5. Product Schema (Enhanced with Variants + Reviews) -->
   {% if request.page_type == 'product' %}
   {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
   {% assign rating_count = product.metafields.custom.rating_count | plus: 0 %}
@@ -226,8 +226,46 @@
       {% for image in product.images limit: 5 %}
         "{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
       {% endfor %}
-    ],
-    "offers": {
+    ]
+    {% if product.variants.size > 1 %}
+    ,"offers": [
+      {% for variant in product.variants %}
+      {
+        "@type": "Offer",
+        "name": "{{ variant.title | escape }}",
+        "sku": "{{ variant.sku | default: variant.id }}",
+        "url": "{{ shop.url }}{{ product.url }}?variant={{ variant.id }}",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "price": "{{ variant.price | money_without_currency | replace: ',', '.' }}",
+        "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+        "itemCondition": "https://schema.org/NewCondition",
+        "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+        "seller": {
+          "@type": "Organization",
+          "name": "Simbye"
+        },
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingRate": {
+            "@type": "MonetaryAmount",
+            "value": "0",
+            "currency": "EUR"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 0,
+              "maxValue": 0,
+              "unitCode": "MIN"
+            }
+          }
+        }
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ]
+    {% else %}
+    ,"offers": {
       "@type": "Offer",
       "url": "{{ shop.url }}{{ product.url }}",
       "priceCurrency": "{{ cart.currency.iso_code }}",
@@ -256,8 +294,9 @@
           }
         }
       }
-    },
-    "hasMerchantReturnPolicy": {
+    }
+    {% endif %}
+    ,"hasMerchantReturnPolicy": {
       "@type": "MerchantReturnPolicy",
       "applicableCountry": ["DE","AT","CH","US","GB","FR","IT","ES","NL","PL","TR"],
       "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
