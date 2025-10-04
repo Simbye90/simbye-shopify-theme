@@ -1,5 +1,5 @@
-<!-- sections/main-search.liquid -->
-<!-- SIMBYE ENTERPRISE SEARCH V2.0 - PRODUCTS ONLY + LIVE SUGGESTIONS -->
+<!-- sections/search.liquid -->
+<!-- SIMBYE ENTERPRISE SEARCH - PRODUCTS ONLY -->
 
 <style>
 /* CSS Variables */
@@ -15,75 +15,72 @@
   --search-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
   --search-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
   --search-shadow-lg: 0 12px 32px rgba(0, 154, 97, 0.15);
+  --search-radius: 24px;
   --search-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Dark Mode */
 [data-theme="dark"] {
   --search-text: #f5f5f5;
   --search-text-secondary: #999999;
   --search-bg: #0a0a0a;
-  --search-card-bg: rgba(26, 26, 26, 0.6);
+  --search-card-bg: rgba(26, 26, 26, 0.8);
   --search-border: rgba(255, 255, 255, 0.08);
   --search-primary: #00d97e;
   --search-primary-hover: #009a61;
   --search-accent: #00ff88;
   --search-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
   --search-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
-  --search-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.15);
+  --search-shadow-lg: 0 12px 32px rgba(0, 217, 126, 0.2);
 }
 
-.shopify-section:has(.search-section) {
+/* Kill Shopify Grid */
+.shopify-section:has(.search-enterprise) {
   display: block !important;
   padding: 0 !important;
   margin: 0 !important;
   grid-template-columns: unset !important;
 }
 
-.search-section {
+/* Main Section */
+.search-enterprise {
   width: 100%;
   min-height: 100vh;
-  background: var(--search-bg);
   padding: 120px 0 80px 0;
+  background: var(--search-bg);
+  position: relative;
 }
 
-[data-theme="dark"] .search-section {
-  background: linear-gradient(180deg, #0a0a0a 0%, #0d100f 50%, #0a0a0a 100%);
+[data-theme="dark"] .search-enterprise {
+  background: #0a0a0a;
 }
 
+/* Container */
 .search-container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 40px;
 }
 
-/* Header */
+/* Search Header */
 .search-header {
   text-align: center;
   margin-bottom: 60px;
-  animation: fadeInUp 0.6s ease;
 }
 
 .search-title {
   font-size: clamp(36px, 5vw, 56px);
   font-weight: 700;
   color: var(--search-text);
-  margin: 0 0 12px 0;
+  margin: 0 0 32px 0;
   letter-spacing: -0.02em;
 }
 
-.search-subtitle {
-  font-size: 18px;
-  color: var(--search-text-secondary);
-  margin: 0;
-}
-
-/* Search Form - VERBESSERT */
+/* Search Form */
 .search-form {
-  max-width: 800px;
-  margin: 0 auto 60px auto;
+  max-width: 680px;
+  margin: 0 auto;
   position: relative;
-  z-index: 100;
-  animation: fadeInUp 0.7s ease 0.1s both;
 }
 
 .search-input-wrapper {
@@ -91,130 +88,82 @@
   display: flex;
   align-items: center;
   background: white;
-  border-radius: 20px;
-  box-shadow: 0 8px 32px rgba(0, 154, 97, 0.12);
-  overflow: hidden;
-  height: 72px;
+  border: 2px solid var(--search-border);
+  border-radius: 16px;
+  padding: 4px;
+  box-shadow: var(--search-shadow-md);
   transition: var(--search-transition);
-  border: 2px solid transparent;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: var(--search-primary);
+  box-shadow: var(--search-shadow-lg);
 }
 
 [data-theme="dark"] .search-input-wrapper {
   background: rgba(26, 26, 26, 0.8);
   border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(15px);
-}
-
-.search-input-wrapper:focus-within {
-  box-shadow: 0 12px 48px rgba(0, 154, 97, 0.25);
-  border-color: var(--search-primary);
 }
 
 .search-icon {
-  width: 28px;
-  height: 28px;
-  margin: 0 24px;
-  color: var(--search-primary);
+  width: 24px;
+  height: 24px;
+  margin: 0 16px;
+  color: var(--search-text-secondary);
   flex-shrink: 0;
-  stroke-width: 2.5;
 }
 
 .search-input {
   flex: 1;
   border: none;
-  padding: 0 20px 0 0;
-  font-size: 19px;
-  font-weight: 600;
-  outline: none;
+  padding: 16px 8px;
+  font-size: 18px;
+  font-weight: 500;
   background: transparent;
   color: var(--search-text);
-  font-family: inherit;
-  letter-spacing: -0.01em;
+  outline: none;
 }
 
 .search-input::placeholder {
   color: var(--search-text-secondary);
-  font-weight: 500;
-}
-
-.search-clear {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.05);
-  border: none;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-right: 12px;
-  transition: var(--search-transition);
-}
-
-.search-clear.active {
-  display: flex;
-}
-
-.search-clear:hover {
-  background: rgba(0, 0, 0, 0.1);
-  transform: scale(1.1);
-}
-
-[data-theme="dark"] .search-clear {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.search-clear svg {
-  width: 20px;
-  height: 20px;
-  color: var(--search-text-secondary);
+  font-weight: 400;
 }
 
 .search-submit {
-  height: 100%;
+  padding: 14px 32px;
   background: var(--search-primary);
   color: white;
   border: none;
-  padding: 0 40px;
-  font-weight: 700;
-  font-size: 17px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: var(--search-transition);
   white-space: nowrap;
-  letter-spacing: -0.01em;
-  display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
 .search-submit:hover {
   background: var(--search-primary-hover);
+  transform: translateY(-1px);
 }
 
-/* Live Suggestions Dropdown - NEU */
+/* Search Suggestions */
 .search-suggestions {
   position: absolute;
-  top: calc(100% + 12px);
+  top: calc(100% + 8px);
   left: 0;
   right: 0;
   background: white;
-  border-radius: 20px;
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
+  border: 1px solid var(--search-border);
+  border-radius: 16px;
+  box-shadow: var(--search-shadow-lg);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
   transition: var(--search-transition);
-  z-index: 1000;
-  max-height: 500px;
+  z-index: 100;
+  max-height: 400px;
   overflow-y: auto;
-  border: 2px solid var(--search-border);
-}
-
-[data-theme="dark"] .search-suggestions {
-  background: #1a1a1a;
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
 }
 
 .search-suggestions.active {
@@ -223,328 +172,188 @@
   transform: translateY(0);
 }
 
+[data-theme="dark"] .search-suggestions {
+  background: #1a1a1a;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
 .suggestion-item {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 14px 20px;
-  text-decoration: none;
+  padding: 12px 16px;
   color: var(--search-text);
-  transition: var(--search-transition);
+  text-decoration: none;
   border-bottom: 1px solid var(--search-border);
+  transition: var(--search-transition);
   cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: rgba(0, 154, 97, 0.08);
 }
 
 .suggestion-item:last-child {
   border-bottom: none;
 }
 
-.suggestion-item:hover {
-  background: rgba(0, 154, 97, 0.05);
-  padding-left: 28px;
-}
-
-.suggestion-flag {
+.suggestion-image {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
+  border-radius: 8px;
   object-fit: cover;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: 2px solid var(--search-border);
 }
 
-.suggestion-content {
+.suggestion-info {
   flex: 1;
   min-width: 0;
 }
 
 .suggestion-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   color: var(--search-text);
   margin: 0 0 4px 0;
-  letter-spacing: -0.01em;
-}
-
-.suggestion-meta {
-  font-size: 13px;
-  color: var(--search-text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.suggestion-price {
-  color: var(--search-primary);
-  font-weight: 700;
-  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.suggestion-loading {
-  padding: 24px;
-  text-align: center;
-  color: var(--search-text-secondary);
+.suggestion-price {
   font-size: 14px;
-}
-
-.suggestion-empty {
-  padding: 32px 24px;
-  text-align: center;
-}
-
-.suggestion-empty-icon {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 16px;
-  background: rgba(0, 154, 97, 0.05);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-weight: 700;
   color: var(--search-primary);
-}
-
-.suggestion-empty-text {
-  font-size: 15px;
-  color: var(--search-text-secondary);
-  margin: 0;
 }
 
 /* Results Info */
 .search-results-info {
   text-align: center;
-  margin-bottom: 40px;
-  animation: fadeInUp 0.8s ease 0.2s both;
-}
-
-.search-results-count {
+  margin: 40px 0;
   font-size: 18px;
   color: var(--search-text-secondary);
-  margin: 0;
 }
 
-.search-results-count strong {
+.search-results-info strong {
   color: var(--search-primary);
   font-weight: 700;
-}
-
-/* Product Grid - VERBESSERT */
-.search-products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 32px;
-  margin-bottom: 60px;
-}
-
-/* Product Card - WIE COLLECTION PAGE */
-.product-card {
-  background: var(--search-card-bg);
-  border: 2px solid var(--search-border);
-  border-radius: 24px;
-  overflow: hidden;
-  transition: var(--search-transition);
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--search-shadow-sm);
-  position: relative;
-  animation: fadeInUp 0.9s ease both;
-  animation-delay: calc(var(--card-index) * 0.05s);
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--search-shadow-lg);
-  border-color: var(--search-primary);
-}
-
-[data-theme="dark"] .product-card {
-  background: var(--search-card-bg);
-  border-color: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-}
-
-.product-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(0, 154, 97, 0.05), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.8s ease;
-}
-
-.product-card:hover::before {
-  transform: translateX(100%);
-}
-
-/* Popular Badge */
-.popular-badge {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  background: linear-gradient(135deg, #ff7e50, #ff9a76);
-  color: white;
-  padding: 6px 16px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(255, 126, 80, 0.4);
-  z-index: 2;
-  letter-spacing: 0.5px;
-}
-
-/* Product Image */
-.product-info-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 24px 24px 16px;
-}
-
-.product-flag {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  object-fit: cover;
-  flex-shrink: 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 2px solid var(--search-border);
-}
-
-.product-name {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--search-text);
-  margin: 0;
-  line-height: 1.3;
-  flex: 1;
-  letter-spacing: -0.01em;
-}
-
-/* Product Price */
-.product-price-section {
-  padding: 0 24px 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid var(--search-border);
-  padding-top: 16px;
-  margin-top: auto;
-}
-
-.product-price-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.product-starting {
-  font-size: 12px;
-  color: var(--search-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: 600;
-}
-
-.product-price {
-  font-size: 26px;
-  font-weight: 800;
-  color: var(--search-primary);
-  line-height: 1;
-}
-
-[data-theme="dark"] .product-price {
-  color: var(--search-accent);
-}
-
-.product-arrow {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--search-primary), var(--search-accent));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--search-transition);
-  flex-shrink: 0;
-}
-
-.product-card:hover .product-arrow {
-  transform: translateX(4px);
-}
-
-.product-arrow svg {
-  width: 24px;
-  height: 24px;
-  color: white;
 }
 
 /* No Results */
 .search-no-results {
   text-align: center;
-  padding: 100px 20px;
-  animation: fadeInUp 0.8s ease;
+  padding: 80px 20px;
 }
 
-.search-no-results-icon {
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 32px auto;
-  background: linear-gradient(135deg, rgba(0, 154, 97, 0.1), rgba(0, 217, 126, 0.05));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--search-primary);
-  border: 3px solid var(--search-border);
+.no-results-icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 24px auto;
+  color: var(--search-text-secondary);
+  opacity: 0.5;
 }
 
-.search-no-results-icon svg {
-  width: 70px;
-  height: 70px;
-}
-
-.search-no-results-title {
-  font-size: 36px;
+.no-results-title {
+  font-size: 28px;
   font-weight: 700;
   color: var(--search-text);
-  margin: 0 0 16px 0;
-  letter-spacing: -0.02em;
+  margin: 0 0 12px 0;
 }
 
-.search-no-results-text {
-  font-size: 18px;
+.no-results-text {
+  font-size: 16px;
   color: var(--search-text-secondary);
-  margin: 0 0 32px 0;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
+  margin: 0;
 }
 
-.search-no-results-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px 36px;
-  background: var(--search-primary);
-  color: white;
+/* Product Grid */
+.search-products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+  margin-bottom: 60px;
+}
+
+/* Product Card */
+.search-product-card {
+  background: var(--search-card-bg);
+  border: 2px solid var(--search-border);
+  border-radius: var(--search-radius);
+  padding: 20px;
   text-decoration: none;
-  border-radius: 14px;
-  font-weight: 600;
-  font-size: 17px;
   transition: var(--search-transition);
-  box-shadow: 0 6px 20px rgba(0, 154, 97, 0.3);
-  letter-spacing: -0.01em;
+  position: relative;
+  overflow: hidden;
 }
 
-.search-no-results-cta:hover {
-  background: var(--search-primary-hover);
-  transform: translateY(-2px);
+.search-product-card:hover {
+  border-color: var(--search-primary);
+  transform: translateY(-4px);
   box-shadow: var(--search-shadow-lg);
+}
+
+[data-theme="dark"] .search-product-card {
+  background: var(--search-card-bg);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.product-image-wrapper {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .product-image-wrapper {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.search-product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+.product-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.product-flag {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.product-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--search-text);
+  margin: 0;
+  line-height: 1.3;
+  flex: 1;
+}
+
+.product-price {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--search-primary);
+  margin: 8px 0 0 0;
+}
+
+[data-theme="dark"] .product-price {
+  color: var(--search-accent);
 }
 
 /* Pagination */
@@ -552,59 +361,53 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin-top: 60px;
-  animation: fadeInUp 0.9s ease 0.3s both;
 }
 
-.pagination-link {
+.pagination-item {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 48px;
-  height: 48px;
+  min-width: 44px;
+  height: 44px;
   padding: 0 16px;
   background: var(--search-card-bg);
+  border: 1px solid var(--search-border);
+  border-radius: 12px;
   color: var(--search-text);
   text-decoration: none;
-  border: 2px solid var(--search-border);
-  border-radius: 14px;
   font-weight: 600;
-  font-size: 16px;
   transition: var(--search-transition);
 }
 
-.pagination-link:hover:not(.pagination-link--current) {
+.pagination-item:hover {
   border-color: var(--search-primary);
+  background: rgba(0, 154, 97, 0.08);
   color: var(--search-primary);
-  transform: translateY(-2px);
 }
 
-.pagination-link--current {
+.pagination-item.active {
   background: var(--search-primary);
-  color: white;
   border-color: var(--search-primary);
+  color: white;
 }
 
-.pagination-link--disabled {
-  opacity: 0.3;
+.pagination-item.disabled {
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .search-container {
-    padding: 0 24px;
-  }
-  
   .search-products-grid {
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 24px;
   }
 }
 
 @media (max-width: 768px) {
-  .search-section {
+  .search-enterprise {
     padding: 100px 0 60px 0;
   }
   
@@ -620,217 +423,133 @@
     font-size: 32px;
   }
   
-  .search-form {
-    margin-bottom: 40px;
-  }
-  
-  .search-input-wrapper {
-    height: 60px;
-  }
-  
-  .search-icon {
-    width: 24px;
-    height: 24px;
-    margin: 0 16px;
-  }
-  
   .search-input {
     font-size: 16px;
   }
   
   .search-submit {
-    padding: 0 28px;
+    padding: 12px 24px;
     font-size: 15px;
   }
   
   .search-products-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
   }
   
-  .product-name {
-    font-size: 19px;
+  .search-product-card {
+    padding: 12px;
+  }
+  
+  .product-title {
+    font-size: 16px;
   }
   
   .product-price {
-    font-size: 22px;
+    font-size: 20px;
   }
-  
-  .search-no-results {
-    padding: 60px 20px;
-  }
-  
-  .search-no-results-title {
-    font-size: 28px;
-  }
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Scrollbar */
-.search-suggestions::-webkit-scrollbar {
-  width: 6px;
-}
-
-.search-suggestions::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.search-suggestions::-webkit-scrollbar-thumb {
-  background: var(--search-primary);
-  border-radius: 3px;
-}
-
-[data-theme="dark"] .search-suggestions::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
 }
 </style>
 
-<div class="search-section">
+<section class="search-enterprise">
   <div class="search-container">
     
     <!-- Header -->
     <div class="search-header">
-      <h1 class="search-title">
-        Search eSIM Products
-      </h1>
-      <p class="search-subtitle">
-        Find the perfect eSIM for your destination
-      </p>
+      <h1 class="search-title">Search Products</h1>
+      
+      <!-- Search Form -->
+      <form action="{{ routes.search_url }}" method="get" role="search" class="search-form" id="search-form">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          
+          <input
+            type="search"
+            name="q"
+            id="search-input"
+            value="{{ search.terms | escape }}"
+            placeholder="Search for eSIM destinations..."
+            class="search-input"
+            autocomplete="off"
+          >
+          
+          <button type="submit" class="search-submit">Search</button>
+        </div>
+        
+        <!-- Live Suggestions -->
+        <div class="search-suggestions" id="search-suggestions"></div>
+      </form>
     </div>
-    
-    <!-- Search Form with Live Suggestions -->
-    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form" id="search-form">
-      <input type="hidden" name="type" value="product">
-      
-      <div class="search-input-wrapper">
-        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-          <circle cx="11" cy="11" r="8"/>
-          <path d="m21 21-4.35-4.35"/>
-        </svg>
-        
-        <input
-          type="search"
-          name="q"
-          value="{{ search.terms | escape }}"
-          placeholder="Search destinations... (e.g. Turkey, USA, Europe)"
-          class="search-input"
-          id="search-input"
-          aria-label="Search"
-          autocomplete="off"
-        >
-        
-        <button type="button" class="search-clear" id="search-clear" aria-label="Clear">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 6L6 18M6 6l12 12"/>
-          </svg>
-        </button>
-        
-        <button type="submit" class="search-submit">
-          <span>Search</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-            <polyline points="9 18 15 12 9 6"/>
-          </svg>
-        </button>
-      </div>
-      
-      <!-- Live Suggestions -->
-      <div class="search-suggestions" id="search-suggestions">
-        <div class="suggestion-loading">Searching...</div>
-      </div>
-    </form>
     
     {% if search.performed %}
       {% comment %} Filter nur Produkte {% endcomment %}
       {% assign product_results = search.results | where: 'object_type', 'product' %}
       
       {% if product_results.size == 0 %}
-        
         <!-- No Results -->
         <div class="search-no-results">
-          <div class="search-no-results-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.35-4.35"/>
-            </svg>
-          </div>
-          
-          <h2 class="search-no-results-title">
-            No eSIM found
-          </h2>
-          
-          <p class="search-no-results-text">
-            We couldn't find any eSIM products matching "{{ search.terms }}". Try searching with different keywords or browse all destinations.
+          <svg class="no-results-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+            <line x1="11" y1="8" x2="11" y2="14"/>
+            <line x1="11" y1="16" x2="11" y2="16"/>
+          </svg>
+          <h2 class="no-results-title">No products found</h2>
+          <p class="no-results-text">
+            We couldn't find any eSIM products matching "{{ search.terms | escape }}". 
+            Try searching for a country name or region.
           </p>
-          
-          <a href="{{ routes.all_products_collection_url }}" class="search-no-results-cta">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="22" height="22">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            </svg>
-            Browse All Destinations
-          </a>
         </div>
-        
       {% else %}
-        
         <!-- Results Info -->
         <div class="search-results-info">
-          <p class="search-results-count">
-            Found <strong>{{ product_results.size }}</strong> eSIM products
-            {% if search.terms != blank %}
-              for "{{ search.terms }}"
-            {% endif %}
-          </p>
+          Found <strong>{{ product_results.size }} product{% if product_results.size != 1 %}s{% endif %}</strong> 
+          for "{{ search.terms | escape }}"
         </div>
         
         <!-- Products Grid -->
         {% paginate product_results by 12 %}
           <div class="search-products-grid">
-            {% for product in paginate.items %}
-              <a href="{{ product.url }}" class="product-card" style="--card-index: {{ forloop.index }}">
+            {% for product in product_results %}
+              <a href="{{ product.url }}" class="search-product-card">
+                <div class="product-image-wrapper">
+                  {% if product.images[1] %}
+                    <img 
+                      src="{{ product.images[1] | image_url: width: 400 }}" 
+                      alt="{{ product.title }}"
+                      class="product-image"
+                      loading="lazy"
+                    >
+                  {% elsif product.featured_image %}
+                    <img 
+                      src="{{ product.featured_image | image_url: width: 400 }}" 
+                      alt="{{ product.title }}"
+                      class="product-image"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </div>
                 
-                {% if forloop.index == 3 %}
-                  <span class="popular-badge">Popular</span>
-                {% endif %}
-                
-                <div class="product-info-wrapper">
+                <div class="product-info">
                   {% if product.featured_image %}
                     <img 
-                      src="{{ product.featured_image | image_url: width: 120 }}" 
-                      alt="{{ product.title | escape }}"
+                      src="{{ product.featured_image | image_url: width: 80 }}" 
+                      alt="{{ product.title }}"
                       class="product-flag"
-                      loading="lazy"
-                      width="120"
-                      height="120"
                     >
                   {% endif %}
                   
-                  <h3 class="product-name">{{ product.title }}</h3>
+                  <h3 class="product-title">{{ product.title }}</h3>
                 </div>
                 
-                <div class="product-price-section">
-                  <div class="product-price-wrapper">
-                    <span class="product-starting">Starting from</span>
-                    <span class="product-price">{{ product.price | money_without_currency }}€</span>
-                  </div>
-                  
-                  <div class="product-arrow">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                  </div>
-                </div>
-                
+                {% if product.price %}
+                  <p class="product-price">
+                    {{ product.price | money_without_trailing_zeros }}
+                  </p>
+                {% endif %}
               </a>
             {% endfor %}
           </div>
@@ -838,148 +557,109 @@
           <!-- Pagination -->
           {% if paginate.pages > 1 %}
             <div class="search-pagination">
-              
               {% if paginate.previous %}
-                <a href="{{ paginate.previous.url }}" class="pagination-link">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                    <polyline points="15 18 9 12 15 6"/>
+                <a href="{{ paginate.previous.url }}" class="pagination-item">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
                   </svg>
                 </a>
               {% else %}
-                <span class="pagination-link pagination-link--disabled">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                    <polyline points="15 18 9 12 15 6"/>
+                <span class="pagination-item disabled">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6"/>
                   </svg>
                 </span>
               {% endif %}
               
               {% for part in paginate.parts %}
                 {% if part.is_link %}
-                  <a href="{{ part.url }}" class="pagination-link">{{ part.title }}</a>
+                  <a href="{{ part.url }}" class="pagination-item">{{ part.title }}</a>
                 {% else %}
                   {% if part.title == paginate.current_page %}
-                    <span class="pagination-link pagination-link--current">{{ part.title }}</span>
+                    <span class="pagination-item active">{{ part.title }}</span>
                   {% else %}
-                    <span class="pagination-link">{{ part.title }}</span>
+                    <span class="pagination-item">{{ part.title }}</span>
                   {% endif %}
                 {% endif %}
               {% endfor %}
               
               {% if paginate.next %}
-                <a href="{{ paginate.next.url }}" class="pagination-link">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                    <polyline points="9 18 15 12 9 6"/>
+                <a href="{{ paginate.next.url }}" class="pagination-item">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"/>
                   </svg>
                 </a>
               {% else %}
-                <span class="pagination-link pagination-link--disabled">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
-                    <polyline points="9 18 15 12 9 6"/>
+                <span class="pagination-item disabled">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6"/>
                   </svg>
                 </span>
               {% endif %}
-              
             </div>
           {% endif %}
-          
         {% endpaginate %}
-        
       {% endif %}
     {% endif %}
     
   </div>
-</div>
+</section>
 
 <script>
 (function() {
   'use strict';
   
   const searchInput = document.getElementById('search-input');
-  const searchClear = document.getElementById('search-clear');
   const suggestions = document.getElementById('search-suggestions');
-  let searchTimeout;
-  let currentQuery = '';
+  let debounceTimer;
   
   if (!searchInput || !suggestions) return;
   
-  // Clear Button
   searchInput.addEventListener('input', function() {
-    if (this.value.length > 0) {
-      searchClear.classList.add('active');
-    } else {
-      searchClear.classList.remove('active');
-      hideSuggestions();
-    }
-    
-    // Live Search
-    clearTimeout(searchTimeout);
+    clearTimeout(debounceTimer);
     const query = this.value.trim();
     
-    if (query.length >= 2) {
-      searchTimeout = setTimeout(() => fetchSuggestions(query), 300);
-    } else {
+    if (query.length < 2) {
       hideSuggestions();
+      return;
     }
+    
+    debounceTimer = setTimeout(() => {
+      fetchSuggestions(query);
+    }, 300);
   });
   
-  searchClear.addEventListener('click', function() {
-    searchInput.value = '';
-    searchClear.classList.remove('active');
-    hideSuggestions();
-    searchInput.focus();
-  });
-  
-  // Fetch Suggestions
   function fetchSuggestions(query) {
-    if (query === currentQuery) return;
-    currentQuery = query;
-    
-    showLoading();
-    
-    fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=6`)
+    fetch(`/search/suggest.json?q=${encodeURIComponent(query)}&resources[type]=product&resources[limit]=5`)
       .then(response => response.json())
       .then(data => {
-        const products = data.resources.results.products || [];
-        displaySuggestions(products);
+        if (data.resources && data.resources.results && data.resources.results.products) {
+          displaySuggestions(data.resources.results.products);
+        }
       })
-      .catch(() => {
-        hideSuggestions();
+      .catch(error => {
+        console.error('Search suggestions error:', error);
       });
   }
   
-  // Display Suggestions
   function displaySuggestions(products) {
     if (products.length === 0) {
-      suggestions.innerHTML = `
-        <div class="suggestion-empty">
-          <div class="suggestion-empty-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
-              <circle cx="11" cy="11" r="8"/>
-              <path d="m21 21-4.35-4.35"/>
-            </svg>
-          </div>
-          <p class="suggestion-empty-text">No products found. Try different keywords.</p>
-        </div>
-      `;
-      showSuggestions();
+      hideSuggestions();
       return;
     }
     
     let html = '';
     products.forEach(product => {
-      const image = product.featured_image?.url || product.image;
-      const price = (product.price / 100).toFixed(2);
+      const image = product.image || '';
+      const price = product.price ? formatMoney(product.price) : '';
       
       html += `
         <a href="${product.url}" class="suggestion-item">
-          <img src="${image}" alt="${product.title}" class="suggestion-flag">
-          <div class="suggestion-content">
+          ${image ? `<img src="${image}" alt="${product.title}" class="suggestion-image">` : ''}
+          <div class="suggestion-info">
             <h4 class="suggestion-title">${product.title}</h4>
-            <div class="suggestion-meta">
-              <span>eSIM Data Plan</span>
-            </div>
+            ${price ? `<p class="suggestion-price">${price}</p>` : ''}
           </div>
-          <span class="suggestion-price">${price}€</span>
         </a>
       `;
     });
@@ -988,9 +668,8 @@
     showSuggestions();
   }
   
-  function showLoading() {
-    suggestions.innerHTML = '<div class="suggestion-loading">Searching products...</div>';
-    showSuggestions();
+  function formatMoney(cents) {
+    return (cents / 100).toFixed(2) + ' €';
   }
   
   function showSuggestions() {
@@ -999,20 +678,17 @@
   
   function hideSuggestions() {
     suggestions.classList.remove('active');
-    currentQuery = '';
   }
   
-  // Close on outside click
   document.addEventListener('click', function(e) {
-    if (!e.target.closest('.search-form')) {
+    if (!searchInput.contains(e.target) && !suggestions.contains(e.target)) {
       hideSuggestions();
     }
   });
   
-  // Close on ESC
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      hideSuggestions();
+  searchInput.addEventListener('focus', function() {
+    if (suggestions.innerHTML && searchInput.value.length >= 2) {
+      showSuggestions();
     }
   });
 })();
@@ -1020,16 +696,7 @@
 
 {% schema %}
 {
-  "name": "Search Products",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Search Settings"
-    },
-    {
-      "type": "paragraph",
-      "content": "This section displays search results for products only with live suggestions."
-    }
-  ]
+  "name": "Search",
+  "settings": []
 }
 {% endschema %}
