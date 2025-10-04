@@ -83,6 +83,48 @@
             "text": "Partnership",
             "url": "shopify://pages/simbye-partner"
           }
+        },
+        "esim_link_JGJ9T6": {
+          "type": "esim_link",
+          "settings": {
+            "text": "Simbye Blog",
+            "url": "shopify://pages/blog"
+          }
+        },
+        "esim_link_JqQfin": {
+          "type": "esim_link",
+          "settings": {
+            "text": "What is an eSIM",
+            "url": "shopify://blogs/blog/what-is-an-esim-the-clear-guide-to-embedded-sims-in-2025"
+          }
+        },
+        "esim_link_Mpk38m": {
+          "type": "esim_link",
+          "settings": {
+            "text": "eSIM Top Up",
+            "url": "shopify://pages/topup"
+          }
+        },
+        "esim_link_Gx7qim": {
+          "type": "esim_link",
+          "settings": {
+            "text": "How to Delete eSIM",
+            "url": "shopify://blogs/blog/how-to-delete-esim-from-iphone-a-simple-guide"
+          }
+        },
+        "esim_link_pJFqmT": {
+          "type": "esim_link",
+          "settings": {
+            "text": "How to Use eSIM",
+            "url": "shopify://pages/how-it-works"
+          }
+        },
+        "esim_link_mQddRC": {
+          "type": "esim_link",
+          "settings": {
+            "text": "What is an eSIM?",
+            "url": ""
+          }
         }
       },
       "block_order": [
@@ -95,7 +137,13 @@
         "destination_link_zFnNf4",
         "company_link_3bVJV8",
         "company_link_8EaXmV",
-        "company_link_tgRkwW"
+        "company_link_tgRkwW",
+        "esim_link_JGJ9T6",
+        "esim_link_JqQfin",
+        "esim_link_Mpk38m",
+        "esim_link_Gx7qim",
+        "esim_link_pJFqmT",
+        "esim_link_mQddRC"
       ],
       "settings": {
         "app_store_url": "",
