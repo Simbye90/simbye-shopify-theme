@@ -14,7 +14,7 @@
       "custom_css": [],
       "settings": {
         "show_compare_price": true,
-        "price_increase_percent": 0
+        "price_increase_percent": 25
       }
     },
     "product_info_tabs_jTcRT8": {
