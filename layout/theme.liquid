@@ -43,6 +43,7 @@
   {% render 'meta-tags' %}
   
   <!-- Favicons -->
+  <link rel="icon" type="image/webp" sizes="192x192" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
   <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | img_url: '32x32' }}">
   <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
   
@@ -398,8 +399,6 @@
 </head>
 
 <body class="template-{{ request.page_type }}{% if request.locale.iso_code == 'ar' %} rtl-layout{% endif %}">
-  
-
   
   <!-- Header Group -->
   {% sections 'header-group' %}
