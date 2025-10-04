@@ -46,16 +46,18 @@
 {% endif %}
 
 <!-- ===== HREFLANG TAGS (MULTI-LANGUAGE SEO) ===== -->
-{% if localization.available_languages.size > 1 %}
-  {% for language in localization.available_languages %}
+{% if shop.published_locales.size > 1 %}
+  {% assign base_path = request.path | remove_first: request.locale.root_url %}
+  {% for locale in shop.published_locales %}
     <link rel="alternate" 
-          hreflang="{{ language.iso_code }}" 
-          href="{{ canonical_url | replace: request.locale.root_url, language.root_url }}">
+          hreflang="{{ locale.iso_code }}" 
+          href="{{ shop.url }}{{ locale.root_url }}{{ base_path }}">
   {% endfor %}
   
+  {% comment %} x-default points to primary locale {% endcomment %}
   <link rel="alternate" 
         hreflang="x-default" 
-        href="{{ canonical_url | replace: request.locale.root_url, '/en' }}">
+        href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ base_path }}">
 {% endif %}
 
 <!-- ===== OPEN GRAPH TAGS ===== -->
