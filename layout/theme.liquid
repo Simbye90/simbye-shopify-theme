@@ -1,23 +1,298 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}">
-  <head>
-    {% # Inlined CSS Variables %}
-    {% render 'css-variables' %}
+<html lang="{{ request.locale.iso_code }}" dir="ltr">
+<head>
+  <!-- ========================================
+       META TAGS & SEO
+       ======================================== -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="7b_1zieYW2EKr0VNKoB_OvPsHTrpvjJ-MovSdnsfUZQ">
+  <meta name="format-detection" content="telephone=no">
+  
+  <!-- Preconnect to CDNs -->
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616" type="image/webp">
+  <link rel="preload" href="{{ 'critical.css' | asset_url }}" as="style">
+  
+  <!-- Critical CSS -->
+  {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+  
+  <!-- Meta Tags Snippet (includes hreflang, OG, Twitter, AI tags) -->
+  {% render 'meta-tags' %}
+  
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | img_url: '32x32' }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
+  
+  <!-- /index.html Redirect Fix -->
+  {% if request.path == '/index.html' %}
+    <meta http-equiv="refresh" content="0;url={{ shop.url }}/">
+    <link rel="canonical" href="{{ shop.url }}/">
+    <meta name="robots" content="noindex, follow">
+    <script>window.location.replace('{{ shop.url }}/');</script>
+  {% endif %}
+  
+  <!-- ========================================
+       STRUCTURED DATA / SCHEMA.ORG
+       ======================================== -->
+  
+  <!-- 1. Organization Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Simbye",
+    "url": "{{ shop.url }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp"
+    },
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61557685794131",
+      "https://www.instagram.com/simbyecom/",
+      "https://www.tiktok.com/@simbye.com",
+      "https://www.youtube.com/@Simbye.",
+      "https://twitter.com/simbyecom"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+19701028954",
+      "contactType": "customer service",
+      "areaServed": "Worldwide",
+      "availableLanguage": ["English", "German", "French", "Spanish", "Polish", "Dutch", "Turkish"]
+    }
+  }
+  </script>
+  
+  <!-- 2. WebSite Schema with Sitelinks SearchBox -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Simbye",
+    "alternateName": "Simbye eSIM",
+    "url": "{{ shop.url }}",
+    "inLanguage": ["en", "de", "es", "fr", "tr", "nl", "pl"],
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "{{ shop.url }}/search?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  
+  <!-- 3. Breadcrumbs Schema -->
+  {% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{ shop.url }}"
+      }
+      {% if request.page_type == 'product' %}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Products",
+        "item": "{{ shop.url }}/collections/all"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ product.title | escape }}",
+        "item": "{{ shop.url }}{{ product.url }}"
+      }
+      {% elsif request.page_type == 'collection' %}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ collection.title | escape }}",
+        "item": "{{ shop.url }}{{ collection.url }}"
+      }
+      {% elsif request.page_type == 'page' %}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ page.title | escape }}",
+        "item": "{{ shop.url }}{{ page.url }}"
+      }
+      {% elsif request.page_type == 'article' %}
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "{{ blog.title | escape }}",
+        "item": "{{ shop.url }}{{ blog.url }}"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "{{ article.title | escape }}",
+        "item": "{{ shop.url }}{{ article.url }}"
+      }
+      {% endif %}
+    ]
+  }
+  </script>
+  {% endunless %}
+  
+  <!-- 4. Product Schema (Enhanced with Reviews) -->
+  {% if request.page_type == 'product' %}
+  {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
+  {% assign rating_count = product.metafields.custom.rating_count | plus: 0 %}
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "{{ product.title | escape }}",
+    "description": "{{ product.description | strip_html | truncatewords: 50 | escape }}",
+    "brand": {
+      "@type": "Brand",
+      "name": "{{ product.vendor | default: 'Simbye' | escape }}"
+    },
+    "category": "Electronics > Communications > Mobile Phone Accessories > eSIM",
+    {% if product.sku != blank %}
+    "sku": "{{ product.sku | escape }}",
+    "productID": "{{ product.id }}",
+    "mpn": "{{ product.sku | escape }}",
+    {% else %}
+    "productID": "{{ product.id }}",
+    {% endif %}
+    "image": [
+      {% for image in product.images limit: 5 %}
+        "{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ],
+    "offers": {
+      "@type": "Offer",
+      "url": "{{ shop.url }}{{ product.url }}",
+      "priceCurrency": "{{ cart.currency.iso_code }}",
+      "price": "{{ product.price | money_without_currency | replace: ',', '.' }}",
+      "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+      "seller": {
+        "@type": "Organization",
+        "name": "Simbye"
+      },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "0",
+          "currency": "EUR"
+        },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": {
+            "@type": "QuantitativeValue",
+            "minValue": 0,
+            "maxValue": 0,
+            "unitCode": "MIN"
+          }
+        }
+      }
+    },
+    "hasMerchantReturnPolicy": {
+      "@type": "MerchantReturnPolicy",
+      "applicableCountry": ["DE","AT","CH","US","GB","FR","IT","ES","NL","PL","TR"],
+      "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+      "merchantReturnDays": 30,
+      "returnMethod": "https://schema.org/ReturnByMail",
+      "returnFees": "https://schema.org/FreeReturn"
+    }
+    {% if rating_value and rating_count > 0 %}
+    ,"aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ rating_value }},
+      "ratingCount": {{ rating_count }},
+      "bestRating": 5,
+      "worstRating": 1
+    }
+    {% endif %}
+  }
+  </script>
+  {% endif %}
+  
+  <!-- ========================================
+       SHOPIFY REQUIRED
+       ======================================== -->
+  {{ content_for_header }}
+  
+  <!-- ========================================
+       CUSTOM STYLES
+       ======================================== -->
+  {% render 'css-variables' %}
+  
+  <!-- jQuery (loaded first, non-deferred) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  
+  <!-- Dark Mode Default Script (runs IMMEDIATELY before body) -->
+  <script>
+    (function() {
+      // Set Dark Mode as DEFAULT for new visitors
+      const savedTheme = localStorage.getItem('theme');
+      const theme = savedTheme || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      
+      // Save dark mode as default if no preference exists
+      if (!savedTheme) {
+        try {
+          localStorage.setItem('theme', 'dark');
+        } catch(e) {
+          console.warn('localStorage not available');
+        }
+      }
+    })();
+  </script>
+  
+  <!-- Remove no-js class -->
+  <script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+  </script>
+</head>
 
-    {% # Load and preload the critical CSS %}
-    {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
-
-    {% # Social, title, etc. %}
-    {% render 'meta-tags' %}
-
-    {{ content_for_header }}
-  </head>
-
-  <body>
-    {% sections 'header-group' %}
-
+<body class="template-{{ request.page_type }}">
+  
+  <!-- Skip to Content Link (Accessibility) -->
+  <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+    Skip to content
+  </a>
+  
+  <!-- Header Group -->
+  {% sections 'header-group' %}
+  
+  <!-- Main Content -->
+  <main id="MainContent" class="wrapper-body content-for-layout" role="main" tabindex="-1">
     {{ content_for_layout }}
-
-    {% sections 'footer-group' %}
-  </body>
+  </main>
+  
+  <!-- Footer Group -->
+  {% sections 'footer-group' %}
+  
+  <!-- Accessibility Helper -->
+  <ul hidden>
+    <li id="a11y-refresh-page-message">The page will refresh on selection</li>
+  </ul>
+  
+  <!-- ========================================
+       SCRIPTS (Deferred for Performance)
+       ======================================== -->
+  {% if template.directory == 'customers' %}
+    <script defer src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+  {% endif %}
+  
+</body>
 </html>
