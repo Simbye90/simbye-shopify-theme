@@ -87,7 +87,7 @@
        STRUCTURED DATA / SCHEMA.ORG
        ======================================== -->
   
-  <!-- 1. Organization Schema (ALL PAGES) -->
+  <!-- 1. Organization Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -115,7 +115,7 @@
   }
   </script>
   
-  <!-- 2. WebSite Schema with Sitelinks SearchBox (ALL PAGES) -->
+  <!-- 2. WebSite Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -135,7 +135,7 @@
   }
   </script>
   
-  <!-- 3. FAQ Schema (NON-PRODUCT PAGES ONLY) -->
+  <!-- 3. FAQ Schema -->
   {% unless request.page_type == 'product' %}
   <script type="application/ld+json">
   {
@@ -179,7 +179,7 @@
   </script>
   {% endunless %}
   
-  <!-- 4. Breadcrumbs Schema (EXCLUDE HOMEPAGE, CART, COLLECTION LIST) -->
+  <!-- 4. Breadcrumbs Schema -->
   {% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
   <script type="application/ld+json">
   {
@@ -236,7 +236,7 @@
   </script>
   {% endunless %}
   
-  <!-- 5. Product Schema (PRODUCT PAGES ONLY - ZERO WARNINGS) -->
+  <!-- 5. Product Schema (ZERO WARNINGS VERSION) -->
   {% if request.page_type == 'product' %}
   
   {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
@@ -424,7 +424,7 @@
           crossorigin="anonymous"
           referrerpolicy="no-referrer"></script>
   
-  <!-- Dark Mode Default Script (runs IMMEDIATELY) -->
+  <!-- Dark Mode Default Script -->
   <script>
     (function() {
       var saved = null;
@@ -461,9 +461,7 @@
     <li id="a11y-refresh-page-message">The page will refresh on selection</li>
   </ul>
   
-  <!-- ========================================
-       SCRIPTS (Deferred for Performance)
-       ======================================== -->
+  <!-- Scripts -->
   {% if template.directory == 'customers' %}
     <script defer src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
   {% endif %}
