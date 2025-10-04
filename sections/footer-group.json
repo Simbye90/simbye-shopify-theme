@@ -158,13 +158,13 @@
         "youtube_url": "",
         "linkedin_url": "",
         "reddit_url": "",
-        "privacy_url": "shopify://policies/privacy-policy",
+        "privacy_url": "shopify://pages/privacy-policy",
         "privacy_text": "",
         "terms_url": "",
         "terms_text": "",
         "cookie_url": "",
         "cookie_text": "Cookie Preferencsdssde",
-        "copyright_text": "All rights reservedsdsd.",
+        "copyright_text": "All rights reserved",
         "show_payment": true,
         "payment_label": "Secure payments:"
       }
