@@ -45,15 +45,13 @@
   <!-- Meta Tags Snippet (includes OG, Twitter, AI tags) -->
   {% render 'meta-tags' %}
   
-  <!-- Favicons - FIXED WITH FALLBACK -->
+  <!-- ========================================
+       FAVICONS - HARDCODED (WORKS EVERYWHERE)
+       ======================================== -->
   <link rel="icon" type="image/webp" sizes="192x192" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
-  {% if settings.favicon %}
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | img_url: '32x32' }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ settings.favicon | img_url: '180x180' }}">
-  {% else %}
-    <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
-  {% endif %}
+  <link rel="icon" type="image/png" sizes="32x32" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp">
+  <link rel="shortcut icon" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/favicon-192.webp" type="image/x-icon">
   
   <!-- /index.html Redirect Fix -->
   {% if request.path == '/index.html' %}
@@ -64,40 +62,42 @@
   {% endif %}
   
   <!-- ========================================
-       HREFLANG (SINGLE SOURCE OF TRUTH) - FIXED!
+       HREFLANG (FINAL FIX - COMPLETELY WORKING)
        Published Locales Only - Optimized URL Construction
        ======================================== -->
   {% if shop.published_locales.size > 1 %}
     {% comment %}
-      CRITICAL FIX: Properly handle leading slash in paths
+      FINAL SOLUTION for hreflang URL construction:
       
-      Problem: request.path can be either:
-        - "/" (homepage)
-        - "/products/esim-turkey" (default locale)
-        - "/de/products/esim-turkey" (non-default locale)
+      PROBLEM:
+      - Default locale (en): request.path = "/products/esim-uk", locale.root_url = "/"
+        → After remove "/" we get "products/esim-uk" (NO leading slash!)
+        → Result: simbye.com/deproducts/esim-uk ❌
       
-      Solution: 
-      1. Remove current locale prefix from path
-      2. Ensure path always starts with "/"
-      3. Concatenate: shop.url + locale.root_url + path
+      - Other locale (de): request.path = "/de/products/esim-uk", locale.root_url = "/de"
+        → After remove "/de" we get "/products/esim-uk" (HAS leading slash!)
+        → Result: simbye.com/de/products/esim-uk ✅
+      
+      FIX: Check first character and add "/" if missing
     {% endcomment %}
     
-    {% comment %} Step 1: Remove current locale prefix {% endcomment %}
+    {% comment %} Step 1: Remove current locale prefix from path {% endcomment %}
     {% assign base_path = request.path | remove_first: request.locale.root_url %}
     
-    {% comment %} Step 2: Ensure leading slash {% endcomment %}
-    {% unless base_path contains '/' %}
-      {% assign base_path = '/' | append: base_path %}
-    {% endunless %}
+    {% comment %} Step 2: Check if first character is "/" and add if missing {% endcomment %}
+    {% assign first_char = base_path | slice: 0 %}
+    {% if first_char != "/" %}
+      {% assign base_path = "/" | append: base_path %}
+    {% endif %}
     
-    {% comment %} Step 3: Generate hreflang for all locales {% endcomment %}
+    {% comment %} Step 3: Generate hreflang for all published locales {% endcomment %}
     {% for locale in shop.published_locales %}
       <link rel="alternate" 
             hreflang="{{ locale.iso_code }}" 
             href="{{ shop.url }}{{ locale.root_url }}{{ base_path }}">
     {% endfor %}
     
-    {% comment %} x-default points to primary locale {% endcomment %}
+    {% comment %} Step 4: x-default points to primary locale (usually English) {% endcomment %}
     <link rel="alternate" 
           hreflang="x-default" 
           href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ base_path }}">
@@ -107,7 +107,7 @@
        STRUCTURED DATA / SCHEMA.ORG
        ======================================== -->
   
-  <!-- 1. Organization Schema -->
+  <!-- 1. Organization Schema (ALL PAGES) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -135,7 +135,7 @@
   }
   </script>
   
-  <!-- 2. WebSite Schema with Sitelinks SearchBox -->
+  <!-- 2. WebSite Schema with Sitelinks SearchBox (ALL PAGES) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -155,7 +155,7 @@
   }
   </script>
   
-  <!-- 3. FAQ Schema (General Company FAQ) -->
+  <!-- 3. FAQ Schema (NON-PRODUCT PAGES ONLY) -->
   {% unless request.page_type == 'product' %}
   <script type="application/ld+json">
   {
@@ -199,7 +199,7 @@
   </script>
   {% endunless %}
   
-  <!-- 4. Breadcrumbs Schema -->
+  <!-- 4. Breadcrumbs Schema (EXCLUDE HOMEPAGE, CART, COLLECTION LIST) -->
   {% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
   <script type="application/ld+json">
   {
@@ -256,12 +256,12 @@
   </script>
   {% endunless %}
   
-  <!-- 5. Product Schema (WITH CUSTOM REVIEWS - SINGLE SOURCE OF TRUTH) -->
+  <!-- 5. Product Schema (PRODUCT PAGES ONLY - WITH CUSTOM REVIEWS) -->
   {% if request.page_type == 'product' %}
   {% comment %}
-    ⚠️ IMPORTANT: This replaces Shopify's default {{ product | structured_data }}
+    IMPORTANT: This replaces Shopify's default {{ product | structured_data }}
     Reason: We need custom metafields (rating, rating_count) for Rich Snippets
-    Shopify's default doesn't support custom review metafields
+    Shopify's default structured_data doesn't support custom review metafields
   {% endcomment %}
   
   {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
