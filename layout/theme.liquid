@@ -90,6 +90,58 @@
   }
   </script>
   
+  <!-- 3. FAQPage Schema for Homepage (AI + Featured Snippets) -->
+  {% if template == 'index' %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an eSIM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An eSIM (embedded SIM) is a digital SIM card built into your device. No physical card needed - perfect for international travel. Supported by iPhone XS and newer, Samsung Galaxy S20+, Google Pixel 3+ and many modern smartphones."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast is eSIM delivery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Instant delivery within 2 minutes after purchase. You receive the QR code via email and can activate immediately. No waiting, no shipping."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which countries does Simbye eSIM cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "190+ countries worldwide including USA, Turkey, Germany, Spain, France, UK, Italy, Greece, Thailand, Japan and more. Full 4G/5G coverage in most destinations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I keep my WhatsApp number with eSIM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. WhatsApp is linked to your phone number, not your SIM card. You can use Simbye eSIM for data while keeping your original number for WhatsApp, calls and SMS."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Simbye eSIM cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plans start from 0 EUR. Prices vary by country and data amount. No contracts, no hidden fees. Pay only for what you need."
+        }
+      }
+    ]
+  }
+  </script>
+  {% endif %}
+  
   <!-- 3. Breadcrumbs Schema -->
   {% unless template == 'index' or template == 'cart' or template == 'list-collections' %}
   <script type="application/ld+json">
