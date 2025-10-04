@@ -49,15 +49,17 @@
 {% if shop.published_locales.size > 1 %}
   {% assign base_path = request.path | remove_first: request.locale.root_url %}
   {% for locale in shop.published_locales %}
+    {% assign locale_url = locale.root_url | append: base_path %}
     <link rel="alternate" 
           hreflang="{{ locale.iso_code }}" 
-          href="{{ shop.url }}{{ locale.root_url }}{{ base_path }}">
+          href="{{ shop.url }}{{ locale_url }}">
   {% endfor %}
   
   {% comment %} x-default points to primary locale {% endcomment %}
+  {% assign default_url = shop.primary_locale.root_url | append: base_path %}
   <link rel="alternate" 
         hreflang="x-default" 
-        href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ base_path }}">
+        href="{{ shop.url }}{{ default_url }}">
 {% endif %}
 
 <!-- ===== OPEN GRAPH TAGS ===== -->
