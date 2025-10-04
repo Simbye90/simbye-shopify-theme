@@ -45,20 +45,24 @@
   {% endif %}
 {% endif %}
 
-<!-- ===== HREFLANG TAGS (MULTI-LANGUAGE SEO) ===== -->
-{% if shop.published_locales.size > 1 %}
-  {% assign base_path = request.path | remove_first: request.locale.root_url %}
-  {% for locale in shop.published_locales %}
-    <link rel="alternate" 
-          hreflang="{{ locale.iso_code }}" 
-          href="{{ shop.url }}{{ locale.root_url }}{{ base_path }}">
-  {% endfor %}
+<!-- ===== HREFLANG REMOVED - NOW IN theme.liquid ONLY ===== -->
+{% comment %}
+  ⚠️ IMPORTANT: hreflang tags are now ONLY in layout/theme.liquid to prevent duplicates.
+  This prevents Google Search Console warnings and international SEO issues.
   
-  {% comment %} x-default points to primary locale {% endcomment %}
-  <link rel="alternate" 
-        hreflang="x-default" 
-        href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ base_path }}">
-{% endif %}
+  Previous code was:
+  {% if shop.published_locales.size > 1 %}
+    {% assign base_path = request.path | remove_first: request.locale.root_url %}
+    {% for locale in shop.published_locales %}
+      <link rel="alternate" hreflang="{{ locale.iso_code }}" 
+            href="{{ shop.url }}{{ locale.root_url }}{{ base_path }}">
+    {% endfor %}
+    <link rel="alternate" hreflang="x-default" 
+          href="{{ shop.url }}{{ shop.primary_locale.root_url }}{{ base_path }}">
+  {% endif %}
+  
+  ❌ REMOVED to prevent duplicate hreflang tags
+{% endcomment %}
 
 <!-- ===== OPEN GRAPH TAGS ===== -->
 {%- liquid
@@ -82,6 +86,11 @@
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | escape }}">
 <meta property="og:locale" content="{{ request.locale.iso_code | replace: '-', '_' }}">
+
+<!-- RTL Support for Arabic -->
+{% if request.locale.iso_code == 'ar' %}
+  <meta property="og:locale:direction" content="rtl">
+{% endif %}
 
 {% if localization.available_languages.size > 1 %}
   {% for language in localization.available_languages %}
@@ -114,9 +123,19 @@
   
   <meta name="keywords" content="eSIM {{ product.title | escape }}, mobile data, travel internet, {{ localization.country.name }}, {{ request.locale.iso_code }}">
   
-  <script type="application/ld+json">
-    {{ product | structured_data }}
-  </script>
+  {% comment %}
+    ⚠️ REMOVED: {{ product | structured_data }}
+    
+    Reason: Custom Product Schema with reviews is in theme.liquid
+    Shopify's default structured_data doesn't support custom metafields (rating, rating_count)
+    
+    Previous code was:
+    <script type="application/ld+json">
+      {{ product | structured_data }}
+    </script>
+    
+    ❌ REMOVED to prevent duplicate Product Schema and enable custom reviews
+  {% endcomment %}
 {%- endif -%}
 
 <!-- ===== ARTICLE-SPECIFIC TAGS ===== -->
@@ -145,10 +164,20 @@
 <meta name="author" content="Simbye">
 <meta name="publisher" content="Simbye">
 
-<!-- ===== ROBOTS & INDEXING ===== -->
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
-<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large">
+<!-- ===== ROBOTS REMOVED - NOW IN theme.liquid ONLY ===== -->
+{% comment %}
+  ⚠️ IMPORTANT: Robots meta tags are now ONLY in layout/theme.liquid with intelligent logic.
+  This ensures Cart/Search/Account pages are correctly set to noindex.
+  Previous implementation here was always "index, follow" which was wrong.
+  
+  Previous code was:
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large">
+  
+  ❌ REMOVED to prevent duplicate and incorrect robots directives
+  ✅ Now handled intelligently in theme.liquid based on page_type
+{% endcomment %}
 
 <!-- ===== SOCIAL PROFILES ===== -->
 <link rel="me" href="https://twitter.com/simbyecom">
