@@ -144,8 +144,18 @@
         "faq_item_P4z6pt": {
           "type": "faq_item",
           "settings": {
-            "question": "Can I reuse my eSIM or top it up?",
-            "answer": "<p>Yes! Simbye eSIMs are fully rechargeable. You can top up your data anytime through your account dashboard. No need to buy a new eSIM - just add more data when needed. Your eSIM stays active as long as you use it at least once every 180 days.</p>",
+            "question": "Does my Simbye eSIM come with a phone number?",
+            "answer": "<p>No, Simbye eSIM is a data-only package without a phone number. However, you can keep using your original number for WhatsApp, iMessage, and all internet-based calls through apps like WhatsApp, Telegram, or FaceTime. Your contacts won't notice any difference!</p>",
+            "show_cta": false,
+            "cta_text": "",
+            "cta_link": ""
+          }
+        },
+        "faq_item_tpdcDh": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do I need to activate data roaming on my device?",
+            "answer": "<p>Yes, you need to enable data roaming in your device settings for your Simbye eSIM to work properly. Don't worry – with Simbye you won't face any roaming charges! Simply go to your phone's settings, select your Simbye eSIM, and turn on data roaming. You'll be connected instantly without extra fees.</p>",
             "show_cta": false,
             "cta_text": "Learn More",
             "cta_link": ""
@@ -157,8 +167,8 @@
             "question": "What happens when my data runs out?",
             "answer": "<p>When your data is depleted, the eSIM simply stops working - no surprise charges or roaming fees! You'll receive notifications at 50%, 80%, and 95% usage. You can top up instantly through our app or website to continue using your eSIM.</p>",
             "show_cta": true,
-            "cta_text": "Learn More",
-            "cta_link": ""
+            "cta_text": "Top Up",
+            "cta_link": "shopify://pages/topup"
           }
         },
         "faq_item_rdtYVd": {
@@ -174,9 +184,9 @@
         "faq_item_8rc8p8": {
           "type": "faq_item",
           "settings": {
-            "question": "Can my phone usesdsd eSIM?",
-            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
-            "show_cta": true,
+            "question": "Can I keep my WhatsApp number?",
+            "answer": "<p>Yes, absolutely! Your WhatsApp number stays the same because it's linked to your original phone number, not your SIM card. With Simbye eSIM providing data, you can continue using WhatsApp with your existing number and contacts worldwide. Stay connected without changing a thing!</p>",
+            "show_cta": false,
             "cta_text": "Learn More",
             "cta_link": ""
           }
@@ -184,18 +194,18 @@
         "faq_item_XTR87W": {
           "type": "faq_item",
           "settings": {
-            "question": "Can my phone use eSIM?",
-            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
-            "show_cta": false,
-            "cta_text": "Learn More",
-            "cta_link": ""
+            "question": "How do I set up the eSIM on my device?",
+            "answer": "<p>Setting up your Simbye eSIM takes less than 60 seconds! After purchase, you'll receive a QR code via email. Simply scan the QR code with your phone camera, follow the on-screen prompts, and your eSIM activates instantly. For detailed step-by-step guides, check our installation tutorials for iPhone and Samsung devices.</p>",
+            "show_cta": true,
+            "cta_text": "Installation guides",
+            "cta_link": "shopify://pages/how-it-works"
           }
         },
         "faq_item_Rwd3m6": {
           "type": "faq_item",
           "settings": {
-            "question": "Can my phone use eSIM?",
-            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
+            "question": "When should I set up my eSIM?",
+            "answer": "<p>You need WiFi to install your eSIM, so we recommend setting it up shortly before your departure while you're still at home. Alternatively, you can wait until you arrive at your destination and connect to airport or hotel WiFi. Just remember – you'll need an internet connection for the initial setup, but after that, you're good to go!</p>",
             "show_cta": false,
             "cta_text": "Learn More",
             "cta_link": ""
@@ -204,8 +214,8 @@
         "faq_item_Vbw4b6": {
           "type": "faq_item",
           "settings": {
-            "question": "Can I use multiple eSIMs at the same time?",
-            "answer": "<p>Yes, most eSIM-compatible phones support multiple eSIM profiles. You can store 5-10 different eSIMs and switch between them as needed. However, typically only one eSIM can be active for data at a time (alongside your physical SIM).</p>",
+            "question": "Can I use my eSIM as a mobile hotspot?",
+            "answer": "<p>Yes! You can share your Simbye eSIM data connection with other devices using your phone's mobile hotspot feature. Simply enable hotspot in your device settings and connect your laptop, tablet, or other devices. Keep in mind that hotspot usage will count toward your data package limit.</p>",
             "show_cta": false,
             "cta_text": "Learn More",
             "cta_link": ""
@@ -214,7 +224,7 @@
         "faq_item_7KbyHA": {
           "type": "faq_item",
           "settings": {
-            "question": "Can my phone use eSIM?",
+            "question": "How many times can I use my eSIM?",
             "answer": "<p>Most modern smartphones from 2018 onwards support eSIM technology. This includes iPhone XS and newer, Samsung Galaxy S20 and newer, Google Pixel 3 and newer, and many more devices. You can check your device compatibility on our website.</p>",
             "show_cta": false,
             "cta_text": "Learn More",
@@ -225,7 +235,17 @@
           "type": "faq_item",
           "settings": {
             "question": "Is there any speed throttling?",
-            "answer": "<p>No throttling whatsoever! You get full 4G/5G speeds up to 1 Gbit/s depending on local network capabilities. We partner with premium tier-1 carriers to ensure you get the same speeds as local customers. Unlimited plans have no fair use policy.</p>",
+            "answer": "<p>No throttling on regular data plans – you get full 4G/5G speeds up to 1 Gbit/s depending on local network capabilities. We partner with premium tier-1 carriers so you enjoy the same speeds as locals. For unlimited plans, we apply a fair use policy: 2GB high-speed data per day, then reduced speeds until the next 24-hour cycle resets.</p>",
+            "show_cta": false,
+            "cta_text": "Learn More",
+            "cta_link": ""
+          }
+        },
+        "faq_item_ftzTTd": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Is Simbye the best eSIM provider?",
+            "answer": "<p>We believe so! Simbye offers the most affordable eSIM packages on the market starting from just $1, with coverage in 190+ countries and partnerships with 700+ premium network operators. We're the first eSIM provider with easy top-up functionality, 24/7 support, and instant activation. Try our free 100MB trial and experience the difference yourself!</p>",
             "show_cta": false,
             "cta_text": "Learn More",
             "cta_link": ""
@@ -235,7 +255,7 @@
           "type": "faq_item",
           "settings": {
             "question": "How can I check my data usage?",
-            "answer": "<p>Track your usage in real-time through: 1) Your phone's settings menu, 2) Our Simbye app with live statistics, 3) Email notifications at usage milestones, or 4) Your account dashboard on our website. You'll always know exactly how much data you have left.</p>",
+            "answer": "<p>You can track your data usage in three easy ways: log into your customer account to view your balance, use the link provided in your confirmation email, or visit our top-up page and enter your order number. You'll see your remaining data in real-time, so you always know when it's time to top up!</p>",
             "show_cta": false,
             "cta_text": "Learn More",
             "cta_link": ""
@@ -248,6 +268,7 @@
         "faq_item_dVVkHb",
         "faq_item_XJPNUW",
         "faq_item_P4z6pt",
+        "faq_item_tpdcDh",
         "faq_item_7CatEj",
         "faq_item_rdtYVd",
         "faq_item_8rc8p8",
@@ -256,6 +277,7 @@
         "faq_item_Vbw4b6",
         "faq_item_7KbyHA",
         "faq_item_TPE74Y",
+        "faq_item_ftzTTd",
         "faq_item_mh7WnM"
       ],
       "name": "FAQ Premium",
