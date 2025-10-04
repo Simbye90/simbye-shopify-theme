@@ -29,20 +29,20 @@
               "answer": "<p>The easiest way is to check your phone settings: On iPhone, go to Settings &gt; Cellular/Mobile Data &gt; Add eSIM. On Android, go to Settings &gt; Network & Internet &gt; SIM cards. If you see these options, your device supports eSIM. Alternatively, dial *#06# to see if an EID number appears. Check our full compatibility list for your device!</p>"
             }
           },
-          "faq_item_ECyDQd": {
-            "type": "faq_item",
-            "settings": {
-              "category": "usage",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
-            }
-          },
           "faq_item_Cm8JMf": {
             "type": "faq_item",
             "settings": {
               "category": "compatibility",
               "question": "Can I use eSIM and physical SIM at the same time?",
               "answer": "<p>Yes! Most modern smartphones support dual SIM functionality, allowing you to use your physical SIM and Simbye eSIM simultaneously. This means you can keep your home number active for calls and texts while using the eSIM for affordable mobile data abroad. Simply enable both SIMs in your phone settings and choose which one to use for data.</p>"
+            }
+          },
+          "faq_item_gWMheT": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "Can I transfer my eSIM to a new phone?",
+              "answer": "<p>No, eSIMs cannot be transferred between devices. Once installed and activated on one device, the eSIM is permanently linked to that phone. If you get a new device, you'll need to purchase a new eSIM. However, Simbye eSIMs are affordable and start from just $1, making it easy to get connected on any device!</p>"
             }
           },
           "faq_item_e88F9M": {
@@ -57,27 +57,180 @@
             "type": "faq_item",
             "settings": {
               "category": "purchase",
+              "question": "How do I purchase a Simbye eSIM?",
+              "answer": "<p>Buying a Simbye eSIM is quick and easy! Simply select your destination country, choose your preferred data package, and complete the checkout. You'll instantly receive your eSIM QR code via email and in your customer account. The entire process takes less than 2 minutes. Shop now and get connected!</p>"
+            }
+          },
+          "faq_item_ECyDQd": {
+            "type": "faq_item",
+            "settings": {
+              "category": "purchase",
+              "question": "When will I receive my eSIM after purchase?",
+              "answer": "<p>Instantly! Your eSIM QR code is delivered immediately via email after payment confirmation. You can also access it anytime in your customer account or on our top-up page using your order number. No waiting, no shipping delays – just instant digital delivery so you can start installing right away!</p>"
+            }
+          },
+          "faq_item_GpRKU6": {
+            "type": "faq_item",
+            "settings": {
+              "category": "purchase",
+              "question": "Can I cancel my order or get a refund?",
+              "answer": "<p>Yes, you can request a refund if your eSIM hasn't been installed or activated yet. Once the eSIM is scanned and activated, refunds are no longer possible as the service has been used. For refund requests or questions, contact our 24/7 support team who will assist you promptly.</p>"
+            }
+          },
+          "faq_item_6rhExT": {
+            "type": "faq_item",
+            "settings": {
+              "category": "purchase",
+              "question": "What data plans do you offer?",
+              "answer": "<p>We offer flexible prepaid data plans ranging from 1GB to unlimited options with validity periods from 7 to 90 days. Whether you need light browsing or heavy streaming, we have packages for every travel style and budget. Plans start from just $1, and you can easily top up when needed. Browse all plans now!</p>"
+            }
+          },
+          "faq_item_8FbBUB": {
+            "type": "faq_item",
+            "settings": {
+              "category": "purchase",
+              "question": "Do you offer unlimited data plans?",
+              "answer": "<p>Yes! We offer unlimited data eSIM plans for many popular destinations. Unlimited plans include a fair use policy of 2GB high-speed data per day, after which speeds are reduced until the next 24-hour cycle. This ensures stable network performance for all users while giving you worry-free connectivity. Check availability for your destination!</p>"
+            }
+          },
+          "faq_item_hNLh6K": {
+            "type": "faq_item",
+            "settings": {
+              "category": "purchase",
+              "question": "How long are the data plans valid?",
+              "answer": "<p>Our data plans are valid from 7 to 90 days depending on the package you choose. Your plan validity starts only when you arrive at your destination and the eSIM connects to the local network. Before activation, your eSIM remains valid for 180 days, giving you plenty of time to plan your trip!</p>"
+            }
+          },
+          "faq_item_eXbQ7f": {
+            "type": "faq_item",
+            "settings": {
+              "category": "activation",
+              "question": "How do I activate my Simbye eSIM?",
+              "answer": "<p>Your Simbye eSIM activates automatically when you arrive at your destination country and turn on mobile data. Simply install the eSIM before your trip, enable data roaming, and it will connect to the local network as soon as you land. No manual activation needed – just instant connectivity!</p>"
+            }
+          },
+          "faq_item_Ma8UEh": {
+            "type": "faq_item",
+            "settings": {
+              "category": "activation",
+              "question": "When should I activate my eSIM?",
+              "answer": "<p>Your eSIM only activates when you arrive at your destination and it connects to the local network. You can install it anytime before departure using WiFi, but your data plan won't start counting down until you're actually in the country. Install early for peace of mind!</p>"
+            }
+          },
+          "faq_item_fFQKrk": {
+            "type": "faq_item",
+            "settings": {
+              "category": "activation",
+              "question": "Can I install my eSIM before traveling?",
+              "answer": "<p>Yes, absolutely! We recommend installing your eSIM at home before departure while you have stable WiFi. Your data plan won't activate until you arrive at your destination, so there's no risk of wasting data. Installation takes less than 60 seconds and saves you hassle at the airport!</p>"
+            }
+          },
+          "faq_item_iHHtGa": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "Do I need to enable data roaming?",
+              "answer": "<p>Yes, you must enable data roaming in your device settings for your Simbye eSIM to work. Don't worry – you won't face any roaming charges! Simply go to your phone settings, select your Simbye eSIM line, and turn on data roaming. You'll be connected instantly without extra fees.</p>"
+            }
+          },
+          "faq_item_PARicj": {
+            "type": "faq_item",
+            "settings": {
+              "category": "activation",
+              "question": "How long does eSIM installation take?",
+              "answer": "<p>Less than 60 seconds! Simply connect to WiFi, scan your QR code, and follow the quick on-screen prompts. The eSIM installs instantly on your device. Even if you're not tech-savvy, our step-by-step guides for iPhone and Android make it super easy. Get connected in under a minute!</p>"
+            }
+          },
+          "faq_item_N4wQhe": {
+            "type": "faq_item",
+            "settings": {
+              "category": "activation",
+              "question": "What if the QR code doesn't scan?",
+              "answer": "<p>If your camera can't scan the QR code, you can install the eSIM manually using the activation code. Simply go to your phone's eSIM settings and select \"Enter Details Manually.\" Then input the SM-DP+ address and activation code provided in your email. Check our detailed manual installation guide for step-by-step help!</p>"
+            }
+          },
+          "faq_item_mbJgtT": {
+            "type": "faq_item",
+            "settings": {
+              "category": "activation",
+              "question": "Can I delete my eSIM after use?",
+              "answer": "<p>Yes! Once you've used all your data or your plan expires, you can easily remove the eSIM from your device. On iPhone, go to Settings &gt; Cellular &gt; [eSIM] &gt; Remove. On Android, go to Settings &gt; Network & Internet &gt; SIMs &gt; [eSIM] &gt; Delete. However, keeping it installed doesn't harm your device if you plan to top up later!</p>"
+            }
+          },
+          "faq_item_GbrcJm": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
               "question": "What is eSIM?",
               "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
             }
           },
-          "faq_item_gWMheT": {
+          "faq_item_iWbCBK": {
             "type": "faq_item",
             "settings": {
               "category": "compatibility",
-              "question": "Can I transfer my eSIM to a new phone?",
-              "answer": "<p>No, eSIMs cannot be transferred between devices. Once installed and activated on one device, the eSIM is permanently linked to that phone. If you get a new device, you'll need to purchase a new eSIM. However, Simbye eSIMs are affordable and start from just $1, making it easy to get connected on any device!</p>"
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+            }
+          },
+          "faq_item_X87wfm": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+            }
+          },
+          "faq_item_ghAcXj": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+            }
+          },
+          "faq_item_HiDrR9": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+            }
+          },
+          "faq_item_efckWp": {
+            "type": "faq_item",
+            "settings": {
+              "category": "compatibility",
+              "question": "What is eSIM?",
+              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
             }
           }
         },
         "block_order": [
           "faq_item_TgHTYA",
           "faq_item_KBNtb9",
-          "faq_item_ECyDQd",
           "faq_item_Cm8JMf",
+          "faq_item_gWMheT",
           "faq_item_e88F9M",
           "faq_item_DCCBix",
-          "faq_item_gWMheT"
+          "faq_item_ECyDQd",
+          "faq_item_GpRKU6",
+          "faq_item_6rhExT",
+          "faq_item_8FbBUB",
+          "faq_item_hNLh6K",
+          "faq_item_eXbQ7f",
+          "faq_item_Ma8UEh",
+          "faq_item_fFQKrk",
+          "faq_item_iHHtGa",
+          "faq_item_PARicj",
+          "faq_item_N4wQhe",
+          "faq_item_mbJgtT",
+          "faq_item_GbrcJm",
+          "faq_item_iWbCBK",
+          "faq_item_X87wfm",
+          "faq_item_ghAcXj",
+          "faq_item_HiDrR9",
+          "faq_item_efckWp"
         ],
         "settings": {
           "title": "Frequently Asked Questions",
