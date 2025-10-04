@@ -88,7 +88,7 @@
           "type": "esim_link",
           "settings": {
             "text": "Simbye Blog",
-            "url": "shopify://pages/blog"
+            "url": "shopify://blogs/blog"
           }
         },
         "esim_link_JqQfin": {
