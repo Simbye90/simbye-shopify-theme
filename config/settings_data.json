@@ -16,7 +16,7 @@
           "faq_item_QYxjfj": {
             "type": "faq_item",
             "settings": {
-              "category": "purchase",
+              "category": "activation",
               "question": "What is eSIM?",
               "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
             }
@@ -28,7 +28,14 @@
         "settings": {
           "title": "Frequently Asked Questions",
           "subtitle": "Find answers to common questions about our eSIM service",
-          "search_placeholder": "Search for answers..."
+          "search_placeholder": "Search for answers...",
+          "cat_compatibility": "Compatibility & Requirements",
+          "cat_purchase": "Purchase & Plans",
+          "cat_activation": "Activation & Setup",
+          "cat_usage": "Using Your eSIM",
+          "cat_troubleshooting": "Troubleshooting",
+          "no_results_title": "No results found",
+          "no_results_text": "Try different keywords or browse by category"
         }
       }
     },
