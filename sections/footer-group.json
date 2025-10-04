@@ -153,6 +153,9 @@
         "esim_link_mQddRC",
         "company_link_PK7XNa"
       ],
+      "custom_css": [
+        ".footer-top {display: none !important; }"
+      ],
       "settings": {
         "app_store_url": "",
         "google_play_url": "",
