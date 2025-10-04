@@ -207,7 +207,7 @@
     "fair_use_text": "1 GB dziennie przy wysokiej prędkości. Po 1 GB prędkość zostaje zmniejszona do 128 kbps. Dane resetują się codziennie o północy (czas lokalny).",
     "your_selection": "Twój wybór",
     "network": "Sieć",
-    "activation": "Aktywacja",
+    "activation": "Ważność",
     "instant": "Natychmiast",
     "total": "Razem",
     "buy_now": "Kup teraz",
@@ -268,7 +268,7 @@
     "yes": "Tak",
     "no": "Nie",
     "days": "Dni",
-    "instant": "Natychmiast po zakupie"
+    "instant": "180 Dni"
   },
   "apps": {
     "title_part1": "Mobilny internet dla",
