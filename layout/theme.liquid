@@ -66,38 +66,18 @@
        Published Locales Only - Correct URL Construction
        ======================================== -->
   {% if shop.published_locales.size > 1 %}
-    {% comment %}
-      SHOPIFY PRIMARY LOCALE PROBLEM & SOLUTION:
-      
-      Shopify's Liquid has a design flaw:
-      - Primary locale (English): locale.root_url = "/"
-      - Other locales (German): locale.root_url = "/de"
-      
-      If we do: shop.url + locale.root_url + path
-      - Primary: simbye.com + "/" + "/products/esim" = "simbye.com//products/esim" ❌
-      - German: simbye.com + "/de" + "/products/esim" = "simbye.com/de/products/esim" ✅
-      
-      SOLUTION: Only add locale.root_url if locale is NOT primary
-      Source: Shopify Community discussions on locale URL handling
-    {% endcomment %}
-    
-    {% comment %} Step 1: Get path without current locale prefix {% endcomment %}
     {% assign base_path = request.path | remove_first: request.locale.root_url %}
-    
-    {% comment %} Step 2: Ensure base_path starts with "/" {% endcomment %}
     {% assign first_char = base_path | slice: 0 %}
     {% unless first_char == "/" %}
       {% assign base_path = "/" | append: base_path %}
     {% endunless %}
     
-    {% comment %} Step 3: Generate hreflang for all published locales {% endcomment %}
     {% for locale in shop.published_locales %}
       <link rel="alternate" 
             hreflang="{{ locale.iso_code }}" 
             href="{{ shop.url }}{% unless locale.primary %}{{ locale.root_url }}{% endunless %}{{ base_path }}">
     {% endfor %}
     
-    {% comment %} Step 4: x-default points to primary locale {% endcomment %}
     <link rel="alternate" 
           hreflang="x-default" 
           href="{{ shop.url }}{{ base_path }}">
@@ -256,7 +236,7 @@
   </script>
   {% endunless %}
   
-  <!-- 5. Product Schema (PRODUCT PAGES ONLY - OPTIMIZED FOR ZERO WARNINGS) -->
+  <!-- 5. Product Schema (PRODUCT PAGES ONLY - ZERO WARNINGS) -->
   {% if request.page_type == 'product' %}
   
   {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
@@ -323,14 +303,12 @@
             "handlingTime": {
               "@type": "QuantitativeValue",
               "minValue": 0,
-              "maxValue": 0,
-              "unitCode": "HUR"
+              "maxValue": 0
             },
             "transitTime": {
               "@type": "QuantitativeValue",
               "minValue": 0,
-              "maxValue": 0,
-              "unitCode": "HUR"
+              "maxValue": 0
             }
           }
         },
@@ -379,14 +357,12 @@
           "handlingTime": {
             "@type": "QuantitativeValue",
             "minValue": 0,
-            "maxValue": 0,
-            "unitCode": "HUR"
+            "maxValue": 0
           },
           "transitTime": {
             "@type": "QuantitativeValue",
             "minValue": 0,
-            "maxValue": 0,
-            "unitCode": "HUR"
+            "maxValue": 0
           }
         }
       },
