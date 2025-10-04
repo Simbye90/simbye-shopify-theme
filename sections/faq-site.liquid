@@ -1,5 +1,5 @@
 <!-- sections/faq.liquid -->
-<!-- SIMBYE FAQ PAGE - ULTIMATE ENTERPRISE VERSION -->
+<!-- SIMBYE FAQ - WORKING VERSION -->
 
 <style>
 :root {
@@ -7,12 +7,9 @@
   --faq-text: #1a1a1a;
   --faq-text-secondary: #666666;
   --faq-primary: #009a61;
-  --faq-primary-hover: #00824f;
-  --faq-accent: #00d97e;
   --faq-border: rgba(0, 0, 0, 0.08);
-  --faq-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.06);
-  --faq-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
-  --faq-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --faq-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --faq-transition: all 0.3s ease;
 }
 
 [data-theme="dark"] {
@@ -20,11 +17,8 @@
   --faq-text: #f5f5f5;
   --faq-text-secondary: #999999;
   --faq-primary: #00d97e;
-  --faq-primary-hover: #009a61;
-  --faq-accent: #00ff88;
   --faq-border: rgba(255, 255, 255, 0.08);
-  --faq-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --faq-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --faq-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .shopify-section:has(.faq-page) {
@@ -36,7 +30,6 @@
 
 .faq-page {
   width: 100%;
-  min-height: 100vh;
   padding: 60px 0 100px;
   background: var(--faq-bg);
 }
@@ -53,7 +46,7 @@
 }
 
 .faq-title {
-  font-size: clamp(36px, 5vw, 56px);
+  font-size: 56px;
   font-weight: 700;
   color: var(--faq-text);
   margin: 0 0 16px 0;
@@ -64,7 +57,6 @@
   font-size: 18px;
   color: var(--faq-text-secondary);
   margin: 0 0 40px 0;
-  line-height: 1.6;
 }
 
 .faq-search {
@@ -81,14 +73,12 @@
   border-radius: 12px;
   background: var(--faq-bg);
   color: var(--faq-text);
-  transition: var(--faq-transition);
   font-family: inherit;
 }
 
 .faq-search-input:focus {
   outline: none;
   border-color: var(--faq-primary);
-  box-shadow: 0 0 0 4px rgba(0, 154, 97, 0.1);
 }
 
 .faq-search-icon {
@@ -99,39 +89,10 @@
   width: 20px;
   height: 20px;
   color: var(--faq-text-secondary);
-  pointer-events: none;
-}
-
-.faq-categories {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin: 40px 0 60px;
-}
-
-.category-btn {
-  padding: 12px 24px;
-  background: var(--faq-bg);
-  border: 2px solid var(--faq-border);
-  border-radius: 12px;
-  color: var(--faq-text);
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--faq-transition);
-  text-decoration: none;
-}
-
-.category-btn:hover {
-  border-color: var(--faq-primary);
-  background: rgba(0, 154, 97, 0.05);
-  transform: translateY(-2px);
 }
 
 .faq-category {
-  margin-bottom: 60px;
-  scroll-margin-top: 120px;
+  margin: 60px 0;
 }
 
 .category-title {
@@ -139,7 +100,6 @@
   font-weight: 700;
   color: var(--faq-text);
   margin: 0 0 32px 0;
-  letter-spacing: -0.01em;
   padding-bottom: 16px;
   border-bottom: 2px solid var(--faq-border);
 }
@@ -155,23 +115,17 @@
   border: 2px solid var(--faq-border);
   border-radius: 16px;
   overflow: hidden;
-  transition: var(--faq-transition);
 }
 
 .faq-item:hover {
   border-color: var(--faq-primary);
-  box-shadow: var(--faq-shadow-sm);
-}
-
-.faq-item.active {
-  border-color: var(--faq-primary);
-  box-shadow: var(--faq-shadow-md);
+  box-shadow: var(--faq-shadow);
 }
 
 .faq-question {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 20px 24px;
   background: none;
@@ -179,14 +133,12 @@
   text-align: left;
   cursor: pointer;
   font-family: inherit;
-  gap: 16px;
 }
 
 .faq-question-text {
   font-size: 18px;
   font-weight: 600;
   color: var(--faq-text);
-  line-height: 1.4;
   flex: 1;
 }
 
@@ -194,8 +146,7 @@
   width: 24px;
   height: 24px;
   color: var(--faq-primary);
-  transition: transform var(--faq-transition);
-  flex-shrink: 0;
+  transition: transform 0.3s;
 }
 
 .faq-item.active .faq-icon {
@@ -205,7 +156,7 @@
 .faq-answer {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: max-height 0.4s ease;
 }
 
 .faq-answer-content {
@@ -215,64 +166,7 @@
   line-height: 1.7;
 }
 
-.faq-answer-content p {
-  margin: 0 0 16px 0;
-}
-
-.faq-answer-content p:last-child {
-  margin-bottom: 0;
-}
-
-.faq-answer-content a {
-  color: var(--faq-primary);
-  text-decoration: underline;
-}
-
-.faq-answer-content ul,
-.faq-answer-content ol {
-  margin: 16px 0;
-  padding-left: 24px;
-}
-
-.faq-answer-content li {
-  margin-bottom: 8px;
-}
-
-.no-results {
-  text-align: center;
-  padding: 60px 20px;
-  display: none;
-}
-
-.no-results.active {
-  display: block;
-}
-
-.no-results-icon {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 24px;
-  color: var(--faq-text-secondary);
-  opacity: 0.3;
-}
-
-.no-results-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--faq-text);
-  margin: 0 0 8px 0;
-}
-
-.no-results-text {
-  font-size: 16px;
-  color: var(--faq-text-secondary);
-}
-
 @media (max-width: 768px) {
-  .faq-page {
-    padding: 40px 0 60px;
-  }
-  
   .faq-container {
     padding: 0 20px;
   }
@@ -281,35 +175,12 @@
     font-size: 32px;
   }
   
-  .faq-subtitle {
-    font-size: 16px;
-  }
-  
-  .faq-categories {
-    margin: 32px 0 40px;
-  }
-  
-  .category-btn {
-    padding: 10px 20px;
-    font-size: 14px;
-  }
-  
   .category-title {
     font-size: 24px;
-    margin-bottom: 24px;
-  }
-  
-  .faq-question {
-    padding: 16px 20px;
   }
   
   .faq-question-text {
     font-size: 16px;
-  }
-  
-  .faq-answer-content {
-    padding: 0 20px 20px;
-    font-size: 15px;
   }
 }
 </style>
@@ -319,9 +190,7 @@
     
     <div class="faq-header">
       <h1 class="faq-title">{{ section.settings.title }}</h1>
-      {% if section.settings.subtitle != blank %}
-        <p class="faq-subtitle">{{ section.settings.subtitle }}</p>
-      {% endif %}
+      <p class="faq-subtitle">{{ section.settings.subtitle }}</p>
       
       <div class="faq-search">
         <input 
@@ -337,223 +206,154 @@
       </div>
     </div>
     
-    <div class="faq-categories" id="category-nav"></div>
+    {% comment %} Group blocks by category {% endcomment %}
+    {% assign compatibility_items = section.blocks | where: 'settings.category', 'compatibility' %}
+    {% assign purchase_items = section.blocks | where: 'settings.category', 'purchase' %}
+    {% assign activation_items = section.blocks | where: 'settings.category', 'activation' %}
+    {% assign usage_items = section.blocks | where: 'settings.category', 'usage' %}
+    {% assign troubleshooting_items = section.blocks | where: 'settings.category', 'troubleshooting' %}
     
-    <div id="faq-content">
-      {% if section.blocks.size == 0 %}
-        <div style="text-align: center; padding: 60px 20px; border: 2px dashed var(--faq-border); border-radius: 16px; margin-top: 40px;">
-          <h3 style="font-size: 24px; color: var(--faq-text); margin: 0 0 16px 0;">No FAQ items added yet</h3>
-          <p style="font-size: 16px; color: var(--faq-text-secondary); margin: 0 0 24px 0;">Click "Add FAQ Item" below to create your first question.</p>
-          <p style="font-size: 14px; color: var(--faq-text-secondary); margin: 0;">Each FAQ needs: Category + Question + Answer</p>
-        </div>
-      {% else %}
-        {% assign category_order = 'compatibility,purchase,activation,usage,troubleshooting' | split: ',' %}
-        
-        {% for category_id in category_order %}
-          {% assign category_blocks = section.blocks | where: 'settings.category', category_id %}
-          
-          {% if category_blocks.size > 0 %}
-            {% case category_id %}
-              {% when 'compatibility' %}
-                {% assign category_name = section.settings.cat_compatibility %}
-              {% when 'purchase' %}
-                {% assign category_name = section.settings.cat_purchase %}
-              {% when 'activation' %}
-                {% assign category_name = section.settings.cat_activation %}
-              {% when 'usage' %}
-                {% assign category_name = section.settings.cat_usage %}
-              {% when 'troubleshooting' %}
-                {% assign category_name = section.settings.cat_troubleshooting %}
-            {% endcase %}
-            
-            <div class="faq-category" id="{{ category_id }}" data-category="{{ category_id }}" data-name="{{ category_name }}">
-              <h2 class="category-title">{{ category_name }}</h2>
-            
-            <div class="faq-items">
-              {% for block in category_blocks %}
-                <div class="faq-item" 
-                     data-search="{{ block.settings.question | downcase }} {{ block.settings.answer | strip_html | downcase }}" 
-                     {{ block.shopify_attributes }}>
-                  <button class="faq-question" aria-expanded="false">
-                    <span class="faq-question-text">{{ block.settings.question }}</span>
-                    <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="m6 9 6 6 6-6"/>
-                    </svg>
-                  </button>
-                  <div class="faq-answer">
-                    <div class="faq-answer-content">
-                      {{ block.settings.answer }}
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
+    {% comment %} Compatibility Category {% endcomment %}
+    {% if compatibility_items.size > 0 %}
+      <div class="faq-category">
+        <h2 class="category-title">{{ section.settings.cat_compatibility }}</h2>
+        <div class="faq-items">
+          {% for block in compatibility_items %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span class="faq-question-text">{{ block.settings.question }}</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">{{ block.settings.answer }}</div>
+              </div>
             </div>
-          </div>
-        {% endif %}
-      {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
     {% endif %}
-    </div>
     
-    <div class="no-results" id="no-results">
-      <svg class="no-results-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <circle cx="11" cy="11" r="8"/>
-        <path d="m21 21-4.35-4.35"/>
-      </svg>
-      <h3 class="no-results-title">{{ section.settings.no_results_title }}</h3>
-      <p class="no-results-text">{{ section.settings.no_results_text }}</p>
-    </div>
+    {% comment %} Purchase Category {% endcomment %}
+    {% if purchase_items.size > 0 %}
+      <div class="faq-category">
+        <h2 class="category-title">{{ section.settings.cat_purchase }}</h2>
+        <div class="faq-items">
+          {% for block in purchase_items %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span class="faq-question-text">{{ block.settings.question }}</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">{{ block.settings.answer }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    
+    {% comment %} Activation Category {% endcomment %}
+    {% if activation_items.size > 0 %}
+      <div class="faq-category">
+        <h2 class="category-title">{{ section.settings.cat_activation }}</h2>
+        <div class="faq-items">
+          {% for block in activation_items %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span class="faq-question-text">{{ block.settings.question }}</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">{{ block.settings.answer }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    
+    {% comment %} Usage Category {% endcomment %}
+    {% if usage_items.size > 0 %}
+      <div class="faq-category">
+        <h2 class="category-title">{{ section.settings.cat_usage }}</h2>
+        <div class="faq-items">
+          {% for block in usage_items %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span class="faq-question-text">{{ block.settings.question }}</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">{{ block.settings.answer }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+    
+    {% comment %} Troubleshooting Category {% endcomment %}
+    {% if troubleshooting_items.size > 0 %}
+      <div class="faq-category">
+        <h2 class="category-title">{{ section.settings.cat_troubleshooting }}</h2>
+        <div class="faq-items">
+          {% for block in troubleshooting_items %}
+            <div class="faq-item" {{ block.shopify_attributes }}>
+              <button class="faq-question">
+                <span class="faq-question-text">{{ block.settings.question }}</span>
+                <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m6 9 6 6 6-6"/>
+                </svg>
+              </button>
+              <div class="faq-answer">
+                <div class="faq-answer-content">{{ block.settings.answer }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
     
   </div>
 </section>
 
 <script>
-(function() {
-  'use strict';
+document.addEventListener('DOMContentLoaded', function() {
+  const items = document.querySelectorAll('.faq-item');
   
-  const searchInput = document.getElementById('faq-search');
-  const faqItems = document.querySelectorAll('.faq-item');
-  const categories = document.querySelectorAll('.faq-category');
-  const noResults = document.getElementById('no-results');
-  const categoryNav = document.getElementById('category-nav');
-  
-  function createCategoryNav() {
-    categories.forEach(category => {
-      const id = category.getAttribute('data-category');
-      const name = category.getAttribute('data-name');
-      const btn = document.createElement('a');
-      btn.href = '#' + id;
-      btn.className = 'category-btn';
-      btn.textContent = name;
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const element = document.getElementById(id);
-        if (element) {
-          const offset = 100;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - offset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-      categoryNav.appendChild(btn);
-    });
-  }
-  
-  function toggleFAQ(item) {
-    const isActive = item.classList.contains('active');
+  items.forEach(item => {
+    const button = item.querySelector('.faq-question');
     const answer = item.querySelector('.faq-answer');
-    const answerContent = item.querySelector('.faq-answer-content');
-    const button = item.querySelector('.faq-question');
+    const content = item.querySelector('.faq-answer-content');
     
-    if (isActive) {
-      item.classList.remove('active');
-      answer.style.maxHeight = '0';
-      button.setAttribute('aria-expanded', 'false');
-    } else {
-      item.classList.add('active');
-      answer.style.maxHeight = answerContent.scrollHeight + 'px';
-      button.setAttribute('aria-expanded', 'true');
-    }
-  }
-  
-  function handleSearch(query) {
-    const searchTerm = query.toLowerCase().trim();
-    let visibleCount = 0;
-    
-    if (searchTerm === '') {
-      faqItems.forEach(item => item.style.display = '');
-      categories.forEach(cat => cat.style.display = '');
-      noResults.classList.remove('active');
-      return;
-    }
-    
-    faqItems.forEach(item => {
-      const searchData = item.getAttribute('data-search') || '';
-      if (searchData.includes(searchTerm)) {
-        item.style.display = '';
-        visibleCount++;
+    button.addEventListener('click', function() {
+      const isActive = item.classList.contains('active');
+      
+      if (isActive) {
+        item.classList.remove('active');
+        answer.style.maxHeight = '0';
       } else {
-        item.style.display = 'none';
+        item.classList.add('active');
+        answer.style.maxHeight = content.scrollHeight + 'px';
       }
     });
-    
-    categories.forEach(cat => {
-      const visibleItems = cat.querySelectorAll('.faq-item:not([style*="display: none"])');
-      cat.style.display = visibleItems.length > 0 ? '' : 'none';
-    });
-    
-    noResults.classList.toggle('active', visibleCount === 0);
-  }
-  
-  faqItems.forEach(item => {
-    const button = item.querySelector('.faq-question');
-    button.addEventListener('click', () => toggleFAQ(item));
   });
-  
-  if (searchInput) {
-    searchInput.addEventListener('input', function() {
-      handleSearch(this.value);
-    });
-  }
-  
-  createCategoryNav();
-  
-  const faqData = [];
-  faqItems.forEach(item => {
-    const question = item.querySelector('.faq-question-text')?.textContent;
-    const answer = item.querySelector('.faq-answer-content')?.textContent;
-    
-    if (question && answer) {
-      faqData.push({
-        "@type": "Question",
-        "name": question.trim(),
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": answer.trim()
-        }
-      });
-    }
-  });
-  
-  if (faqData.length > 0) {
-    const script = document.createElement('script');
-    script.type = 'application/ld+json';
-    script.textContent = JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": faqData
-    });
-    document.head.appendChild(script);
-  }
-  
-  if (window.location.hash) {
-    setTimeout(() => {
-      const id = window.location.hash.substring(1);
-      const element = document.getElementById(id);
-      if (element) {
-        const offset = 100;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - offset;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    }, 100);
-  }
-})();
+});
 </script>
 
 {% schema %}
 {
   "name": "FAQ Page",
   "settings": [
-    {
-      "type": "header",
-      "content": "Page Settings"
-    },
     {
       "type": "text",
       "id": "title",
@@ -574,58 +374,37 @@
     },
     {
       "type": "header",
-      "content": "Category Names (SEO Important)"
+      "content": "Category Names (SEO)"
     },
     {
       "type": "text",
       "id": "cat_compatibility",
-      "label": "Category 1 Name",
-      "default": "Compatibility & Requirements",
-      "info": "H2 heading for SEO"
+      "label": "Category 1: Compatibility",
+      "default": "Compatibility & Requirements"
     },
     {
       "type": "text",
       "id": "cat_purchase",
-      "label": "Category 2 Name",
-      "default": "Purchase & Plans",
-      "info": "H2 heading for SEO"
+      "label": "Category 2: Purchase",
+      "default": "Purchase & Plans"
     },
     {
       "type": "text",
       "id": "cat_activation",
-      "label": "Category 3 Name",
-      "default": "Activation & Setup",
-      "info": "H2 heading for SEO"
+      "label": "Category 3: Activation",
+      "default": "Activation & Setup"
     },
     {
       "type": "text",
       "id": "cat_usage",
-      "label": "Category 4 Name",
-      "default": "Using Your eSIM",
-      "info": "H2 heading for SEO"
+      "label": "Category 4: Usage",
+      "default": "Using Your eSIM"
     },
     {
       "type": "text",
       "id": "cat_troubleshooting",
-      "label": "Category 5 Name",
-      "default": "Troubleshooting",
-      "info": "H2 heading for SEO"
-    },
-    {
-      "type": "header",
-      "content": "No Results"
-    },
-    {
-      "type": "text",
-      "id": "no_results_title",
-      "label": "No Results Title",
-      "default": "No results found"
-    },
-    {
-      "type": "text",
-      "id": "no_results_text",
-      "label": "No Results Text",
-      "default": "Try different keywords or browse by category"
+      "label": "Category 5: Troubleshooting",
+      "default": "Troubleshooting"
     }
   ],
   "blocks": [
@@ -638,26 +417,11 @@
           "id": "category",
           "label": "Category",
           "options": [
-            {
-              "value": "compatibility",
-              "label": "Compatibility & Requirements"
-            },
-            {
-              "value": "purchase",
-              "label": "Purchase & Plans"
-            },
-            {
-              "value": "activation",
-              "label": "Activation & Setup"
-            },
-            {
-              "value": "usage",
-              "label": "Using Your eSIM"
-            },
-            {
-              "value": "troubleshooting",
-              "label": "Troubleshooting"
-            }
+            {"value": "compatibility", "label": "Compatibility"},
+            {"value": "purchase", "label": "Purchase"},
+            {"value": "activation", "label": "Activation"},
+            {"value": "usage", "label": "Usage"},
+            {"value": "troubleshooting", "label": "Troubleshooting"}
           ],
           "default": "compatibility"
         },
@@ -671,56 +435,14 @@
           "type": "richtext",
           "id": "answer",
           "label": "Answer",
-          "default": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.</p>"
+          "default": "<p>An eSIM is a digital SIM card.</p>"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "FAQ Page",
-      "blocks": [
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "compatibility",
-            "question": "What is eSIM?",
-            "answer": "<p>An eSIM (embedded SIM) is a digital SIM card built into your device. It allows you to activate a cellular plan without a physical SIM card.</p>"
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "compatibility",
-            "question": "Which devices support eSIM?",
-            "answer": "<p>Most modern smartphones from 2018 onwards support eSIM, including iPhone XS and newer, Samsung Galaxy S20 and newer, and Google Pixel 3 and newer.</p>"
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "purchase",
-            "question": "How much does it cost?",
-            "answer": "<p>Prices vary by destination and data amount. Check our product pages for specific pricing.</p>"
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "activation",
-            "question": "How do I activate my eSIM?",
-            "answer": "<p>Scan the QR code we send you via email. Your eSIM will activate automatically when you arrive at your destination.</p>"
-          }
-        },
-        {
-          "type": "faq_item",
-          "settings": {
-            "category": "troubleshooting",
-            "question": "My eSIM is not working, what should I do?",
-            "answer": "<p>First, make sure data roaming is enabled. If issues persist, contact our support team.</p>"
-          }
-        }
-      ]
+      "name": "FAQ Page"
     }
   ]
 }
