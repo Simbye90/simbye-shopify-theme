@@ -17,21 +17,85 @@
         "destination_link_mcaVRM": {
           "type": "destination_link",
           "settings": {
-            "text": "Turkey eSIM",
+            "text": "eSIM Türkei",
             "url": "shopify://products/esim-turkey"
+          }
+        },
+        "destination_link_mFWp68": {
+          "type": "destination_link",
+          "settings": {
+            "text": "eSIM Japan",
+            "url": "shopify://products/esim-japan"
+          }
+        },
+        "destination_link_EAVpGa": {
+          "type": "destination_link",
+          "settings": {
+            "text": "eSIM Morocco",
+            "url": "shopify://products/esim-morocco"
+          }
+        },
+        "destination_link_wnta63": {
+          "type": "destination_link",
+          "settings": {
+            "text": "eSIM Thailand",
+            "url": "shopify://products/esim-thailand"
+          }
+        },
+        "destination_link_iiCpzf": {
+          "type": "destination_link",
+          "settings": {
+            "text": "eSIM Australia",
+            "url": "shopify://products/esim-australia"
+          }
+        },
+        "destination_link_rjyKaF": {
+          "type": "destination_link",
+          "settings": {
+            "text": "eSIM South Korea",
+            "url": "shopify://products/south-korea-esim"
           }
         },
         "destination_link_zFnNf4": {
           "type": "destination_link",
           "settings": {
-            "text": "Turkey",
-            "url": ""
+            "text": "eSIM United States",
+            "url": "shopify://products/esim-united-states"
+          }
+        },
+        "company_link_3bVJV8": {
+          "type": "company_link",
+          "settings": {
+            "text": "About Us",
+            "url": "shopify://pages/about-simbye-esim"
+          }
+        },
+        "company_link_8EaXmV": {
+          "type": "company_link",
+          "settings": {
+            "text": "Contact us",
+            "url": "shopify://pages/contact-us"
+          }
+        },
+        "company_link_tgRkwW": {
+          "type": "company_link",
+          "settings": {
+            "text": "Partnership",
+            "url": "shopify://pages/simbye-partner"
           }
         }
       },
       "block_order": [
         "destination_link_mcaVRM",
-        "destination_link_zFnNf4"
+        "destination_link_mFWp68",
+        "destination_link_EAVpGa",
+        "destination_link_wnta63",
+        "destination_link_iiCpzf",
+        "destination_link_rjyKaF",
+        "destination_link_zFnNf4",
+        "company_link_3bVJV8",
+        "company_link_8EaXmV",
+        "company_link_tgRkwW"
       ],
       "settings": {
         "app_store_url": "",
