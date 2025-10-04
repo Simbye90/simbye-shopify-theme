@@ -207,7 +207,7 @@
     "fair_use_text": "Günde 1GB yüksek hızda. 1GB'den sonra hız 128kbps'ye düşer. Veriler her gece yarısı (yerel saat) sıfırlanır.",
     "your_selection": "Seçiminiz",
     "network": "Ağ",
-    "activation": "Aktivasyon",
+    "activation": "Geçerli",
     "instant": "Anında",
     "total": "Toplam",
     "buy_now": "Şimdi Al",
@@ -268,7 +268,7 @@
     "yes": "Evet",
     "no": "Hayır",
     "days": "Gün",
-    "instant": "Satın alma sonrası hemen"
+    "instant": "180 Gün"
   },
   "apps": {
     "title_part1": "Uygulamalar için",
