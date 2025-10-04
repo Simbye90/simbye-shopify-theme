@@ -13,26 +13,17 @@
       "faq-site": {
         "type": "faq-site",
         "blocks": {
-          "faq_item_Qt6XLU": {
+          "faq_item_gWMheT": {
             "type": "faq_item",
             "settings": {
-              "category": "compatibility",
+              "category": "purchase",
               "question": "What is eSIM?sd",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.sd</p>"
-            }
-          },
-          "faq_item_QYxjfj": {
-            "type": "faq_item",
-            "settings": {
-              "category": "activation",
-              "question": "What is eSIM?",
-              "answer": "<p>An eSIM is a digital SIM card that allows you to activate a cellular plan without using a physical SIM card.s</p>"
+              "answer": "<p>An eSIM is a digital SIM card.sd</p>"
             }
           }
         },
         "block_order": [
-          "faq_item_Qt6XLU",
-          "faq_item_QYxjfj"
+          "faq_item_gWMheT"
         ],
         "settings": {
           "title": "Frequently Asked Questions",
@@ -42,9 +33,7 @@
           "cat_purchase": "Purchase & Plans",
           "cat_activation": "Activation & sdSetup",
           "cat_usage": "Using Your eSIM",
-          "cat_troubleshooting": "Troubleshooting",
-          "no_results_title": "No results found",
-          "no_results_text": "Try different keywords or browse by category"
+          "cat_troubleshooting": "Troubleshooting"
         }
       }
     },
