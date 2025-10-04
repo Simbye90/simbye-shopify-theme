@@ -1,20 +1,36 @@
 <!doctype html>
-<html lang="{{ request.locale.iso_code }}" dir="ltr">
+<html lang="{{ request.locale.iso_code }}" dir="{% if request.locale.iso_code == 'ar' %}rtl{% else %}ltr{% endif %}">
 <head>
   <!-- ========================================
-       META TAGS & SEO
+       META TAGS & SEO (ENTERPRISE OPTIMIZED)
        ======================================== -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <!-- Intelligent Robots Meta (noindex für Cart/Search/Account) -->
+  {% liquid
+    assign noindex = false
+    if request.page_type == 'search' or request.page_type == 'cart' or template contains 'customers' or request.path contains '/policies' or request.path contains '/account'
+      assign noindex = true
+    endif
+  %}
+  <meta name="robots" content="{% if noindex %}noindex, nofollow{% else %}index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1{% endif %}">
+  <meta name="googlebot" content="{% if noindex %}noindex, nofollow{% else %}index, follow, max-snippet:-1, max-image-preview:large{% endif %}">
+  
+  <!-- Theme Color (Browser UI) -->
+  <meta name="theme-color" content="#009a61" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  
   <!-- Google Site Verification -->
   <meta name="google-site-verification" content="7b_1zieYW2EKr0VNKoB_OvPsHTrpvjJ-MovSdnsfUZQ">
   <meta name="format-detection" content="telephone=no">
   
-  <!-- Preconnect to CDNs -->
+  <!-- Preconnect & DNS Prefetch -->
   <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="dns-prefetch" href="//cdn.shopify.com">
+  <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
   
   <!-- Preload Critical Resources -->
   <link rel="preload" as="image" href="https://cdn.shopify.com/s/files/1/0633/9012/2175/files/Simbye_Company_logo.webp?v=1739551616" type="image/webp">
@@ -23,7 +39,7 @@
   <!-- Critical CSS -->
   {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
   
-  <!-- Meta Tags Snippet (includes hreflang, OG, Twitter, AI tags) -->
+  <!-- Meta Tags Snippet (includes OG, Twitter, AI tags) -->
   {% render 'meta-tags' %}
   
   <!-- Favicons -->
@@ -36,6 +52,24 @@
     <link rel="canonical" href="{{ shop.url }}/">
     <meta name="robots" content="noindex, follow">
     <script>window.location.replace('{{ shop.url }}/');</script>
+  {% endif %}
+  
+  <!-- ========================================
+       HREFLANG (Published Locales Only)
+       ======================================== -->
+  {% if shop.published_locales.size > 1 %}
+    {% assign primary_root = '/' %}
+    {% for locale in shop.published_locales %}
+      <link rel="alternate" 
+            hreflang="{{ locale.iso_code }}" 
+            href="{{ shop.url }}{{ locale.root_url }}{{ request.path | remove_first: request.locale.root_url }}">
+      {% if locale.iso_code == shop.primary_locale.iso_code %}
+        {% assign primary_root = locale.root_url %}
+      {% endif %}
+    {% endfor %}
+    <link rel="alternate" 
+          hreflang="x-default" 
+          href="{{ shop.url }}{{ primary_root }}{{ request.path | remove_first: request.locale.root_url }}">
   {% endif %}
   
   <!-- ========================================
@@ -65,7 +99,7 @@
       "telephone": "+19701028954",
       "contactType": "customer service",
       "areaServed": "Worldwide",
-      "availableLanguage": ["English", "German", "French", "Spanish", "Polish", "Dutch", "Turkish"]
+      "availableLanguage": ["English", "German", "French", "Spanish", "Polish", "Dutch", "Turkish", "Arabic"]
     }
   }
   </script>
@@ -78,7 +112,7 @@
     "name": "Simbye",
     "alternateName": "Simbye eSIM",
     "url": "{{ shop.url }}",
-    "inLanguage": ["en", "de", "es", "fr", "tr", "nl", "pl"],
+    "inLanguage": ["en", "de", "es", "fr", "tr", "nl", "pl", "ar"],
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
@@ -90,7 +124,7 @@
   }
   </script>
   
-  <!-- 3. FAQPage Schema for Homepage (AI + Featured Snippets) -->
+  <!-- 3. FAQPage Schema for Homepage -->
   {% if template == 'index' %}
   <script type="application/ld+json">
   {
@@ -164,33 +198,33 @@
       },{
         "@type": "ListItem",
         "position": 3,
-        "name": "{{ product.title | escape }}",
+        "name": {{ product.title | escape | json }},
         "item": "{{ shop.url }}{{ product.url }}"
       }
       {% elsif request.page_type == 'collection' %}
       ,{
         "@type": "ListItem",
         "position": 2,
-        "name": "{{ collection.title | escape }}",
+        "name": {{ collection.title | escape | json }},
         "item": "{{ shop.url }}{{ collection.url }}"
       }
       {% elsif request.page_type == 'page' %}
       ,{
         "@type": "ListItem",
         "position": 2,
-        "name": "{{ page.title | escape }}",
+        "name": {{ page.title | escape | json }},
         "item": "{{ shop.url }}{{ page.url }}"
       }
       {% elsif request.page_type == 'article' %}
       ,{
         "@type": "ListItem",
         "position": 2,
-        "name": "{{ blog.title | escape }}",
+        "name": {{ blog.title | escape | json }},
         "item": "{{ shop.url }}{{ blog.url }}"
       },{
         "@type": "ListItem",
         "position": 3,
-        "name": "{{ article.title | escape }}",
+        "name": {{ article.title | escape | json }},
         "item": "{{ shop.url }}{{ article.url }}"
       }
       {% endif %}
@@ -199,7 +233,7 @@
   </script>
   {% endunless %}
   
-  <!-- 5. Product Schema (Enhanced with Variants + Reviews) -->
+  <!-- 5. Product Schema (Numeric Prices + Dynamic Currency + Variants) -->
   {% if request.page_type == 'product' %}
   {% assign rating_value = product.metafields.custom.rating | replace: ',', '.' %}
   {% assign rating_count = product.metafields.custom.rating_count | plus: 0 %}
@@ -208,23 +242,23 @@
   {
     "@context": "https://schema.org",
     "@type": "Product",
-    "name": "{{ product.title | escape }}",
-    "description": "{{ product.description | strip_html | truncatewords: 50 | escape }}",
+    "name": {{ product.title | strip | json }},
+    "description": {{ product.description | strip_html | truncatewords: 50 | json }},
     "brand": {
       "@type": "Brand",
-      "name": "{{ product.vendor | default: 'Simbye' | escape }}"
+      "name": {{ product.vendor | default: 'Simbye' | json }}
     },
     "category": "Electronics > Communications > Mobile Phone Accessories > eSIM",
     {% if product.sku != blank %}
-    "sku": "{{ product.sku | escape }}",
+    "sku": {{ product.sku | json }},
     "productID": "{{ product.id }}",
-    "mpn": "{{ product.sku | escape }}",
+    "mpn": {{ product.sku | json }},
     {% else %}
     "productID": "{{ product.id }}",
     {% endif %}
     "image": [
       {% for image in product.images limit: 5 %}
-        "{{ image | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
+        {{ image | image_url: width: 1200 | json }}{% unless forloop.last %},{% endunless %}
       {% endfor %}
     ]
     {% if product.variants.size > 1 %}
@@ -232,11 +266,11 @@
       {% for variant in product.variants %}
       {
         "@type": "Offer",
-        "name": "{{ variant.title | escape }}",
-        "sku": "{{ variant.sku | default: variant.id }}",
-        "url": "{{ shop.url }}{{ product.url }}?variant={{ variant.id }}",
-        "priceCurrency": "{{ cart.currency.iso_code }}",
-        "price": "{{ variant.price | money_without_currency | replace: ',', '.' }}",
+        "name": {{ variant.title | json }},
+        "sku": {{ variant.sku | default: variant.id | json }},
+        "url": {{ shop.url | append: product.url | append: '?variant=' | append: variant.id | json }},
+        "priceCurrency": {{ localization.country.currency.iso_code | default: shop.currency | json }},
+        "price": {{ variant.price | divided_by: 100.0 | round: 2 }},
         "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
         "itemCondition": "https://schema.org/NewCondition",
         "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
@@ -267,9 +301,9 @@
     {% else %}
     ,"offers": {
       "@type": "Offer",
-      "url": "{{ shop.url }}{{ product.url }}",
-      "priceCurrency": "{{ cart.currency.iso_code }}",
-      "price": "{{ product.price | money_without_currency | replace: ',', '.' }}",
+      "url": {{ shop.url | append: product.url | json }},
+      "priceCurrency": {{ localization.country.currency.iso_code | default: shop.currency | json }},
+      "price": {{ product.price | divided_by: 100.0 | round: 2 }},
       "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
       "itemCondition": "https://schema.org/NewCondition",
       "availability": "{% if product.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
@@ -327,24 +361,32 @@
        ======================================== -->
   {% render 'css-variables' %}
   
-  <!-- jQuery (loaded first, non-deferred) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <!-- RTL Support Styles -->
+  {% if request.locale.iso_code == 'ar' %}
+  <style>
+    body { direction: rtl; text-align: right; }
+    .header-nav { flex-direction: row-reverse; }
+    .footer-content { direction: rtl; }
+    .nav-link::after { left: auto; right: 24px; }
+  </style>
+  {% endif %}
   
-  <!-- Dark Mode Default Script (runs IMMEDIATELY before body) -->
+  <!-- jQuery 3.7.1 with SRI -->
+  <script defer 
+          src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+          integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+          crossorigin="anonymous"
+          referrerpolicy="no-referrer"></script>
+  
+  <!-- Dark Mode Default Script (runs IMMEDIATELY) -->
   <script>
     (function() {
-      // Set Dark Mode as DEFAULT for new visitors
-      const savedTheme = localStorage.getItem('theme');
-      const theme = savedTheme || 'dark';
+      var saved = null;
+      try { saved = localStorage.getItem('theme'); } catch(e) {}
+      var theme = saved || 'dark';
       document.documentElement.setAttribute('data-theme', theme);
-      
-      // Save dark mode as default if no preference exists
-      if (!savedTheme) {
-        try {
-          localStorage.setItem('theme', 'dark');
-        } catch(e) {
-          console.warn('localStorage not available');
-        }
+      if (!saved) {
+        try { localStorage.setItem('theme', 'dark'); } catch(e) {}
       }
     })();
   </script>
@@ -355,7 +397,7 @@
   </script>
 </head>
 
-<body class="template-{{ request.page_type }}">
+<body class="template-{{ request.page_type }}{% if request.locale.iso_code == 'ar' %} rtl-layout{% endif %}">
   
   <!-- Skip to Content Link (Accessibility) -->
   <a class="skip-to-content-link button visually-hidden" href="#MainContent">
