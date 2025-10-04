@@ -125,6 +125,13 @@
             "text": "What is an eSIM?",
             "url": ""
           }
+        },
+        "company_link_PK7XNa": {
+          "type": "company_link",
+          "settings": {
+            "text": "Terms & Conditions",
+            "url": "shopify://pages/terms-conditions"
+          }
         }
       },
       "block_order": [
@@ -143,7 +150,8 @@
         "esim_link_Mpk38m",
         "esim_link_Gx7qim",
         "esim_link_pJFqmT",
-        "esim_link_mQddRC"
+        "esim_link_mQddRC",
+        "company_link_PK7XNa"
       ],
       "settings": {
         "app_store_url": "",
@@ -158,12 +166,12 @@
         "youtube_url": "https://www.youtube.com/@Simbye.",
         "linkedin_url": "",
         "reddit_url": "",
-        "privacy_url": "",
-        "privacy_text": "",
-        "terms_url": "",
-        "terms_text": "",
-        "cookie_url": "",
-        "cookie_text": "",
+        "privacy_url": "shopify://pages/privacy-policy",
+        "privacy_text": "Privacy Policy",
+        "terms_url": "shopify://pages/refund-policy",
+        "terms_text": "Refund Policy",
+        "cookie_url": "shopify://pages/cookie-policy",
+        "cookie_text": "Cookie Policy",
         "copyright_text": "All rights reserved",
         "show_payment": true,
         "payment_label": "Secure payments:"
